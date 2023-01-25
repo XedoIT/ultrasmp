@@ -1,0 +1,136 @@
+title: '{level_progression_menu_title}'
+size: 6
+fill:
+  enabled: true
+  material: gray_stained_glass_pane
+items:
+  rank:
+    pos: 5,5
+    material: oak_sign
+    display_name: '{your_ranking}'
+    lore:
+    - '{out_of}'
+    - '{percent}'
+    - ' '
+    - '{leaderboard_click}'
+  back:
+    pos: 5,4
+    material: arrow
+    display_name: '{back}'
+    lore:
+    - '&7Torna a Abilità'
+  close:
+    pos: 5,9
+    material: arrow
+    display_name: '{close}'
+  next_page:
+    pos: 5,8
+    material: spectral_arrow
+    display_name: '{next_page}'
+  previous_page:
+    pos: 5,0
+    material: spectral_arrow
+    display_name: '{previous_page}'
+  sources:
+    pos: 0,2
+    material: experience_bottle
+    display_name: '{sources}'
+    lore:
+    - '{sources_desc}'
+    - ' '
+    - '{sources_click}'
+  abilities:
+    pos: 0,3
+    material: redstone
+    display_name: '{abilities}'
+    lore:
+    - '{abilities_desc}'
+    - ' '
+    - '{abilities_click}'
+templates:
+  skill:
+    pos: 0,0
+    farming:
+      material: diamond_hoe
+      flags:
+      - hide_attributes
+    foraging:
+      material: diamond_axe
+      flags:
+      - hide_attributes
+    mining:
+      material: diamond_pickaxe
+      flags:
+      - hide_attributes
+    fishing:
+      material: fishing_rod
+    excavation:
+      material: diamond_shovel
+      flags:
+      - hide_attributes
+    archery:
+      material: bow
+    defense:
+      material: diamond_chestplate
+      flags:
+      - hide_attributes
+    fighting:
+      material: netherite_sword
+      flags:
+      - hide_attributes
+    endurance:
+      material: golden_apple
+    agility:
+      material: feather
+    alchemy:
+      material: brewing_stand
+      flags:
+      - hide_potion_effects
+    enchanting:
+      material: enchanting_table
+    sorcery:
+      material: blaze_rod
+    healing:
+      material: enchanted_golden_apple
+      flags:
+      - hide_potion_effects
+    forging:
+      material: anvil
+    display_name: '&b{skill} &6{level}'
+    lore:
+    - '{skill_desc}'
+    - '{stats_leveled}'
+    - '{ability_levels}{mana_ability}'
+    - '{level}'
+    - ' '
+    - '{progress_to_level}{max_level}'
+  unlocked:
+    material: lime_stained_glass_pane
+    display_name: '{level_unlocked}'
+    lore:
+    - '{level_number}'
+    - '{rewards}'
+    - '{ability}{mana_ability}'
+    - '{unlocked}'
+  in_progress:
+    material: yellow_stained_glass_pane
+    display_name: '{level_in_progress}'
+    lore:
+    - '{level_number}'
+    - '{rewards}'
+    - '{ability}{mana_ability}'
+    - '{progress}'
+    - ' '
+    - '{in_progress}'
+  locked:
+    material: red_stained_glass_pane
+    display_name: '{level_locked}'
+    lore:
+    - '{level_number}'
+    - '{rewards}'
+    - '{ability}{mana_ability}'
+    - '{locked}'
+options:
+  use_level_as_amount: false
+  over_max_stack_amount: 1
+  items_per_page: 24

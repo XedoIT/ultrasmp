@@ -1,0 +1,32 @@
+messages:
+  error:
+    consoleUnsupported: Non puoi usare questo comando dalla console.
+    lootNotGenerated: '&cContenuto non generato! Disattiva &b/silentcontainer&c.'
+    invalidMaterial: '&cMateriale non valido: "%target%"'
+    invalidNumber: '&cNumero non valido: "%target%"'
+    invalidPlayer: '&cNon ho trovato il giocatore che cerchi!'
+    permissionOpenSelf: '&c&lEhi! &cNon hai il permesso di guardare nel tuo inventario.'
+    permissionEnderAll: '&c&lEhi! &cNon hai il permesso di guardare nelle enderchest altrui.'
+    permissionExempt: '&cL''inventario di %target% è protetto.'
+    permissionCrossWorld: '&c%target% non è nel mondo in cui ti trovi.'
+    permissionPlayerOnline: '&c&lEhi! &cNon hai il permesso di controllare l''inventario
+      dei giocatori online.'
+    permissionPlayerOffline: '&c&lEhi! &cNon hai il permesso di controllare l''inventario
+      dei giocatori offline.'
+    commandException: '&cC''è stato un errore! Controlla la console.'
+  info:
+    containerBlocked: Stai aprendo un contenitore bloccato.
+    containerBlockedSilent: ''
+    containerSilent: ''
+    settingState: ''
+    player:
+      noMatches: Non ho trovato nessun giocatore con %target%.
+      matches: 'Giocatori che hanno %target%: %detail%'
+    container:
+      noMatches: Non ho trovato nessun contenitore con %target%.
+      matches: 'Contenitori che hanno %target%: %detail%'
+    'true': 'on'
+    'false': 'off'
+container:
+  player: Inventario di %player%
+  enderchest: Enderchest di %player%

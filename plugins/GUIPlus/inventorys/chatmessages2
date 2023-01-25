@@ -1,0 +1,694 @@
+inv:
+  size: 54
+  id: chatmessages2
+  title: Messaggi Server (2/3)
+  targetPlayerOption: DISABLED
+  items:
+    '0':
+      '-2185345765990530482':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '1':
+      '-1873822562276300066':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '2':
+      '-1188777830508793740':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '3':
+      '-1850988683494863329':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '4':
+      '-5774164300696707789':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '5':
+      '-7725351224830840333':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '6':
+      '3474761088346124219':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '7':
+      '7649223114463895521':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '8':
+      '2845540903652234652':
+        item:
+          v: 3120
+          type: ARROW
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"Pagina
+              successiva"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Messaggi
+              Server (2/3)"}],"text":""}'
+    '9':
+      '8773418591691868015':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '10':
+      '-7961650332932435305':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Emoticon In Love"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: d22e6853-71c6-4042-8f12-a1181d657714
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI5ZmI5ZjU5M2I2YWU1MzNkZmE4Y2U3OTYxNWZjYzM1ODk0YTQyY2JiNDFkZTU5OGQ2OTQ3NjczNTJmZSJ9fX0=
+    '11':
+      '-7588389574481774838':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Death"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: a362acf7-9c55-4cca-ac2b-8c3b16e80589
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjZkZThkNTgzZWViZjRhMzM2MWNlOTVjN2Q2NGNiNTJkMzU4NTcwNTlkNTE0NjJiOGE5MDkzYTQxYmZlMzljMCJ9fX0=
+    '12':
+      '8271295927389154853':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Car"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: a13385d3-e9ee-4a0e-bd32-718cbc7ec44c
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTgwMGMxZWRmZmMzZGJjYTlhYjZjZmVlOGYxNjNiMmI5NGQ5ZjViNzRkMDRhOGFmN2I0YjZkOGM0ZmY2MTAwMSJ9fX0=
+    '13':
+      '-4966197040922072952':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Basketball"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 9a869760-a4ae-49ac-9598-e136ce74ba73
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWRmODQ3MTVhNjRkYzQ1NTg2ZjdhNjA3OWY4ZTQ5YTk0NzdjMGZlOTY1ODliNGNmZDcxY2JhMzIyNTRhYzgifX19
+    '14':
+      '4577943013469432632':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Hamburger on a Plate"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: fb8c50a0-10e8-4d32-b4d3-e4b69d794b20
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTllZDIyNTU1YzY1NDk0NWI4YmU1YTBjZDQzYzBiYmU0MTUwZDczNWVjNzE5YjQ1YzU4ZjlhZDFmMTllYTVlZiJ9fX0=
+    '15':
+      '-9213519628754553079':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Beer"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 30e8590a-f0b9-44e8-9f28-18fff6a6f14c
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWVhNzg1OGRkYjUzZjNmYzEzYmU5ZDcxNDdkZjQwOGZmN2Y4NDNkZDIxYWYxOWMzOWIzZGQ1OGI1MjQxNjk1ZCJ9fX0=
+    '16':
+      '-1679206238245065883':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Cinderella"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 4bcccb09-03f5-434e-93a2-904d3b221c47
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzJhMWM4OWU4OGRiYzQ5Y2ZlN2NiYzBhZGQ0MmI4YzJmZDkyYjY5NGFmNzI5YzM0ODg3MjJlZjJiMmE3YjU1OCJ9fX0=
+    '17':
+      '3027935585374066048':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '18':
+      '-4248555160199410693':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '19':
+      '-1072631091670590348':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Technical Device"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 5f0abecb-3ff7-4f95-bfef-0a8abafe2975
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzgyZDU4ZTg5M2JmOWI4MjQzMzYyNmQwZTQ4MGU5Mzc1YjU4ZjNjMmRkZWY0NTBmNjE3YjYwZGJmNTA2Y2JiOSJ9fX0=
+    '20':
+      '-5934364906050025892':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Boy"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 44c1571b-98db-45e2-875e-a1cd944111e7
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTlmMGYyNTFiZGNmMmJhNTE5OTJlNWFlZmZkZWQ2ODQ0Zjg3Nzk2ZTE1NzQyNWU1N2Y0NWRmZDYwZTAyZTU2ZSJ9fX0=
+    '21':
+      '-7426945359548910260':
+        item:
+          v: 3120
+          type: CREEPER_HEAD
+    '22':
+      '7272598122848071968':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Fortnite"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: d61234c1-85f9-4e86-b3e8-1f373fdb8e3b
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTcyNzY3MzMzMzlhMWM4ZjI4OWY1YWYzNDYxZDFmZjVlMTE5MmU0MmYyMjJlNjdlYjIyYTI1Yjk5NWMyOCJ9fX0=
+    '23':
+      '-4034005256900312701':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Gamecube Controller"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: f079cc82-bb63-4888-8e5c-e7b7d6cda480
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmMxZGIyNmQwY2UyMzU3OTg0MWIwZTcyNWJkYzU0YmFhMDVjNDgyYTNkZTBjMGYxOTk1ODMyNTM5NThlYWJmYyJ9fX0=
+    '24':
+      '-1860278636871970813':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Peter Griffin"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 208b4947-10cd-456b-ae1d-7947dd5e5c43
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2YxMDg1ZWM0MmZhOWJjYjEzODY5NDgyMWQzNWVlOWNmOWIyYzM3YzUxNjA2MzgyN2Y3N2IyZTVhODU5MzAzOSJ9fX0=
+    '25':
+      '-4989069688438012001':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Instagram"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: acaae4ea-b8ee-45b6-b993-94d56a8e8a82
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWM4OGQ2MTYzZmFiZTdjNWU2MjQ1MGViMzdhMDc0ZTJlMmM4ODYxMWM5OTg1MzZkYmQ4NDI5ZmFhMDgxOTQ1MyJ9fX0=
+    '26':
+      '6956232439426054830':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '27':
+      '-775607263805267762':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '28':
+      '4862021528022667564':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Microphone"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 30b46026-c62c-4750-966b-9fff7ece4f86
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmRhODZjOWYyMWNjNWFlMjg4NDc4OTBlYzFiNzhmNDY4MWUxN2M3MWQyNDNjYjJiYWZlMjMzZmYxMjA3MSJ9fX0=
+    '29':
+      '7413926967618168673':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"LGBT person"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 7704e050-ec17-4bf7-9f73-767c8423cad2
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTgwNWU4Y2U5MjRjYWI0OWE1OWE1OWQzOTA2YTNkM2E1NGEyZWRkN2NiY2NiOWM0Njc1MzRmOGY2ZjhhMGZiNiJ9fX0=
+    '30':
+      '-385805622604668828':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Ryuk"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 661839b6-24fc-4e20-84ed-8098dfed65a6
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIxNGRjZDE4ODFhNTE5YjllYWMyZjY4MTU2ZmJhNzMzMzRmNDdjN2NiNWY5Zjc0NTY0YTE0OGU1ZTBlYWU5ZiJ9fX0=
+    '31':
+      '525808934596877766':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Technical Device"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 6b452bcb-5b7d-46a5-a111-71772c7249b7
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjdmNzFlNDRhNmM5NGM2ZDVhOTkyZDlhZmJlYjIxZjZlYjA3OTQ4ZDRlMGIwYmRhYWI1ZTlmOThjNWQ3OGNkIn19fQ==
+    '32':
+      '8363923037885369901':
+        item:
+          v: 3120
+          type: DIAMOND
+    '33':
+      '-749382268324713658':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Twitch"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 8a507e41-fd0a-4716-917c-938532f20b61
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmYxOGZhNDNkNGQ5Mzc4OTQ4YjU2Yjg1YjUzMTk3OTA3NDExOWMxMjUyMzJlNzE1Y2U0YmQ1Mjc4MGFjNGQ3NiJ9fX0=
+    '34':
+      '-2829010178409201743':
+        item:
+          v: 3120
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Youtube"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: eb2bcce4-75d4-4fc1-898a-b2dcc655bb3a
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTE0NTFlNWY4NWY4YmY3NDcyZjZlNmQxOWI3ZGRkOGZhZTM5OWUwOTkxMWYyMWJjZTdmOTcxMzFiNDJhNWE1NyJ9fX0=
+    '35':
+      '2389591396137621486':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '36':
+      '-1512976462936733768':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '37':
+      '-5722269120061662841':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '38':
+      '-1839448488684974731':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '39':
+      '1134924188425451553':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '40':
+      '4798806979569109509':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '41':
+      '1264442855364934741':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '42':
+      '-7535745536277190746':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '43':
+      '1383910563033648038':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '44':
+      '-7329010657958010594':
+        item:
+          v: 3120
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '45':
+      '-3776801730903032063':
+        item:
+          v: 3120
+          type: ARROW
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"Pagina
+              precedente"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Messaggi
+              Server (1/3)"}],"text":""}'
+        leftaction:
+          price:
+            lvl: false
+            money: 0.0
+            xp: 0
+            economy: Vault
+            items: []
+            checkDurability: true
+          cooldown: 200
+          closeInv: false
+          commands:
+          - gui open chatmessages
+    '46':
+      '4034901560134366449':
+        item:
+          v: 3120
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '47':
+      '217976406273576986':
+        item:
+          v: 3120
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '48':
+      '-7975822225526302499':
+        item:
+          v: 3120
+          type: PAPER
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"red","text":"Info"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Griglia
+              in aggiornamento costante!"}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"aqua","text":"Contribuisci
+              anche tu all''aggiunta"}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"aqua","text":"di
+              nuovi pacchetti di messaggi!"}],"text":""}'
+    '49':
+      '5750398359647919892':
+        item:
+          v: 3120
+          type: BARRIER
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"red","text":"Chiudi"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Torna
+              alla Disagio SMP"}],"text":""}'
+        leftaction:
+          price:
+            lvl: false
+            money: 0.0
+            xp: 0
+            economy: Vault
+            items: []
+            checkDurability: true
+          cooldown: 200
+          closeInv: true
+          commands:
+          - <back>
+    '50':
+      '-3608542747475245581':
+        item:
+          v: 3120
+          type: PAPER
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"red","text":"Info"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Griglia
+              in aggiornamento costante!"}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"aqua","text":"Contribuisci
+              anche tu all''aggiunta"}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"aqua","text":"di
+              nuovi pacchetti di messaggi!"}],"text":""}'
+        leftaction:
+          price:
+            lvl: false
+            money: 0.0
+            xp: 0
+            economy: Vault
+            items: []
+            checkDurability: true
+          cooldown: 200
+          closeInv: false
+    '51':
+      '2313488351371236026':
+        item:
+          v: 3120
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '52':
+      '7190053630415584055':
+        item:
+          v: 3120
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '53':
+      '4281119510787607619':
+        item:
+          v: 3120
+          type: ARROW
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"Pagina
+              successiva"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Messaggi
+              Server (3/3)"}],"text":""}'
+        leftaction:
+          price:
+            lvl: false
+            money: 0.0
+            xp: 0
+            economy: Vault
+            items: []
+            checkDurability: true
+          cooldown: 200
+          closeInv: false
+          commands:
+          - gui open chatmessages3

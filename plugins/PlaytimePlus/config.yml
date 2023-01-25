@@ -1,0 +1,67 @@
+#  -------------------------------------------------------------------------------------  #
+# When customizing the messages, you can use placeholders.                                #
+# For instance, %hours% will get replaced by the amount of hours player has played for    #
+# Available placeholders:                                                                 #
+#   %target% -> this is the target's username                                             #
+#   The following time placeholders will display the units in clock format rather than    #
+#   their total                                                                           #
+#   %hours%                                                                               #
+#   %minutes                                                                              #
+#   %seconds%                                                                             #
+#   %reward% -> this is the reward's name                                                 #
+# All time settings are in seconds                                                        #
+#  -------------------------------------------------------------------------------------  #
+
+messages:
+  prefix: '&6[&cPlaytimePlus&6] » '
+  current-playtime: '&7Your current session playtime is &4%hours%h %minutes%m %seconds%s.'
+  current-playtime-other: '&7Current session playtime of &4%target% &7is &4%hours%h %minutes%m %seconds%s.'
+  total-playtime: '&7Your total playtime is &4%hours%h %minutes%m %seconds%s.'
+  total-playtime-other: '&7Total playtime of &4%target% &7is &4%hours%h %minutes%m %seconds%s.'
+  player-not-found: '&4&o%target% &7was not found in our database.'
+  player-offline: '&4&o%target% &7is currently offline.'
+  incorrect-usage: '&7&oIncorrect usage.'
+  insufficient-permissions: "&7&oYou have insufficient permissions to execute this command."
+  #Admin messages
+  checked-reward-player: "&7%target% has been checked for %reward%."
+  checked-rewards-player: "&4%target% &7has been checked for unclaimed rewards."
+  granted-reward-player: "&7Attempting to grant &r%reward% &7to &4%target%."
+  granted-rewards-player: "&7%target% has been granted with unclaimed rewards."
+  reload-message: '&7Configuration successfully reloaded.'
+  database-saved: '&7Database successfully saved.'
+  migration-no-config: '&7No config to which to migrate from found...'
+  migration-beginning: '&7Beginning migration.'
+  migration-amount: "&7Migrating &r%amount% &7users."
+
+leaderboard:
+  title: "&cPlaytime Leaderboard"
+  player-own-color: '&a'
+  player-other-color: '&c'
+  lore_color: '&d'
+  size: 9 # It must be either 9, 18, 27, 36, 45, 54
+  player_amount: 9 # can't be bigger than the inventory size
+  custom_lore:
+    - "&5Hours: %hours%"
+    - "&5Minutes: %minutes%"
+    - "&5Seconds: %seconds%"
+
+storage:
+  save-time: 500 #How often should playtimes get saved to the database?
+
+rewards:
+  size: 9 # It must be either 9, 18, 27, 36, 45, 54. Pagination isn't implemented yet
+  check-time: 100 #How often should the plugin check for the rewards?
+  title: "&cReward List"
+  requirement-type-color: '&d'
+  requirement-color: '&e'
+  # For list of materials see https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html0
+  material-obtained: "GREEN_STAINED_GLASS_PANE"
+  material-not-obtained: "RED_STAINED_GLASS_PANE"
+
+mysql:
+  enabled: false
+  host: localhost
+  port: 3306
+  database: playtime
+  user: root
+  password: password

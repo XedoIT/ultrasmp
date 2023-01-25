@@ -1,0 +1,51 @@
+title: '{abilities_title}'
+size: 4
+fill:
+  enabled: true
+  material: gray_stained_glass_pane
+items:
+  back:
+    material: arrow
+    pos: 3,4
+    display_name: '{back}'
+    lore:
+      - '&7Torna a Livelli abilità'
+templates:
+  locked_ability:
+    material: bedrock
+    display_name: '&b{name}'
+    lore:
+      - '{locked_desc}'
+      - ' '
+      - '{unlocked_at}'
+      - ' '
+      - '{locked}'
+  locked_mana_ability:
+    pos: 2,4
+    material: bedrock
+    display_name: '&d{name}'
+    lore:
+      - '{locked_desc}'
+      - ' '
+      - '{unlocked_at}'
+      - ' '
+      - '{locked}'
+  unlocked_ability:
+    material: diamond_block
+    display_name: '&b{name}'
+    lore:
+      - '{your_ability_level}'
+      - ' '
+      - '{unlocked_desc}'
+      - ' '
+      - '{unlocked}'
+  unlocked_mana_ability:
+    pos: 2,4
+    material: emerald_block
+    display_name: '&d{name}'
+    lore:
+      - '{your_ability_level}'
+      - ' '
+      - '{unlocked_desc}'
+      - ' '
+      - '{unlocked}'

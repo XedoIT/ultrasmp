@@ -1,0 +1,62 @@
+#  ------------------------------------------------------------------------------------------------------  #
+# All the time settings are in seconds                                                                     #
+# Available keys:                                                                                          #
+#   total-playtime - How much total playtime should be required?                                           #
+#   session-playtime - How much session playtime should be required?                                       #
+#   required-permissions - Which permissions should be required?                                           #
+#   console-commands - What commands in the console should be executed upon completion of all              #
+#   requirements?                                                                                          #
+#   name - What name should the reward have?                                                               #
+#   custom-lore - What lore should the item have in the rewards list gui?                                  #
+# Available placeholders:                                                                                  #
+#   %prefix% - Displays the plugin's message prefix. This can be set in the config file.                   #
+# IMPORTANT:                                                                                               #
+#   THE ID MUST BE GREATER THAN 0 AND IT MUST BE UNIQUE. A NEW ID IS A COMPLETELY NEW REWARD               #
+#   The rewards in the database are identified by IDs. Let's say a player has obtained a reward            #
+#   called rankup which has the ID of 1. If the ID gets changed to let's say 2, the player will once       #
+#   again receive the rankup reward.                                                                       #
+#   No two rewards should have the same ID                                                                 #
+#  ------------------------------------------------------------------------------------------------------  #
+
+rewards: #Do not change this
+
+  #rankup: #Reward name
+  #  id: 1
+  #  name: "&bRankup"
+  #  total-playtime: 6500
+  #  console-commands:
+  #    - command %target%
+  #    - command2 %target%
+  #  player-messages:
+  #    - "%prefix%&7You have obtained the &bRankup &7reward"
+
+  #reward2:
+  #  id: 2
+  #  name: "&cReward 2"
+  #  session-playtime: 1000
+  #  console-commands:
+  #    - command1 %target%
+  #    - command2 %target%
+  #  broadcast-messages:
+  #    - "%prefix%&7Player %target% has obtained the &cReward 2 &7reward"
+
+  #vip:
+  #  id: 3
+  #  name: "&4VIP"
+  #  total-playtime: 5000
+  #  session-playtime: 1000
+  #  required-permissions:
+  #    - playtime.vip
+  #  console-commands:
+  #    - eco give %target% 100
+  #    - give %target% diamonds 1
+  #  broadcast-messages:
+  #    - "%prefix%&7Player %target% has obtained the &4VIP &7reward"
+  #  player-messages:
+  #    - "%prefix%&7You have obtained the &4VIP &7reward"
+  #  custom-lore:
+  #    - "&4Lorem ipsum dolor sit amet "
+  #    - "&c consectetur adipiscing elit"
+  #    - "&1  Aliquam sollicitudin"
+  #    - "&9   neque elit"
+  #    - "Aliquam semper"

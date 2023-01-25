@@ -1,0 +1,24 @@
+command /bug [<text>]:
+	description: Segnala e gestisci i bug segnalati dai giocatori.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				send "&cUtilizzo: &6/bug <bug>"
+				stop
+			else:
+				log "[BUG] %player% ha segnalato un bug: ""%arg-1%""" to "bug.log"
+				send "&a&lBug segnalato correttamente!"
+				send "&b&l[&4&lBUG&b&l] &3&l>>> &e%player% ha segnalato un bug: ""&9%arg-1%&e"" &3&l<<< &b&l[&4&lBUG&b&l]" to console
+				send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log" to console
+				stop
+				
+		else:
+			if arg-1 is not set:
+				send "&cQual è il bug che vuoi segnalare?"
+				stop
+			else:
+				log "[BUG] La console ha segnalato un bug: ""%arg-1%""" to "bug.log"
+				send "&a&lBug segnalato correttamente!"
+				send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log"
+				stop

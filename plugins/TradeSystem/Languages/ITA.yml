@@ -1,0 +1,138 @@
+No_Permissions: '&cNon hai i permessi per farlo!'
+Only_for_Player: '&cSolo i giocatori possono farlo!'
+No_Money: '&cNon hai soldi!'
+Enter_Correct_Amount: '&cPer favore, inserisci un valore valido.'
+Only_X_Amount: '&7Possiedi &c%amount% %type%&7!'
+Trade_Was_Cancelled: '&cScambio annullato.'
+Trade_Was_Finished: '&7Lo scambio si è &aconcluso&7.'
+Cannot_Trade_With_Yourself: '&cChe strano! Nessuno mi aveva mai chiesto di scambiare con se stesso/a.'
+Player_Not_Online: '&cQuel giocatore non è online.'
+Want_To_Trade: '&c%player% &7vorrebbe scambiare con te. &8[%accept% &7| %deny%&8]'
+Want_To_Trade_Accept: '&aAccetta'
+Want_To_Trade_Deny: '&cRifiuta'
+Want_To_Trade_Hover: '&8» Clicca qui «'
+Player_Is_Invited: '&7Hai inviato una richiesta di trading a &c%player%&7.'
+Command_How_To: '&7Utilizza: &c/trade <player&7, &caccept&7, &cdeny&7, &ctoggle>'
+Command_How_To_Accept: '&7Utilizza: &c/trade accept <giocatore>'
+Command_How_To_Deny: '&7Utilizza: &c/trade deny <giocatore>'
+Player_Of_Request_Not_Online: '&cQuel giocatore non è più online!'
+Request_Accepted: '&7Hai &aaccettato &7la richiesta di trading.'
+Request_Was_Accepted: '&c%player% &7ha &aaccettato &7la tua richiesta di trading.'
+Request_Denied: '&7Hai &crifiutato &7la richiesta di trading.'
+Request_Was_Denied: '&c%player% &7ha &crifiutato &7la tua richiesta di trading.'
+No_Request_Found: '&cNon hai nessuna richiesta di trading da parte di questo giocatore!'
+No_Requests_Found: '&cNon hai ancora ricevuto nessuna richiesta di trading!'
+Too_many_requests: '&cVedo che hai molte richieste in sospeso. &7Per favore, specifica il nome del giocatore.'
+GUI_Title: '&c%player% %tradesystem_countdown_fancy%'
+Money_Amount: Soldi
+Coin: DisaCoin
+Coins: DisaCoins
+Status: Stato
+Ready: Pronto/a
+Not_Ready: Non pronto/a
+Wait_For_Other_Player: Attendo l'altro giocatore...
+Trade_Only_With_Objects: Devi scambiare qualcosa per concludere lo scambio!
+Click_To_Change: Clicca per modificare
+Cancel_Trade: Interrompi il trade
+Not_Able_To_Trade: Non hai il permesso per scambiare!
+Player_Is_Not_Able_Trade: Questo giocatore non può scambiare.
+TRADE_EDITOR: Editor - Trading GUI
+TRADE_EDITOR_FUNCTIONS: Editor - Funzioni
+EDITOR_RESET: La tua GUI salvata temporaneamente è stata ripristinata.
+Editor_Command_How_To: '&7Utilizza: &c/tradeEditor [reset]'
+Editor_Not_Empty: Non ci sono slot vuoti!
+Editor_No_Item: Non ci sono oggetti!
+Layout_Name: Nome Layout
+Layout_Name_Already_Exists: Il nome per questo layout è già in uso!
+Layout_Finished: Layout creato &acorrettamente&7.
+Layout_Edited: Layout modificato &acorrettamente&7.
+Layout_Editor: '&9Layout &8- &9Editor'
+Save: Salva
+Not_Ready_For_Saving: '&cQuesto layout non può essere ancora salvato!'
+Items: Oggetti
+Set: Imposta
+Not_Set: Non impostato
+Functions: Funzioni
+Name: Nome
+Ambiguous_Functions: Funzione ambigua
+Layout_Set_Items: Compila la Trade GUI standard
+Layout_Set_Functions: Imposta le funzioni
+Layout_Set_Name: Imposta il nome del layout
+Layout_Set_Ambiguous_Functions: Imposta le funzioni ambigue
+Layout_Editor_Set_Items: '&cChiudi per continuare'
+Back: Indietro
+Trader: Trader
+Other: Altro
+Layout_Set_Own_Slots: Imposta i tuoi slot per gli scambi
+Layout_Set_Other_Slots: Imposta gli slot per gli scambi del trader
+Layout_Set_Cancel: Imposta l'icona che permette l'annullamento dello scambio
+Layout_Set_Other_Not_Ready: Imposta l'icona del ''Non pronto/a'' del trader
+Layout_Set_Status: Imposta l'icona dello stato personale
+Layout_Set_Money: Imposta l'icona della propria moneta
+Layout_Set_Other_Money: Imposta l'icona della moneta del trader
+Help_TradeSystem: '&7Utilizza &e/%label% <layout, reload>'
+Help_TradeSystem_Layout: '&7Utilizza &e/%label% layout <create, edit, delete, activate>'
+Help_TradeSystem_Layout_Create: '&7Utilizza &e/%label% layout create <nome>'
+Help_TradeSystem_Layout_Activate: '&7Utilizza &e/%label% layout activate <nome>'
+Help_TradeSystem_Layout_Delete: '&7Utilizza &e/%label% layout delete <nome>'
+Help_TradeSystem_Layout_Edit: '&7Utilizza &e/%label% layout edit <nome>'
+Help_TradeLog: '&7Utilizza &e/%label% <nome>'
+Layout_Does_Not_Exist: '&cQuesto layout non esiste!'
+Layout_Activated: '&7Il layout ''&b%name%&7'' è stato &aattivato&7.'
+Layout_Deleted: '&7Il layout ''&b%name%&7'' è stato &celiminato&7.'
+Enter_Correct_Name_Space: '&cPer favore, non usare spazi.'
+Sure_That_You_Want_To_Loose_Your_Data: '&7Sei sicuro/a di &cnon voler &7salvare le modifiche?'
+Close: Chiudi
+Layout_Already_Activated: '&7Questo layout &cè già attivato&7!'
+Layout_Set_Replacement_For_Money: '&7L''icona, che &esostituisce l''icona della moneta&7, quando
+  &enessun plugin economy &7viene rilevato.'
+Layout_Hint_Same_Slot_Amount: '&7Entrambi i trader &cdevono avere &7la &cstessa quantità di slot&7!'
+Current_Amount: Quantità attuale
+Trade_Spam: '&7Questo giocatore &cha già ricevuto una richiesta di trading&7!'
+Plugin_Reloading: '&3Ricarico il plugin...'
+Success_Plugin_Reloaded: '&aPlugin ricaricato.'
+Player_is_not_in_range: '&7&c%player% &cnon è abbastanza vicino/a a te &7per permetterti di poter avviare una sessione di trading!'
+Cannot_trade_in_that_GameMode: '&cNon puoi scambiare in questa gamemode!'
+Other_cannot_trade_in_that_GameMode: '&cQuesto giocatore non può scambiare nella gamemode in cui si trova!'
+Trade_cancelled_by_attack: '&cLo scambio è stato annullato perché uno dei due trader ha subito danni.'
+Trade_Partner_No_Space: '&7Il giocatore con cui stai scambiando &cnon ha abbastanza spazio nel suo inventario!'
+Trade_Offline: '&7Hai scelto di &cnon essere più disponibile &7per le richieste di trading!'
+Trade_Online: '&7Hai scelto di &aessere disponibile &7per le richieste di trading!'
+Trade_Partner_is_Offline: '&cNon puoi inviare richieste di trading a questo giocatore!'
+Trade_You_are_Offline: '&7Utilizza "%command%&e/trade toggle%command%&7" per scambiare di nuovo.'
+Trade_Placed_Blocked_Item: '&7Questo oggetto &cnon può &7essere scambiato!'
+Cannot_trade_in_bed: '&cNon puoi scambiare oggetti &7mentre sei a letto.'
+Cannot_trade_in_world: '&cNon puoi scambiare oggetti &7in questo mondo!'
+Other_cannot_trade_in_world: '&7Quel giocatore &cnon può scambiare &7nel mondo in cui si trova!'
+Cannot_trade_while_invisible: '&cNon puoi scambiare &7mentre sei &cinvisibile&7!'
+Other_is_already_trading: '&7Questo giocatore &cè già in una sessione di trading &7in questo momento! Riprova tra qualche istante.'
+Online: Online
+Offline: Offline
+Your_request_expired: '&7La richiesta di trading che hai inviato a &e%player% &7è &cscaduta&7.'
+Request_expired: '&7La richiesta di trading che ti ha inviato &e%player% &7è &cscaduta&7.'
+Fancy_Countdown: ' &7- &e%seconds%s'
+Economy_Error: '&7Lo scambio è stato &cannullato &7a causa di un &cerrore economico&7.'
+Items_Dropped: '&7Il tuo inventario è &cpieno&7! &7Alcuni oggetti sono stati droppati per terra!'
+TradeLog_Disabled: '&7Il log degli scambi è &cdisabilitato&7!'
+Sign_Enter_Amount: |-
+  ^^^^^^^^
+  Inserisci la quantità
+  qui sopra
+Leftclick: Click sinistro
+Rightclick: Click destro
+Shift_Leftclick: Shift + Click sinistro
+Shift_Rightclick: Shift + Click destro
+Select: Seleziona
+Select_Foreign_Preview: Seleziona anteprima del trader
+Edit: Modifica
+Edit_Variant: Modifica variante
+Variant: Variante
+Cancel: Annulla
+Finish: Termina
+Levels: Livelli
+Level: Livello
+Too_Little_Exp: '&cNon hai esperienza per poter scambiare.'
+Exp_Points: Punti esperienza
+Exp_Point: Punto esperienza
+Open_GUI_Error: '&7Lo scambio è stato &cannullato &7a causa di un &cproblema di GUI&7. Riprova.'
+Reset: Ripristina

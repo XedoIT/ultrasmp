@@ -1,0 +1,469 @@
+inv:
+  size: 54
+  id: chatmessages3
+  title: Messaggi Server (3/3)
+  targetPlayerOption: DISABLED
+  items:
+    '0':
+      '-1529146596376381336':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '1':
+      '9021459398830241861':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '2':
+      '-1415276348790430723':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '3':
+      '783022946091030840':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '4':
+      '9177477349590525899':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '5':
+      '-5974863955674608465':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '6':
+      '2988897947035145555':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '7':
+      '2336599956376528294':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '8':
+      '-4704206046914148297':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '9':
+      '-2663972722236991518':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '10':
+      '-7581608572971182840':
+        item:
+          v: 3218
+          type: LIGHTNING_ROD
+    '11':
+      '-2641796690601857515':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"City Building"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 66203b35-31b7-4cd3-bcbb-91f953d180cc
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjI1YjI3Y2U2MmNhODg3NDM4NDBhOTVkMWMzOTg2OGY0M2NhNjA2OTZhODRmNTY0ZmJkN2RkYTI1OWJlMDBmZSJ9fX0=
+    '12':
+      '-3939412378456308437':
+        item:
+          v: 3218
+          type: WATER_BUCKET
+    '13':
+      '-1917151009588585673':
+        item:
+          v: 3218
+          type: LAVA_BUCKET
+    '14':
+      '-769433352702493171':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Best Friends"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 4519382e-8969-43a3-92a1-d222897c6b43
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzZjYmFlNzI0NmNjMmM2ZTg4ODU4NzE5OGM3OTU5OTc5NjY2YjRmNWE0MDg4ZjI0ZTI2ZTA3NWYxNDBhZTZjMyJ9fX0=
+    '15':
+      '3553081228824043068':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Love Letter"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: ca5162ed-8149-4727-bbfe-5be0562ca0e0
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmI1YzdhMDVjYzBiOGI3NDQ1N2E2Y2EyZWMyZTUwZGVlMmM0OGE2NDllNDhhNWU3OTBmY2E0ZDkzOGQzN2IzYiJ9fX0=
+    '16':
+      '2999176340931809079':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Jesus Christ"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 744745d6-24ab-41d8-976a-af89ca929f28
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmU2MmM4N2Q4MmNjNzNmZDQyMjg4YjI3NGZhODllOGQ2M2EyNWI5NTJiZGZlMGU1ZGRmNGM5OGIxNDM3In19fQ==
+    '17':
+      '-2699880243933860979':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '18':
+      '2609623389322643969':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '19':
+      '9201816033559219088':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Devil"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 8e903251-86f2-4765-b975-15caa6c0140e
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzI1OWRiYmVmZGMxZjQ1ZGMwNGZjM2MxMDVhYTAyODQ4ODYwNTcyZmQ1N2ZiZmU3ZDBkMGRjYzdlNDhiYmVmMyJ9fX0=
+    '20':
+      '8839282909085555877':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Fire Demon"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: 73b53a35-4886-4275-9955-5b5c835b93f9
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2UzN2RmMjdkMWU5MjVkMmY3OGRlNjkzNDEzYWRhYjc1ZDc5MTg4NDViYWM4ZjYxNzRmZGIyMmVjNTc3NjExZCJ9fX0=
+    '21':
+      '-2630867434988663314':
+        item:
+          v: 3218
+          type: PLAYER_HEAD
+          meta:
+            ==: ItemMeta
+            meta-type: SKULL
+            display-name: '{"text":"Demon Knight"}'
+            skull-owner:
+              ==: PlayerProfile
+              uniqueId: d267c9a0-f0c1-4fe8-96aa-86932ca61b0b
+              name: Player
+              properties:
+              - name: textures
+                value: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjQzZmFkZjQzOWYwOWYzZTEwZDk1ZWUwMzMwZWI2YTQ2MWE2Y2MzYzQzNWYwYjJkYTA0YWY1MGYxYWRlZGE2YyJ9fX0=
+    '26':
+      '7087605335766864195':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '27':
+      '6334639326945874612':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '35':
+      '-7475325997238620510':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '36':
+      '6481174154416615422':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '37':
+      '2259686548804851638':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '38':
+      '-667582688141535893':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '39':
+      '8106053341841323515':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '40':
+      '-5760353500464458553':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '41':
+      '4555917223452103335':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '42':
+      '-8499887336277954655':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '43':
+      '-8088865415152229521':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '44':
+      '-8641759504735352875':
+        item:
+          v: 3218
+          type: GRAY_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '45':
+      '181534995539812722':
+        item:
+          v: 3218
+          type: ARROW
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"green","text":"Pagina
+              precedente"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Messaggi
+              Server (2/3)"}],"text":""}'
+        leftaction:
+          price:
+            lvl: false
+            money: 0.0
+            xp: 0
+            economy: Vault
+            items: []
+            checkDurability: true
+          cooldown: 200
+          closeInv: false
+          commands:
+          - gui open chatmessages2
+    '46':
+      '-1862965430643457004':
+        item:
+          v: 3218
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '47':
+      '8963425406155417213':
+        item:
+          v: 3218
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '48':
+      '9035250941870304490':
+        item:
+          v: 3218
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '49':
+      '8574005586392736026':
+        item:
+          v: 3218
+          type: BARRIER
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"red","text":"Chiudi"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Torna
+              alla Disagio SMP"}],"text":""}'
+        leftaction:
+          price:
+            lvl: false
+            money: 0.0
+            xp: 0
+            economy: Vault
+            items: []
+            checkDurability: true
+          cooldown: 200
+          closeInv: true
+          commands:
+          - <back>
+    '50':
+      '7186757614052211570':
+        item:
+          v: 3218
+          type: PAPER
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":true,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"red","text":"Info"}],"text":""}'
+            lore:
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"gray","text":"Griglia
+              in aggiornamento costante!"}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"aqua","text":"Contribuisci
+              anche tu all''aggiunta"}],"text":""}'
+            - '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"aqua","text":"di
+              nuovi pacchetti di messaggi!"}],"text":""}'
+    '51':
+      '144764162760033338':
+        item:
+          v: 3218
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '52':
+      '5741705495856322888':
+        item:
+          v: 3218
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'
+    '53':
+      '478629206246315320':
+        item:
+          v: 3218
+          type: BLACK_STAINED_GLASS_PANE
+          meta:
+            ==: ItemMeta
+            meta-type: UNSPECIFIC
+            display-name: '{"extra":[{"bold":false,"italic":false,"underlined":false,"strikethrough":false,"obfuscated":false,"color":"white","text":""}],"text":""}'

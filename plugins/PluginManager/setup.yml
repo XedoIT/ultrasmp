@@ -1,0 +1,118 @@
+Settings:
+  PluginsInventory:
+    Title: Plugin della Disagio SMP
+    Plugin:
+      DisplayName: '&b%plugin%'
+      Lore:
+      - '&7Versione&8: &a%plugin%'
+      Type:
+        Enabled: LEGACY_STAINED_CLAY
+        Disabled: LEGACY_STAINED_CLAY
+      MetaData:
+        Enabled: 5
+        Disabled: 14
+    Info:
+      DisplayName: '&6&lInfo'
+      Lore:
+      - '&e&lClick sinistro &7per aprire le impostazioni del plugin'
+      - '&e&lClick destro &7per &aattivare &7o &cdisattivare &7il plugin'
+      Type: LEGACY_NETHER_STAR
+    Next:
+      DisplayName: '&8Avanti'
+      Lore:
+      - '&7Vai alla pagina successiva'
+      Type: LEGACY_ARROW
+    Back:
+      DisplayName: '&8Indietro'
+      Lore:
+      - '&7Torna alla pagina precedente'
+      Type: LEGACY_ARROW
+  SettingsInventory:
+    Title: '&b%plugin%'
+    UsePlaceHolders: true
+    PlaceHolder:
+      DisplayName: '&8&k,&r'
+      Type: LEGACY_STAINED_GLASS_PANE
+    Enable:
+      DisplayName: '&aAttiva'
+      Lore:
+      - '&7Clicca qui per attivare il plugin.'
+      Type: LEGACY_STAINED_CLAY
+      MetaData: 5
+    Disable:
+      DisplayName: '&cDisattiva'
+      Lore:
+      - '&7Clicca qui per disattivare il plugin.'
+      Type: LEGACY_STAINED_CLAY
+      MetaData: 14
+    Restart:
+      DisplayName: '&eRiavvia'
+      Lore:
+      - '&7Clicca qui per riavviare il plugin.'
+      Type: LEGACY_STAINED_CLAY
+      MetaData: 4
+    Reload:
+      DisplayName: '&6Ricarica'
+      Lore:
+      - '&7Clicca qui per ricaricare il plugin.'
+      Type: LEGACY_STAINED_CLAY
+      MetaData: 1
+    Info:
+      DisplayName: '&6&l%plugin%'
+      Lore:
+      - '&7Versione&8: &a%version%'
+      - '&7Autor(e/i)&8: &a%authors%'
+      - '&7Stato&8: &a%state%'
+      Type: LEGACY_NETHER_STAR
+    Back:
+      DisplayName: '&fIndietro'
+      Lore:
+      - '&7Clicca qui per tornare alla pagina principale'
+      Type: LEGACY_ARROW
+Messages:
+  State:
+    Enabled: '&b&k||&a&lAbilitato&b&k||'
+    Disabled: '&8&k||&c&lDisabilitato&8&k||'
+  Prefix: '&8[&9&lPM&8] '
+  NoPerm: '&8[&4&lINFO&8] &cNon hai i permessi per farlo!'
+  NotPlayer: '&cSolo i giocatori possono eseguire questo comando'
+  PluginNotFound: '&cIl plugin &a%plugin% &cnon è stato trovato!'
+  PluginEnabled: '&eIl plugin &a%plugin% &eè stato abilitato!'
+  PluginDisabled: '&cIl plugin &a%plugin% &cè stato disabilitato!'
+  AllPluginsEnabled: '&eTutti i plugin sono stati &aabilitati&e!'
+  AllPluginsDisabled: '&cTutti i plugin sono stati &7disabilitati&c!'
+  PluginCanNotBeToggled: '&cNon è stato possibile &aabilitare&c/&7disabilitare &cil
+    plugin &a%plugin%&c!'
+  PluginLoaded: '&eIl plugin &a%plugin% &eè stato caricato e abilitato!'
+  AllPluginsLoaded: '&eTutti i plugin sono stati caricati e abilitati!'
+  PluginUnloaded: '&cIl plugin &a%plugin% &cè stato scaricato e disabilitato!'
+  AllPluginsUnloaded: '&cTutti i plugin sono stati scaricati e disabilitati!'
+  PluginReloaded: '&eIl plugin &a%plugin% &eè stato ricaricato e abilitato!'
+  AllPluginsReloaded: '&eTutti i plugin sono stati ricaricati e abilitati!'
+  PluginCanNotBeLoaded: '&cIl plugin &a%plugin% &cnon può essere caricato!'
+  AllPlugins:
+    Header: '&8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ &bTutti i plugin &7(&a%count%&7) &8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+    Plugin: '%state%%name% &7(&e%version%&7)'
+    Spacer: '&8, '
+    Footer: '&8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+  PluginRestarted: '&eIl plugin &a%plugin% &eè stato riavviato!'
+  AllPluginsRestarted: '&eTutti i plugin sono stati riavviati!'
+  PluginDeleted: '&eIl file del plugin &a%plugin% &eè stato eliminato!'
+  PluginCanNotBeDeleted: '&eIl file del plugin &a%plugin% &enon può essere eliminato!'
+  PluginDirectoryDeleted: '&eIl percorso del plugin &a%plugin% &eè stato eliminato!'
+  PluginDirectoryCanNotBeDeleted: '&eIl percorso del plugin &a%plugin% &enon può essere
+    eliminato!'
+  PluginCommands:
+    Header: '&8⎯⎯⎯⎯⎯ &7Tutti i comandi di &b%plugin% &8⎯⎯⎯⎯⎯'
+    Command: '&8- &a%name% &7(&e%usage%&7)'
+    Footer: '&8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+  NoPluginCommands: '&cIl plugin &a%plugin% &cnon ha comandi da mostrare!'
+  CommandBelongsToPlugin: '&eIl comando &a%command% &eappartiene al plugin &d%plugin%&e!'
+  CommandNotFound: '&cIl comando &a%command% &cnon esiste!'
+  PluginAlreadyLoaded: '&cIl plugin &a%plugin% &cè già stato caricato!'
+  PluginInfo:
+  - '&8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ &b%name% &8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+  - '&7Autor(e/i)&8: &a%authors%'
+  - '&7Versione&8: &a%version%'
+  - '&7Stato&8: &a%state%'
+  - '&8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ &b%name% &8⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'

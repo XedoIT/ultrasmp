@@ -1,0 +1,71 @@
+# GUIPlus Messages
+
+PREFIX: '&6[GUIPlus]'
+
+# 
+# User Messages
+# You may change this Messages to Server Language
+# 
+DAYS: day(s)
+HOURS: hour(s)
+MINUTES: minutes(s)
+SECONDS: seconds(s)
+NO_PERM: '&cYou don''t have permission to perform this Command'
+TARGET_DOES_NOT_EXISTS: '&cThe Player is not online'
+
+# %cmd% will be replaced with the Command Alias
+TARGET_REQUIRED: '&cUsage: &7/%cmd% <player>'
+
+# %name% will be replaced with the GUI Name
+GUI_TARGET_REQUIRED: '&cUsage: &7/gui open %name% <player>'
+CMD_GUI_PERM: '&cYou don''t have permission to open this GUI'
+CMD_GUI_EXISTS: '&cThis GUI does not exists'
+ACTION_NOT_ENOUGH_PERMISSIONS: '&cYou don''t have enough permissions'
+ACTION_STILL_ON_COOLDOWN: '&eYou have to wait §7%time%'
+ACTION_NOT_ENOUGH_MONEY: '&cYou don''t have enough Money to afford this'
+ACTION_NOT_ENOUGH_XP: '&cYou don''t have enough Exp to afford this'
+ACTION_NOT_ENOUGH_ITEMS: '&cYou don''t have enough Items to afford this'
+DATA_NOT_LOADED: '&cWAIT! Your Data has to load.'
+
+# 
+# Admin Messages
+# In most cases your default Players won't see this Messages
+# 
+NO_CONSOLE: '&cOnly a Player can use this Command'
+GUI_NEW_NAME: '&eWrite the new &7Name &ein Chat'
+GUI_NEW_TITLE: '&eWrite the new &7Title &ein Chat'
+GUI_NEW_SIZE: '&eWrite the new &7Size &ein Chat'
+GUI_NEW_PERMISSION: '&eWrite the new &7Permission &ein Chat'
+GUI_NEW_COOLDOWN: '&eWrite the new &7Cooldown &ein Chat &e(&7Example: &a200ms&e)'
+GUI_CHANGED_NAME: '&eChanged name to &7%name%'
+GUI_EXISTS_NAME: '&cThis Name already exists'
+GUI_NEW_ALIAS: '&eWrite the new &7Command alias &ein Chat (without &7/&e)'
+GUI_CHANGED_TITLE: '&eChanged title to &7%name%'
+GUI_MAX_TITLE: '&cThe Max-Size of the Title is 32'
+GUI_CHANGED_SIZE: '&eChanged size to &7%size%'
+GUI_CLONE: '&eWrite the Name of the other GUI in Chat'
+GUI_MAX_SIZE: '&cThe Max-Size is 54'
+GUI_VALID_NUMBER: '&cThis is not a valid Number'
+GUI_CHANGED_PERMISSION: '&eChanged permission to &7%name%'
+GUI_CHANGED_ALIAS: '&eChanged Command alias to &7%cmd%'
+ITEM_NEW_DISPLAYNAME: '&eWrite the new &7Displayname &ein Chat'
+ITEM_NEW_SKULL_OWNER: '&eWrite the new &7Skull Owner &ein Chat'
+ITEM_MAX_DISPLAYNAME: '&cThe Max-Size of the Displayname is 32'
+ITEM_CHANGED_DISPLAYNAME: '&eChanged displayname to %name%'
+ITEM_CHANGED_SKULL_OWNER: '&eChanged skull owner to %name%'
+LIST_NEW_LORE: '&eWrite the new &7Lore in Chat'
+CMD_GUI_ALREADYEXISTS: '&cThis GUI already exists'
+CMD_GUI_DELETE: '&eYou deleted the GUI &7%name%'
+CMD_GUI_RELOAD: '&eReload complete'
+CMD_GUI_RELOAD_ERROR: '&cReload failed (Check console)'
+CMD_GUI_OTHER_ONLINE: '&cThe player isn''t online'
+CMD_GUI_OTHER_EXECUTED: '&eYou opened the GUI for %player%'
+ACTION_NEW_PRICE: '&eWrite the new &7Price &ein Chat'
+ACTION_NEW_PRICE_EXP: '&eWrite the new EXP Price in Chat (L for Level)'
+ACTION_PRICE_NEGATIVE: '&cNegative Prices aren''t allowed'
+ACTION_CHANGED_PRICE: '&eChanged price to &7%size%'
+ACTION_COOLDOWN_NEGATIVE: '&cNegative Cooldowns aren''t allowed'
+ACTION_COOLDOWN_WRONG_UNIT: '&cThis is not a valid Timeunit'
+ACTION_CHANGED_COOLDOWN: '&eChanged cooldown to &7%time%'
+ACTION_NEW_COMMAND: '&eWrite the new &7Command in Chat'
+ACTION_CHANGED_COMMAND: '&eChanged Command to %name%'

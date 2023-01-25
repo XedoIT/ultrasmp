@@ -1,0 +1,53 @@
+title: 'Statistiche'
+size: 5
+fill:
+  enabled: true
+  material: gray_stained_glass_pane
+items:
+  skull:
+    pos: 0,4
+    material: player_head
+    display_name: '&e{player}'
+    lore:
+    - '{strength}'
+    - '{health}'
+    - '{regeneration}'
+    - '{luck}'
+    - '{wisdom}'
+    - '{toughness}'
+  back:
+    material: arrow
+    pos: 4,4
+    display_name: '{back}'
+    lore:
+    - '&7Torna a Abilità'
+templates:
+  stat:
+    strength:
+      pos: 1,2
+      material: netherite_sword
+      flags:
+      - hide_attributes
+    health:
+      pos: 1,6
+      material: totem_of_undying
+    regeneration:
+      pos: 2,3
+      material: golden_apple
+    luck:
+      pos: 2,5
+      material: emerald
+    wisdom:
+      pos: 3,2
+      material: writable_book
+    toughness:
+      pos: 3,6
+      material: shield
+    display_name: '{color}{stat}'
+    lore:
+    - '{stat_desc}'
+    - '{skills}'
+    - ' '
+    - '{your_level}'
+    - ' '
+    - '{descriptors}'
