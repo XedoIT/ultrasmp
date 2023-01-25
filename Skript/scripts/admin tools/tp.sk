@@ -1,0 +1,197 @@
+options:
+    prefix1: &8[&4&lTP&8]
+    prefix2: &8[&4&lTOP&8]
+
+command /tphere [<offline player>]:
+	permission: tphere.use
+	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				send "&cUtilizzo: &6/tphere &e<giocatore>"
+				stop
+			else if arg-1 is not online:
+				send "{@prefix1} &c%arg-1% &6non è online!"
+				stop
+			else if arg-1 is set:
+				if arg-1 is player:
+					send "{@prefix1} &cNon puoi teletrasportarti da te stesso/a!"
+					stop
+				else:
+					teleport arg-1 to player's location
+					send "{@prefix1} &7Hai portato &c%arg-1% &7da te." to player
+					send "{@prefix1} &c%player% &7ti ha portato/a alla sua posizione." to arg-1
+					stop
+		else:
+			if arg-1 is not set:
+				send "&cNon puoi utilizzare questo comando dalla console!"
+				stop
+			else:
+				send "&cNon puoi utilizzare questo comando dalla console!"
+				stop
+
+command /teleport [<offline player>] [<offline player>]:
+    permission: teleport.use
+    permission message: {@prefix1} &cComando sconosciuto.
+    description: "TELETRASPORTO!"
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    send "{@prefix1} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
+                    stop
+                else:
+                    send "{@prefix1} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
+                    stop
+            else if arg-1 is player:
+                if arg-2 is not set:
+                    if {settings::%player%::genre::male} is true:
+                        send "{@prefix1} &cNon puoi teletrasportarti da te stesso!"
+                        stop
+                    else if {settings::%player%::genre::female} is true:
+                        send "{@prefix1} &cNon puoi teletrasportarti da te stessa!"
+                        stop
+                if arg-2 is player:
+                    if {settings::%player%::genre::male} is true:
+                        send "{@prefix1} &cNon puoi teletrasportare te stesso da te stesso!"
+                        stop
+                    else if {settings::%player%::genre::female} is true:
+                        send "{@prefix1} &cNon puoi teletrasportare te stessa da te stessa!"
+                        stop
+                else if arg-2 is not player:
+                    if {settings::%player%::genre::male} is true:
+                        teleport player at arg-2's location
+                        send "{@prefix1} &7Ti ho portato da &c%arg-2%&7."
+                        stop
+                    else if {settings::%player%::genre::female} is true:
+                        send "{@prefix1} &7Ti ho portata da &c%arg-2%&7."
+                        stop
+            else if arg-1 is offline:
+                send "{@prefix1} &c%arg-1% &6non è online!"
+                stop
+            else if arg-1 is online:
+                if arg-2 is not set:
+                    if {settings::%player%::genre::male} is true:
+                        teleport player at arg-1's location
+                        send "{@prefix1} &7Ti ho portato da &c%arg-1%&7."
+                        stop
+                    else if {settings::%player%::genre::female} is true:
+                        teleport player at arg-1's location
+                        send "{@prefix1} &7Ti ho portata da &c%arg-1%&7."
+                        stop
+                else if arg-2 is offline:
+                    send "{@prefix1} &c%arg-2% &6non è online!"
+                    stop
+                else if arg-2 is online:
+                    teleport arg-1 at arg-2's location
+                    send "{@prefix1} &7Hai portato &c%arg-1% &7da &c%arg-2%&7."
+                    stop
+        else:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    send "{@prefix1} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
+                    stop
+                else:
+                    send "{@prefix1} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
+                    stop
+            else if arg-1 is offline:
+                send "{@prefix1} &c%arg-1% &6non è online!"
+                stop
+            else if arg-1 is online:
+                if arg-2 is not set:
+                    send "{@prefix1} &cDa chi vuoi portare %arg-1%?"
+                    stop
+                if arg-2 is equal to arg-1:
+                    send "{@prefix1} &cNon puoi teletrasportare %arg-1% da %arg-2%!"
+                    stop
+                else if arg-2 is offline:
+                    send "{@prefix1} &c%arg-2% &6non è online!"
+                    stop
+                else if arg-2 is online:
+                    teleport arg-1 at arg-2's location
+                    send "{@prefix1} &7Hai portato &c%arg-1% &7da &c%arg-2%&7."
+                    stop
+
+command /top [<offline player>]:
+    permission: top.use
+    permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if player is not flying:
+                    set {_loc} to location at player
+                    set y-coord of {_loc} to 320
+                    loop 320 times:
+                        if y-coord of {_loc} is y-coord of location at player:
+                            send "{@prefix2} &cSei già in cima!"
+                            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+                            stop
+                        if block at {_loc} is solid:
+                            teleport player to block above {_loc}
+                            play sound "entity.enderman.teleport" with volume 1 at player for the player
+                            send "{@prefix2} &aTi ho portato in cima."
+                            stop
+                        else:
+                            remove 1 from y-coord of {_loc}
+                else:
+                    send "{@prefix2} &cQuesta funzione è disabilitata se sei in volo."
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+                    stop
+            else if arg-1 is player:
+                send "{@prefix2} &cUtilizzo: &6/top" to player
+                stop
+            else if arg-1 is not online:
+                send "{@prefix2} &cAl momento %arg-1% non è online."
+                stop
+            else:
+                if arg-1 is not flying:
+                    set {_loc} to location at arg-1
+                    set y-coord of {_loc} to 320
+                    loop 320 times:
+                        if y-coord of {_loc} is y-coord of location at arg-1:
+                            send "{@prefix2} &c%arg-1% è già in cima!" to player
+                            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+                            stop
+                        if block at {_loc} is solid:
+                            teleport arg-1 to block above {_loc}
+                            play sound "entity.enderman.teleport" with volume 1 at arg-1 for the arg-1
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at player for the player
+                            send "{@prefix2} &aHo portato &e%arg-1% &ain cima." to player
+                            send "{@prefix2} &e%player% &ati ha portato in cima." to arg-1
+                            stop
+                        else:
+                            remove 1 from y-coord of {_loc}
+                else:
+                    send "{@prefix2} &cQuesta funzione è disabilitata se %arg-1% è in volo."
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+                    stop
+        else:
+            if arg-1 is not set:
+                send "&cSolo i giocatori possono eseguire questo comando!"
+                stop
+            else if arg-1 is not online:
+                send "{@prefix2} &cAl momento %arg-1% non è online."
+                stop
+            else:
+                if arg-1 is not flying:
+                    set {_loc} to location at arg-1
+                    set y-coord of {_loc} to 320
+                    loop 320 times:
+                        if y-coord of {_loc} is y-coord of location at arg-1:
+                            send "{@prefix2} &c%arg-1% è già in cima!" to console
+                            stop
+                        if block at {_loc} is solid:
+                            teleport arg-1 to block above {_loc}
+                            play sound "entity.enderman.teleport" with volume 1 at arg-1 for the arg-1
+                            send "{@prefix2} &aHo portato &e%arg-1% &ain cima." to console
+                            send "{@prefix2} &aLa &econsole &ati ha portato in cima." to arg-1
+                            stop
+                        else:
+                            remove 1 from y-coord of {_loc}
+                else:
+                    send "{@prefix2} &cQuesta funzione è disabilitata se %arg-1% è in volo." to console
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+                    stop

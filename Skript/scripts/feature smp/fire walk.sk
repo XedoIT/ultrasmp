@@ -1,0 +1,225 @@
+every 20 seconds:
+	loop all players:
+		if biome at loop-player is desert:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+				
+		else if biome at loop-player is savanna:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+
+		else if biome at loop-player is savanna plateau:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+							
+		else if biome at loop-player is windswept savanna:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+							
+		else if biome at loop-player is badlands:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+							
+		else if biome at loop-player is eroded badlands:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+
+		else if biome at loop-player is wooded badlands:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds
+							
+		else if biome at loop-player is beach:
+			if gamemode of loop-player is not creative or spectator:
+				if weather in "smp" is clear:
+					if time in "smp" is between 8:00 and 16:00:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 5 seconds
+							else:
+								extinguish loop-player
+						else:
+							extinguish loop-player
+					else if time in "smp" is between 6:00 and 7:59:
+						if sunlight level at loop-player is 15:
+							if loop-player is not wearing leather boots or diamond boots or netherite boots:
+								send "" to loop-player
+								send "&6&l[&4&l!&6&l] &cTi trovi in un bioma caldo e tra poco prenderai fuoco! Fai attenzione alla tua vita. &6&l[&4&l!&6&l]" to loop-player
+								wait 10 ticks
+								send "&cPuoi impedirlo se indossi degli stivali in pelle, in diamante oppure in netherite." to loop-player
+								send "" to loop-player
+								wait 7 seconds
+								ignite loop-player for 2 seconds

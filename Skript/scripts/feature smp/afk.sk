@@ -1,0 +1,74 @@
+variables:
+	{afk::%player%} = false
+	{afk::%player%::info} = false
+	{afk::%player%::status} = "&cNo"
+
+on join:
+	if {afk::%player%} is true:
+		set {afk::%player%} to false
+	else if {afk::%player%::info} is true:
+		set {afk::%player%::info} to false
+	else if {afk::%player%::status} is not set:
+		set {afk::%player%::status} to "&cNo"
+		
+on pick up:
+	if {afk::%player%} is true:
+		cancel event
+
+on quit:
+	if {afk::%player%} is not set:
+		set {afk::%player%} to false
+		stop
+	else if {afk::%player%} is true:
+		set {afk::%player%} to false
+		stop
+	else if {afk::%player%::info} is not set:
+		set {afk::%player%::info} to false
+		stop
+	else if {afk::%player%::info} is true:
+		set {afk::%player%::info} to false
+		stop
+
+on inventory click:
+	if {afk::%player%} is true:
+		set {afk::%player%} to false
+		execute console command "/afk %player%"
+		execute console command "/checkafk %player%"
+		stop
+	if {afk::%player%::info} is true:
+		set {afk::%player%::info} to false
+		stop
+
+on inventory open:
+	if {afk::%player%} is true:
+		set {afk::%player%} to false
+		execute console command "/afk %player%"
+		execute console command "/checkafk %player%"
+		stop
+	if {afk::%player%::info} is true:
+		set {afk::%player%::info} to false
+		stop
+
+on inventory close:
+	if {afk::%player%} is true:
+		set {afk::%player%} to false
+		execute console command "/afk %player%"
+		execute console command "/checkafk %player%"
+		stop
+	if {afk::%player%::info} is true:
+		set {afk::%player%::info} to false
+		stop
+
+command /checkafk [<offline player>]:
+	description: Attiva la modalità AFK di un giocatore.
+	trigger:
+		if {afk::%arg-1%} is false:
+			set {afk::%arg-1%} to true
+			set {afk::%arg-1%::info} to true
+			set {afk::%arg-1%::status} to "&aSì"
+			stop
+		else:
+			set {afk::%arg-1%} to false
+			set {afk::%arg-1%::info} to false
+			set {afk::%arg-1%::status} to "&cNo"
+			stop

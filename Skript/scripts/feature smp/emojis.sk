@@ -1,0 +1,153 @@
+# TOTALE EMOJI: 27
+
+options:
+    prefix: &b[&2^_^&b]
+
+on chat:
+    if message contains "<3":
+        replace all "<3" in message with "&c❤&r"
+    else if message contains ":star:":
+        replace all ":star:" in message with "&6✮&r"
+    else if message contains ":yes:":
+        replace all ":yes:" in message with "&a✓&r"
+    else if message contains ":no:":
+        replace all ":no:" in message with "&c❌&r"
+    else if message contains ":coffee:":
+        replace all ":coffee:" in message with "&b☕&r"
+    else if message contains ":arrow:":
+        replace all ":arrow:" in message with "&e&l→&r"
+    else if message contains ":shrug:":
+        replace all ":shrug:" in message with "&e¯\_(ツ)_/¯&r"
+    else if message contains ":tableflip:":
+        replace all ":tableflip:" in message with "&c(╯°□°）╯&7︵┻━┻&r"
+    else if message contains ":o/:":
+        replace all ":o/:" in message with "&d( ﾟ◡ﾟ)/&r"
+    else if message contains ":123:":
+        replace all ":123:" in message with "&c1&a2&93&r"
+    else if message contains ":totem:":
+        replace all ":totem:" in message with "&b⦿&e_&b⦿&r"
+    else if message contains ":typing:":
+        replace all ":typing:" in message with "&e✎&6...&r"
+    else if message contains ":math:":
+        replace all ":math:" in message with "&a&l√&e&l(&a&l∏+x&e&l)&a&l=&c&l4⁴&r"
+    else if message contains ":snail:":
+        replace all ":snail:" in message with "&e@&a'&e-&a'&r"
+    else if message contains ":thinking:":
+        replace all ":thinking:" in message with "&6(&a0&6.&ao&c?&6)&r"
+    else if message contains ":gimme:":
+        replace all ":gimme:" in message with "&b( つ ◕_◕ )つ&r"
+    else if message contains ":magic:":
+        replace all ":magic:" in message with "&e(&b'&e-&b'&e)⊃&c━&d☆ﾟ.*･｡ﾟ&r"
+    else if message contains ":peace:":
+        replace all ":peace:" in message with "&e✌&r"
+    else if message contains ":pufferfish:":
+        replace all ":pufferfish:" in message with "&e<('O')>&r"
+    else if message contains ":yay:":
+        replace all ":yay:" in message with "&aヽ (◕◡◕) ﾉ&r"
+    else if message contains ":kitty:":
+        replace all ":kitty:" in message with "&e= &b＾● ⋏ ●＾ &e=&r"
+    else if message contains ":dab:":
+        replace all ":dab:" in message with "&d<&eo&d/&r"
+    else if message contains ":dj:":
+        replace all ":dj:" in message with "&9ヽ&5(&d⌐&c■&6_&e■&b)&3ノ&9♬&r"
+    else if message contains ":h/:":
+        replace all ":h/:" in message with "&eヽ(^◇^*)/&r"
+    else if message contains ":sloth:":
+        replace all ":sloth:" in message with "&6(&8・&6⊝&8・&6)&r"
+    else if message contains ":cutie:":
+        replace all ":cutie:" in message with "&e(&a✿&e◠‿◠)&r"
+    else if message contains ":doggy:":
+        replace all ":doggy:" in message with "&6(ᵔᴥᵔ)&r"
+        
+command /emoji [<text>]:
+    description: "Faccina con lacrime di gioia - Cit."
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cUtilizzo: &6/emoji <help | status>"
+                stop
+            else if arg-1 is "help":
+                send "&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a- &b&lEMOJI &6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-"
+                send "&9Le emoji che puoi scrivere sono:"
+                send "&6<3 &f- &c❤"
+                send "&6:star: &f- &6✮"
+                send "&6:yes: &f- &a✓"
+                send "&6:no: &f- &c❌"
+                send "&6:coffee: &f- &b☕"
+                send "&6:arrow: &f- &e&l→"
+                send "&6:shrug: &f- &e¯\_(ツ)_/¯"
+                send "&6:tableflip: &f- &c(╯°□°）╯&7︵┻━┻"
+                send "&6:o/: &f- &d( ﾟ◡ﾟ)/"
+                send "&6:123: &f- &c1&a2&93"
+                send "&6:totem: &f- &b⦿&e_&b⦿"
+                send "&6:typing: &f- &e✎&6..."
+                send "&6:math: &f- &a&l√&e&l(&a&l∏+x&e&l)&a&l=&c&l4⁴"
+                send "&6:snail: &f- &e@&a'&e-&a'"
+                send "&6:thinking: &f- &6(&a0&6.&ao&c?&6)"
+                send "&6:gimme: &f- &b( つ ◕_◕ )つ"
+                send "&6:magic: &f- &e(&b'&e-&b'&e)⊃&c━&d☆ﾟ.*･｡ﾟ"
+                send "&6:peace: &f- &e✌"
+                send "&6:pufferfish: &f- &e<('O')>"
+                send "&6:yay: &f- &aヽ (◕◡◕) ﾉ"
+                send "&6:kitty: &f- &e= &b＾● ⋏ ●＾ &e="
+                send "&6:dab: &f- &d<&eo&d/"
+                send "&6:dj: &f- &9ヽ&5(&d⌐&c■&6_&e■&b)&3ノ&9♬"
+                send "&6:h/: &f- &eヽ(^◇^*)/"
+                send "&6:sloth: &f- &6(&8・&6⊝&8・&6)"
+                send "&6:cutie: &f- &e(&a✿&e◠‿◠)"
+                send "&6:doggy: &f- &6(ᵔᴥᵔ)"
+                send ""
+                send "&c&lATTENZIONE! &cAlcune emoji potresti doverle sbloccare prima di poterle utilizzare."
+                send "&cControlla i tuoi progressi con &6/emoji status&c."
+                send "&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-"
+                stop
+            else if arg-1 is "status":
+                #openEmojiStatusGui(player)
+                send ""
+                send "&cSi è verificato un problema durante l'esecuzione di questo comando."
+                send "&cQuesto è dovuto alla configurazione incompleta del comando e delle rispettive funzioni."
+                send "&cRiprova più tardi."
+                send "&cGrazie. {@prefix}"
+                send ""
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                stop
+        else:
+            if arg-1 is not set:
+                send "{@prefix} &cUtilizzo: &6/emoji <help | status>"
+                stop
+            else if arg-1 is "help":
+                send "&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a- &b&lEMOJI &6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-"
+                send "&9Le emoji disponibili nel server sono:"
+                send "&6<3 &f- &c❤"
+                send "&6:star: &f- &6✮"
+                send "&6:yes: &f- &a✓"
+                send "&6:no: &f- &c❌"
+                send "&6:coffee: &f- &b☕"
+                send "&6:arrow: &f- &e&l→"
+                send "&6:shrug: &f- &e¯\_(ツ)_/¯"
+                send "&6:tableflip: &f- &c(╯°□°）╯&7︵┻━┻"
+                send "&6:o/: &f- &d( ﾟ◡ﾟ)/"
+                send "&6:123: &f- &c1&a2&93"
+                send "&6:totem: &f- &b⦿&e_&b⦿"
+                send "&6:typing: &f- &e✎&6..."
+                send "&6:math: &f- &a&l√&e&l(&a&l∏+x&e&l)&a&l=&c&l4⁴"
+                send "&6:snail: &f- &e@&a'&e-&a'"
+                send "&6:thinking: &f- &6(&a0&6.&ao&c?&6)"
+                send "&6:gimme: &f- &b( つ ◕_◕ )つ"
+                send "&6:magic: &f- &e(&b'&e-&b'&e)⊃&c━&d☆ﾟ.*･｡ﾟ"
+                send "&6:peace: &f- &e✌"
+                send "&6:pufferfish: &f- &e<('O')>"
+                send "&6:yay: &f- &aヽ (◕◡◕) ﾉ"
+                send "&6:kitty: &f- &e= &b＾● ⋏ ●＾ &e="
+                send "&6:dab: &f- &d<&eo&d/"
+                send "&6:dj: &f- &9ヽ&5(&d⌐&c■&6_&e■&b)&3ノ&9♬"
+                send "&6:h/: &f- &eヽ(^◇^*)/"
+                send "&6:sloth: &f- &6(&8・&6⊝&8・&6)"
+                send "&6:cutie: &f- &e(&a✿&e◠‿◠)"
+                send "&6:doggy: &f- &6(ᵔᴥᵔ)"
+                send "&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-&6-&a-"
+                stop
+            else if arg-1 is "status":
+                send "{@prefix} &cSolo i giocatori possono eseguire questo comando!"
+                stop
