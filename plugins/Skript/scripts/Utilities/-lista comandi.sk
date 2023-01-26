@@ -1,0 +1,61 @@
+command /aiuto [<text>]:
+	aliases: /comandi
+	trigger:
+		if arg-1 is not set:
+			send "&cSpecifica il tipo di comandi che vuoi visualizzare!"
+			send "&cUtilizza: &6/help &e<general | homewarps | tp | skript>"
+			stop trigger
+			
+		else if arg-1 is "skript":
+			send "&e> &7&m---------------&a&l SKRIPT &7&m---------------&e<"
+			send "&f1. &c/afk &7- Avvisa l'intero server che ti stai allontando dal computer (DISATTIVATO)"
+			send "&f2. &c/alignment &7- (come /rank o /reputazione) Visualizza la tua attuale reputazione"
+			send "&f3. &c/bug &7- Segnala i bug che trovi all'interno del server"
+			send "&f4. &c/cestino &7- (come /trash) Apre il cestino dove puoi buttare gli oggetti che non ti servono e fare spazio nell'inventario"
+			send "&f5. &c/checkping &7- (come /chkping o /ping) Controlla il tuo ping all'interno del server"
+			send "&f6. &c/crafting &7- (come /fabbricazione) Apri la crafting table direttamente con questo comando"
+			send "&f7. &c/msg &7- Invia messaggi privati ai giocatori"
+			send "&f8. &c/points &7- (come /p o /punti) Mostra quanti punti hai accumulato"
+			send "&e> &7&m---------------&a&l SKRIPT &7&m---------------&e<"
+			stop trigger
+			
+		else if arg-1 is "tp":
+			send "&e> &7&m---------------&a&l TP &7&m---------------&e<"
+			send "&f1. &c/back &7- Ritorna al punto in cui ti trovavi prima (vale anche per le morti!)"
+			send "&f2. &c/tpa <giocatore> &7- Chiedi ad un giocatore di teletrasporti alla sua posizione"
+			send "&f3. &c/tpno &7- (come /tpdeny) Rifiuta la richiesta di teletrasporto di un giocatore"
+			send "&f4. &c/tpyes &7- (come /tpaccept) Accetta la richiesta di teletrasporto di un giocatore"
+			send "&f5. &c/tpahere &7- Chiedi ad un giocatore di teletrasportarsi alla tua posizione"
+			send "&f6. &c/tpoff &7- Disattiva le richieste di teletrasporto da parte degli altri giocatori"
+			send "&f7. &c/tpon &7- Attiva le richieste di teletrasporto da parte degli altri giocatori"
+			send "&f8. &c/tpr &7- Vai in un punto a caso nel mondo"
+			send "&e> &7&m---------------&a&l TP &7&m---------------&e<"
+			stop trigger
+			
+		else if arg-1 is "homewarps":
+			send "&e> &7&m---------------&a&l HOMEWARPS &7&m---------------&e<"
+			send "&f1. &c/home &7- Vai in una delle tue case"
+			send "&f2. &c/warp &7- Vai in un warp del server"
+			send "&f3. &c/sethome &7- Imposta una casa"
+			send "&f4. &c/setwarp &7- Imposta un warp"
+			send "&f5. &c/delhome &7- Rimuovi una delle tue case"
+			send "&f6. &c/delwarp &7- Rimuovi un warp"
+			send "&f7. &c/movehome &7- Sposta una tua casa esistente alla tua posizione"
+			send "&f8. &c/setmainhome &7- Crea una casa alla tua posizione o rende come principale una già esistente"
+			send "&f9. &c/movewarp &7- Sposta un warp esistente alla tua posizione"
+			send "&e> &7&m---------------&a&l HOMEWARPS &7&m---------------&e<"
+			stop trigger
+			
+		else if arg-1 is "general":
+			send "&e> &7&m---------------&a&l GENERAL &7&m---------------&e<"
+			send "&f1. &c/bottle store &7- Decidi se immagazzinare la tua esperienza (un valore preciso o tutta) dentro a delle ampolle"
+			send "&f2. &c/chair &7- (come /chairs) Attiva o disattiva la possibiltà di sederti su slab, scalini e tappeti"
+			send "&f3. &c/skills &7- Visualizza le tue abilità all'interno del server"
+			send "&f4. &c/stats &7- Visualizza le tue statistiche all'interno del server"
+			send "&e> &7&m---------------&a&l GENERAL &7&m---------------&e<"
+			stop trigger
+			
+		else if arg-1 is not "general", "homewarps", "tp" or "skript":
+			send "&8[&4&lINFO&8] &cParametro sconosciuto."
+			send "&cUtilizza: &6/help &e<general | homewarps | tp | skript>"
+			stop trigger
