@@ -1,4 +1,4 @@
-<h1>#DisagioSMP!</h1> 
-Il Server piu  Fantastico della tua esistenza!
+## Server DisagioSMP! 
+Il Server più Fantastico della tua esistenza!
 
 ##  NOTA
