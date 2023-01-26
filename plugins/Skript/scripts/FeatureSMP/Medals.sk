@@ -1,0 +1,262 @@
+#  SCRIPT PER LA GESTIONE DELLE MEDAGLIE DEI GIOCATORI  #
+
+#PlaceHolder di PlaceHolderAPI: %skript_medals::{player}%
+
+options:
+	prefix: &8[&e&lMEDAGLIE&8]
+	error_prefix: &8[&4&lMEDAGLIE&8]
+	medals_version: 1.0
+
+variables:
+	{medals::%player%} = 0
+
+on first join:
+	if {medals::%player%} is not set:
+		set {medals::%player%} to 0
+
+on join:
+	if {medals::%player%} is not set:
+		set {medals::%player%} to 0
+
+command /medals [<text>] [<offline player>] [<integer>]:
+	aliases: /medaglie
+	permission: medals.use
+	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	description: Visualizza quante medaglie possiedi attualmente.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				if {medals::%player%} is 1:
+					send "{@prefix} &7Hai accumulato &c%{medals::%player%}% medaglia&7."
+					stop
+				else if {medals::%player%} is 0:
+					send "{@prefix} &cNon hai nessuna medaglia! Gioca agli eventi e completa le sfide per ottenerle."
+					stop
+				else if {medals::%player%} is not "0" or "1":
+					send "{@prefix} &7Hai accumulato &c%{medals::%player%}% medaglie&7."
+					stop
+
+			else if arg-1 is "check":
+				if arg-2 is not set:
+					send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+					stop
+				else:
+					if {medals::%arg-2%} is 1:
+						send "{@prefix} &c%arg-2% &7ha accumulato &e%{medals::%arg-2%}% medaglia&7."
+						stop
+					else if {medals::%arg-2%} is 0:
+						send "{@prefix} &c%arg-2% &7non ha accumulato nessuna medaglia."
+						stop
+					else if {medals::%arg-2%} is not "0" or "1":
+						send "{@prefix} &c%arg-2% &7ha accumulato &e%{medals::%arg-2%}% medaglie&7."
+						stop
+
+			else if arg-1 is "set":
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica un numero!"
+						stop
+					else:
+						set {medals::%arg-2%} to arg-3
+						send "{@prefix} &7Hai impostato le medaglie di &c%arg-2% &7a &e%arg-3%&7." to player
+						send "{@prefix} &c%player% &7ha impostato le tue medaglie a &e%arg-3%&7." to arg-2
+						stop
+
+			else if arg-1 is "add":
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica un numero!"
+						stop
+					else:
+						if arg-3 is higher than 1:
+							add arg-3 to {medals::%arg-2%}
+							send "{@prefix} &7Hai dato &e%arg-3% medaglie &7a &c%arg-2%&7." to player
+							send "{@prefix} &c%player% &7ti ha dato &e%arg-3% medaglie&7." to arg-2
+							stop
+						else if arg-3 is 1:
+							add arg-3 to {medals::%arg-2%}
+							send "{@prefix} &7Hai dato &euna medaglia &7a &c%arg-2%&7." to player
+							send "{@prefix} &c%player% &7ti ha dato &euna medaglia&7." to arg-2
+							stop
+						else if arg-3 is 0:
+							send "{error_prefix} &cChe senso ha aggiungere 0 medaglie?"
+							stop
+						else if arg-3 is lower than 0:
+							send "{@error_prefix} &cIl numero deve essere positivo!"
+							stop
+
+			else if arg-1 is "remove":
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica un numero!"
+						stop
+					else:
+						if {medals::%arg-2%} is higher than 0:
+							if arg-3 is higher than 1:
+								remove arg-3 from {medals::%arg-2%}
+								send "{@prefix} &7Hai tolto &e%arg-3% medaglie &7a &c%arg-2%&7." to player
+								send "{@prefix} &c%player% &7ti ha tolto &e%arg-3% medaglie&7." to arg-2
+								stop
+							else if arg-3 is 1:
+								remove arg-3 from {medals::%arg-2%}
+								send "{@prefix} &7Hai tolto &euna medaglia &7a &c%arg-2%&7." to player
+								send "{@prefix} &c%player% &7ti ha tolto &euna medaglia&7." to arg-2
+								stop
+							else if arg-3 is 0:
+								send "{@error_prefix} &cChe senso ha togliere 0 medaglie?"
+								stop
+							else if arg-3 is lower than 0:
+								send "{@error_prefix} &cIl numero deve essere positivo!"
+								stop
+						else:
+							send "{@error_prefix} &c%arg-2% ha già 0 medaglie! Pertanto non è possibile rimuoverne altre."
+							stop
+
+			else if arg-1 is "reset":
+				if arg-2 is not set:
+					set {medals::%player%} to 0
+					send "{@prefix} &7Non hai più medaglie!"
+					stop
+				else:
+					set {medals::%arg-2%} to 0
+					send "{@prefix} &7Hai tolto tutte le medaglie a &c%arg-2%&7."
+					stop
+
+			else if arg-1 is "reload":
+				send "{@prefix} &3Ricarico il config..."
+				wait 5 ticks
+				execute player command "/skript reload %script%"
+				wait 2 seconds
+				send "{@prefix} &aConfig ricaricato!"
+				stop
+
+			else if arg-1 is not "check", "set", "add", "remove", "reset" or "reload":
+				send "{@error_prefix} &cParametro sconosciuto."
+				stop
+
+		else:
+			if arg-1 is not set:
+				send "&cQuesto comando può essere eseguito solo dai giocatori!"
+				stop
+
+			else if arg-1 is "check":
+				if arg-2 is not set:
+					send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+					stop
+				else:
+					if {medals::%arg-2%} is 1:
+						send "{@prefix} &c%arg-2% &7ha accumulato &e%{medals::%arg-2%}% medaglia&7."
+						stop
+					else if {medals::%arg-2%} is 0:
+						send "{@prefix} &c%arg-2% &7non ha accumulato nessuna medaglia."
+						stop
+					else if {medals::%arg-2%} is not "0" or "1":
+						send "{@prefix} &c%arg-2% &7ha accumulato &e%{medals::%arg-2%}% medaglie&7."
+						stop
+
+			else if arg-1 is "set":
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica un numero!"
+						stop
+					else:
+						set {medals::%arg-2%} to arg-3
+						send "{@prefix} &7Hai impostato le medaglie di &c%arg-2% &7a &e%arg-3%&7." to console
+						send "{@prefix} &cConsole &7ha impostato le tue medaglie a &e%arg-3%&7." to arg-2
+						stop
+
+			else if arg-1 is "add":
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica un numero!"
+						stop
+					else:
+						if arg-3 is higher than 1:
+							add arg-3 to {medals::%arg-2%}
+							send "{@prefix} &7Hai dato &e%arg-3% medaglie &7a &c%arg-2%&7." to console
+							send "{@prefix} &cConsole &7ti ha dato &e%arg-3% medaglie&7." to arg-2
+							stop
+						else if arg-3 is 1:
+							add arg-3 to {medals::%arg-2%}
+							send "{@prefix} &7Hai dato &euna medaglia &7a &c%arg-2%&7." to console
+							send "{@prefix} &cConsole &7ti ha dato &euna medaglia&7." to arg-2
+							stop
+						else if arg-3 is 0:
+							send "{error_prefix} &cChe senso ha aggiungere 0 medaglie?"
+							stop
+						else if arg-3 is lower than 0:
+							send "{@error_prefix} &cIl numero deve essere positivo!"
+							stop
+
+			else if arg-1 is "remove":
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					if arg-3 is not set:
+						send "{@error_prefix} &cSpecifica un numero!"
+						stop
+					else:
+						if {medals::%arg-2%} is higher than 0:
+							if arg-3 is higher than 1:
+								remove arg-3 from {medals::%arg-2%}
+								send "{@prefix} &7Hai tolto &e%arg-3% medaglie &7a &c%arg-2%&7." to player
+								send "{@prefix} &c%player% &7ti ha tolto &e%arg-3% medaglie&7." to arg-2
+								stop
+							else if arg-3 is 1:
+								remove arg-3 from {medals::%arg-2%}
+								send "{@prefix} &7Hai tolto &euna medaglia &7a &c%arg-2%&7." to player
+								send "{@prefix} &c%player% &7ti ha tolto &euna medaglia&7." to arg-2
+								stop
+							else if arg-3 is 0:
+								send "{@error_prefix} &cChe senso ha togliere 0 medaglie?"
+								stop
+							else if arg-3 is lower than 0:
+								send "{@error_prefix} &cIl numero deve essere positivo!"
+								stop
+						else:
+							send "{@error_prefix} &c%arg-2% ha già 0 medaglie! Pertanto non è possibile rimuoverne altre."
+							stop
+
+			else if arg-1 is "reset":
+				if arg-2 is not set:
+					send "&cQuesto comando lo possono eseguire solo i giocatori!"
+					stop
+				else:
+					set {medals::%arg-2%} to 0
+					send "{@prefix} &7Hai tolto tutte le medaglie a &c%arg-2%&7."
+					stop
+
+			else if arg-1 is "reload":
+				send "{@prefix} &3Ricarico il config..."
+				wait 5 ticks
+				execute console command "/skript reload %script%"
+				wait 2 seconds
+				send "{@prefix} &aConfig ricaricato!"
+				stop
+
+			else if arg-1 is not "check", "set", "add", "remove", "reset" or "reload":
+				send "{@error_prefix} &cParametro sconosciuto."
+				stop

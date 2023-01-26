@@ -1,0 +1,89 @@
+function openMainAchievementsGui(p: player):
+    if {settings::%{_p}%::glasspanes} is true:
+        set {_gui} to a new chest inventory with 6 rows with name "Obiettivi SMP"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+        set slot 11, 13, 15, 19, 21, 22, 23, 25, 29, 31, 33, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+        set slot 10 of {_gui} to brick block named "&fBlocchi da costruzione"
+        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati"
+        set slot 14 of {_gui} to grass block named "&fBlocchi naturali"
+        set slot 16 of {_gui} to oak sign named "&fBlocchi funzionali"
+        set slot 20 of {_gui} to iron ingot named "&fMinerali"
+        set slot 24 of {_gui} to golden apple named "&fCibo"
+        set slot 28 of {_gui} to redstone named "&fRedstone"
+        set slot 30 of {_gui} to red dye named "&fColoranti"
+        set slot 32 of {_gui} to ender eye named "&fUtilità"
+        set slot 34 of {_gui} to rotten flesh named "&fMob"
+        set slot 49 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Il tuo profilo &7&lSMP&7"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 6 rows with name "Obiettivi SMP"
+        set slot 10 of {_gui} to brick block named "&fBlocchi da costruzione"
+        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati"
+        set slot 14 of {_gui} to grass block named "&fBlocchi naturali"
+        set slot 16 of {_gui} to oak sign named "&fBlocchi funzionali"
+        set slot 20 of {_gui} to iron ingot named "&fMinerali"
+        set slot 24 of {_gui} to golden apple named "&fCibo"
+        set slot 28 of {_gui} to redstone named "&fRedstone"
+        set slot 30 of {_gui} to red dye named "&fColoranti"
+        set slot 32 of {_gui} to ender eye named "&fUtilità"
+        set slot 34 of {_gui} to rotten flesh named "&fMob"
+        set slot 49 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Il tuo profilo &7&lSMP&7"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Obiettivi SMP":
+        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 15, 17, 18, 19, 21, 22, 23, 25, 26, 27, 29, 31, 33, 35, 36, 37, 38, 39, 40, 41, 42, 43 or 44:
+            cancel event
+        else if index of event-slot is 45, 46, 47, 48, 50, 51, 52 or 53:
+            cancel event
+        else if index of event-slot is 10:
+            cancel event
+            openBuildAchievementsGui(player)
+        else if index of event-slot is 12:
+            cancel event
+            #openColorAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 14:
+            cancel event
+            #openNatureAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 16:
+            cancel event
+            #openFunctionAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 20:
+            cancel event
+            #openMineralsAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 24:
+            cancel event
+            #openFoodAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 28:
+            cancel event
+            #openRedstoneAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 30:
+            cancel event
+            #openDyesAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 32:
+            cancel event
+            #openUtilsAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 34:
+            cancel event
+            #openMobsAchievementsGui(player)
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cQuesta pagina non è disponibile! Riprova più tardi."
+        else if index of event-slot is 49:
+            cancel event
+            openProfileGui(player)

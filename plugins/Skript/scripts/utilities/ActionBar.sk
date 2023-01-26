@@ -1,0 +1,70 @@
+options:
+	prefix: &e[&9&lAB&e]
+	
+command /actionbar [<text>]:
+	description: Attiva o disattiva la visualizzazione di una determinata action bar.
+	trigger:
+		if arg-1 is "manutenzione" or "maintenance":
+			if player has permission "maintenance.actionbar":
+				if {maintenance.ab} is not set:
+					set {maintenance.ab} to true
+					send "{@prefix} &aAction bar attivata per &6Manutenzione&a."
+					stop
+				else if {maintenance.ab} is true:
+					delete {maintenance.ab}
+					send "{@prefix} &cAction bar disattivata per &6Manutenzione&a."
+					stop
+			else:
+				send "{@prefix} &cNon hai i permessi per farlo!"
+
+		else if arg-1 is "uptime":
+			if player has permission "uptime.actionbar":
+				if {uptimeac::%player%} is not set:
+					set {uptimeac::%player%} to true
+					send "{@prefix} &aAction bar attivata per &6Uptime&a."
+					stop
+				else if {uptimeac::%player%} is true:
+					delete {uptimeac::%player%}
+					send "{@prefix} &cAction bar disattivata per &6Uptime&a."
+					stop
+			else:
+				send "{@prefix} &cNon hai i permessi per farlo!"
+
+		else if arg-1 is "god":
+			if player has permission "god.actionbar":
+				if {god::%player%::ab} is not set:
+					set {god::%player%::ab} to true
+					send "{@prefix} &aAction bar attivata per &6Godmode&a."
+					stop
+				else if {god::%player%::ab} is true:
+					delete {god::%player%::ab}
+					send "{@prefix} &cAction bar disattivata per &6Godmode&a."
+					stop
+
+		else if arg-1 is "fly":
+			if player has permission "fly.actionbar":
+				if {fly::%player%::ab} is not set:
+					set {fly::%player%::ab} to true
+					send "{@prefix} &aAction bar attivata per &6Flymode&a."
+					stop
+				else if {fly::%player%::ab} is true:
+					delete {fly::%player%::ab}
+					send "{@prefix} &cAction bar disattivata per &6Flymode&a."
+					stop
+
+every 10 ticks:
+	loop all players:
+		if {afk::%loop-player%} is true:
+			send action bar "&c&lSei AFK! &6Per tornare a giocare, muoviti o scrivi in chat." to loop-player
+			
+		else if {god::%loop-player%::ab} is true:
+			send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player
+			
+		else if {fly::%loop-player%::ab} is true:
+			if gamemode of loop-player is not creative or spectator:
+				if loop-player is not flying:
+					send action bar "&a&lA TERRA &7| &bVelocità del passo: &e%walkspeed of loop-player%" to loop-player
+				else:
+					send action bar "&c&lIN VOLO &7| &aVelocità di volo: &6%flyspeed of loop-player%" to loop-player
+			else:
+				stop

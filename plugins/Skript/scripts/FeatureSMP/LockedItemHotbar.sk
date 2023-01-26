@@ -1,0 +1,48 @@
+on join:
+    set slot 8 of player to nether star named "&eProfilo SMP &7(Click destro)"
+
+on right click:
+    if item is nether star named "&eProfilo SMP &7(Click destro)":
+        openProfileGui(player)
+
+on inventory click:
+    if type of event-inventory is player:
+        if index of event-slot is not 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 or 40:
+            cancel event
+            openProfileGui(player)
+        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 or 40:
+            if event-item is nether star named "&eProfilo SMP &7(Click destro)":
+                clear event-slot
+    if click type is number key:
+        if event-slot is not 8:
+            if event-slot is air:
+                set {noswap::%player%} to air
+            else:
+                set {noswap::%player%} to event-item
+            wait 1 tick
+            if event-item is nether star named "&eProfilo SMP &7(Click destro)":
+                set event-slot to {noswap::%player%}
+                set slot 8 of player's inventory to nether star named "&eProfilo SMP &7(Click destro)"
+        if event-slot is 8:
+            cancel event
+        if cursor slot of player is nether star named "&eProfilo SMP &7(Click destro)":
+            set cursor slot of player to {noswap::%player%}
+            set slot 8 of player's inventory to nether star named "&eProfilo SMP &7(Click destro)"
+
+on drop:
+    if event-item is nether star named "&eProfilo SMP &7(Click destro)":
+        cancel event
+
+on swap hand items:
+    if event-player's tool is nether star named "&eProfilo SMP &7(Click destro)":
+        cancel event
+
+every tick:
+    loop all players:
+        if slot 8 of loop-player is not nether star named "&eProfilo SMP &7(Click destro)":
+            set slot 8 of loop-player to nether star named "&eProfilo SMP &7(Click destro)"
+        loop all items in the inventory of loop-player:
+            if name of loop-item is "&eProfilo SMP &7(Click destro)":
+                if slot 8 of loop-player's inventory is not loop-item:
+                    set loop-item to air
+    

@@ -1,0 +1,2622 @@
+# Script per il sistema dei punti, reputazioni ed effetti dati dalle reputazioni #
+
+#PlaceHolder per i PUNTI: %skript_points::{player}%
+#PlaceHolder per gli EFFETTI: %skript_points::{player}::effect%
+
+#Impostazioni per Punti e Reputazioni
+options:
+	prefix1: &8[&b&lPUNTI&8]
+	error_prefix1: &8[&4&lPUNTI&8]
+	prefix2: &8[&b&lRANK&8]
+	error_prefix2: &8[&4&lRANK&8]
+	version: 1.0
+
+# Evento per Reputazioni
+on load:
+	loop all players:
+		set {_alignment-5} to "&4&lMalvagio/a"
+		set {_alignment-4} to "&c&lPessimo/a"
+		set {_alignment-3} to "&6&lVile"
+		set {_alignment-2} to "&e&lSpregevole"
+		set {_alignment-1} to "&8&lAggressivo/a"
+		set {_alignment0} to "&7&lNeutrale"
+		set {_alignment1_1} to "&a&lGentile"
+		set {_alignment1_2} to "&a&lGentile &f&l+"
+		set {_alignment2_1} to "&2&lBuono/a"
+		set {_alignment2_2} to "&2&lBuono/a &f&l+"
+		set {_alignment3_1} to "&3&lPuro/a"
+		set {_alignment3_2} to "&3&lPuro/a &f&l+"
+		set {_alignment4_1} to "&9&lMigliore"
+		set {_alignment4_2} to "&9&lMigliore &f&l+"
+		set {_alignment5_1} to "&b&lSupremo/a"
+		set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+		set {points::%loop-player%::effect} to "&7Nessun effetto"
+		set {points::%loop-player%::rankprefix} to "&8[&7&lN&8]"
+
+# Evento per Punti
+variables:
+	{points::%player%} = 0
+	{points::%player%::rank} = "&7&lNeutrale"
+	{points::%player%::rankprefix} = "&8[&7&lN&8]"
+	{points::%player%::idle} = true
+
+# Evento per Punti
+on join:
+	if {points::%player%} is not set:
+		set {points::%player%} to 0
+	if {points::%player%::rank} is not set:
+		set {points::%player%::rank} to "&7&lNeutrale"
+	if {points::%player%::rankprefix} is not set:
+		set {points::%player%::rankprefix} to "&8[&7&lN&8]"
+	if {points::%player%::idle} is not set:
+		set {points::%player%::idle} to true
+#--------------------------------------------#
+#											 #
+#				   GENERALE					 #
+#											 #
+#--------------------------------------------#
+every 5 hours:
+	set {_alignment-5} to "&4&lMalvagio/a"
+	set {_alignment-4} to "&c&lPessimo/a"
+	set {_alignment-3} to "&6&lVile"
+	set {_alignment-2} to "&e&lSpregevole"
+	set {_alignment-1} to "&8&lAggressivo/a"
+	set {_alignment0} to "&7&lNeutrale"
+	set {_alignment1_1} to "&a&lGentile"
+	set {_alignment1_2} to "&a&lGentile &f&l+"
+	set {_alignment2_1} to "&2&lBuono/a"
+	set {_alignment2_2} to "&2&lBuono/a &f&l+"
+	set {_alignment3_1} to "&3&lPuro/a"
+	set {_alignment3_2} to "&3&lPuro/a &f&l+"
+	set {_alignment4_1} to "&9&lMigliore"
+	set {_alignment4_2} to "&9&lMigliore &f&l+"
+	set {_alignment5_1} to "&b&lSupremo/a"
+	set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+	set {_points-5} to a random integer between 300 and 400
+	set {_points-4} to a random integer between 250 and 300
+	set {_points-3} to a random integer between 200 and 250
+	set {_points-2} to a random integer between 100 and 200
+	set {_points-1} to a random integer between 50 and 100
+	set {_points0} to a random integer between 10 and 50
+	set {_points1_1} to a random integer between 50 and 75
+	set {_points1_2} to a random integer between 50 and 125
+	set {_points2_1} to a random integer between 125 and 175
+	set {_points2_2} to a random integer between 125 and 200
+	set {_points3_1} to a random integer between 225 and 250
+	set {_points3_2} to a random integer between 225 and 275
+	set {_points4_1} to a random integer between 250 and 325
+	set {_points4_2} to a random integer between 250 and 350
+	set {_points5_1} to a random integer between 350 and 450
+	set {_points5_2} to a random integer between 450 and 500
+	loop all players:
+		if loop-player is online:
+			if {points::%loop-player%} is lower than 1000000:
+				if {points::%loop-player%::idle} is true:
+					if {points::%loop-player%::rank} is {_alignment-5}:
+						add {_points-5} to {points::%loop-player%}
+						send "&6+%{_points-5}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment-5}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment-4}:
+						add {_points-4} to {points::%loop-player%}
+						send "&6+%{_points-4}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment-4}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment-3}:
+						add {_points-3} to {points::%loop-player%}
+						send "&6+%{_points-3}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment-3}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment-2}:
+						add {_points-2} to {points::%loop-player%}
+						send "&6+%{_points-2}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment-2}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment-1}:
+						add {_points-1} to {points::%loop-player%}
+						send "&6+%{_points-1}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment-1}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment0}:
+						add {_points0} to {points::%loop-player%}
+						send "&6+%{_points0}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment0}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment1_1}:
+						add {_points1_1} to {points::%loop-player%}
+						send "&6+%{_points1_1}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment1_1}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment1_2}:
+						add {_points1_2} to {points::%loop-player%}
+						send "&6+%{_points1_2}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment1_2}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment2_1}:
+						add {_points2_1} to {points::%loop-player%}
+						send "&6+%{_points2_1}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment2_1}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment2_2}:
+						add {_points2_2} to {points::%loop-player%}
+						send "&6+%{_points2_2}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment2_2}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment3_1}:
+						add {_points3_1} to {points::%loop-player%}
+						send "&6+%{_points3_1}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment3_1}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment3_2}:
+						add {_points3_2} to {points::%loop-player%}
+						send "&6+%{_points3_2}% punti! (Tempo di gioco) &b&l>> &6(%{_alignment3_2}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment4_1}:
+						add {_points4_1} to {points::%loop-player%}
+						send "&6+%{_points4_1}% punti! (Tempo di gioco) &b&l>> %{_alignment4_1}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment4_2}:
+						add {_points4_2} to {points::%loop-player%}
+						send "&6+%{_points4_2}% punti! (Tempo di gioco) &b&l>> (%{_alignment4_2}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment5_1}:
+						add {_points5_1} to {points::%loop-player%}
+						send "&6+%{_points5_1}% punti! (Tempo di gioco) &b&l>> (%{_alignment5_1}%&6)" to loop-player
+						stop
+					else if {points::%loop-player%::rank} is {_alignment5_2}:
+						add {_points5_2} to {points::%loop-player%}
+						send "&6+%{_points5_2}% punti! (Tempo di gioco) &b&l>> (%{_alignment5_2}%&6)" to loop-player
+						stop
+				else:
+					if loop-player has permission "points.idle.notify":
+						send "{@error_prefix1} &cNon posso assegnare i punti ai giocatori perché l'assegnazione automatica dei punti è disattivata!" to loop-player
+						send "&cPer attivarla, digita &6/idle on&c." to loop-player
+						stop
+					else:
+						stop
+			else:
+				send "&6Hai raggiunto la reputazione più alta del server, pertanto non riceverai più punti in modo automatico." to loop-player
+				send "&bPuoi comunque guadagnarli giocando normalmente nel server!" to loop-player
+				stop
+		else:
+			stop
+		
+command /points [<text>] [<offline player>] [<number>]:
+	aliases: /punti, /p
+	description: Visualizza quanti punti hai accumulato.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				if {points::%player%} is 1:
+					send "{@prefix1} &6Hai accumulato &c%{points::%player%}% punto&6."
+					stop
+				else if {points::%player%} is -1:
+					send "{@prefix1} &6Hai accumulato &c%{points::%player%}% punto&6."
+					stop
+				if {points::%player%} is 0:
+					send "{@prefix1} &6Hai &c%{points::%player%}% punti&6."
+					stop
+				if {points::%player%} is not "-1", "0" or "1":
+					send "{@prefix1} &6Hai accumulato &c%{points::%player%}% punti&6."
+					stop
+				
+			else if arg-1 is not "check", "reset", "set", "give", "add", "remove", "auto", "help", "info" or "reload":
+				if player has permission "points.commands":
+					send "{@error_prefix1} &cComando sconosciuto."
+					stop
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+					
+			else if arg-1 is "check":
+				if player has permission "points.check":
+					if arg-2 is set:
+						if {points::%arg-2%} is set:
+							send "{@prefix1} &c%arg-2% &6ha accumulato &e%{points::%arg-2%}% punti&6."
+							stop
+						else:
+							send "{@error_prefix1} &6%arg-2% &cnon ha ancora giocato in questo server!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica il nome di un giocatore!"
+						stop
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+					
+			else if arg-1 is "reset":
+				if player has permission "points.reset":
+					if arg-2 is set:
+						if {points::%arg-2%} is not 0:
+							set {points::%arg-2%} to 0
+							send "{@prefix1} &6Hai azzerato i punti di &c%arg-2%&6." to player
+							send "{@prefix1} &c%player% &6ha azzerato i tuoi punti." to arg-2
+							stop
+						else:
+							send "{@error_prefix1} &6%arg-2% &cnon ha nessun punto!"
+							stop
+							
+					else if arg-2 is not set:
+						if {points::%player%} is not 0:
+							set {points::%player%} to 0 
+							send "{@prefix1} &6Hai azzerato i tuoi punti."
+							stop
+						else:
+							send "{@error_prefix1} &cNon hai nessun punto!"
+							stop	
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+					
+			else if arg-1 is "set":
+				if player has permission "points.set":
+					if arg-2 is set:
+						if arg-3 is set:
+							if arg-3 is 0:
+								set {points::%arg-2%} to arg-3
+								send "{@prefix1} &6Hai impostato i punti di &c%arg-2% &6a &e%arg-3%&6." to player
+								send "{@prefix1} &c%player% &6ha impostato i tuoi punti a &e%arg-3%&6." to arg-2
+								stop
+							if arg-3 is higher than 0:
+								set {points::%arg-2%} to arg-3
+								send "{@prefix1} &6Hai impostato i punti di &c%arg-2% &6a &e%arg-3%&6." to player
+								send "{@prefix1} &c%player% &6ha impostato i tuoi punti a &e%arg-3%&6." to arg-2
+								stop
+							else:
+								send "{@error_prefix1} &cIl numero deve essere positivo!"
+								stop
+						else:
+							send "{@error_prefix1} &cSpecifica un numero!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica il giocatore a cui vuoi assegnare i punti!"
+						stop		
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+				
+			else if arg-1 is "add" or "give":
+				if player has permission "points.add":
+					if arg-2 is set:
+						if arg-3 is set:
+							if arg-3 is 0:
+								send "{@error_prefix1} &cChe senso ha aggiungere 0 punti?"
+								stop
+							if arg-3 is higher than 0:
+								add arg-3 to {points::%arg-2%}
+								send "{@prefix1} &6Hai dato &e%arg-3% punti &6a &c%arg-2%&6." to player
+								send "{@prefix1} &c%player% &6ti ha dato &e%arg-3% punti &6in più." to arg-2
+								stop
+							else:
+								send "{@error_prefix1} &cIl numero deve essere positivo!"
+								stop
+						else:
+							send "{@error_prefix1} &cSpecifica un numero!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica il giocatore a cui vuoi aggiungere i punti!"
+						stop	
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+				
+			else if arg-1 is "remove":
+				if player has permission "points.remove":
+					if arg-2 is set:
+						if arg-3 is set:
+							if arg-3 is 0:
+								send "{@error_prefix1} &cChe senso ha togliere 0 punti?"
+								stop
+							if arg-3 is higher than 0:
+								remove arg-3 from {points::%arg-2%}
+								send "{@prefix1} &6Hai tolto &e%arg-3% punti &6a &c%arg-2%&6." to player
+								send "{@prefix1} &c%player% &6ti ha tolto &e%arg-3% punti&6." to arg-2
+								stop
+							else:
+								send "{@error_prefix1} &cIl numero deve essere positivo!"
+								stop
+						else:
+							send "{@error_prefix1} &cSpecifica un numero!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica il giocatore a cui vuoi togliere i punti!"
+						stop
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+					
+			else if arg-1 is "help":
+				if player has permission "points.help":
+					send "&e> &7&m------------&r {@prefix1} &7&m------------&r &e<"
+					send ""
+					send "&7Comandi che puoi eseguire:"
+					send "&c- &a/points &7&o- Visualizza quanti punti hai accumulato."
+					send "&c- &7/points &acheck <giocatore> &7&o- Controlla quanti punti ha un giocatore"
+					send "&c- &7/points &areset <giocatore> &7&o- Azzera i tuoi punti o quelli di un giocatore"
+					send "&c- &7/points &aset | give <giocatore> <punti> &7&o- Imposta il valore dei punti di un giocatore"
+					send "&c- &7/points &aadd <giocatore> <punti> &7&o- Aggiungi dei punti ad un giocatore"
+					send "&c- &7/points &aremove <giocatore> <punti> &7&o- Rimuovi dei punti ad un giocatore"
+					send "&c- &7/points &aauto <giocatore> &7&o- Assegna in modo automatico i punti ad un giocatore rispettando la sua reputazione"
+					send "&c- &7/points &ainfo &7&o- Visualizza le info dello script"
+					send "&c- &7/points &ahelp &7&o- Mostra questa lista comandi"
+					send "&c- &7/points &areload &7&o- Ricarica lo script"
+					send ""
+					send "&e> &7&m--------------------------------&r &e<"
+					stop
+				else:
+					send "&e> &7&m------------&r {@prefix1} &7&m------------&r &e<"
+					send ""
+					send "&7Comandi che puoi eseguire:"
+					send "&c- &a/points &7&o- Visualizza quanti punti hai accumulato"
+					send "&c- &7/points &ainfo &7&o- Visualizza le info dello script"
+					send "&c- &7/points &ahelp &7&o- Mostra questa lista comandi"
+					send ""
+					send "&e> &7&m--------------------------------&r &e<"
+					stop
+				
+			else if arg-1 is "info":
+				send "&a> &9&m------------&r {@prefix1} &9&m------------&r &a<"
+				send ""
+				send " &7Info sullo script:"
+				send "	 &3Versione dello script: &c{@version}"
+				send "	 &3Versione di Minecraft: &a%minecraft version%"
+				send "	 &3Script ideato e scritto da &bXedo"
+				send ""
+				send "&a> &9&m--------------------------------&r &a<"
+				stop
+			
+			else if arg-1 is "reload":
+				if player has permission "points.reload":
+					send "{@prefix1} &3Ricarico il config principale..."
+					wait 5 ticks
+					execute player command "/skript reload points (comandi)"
+					wait 2 seconds
+					send "{@prefix1} &3Ricarico il config dei MINERALI..."
+					wait 5 ticks
+					execute player command "/skript reload points (minerali)"
+					wait 2 seconds
+					send "{@prefix1} &3Ricarico il config dei MOB..."
+					wait 5 ticks
+					execute player command "/skript reload points (mob)"
+					wait 2 seconds
+					send "{@prefix1} &3Ricarico il config delle REPUTAZIONI..."
+					wait 5 ticks
+					execute player command "/skript reload points (alignment)"
+					wait 2 seconds
+					send "{@prefix1} &3Ricarico il config degli EFFETTI..."
+					execute player command "/skript reload points (effects)"
+					wait 3 seconds
+					send "{@prefix1} &aConfig ricaricati!"
+					stop
+				else:
+					send "{@error_prefix1} &cNon hai i permessi per farlo!"
+					stop
+				
+		if sender is console:
+			if arg-1 is not set:
+				send "{@error_prefix1} &cQuesto comando può essere eseguito solo dai giocatori!"
+				stop
+				
+			if arg-1 is not "check", "reset", "set", "give", "add", "remove", "auto", "help", "info" or "reload":
+				send "{@error_prefix1} &cComando sconosciuto."
+				stop
+					
+			if arg-1 is "check":
+				if arg-2 is set:
+					if {points::%arg-2%} is set:
+						send "{@prefix1} &c%arg-2% &6ha accumulato &e%{points::%arg-2%}% punti&6."
+						stop
+					else:
+						send "{@error_prefix1} &6%arg-2% &cnon ha ancora giocato in questo server!"
+						stop
+				else:
+					send "{@error_prefix1} &cSpecifica il nome di un giocatore!"
+					stop	
+					
+			if arg-1 is "reset":
+				if arg-2 is set:
+					if {points::%arg-2%} is not 0:
+						set {points::%arg-2%} to 0
+						send "{@prefix1} &6Hai azzerato i punti di &c%arg-2%&6." to console
+						send "{@prefix1} &6La &cconsole &6ha azzerato i tuoi punti." to arg-2
+						stop
+					else:
+						send "{@error_prefix1} &6%arg-2% &cnon ha nessun punto!"
+						stop
+				else:
+					send "{@error_prefix1} &cQuesta funzione la possono utilizzare solo i giocatori!"
+					stop	
+					
+			if arg-1 is "set":
+				if arg-2 is set:
+					if arg-3 is set:
+						if arg-3 is 0:
+							set {points::%arg-2%} to arg-3
+							send "{@prefix1} &6Hai impostato i punti di &c%arg-2% &6a &e%arg-3%&6." to player
+							send "{@prefix1} &c%player% &6ha impostato i tuoi punti a &e%arg-3%&6." to arg-2
+							stop
+						if arg-3 is higher than 0:
+							set {points::%arg-2%} to arg-3
+							send "{@prefix1} &6Hai impostato i punti di &c%arg-2% &6a &e%arg-3%&6." to console
+							send "{@prefix1} &6La &cconsole &6ha impostato i tuoi punti a &e%arg-3%&6." to arg-2
+							stop
+						else:
+							send "{@error_prefix1} &cIl numero deve essere positivo!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica un numero!"
+						stop
+				else:
+					send "{@error_prefix1} &cSpecifica il giocatore a cui vuoi assegnare i punti!"
+					stop	
+					
+			if arg-1 is "add":
+				if arg-2 is set:
+					if arg-3 is set:
+						if arg-3 is 0:
+							send "{@error_prefix1} &cChe senso ha aggiungere 0 punti?"
+							stop
+						if arg-3 is higher than 0:
+							add arg-3 to {points::%arg-2%}
+							send "{@prefix1} &6Hai dato &e%arg-3% punti &6a &c%arg-2%&6." to console
+							send "{@prefix1} &6La &cconsole &6ti ha dato &e%arg-3% punti &6in più." to arg-2
+							stop
+						else:
+							send "{@error_prefix1} &cIl numero deve essere positivo!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica un numero!"
+						stop
+				else:
+					send "{@error_prefix1} &cSpecifica il giocatore a cui vuoi aggiungere i punti!"
+					stop
+		
+			if arg-1 is "remove":
+				if arg-2 is set:
+					if arg-3 is set:
+						if arg-3 is 0:
+							send "{@error_prefix1} &cChe senso ha togliere 0 punti?"
+							stop
+						if arg-3 is higher than 0:
+							remove arg-3 from {points::%arg-2%}
+							send "{@prefix1} &6Hai tolto &e%arg-3% punti &6a &c%arg-2%&6." to console
+							send "{@prefix1} &6La &cconsole &6ti ha tolto &e%arg-3% punti&6." to arg-2
+							stop
+						else:
+							send "{@error_prefix1} &cIl numero deve essere positivo!"
+							stop
+					else:
+						send "{@error_prefix1} &cSpecifica un numero!"
+						stop
+				else:
+					send "{@error_prefix1} &cSpecifica il giocatore a cui vuoi togliere i punti!"
+					stop
+				
+			if arg-1 is "help":
+				send "&e> &7&m------------&r {@prefix1} &7&m------------&r &e<"
+				send ""
+				send "&7Comandi che puoi eseguire:"
+				send "&c- &7/points &acheck <giocatore> &7&o- Controlla quanti punti ha un giocatore"
+				send "&c- &7/points &areset <giocatore> &7&o- Azzera i punti di un giocatore"
+				send "&c- &7/points &aset | give <giocatore> <punti> &7&o- Imposta il valore dei punti di un giocatore ad uno specifico numero"
+				send "&c- &7/points &aadd <giocatore> <valore> &7&o- Aggiungi dei punti ad un giocatore"
+				send "&c- &7/points &aremove <giocatore> <valore> &7&o- Rimuovi dei punti ad un giocatore"
+				send "&c- &7/points &aauto <giocatore> &7&o- Assegna in modo automatico i punti ad un giocatore rispettando la sua reputazione"
+				send "&c- &7/points &ainfo &7&o- Visualizza le info dello script"
+				send "&c- &7/points &ahelp &7&o- Mostra questa lista comandi"
+				send "&c- &7/points &areload &7&o- Ricarica lo script"
+				send ""
+				send "&e> &7&m---------------------------------&r &e<"
+				stop
+				
+			if arg-1 is "info":
+				send "&a> &9&m------------&r {@prefix1} &9&m------------&r &a<"
+				send ""
+				send " &7Info sullo script:"
+				send "	 &3Versione dello script: &6{@version}"
+				send "	 &3Versione di Minecraft: &a%minecraft version%"
+				send "	 &3Script ideato e scritto da &bXedo"
+				send ""
+				send "&a> &9&m---------------------------------&r &a<"
+				stop
+				
+			if arg-1 is "reload":
+				send "{@prefix1} &3Ricarico il config principale..."
+				wait 5 ticks
+				execute console command "/skript reload points (comandi)"
+				wait 2 seconds
+				send "{@prefix1} &3Ricarico il config dei MINERALI..."
+				wait 5 ticks
+				execute console command "/skript reload points (minerali)"
+				wait 2 seconds
+				send "{@prefix1} &3Ricarico il config dei MOB..."
+				wait 5 ticks
+				execute console command "/skript reload points (mob)"
+				wait 2 seconds
+				send "{@prefix1} &3Ricarico il config delle REPUTAZIONI..."
+				wait 5 ticks
+				execute console command "/skript reload points (alignment)"
+				wait 2 seconds
+				send "{@prefix1} &3Ricarico il config degli EFFETTI..."
+				execute console command "/skript reload points (effects)"
+				wait 3 seconds
+				send "{@prefix1} &aConfig ricaricati!"
+				stop
+		
+command /idle [<text>]:
+	permission: points.idle.toggle
+	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	description: Attiva o disattiva l'assegnazione automatica dei punti ai giocatori.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				send "&cUtilizzo: &6/idle &e<on | off>"
+				stop
+			if arg-1 is "on":
+				if {points::%player%::idle} is true:
+					send "{@error_prefix1} &cL'assegnazione automatica dei punti è già attivata!"
+					stop
+				else:
+					set {points::%player%::idle} to true
+					send "{@prefix1} &aAssegnazione automatica dei punti attivata!"
+					stop
+			else if arg-1 is "off":
+				if {points::%player%::idle} is false:
+					send "{@error_prefix1} &cL'assegnazione automatica dei punti è già disattivata!"
+					stop
+				else:
+					set {points::%player%::idle} to false
+					send "{@prefix1} &cAssegnazione automatica dei punti disattivata!"
+					stop
+		else:
+			if arg-1 is not set:
+				send "&cUtilizzo: &6/idle &e<on | off>"
+				stop
+			if arg-1 is "on":
+				if {points::%player%::idle} is true:
+					send "{@error_prefix1} &cL'assegnazione automatica dei punti è già attivata!"
+					stop
+				else:
+					set {points::%player%::idle} to true
+					send "{@prefix1} &aAssegnazione automatica dei punti attivata!"
+					stop
+			else if arg-1 is "off":
+				if {points::%player%::idle} is false:
+					send "{@error_prefix1} &cL'assegnazione automatica dei punti è già disattivata!"
+					stop
+				else:
+					set {points::%player%::idle} to false
+					send "{@prefix1} &cAssegnazione automatica dei punti disattivata!"
+					stop
+		
+#command /pay [<offline player>] [<number>]:
+	#executable by: player, console
+	#usage: &8[&4&lPAY&8] &cUtilizzo: &6/pay &e<giocatore> <valore>
+	#trigger:
+		#if sender is player:
+			#if arg-1 is set:
+				#if arg-1 is player:
+					#send "{@error_prefix1} &cNon puoi pagare te stesso/a!"
+					#stop
+				#else if arg-1 is offline:
+					#send "{@error_prefix1} &c%arg-1% è offline!"
+					#stop
+				#if arg-2 is set:
+					#if {points::%player%} is higher or equal to arg-2:
+						#add arg-2 to {points::%arg-1%}
+						#remove arg-2 from {points::%player%}
+						#send "{@prefix1} &6Hai pagato &e%arg-2% punti &6a &c%arg-1%&6." to player
+						#send "{@prefix1} &c%player% &6ti ha pagato &e%arg-2% punti&6." to arg-1
+						#stop
+					#else:
+						#send "{@error_prefix1} &cNon hai abbastanza punti!"
+						#stop
+				#else:
+					#send "{@error_prefix1} &cSpecifica la somma da pagare!"
+					#stop
+			#else if arg-1 is not set:
+				#send "{@error_prefix1} &cChi vuoi pagare?"
+				#stop
+		#else:
+			#if arg-1 is set:
+				#if arg-2 is set:
+					#send "&cSolo i giocatori possono eseguire questo comando!"
+					#stop
+				#else:
+					#send "&cSolo i giocatori possono eseguire questo comando!"
+					#stop
+			#else:
+				#send "&cSolo i giocatori possono eseguire questo comando!"
+				#stop
+
+#--------------------------------------------#
+#											 #
+#				   MINERALI					 #
+#											 #
+#--------------------------------------------#
+on mine of coal ore or deepslate coal ore:
+	set {_points} to random number between 0.5 and 1
+	add {_points} to {points::%player%}
+	send action bar "&0&lCARBONE &8+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop	
+on mine of iron ore or deepslate iron ore:
+	set {_points} to random number between 1 and 2
+	add {_points} to {points::%player%}
+	send action bar "&f&lFERRO &7+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop	
+on mine of copper ore or deepslate copper ore:
+	set {_points} to random number between 1.25 and 2
+	add {_points} to {points::%player%}
+	send action bar "&5&lRAME &d+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop	
+on mine of gold ore or deepslate gold ore:
+	set {_points} to random number between 1.5 and 3
+	add {_points} to {points::%player%}
+	send action bar "&e&lORO &6+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop
+on mine of redstone ore or deepslate redstone ore:
+	set {_points} to random number between 1.75 and 3.25
+	add {_points} to {points::%player%}
+	send action bar "&4&lREDSTONE &c+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop	
+on mine of lapis ore or deepslate lapis ore:
+	set {_points} to random number between 2 and 3.5
+	add {_points} to {points::%player%}
+	send action bar "&1&lLAPIS &9+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop
+on mine of emerald ore or deepslate emerald ore:
+	set {_points} to random number between 10 and 20
+	add {_points} to {points::%player%}
+	send action bar "&2&lSMERALDO &a+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop	
+on mine of diamond ore or deepslate diamond ore:
+	set {_points} to random number between 8 and 16
+	add {_points} to {points::%player%}
+	send action bar "&b&lDIAMANTE &9+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop	
+on mine of ancient debris:
+	set {_points} to random number between 40 and 80
+	add {_points} to {points::%player%}
+	send action bar "&f&lNETHERITE &7+%{_points}% punti &3(%{points::%player%}% totali)" to player
+	stop
+#--------------------------------------------#
+#											 #
+#				     MOB					 #
+#											 #
+#--------------------------------------------#
+          # ----- MONDO: SMP ----- #
+#---------- MOB KILL PASSIVI E NEUTRALI ----------#		
+on death of chicken, cow, pig, rabbit or sheep:
+	set {_points} to random number between 0.1 and 0.5
+	if world is "smp":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of frog or tadpole:
+	set {_points} to random number between 0.5 and 1.5
+	if world is "smp":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop	
+on death of axolotl, cod, dolphin, glow squid, puffer fish, salmon, squid, tropical fish or turtle:
+	set {_points} to random number between 0.5 and 2
+	if world is "smp":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of donkey, horse, mule, skeleton horse, llama, trader llama, goat, panda or polar bear:
+	set {_points} to random number between 0.5 and 2.5
+	if world is "smp":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of bee, cat, parrot, fox or wolf:
+	set {_points} to random number between 0.5 and 3
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of villager, wandering trader, iron golem or allay:
+	set {_points} to random number between 0.5 and 4
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			remove ({_points}*1) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			remove ({_points}*1.5) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			remove ({_points}*2) from {points::%attacker%}
+			send action bar "&4&lMOB KILL &c-%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop	
+#---------- MOB KILL OSTILI ----------#
+on death of drowned, husk, zombie or zombified piglin: 
+	set {_points} to random number between 0.5 and 3
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop	
+on death of zombie villager:
+	set {_points} to random number between 0.5 and 2.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of zoglin:
+	set {_points} to random number between 1 and 4
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of phantom:
+	set {_points} to random number between 1 and 2.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of skeleton or stray:
+	set {_points} to random number between 1.5 and 3.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*3.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of wither skeleton:
+	set {_points} to random number between 2 and 4
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*3.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of cave spider or spider:
+	set {_points} to random number between 1.5 and 3.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of endermite or silverfish:
+	set {_points} to random number between 1 and 2.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of creeper:
+	set {_points} to random number between 1.5 and 4.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of slime:
+	set {_points} to random number between 0.5 and 3
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of pillager, vindicator or witch:
+	set {_points} to random number between 2.5 and 5.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of evoker:
+	set {_points} to random number between 3 and 6
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of vex:
+	set {_points} to random number between 3 and 6
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of ravager:
+	set {_points} to random number between 5 and 10
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of elder guardian or guardian:
+	set {_points} to random number between 3 and 7
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of blaze, magma cube:
+	set {_points} to random number between 1.5 and 3.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of ghast:
+	set {_points} to random number between 1.5 and 3
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*7) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*3.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of piglin, piglin brute or hoglin:
+	set {_points} to random number between 0.5 and 2
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of enderman or shulker:
+	set {_points} to random number between 2 and 4.5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*3.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*3.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop	
+on death of warden:
+	set {_points} to random number between 150 and 300
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop		
+on death of wither:
+	set {_points} to random number between 50 and 75
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*7) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*8) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*3) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*4.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*6.5) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+on death of ender dragon:
+	set {_points} to random number between 20 and 40
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*8) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+
+# ----- SPECIALI ----- #
+on death of illusioner:
+	set {_points} to random number between 2 and 5
+	if world is "smp":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_nether":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+	else if world is "smp_the_end":
+		if difficulty is easy:
+			add ({_points}*1) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is normal:
+			add ({_points}*2) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+		else if difficulty is hard:
+			add ({_points}*4) to {points::%attacker%}
+			send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
+			stop
+#--------------------------------------------#
+#											 #
+#				 REPUTAZIONI				 #
+#											 #
+#--------------------------------------------#
+command /rank [<text>] [<offline player>] [<text>]:
+	aliases: /alignment, /reputazione
+	description: Gestisci la reputazione di un giocatore.
+	executable by: player, console
+	trigger:
+		set {_alignment-5} to "&4&lMalvagio/a"
+		set {_alignment-4} to "&c&lPessimo/a"
+		set {_alignment-3} to "&6&lVile"
+		set {_alignment-2} to "&e&lSpregevole"
+		set {_alignment-1} to "&8&lAggressivo/a"
+		set {_alignment0} to "&7&lNeutrale"
+		set {_alignment1_1} to "&a&lGentile"
+		set {_alignment1_2} to "&a&lGentile &f&l+"
+		set {_alignment2_1} to "&2&lBuono/a"
+		set {_alignment2_2} to "&2&lBuono/a &f&l+"
+		set {_alignment3_1} to "&3&lPuro/a"
+		set {_alignment3_2} to "&3&lPuro/a &f&l+"
+		set {_alignment4_1} to "&9&lMigliore"
+		set {_alignment4_2} to "&9&lMigliore &f&l+"
+		set {_alignment5_1} to "&b&lSupremo/a"
+		set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+		if sender is player:
+			if arg-1 is not set:
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@prefix2} &fLa tua reputazione: %{points::%player%::rank}%"
+						stop
+			
+			else if arg-1 is "check":
+				if player has permission "alignment.check":
+					if arg-2 is set:
+						if {points::%arg-2%::rank} is set:
+							send "{@prefix2} &fReputazione di %arg-2%: %{points::%arg-2%::rank}%"
+							stop
+						else:
+							send "{@error_prefix2} &6%arg-2% &cnon possiede ancora nessun ruolo!"
+							stop
+					else:
+						send "{@error_prefix2} &cSpecifica il nome di un giocatore!"
+						stop
+						if arg-3 is set:
+							send "{@error_prefix2} &cHai inserito troppi parametri!"
+							stop
+				else:
+					send "{@error_prefix2} &cNon hai i permessi per farlo!"
+					stop
+					
+			else if arg-1 is "set":
+				if player has permission "alignment.set":
+					if arg-2 is not set:
+						send "{@error_prefix2} &cSpecifica il nome di un giocatore."
+						stop
+					else:
+						if arg-3 is not set:
+							send "&7Ruoli disponibili:"
+							send "1. %{_alignment-5}%"
+							send "2. %{_alignment-4}%"
+							send "3. %{_alignment-3}%"
+							send "4. %{_alignment-2}%"
+							send "5. %{_alignment-1}%"
+							send "6. %{_alignment0}%"
+							send "7. %{_alignment1_1}%"
+							send "8. %{_alignment1_2}%"
+							send "9. %{_alignment2_1}%"
+							send "10. %{_alignment2_2}%"
+							send "11. %{_alignment3_1}%"
+							send "12. %{_alignment3_2}%"
+							send "13. %{_alignment4_1}%"
+							send "14. %{_alignment4_2}%"
+							send "15. %{_alignment5_1}%"
+							send "16. %{_alignment5_2}%"
+							stop
+						else if arg-3 is "malvagio", "malvagia" or "malvagio/a":
+							set {points::%arg-2%::rank} to {_alignment-5}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "pessimo", "pessima" or "pessimo/a":
+							set {points::%arg-2%::rank} to {_alignment-4}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "vile":
+							set {points::%arg-2%::rank} to {_alignment-3}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "spregevole":
+							set {points::%arg-2%::rank} to {_alignment-2}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "aggressivo", "aggressiva" or "aggressivo/a":
+							set {points::%arg-2%::rank} to {_alignment-1}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "neutrale":
+							set {points::%arg-2%::rank} to {_alignment0}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "gentile":	
+							set {points::%arg-2%::rank} to {_alignment1_1}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "buono", "buona" or "buono/a":
+							set {points::%arg-2%::rank} to {_alignment2_1}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "puro", "pura" or "puro/a":
+							set {points::%arg-2%::rank} to {_alignment3_1}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "migliore":
+							set {points::%arg-2%::rank} to {_alignment4_1}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is "supremo":
+							set {points::%arg-2%::rank} to {_alignment5_1}
+							send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+							send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+							stop
+						else if arg-3 is not "malvagio", "malvagia", "malvagio/a", "pessimo", "pessima", "pessimo/a", "vile", "spregevole", "aggressivo", "aggressiva", "aggressivo/a", "neutrale", "gentile", "buono", "buona", "buono/a", "puro", "pura", "puro/a", "migliore" or "supremo":
+							send "{@error_prefix2} &cNon conosco quel rank."
+							stop
+				else:
+					send "{@error_prefix2} &cNon hai i permessi per farlo!"
+					stop
+					
+			else if arg-1 is "list":
+				if player has permission "alignment.list":
+					send "&7&m------------------&r {@prefix2} &7&m------------------"
+					send "&7Di seguito troverai la lista di tutti i gradi di reputazione che puoi ottenere giocando"
+					send "&7e accumulando punti! (Dal peggiore al migliore):"
+					send "1. %{_alignment-5}% &r- &7&o(Da -50.000 punti in giù)"
+					send "2. %{_alignment-4}% &r- &7&o(Da -49.999 punti a -30.000 punti)"
+					send "3. %{_alignment-3}% &r- &7&o(Da -29.999 punti a -10.000 punti)"
+					send "4. %{_alignment-2}% &r- &7&o(Da -9.999 punti a -7.500 punti)"
+					send "5. %{_alignment-1}% &r- &7&o(Da -7.499 punti a -5.500 punti)"
+					send "6. %{_alignment0}% &r- &7&o(Da -5.499 punti a 5.499 punti)"
+					send "7. %{_alignment1_1}% &r- &7&o(Da 5.500 punti a 9.999 punti)"
+					send "8. %{_alignment1_2}% &r- &7&o(Da 10.000 punti a 49.999 punti)"
+					send "9. %{_alignment2_1}% &r- &7&o(Da 50.000 punti a 74.999 punti)"
+					send "10. %{_alignment2_2}% &r- &7&o(Da 75.000 punti a 99.999 punti)"
+					send "11. %{_alignment3_1}% &r- &7&o(Da 100.000 punti a 124.999 punti)"
+					send "12. %{_alignment3_2}% &r- &7&o(Da 125.000 punti a 199.999 punti)"
+					send "13. %{_alignment4_1}% &r- &7&o(Da 200.000 punti a 249.999 punti)"
+					send "14. %{_alignment4_2}% &r- &7&o(Da 250.000 punti a 499.999 punti)"
+					send "15. %{_alignment5_1}% &r- &7&o(Da 500.000 punti 999.999 punti)"
+					send "16. %{_alignment5_2}% &r- &7&o(Da 1.000.000 punti in su)"
+					send "&7&m-------------------------------------------"
+					stop
+					if arg-2 is set:
+						send "{@error_prefix2} &cHai inserito troppi parametri!"
+						stop
+				else:
+					send "{@error_prefix2} &cNon hai i permessi per farlo!"
+					stop
+			
+			else if arg-1 is "reset":
+				if player has permission "alignment.reset":
+					if arg-2 is not set:
+						set {points::%player%::rank} to {_alignment0}
+						send "{@prefix2} &3Hai reimpostato la tua reputazione su %{_alignment0}%"
+						stop
+					else:
+						set {points::%arg-2%::rank} to {_alignment0}
+						send "{@prefix2} &3Hai reimpostato la tua reputazione su %{_alignment0}%&3." to player
+						send "{@prefix2} &3La tua reputazione è stata reimpostata su %{_alignment0}%&3." to arg-2
+						stop
+						if arg-3 is set:
+							send "{@error_prefix2} &cHai inserito troppi parametri!"
+							stop
+				else:
+					send "{@error_prefix2} &cNon hai i permessi per farlo!"
+					stop
+			
+			else if arg-1 is "help":
+				if player has permission "alignment.help":
+					send "&e> &7&m------------&r {@prefix2} &7&m------------&r &e<"
+					send ""
+					send "&7Comandi che puoi eseguire:"
+					send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione"
+					send "&c- &7/rank &acheck <giocatore> &7&o- Controlla la reputazione di un giocatore"
+					send "&c- &7/rank &aset <giocatore> <rank> &7&o- Imposta una reputazione ad un giocatore"
+					send "&c- &7/rank &alist &7&o- Mostra un elenco di tutte le reputazioni ottenibili disponibili"
+					send "&c- &7/rank &areset <giocatore> &7&o- Reimposta la reputazione di un giocatore a ''&7&lNeutrale&7''"
+					send "&c- &7/rank &ahelp &7&o- Mostra questa lista comandi"
+					send ""
+					send "&e> &7&m--------------------------------&r &e<"
+					stop
+					if arg-2 is set:
+						send "{@error_prefix2} &cHai inserito troppi parametri!"
+						stop
+				else:
+					send "&e> &7&m------------&r {@prefix2} &7&m------------&r &e<"
+					send ""
+					send "&7Comandi che puoi eseguire:"
+					send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione"
+					send "&c- &7/rank &alist &7&o- Mostra un elenco di tutte le reputazioni ottenibili disponibili"
+					send "&c- &7/rank &ahelp &7&o- Mostra questa lista comandi"
+					send ""
+					send "&e> &7&m--------------------------------&r &e<"
+					stop
+					
+			else if arg-1 is not "check", "set", "list", "reset" or "help":
+				send "{@error_prefix2} &cComando sconosciuto."
+				stop
+					
+		else if sender is console:
+			if arg-1 is not set:
+				if arg-2 is not set:
+					if arg-3 is not set:
+						send "{@error_prefix2} &cSolo i giocatori possono vedere la propria reputazione."
+						stop
+			
+			else if arg-1 is "check":
+				if arg-2 is set:
+					if {points::%arg-2%::rank} is set:
+						send "{@prefix2} &3Reputazione di %arg-2%: %{points::%arg-2%::rank}%"
+						stop
+					else:
+						send "{@error_prefix2} &6%arg-2% &cnon possiede ancora nessun ruolo!"
+						stop
+						if arg-3 is set:
+							send "{@error_prefix2} &cHai inserito troppi parametri!"
+							stop
+				else:
+					send "{@error_prefix2} &cSpecifica il nome di un giocatore!"
+					stop
+					
+			else if arg-1 is "set":
+				if arg-2 is not set:
+					send "{@error_prefix2} &cSpecifica il nome di un giocatore!"
+					stop
+				else:
+					if arg-3 is not set:
+						send "&7Ruoli disponibili:"
+						send "1. %{_alignment-5}%"
+						send "2. %{_alignment-4}%"
+						send "3. %{_alignment-3}%"
+						send "4. %{_alignment-2}%"
+						send "5. %{_alignment-1}%"
+						send "6. %{_alignment0}%"
+						send "7. %{_alignment1_1}%"
+						send "8. %{_alignment1_2}%"
+						send "9. %{_alignment2_1}%"
+						send "10. %{_alignment2_2}%"
+						send "11. %{_alignment3_1}%"
+						send "12. %{_alignment3_2}%"
+						send "13. %{_alignment4_1}%"
+						send "14. %{_alignment4_2}%"
+						send "15. %{_alignment5_1}%"
+						send "16. %{_alignment5_2}%"
+						stop
+					else if arg-3 is "malvagio", "malvagia" or "malvagio/a":
+						set {points::%arg-2%::rank} to {_alignment-5}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "pessimo", "pessima" or "pessimo/a":
+						set {points::%arg-2%::rank} to {_alignment-4}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "vile":
+						set {points::%arg-2%::rank} to {_alignment-3}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "spregevole":
+						set {points::%arg-2%::rank} to {_alignment-2}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "aggressivo", "aggressiva" or "aggressivo/a":
+						set {points::%arg-2%::rank} to {_alignment-1}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "neutrale":
+						set {points::%arg-2%::rank} to {_alignment0}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "gentile":	
+						set {points::%arg-2%::rank} to {_alignment1_1}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "buono", "buona" or "buono/a":
+						set {points::%arg-2%::rank} to {_alignment2_1}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "puro", "pura" or "puro/a":
+						set {points::%arg-2%::rank} to {_alignment3_1}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "migliore":
+						set {points::%arg-2%::rank} to {_alignment4_1}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is "supremo":
+						set {points::%arg-2%::rank} to {_alignment5_1}
+						send "&7La tua reputazione è stata modificata in %{points::%arg-2%::rank}%&7." to arg-2
+						send "&7Hai modificato la reputazione di %arg-2% in %{points::%arg-2%::rank}%&7." to player
+						stop
+					else if arg-3 is not "malvagio", "malvagia", "malvagio/a", "pessimo", "pessima", "pessimo/a", "vile", "spregevole", "aggressivo", "aggressiva", "aggressivo/a", "neutrale", "gentile", "buono", "buona", "buono/a", "puro", "pura", "puro/a", "migliore" or "supremo":
+						send "{@error_prefix2} &cNon conosco quel rank."
+						stop
+					
+			else if arg-1 is "list":
+				send "&7&m------------------&r {@prefix2} &7&m------------------"
+				send "&7Di seguito troverai la lista di tutti i gradi di reputazione che puoi ottenere giocando"
+				send "&7e accumulando punti! (Dal peggiore al migliore):"
+				send "1. %{_alignment-5}% &r- &7&o(Da -50.000 punti in giù)"
+				send "2. %{_alignment-4}% &r- &7&o(Da -49.999 punti a -30.000 punti)"
+				send "3. %{_alignment-3}% &r- &7&o(Da -29.999 punti a -10.000 punti)"
+				send "4. %{_alignment-2}% &r- &7&o(Da -9.999 punti a -7.500 punti)"
+				send "5. %{_alignment-1}% &r- &7&o(Da -7.499 punti a -5.500 punti)"
+				send "6. %{_alignment0}% &r- &7&o(Da -5.499 punti a 5.499 punti)"
+				send "7. %{_alignment1_1}% &r- &7&o(Da 5.500 punti a 9.999 punti)"
+				send "8. %{_alignment1_2}% &r- &7&o(Da 10.000 punti a 49.999 punti)"
+				send "9. %{_alignment2_1}% &r- &7&o(Da 50.000 punti a 74.999 punti)"
+				send "10. %{_alignment2_2}% &r- &7&o(Da 75.000 punti a 99.999 punti)"
+				send "11. %{_alignment3_1}% &r- &7&o(Da 100.000 punti a 124.999 punti)"
+				send "12. %{_alignment3_2}% &r- &7&o(Da 125.000 punti a 199.999 punti)"
+				send "13. %{_alignment4_1}% &r- &7&o(Da 200.000 punti a 249.999 punti)"
+				send "14. %{_alignment4_2}% &r- &7&o(Da 250.000 punti a 499.999 punti)"
+				send "15. %{_alignment5_1}% &r- &7&o(Da 500.000 punti 999.999 punti)"
+				send "16. %{_alignment5_2}% &r- &7&o(Da 1.000.000 punti in su)"
+				send "&7&m-------------------------------------------"
+				stop
+				if arg-2 is set:
+					send "{@error_prefix2} &cHai inserito troppi parametri!"
+					stop
+			
+			else if arg-1 is "reset":
+				if arg-2 is not set:
+					send "{@error_prefix2} &cSolo i giocatori possono reimpostare la propria reputazione."
+					stop
+				else:
+					set {points::%arg-2%::rank} to {_alignment0}
+					send "{@prefix2} &3Hai reimpostato la tua reputazione su %{_alignment0}%&3." to console
+					send "{@prefix2} &3La &cconsole &3ha reimpostato la tua reputazione su %{_alignment0}%&3." to arg-2
+					stop
+					if arg-3 is set:
+						send "{@error_prefix2} &cHai inserito troppi parametri!"
+						stop
+			
+			else if arg-1 is "help":
+				send "&e> &7&m------------&r {@prefix2} &7&m------------&r &e<"
+				send ""
+				send "&7Comandi che puoi eseguire:"
+				send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione"
+				send "&c- &7/rank &acheck <giocatore> &7&o- Controlla la reputazione di un giocatore"
+				send "&c- &7/rank &aset <giocatore> <rank> &7&o- Imposta una reputazione ad un giocatore"
+				send "&c- &7/rank &alist &7&o- Mostra un elenco di tutte le reputazioni ottenibili disponibili"
+				send "&c- &7/rank &areset <giocatore> &7&o- Reimposta la reputazione di un giocatore a ''&7&lNeutrale&7''"
+				send "&c- &7/rank &ahelp &7&o- Mostra questa lista comandi"
+				send ""
+				send "&e> &7&m--------------------------------&r &e<"
+				stop
+				if arg-2 is set:
+					send "{@error_prefix2} &cHai inserito troppi parametri!"
+					stop
+					
+			else if arg-1 is not "check", "set", "list", "reset" or "help":
+				send "{@error_prefix2} &cComando sconosciuto."
+				stop
+				
+every tick:
+	loop all players:
+		set {_alignment-5} to "&4&lMalvagio/a"
+		set {_alignment-4} to "&c&lPessimo/a"
+		set {_alignment-3} to "&6&lVile"
+		set {_alignment-2} to "&e&lSpregevole"
+		set {_alignment-1} to "&8&lAggressivo/a"
+		set {_alignment0} to "&7&lNeutrale"
+		set {_alignment1_1} to "&a&lGentile"
+		set {_alignment1_2} to "&a&lGentile &f&l+"
+		set {_alignment2_1} to "&2&lBuono/a"
+		set {_alignment2_2} to "&2&lBuono/a &f&l+"
+		set {_alignment3_1} to "&3&lPuro/a"
+		set {_alignment3_2} to "&3&lPuro/a &f&l+"
+		set {_alignment4_1} to "&9&lMigliore"
+		set {_alignment4_2} to "&9&lMigliore &f&l+"
+		set {_alignment5_1} to "&b&lSupremo/a"
+		set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+		if {points::%loop-player%::rank} is set:
+			if {points::%loop-player%::rank} is {_alignment-5}: #(REPUTAZIONE -5)
+				if {points::%loop-player%} is higher than -50000:
+					set {points::%loop-player%::rank} to {_alignment-4}
+					set {points::%loop-player%::rankprefix} to "&4[&c&lP&4]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment-4}: #(REPUTAZIONE -4)
+				if {points::%loop-player%} is lower than -49999:
+					set {points::%loop-player%::rank} to {_alignment-5}
+					set {points::%loop-player%::rankprefix} to "&c[&4&lM&c]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than -29999:
+					set {points::%loop-player%::rank} to {_alignment-3}
+					set {points::%loop-player%::rankprefix} to "&e[&6&lV&e]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+			
+			else if {points::%loop-player%::rank} is {_alignment-3}: #(REPUTAZIONE -3)
+				if {points::%loop-player%} is lower than -29999:
+					set {points::%loop-player%::rank} to {_alignment-4}
+					set {points::%loop-player%::rankprefix} to "&4[&c&lP&4]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than -9999:
+					set {points::%loop-player%::rank} to {_alignment-2}
+					set {points::%loop-player%::rankprefix} to "&e[&6&lS&e]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+			
+			else if {points::%loop-player%::rank} is {_alignment-2}: #(REPUTAZIONE -2)
+				if {points::%loop-player%} is lower than -9999:
+					set {points::%loop-player%::rank} to {_alignment-3}
+					set {points::%loop-player%::rankprefix} to "&e[&6&lV&e]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than -7499:
+					set {points::%loop-player%::rank} to {_alignment-1}
+					set {points::%loop-player%::rankprefix} to "&6[&e&lA&6]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+		
+			else if {points::%loop-player%::rank} is {_alignment-1}: #(REPUTAZIONE -1)
+				if {points::%loop-player%} is lower than -7499:
+					set {points::%loop-player%::rank} to {_alignment-2}
+					set {points::%loop-player%::rankprefix} to "&e[&6&lS&e]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than -5500:
+					set {points::%loop-player%::rank} to {_alignment0}
+					set {points::%loop-player%::rankprefix} to "&8[&7&lN&8]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment0}: #(REPUTAZIONE 0)
+				if {points::%loop-player%} is lower than -5499:
+					set {points::%loop-player%::rank} to {_alignment-1}
+					set {points::%loop-player%::rankprefix} to "&6[&e&lA&6]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 5499:
+					set {points::%loop-player%::rank} to {_alignment1_1}
+					set {points::%loop-player%::rankprefix} to "&2[&a&lG&2]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				
+			else if {points::%loop-player%::rank} is {_alignment1_1}: #(REPUTAZIONE 1.1)
+				if {points::%loop-player%} is lower than 5500:
+					set {points::%loop-player%::rank} to {_alignment0}
+					set {points::%loop-player%::rankprefix} to "&8[&7&lN&8]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 9999:
+					set {points::%loop-player%::rank} to {_alignment1_2}
+					set {points::%loop-player%::rankprefix} to "&2[&a&lG&f&l+&2]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment1_2}: #(REPUTAZIONE 1.2)
+				if {points::%loop-player%} is lower than 10000:
+					set {points::%loop-player%::rank} to {_alignment1_1}
+					set {points::%loop-player%::rankprefix} to "&2[&a&lG&2]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 49999:
+					set {points::%loop-player%::rank} to {_alignment2_1}
+					set {points::%loop-player%::rankprefix} to "&a[&2&lB&a]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment2_1}: #(REPUTAZIONE 2.1)
+				if {points::%loop-player%} is lower than 50000:
+					set {points::%loop-player%::rank} to {_alignment1_2}
+					set {points::%loop-player%::rankprefix} to "&2[&a&lG&f&l+&2]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 74999:
+					set {points::%loop-player%::rank} to {_alignment2_2}
+					set {points::%loop-player%::rankprefix} to "&a[&2&lB&f&l+&a]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment2_2}: #(REPUTAZIONE 2.2)
+				if {points::%loop-player%} is lower than 75000:
+					set {points::%loop-player%::rank} to {_alignment2_1}
+					set {points::%loop-player%::rankprefix} to "&a[&2&lB&a]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 99999:
+					set {points::%loop-player%::rank} to {_alignment3_1}
+					set {points::%loop-player%::rankprefix} to "&f[&3&lP&f]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment3_1}: #(REPUTAZIONE 3.1)
+				if {points::%loop-player%} is lower than 100000:
+					set {points::%loop-player%::rank} to {_alignment2_2}
+					set {points::%loop-player%::rankprefix} to "&a[&2&lB&f&l+&a]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 124999:
+					set {points::%loop-player%::rank} to {_alignment3_2}
+					set {points::%loop-player%::rankprefix} to "&f[&3&lP&f&l+&f]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+					
+			else if {points::%loop-player%::rank} is {_alignment3_2}: #(REPUTAZIONE 3.2)
+				if {points::%loop-player%} is lower than 125000:
+					set {points::%loop-player%::rank} to {_alignment3_1}
+					set {points::%loop-player%::rankprefix} to "&f[&3&lP&f]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 199999:
+					set {points::%loop-player%::rank} to {_alignment4_1}
+					set {points::%loop-player%::rankprefix} to "&b[&9&lM&b]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment4_1}: #(REPUTAZIONE 4.1)
+				if {points::%loop-player%} is lower than 200000:
+					set {points::%loop-player%::rank} to {_alignment3_2}
+					set {points::%loop-player%::rankprefix} to "&f[&3&lP&f&l+&f]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 249999:
+					set {points::%loop-player%::rank} to {_alignment4_2}
+					set {points::%loop-player%::rankprefix} to "&b[&9&lM&f&l+&b]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment4_2}: #(REPUTAZIONE 4.2)
+				if {points::%loop-player%} is lower than 250000:
+					set {points::%loop-player%::rank} to {_alignment4_1}
+					set {points::%loop-player%::rankprefix} to "&b[&9&lM&b]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 499999:
+					set {points::%loop-player%::rank} to {_alignment5_1}
+					set {points::%loop-player%::rankprefix} to "&9[&b&lS&9]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				
+			else if {points::%loop-player%::rank} is {_alignment5_1}: #(REPUTAZIONE 5.1)
+				if {points::%loop-player%} is lower than 500000:
+					set {points::%loop-player%::rank} to {_alignment4_2}
+					set {points::%loop-player%::rankprefix} to "&b[&9&lM&f&l+&b]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+				else if {points::%loop-player%} is higher than 999999:
+					set {points::%loop-player%::rank} to {_alignment5_2}
+					set {points::%loop-player%::rankprefix} to "&9[&b&lS&f&l+&9]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+					
+			else if {points::%loop-player%::rank} is {_alignment5_2}: #(REPUTAZIONE 5.2)
+				if {points::%loop-player%} is lower than 1000000:
+					set {points::%loop-player%::rank} to {_alignment5_1}
+					set {points::%loop-player%::rankprefix} to "&9[&b&lS&9]"
+					broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato/a %{points::%loop-player%::rank}%&f!"
+					stop
+#--------------------------------------------#
+#											 #
+#				   EFFETTI					 #
+#											 #
+#--------------------------------------------#
+every 119 ticks:
+	loop all players:
+		set {_alignment-5} to "&4&lMalvagio/a"
+		set {_alignment-4} to "&c&lPessimo/a"
+		set {_alignment-3} to "&6&lVile"
+		set {_alignment-2} to "&e&lSpregevole"
+		set {_alignment-1} to "&8&lAggressivo/a"
+		set {_alignment0} to "&7&lNeutrale"
+		set {_alignment1_1} to "&a&lGentile"
+		set {_alignment1_2} to "&a&lGentile &f&l+"
+		set {_alignment2_1} to "&2&lBuono/a"
+		set {_alignment2_2} to "&2&lBuono/a &f&l+"
+		set {_alignment3_1} to "&3&lPuro/a"
+		set {_alignment3_2} to "&3&lPuro/a &f&l+"
+		set {_alignment4_1} to "&9&lMigliore"
+		set {_alignment4_2} to "&9&lMigliore &f&l+"
+		set {_alignment5_1} to "&b&lSupremo/a"
+		set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+		if {points::%loop-player%::rank} is {_alignment-5}:
+			set {points::%loop-player%::effect} to "&cLentezza%nl%&6Debolezza%nl%&eAffaticamento%nl%&8Sfortuna"
+			apply slowness without any particles to loop-player for 6 seconds
+			apply weakness without any particles to loop-player for 6 seconds
+			apply mining fatigue without any particles to loop-player for 6 seconds
+			apply unluck without any particles to loop-player for 6 seconds
+				
+		if {points::%loop-player%::rank} is {_alignment-4}:
+			set {points::%loop-player%::effect} to "&cLentezza%nl%&6Debolezza%nl%&eAffaticamento%nl%&8Sfortuna"
+			apply slowness without any particles to loop-player for 6 seconds
+			apply weakness without any particles to loop-player for 6 seconds
+			apply mining fatigue without any particles to loop-player for 6 seconds
+			apply unluck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment-3}:
+			set {points::%loop-player%::effect} to "&6Affaticamento %nl%&eAffaticamento%nl%&8Sfortuna"
+			apply mining fatigue 2 without any particles to loop-player for 6 seconds #se possibile mettere un livello più alto
+			apply weakness without any particles to loop-player for 6 seconds
+			apply unluck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment-2}:
+			set {points::%loop-player%::effect} to "&eDebolezza%nl%&8Sfortuna"
+			apply weakness without any particles to loop-player for 6 seconds
+			apply strength without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment-1}:
+			set {points::%loop-player%::effect} to "&8Sfortuna"
+			apply strength without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment0}:
+			set {points::%loop-player%::effect} to "&7Non hai nessun effetto perché sei neutrale&7.%nl%Cambia reputazione per ottenerne uno."
+				
+		else if {points::%loop-player%::rank} is {_alignment1_1}:
+			set {points::%loop-player%::effect} to "&aFortuna"
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment1_2}:
+			set {points::%loop-player%::effect} to "&aFortuna"
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment2_1}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine"
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment2_2}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine"
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment3_1}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine%nl%&3Resistenza"
+			apply resistance without any particles to loop-player for 6 seconds
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment3_2}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine%nl%&3Resistenza"
+			apply resistance without any particles to loop-player for 6 seconds
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment4_1}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine%nl%&3Resistenza%nl%&9Rigenerazione"
+			apply regeneration without any particles to loop-player for 6 seconds
+			apply resistance without any particles to loop-player for 6 seconds
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment4_2}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine%nl%&3Resistenza%nl%&9Rigenerazione%nl%&9Velocità"
+			apply speed without any particles to loop-player for 6 seconds
+			apply regeneration without any particles to loop-player for 6 seconds
+			apply resistance without any particles to loop-player for 6 seconds
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+				
+		else if {points::%loop-player%::rank} is {_alignment5_1}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine%nl%&3Resistenza%nl%&9Rigenerazione%nl%&9Velocità%nl%&bForza"
+			apply strength without any particles to loop-player for 6 seconds
+			apply speed without any particles to loop-player for 6 seconds
+			apply regeneration without any particles to loop-player for 6 seconds
+			apply resistance without any particles to loop-player for 6 seconds
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+			
+		else if {points::%loop-player%::rank} is {_alignment5_2}:
+			set {points::%loop-player%::effect} to "&aFortuna%nl%&2Sollecitudine%nl%&3Resistenza%nl%&9Rigenerazione%nl%&9Velocità%nl%&bForza%nl%&bAssorbimento"
+			apply absorption without any particles to loop-player for 6 seconds
+			apply strength without any particles to loop-player for 6 seconds
+			apply speed without any particles to loop-player for 6 seconds
+			apply regeneration without any particles to loop-player for 6 seconds
+			apply resistance without any particles to loop-player for 6 seconds
+			apply haste without any particles to loop-player for 6 seconds
+			apply luck without any particles to loop-player for 6 seconds
+			
+every 15 minutes:
+	loop all players:
+		set {_alignment-5} to "&4&lMalvagio/a"
+		set {_alignment-4} to "&c&lPessimo/a"
+		set {_alignment-3} to "&6&lVile"
+		set {_alignment-2} to "&e&lSpregevole"
+		set {_alignment-1} to "&8&lAggressivo/a"
+		set {_alignment0} to "&7&lNeutrale"
+		set {_alignment1_1} to "&a&lGentile"
+		set {_alignment1_2} to "&a&lGentile &f&l+"
+		set {_alignment2_1} to "&2&lBuono/a"
+		set {_alignment2_2} to "&2&lBuono/a &f&l+"
+		set {_alignment3_1} to "&3&lPuro/a"
+		set {_alignment3_2} to "&3&lPuro/a &f&l+"
+		set {_alignment4_1} to "&9&lMigliore"
+		set {_alignment4_2} to "&9&lMigliore &f&l+"
+		set {_alignment5_1} to "&b&lSupremo/a"
+		set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+		if loop-player is online:
+			if {points::%loop-player%::rank} is {_alignment-5}:
+				apply blindness without any particles to loop-player for 31 seconds
+		else:
+			stop
+			
+every 40 minutes:
+	loop all players:
+		set {_alignment-5} to "&4&lMalvagio/a"
+		set {_alignment-4} to "&c&lPessimo/a"
+		set {_alignment-3} to "&6&lVile"
+		set {_alignment-2} to "&e&lSpregevole"
+		set {_alignment-1} to "&8&lAggressivo/a"
+		set {_alignment0} to "&7&lNeutrale"
+		set {_alignment1_1} to "&a&lGentile"
+		set {_alignment1_2} to "&a&lGentile &f&l+"
+		set {_alignment2_1} to "&2&lBuono/a"
+		set {_alignment2_2} to "&2&lBuono/a &f&l+"
+		set {_alignment3_1} to "&3&lPuro/a"
+		set {_alignment3_2} to "&3&lPuro/a &f&l+"
+		set {_alignment4_1} to "&9&lMigliore"
+		set {_alignment4_2} to "&9&lMigliore &f&l+"
+		set {_alignment5_1} to "&b&lSupremo/a"
+		set {_alignment5_2} to "&b&lSupremo/a &f&l+"
+		if loop-player is online:
+			if {points::%loop-player%::rank} is {_alignment5_2}:
+				apply hero of the village without any particles to loop-player for 15 minutes
+		else:
+			stop
