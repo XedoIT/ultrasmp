@@ -82,3 +82,10 @@ command /tprcompass:
         give 1 compass named "&cTPR rapido &7(Click destro)" with lore "&7Teletrasportati in un punto", "&7a caso nel mondo con un", "&7semplice click." to player
         play sound "entity.item.pickup" with volume 1 and pitch 2 at player for player
         stop
+
+#--------------------------------------------#
+# COMANDO CHE NON FA NIENTE (PER ANTI-XRAY)  #
+#--------------------------------------------#
+command /nothing:
+    trigger:
+        stop
