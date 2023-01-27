@@ -1,9 +1,0 @@
-config-version: 5
-settings:
-  disable-saving: false
-  locale: it_it
-  disable-offline-access: false
-toggles:
-  silent-chest:
-    cd1db3e8-73ee-488f-9367-73224ca93ef3: false
-    00000000-0000-0000-0009-01f527b3981c: false
