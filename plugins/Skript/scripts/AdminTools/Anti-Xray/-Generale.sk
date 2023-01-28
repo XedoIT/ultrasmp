@@ -628,7 +628,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                     if player has permission "axr.admin.world.gui":
                         loop all worlds:
                             set {all::*} to worlds
-                        openAXRworlds(player)
+                            openAXRworlds(player)
                     else:
                         send "{@prefix_hide} &cComando sconosciuto."
                         stop
