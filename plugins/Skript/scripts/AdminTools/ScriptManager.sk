@@ -8,7 +8,7 @@ options:
   full prefix: &8[&e&lScriptManager&8]
   full name: &e&lScriptManager
   permission: script.manager
-  permission message: &8[&4&lINFO&8] &cComando sconsciuto.
+  permission message: &8[&4&lINFO&8] &cComando sconosciuto.
   v: 1.5
   
 #not options like setting
