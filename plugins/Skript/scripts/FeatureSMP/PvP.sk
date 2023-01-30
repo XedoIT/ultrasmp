@@ -6,27 +6,49 @@ command /pvp:
 	trigger:
 		if sender is player:
 			if {pvp} is not set:
-				enable PvP in all worlds
+				#enable PvP in all worlds
 				set {pvp} to true
 				broadcast "&8[&2●&8] &aPvP globale abilitato!"
 				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
 				stop
-			else:
-				disable PvP in all worlds
-				delete {pvp}
+			else if {pvp} is true:
+				#disable PvP in all worlds
+				set {pvp} to false
 				broadcast "&8[&4●&8] &cPvP globale disabilitato!"
 				send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
+				stop
+			else if {pvp} is false:
+				#enable PvP in all worlds
+				set {pvp} to true
+				broadcast "&8[&2●&8] &aPvP globale abilitato!"
+				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
 				stop
 		else:
 			if {pvp} is not set:
-				enable PvP in all worlds
+				#enable PvP in all worlds
 				set {pvp} to true
 				broadcast "&8[&2●&8] &aPvP globale abilitato!"
 				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
 				stop
-			else:
-				disable PvP in all worlds
-				delete {pvp}
+			else if {pvp} is true:
+				#disable PvP in all worlds
+				set {pvp} to false
 				broadcast "&8[&4●&8] &cPvP globale disabilitato!"
 				send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
 				stop
+			else if {pvp} is false:
+				#enable PvP in all worlds
+				set {pvp} to true
+				broadcast "&8[&2●&8] &aPvP globale abilitato!"
+				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
+				stop
+
+on damage:
+	if attacker is player:
+		if victim is a player:
+			if {pvp} is not set:
+				cancel event
+				send "&cIl PvP è disabilitato!" to attacker
+			else if {pvp} is false:
+				cancel event
+				send "&cIl PvP è disabilitato!" to attacker

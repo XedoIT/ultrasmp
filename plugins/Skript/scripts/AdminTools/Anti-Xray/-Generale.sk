@@ -204,6 +204,15 @@ on load:
             set {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore} or {axr::%loop-player%::ancient_debris} to 0
         else if {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore} or {axr::%loop-player%::offline_ancient_debris} is not set:
             set {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore} or {axr::%loop-player%::offline_ancient_debris} to 0
+ # CONFIGURAZIONE MONDI
+    if {axr_worlds::*} is not set:
+        set {axr_worlds::*} to "&7Nessun mondo abilitato."
+    if {all_worlds::*} is not set:
+        loop all worlds:
+            set {all_worlds::*} to all worlds
+   # !! SOLO DEBUG !!
+    #delete {axr_worlds::*}
+    #delete {all_worlds::*}
 on join:
     if {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore} or {axr::%player%::ancient_debris} is not set:
         set {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore} or {axr::%player%::ancient_debris} to 0
@@ -231,42 +240,65 @@ on chat:
         set {_p} to message parsed as offline player
         delete {offlinelookup::%player%}
         #execute player command "/ofa lookup %{_p}%"
-    else if {aworldset::%player%} is true:
+    else if {addingworld::%player%} is true:
         cancel event
-        set {added::world} to message parsed as world
-        if {enabled_worlds::*} contains {added::world}:
-            send "{@prefix} &cIl mondo &6%{added::world}% &cè già stato aggiunto!"
-            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-            delete {aworldset::%player%}
-            wait 1 tick
-            #execute player command "/axr world"
-        else:
-            send "{@prefix} &aHai aggiunto &b%{added::world}% &aalla lista dei mondi abilitati!"
-            add {added::world} to {enabled_worlds::*}
+        set {add_world} to message parsed as world
+        if {axr_worlds::*} is "&7Nessun mondo abilitato.":
+            delete {axr_worlds::*}
+            send "{@prefix} &aHai aggiunto &b%{add_world}% &aalla lista dei mondi abilitati!"
+            add {add_world} to {axr_worlds::*}
+            remove {add_world} from {all_worlds::*}
+            if {all_worlds::*} is not set:
+                set {all_worlds::*} to "&7Nessun mondo disponibile."
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player   
             wait 5 ticks
-            delete {aworldset::%player%}
-            delete {all::*}
-            wait 1 tick
-            #execute player command "/axr world"
-    else if {rworldset::%player%} is true:
-        cancel event
-        set {removed::world} to message parsed as world
-        if {enabled_worlds::*} contains {removed::world}:
-            send "{@prefix} &aHai rimosso &b%{removed::world}% &adalla lista dei mondi abilitati!"
+            delete {addingworld::%player%}
+            openAXRworlds(player)
+        else if {axr_worlds::*} contains {add_world}:
+            send "{@prefix} &cIl mondo &6%{add_world}% &cè già stato aggiunto!"
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {addingworld::%player%}
+            openAXRworlds(player)
+        else if {axr_worlds::*} doesn't contain {add_world}:
+            send "{@prefix} &aHai aggiunto &b%{add_world}% &aalla lista dei mondi abilitati!"
+            add {add_world} to {axr_worlds::*}
+            remove {add_world} from {all_worlds::*}
+            if {all_worlds::*} is not set:
+                set {all_worlds::*} to "&7Nessun mondo disponibile."
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player   
             wait 5 ticks
-            remove {removed::world} from {enabled_worlds::*}
-            delete {rworldset::%player%}
-            delete {all::*}
-            wait 1 tick
-            #execute player command "/axr world"
+            delete {addingworld::%player%}
+            openAXRworlds(player)
+    else if {removingworld::%player%} is true:
+        cancel event
+        set {removed_world} to message parsed as world
+        if {axr_worlds::*} contains {removed_world}:
+            if {all_worlds::*} is "&7Nessun mondo disponibile.":
+                delete {all_worlds::*}
+                send "{@prefix} &aHai rimosso &b%{removed_world}% &adalla lista dei mondi abilitati!"
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player   
+                wait 5 ticks
+                remove {removed_world} from {axr_worlds::*}
+                if {axr_worlds::*} is not set:
+                    set {axr_worlds::*} to "&7Nessun mondo abilitato."
+                add {removed_world} to {all_worlds::*}
+                delete {removingworld::%player%}
+                openAXRworlds(player)
+            else if {all_worlds::*} is not "&7Nessun mondo disponibile.":
+                send "{@prefix} &aHai rimosso &b%{removed_world}% &adalla lista dei mondi abilitati!"
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player   
+                wait 5 ticks
+                remove {removed_world} from {axr_worlds::*}
+                if {axr_worlds::*} is not set:
+                    set {axr_worlds::*} to "&7Nessun mondo abilitato."
+                add {removed_world} to {all_worlds::*}
+                delete {removingworld::%player%}
+                openAXRworlds(player)
         else:
-            send "{@prefix} &cIl mondo &6%{removed::world}% &cnon è nella lista dei mondi abilitati!"
+            send "{@prefix} &cIl mondo &6%{removed_world}% &cnon è nella lista dei mondi abilitati!"
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-            delete {rworldset::%player%}
-            wait 1 tick
-            #execute player command "/axr world"
+            delete {removingworld::%player%}
+            openAXRworlds(player)
     else if {lookup::%player%} is true:
         cancel event
         set {_p} to message parsed as offline player
@@ -577,7 +609,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                 else if arg-2 is "add":
                     if arg-3 is not set:
                         if player has permission "axr.admin.world.add":
-                            send "{@prefix} &aMondi disponibili: &b%{all::*}%"
+                            send "{@prefix} &aMondi disponibili: &b%{all_worlds::*}%"
                             send "{@prefix} &cUtilizzo: &6/axr world add <&emondo&6>"
                             stop
                         else:
@@ -585,14 +617,14 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             stop
                     else:
                         if player has permission "axr.admin.world.add":
-                            set {added::world} to arg-1 parsed as world
-                            if {enabled_worlds::*} contains {added::world}:
-                                send "{@prefix} &cIl mondo &6%{added::world}% &cè già stato aggiunto!"
+                            set {add_world} to arg-3 parsed as world
+                            if {axr_worlds::*} contains {add_world}:
+                                send "{@prefix} &cIl mondo &6%{add_world}% &cè già stato aggiunto!"
                                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                 stop
                             else:
-                                send "{@prefix} &aHai aggiunto &b%{added::world}% &aalla lista dei mondi abilitati!"
-                                add {added::world} to {enabled_worlds::*}
+                                send "{@prefix} &aHai aggiunto &b%{add_world}% &aalla lista dei mondi abilitati!"
+                                add {add_world} to {axr_worlds::*}
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                 stop
                         else:
@@ -610,14 +642,14 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             stop   
                     else:
                         if player has permission "axr.admin.world.remove":
-                            set {removed::world} to arg-1 parsed as world
-                            if {enabled_worlds::*} contains {removed::world}:
-                                send "{@prefix} &aHai rimosso &b%{removed::world}% &adalla lista dei mondi abilitati!"
+                            set {removed_world} to arg-3 parsed as world
+                            if {axr_worlds::*} contains {removed_world}:
+                                send "{@prefix} &aHai rimosso &b%{removed_world}% &adalla lista dei mondi abilitati!"
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                                remove {removed::world} from {enabled_worlds::*}
+                                remove {removed_world} from {axr_worlds::*}
                                 stop
                             else:
-                                send "{@prefix} &cIl mondo &6%{removed::world}% &cnon è nella lista dei mondi abilitati!"
+                                send "{@prefix} &cIl mondo &6%{removed_world}% &cnon è nella lista dei mondi abilitati!"
                                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                 stop
                         else:
@@ -627,7 +659,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                 else if arg-2 is "gui":
                     if player has permission "axr.admin.world.gui":
                         loop all worlds:
-                            set {all::*} to worlds
+                            set {all_worlds::*} to worlds
                             openAXRworlds(player)
                     else:
                         send "{@prefix_hide} &cComando sconosciuto."
