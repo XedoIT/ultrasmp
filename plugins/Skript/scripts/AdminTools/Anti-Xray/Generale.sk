@@ -1,9 +1,10 @@
+#
 # ================================================================================================= #
 #  "SISTEMA ANTI-XRAY CON AVVISI MINERALI, CONTATORE MINERALI, AVVISI OFFLINE E AVVISI IN CONSOLE"  #
 #                                             BY _XEDO_                                             #
 # ================================================================================================= #
-# PLACEHOLDERS SCRIPT
 #
+# {--- [PLACEHOLDERS SCRIPT] ---}
 # Minerale di ferro -                                %skript_axr::{player}::iron_ore%
 # Minerale di ferro in ardesia profonda -            %skript_axr::{player}::deepslate_iron_ore%
 # Minerale di rame -                                 %skript_axr::{player}::copper_ore%
@@ -19,10 +20,12 @@
 # Minerale di smeraldo -                             %skript_axr::{player}::emerald_ore%
 # Minerale di smeraldo in ardesia profonda -         %skript_axr::{player}::deepslate_emerald_ore%
 # Detriti antichi -                                  %skript_axr::{player}::ancient_debris%
+#
 # ================================================================================================= #
-# Script basato su quello di SoulStriker, modificato e ricreato da Xedo. Tutti i diritti riservati. #
+# Script ideato, creato e sviluppato da Xedo. Tutti i diritti riservati.
 # Pagina GitHub del progetto: https://github.com/XedoIT/disagiosmp
 # ================================================================================================= #
+#
 # Permessi:
 # - axr.*
 # - axr.admin.*
@@ -46,7 +49,8 @@
 # - openAXRcounter
 # - openAXRores
 # - openAXRworlds
-
+#
+# INIZIO SCRIPT (ATTENZIONE!! Modifica il codice solo se sai ciò che fai!)
 options:
  # GENERALI
     prefix: &6[&e&lAnti-Xray&6]
@@ -92,25 +96,24 @@ options:
  # RILEVAMENTO AUTOMATICO MINERALI
     auto_alert_msg: &e&l%arg-player% &c&lpotrebbe star usando l'Xray!
   # COMANDI RILEVAMENTO AUTOMATICO MINERALI (KICK): questi comandi saranno eseguiti ogni qualvolta il sistema rileverà che il giocatore stia usando l'Xray.
-    auto_male_command1: kick %arg-player% due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lAnti-Xray&8] &c---%nl%%nl%&cSei stato espulso dal server perché sospettiamo che tu stia usando l'Xray.%nl%&7Disattivala prima di rientrare nel server!"
+    auto_male_command1: kick %arg-player% due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lAnti-Xray&8] &c---%nl%%nl%&cSei stato espulso dal server perché il sistema sospetta che tu stia usando l'Xray.%nl%&7Disattivala prima di rientrare nel server!"
     auto_male_command2: nothing
     auto_male_command3: nothing
     auto_male_command4: nothing
-    auto_female_command1: kick %arg-player% due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lAnti-Xray&8] &c---%nl%%nl%&cSei stata espulsa dal server perché sospettiamo che tu stia usando l'Xray.%nl%&7Disattivala prima di rientrare nel server!"
+    auto_female_command1: kick %arg-player% due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lAnti-Xray&8] &c---%nl%%nl%&cSei stata espulsa dal server perché il sistema sospetta che tu stia usando l'Xray.%nl%&7Disattivala prima di rientrare nel server!"
     auto_female_command2: nothing
     auto_female_command3: nothing
     auto_female_command4: nothing
   # NUMERO MASSIMO DI ESPULSIONI AUTOMATICHE: superato il valore sottostante si attiveranno i comandi a seguire.
     autokicktime: 3
   # COMANDI RILEVAMENTO AUTOMATICO MINERALI: questi comandi saranno eseguiti una volta superato il valore soprastante.
-    auto_next_message: &6%arg-player% &cha raggiunto il limite massimo di avvertimenti!
+    max_warns_message: &6%arg-player% &cha raggiunto il limite massimo di avvertimenti!
     auto_next_command1: nothing
     auto_next_command2: nothing
     auto_next_command3: nothing
     auto_next_command4: nothing
 
 on load:
-    send "{@prefix} &9Sistema caricato e pronto! Versione di Minecraft: %minecraft version%" to console
  # CONFIGURAZIONE TIMER
     if {timer} is not set:
         set {timer} to 30
@@ -213,6 +216,7 @@ on load:
    # !! SOLO DEBUG !!
     #delete {axr_worlds::*}
     #delete {all_worlds::*}
+    send "{@prefix} &9Sistema caricato e pronto! Versione di Minecraft: %minecraft version%" to console
 on join:
     if {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore} or {axr::%player%::ancient_debris} is not set:
         set {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore} or {axr::%player%::ancient_debris} to 0
@@ -581,6 +585,12 @@ on chat:
         delete {auto_ancient_debris_set::%player%}
         wait 1 tick
         #execute player command "/axr axrasettings"
+ # OGGETTO CHE APRE LA GUI DELL'ANTI-XRAY (DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!)
+on right click:
+    loop all players:
+        if player's tool is a recovery compass named "&6[&eAXR&6] &7(Click destro)":
+            openAXRmain(player)
+ # COMANDO PRINCIPALE ANTI-XRAY
 command /axr [<text>] [<text>] [<text>] [<offline player>]:
     aliases: /antixray
     description: Gestisci le impostazioni dell'Anti-Xray.
@@ -589,102 +599,194 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
         if sender is player:
             if arg-1 is not set:
                 if arg-2 is not set:
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.gui.use":
+                                openAXRmain(player)
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                else:
                     if player has permission "axr.admin.gui.use":
-                        openAXRmain(player)
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
                         stop
                     else:
                         send "{@prefix_hide} &cComando sconosciuto."
                         stop
+          # PARAMETRO DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!
+            else if arg-1 is "item":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            give a recovery compass named "&6[&eAXR&6] &7(Click destro)" to player
+                            stop
 
             else if arg-1 is "world":
                 if arg-2 is not set:
-                    if player has permission "axr.admin.world.add":
-                        send "{@prefix} &cComando incompleto."
-                        send "{@prefix} &cUtilizzo: &6/axr world <&eadd &6| &eremove&6>"
-                        stop
-                    else:
-                        send "{@prefix_hide} &cComando sconosciuto."
-                        stop
-                        
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr world <&eadd &6| &eremove&6>"
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
                 else if arg-2 is "add":
                     if arg-3 is not set:
-                        if player has permission "axr.admin.world.add":
-                            send "{@prefix} &aMondi disponibili: &b%{all_worlds::*}%"
-                            send "{@prefix} &cUtilizzo: &6/axr world add <&emondo&6>"
-                            stop
-                        else:
-                            send "{@prefix_hide} &cComando sconosciuto."
-                            stop
-                    else:
-                        if player has permission "axr.admin.world.add":
-                            set {add_world} to arg-3 parsed as world
-                            if {axr_worlds::*} contains {add_world}:
-                                send "{@prefix} &cIl mondo &6%{add_world}% &cè già stato aggiunto!"
-                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world.add":
+                                send "{@prefix} &aMondi disponibili: &b%{all_worlds::*}%"
+                                send "{@prefix} &cUtilizzo: &6/axr world add <&emondo&6>"
                                 stop
                             else:
-                                send "{@prefix} &aHai aggiunto &b%{add_world}% &aalla lista dei mondi abilitati!"
-                                add {add_world} to {axr_worlds::*}
-                                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                send "{@prefix_hide} &cComando sconosciuto."
                                 stop
+                    else if arg-3 is "smp", "smp_nether" or "smp_the_end":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world.add":
+                                set {add_world} to arg-3 parsed as world
+                                if {axr_worlds::*} is "&7Nessun mondo abilitato.":
+                                    delete {axr_worlds::*}
+                                    send "{@prefix} &aHai aggiunto &b%{add_world}% &aalla lista dei mondi abilitati!"
+                                    add {add_world} to {axr_worlds::*}
+                                    remove {add_world} from {all_worlds::*}
+                                    if {all_worlds::*} is not set:
+                                        set {all_worlds::*} to "&7Nessun mondo disponibile."
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    stop
+                                else if {axr_worlds::*} contains {add_world}:
+                                    send "{@prefix} &cIl mondo &6%{add_world}% &cè già stato aggiunto!"
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                    stop
+                                else if {axr_worlds::*} doesn't contain {add_world}:
+                                    send "{@prefix} &aHai aggiunto &b%{add_world}% &aalla lista dei mondi abilitati!"
+                                    add {add_world} to {axr_worlds::*}
+                                    remove {add_world} from {all_worlds::*}
+                                    if {all_worlds::*} is not set:
+                                        set {all_worlds::*} to "&7Nessun mondo disponibile."
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if player has permission "axr.admin.world.add":
+                                send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else:
+                        if player has permission "axr.admin.world.add":
+                            send "{@prefix} &cQuel mondo non esiste!"
+                            send "{@prefix} &aMondi disponibili: &b%{all_worlds::*}%"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
                         else:
                             send "{@prefix_hide} &cComando sconosciuto."
                             stop
-
                 else if arg-2 is "remove":
                     if arg-3 is not set:
-                        if player has permission "axr.admin.world.remove":
-                            send "{@prefix} &cComando incompleto."
-                            send "{@prefix} &cUtilizzo: &6/axr world remove <&emondo&6>"
-                            stop
-                        else:
-                            send "{@prefix_hide} &cComando sconosciuto."
-                            stop   
-                    else:
-                        if player has permission "axr.admin.world.remove":
-                            set {removed_world} to arg-3 parsed as world
-                            if {axr_worlds::*} contains {removed_world}:
-                                send "{@prefix} &aHai rimosso &b%{removed_world}% &adalla lista dei mondi abilitati!"
-                                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                                remove {removed_world} from {axr_worlds::*}
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world.remove":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr world remove <&emondo&6>"
                                 stop
                             else:
-                                send "{@prefix} &cIl mondo &6%{removed_world}% &cnon è nella lista dei mondi abilitati!"
-                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                send "{@prefix_hide} &cComando sconosciuto."
                                 stop
+                    else if arg-3 is "smp", "smp_nether" or "smp_the_end":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world.remove":
+                                set {removed_world} to arg-3 parsed as world
+                                if {axr_worlds::*} is "&7Nessun mondo abilitato.":
+                                    send "{@prefix} &cNon ci sono mondi che puoi rimuovere!"
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                    stop
+                                else if {all_worlds::*} is not "&7Nessun mondo disponibile.":
+                                    send "{@prefix} &aHai rimosso &b%{removed_world}% &adalla lista dei mondi abilitati!"
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    remove {removed_world} from {axr_worlds::*}
+                                    if {axr_worlds::*} is not set:
+                                        set {axr_worlds::*} to "&7Nessun mondo abilitato."
+                                    add {removed_world} to {all_worlds::*}
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if player has permission "axr.admin.world.remove":
+                                send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else:
+                        if player has permission "axr.admin.world.remove":
+                            send "{@prefix} &cQuel mondo non esiste!"
+                            send "{@prefix} &4Puoi rimuovere: &6%{axr_worlds::*}%"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
                         else:
                             send "{@prefix_hide} &cComando sconosciuto."
                             stop
-
                 else if arg-2 is "gui":
-                    if player has permission "axr.admin.world.gui":
-                        loop all worlds:
-                            set {all_worlds::*} to worlds
-                            openAXRworlds(player)
-                    else:
-                        send "{@prefix_hide} &cComando sconosciuto."
-                        stop
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world.gui":
+                                openAXRworlds(player)
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if player has permission "axr.admin.world.gui":
+                                send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
                 else if arg-2 isn't "add", "remove" or "gui":
-                    if player has permission "axr.admin.world":
-                        send "{@prefix} &cComando sconosciuto."
-                        send "{@prefix} &cUtilizzo: &6/axr world <&eadd &6| &eremove &6| &egui&6>"
-                        stop
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world":
+                                send "{@prefix} &cComando sconosciuto."
+                                send "{@prefix} &cUtilizzo: &6/axr world <&eadd &6| &eremove &6| &egui&6>"
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
                     else:
-                        send "{@prefix_hide} &cComando sconosciuto."
-                        stop
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.world":
+                                send "{@prefix} &cComando sconosciuto."
+                                send "{@prefix} &cUtilizzo: &6/axr world <&eadd &6| &eremove &6| &egui&6>"
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if player has permission "axr.admin.world":
+                                send "{@prefix} &cComando sconosciuto."
+                                send "{@prefix} &cUtilizzo: &6/axr world <&eadd &6| &eremove &6| &egui&6>"
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
 
             else if arg-1 is "ore":
                 if arg-2 is not set:
                     if arg-3 is not set:
-                        if player has permission "axr.admin.ore":
-                            send "{@prefix} &cComando incompleto."
-                            send "{@prefix} &cUtilizzo: &6/axr ore <&eview &6| &ecounter &6| &eclear &6| &ealerts&6> [&egiocatore &6| &eall&6]"
-                            stop
-                        else:
-                            send "{@prefix_hide} &cComando sconosciuto."
-                            stop
-
-                else if arg-2 is "view":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.ore":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr ore <&eview &6| &ecounter &6| &eclear &6| &ealerts&6> [&egiocatore &6| &eall&6]"
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                else if arg-2 is "view" or "check":
                     if arg-3 is not set:
                         if arg-4 is not set:
                             if player has permission "axr.admin.ore.viewer":
@@ -705,7 +807,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 send "{@prefix_hide} &cComando sconosciuto."
                                 stop
                         else:
-                            send "{@prefix} &7Sto controllando &c%arg-4%&7..."
+                            send "{@prefix} &7Sto controllando i minerali scavati di &c%arg-4%&7..."
                             play sound "{@check_sound}" with volume 1 at player for player
                             wait 1 second
                             openAXRores(player)
@@ -715,23 +817,31 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         send "{@prefix} &cUtilizzo: &6/axr ore view for <&egiocatore&6>"
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
-
                 else if arg-2 is "counter":
                     if arg-3 is not set:
-                        if player has permission "axr.admin.ore.counter":
-                            openAXRcounter(player)
-                            stop
-                        else:
-                            send "{@prefix_hide} &cComando sconosciuto."
-                            stop
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.ore.counter":
+                                openAXRcounter(player)
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
                     else:
                         if player has permission "axr.admin.ore.counter":
                             send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
                             stop
-
                 else if arg-2 is "clear":
                     if arg-3 is not set:
                         if arg-4 is not set:
+                            if player has permission "axr.admin.ore.clear":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr ore clear all <&egiocatore&6>"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
                             if player has permission "axr.admin.ore.clear":
                                 send "{@prefix} &cComando incompleto."
                                 send "{@prefix} &cUtilizzo: &6/axr ore clear all <&egiocatore&6>"
@@ -748,7 +858,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         else:
                             if {axr::counter} is true:
                                 if player has permission "axr.admin.ore.clear":
-                                    send "{@prefix} &aHo azzerato i minerali di &b%arg-4%&a."
+                                    send "{@prefix} &aHo azzerato i minerali scavati di &b%arg-4%&a."
                                     set {axr::%arg-4%::iron_ore} to 0
                                     set {axr::%arg-4%::deepslate_iron_ore} to 0
                                     set {axr::%arg-4%::copper_ore} to 0
@@ -770,131 +880,165 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         send "{@prefix} &cUtilizzo: &6/axr ore clear all <&egiocatore&6>"
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
-
                 else if arg-2 is "alerts":
                     if arg-3 is not set:
-                        if player has permission "axr.admin.ore.alerts":
-                            send "{@prefix} &cComando incompleto."
-                            send "{@prefix} &cUtilizzo: &6/axr ore alerts <&eall&6>"
-                            stop
-                        else:
-                            send "{@prefix_hide} &cComando sconosciuto."
-                            stop
-                    else if arg-3 is "all":
-                        if player has permission "axr.admin.ore.alerts":
-                            if {axr::alerts} is not set:
-                                set {axr::alerts} to true
-                                set {alert_iron::status} to "{@enabled}"
-                                set {alert_deepslate_iron::status} to "{@enabled}"
-                                set {alert_gold::status} to "{@enabled}"
-                                set {alert_deepslate_gold::status} to "{@enabled}"
-                                set {alert_copper::status} to "{@enabled}"
-                                set {alert_deepslate_copper::status} to "{@enabled}"
-                                set {alert_lapis::status} to "{@enabled}"
-                                set {alert_deepslate_lapis::status} to "{@enabled}"
-                                set {alert_redstone::status} to "{@enabled}"
-                                set {alert_deepslate_redstone::status} to "{@enabled}"
-                                set {alert_emerald::status} to "{@enabled}"
-                                set {alert_deepslate_emerald::status} to "{@enabled}"
-                                set {alert_diamond::status} to "{@enabled}"
-                                set {alert_deepslate_diamond::status} to "{@enabled}"
-                                set {alert_ancient_debris::status} to "{@enabled}"
-                                send "{@prefix} &7Gli avvisi minerali sono stati &aattivati&7."
-                                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.ore.alerts":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr ore alerts <&eall&6>"
                                 stop
                             else:
-                                delete {axr::alerts}
-                                set {alert_iron::status} to "{@disabled}"
-                                set {alert_deepslate_iron::status} to "{@disabled}"
-                                set {alert_gold::status} to "{@disabled}"
-                                set {alert_deepslate_gold::status} to "{@disabled}"
-                                set {alert_copper::status} to "{@disabled}"
-                                set {alert_deepslate_copper::status} to "{@disabled}"
-                                set {alert_lapis::status} to "{@disabled}"
-                                set {alert_deepslate_lapis::status} to "{@disabled}"
-                                set {alert_redstone::status} to "{@disabled}"
-                                set {alert_deepslate_redstone::status} to "{@disabled}"
-                                set {alert_emerald::status} to "{@disabled}"
-                                set {alert_deepslate_emerald::status} to "{@disabled}"
-                                set {alert_diamond::status} to "{@disabled}"
-                                set {alert_deepslate_diamond::status} to "{@disabled}"
-                                set {alert_ancient_debris::status} to "{@disabled}"
-                                send "{@prefix} &7Gli avvisi minerali sono stati &cdisattivati&7."
-                                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                send "{@prefix_hide} &cComando sconosciuto."
                                 stop
-                        else:
-                            send "{@prefix_hide} &cComando sconosciuto."
-                            stop
-
-                    else if arg-2 isn't "view", "counter", "clear" or "alerts":
+                    else if arg-3 is "all":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.ore.alerts":
+                                if {axr::alerts} is not set:
+                                    set {axr::alerts} to true
+                                    set {alert_iron::status} to "{@enabled}"
+                                    set {alert_deepslate_iron::status} to "{@enabled}"
+                                    set {alert_gold::status} to "{@enabled}"
+                                    set {alert_deepslate_gold::status} to "{@enabled}"
+                                    set {alert_copper::status} to "{@enabled}"
+                                    set {alert_deepslate_copper::status} to "{@enabled}"
+                                    set {alert_lapis::status} to "{@enabled}"
+                                    set {alert_deepslate_lapis::status} to "{@enabled}"
+                                    set {alert_redstone::status} to "{@enabled}"
+                                    set {alert_deepslate_redstone::status} to "{@enabled}"
+                                    set {alert_emerald::status} to "{@enabled}"
+                                    set {alert_deepslate_emerald::status} to "{@enabled}"
+                                    set {alert_diamond::status} to "{@enabled}"
+                                    set {alert_deepslate_diamond::status} to "{@enabled}"
+                                    set {alert_ancient_debris::status} to "{@enabled}"
+                                    send "{@prefix} &7Gli avvisi minerali sono stati &aattivati&7."
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    stop
+                                else:
+                                    delete {axr::alerts}
+                                    set {alert_iron::status} to "{@disabled}"
+                                    set {alert_deepslate_iron::status} to "{@disabled}"
+                                    set {alert_gold::status} to "{@disabled}"
+                                    set {alert_deepslate_gold::status} to "{@disabled}"
+                                    set {alert_copper::status} to "{@disabled}"
+                                    set {alert_deepslate_copper::status} to "{@disabled}"
+                                    set {alert_lapis::status} to "{@disabled}"
+                                    set {alert_deepslate_lapis::status} to "{@disabled}"
+                                    set {alert_redstone::status} to "{@disabled}"
+                                    set {alert_deepslate_redstone::status} to "{@disabled}"
+                                    set {alert_emerald::status} to "{@disabled}"
+                                    set {alert_deepslate_emerald::status} to "{@disabled}"
+                                    set {alert_diamond::status} to "{@disabled}"
+                                    set {alert_deepslate_diamond::status} to "{@disabled}"
+                                    set {alert_ancient_debris::status} to "{@disabled}"
+                                    send "{@prefix} &7Gli avvisi minerali sono stati &cdisattivati&7."
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else if arg-2 isn't "view", "check", "counter", "clear" or "alerts":
                         if player has permission "axr.admin.ore":
                             send "{@prefix} &cComando sconosciuto."
                             send "{@prefix} &cUtilizzo: &6/axr ore <&eview &6| &ecounter &6| &eclear &6| &ealerts&6> [&egiocatore &6| &eall&6]"
                             stop
 
-                
             else if arg-1 is "settings":
                 if arg-2 is not set:
-                    if player has permission "axr.admin.settings":
-                        send "{@prefix} &cComando incompleto."
-                        send "{@prefix} &cUtilizzo: &6/axr settings <&ealerts &6| &etimer &6| &ecount&6>"
-                        stop
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.settings":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr settings <&ealerts &6| &etimer &6| &ecount&6>"
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
                     else:
-                        send "{@prefix_hide} &cComando sconosciuto."
-                        stop 
+                        if player has permission "axr.admin.settings":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop 
                 else if arg-2 is "alerts":
-                    if player has permission "axr.admin.settings.alerts":
-                        openAXRalerts(player)
-                        stop
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.settings.alerts":
+                                openAXRalerts(player)
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
                     else:
-                        send "{@prefix_hide} &cComando sconosciuto."
-                        stop
+                        if player has permission "axr.admin.settings":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop 
 
                 else if arg-2 is "timer":
                     if arg-3 is not set:
-                        if player has permission "axr.admin.settings.timer":
-                            if {axr::alerts} is not set:
-                                send "{@prefix} &cGli avvisi minerali sono disabilitati!"
-                                send "{@prefix} &6Abilitali con &e/axr ore alerts all&6."
-                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.settings.timer":
+                                if {axr::alerts} is not set:
+                                    send "{@prefix} &cGli avvisi minerali sono disabilitati!"
+                                    send "{@prefix} &6Abilitali con &e/axr ore alerts all&6."
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                    stop
+                                else if {axr::alerts} is true:
+                                    send "{@prefix} &7Il timer è utilizzato per gli &6avvisi minerali &7e &6riconoscimento automatico&7."
+                                    wait 2 ticks
+                                    send "{@prefix} &cDigita la durata del timer in chat &6(Attualmente è impostato a &e%{timer}% secondi&6)."
+                                    set {timeset::%player%} to true
+                                    stop
+                                else if {axr::alerts} is false:
+                                    send "{@prefix} &cGli avvisi minerali sono disabilitati!"
+                                    send "{@prefix} &6Abilitali con &e/axr ore alerts all&6."
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
                                 stop
-                            else if {axr::alerts} is true:
-                                send "&7Il timer è utilizzato per gli &6avvisi minerali &7e &6riconoscimento automatico&7."
-                                wait 2 ticks
-                                send "{@prefix} &cDigita la durata del timer in chat! &6(Attualmente è impostato a &e%{timer}% secondi&6)."
-                                set {timeset::%player%} to true
-                                stop
-                            else if {axr::alerts} is false:
-                                send "{@prefix} &cGli avvisi minerali sono disabilitati!"
-                                send "{@prefix} &6Abilitali con &e/axr ore alerts all&6."
-                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-                                stop
+                    else:
+                        if player has permission "axr.admin.settings":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            stop
                         else:
                             send "{@prefix_hide} &cComando sconosciuto."
                             stop
                 else if arg-2 is "counter":
                     if arg-3 is not set:
-                        if player has permission "axr.admin.settings.counter":
-                            if {axr::counter} is not set:
-                                set {axr::counter} to true
-                                send "{@prefix} &7Il contatore dei minerali è stato &aattivato&7."
-                                set {counter::status} to "{@enabled}"
-                                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                                #openAXRcounter(player)
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.settings.counter":
+                                if {axr::counter} is not set:
+                                    set {axr::counter} to true
+                                    send "{@prefix} &7Il contatore dei minerali è stato &aattivato&7."
+                                    set {counter::status} to "{@enabled}"
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    #openAXRcounter(player)
+                                    stop
+                                else if {axr::counter} is true:
+                                    delete {axr::counter}
+                                    send "{@prefix} &7Il contatore dei minerali è stato &cdisattivato&7."
+                                    set {counter::status} to "{@disabled}"
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    #openAXRcounter(player)
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
                                 stop
-                            else if {axr::counter} is true:
-                                delete {axr::counter}
-                                send "{@prefix} &7Il contatore dei minerali è stato &cdisattivato&7."
-                                set {counter::status} to "{@disabled}"
-                                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                                #openAXRcounter(player)
+                    else:
+                        if player has permission "axr.admin.settings.counter":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            stop
                         else:
                             send "{@prefix_hide} &cComando sconosciuto."
                             stop
+
                 else if arg-2 is not "alerts", "timer" or "counter":
                     if player has permission "axr.admin.settings":
                         send "{@prefix} &cComando sconosciuto."
-                        send "&cUtilizzo: &6/settings <&ealerts &6| &etimer &6| &ecounter&6>"
+                        send "{@prefix} &cUtilizzo: &6/settings <&ealerts &6| &etimer &6| &ecounter&6>"
                         stop
 
             else if arg-1 is "help":
@@ -904,6 +1048,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             if player has permission "axr.admin.help":
                                 send "&cLISTA COMANDI PER {@prefix}"
                                 send " &f- <suggest command:/axr>&6/axr<reset> &f- &7Apre la GUI principale."
+                                send " &f- <suggest command:/axr item>&6/axr item<reset> &f- &7Ti dà un oggetto con cui aprire rapidamente la GUI dell'Anti-Xray."
                                 send " &f- &6/axr world <<tooltip:&7Aggiungi un mondo all'Anti-Xray, così che possa essere controllato.><suggest command:/axr world add>&eadd<reset> &6| <tooltip:&7Rimuovi un mondo dal controllo dell'Anti-Xray.               &4&lATTENZIONE! &cIl mondo rimosso non sarà più controllato dall'Anti-Xray, pertanto, non verranno inviate notifiche degli avvisi dei minerali. Il contatore dei minerali continuerà a funzionare.><suggest command:/axr world remove>&eremove<reset> &6| <tooltip:&7Apre la GUI dei mondi dell'Anti-Xray.><suggest command:/axr world gui>&egui<reset>&6> &f- &7Gestisci i mondi dell'Anti-Xray."
                                 send " &f- &6/axr ore <<tooltip:&7Visualizza i minerali scavati di un giocatore.><suggest command:/axr ore view for>&eview for<reset> &6| <tooltip:&7Gestisci le impostazioni del contatore dei minerali.><suggest command:/axr ore counter>&ecounter<reset> &6| <tooltip:&7Azzera i minerali scavati di un giocatore.><suggest command:/axr ore clear all>&eclear all<reset> &6| <tooltip:&7Attiva o disattiva gli avvisi dei minerali scavati.><suggest command:/axr ore alerts all>&ealerts&6><reset> &6[<tooltip:&7Per i comandi: &e/axr ore view for &7e &e/axr ore clear all>&egiocatore<reset> &6| <tooltip:&7Per il comando: &e/axr ore alerts>&eall<reset>&6] &f- &7Gestisci le impostazioni dei minerali."
                                 send " &f- &6/axr settings <<tooltip:&7Modifica le impostazioni degli avvisi.><suggest command:/axr settings alerts>&ealerts<reset> &6| <tooltip:&7Modifica ogni quanto tempo i minerali possono essere scavati in modo sicuro.><suggest command:/axr settings timer>&etimer<reset> &6| <tooltip:&7Attiva o disattiva il contatore dei minerali.><suggest command:/axr settings counter>&ecounter<reset>&6> &f- &7Gestisci le impostazioni degli avvisi, del timer e del contatore dei minerali."
@@ -917,6 +1062,13 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             else:
                                 send "{@prefix_hide} &cComando sconosciuto."
                                 stop
+                else:
+                    if player has permission "axr.admin.help":
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "{@prefix_hide} &cComando sconosciuto."
+                        stop
             
             else if arg-1 is "reload":
                 if arg-2 is not set:
@@ -932,3 +1084,10 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             else:
                                 send "{@prefix_hide} &cComando sconosciuto."
                                 stop
+                else:
+                    if player has permission "axr.admin.reload":
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "{@prefix_hide} &cComando sconosciuto."
+                        stop
