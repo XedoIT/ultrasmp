@@ -325,6 +325,63 @@ on chat:
             send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
             delete {lookup::%player%}
+    else if {clearall::%player%} is true:
+        cancel event
+        set {_p} to message parsed as offline player
+        wait 1 tick
+        if {_p} is online:
+            send "{@prefix} &7Azzero i minerali di &c%{_p}%&7..."
+            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+            set {axr::%{_p}%::iron_ore} to 0
+            set {axr::%{_p}%::deepslate_iron_ore} to 0
+            set {axr::%{_p}%::copper_ore} to 0
+            set {axr::%{_p}%::deepslate_copper_ore} to 0
+            set {axr::%{_p}%::gold_ore} to 0
+            set {axr::%{_p}%::deepslate_gold_ore} to 0
+            set {axr::%{_p}%::lapis_ore} to 0
+            set {axr::%{_p}%::deepslate_lapis_ore} to 0
+            set {axr::%{_p}%::redstone_ore} to 0
+            set {axr::%{_p}%::deepslate_redstone_ore} to 0
+            set {axr::%{_p}%::emerald_ore} to 0
+            set {axr::%{_p}%::deepslate_emerald_ore} to 0
+            set {axr::%{_p}%::diamond_ore} to 0
+            set {axr::%{_p}%::deepslate_diamond_ore} to 0
+            set {axr::%{_p}%::ancient_debris} to 0
+            wait 2 seconds
+            send "{@prefix} &aHo azzerato i minerali scavati di &b%{_p}%&a."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            wait 5 ticks
+            delete {clearall::%player%}
+            openAXRcounter(player)
+        else if {_p} has played before:
+            send "{@prefix} &7Azzero i minerali di &c%{_p}%&7..."
+            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+            set {axr::%{_p}%::iron_ore} to 0
+            set {axr::%{_p}%::deepslate_iron_ore} to 0
+            set {axr::%{_p}%::copper_ore} to 0
+            set {axr::%{_p}%::deepslate_copper_ore} to 0
+            set {axr::%{_p}%::gold_ore} to 0
+            set {axr::%{_p}%::deepslate_gold_ore} to 0
+            set {axr::%{_p}%::lapis_ore} to 0
+            set {axr::%{_p}%::deepslate_lapis_ore} to 0
+            set {axr::%{_p}%::redstone_ore} to 0
+            set {axr::%{_p}%::deepslate_redstone_ore} to 0
+            set {axr::%{_p}%::emerald_ore} to 0
+            set {axr::%{_p}%::deepslate_emerald_ore} to 0
+            set {axr::%{_p}%::diamond_ore} to 0
+            set {axr::%{_p}%::deepslate_diamond_ore} to 0
+            set {axr::%{_p}%::ancient_debris} to 0
+            wait 2 seconds
+            send "{@prefix} &aHo azzerato i minerali scavati di &b%{_p}%&a."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            wait 5 ticks
+            delete {clearall::%player%}
+            openAXRcounter(player)
+        else if {_p} has not played before:
+            send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {clearall::%player%}
+            openAXRcounter(player)
     else if {iron_set::%player%} is true:
         cancel event
         set {_timer} to message parsed as number
