@@ -1764,3 +1764,146 @@ on break:
                 add 1 to {blockscolor::%loop-player%::broke}
                 add 1 to {item::%loop-player%::broke::overworld}
 # BLOCCHI NATURALI            
+    # - TERRA E VARIANTI - #
+            else if event-block is grass block:
+                add 1 to {blocksnature::%loop-player%::broke::grass_block}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is podzol:
+                add 1 to {blocksnature::%loop-player%::broke::podzol}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is mycelium:
+                add 1 to {blocksnature::%loop-player%::broke::mycelium}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is dirt path:
+                add 1 to {blocksnature::%loop-player%::broke::dirt_path}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is dirt:
+                add 1 to {blocksnature::%loop-player%::broke::dirt}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is coarse dirt:
+                add 1 to {blocksnature::%loop-player%::broke::coarse_dirt}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is rooted dirt:
+                add 1 to {blocksnature::%loop-player%::broke::rooted_dirt}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is farmland:
+                add 1 to {blocksnature::%loop-player%::broke::farmland}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - GHIACCIO - #
+            else if event-block is ice:
+                add 1 to {blocksnature::%loop-player%::broke::ice}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is packed ice:
+                add 1 to {blocksnature::%loop-player%::broke::packed_ice}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is blue ice:
+                add 1 to {blocksnature::%loop-player%::broke::blue_ice}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - GHIAIA - #
+            else if event-block is gravel:
+                add 1 to {blocksnature::%loop-player%::broke::gravel}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - SABBIA E SABBIA ROSSA - #
+            else if event-block is sand:
+                add 1 to {blocksnature::%loop-player%::broke::sand}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is red sand:
+                add 1 to {blocksnature::%loop-player%::broke::red_sand}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - MUSCHIO - #
+            else if event-block is moss block:
+                add 1 to {blocksnature::%loop-player%::broke::moss_block}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is moss carpet:
+                add 1 to {blocksnature::%loop-player%::broke::moss_carpet}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - NECELI - #
+            else if event-block is crimson nylium:
+                add 1 to {blocksnature::%loop-player%::broke::crymson_nylium}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::nether}
+            else if event-block is warped nylium:
+                add 1 to {blocksnature::%loop-player%::broke::warped_nylium}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::nether}
+    # - SABBIA DELLE ANIME E TERRA DELLE ANIME - #
+            else if event-block is soul sand:
+                add 1 to {blocksnature::%loop-player%::broke::soul_sand}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::nether}
+            else if event-block is soul soil:
+                add 1 to {blocksnature::%loop-player%::broke::soul_soil}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::nether}
+    # - SPELEOTEMA - #
+            else if event-block is dripstone block:
+                add 1 to {blocksnature::%loop-player%::broke::dripstone_block}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is pointed dripstone:
+                add 1 to {blocksnature::%loop-player%::broke::pointed_dripstone}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - OSSIDIANA - #
+            else if event-block is obsidian:
+                add 1 to {blocksnature::%loop-player%::broke::obsidian}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is crying obsidian:
+                add 1 to {blocksnature::%loop-player%::broke::crying_obsidian}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - FOGLIE - #
+            else if event-block is oak leaves:
+                add 1 to {blocksnature::%loop-player%::broke::oak_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is sprice leaves:
+                add 1 to {blocksnature::%loop-player%::broke::spruce_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is birch leaves:
+                add 1 to {blocksnature::%loop-player%::broke::birch_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is jungle leaves:
+                add 1 to {blocksnature::%loop-player%::broke::jungle_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is dark oak leaves:
+                add 1 to {blocksnature::%loop-player%::broke::dark_oak_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is mangrove leaves:
+                add 1 to {blocksnature::%loop-player%::broke::mangrove_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is mangrove roots:
+                add 1 to {blocksnature::%loop-player%::broke::mangrove_roots}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is azalea leaves:
+                add 1 to {blocksnature::%loop-player%::broke::azalea_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+            else if event-block is flowering azalea leaves:
+                add 1 to {blocksnature::%loop-player%::broke::flowering_azalea_leaves}
+                add 1 to {blocksnature::%loop-player%::broke}
+                add 1 to {item::%loop-player%::broke::overworld}
+    # - BLOCCHI DI FUNGHI - #
