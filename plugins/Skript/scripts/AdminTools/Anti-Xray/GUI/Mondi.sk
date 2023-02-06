@@ -13,7 +13,7 @@ function openAXRworlds(p: player):
         set slot 19, 20, 21, 22, 23, 24, 25, 28, 31, 32, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
         set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
         set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
-        set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva il contatore dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+        set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
         set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura di un minerale e un altro."
         set slot 6 of {_gui} to grass block named "&2&l> &a&lMondi &2&l<" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba" and "&7tenere sotto controllo i giocatori."
         set slot 9, 10, 11, 12, 13, 14, 16 and 17 of {_gui} to green stained glass pane named "&f"
@@ -21,13 +21,13 @@ function openAXRworlds(p: player):
         set slot 29 of {_gui} to lime terracotta named "&aAggiungi un mondo" with lore "&7Abilitando un mondo, l'Anti-Xray terrà conto dei", "&7progressi e delle statistiche dei giocatori,", "&7punendo così, chi, secondo il sistema, stia", "&7utilizzando l'Xray.", "&f", "&3Abilitati:" and " &b%{axr_worlds::*}%"
         set slot 30 of {_gui} to red terracotta named "&cRimuovi un mondo" with lore "&4&lATTENZIONE!", "&7Il mondo rimosso non sarà più controllato", "&7dall'Anti-Xray.", "&7Pertanto, non verranno inviate notifiche", "&7degli avvisi dei minerali e i giocatori potranno", "&7utilizzare tranquillamente l'Xray.", "&4&lRimuovi a tuo rischio e pericolo!", "&7Il contatore dei minerali continuerà a", "&7funzionare.", "&f", "&4Puoi rimuovere:" and " &6%{axr_worlds::*}%"
         set slot 33 of {_gui} to oak sign named "&3Mondi disponibili:" with lore "&b%{all_worlds::*}%"
-        set slot 49 of {_gui} to comparator named "&cGestione server"
+        set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Mondi"
         set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
         set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
-        set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva il contatore dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+        set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
         set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura di un minerale e un altro."
         set slot 6 of {_gui} to grass block named "&2&l> &a&lMondi &2&l<" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba" and "&7tenere sotto controllo i giocatori."
         set slot 9, 10, 11, 12, 13, 14, 16 and 17 of {_gui} to green stained glass pane named "&f"
@@ -35,7 +35,7 @@ function openAXRworlds(p: player):
         set slot 29 of {_gui} to lime terracotta named "&aAggiungi un mondo" with lore "&7Abilitando un mondo, l'Anti-Xray terrà conto dei", "&7progressi e delle statistiche dei giocatori,", "&7punendo così, chi, secondo il sistema, stia", "&7utilizzando l'Xray.", "&f", "&3Abilitati:" and " &b%{axr_worlds::*}%"
         set slot 30 of {_gui} to red terracotta named "&cRimuovi un mondo" with lore "&4&lATTENZIONE!", "&7Il mondo rimosso non sarà più controllato", "&7dall'Anti-Xray.", "&7Pertanto, non verranno inviate notifiche", "&7degli avvisi dei minerali e i giocatori potranno", "&7utilizzare tranquillamente l'Xray.", "&4&lRimuovi a tuo rischio e pericolo!", "&7Il contatore dei minerali continuerà a", "&7funzionare.", "&f", "&4Puoi rimuovere:" and " &6%{axr_worlds::*}%"
         set slot 33 of {_gui} to oak sign named "&3Mondi disponibili:" with lore "&b%{all_worlds::*}%"
-        set slot 49 of {_gui} to comparator named "&cGestione server"
+        set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
         open {_gui} to {_p}
 
 on inventory click:
@@ -54,8 +54,7 @@ on inventory click:
             openAXRcounter(player)
         else if index of event-slot is 5:
             cancel event
-            send "&cIn arrivo..."
-            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            openAXRsettings(player)
         else if index of event-slot is 6:  
             cancel event
             send "{@prefix} &cSei già su ""&aMondi&c""!"
