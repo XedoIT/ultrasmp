@@ -220,10 +220,10 @@ on load:
         set {alert_iron::status}, {alert_deepslate_iron::status}, {alert_copper::status}, {alert_deepslate_copper::status}, {alert_gold::status}, {alert_deepslate_gold::status}, {alert_redstone::status}, {alert_deepslate_redstone::status}, {alert_lapis::status}, {alert_deepslate_lapis::status}, {alert_emerald::status}, {alert_deepslate_emerald::status}, {alert_diamond::status}, {alert_deepslate_diamond::status}, {alert_ancient_debris::status}, {autoalert_iron::status}, {autoalert_deepslate_iron::status}, {autoalert_copper::status}, {autoalert_deepslate_copper::status}, {autoalert_gold::status}, {autoalert_deepslate_gold::status}, {autoalert_emerald::status}, {autoalert_deepslate_emerald::status}, {autoalert_diamond::status}, {autoalert_deepslate_diamond::status}, {autoalert_ancient_debris::status}, {autoalert_nether_quartz_ore::status} or {autoalert_nether_gold_ore::status}, {offline_ore_alerts::status} to "&aATTIVATO"
  # CONFIGURAZIONE VARIABILI MINERALI SCAVATI DAL GIOCATORE
     loop all players:
-        if {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore} or {axr::%loop-player%::ancient_debris} is not set:
-            set {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore} or {axr::%loop-player%::ancient_debris} to 0
-        else if {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore} or {axr::%loop-player%::offline_ancient_debris} is not set:
-            set {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore} or {axr::%loop-player%::offline_ancient_debris} to 0
+        if {axr::%loop-player%::total_ores}, {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore}, {axr::%loop-player%::nether_quartz_ore}, {axr::%loop-player%::nether_gold_ore} or {axr::%loop-player%::ancient_debris} is not set:
+            set {axr::%loop-player%::total_ores}, {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore}, {axr::%loop-player%::nether_quartz_ore}, {axr::%loop-player%::nether_gold_ore} or {axr::%loop-player%::ancient_debris} to 0
+        else if {axr::%loop-player%::offline_total_ores}, {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore}, {axr::%loop-player%::offline_nether_quartz_ore}, {axr::%loop-player%::offline_nether_gold_ore} or {axr::%loop-player%::offline_ancient_debris} is not set:
+            set {axr::%loop-player%::offline_total_ores}, {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore}, {axr::%loop-player%::offline_nether_quartz_ore}, {axr::%loop-player%::offline_nether_gold_ore} or {axr::%loop-player%::offline_ancient_debris} to 0
  # CONFIGURAZIONE MONDI
     if {axr_worlds::*} is not set:
         set {axr_worlds::*} to "&7Nessun mondo abilitato."
@@ -235,10 +235,10 @@ on load:
     #delete {all_worlds::*}
     send "{@prefix} &9Sistema caricato e pronto! Versione di Minecraft: %minecraft version%" to console
 on join:
-    if {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore}, {axr::%player%::ancient_debris}, {axr::%player%::nether_quartz_ore} or {axr::%player%::nether_gold_ore} is not set:
-        set {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore}, {axr::%player%::ancient_debris}, {axr::%player%::nether_quartz_ore} or {axr::%player%::nether_gold_ore} to 0
-    else if {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} is not set:
-        set {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} to 0
+    if {axr::%player%::total_ores}, {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore}, {axr::%player%::ancient_debris}, {axr::%player%::nether_quartz_ore} or {axr::%player%::nether_gold_ore} is not set:
+        set {axr::%player%::total_ores}, {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore}, {axr::%player%::ancient_debris}, {axr::%player%::nether_quartz_ore} or {axr::%player%::nether_gold_ore} to 0
+    else if {axr::%player%::offline_total_ores}, {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} is not set:
+        set {axr::%player%::offline_total_ores}, {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} to 0
     wait 5 seconds
     if player has permission "axr.admin.alerts":
         if {offline_ore_alerts::status} is true:
@@ -324,19 +324,23 @@ on chat:
         set {_p} to message parsed as offline player
         wait 1 tick
         if {_p} is online:
-            send "{@prefix} &7Sto controllando &c%{_p}%&7..."
-            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-            wait 5 ticks
+            send "{@prefix} &7Sto controllando i minerali scavati di &c%{_p}%&7..."
+            play sound "{@check_sound}" with volume 1 at player for player
+            wait 1 second
+            delete {checkplayer::latest}
+            set {checkplayer::latest} to {_p}
+            set {arg4} to {_p}
             delete {lookup::%player%}
-            wait 1 ticks
-            #execute player command "/axr orecount ores %{_p}%"
+            openAXRores(player, {_p})
         else if {_p} has played before:
-            send "{@prefix} &7Sto controllando &c%{_p}%&7..."
-            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-            wait 5 ticks
+            send "{@prefix} &7Sto controllando i minerali scavati di &c%{_p}%&7..."
+            play sound "{@check_sound}" with volume 1 at player for player
+            wait 1 second
+            delete {checkplayer::latest}
+            set {checkplayer::latest} to {_p}
+            set {arg4} to {_p}
             delete {lookup::%player%}
-            wait 1 ticks
-            #execute player command "/axr orecount ores %{_p}%"
+            openAXRores(player, {_p})
         else if {_p} has not played before:
             send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
@@ -879,12 +883,46 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             else:
                                 send "{@prefix_hide} &cComando sconosciuto."
                                 stop
-                        else:
-                            send "{@prefix} &7Sto controllando i minerali scavati di &c%arg-4%&7..."
-                            play sound "{@check_sound}" with volume 1 at player for player
-                            wait 1 second
-                            openAXRores(player)
-                            stop
+                        else if arg-4 is online:
+                            if {axr::counter} is true:
+                                send "{@prefix} &7Sto controllando i minerali scavati di &c%arg-4%&7..."
+                                play sound "{@check_sound}" with volume 1 at player for player
+                                wait 1 second
+                                delete {checkplayer::latest}
+                                set {checkplayer::latest} to arg-4
+                                set {arg4} to arg-4
+                                openAXRores(player, arg-4)
+                                stop
+                            else:
+                                send "{@prefix} &cIl contatore dei minerali non è attivato!"
+                                send "{@prefix} &eAttivalo utilizzando &6/axr settings counter"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                        else if arg-4 has played before:
+                            if {axr::counter} is true:
+                                send "{@prefix} &7Sto controllando i minerali scavati di &c%arg-4%&7..."
+                                play sound "{@check_sound}" with volume 1 at player for player
+                                wait 1 second
+                                delete {checkplayer::latest}
+                                set {checkplayer::latest} to arg-4
+                                set {arg4} to arg-4
+                                openAXRores(player, arg-4)
+                                stop
+                            else:
+                                send "{@prefix} &cIl contatore dei minerali non è attivato!"
+                                send "{@prefix} &eAttivalo utilizzando &6/axr settings counter"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                        else if arg-4 has not played before:
+                            if {axr::counter} is true:
+                                send "{@prefix} &cNon ci sono dati per &6%arg-4%&c."
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix} &cIl contatore dei minerali non è attivato!"
+                                send "{@prefix} &eAttivalo utilizzando &6/axr settings counter"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
                     else if arg-3 is not "for":
                         send "{@prefix} &cComando sconosciuto."
                         send "{@prefix} &cUtilizzo: &6/axr ore view for <&egiocatore&6>"
@@ -931,7 +969,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         else:
                             if {axr::counter} is true:
                                 if player has permission "axr.admin.ore.clear":
-                                    send "{@prefix} &aHo azzerato i minerali scavati di &b%arg-4%&a."
+                                    set {axr::%arg-4%::total_ores} to 0
                                     set {axr::%arg-4%::iron_ore} to 0
                                     set {axr::%arg-4%::deepslate_iron_ore} to 0
                                     set {axr::%arg-4%::copper_ore} to 0
@@ -946,7 +984,10 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                     set {axr::%arg-4%::deepslate_emerald_ore} to 0
                                     set {axr::%arg-4%::diamond_ore} to 0
                                     set {axr::%arg-4%::deepslate_diamond_ore} to 0
+                                    set {axr::%arg-4%::nether_quartz_ore} to 0
+                                    set {axr::%arg-4%::nether_gold_ore} to 0
                                     set {axr::%arg-4%::ancient_debris} to 0
+                                    send "{@prefix} &aHo azzerato i minerali scavati di &b%arg-4%&a."
                                     stop
                     else if arg-3 is not "all":
                         send "{@prefix} &cComando sconosciuto."

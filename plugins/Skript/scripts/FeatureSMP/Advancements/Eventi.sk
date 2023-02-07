@@ -1773,7 +1773,7 @@ on break:
                 add 1 to {blocksnature::%loop-player%::broke::podzol}
                 add 1 to {blocksnature::%loop-player%::broke}
                 add 1 to {item::%loop-player%::broke::overworld}
-            else if event-block is mycelium:
+            else if event-block is mycelium block:
                 add 1 to {blocksnature::%loop-player%::broke::mycelium}
                 add 1 to {blocksnature::%loop-player%::broke}
                 add 1 to {item::%loop-player%::broke::overworld}
@@ -1874,7 +1874,7 @@ on break:
                 add 1 to {blocksnature::%loop-player%::broke::oak_leaves}
                 add 1 to {blocksnature::%loop-player%::broke}
                 add 1 to {item::%loop-player%::broke::overworld}
-            else if event-block is sprice leaves:
+            else if event-block is spruce leaves:
                 add 1 to {blocksnature::%loop-player%::broke::spruce_leaves}
                 add 1 to {blocksnature::%loop-player%::broke}
                 add 1 to {item::%loop-player%::broke::overworld}
