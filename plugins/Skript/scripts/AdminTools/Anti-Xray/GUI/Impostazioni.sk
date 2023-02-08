@@ -1,0 +1,236 @@
+options:
+ # GENERALI
+    prefix: &6[&e&lAnti-Xray&6]
+    enabled: &aATTIVATO
+    disabled: &cDISATTIVATO
+ # SUONI
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+function openAXRsettings(p: player):
+   if {settings::%{_p}%::glasspanes} is true:
+      if {counter::status} is "{@disabled}":
+         if {autoalerts::status} is "{@disabled}":
+            if {consolenotify::status} is "{@disabled}":
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai", "&7giocatori, aiutando gli admin a capire", "&7i progressi di un determinato giocatore.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 23 of {_gui} to iron bars named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico", "&7dei minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 24 of {_gui} to ender eye named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare", "&7le notifiche degli avvisi anche", "&7nella console del server.", "&f", "&3Attualmente sono &cdisattivate&3.", "&f" and "&eClicca per attivarle."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+            else:
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai", "&7giocatori, aiutando gli admin a capire", "&7i progressi di un determinato giocatore.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 23 of {_gui} to iron bars named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico", "&7dei minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 24 of {_gui} to ender eye with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare le", "&7notifiche degli avvisi anche nella console", "&7del server.", "&f", "&3Attualmente sono &aattivate&3.", "&f", "&eClicca per disattivarle.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi in console, l'Anti-Xray", "&cnon invierà più notifiche alla console del", "&cserver, inviandole soltanto agli admin che" and "&csono online sul server."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+         else:
+            if {consolenotify::status} is "{@disabled}":
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai", "&7giocatori, aiutando gli admin a capire", "&7i progressi di un determinato giocatore.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 23 of {_gui} to iron bars with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico dei", "&7minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il riconoscimento automatico, l'Anti-Xray", "&cnon sarà più in grado di punire in modo automatico", "&ci giocatori che utilizzano l'Xray, permettendo loro" and "&cdi passarla liscia in assenza di admin sul server."
+               set slot 24 of {_gui} to ender eye named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare", "&7le notifiche degli avvisi anche", "&7nella console del server.", "&f", "&3Attualmente sono &cdisattivate&3.", "&f" and "&eClicca per attivarle."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+            else:
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai", "&7giocatori, aiutando gli admin a capire", "&7i progressi di un determinato giocatore.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 23 of {_gui} to iron bars with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico dei", "&7minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il riconoscimento automatico, l'Anti-Xray", "&cnon sarà più in grado di punire in modo automatico", "&ci giocatori che utilizzano l'Xray, permettendo loro" and "&cdi passarla liscia in assenza di admin sul server."
+               set slot 24 of {_gui} to ender eye with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare le", "&7notifiche degli avvisi anche nella console", "&7del server.", "&f", "&3Attualmente sono &aattivate&3.", "&f", "&eClicca per disattivarle.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi in console, l'Anti-Xray", "&cnon invierà più notifiche alla console del", "&cserver, inviandole soltanto agli admin che" and "&csono online sul server."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+      else:
+         if {autoalerts::status} is "{@disabled}":
+            if {consolenotify::status} is "{@disabled}":
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai giocatori, aiutando gli", "&7admin a capire i progressi di un determinato giocatore", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il contatore dei minerali, l'Anti-Xray non", "&cterrà più conto dei minerali scavati dai giocatori", "&ce, pertanto, gli admin non saranno più in grado di", "&ccontrollarne i progressi."
+               set slot 23 of {_gui} to iron bars named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico", "&7dei minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 24 of {_gui} to ender eye named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare", "&7le notifiche degli avvisi anche", "&7nella console del server.", "&f", "&3Attualmente sono &cdisattivate&3.", "&f" and "&eClicca per attivarle."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+            else:
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai giocatori, aiutando gli", "&7admin a capire i progressi di un determinato giocatore", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il contatore dei minerali, l'Anti-Xray non", "&cterrà più conto dei minerali scavati dai giocatori", "&ce, pertanto, gli admin non saranno più in grado di", "&ccontrollarne i progressi."
+               set slot 23 of {_gui} to iron bars named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico", "&7dei minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &cdisattivato&3.", "&f" and "&eClicca per attivarlo."
+               set slot 24 of {_gui} to ender eye with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare le", "&7notifiche degli avvisi anche nella console", "&7del server.", "&f", "&3Attualmente sono &aattivate&3.", "&f", "&eClicca per disattivarle.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi in console, l'Anti-Xray", "&cnon invierà più notifiche alla console del", "&cserver, inviandole soltanto agli admin che" and "&csono online sul server."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+         else:
+            if {consolenotify::status} is "{@disabled}":
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai giocatori, aiutando gli", "&7admin a capire i progressi di un determinato giocatore", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il contatore dei minerali, l'Anti-Xray non", "&cterrà più conto dei minerali scavati dai giocatori", "&ce, pertanto, gli admin non saranno più in grado di", "&ccontrollarne i progressi."
+               set slot 23 of {_gui} to iron bars with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico dei", "&7minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il riconoscimento automatico, l'Anti-Xray", "&cnon sarà più in grado di punire in modo automatico", "&ci giocatori che utilizzano l'Xray, permettendo loro" and "&cdi passarla liscia in assenza di admin sul server."
+               set slot 24 of {_gui} to ender eye named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare", "&7le notifiche degli avvisi anche", "&7nella console del server.", "&f", "&3Attualmente sono &cdisattivate&3.", "&f" and "&eClicca per attivarle."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+            else:
+               set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Impostazioni"
+               set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+               set slot 19, 22, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+               set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+               set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+               set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+               set slot 5 of {_gui} to redstone torch named "&6&l> &e&lImpostazioni &6&l<" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+               set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+               set slot 9, 10, 11, 12, 13, 15, 16 and 17 of {_gui} to orange stained glass pane named "&f"
+               set slot 14 of {_gui} to yellow stained glass pane named "&f"
+               set slot 20 of {_gui} to clock named "&cTimer" with lore "&7Modifica l'intervallo di tempo (in secondi) per cui", "&7l'Anti-Xray debba controllare i minerali scavati", "&7dai giocatori in modo da agire in tempo, se", "&7necessario.", "&f", "&3Attualmente il timer è di &a%{timer}% secondi&3.", "&f" and "&eClicca per modificare il timer."
+               set slot 21 of {_gui} to oak sign with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&bContatore minerali" with lore "&7Tiene conto dei minerali scavati dai giocatori, aiutando gli", "&7admin a capire i progressi di un determinato giocatore", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il contatore dei minerali, l'Anti-Xray non", "&cterrà più conto dei minerali scavati dai giocatori", "&ce, pertanto, gli admin non saranno più in grado di", "&ccontrollarne i progressi."
+               set slot 23 of {_gui} to iron bars with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Riconoscimento automatico" with lore "&7Attiva o disattiva il riconoscimento automatico dei", "&7minerali e la ricezione delle notifiche.", "&f", "&3Attualmente è &aattivato&3.", "&f", "&eClicca per disattivarlo.", "&f", "&4&lATTENZIONE!", "&cDisattivando il riconoscimento automatico, l'Anti-Xray", "&cnon sarà più in grado di punire in modo automatico", "&ci giocatori che utilizzano l'Xray, permettendo loro" and "&cdi passarla liscia in assenza di admin sul server."
+               set slot 24 of {_gui} to ender eye with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&9Notifiche in console" with lore "&7Decidi se l'Anti-Xray debba inviare le", "&7notifiche degli avvisi anche nella console", "&7del server.", "&f", "&3Attualmente sono &aattivate&3.", "&f", "&eClicca per disattivarle.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi in console, l'Anti-Xray", "&cnon invierà più notifiche alla console del", "&cserver, inviandole soltanto agli admin che" and "&csono online sul server."
+               set slot 30 of {_gui} to grass block named "&aOverworld" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali dell'Overworld."
+               set slot 32 of {_gui} to netherrack named "&cNether" with lore "&7Gestisci e controlla l'Anti-Xray per" and "&7i minerali del Nether."
+               set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+               open {_gui} to {_p}
+
+on inventory click:
+   if name of event-inventory is "Anti-Xray: &9Impostazioni":
+      if index of event-slot is 0, 1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 22, 25, 26, 27, 28, 29, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
+         cancel event
+      else if index of event-slot is 2:
+         cancel event
+         openAXRmain(player)
+      else if index of event-slot is 3:
+         cancel event
+         send "&cIn arrivo..."
+         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+      else if index of event-slot is 4:
+         cancel event
+         openAXRcounter(player)
+      else if index of event-slot is 5:
+         cancel event
+         send "{@prefix} &cSei già su ""&eImpostazioni&c""!"
+         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+      else if index of event-slot is 6:
+         cancel event
+         openAXRworlds(player)
+      else if index of event-slot is 20:
+         cancel event
+         close player's inventory
+         play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+         if {axr::alerts} is not set:
+            send "{@prefix} &cGli avvisi minerali sono disabilitati!"
+            send "{@prefix} &6Abilitali con &e/axr ore alerts all&6."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+         else if {axr::alerts} is true:
+            send "{@prefix} &7Il timer è utilizzato per gli &6avvisi minerali &7e &6riconoscimento automatico&7."
+            wait 2 ticks
+            send "{@prefix} &cDigita la durata del timer in chat &6(Attualmente è impostato a &e%{timer}% secondi&6)."
+            set {timeset::%player%} to true
+         else if {axr::alerts} is false:
+            send "{@prefix} &cGli avvisi minerali sono disabilitati!"
+            send "{@prefix} &6Abilitali con &e/axr ore alerts all&6."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+      else if index of event-slot is 21:
+         cancel event
+         execute player command "/axr settings counter"
+         play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+         openAXRsettings(player)
+      else if index of event-slot is 23:
+         cancel event
+         execute player command "/axr settings alerts autocheck"
+         play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+         openAXRsettings(player)
+      else if index of event-slot is 24:
+         cancel event
+         execute player command "/axr settings alerts console"
+         play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+         openAXRsettings(player)
+      else if index of event-slot is 30:
+         cancel event
+         send "&cIn arrivo..."
+         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+      else if index of event-slot is 32:
+         cancel event
+         send "&cIn arrivo..."
+         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+      else if index of event-slot is 49:
+         cancel event
+         send "&cIn arrivo..."
+         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player

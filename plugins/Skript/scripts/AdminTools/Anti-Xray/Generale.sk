@@ -1274,12 +1274,12 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 wait 3 ticks
                                 send "{@prefix}  &9- Contatore Minerali..."
                                 wait 3 ticks
-                                send "{@prefix}  &9- Impostazioni Avvisi..."
+                                send "{@prefix}  &9- Impostazioni..."
                                 wait 3 ticks
                                 send "{@prefix}  &9- Mondi..."
                                 wait 3 ticks
                                 send "{@prefix}  &9- Menu principale..."
-                                wait 1 seconds
+                                wait 10 tick
                                 execute console command "/skript reload {@axr_directory}"
                                 send "{@prefix} &aConfig ricaricati! &7Puoi controllare se ci sono degli errori dalla console."
                                 stop
