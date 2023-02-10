@@ -1,4 +1,4 @@
 ## Server DisagioSMP! 
 Il Server più Fantastico della tua esistenza!
 
-##  NOTA
+##  Avanzamento Server SMP: 53% di completamento complessivo.
