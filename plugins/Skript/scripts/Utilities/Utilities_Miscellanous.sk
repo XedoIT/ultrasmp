@@ -2,38 +2,85 @@
 #         COLORI CHAT PERSONALIZZATI         #
 #--------------------------------------------#
 on chat:
+    #send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&f%{nick::%player%}% <reset>&7&l>&r %message%" to all players
+    #if {nick::%player%} is player:
+        #send "&f%player% &7&l>&r %message%" to console
+    #else:
+        #send "&f%player% &7(&f%{nick::%player%}%&7) &7&l>&r %message%" to console
     if player's uuid is "cd1db3e8-73ee-488f-9367-73224ca93ef3": #(_Xedo_ - Francesco)
-        set chat format to "&b[player] &9&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&b%{nick::%player%}% <reset>&9&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&b%player% &9&l>&r %message%" to console
+        else:
+            send "&b%player% &7(&b%{nick::%player%}%&7) &9&l>&r %message%" to console
     else if player's uuid is "da71a28d-8da4-427d-8967-c77757f887f4": #(_EryKa_ - Erika)
-        set chat format to "&c[player] &4&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&c%{nick::%player%}% <reset>&4&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&c%player% &4&l>&r %message%" to console
+        else:
+            send "&c%player% &7(&c%{nick::%player%}%&7) &4&l>&r %message%" to console
     else if player's uuid is "0809c6c4-6898-415c-90d5-dd6fee334fca": #(Lucifero696 - Michael)
-        set chat format to "&4[player] &c&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&4%{nick::%player%}% <reset>&c&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&4%player% &c&l>&r %message%" to console
+        else:
+            send "&4%player% &7(&4%{nick::%player%}%&7) &c&l>&r %message%" to console
     else if player's uuid is "d6c92f76-8c3b-4a1f-ac35-74fba37a0d44": #(Ghost_Huntress - Valentina)
-        set chat format to "&8[player] &7&l>&r [message]"
-    
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&8%{nick::%player%}% <reset>&7&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&8%player% &7&l>&r %message%" to console
+        else:
+            send "&8%player% &7(&8%{nick::%player%}%&7) &7&l>&r %message%" to console    
     else if player's uuid is "b1cdedbc-5f5a-4d13-9f75-d0c6c24bceec": #(IL_DIJO - Davide)
-        set chat format to "&a[player] &2&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&a%{nick::%player%}% <reset>&2&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&a%player% &2&l>&r %message%" to console
+        else:
+            send "&a%player% &7(&a%{nick::%player%}%&7) &2&l>&r %message%" to console
     else if player's uuid is "a095c219-f7e9-478e-aff9-110c4a35d653": #(Andr3wOnTilt - Andrea)
-        set chat format to "&d[player] &5&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&d%{nick::%player%}% <reset>&5&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&d%player% &5&l>&r %message%" to console
+        else:
+            send "&d%player% &7(&d%{nick::%player%}%&7) &5&l>&r %message%" to console
     else if player's uuid is "b8d563c2-b3eb-474f-bec2-ddab7cccae0d": #(_Dark_Ender_ - Manu)
-        set chat format to "&5[player] &d&l>&r [message]"
-    
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&5%{nick::%player%}% <reset>&d&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&5%player% &d&l>&r %message%" to console
+        else:
+            send "&5%player% &7(&5%{nick::%player%}%&7) &d&l>&r %message%" to console    
     #else if player's uuid is "UUID DI GABRY": #(NICK DI GABRY - Gabriele [Bedrock?])
-        #set chat format to "&1[player] &9&l>&r [message]"
-    
+        #cancel event
+        #send formatted "<tooltip:9Giocatoree: 7f%player%nl%&bPunti: &f%{points::%player%}%%%nl%eeMondo: %{world_position::%player%}%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}% ore&f, &c%{minutes::%player%}% minuti &fe &c%{seconds::%player%}% secondi%>&1%{nick::%player%}% <reset>&9&l>&r %message% to all players
+        #send "&1%player% &7(&1%{nick::%player%}%&7) &9&l>&r %message%" to console    
     else if player's uuid is "cfc5251b-c55b-4a99-b020-23bdb1c2354a": #(Cla14 - Claudia)
-        set chat format to "&3[player] &1&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&3%{nick::%player%}% <reset>&1&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&3%player% &1&l>&r %message%" to console
+        else:
+            send "&3%player% &7(&3%{nick::%player%}%&7) &1&l>&r %message%" to console
     else if player's uuid is "00000000-0000-0000-0009-01f3df6b780b": #(XedoIT - Francesco [Bedrock])
-        set chat format to "&b[player] &9&l>&r [message]"
-
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&b%{nick::%player%}% <reset>&9&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&b%player% &9&l>&r %message%" to console
+        else:
+            send "&b%player% &7(&b%{nick::%player%}%&7) &9&l>&r %message%" to console
     else if player's uuid is "00000000-0000-0000-0009-01f66f7a13ac": #(Volpe_Rossa5133 - Melissa [Bedrock])
-        set chat format to "&d[player] &d&l>&r [message]"
+        cancel event
+        send formatted "<tooltip:&9Giocatore: &6%player%%nl%&eMondo: %{world_position::%player%}%%nl%&aMorti: &c%{deaths::%player%}%%nl%&3Durata sessione: &c%{hours::%player%}%&fo &c%{minutes::%player%}%&fm &c%{seconds::%player%}%&fs%nl%&bPunti: &7%{points::%player%}%>&d%{nick::%player%}% <reset>&d&l>&r %message%" to all players
+        if {nick::%player%} is player:
+            send "&d%player% &d&l>&r %message%" to console
+        else:
+            send "&d%player% &7(&d%{nick::%player%}%&7) &d&l>&r %message%" to console
 
 #--------------------------------------------#
 #                  VITA MOB                  #

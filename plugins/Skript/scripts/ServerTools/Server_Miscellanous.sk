@@ -5,13 +5,10 @@ every tick:
     loop all players:
         if world of loop-player is "smp":
             set {world_position::%loop-player%} to "&aOverworld"
-            stop
         else if world of loop-player is "smp_nether":
             set {world_position::%loop-player%} to "&cNether"
-            stop
         else if world of loop-player is "smp_the_end":
             set {world_position::%loop-player%} to "&dEnd"
-            stop
 
 #--------------------------------------------#
 #          MESSAGGI AUTOMATICI CHAT          #
