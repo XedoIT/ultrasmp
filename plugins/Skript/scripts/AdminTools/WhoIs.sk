@@ -53,7 +53,7 @@ command /whois [<offline player>]:
                 send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
                 send "&bTECNICHE"
                 send "&3- Indirizzo IP: &e/%placeholder "player_ip" from arg-1%"
-                send "&3- Ping: &e%arg-1's ping%"
+                send "&3- Ping: &e%arg-1's ping%" ms
                 send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
                 send "&3- Modalità Dio: %{god::%arg-1%::status}%"
                 send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
@@ -100,7 +100,7 @@ command /whois [<offline player>]:
                 send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
                 send "&bTECNICHE"
                 send "&3- Indirizzo IP: &e/%placeholder "player_ip" from arg-1%"
-                send "&3- Ping: &e%arg-1's ping%"
+                send "&3- Ping: &e%arg-1's ping%" ms
                 send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
                 send "&3- Modalità Dio: %{god::%arg-1%::status}%"
                 send "&3- Modalità Volo: %{fly::%arg-1%::status}%"

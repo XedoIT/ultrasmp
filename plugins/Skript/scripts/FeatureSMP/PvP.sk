@@ -6,38 +6,32 @@ command /pvp:
 	trigger:
 		if sender is player:
 			if {pvp} is not set:
-				#enable PvP in all worlds
 				set {pvp} to true
 				broadcast "&8[&2●&8] &aPvP globale abilitato!"
 				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
 				stop
 			else if {pvp} is true:
-				#disable PvP in all worlds
 				set {pvp} to false
 				broadcast "&8[&4●&8] &cPvP globale disabilitato!"
 				send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
 				stop
 			else if {pvp} is false:
-				#enable PvP in all worlds
 				set {pvp} to true
 				broadcast "&8[&2●&8] &aPvP globale abilitato!"
 				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
 				stop
 		else:
 			if {pvp} is not set:
-				#enable PvP in all worlds
 				set {pvp} to true
 				broadcast "&8[&2●&8] &aPvP globale abilitato!"
 				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
 				stop
 			else if {pvp} is true:
-				#disable PvP in all worlds
 				set {pvp} to false
 				broadcast "&8[&4●&8] &cPvP globale disabilitato!"
 				send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
 				stop
 			else if {pvp} is false:
-				#enable PvP in all worlds
 				set {pvp} to true
 				broadcast "&8[&2●&8] &aPvP globale abilitato!"
 				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players

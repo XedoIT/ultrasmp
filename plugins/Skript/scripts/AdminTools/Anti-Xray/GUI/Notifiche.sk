@@ -1,0 +1,31 @@
+options:
+ # GENERALI
+    prefix: &6[&e&lAnti-Xray&6]
+ # SUONI
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+function openAXRnotifications(p: player):
+   if {settings::%{_p}%::glasspanes} is true:
+      if {axr::alerts} is not set:
+         send "{@prefix} &cQuesta pagina non è disponibile se gli avvisi minerali sono disattivati." to {_p}
+         play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
+      else:
+         if {offline_ore_alerts::status} is not set:
+            set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Notifiche"
+            set slot 0, 1, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+            set slot 19, 20, 21, 22, 23, 24, 25, 28, 31, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+            set slot 9, 10, 11, 13, 14, 15, 16 and 17 of {_gui} to yellow stained glass pane named "&f"
+            set slot 12 of {_gui} to orange stained glass pane named "&f"
+            set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 29 of {_gui} to empty map named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche", "&7riguardo i rilevamenti da parte del sistema", "&7per i giocatori che, durante la tua assenza,", "&7sono stati colti ad utilizzare l'Xray.", "&f", "&3Attualmente sono "
+            set slot 30 of {_gui} to book named "&6Avvisi giocatori offline"
+            set slot 32 of {_gui} to compass named "&cControlla giocatori offline"
+            set slot 33 of {_gui} to paper named "&cRipristina contatore offline"
+            set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+            open {_gui} to {_p}

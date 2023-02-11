@@ -1,6 +1,6 @@
 options:
     prefix: &e[&6&lIP&e]
-    ip: 79.45.6.211
+    ip: 79.32.165.223
 
 command /checkip [<text>] [<offline player>]:
     aliases: /ip

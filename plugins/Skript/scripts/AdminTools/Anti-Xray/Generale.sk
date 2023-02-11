@@ -1,7 +1,7 @@
 #
 # ================================================================================================= #
 #  "SISTEMA ANTI-XRAY CON AVVISI MINERALI, CONTATORE MINERALI, AVVISI OFFLINE E AVVISI IN CONSOLE"  #
-#                                             BY _XEDO_                                             #
+#                                             BY XEDOIT                                             #
 # ================================================================================================= #
 #
 # {--- [PLACEHOLDERS SCRIPT] ---}
@@ -9,8 +9,8 @@
 # Minerale di ferro in ardesia profonda -            %skript_axr::{player}::deepslate_iron_ore%
 # Minerale di rame -                                 %skript_axr::{player}::copper_ore%
 # Minerale di rame in ardesia profonda -             %skript_axr::{player}::deepslate_copper_ore%
-# Minerale di oro -                                  %skript_axr::{player}::gold_ore%
-# Minerale di oro in ardesia profonda -              %skript_axr::{player}::deepslate_gold_ore%
+# Minerale d'oro -                                   %skript_axr::{player}::gold_ore%
+# Minerale d'oro in ardesia profonda -               %skript_axr::{player}::deepslate_gold_ore%
 # Minerale di lapislazzuli -                         %skript_axr::{player}::lapis_ore%
 # Minerale di lapislazzuli in ardesia profonda -     %skript_axr::{player}::deepslate_ore%
 # Minerale di redstone -                             %skript_axr::{player}::redstone_ore%
@@ -19,6 +19,8 @@
 # Minerale di diamante in ardesia profonda -         %skript_axr::{player}::deepslate_diamond_ore%
 # Minerale di smeraldo -                             %skript_axr::{player}::emerald_ore%
 # Minerale di smeraldo in ardesia profonda -         %skript_axr::{player}::deepslate_emerald_ore%
+# Minerale di quarzo del Nether -                    %skript_axr::{player}::nether_quartz_ore%
+# Minerale d'oro del Nether -                        %skript_axr::{player}::nether_gold_ore%
 # Detriti antichi -                                  %skript_axr::{player}::ancient_debris%
 #
 # ================================================================================================= #
@@ -70,28 +72,32 @@ options:
     check_sound: entity.player.levelup
  # NOTIFICA MINERALI
   # FERRO
-    iron_alert: &7ha scavato &f%{counter::%arg-player%::iron}% blocchi di minerale di ferro &7in &e%{timer}% &7secondi!
-    deepslate_iron_alert: &7ha scavato &f%{counter::%arg-player%::deepslate_iron}% blocchi di minerale di ferro in ardesia profonda &7in &e%{timer}% &7secondi!
+    iron_alert_msg: &7ha scavato &f%{counter::%arg-player%::iron}% blocchi di minerale di ferro &7in &e%{timer}% &7secondi!
+    deepslate_iron_alert_msg: &7ha scavato &f%{counter::%arg-player%::deepslate_iron}% blocchi di minerale di ferro in ardesia profonda &7in &e%{timer}% &7secondi!
   # RAME
-    copper_alert: &7ha scavato &d%{counter::%arg-player%::copper}% blocchi di minerale di rame &7in &e%{timer}% &7secondi!
-    deepslate_copper_alert: &7ha scavato &d%{counter::%arg-player%::deepslate_copper}% blocchi di minerale di rame in ardesia profonda &7in &e%{timer}% &7secondi!
+    copper_alert_msg: &7ha scavato &d%{counter::%arg-player%::copper}% blocchi di minerale di rame &7in &e%{timer}% &7secondi!
+    deepslate_copper_alert_msg: &7ha scavato &d%{counter::%arg-player%::deepslate_copper}% blocchi di minerale di rame in ardesia profonda &7in &e%{timer}% &7secondi!
   # ORO
-    gold_alert: &7ha scavato &6%{counter::%arg-player%::gold}% blocchi di minerale d'oro &7in &e%{timer}% &7secondi!
-    deepslate_gold_alert: &7ha scavato &6%{counter::%arg-player%::deepslate_gold}% blocchi di minerale d'oro in ardesia profonda &7in &e%{timer}% &7secondi!
+    gold_alert_msg: &7ha scavato &6%{counter::%arg-player%::gold}% blocchi di minerale d'oro &7in &e%{timer}% &7secondi!
+    deepslate_gold_alert_msg: &7ha scavato &6%{counter::%arg-player%::deepslate_gold}% blocchi di minerale d'oro in ardesia profonda &7in &e%{timer}% &7secondi!
   # REDSTONE
-    redstone_alert: &7ha scavato &4%{counter::%arg-player%::redstone}% blocchi di minerale di redstone &7in &e%{timer}% &7secondi!
-    deepslate_redstone_alert: &7ha scavato &4%{counter::%arg-player%::deepslate_redstone}% blocchi di minerale di redstone in ardesia profonda &7in &e%{timer}% &7secondi!
+    redstone_alert_msg: &7ha scavato &4%{counter::%arg-player%::redstone}% blocchi di minerale di redstone &7in &e%{timer}% &7secondi!
+    deepslate_redstone_alert_msg: &7ha scavato &4%{counter::%arg-player%::deepslate_redstone}% blocchi di minerale di redstone in ardesia profonda &7in &e%{timer}% &7secondi!
   # LAPISLAZZULI
-    lapis_alert: &7ha scavato &9%{counter::%arg-player%::lapis}% blocchi di minerale di lapislazzuli &7in &e%{timer}% &7secondi!
-    deepslate_lapis_alert: &7ha scavato &9%{counter::%arg-player%::deepslate_lapis}% blocchi di minerale di lapislazzuli in ardesia profonda &7in &e%{timer}% &7secondi!
+    lapis_alert_msg: &7ha scavato &9%{counter::%arg-player%::lapis}% blocchi di minerale di lapislazzuli &7in &e%{timer}% &7secondi!
+    deepslate_lapis_alert_msg: &7ha scavato &9%{counter::%arg-player%::deepslate_lapis}% blocchi di minerale di lapislazzuli in ardesia profonda &7in &e%{timer}% &7secondi!
   # SMERALDO
-    emerald_alert: &7ha scavato &a%{counter::%arg-player%::emerald}% blocchi di minerale di smeraldo &7in &e%{timer}% &7secondi!
-    deepslate_emerald_alert: &7ha scavato &a%{counter::%arg-player%::deepslate_emerald}% blocchi di minerale di smeraldo in ardesia profonda &7in &e%{timer}% &7secondi!
+    emerald_alert_msg: &7ha scavato &a%{counter::%arg-player%::emerald}% blocchi di minerale di smeraldo &7in &e%{timer}% &7secondi!
+    deepslate_emerald_alert_msg: &7ha scavato &a%{counter::%arg-player%::deepslate_emerald}% blocchi di minerale di smeraldo in ardesia profonda &7in &e%{timer}% &7secondi!
   # DIAMANTE
-    diamond_alert: &7ha scavato &b%{counter::%arg-player%::diamond}% blocchi di minerale di diamante &7in &e%{timer}% &7secondi!
-    deepslate_diamond_alert: &7ha scavato &b%{counter::%arg-player%::deepslate_diamond}% blocchi di minerale di diamante in ardesia profonda &7in &e%{timer}% &7secondi!
+    diamond_alert_msg: &7ha scavato &b%{counter::%arg-player%::diamond}% blocchi di minerale di diamante &7in &e%{timer}% &7secondi!
+    deepslate_diamond_alert_msg: &7ha scavato &b%{counter::%arg-player%::deepslate_diamond}% blocchi di minerale di diamante in ardesia profonda &7in &e%{timer}% &7secondi!
+  # QUARZO DEL NETHER
+    nether_quartz_alert_msg: &7ha scavato &f%{counter::%arg-player%::nether_quartz}% blocchi di minerale di quarzo del Nether &7in &e%{timer}% &7secondi!
+  # ORO DEL NETHER
+    nether_gold_alert_msg: &7ha scavato &6%{counter::%arg-player%::nether_gold}% blocchi di minerale d'oro del Nether &7in &e%{timer}% &7secondi!
   # DETRITI ANTICHI
-    ancient_debris_alert: &7ha scavato &c%{counter::%arg-player%::ancient_debris}% blocchi di detriti antichi &7in &e%{timer}% &7secondi!
+    ancient_debris_alert_msg: &7ha scavato &f%{counter::%arg-player%::ancient_debris}% blocchi di detriti antichi &7in &e%{timer}% &7secondi!
   # MESSAGGIO NOTIFICA MINERALI
     hover_alert_msg: &7Clicca per teletrasportarti da &c%arg-player%
   # COMANDI MESSAGGIO NOTIFICA MINERALI
@@ -217,7 +223,7 @@ on load:
         set {counter::status}, {autokick::status}, {orealerts::status}, {obf::status} or {consolenotify::status} to "&cDISATTIVATO"
  # CONFIGURAZIONE STATO VARIABILI MINERALI
     else if {alert_iron::status}, {alert_deepslate_iron::status}, {alert_copper::status}, {alert_deepslate_copper::status}, {alert_gold::status}, {alert_deepslate_gold::status}, {alert_redstone::status}, {alert_deepslate_redstone::status}, {alert_lapis::status}, {alert_deepslate_lapis::status}, {alert_emerald::status}, {alert_deepslate::status}, {alert_diamond::status}, {alert_deepslate_diamond::status}, {alert_ancient_debris::status}, {autoalert_iron::status}, {autoalert_deepslate_iron::status}, {autoalert_copper::status}, {autoalert_deepslate_copper::status}, {autoalert_gold::status}, {autoalert_deepslate_gold::status}, {autoalert_redstone::status}, {autoalert_deepslate_redstone::status}, {autoalert_lapis::status}, {autoalert_deepslate_lapis::status}, {autoalert_emerald::status}, {autoalert_deepslate_emerald::status}, {autoalert_diamond::status}, {autoalert_deepslate_diamond::status}, {autoalert_ancient_debris::status}, {autoalert_nether_quartz_ore::status} or {autoalert_nether_gold_ore::status} is not set:
-        set {alert_iron::status}, {alert_deepslate_iron::status}, {alert_copper::status}, {alert_deepslate_copper::status}, {alert_gold::status}, {alert_deepslate_gold::status}, {alert_redstone::status}, {alert_deepslate_redstone::status}, {alert_lapis::status}, {alert_deepslate_lapis::status}, {alert_emerald::status}, {alert_deepslate_emerald::status}, {alert_diamond::status}, {alert_deepslate_diamond::status}, {alert_ancient_debris::status}, {autoalert_iron::status}, {autoalert_deepslate_iron::status}, {autoalert_copper::status}, {autoalert_deepslate_copper::status}, {autoalert_gold::status}, {autoalert_deepslate_gold::status}, {autoalert_redstone::status}, {autoalert_deepslate_redstone::status}, {autoalert_lapis::status}, {autoalert_deepslate_lapis::status}, {autoalert_emerald::status}, {autoalert_deepslate_emerald::status}, {autoalert_diamond::status}, {autoalert_deepslate_diamond::status}, {autoalert_ancient_debris::status}, {autoalert_nether_quartz_ore::status} or {autoalert_nether_gold_ore::status}, {offline_ore_alerts::status} to "&aattivato"
+        set {alert_iron::status}, {alert_deepslate_iron::status}, {alert_copper::status}, {alert_deepslate_copper::status}, {alert_gold::status}, {alert_deepslate_gold::status}, {alert_redstone::status}, {alert_deepslate_redstone::status}, {alert_lapis::status}, {alert_deepslate_lapis::status}, {alert_emerald::status}, {alert_deepslate_emerald::status}, {alert_diamond::status}, {alert_deepslate_diamond::status}, {alert_ancient_debris::status}, {autoalert_iron::status}, {autoalert_deepslate_iron::status}, {autoalert_copper::status}, {autoalert_deepslate_copper::status}, {autoalert_gold::status}, {autoalert_deepslate_gold::status}, {autoalert_redstone::status}, {autoalert_deepslate_redstone::status}, {autoalert_lapis::status}, {autoalert_deepslate_lapis::status}, {autoalert_emerald::status}, {autoalert_deepslate_emerald::status}, {autoalert_diamond::status}, {autoalert_deepslate_diamond::status}, {autoalert_ancient_debris::status}, {autoalert_nether_quartz_ore::status} or {autoalert_nether_gold_ore::status}, {offline_orealerts::status} to "&aattivato"
  # CONFIGURAZIONE VARIABILI MINERALI SCAVATI DAL GIOCATORE
     loop all players:
         if {axr::%loop-player%::total_ores}, {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore}, {axr::%loop-player%::nether_quartz_ore}, {axr::%loop-player%::nether_gold_ore} or {axr::%loop-player%::ancient_debris} is not set:
@@ -241,7 +247,7 @@ on join:
         set {axr::%player%::offline_total_ores}, {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} to 0
     wait 5 seconds
     if player has permission "axr.admin.alerts":
-        if {offline_ore_alerts::status} is true:
+        if {offline_ore_alerts} is true:
             if {offline_alerts::*} is set:
                 send formatted "{@prefix} <tooltip:&cClicca qui per visualizzarli>&7Ci sono nuovi dati nel registro degli avvisi offline!"#<cmd:/offlineaxr>"
             else:
@@ -944,10 +950,14 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                 stop
                     else if arg-3 is not "for":
-                        send "{@prefix} &cComando sconosciuto."
-                        send "{@prefix} &cUtilizzo: &6/axr ore view for <&egiocatore&6>"
-                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-                        stop
+                        if player has permission "axr.admin.ore.viewer":
+                            send "{@prefix} &cComando sconosciuto."
+                            send "{@prefix} &cUtilizzo: &6/axr ore view for <&egiocatore&6>"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop
                 else if arg-2 is "counter":
                     if arg-3 is not set:
                         if arg-4 is not set:
@@ -1029,6 +1039,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             if player has permission "axr.admin.ore.alerts":
                                 if {axr::alerts} is not set:
                                     set {axr::alerts} to true
+                                    set {orealerts::status} to "{@enabled}"
                                     set {alert_iron::status} to "{@enabled}"
                                     set {alert_deepslate_iron::status} to "{@enabled}"
                                     set {alert_gold::status} to "{@enabled}"
@@ -1051,6 +1062,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                     stop
                                 else:
                                     delete {axr::alerts}
+                                    set {orealerts::status} to "{@disabled}"
                                     set {alert_iron::status} to "{@disabled}"
                                     set {alert_deepslate_iron::status} to "{@disabled}"
                                     set {alert_gold::status} to "{@disabled}"
@@ -1265,7 +1277,291 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         send "{@prefix} &cComando sconosciuto."
                         send "{@prefix} &cUtilizzo: &6/settings <&ealerts &6| &etimer &6| &ecounter&6>"
                         stop
-
+            else if arg-1 is "offline":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr offline <&etoggle &6| &eclear for &6(&egiocatore&6) &6| &eclear all &6| &elist &6| &eview for &6(&egiocatore&6)>"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                else if arg-2 is "toggle":
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.toggle":
+                                if {offline_ore_alerts} is not set:
+                                    set {offline_ore_alerts} to true
+                                    set {offline_orealerts::status} to "{@enabled}"
+                                    send "{@prefix} &7Gli avvisi offline sono stati &aattivati."
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    stop
+                                else:
+                                    delete {offline_ore_alerts}
+                                    set {offline_orealerts::status} to "{@disabled}"
+                                    send "{@prefix} &7Gli avvisi offline sono stati &cdisattivati."
+                                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else:
+                        if player has permission "axr.admin.offline.toggle":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop
+                else if arg-2 is "clear":
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.clear.player":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr clear for <&egiocatore&6>"
+                                send "{@prefix} &cUtilizzo: &6/axr clear all"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else if arg-3 is "for":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.clear.player":
+                                send "{@prefix} &cSpecifica il giocatore di cui vuoi rimuoverne i dati."
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if {offline_ore_alerts} is true:
+                                if {offline_alerts_list::*} doesn't contain arg-4:
+                                    if player has permission "axr.admin.offline.clear.player":
+                                        send "{@prefix} &cNon ho trovato dati offline per &6%arg-4%&c."
+                                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                        stop
+                                    else:
+                                        send "{@prefix_hide} &cComando sconosciuto."
+                                        stop
+                                else:
+                                    if player has permission "axr.admin.offline.clear.player":
+                                        send "{@prefix} &7Elimino i dati offline di &c%arg-4%&7..."
+                                        remove arg-4 from {offline_alerts_list::*}
+                                        delete {axr_offline_location::%arg-4%}
+                                        set {axr::%arg-4%::offline_total_ores} to 0
+                                        set {axr::%arg-4%::offline_iron_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_iron_ore} to 0
+                                        set {axr::%arg-4%::offline_copper_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_copper_ore} to 0
+                                        set {axr::%arg-4%::offline_gold_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_gold_ore} to 0
+                                        set {axr::%arg-4%::offline_lapis_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_lapis_ore} to 0
+                                        set {axr::%arg-4%::offline_redstone_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_redstone_ore} to 0
+                                        set {axr::%arg-4%::offline_emerald_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_emerald_ore} to 0
+                                        set {axr::%arg-4%::offline_diamond_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_diamond_ore} to 0
+                                        set {axr::%arg-4%::offline_nether_quartz_ore} to 0
+                                        set {axr::%arg-4%::offline_nether_gold_ore} to 0
+                                        set {axr::%arg-4%::offline_ancient_debris} to 0
+                                        wait 1 second
+                                        send "{@prefix} &aHo eliminato i dati offline di &b%arg-4%&a."
+                                    else:
+                                        send "{@prefix_hide} &cComando sconosciuto."
+                                        stop
+                            else:
+                                send "{@prefix} &cQuesto comando non è disponibile se gli avvisi offline sono disattivati."
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                    else if arg-3 is "all":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.clear.all":
+                                if {offline_alerts_list::*} is not set:
+                                    send "{@prefix} &cNon ci sono dati offline da eliminare."
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                else:
+                                    send "{@prefix} &7Elimino tutti i dati offline presenti nel database..."
+                                    delete {offline_alerts_list::*}
+                                    wait 1 second
+                                    send "{@prefix} &aHo eliminato tutti i dati offline presenti nel database."
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if player has permission "axr.admin.clear.all":
+                                send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else if arg-3 is not "for" or "all":
+                        if player has permission "axr.admin.offline.clear.player":
+                            send "{@prefix} &cComando sconosciuto."
+                            send "{@prefix} &cUtilizzo: &6/axr offline clear for <&egiocatore&6>"
+                            send "{@prefix} &cUtilizzo: &6/axr offline clear all"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop
+                else if arg-2 is "list":
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.list":
+                                if {offline_alerts_list::*} is not set:
+                                    send "{@prefix} &cNon ci sono dati offline da mostrare."
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                else:
+                                    send "{@prefix} &6Giocatori che potrebbero star utilizzando l'Xray: &c%{offline_alerts_list::*}%&6."
+                                    play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+                                    stop 
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else:
+                        if player has permission "axr.admin.offline.list":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop
+                else if arg-2 is "view" or "check":
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.viewer":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr offline view for <&egiocatore&6>"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else if arg-3 is "for":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.viewer":
+                                send "{@prefix} &cSpecifica il nome di un giocatore!"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else if arg-4 has played before:
+                            if player has permission "axr.admin.offline.viewer":
+                                if {offline_alerts_list::*} doesn't contain arg-4:
+                                    send "{@prefix} &cNon ci sono dati per &6%arg-4%&c."
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                    stop
+                                else:
+                                    if {axr::%arg-4%::offline_total_ores}, {axr::%arg-4%::offline_iron_ore}, {axr::%arg-4%::offline_deepslate_iron_ore}, {axr::%arg-4%::offline_copper_ore}, {axr::%arg-4%::offline_deepslate_copper_ore}, {axr::%arg-4%::offline_gold_ore}, {axr::%arg-4%::offline_deepslate_gold_ore}, {axr::%arg-4%::offline_lapis_ore}, {axr::%arg-4%::offline_deepslate_lapis_ore}, {axr::%arg-4%::offline_redstone_ore}, {axr::%arg-4%::offline_deepslate_redstone_ore}, {axr::%arg-4%::offline_emerald_ore}, {axr::%arg-4%::offline_deepslate_emerald_ore}, {axr::%arg-4%::offline_diamond_ore}, {axr::%arg-4%::offline_deepslate_diamond_ore}, {axr::%arg-4%::offline_ancient_debris}, {axr::%arg-4%::offline_nether_quartz_ore} or {axr::%arg-4%::offline_nether_gold_ore} is not set:
+                                        set {axr::%arg-4%::offline_total_ores} to 0
+                                        set {axr::%arg-4%::offline_iron_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_iron_ore} to 0
+                                        set {axr::%arg-4%::offline_copper_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_copper_ore} to 0
+                                        set {axr::%arg-4%::offline_gold_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_gold_ore} to 0
+                                        set {axr::%arg-4%::offline_lapis_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_lapis_ore} to 0
+                                        set {axr::%arg-4%::offline_redstone_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_redstone_ore} to 0
+                                        set {axr::%arg-4%::offline_emerald_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_emerald_ore} to 0
+                                        set {axr::%arg-4%::offline_diamond_ore} to 0
+                                        set {axr::%arg-4%::offline_deepslate_diamond_ore} to 0
+                                        set {axr::%arg-4%::offline_nether_quartz_ore} to 0
+                                        set {axr::%arg-4%::offline_nether_gold_ore} to 0
+                                        set {axr::%arg-4%::offline_ancient_debris} to 0
+                                    #openAXRofflineores(player)
+                                    stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else if arg-4 has not played before:
+                            if player has permission "axr.admin.offline.viewer":
+                                send "{@prefix} &cNon ci sono dati per &6%arg-4%&c."
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else if arg-3 is not "for":
+                        if player has permission "axr.admin.offline.viewer":
+                            send "{@prefix} &cComando sconosciuto."
+                            send "{@prefix} &cUtilizzo: &6/axr offline view for <&egiocatore&6>"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop
+                else if arg-2 is "teleport":
+                    if arg-3 is not set:
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.teleport":
+                                send "{@prefix} &cComando incompleto."
+                                send "{@prefix} &cUtilizzo: &6/axr offline teleport to <&egiocatore&6>"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                    else if arg-3 is "to":
+                        if arg-4 is not set:
+                            if player has permission "axr.admin.offline.teleport":
+                                send "{@prefix} &cSpecifica il giocatore da cui vuoi teletrasportarti!"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                            else:
+                                send "{@prefix_hide} &cComando sconosciuto."
+                                stop
+                        else:
+                            if {axr_offline_location::%arg-4%} is not set:
+                                if player has permission "axr.admin.offline.teleport":
+                                    send "{@prefix} &cNon ho trovato nessuna posizione per &6%arg-4%&c."
+                                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                    stop
+                                else:
+                                    send "{@prefix_hide} &cComando sconosciuto."
+                                    stop
+                            else:
+                                if player has permission "axr.admin.offline.teleport":
+                                    send "{@prefix} &7Ti sto portando all'ultima posizione conosciuta di &c%arg-4%&7..."
+                                    wait 1 second
+                                    teleport player to {axr_offline_location::%arg-4%}
+                                    stop
+                                else:
+                                    send "{@prefix_hide} &cComando sconosciuto."
+                                    stop
+                    else if arg-3 is not "to":
+                        if player has permission "axr.admin.offline.teleport":
+                            send "{@prefix} &cComando sconosciuto."
+                            send "{@prefix} &cUtilizzo: &6/axr offline teleport to <&egiocatore&6>"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@prefix_hide} &cComando sconosciuto."
+                            stop
+                else if arg-2 is not "toggle", "clear", "list", "view", "check" or "teleport":
+                    if player has permission "axr.admin.offline":
+                        send "{@prefix} &cComando sconosciuto."
+                        send "{@prefix} &cUtilizzo: &6/axr offline toggle" 
+                        send "{@prefix} &cUtilizzo: &6/axr offline clear for <&egiocatore&6>" 
+                        send "{@prefix} &cUtilizzo: &6/axr offline clear all" 
+                        send "{@prefix} &cUtilizzo: &6/axr offline view for <&egiocatore&6>" 
+                        send "{@prefix} &cUtilizzo: &6/axr offline list" 
+                        send "{@prefix} &cUtilizzo: &6/axr offline teleport to <&egiocatore&6>"
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        send "{@prefix_hide} &cComando sconosciuto."
+                        stop
             else if arg-1 is "help":
                 if arg-2 is not set:
                     if arg-3 is not set:

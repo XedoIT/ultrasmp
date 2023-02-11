@@ -550,8 +550,7 @@ on inventory click:
          openAXRmain(player)
       else if index of event-slot is 3:
          cancel event
-         send "&cIn arrivo..."
-         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+         openAXRnotifications(player)
       else if index of event-slot is 4:
          cancel event
          openAXRcounter(player)
