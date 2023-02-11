@@ -34,19 +34,30 @@
 # - axr.admin.alerts
 # - axr.admin.gui.use
 # - axr.admin.world
+# - axr.admin.world.*
 # - axr.admin.world.add
 # - axr.admin.world.remove
 # - axr.admin.world.gui
 # - axr.admin.ore
+# - axr.admin.ore.*
 # - axr.admin.ore.view
 # - axr.admin.ore.counter
 # - axr.admin.ore.clear
 # - axr.admin.ore.alerts
 # - axr.admin.settings
+# - axr.admin.settings.*
 # - axr.admin.settings.alerts
 # - axr.admin.settings.alerts.autocheck
 # - axr.admin.settings.timer
 # - axr.admin.settings.counter
+# - axr.admin.offline
+# - axr.admin.offline.*
+# - axr.admin.offline.toggle
+# - axr.admin.offline.clear.player
+# - axr.admin.offline.clear.all
+# - axr.admin.offline.list
+# - axr.admin.offline.viewer
+# - axr.admin.offline.teleport
 # - axr.admin.help
 # - axr.admin.reload
 #
@@ -264,8 +275,65 @@ on chat:
     else if {offlinelookup::%player%} is true:
         cancel event
         set {_p} to message parsed as offline player
-        delete {offlinelookup::%player%}
-        #execute player command "/ofa lookup %{_p}%"
+        wait 1 tick
+        if {_p} has played before:
+            if {offline_alerts_list::*} doesn't contain {_p}:
+                send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                openAXRnotifications(player)
+            else:
+                send "{@prefix} &7Sto controllando i minerali offline scavati di &c%{_p}%&7..."
+                play sound "{@check_sound}" with volume 1 at player for player
+                wait 1 second
+                delete {checkofflineplayer::latest}
+                set {checkofflineplayer::latest} to {_p}
+                set {arg4} to {_p}
+                delete {offlinelookup::%player%}
+                openAXRofflineores(player, {_p})
+        else if {_p} has not played before:
+            send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {offlinelookup::%player%}
+            wait 10 ticks
+            openAXRnotifications(player)
+    else if {offlineclearall::%player%} is true:
+        cancel event
+        set {_p} to message parsed as offline player
+        wait 1 tick
+        if {_p} has played before:
+            send "{@prefix} &7Elimino i dati offline di &c%{_p}%&7..."
+            remove {_p} from {offline_alerts_list::*}
+            delete {axr_offline_location::%{_p}%}
+            set {axr::%{_p}%::offline_total_ores} to 0
+            set {axr::%{_p}%::offline_iron_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_iron_ore} to 0
+            set {axr::%{_p}%::offline_copper_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_copper_ore} to 0
+            set {axr::%{_p}%::offline_gold_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_gold_ore} to 0
+            set {axr::%{_p}%::offline_lapis_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_lapis_ore} to 0
+            set {axr::%{_p}%::offline_redstone_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_redstone_ore} to 0
+            set {axr::%{_p}%::offline_emerald_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_emerald_ore} to 0
+            set {axr::%{_p}%::offline_diamond_ore} to 0
+            set {axr::%{_p}%::offline_deepslate_diamond_ore} to 0
+            set {axr::%{_p}%::offline_nether_quartz_ore} to 0
+            set {axr::%{_p}%::offline_nether_gold_ore} to 0
+            set {axr::%{_p}%::offline_ancient_debris} to 0
+            wait 1 second
+            send "{@prefix} &aHo eliminato i dati offline di &b%{_p}%&a."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            wait 5 ticks
+            delete {offlineclearall::%player%}
+            openAXRnotifications(player)
+        else if {_p} has not played before:
+            send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {offlineclearall::%player%}
+            wait 10 ticks
+            openAXRnotifications(player)
     else if {addingworld::%player%} is true:
         cancel event
         set {add_world} to message parsed as world
@@ -351,6 +419,8 @@ on chat:
             send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
             delete {lookup::%player%}
+            wait 10 ticks
+            openAXRcounter(player)
     else if {clearall::%player%} is true:
         cancel event
         set {_p} to message parsed as offline player
@@ -407,6 +477,7 @@ on chat:
             send "{@prefix} &cNon ci sono dati per &6%{_p}%&c."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
             delete {clearall::%player%}
+            wait 10 ticks
             openAXRcounter(player)
     else if {iron_set::%player%} is true:
         cancel event
@@ -691,7 +762,7 @@ on chat:
  # OGGETTO CHE APRE LA GUI DELL'ANTI-XRAY (DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!)
 on right click:
     loop all players:
-        if player's tool is a recovery compass named "&6[&eAXR&6] &7(Click destro)":
+        if player's tool is a recovery compass named "{@prefix} &7(Click destro)":
             openAXRmain(player)
  # COMANDO PRINCIPALE ANTI-XRAY
 command /axr [<text>] [<text>] [<text>] [<offline player>]:
@@ -717,12 +788,12 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                     else:
                         send "{@prefix_hide} &cComando sconosciuto."
                         stop
-          # PARAMETRO DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!
+            # PARAMETRO DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!
             else if arg-1 is "item":
                 if arg-2 is not set:
                     if arg-3 is not set:
                         if arg-4 is not set:
-                            give a recovery compass named "&6[&eAXR&6] &7(Click destro)" to player
+                            give a recovery compass named "{@prefix} &7(Click destro)" to player
                             stop
 
             else if arg-1 is "world":
@@ -1283,8 +1354,14 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         if arg-4 is not set:
                             if player has permission "axr.admin.offline":
                                 send "{@prefix} &cComando incompleto."
-                                send "{@prefix} &cUtilizzo: &6/axr offline <&etoggle &6| &eclear for &6(&egiocatore&6) &6| &eclear all &6| &elist &6| &eview for &6(&egiocatore&6)>"
+                                send "{@prefix} &cUtilizzo: &6/axr offline toggle" 
+                                send "{@prefix} &cUtilizzo: &6/axr offline clear for <&egiocatore&6>" 
+                                send "{@prefix} &cUtilizzo: &6/axr offline clear all" 
+                                send "{@prefix} &cUtilizzo: &6/axr offline view for <&egiocatore&6>" 
+                                send "{@prefix} &cUtilizzo: &6/axr offline list" 
+                                send "{@prefix} &cUtilizzo: &6/axr offline teleport to <&egiocatore&6>"
                                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
                             else:
                                 send "{@prefix_hide} &cComando sconosciuto."
                                 stop
@@ -1380,7 +1457,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 stop
                     else if arg-3 is "all":
                         if arg-4 is not set:
-                            if player has permission "axr.admin.clear.all":
+                            if player has permission "axr.admin.offline.clear.all":
                                 if {offline_alerts_list::*} is not set:
                                     send "{@prefix} &cNon ci sono dati offline da eliminare."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
@@ -1460,26 +1537,13 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
                                 else:
-                                    if {axr::%arg-4%::offline_total_ores}, {axr::%arg-4%::offline_iron_ore}, {axr::%arg-4%::offline_deepslate_iron_ore}, {axr::%arg-4%::offline_copper_ore}, {axr::%arg-4%::offline_deepslate_copper_ore}, {axr::%arg-4%::offline_gold_ore}, {axr::%arg-4%::offline_deepslate_gold_ore}, {axr::%arg-4%::offline_lapis_ore}, {axr::%arg-4%::offline_deepslate_lapis_ore}, {axr::%arg-4%::offline_redstone_ore}, {axr::%arg-4%::offline_deepslate_redstone_ore}, {axr::%arg-4%::offline_emerald_ore}, {axr::%arg-4%::offline_deepslate_emerald_ore}, {axr::%arg-4%::offline_diamond_ore}, {axr::%arg-4%::offline_deepslate_diamond_ore}, {axr::%arg-4%::offline_ancient_debris}, {axr::%arg-4%::offline_nether_quartz_ore} or {axr::%arg-4%::offline_nether_gold_ore} is not set:
-                                        set {axr::%arg-4%::offline_total_ores} to 0
-                                        set {axr::%arg-4%::offline_iron_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_iron_ore} to 0
-                                        set {axr::%arg-4%::offline_copper_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_copper_ore} to 0
-                                        set {axr::%arg-4%::offline_gold_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_gold_ore} to 0
-                                        set {axr::%arg-4%::offline_lapis_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_lapis_ore} to 0
-                                        set {axr::%arg-4%::offline_redstone_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_redstone_ore} to 0
-                                        set {axr::%arg-4%::offline_emerald_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_emerald_ore} to 0
-                                        set {axr::%arg-4%::offline_diamond_ore} to 0
-                                        set {axr::%arg-4%::offline_deepslate_diamond_ore} to 0
-                                        set {axr::%arg-4%::offline_nether_quartz_ore} to 0
-                                        set {axr::%arg-4%::offline_nether_gold_ore} to 0
-                                        set {axr::%arg-4%::offline_ancient_debris} to 0
-                                    #openAXRofflineores(player)
+                                    send "{@prefix} &7Sto controllando i minerali offline scavati di &c%arg-4%&7..."
+                                    play sound "{@check_sound}" with volume 1 at player for player
+                                    wait 1 second
+                                    delete {checkofflineplayer::latest}
+                                    set {checkofflineplayer::latest} to arg-4
+                                    set {arg4} to arg-4
+                                    openAXRofflineores(player, arg-4)
                                     stop
                             else:
                                 send "{@prefix_hide} &cComando sconosciuto."
@@ -1548,12 +1612,13 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         else:
                             send "{@prefix_hide} &cComando sconosciuto."
                             stop
+                            
                 else if arg-2 is not "toggle", "clear", "list", "view", "check" or "teleport":
                     if player has permission "axr.admin.offline":
                         send "{@prefix} &cComando sconosciuto."
                         send "{@prefix} &cUtilizzo: &6/axr offline toggle" 
-                        send "{@prefix} &cUtilizzo: &6/axr offline clear for <&egiocatore&6>" 
-                        send "{@prefix} &cUtilizzo: &6/axr offline clear all" 
+                        send "{@prefix} &cUtilizzo: &6/axr offline clear all"
+                        send "{@prefix} &cUtilizzo: &6/axr offline clear for <&egiocatore&6>"
                         send "{@prefix} &cUtilizzo: &6/axr offline view for <&egiocatore&6>" 
                         send "{@prefix} &cUtilizzo: &6/axr offline list" 
                         send "{@prefix} &cUtilizzo: &6/axr offline teleport to <&egiocatore&6>"
