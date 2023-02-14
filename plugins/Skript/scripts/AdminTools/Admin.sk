@@ -51,8 +51,8 @@ every 3 ticks:
 command /maintenance [<text>] [<offline player>]:
     aliases: /manutenzione
     permission: maintenance.use
-    permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-    description: Attiva la manutenzione del server ed espelle tutti i giocatori non hanno i permessi.
+    permission message: {@prefix1} &cComando sconosciuto.
+    description: Attiva la manutenzione del server ed espelle tutti i giocatori che non hanno i permessi.
     executable by: player, console
     trigger:
         if sender is player:

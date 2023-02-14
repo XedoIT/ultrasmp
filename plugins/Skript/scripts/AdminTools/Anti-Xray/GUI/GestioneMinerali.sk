@@ -8,7 +8,7 @@ options:
     error_sound: entity.enderman.teleport
     check_sound: entity.player.levelup
 
-function openAXRcounter(p: player):
+function openAXRminerals(p: player):
    if {settings::%{_p}%::glasspanes} is true:
       if {axr::alerts} is true:
          set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Gestione minerali"
@@ -151,13 +151,20 @@ on inventory click:
          cancel event
          execute player command "/axr ore alerts all"
          play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-         openAXRcounter(player)
+         openAXRminerals(player)
       else if index of event-slot is 31:
-         close player's inventory
-         send "{@prefix} &cSpecifica il nome del giocatore che vuoi controllare."
-         play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-         set {lookup::%player%} to true
+         cancel event
+         if {checkplayer::latest} is not set:
+            close player's inventory
+            send "{@prefix} &cSpecifica il nome del giocatore che vuoi controllare."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {lookup::%player%} to true
+         else:
+            send "{@prefix} &cQualcun altro sta controllando i minerali di un giocatore."
+            send "{@prefix} &cAttendi qualche istante prima di poter utilizzare questo comando."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
       else if index of event-slot is 33:
+         cancel event
          close player's inventory
          send "{@prefix} &cSpecifica il nome del giocatore a cui vuoi azzerare i minerali."
          play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
@@ -171,7 +178,7 @@ on inventory click:
          cancel event
       else if index of event-slot is 2:
          cancel event
-         openAXRcounter(player)
+         openAXRminerals(player)
       else if index of event-slot is 6:
          cancel event
          set {axr::%{checkplayer::latest}%::total_ores} to 0
@@ -192,93 +199,99 @@ on inventory click:
          set {axr::%{checkplayer::latest}%::nether_quartz_ore} to 0
          set {axr::%{checkplayer::latest}%::nether_gold_ore} to 0
          set {axr::%{checkplayer::latest}%::ancient_debris} to 0
+         send "{@prefix} &aHo azzerato il contatore di &b%{checkplayer::latest}%&a."
+         play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 19:
          cancel event
-         set {axr::%{checkplayer::latest}%::iron_ore} to 0
          remove {axr::%{checkplayer::latest}%::iron_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::iron_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 20:
          cancel event
-         set {axr::%{checkplayer::latest}%::copper_ore} to 0
          remove {axr::%{checkplayer::latest}%::copper_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::copper_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 21:
          cancel event
-         set {axr::%{checkplayer::latest}%::gold_ore} to 0
          remove {axr::%{checkplayer::latest}%::gold_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::gold_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 22:
          cancel event
-         set {axr::%{checkplayer::latest}%::redstone_ore} to 0
          remove {axr::%{checkplayer::latest}%::redstone_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::redstone_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 23:
          cancel event
-         set {axr::%{checkplayer::latest}%::lapis_ore} to 0
          remove {axr::%{checkplayer::latest}%::lapis_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::lapis_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 24:
          cancel event
-         set {axr::%{checkplayer::latest}%::emerald_ore} to 0
          remove {axr::%{checkplayer::latest}%::emerald_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::emerald_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 25:
          cancel event
-         set {axr::%{checkplayer::latest}%::diamond_ore} to 0
          remove {axr::%{checkplayer::latest}%::diamond_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::diamond_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 28:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_iron_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_iron_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_iron_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 29:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_copper_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_copper_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_copper_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 30:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_gold_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_gold_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_gold_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 31:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_redstone_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_redstone_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_redstone_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 32:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_lapis_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_lapis_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_lapis_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 33:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_emerald_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_emerald_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_emerald_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 34:
          cancel event
-         set {axr::%{checkplayer::latest}%::deepslate_diamond_ore} to 0
          remove {axr::%{checkplayer::latest}%::deepslate_diamond_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::deepslate_diamond_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 39:
          cancel event
-         set {axr::%{checkplayer::latest}%::nether_quartz_ore} to 0
          remove {axr::%{checkplayer::latest}%::nether_quartz_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::nether_quartz_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 40:
          cancel event
-         set {axr::%{checkplayer::latest}%::nether_gold_ore} to 0
          remove {axr::%{checkplayer::latest}%::nether_gold_ore} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::nether_gold_ore} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 41:
          cancel event
-         set {axr::%{checkplayer::latest}%::ancient_debris} to 0
          remove {axr::%{checkplayer::latest}%::ancient_debris} from {axr::%{checkplayer::latest}%::total_ores}
+         set {axr::%{checkplayer::latest}%::ancient_debris} to 0
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 49:
          cancel event
          send "&cIn arrivo..."
          play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+
+on inventory close:
+   if event-inventory is (metadata tag "PlayerCounterGUI" of player):
+      delete {checkplayer::latest}

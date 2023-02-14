@@ -53,7 +53,7 @@ on inventory click:
             openAXRnotifications(player)
         else if index of event-slot is 4:
             cancel event
-            openAXRcounter(player)
+            openAXRminerals(player)
         else if index of event-slot is 5:
             cancel event
             openAXRsettings(player)
