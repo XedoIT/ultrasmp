@@ -1,7 +1,0 @@
-options:
- # GENERALI
-    prefix: &6[&e&lAnti-Xray&6]
- # SUONI
-    confirm_sound: block.note_block.pling
-    error_sound: entity.enderman.teleport
-    check_sound: entity.player.levelup
