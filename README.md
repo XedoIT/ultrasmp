@@ -1,4 +1,4 @@
-#  Disagio SMP: 53% completato
+#  Disagio SMP: 55% completato
   Di seguito, tutte le modifiche effettuate/introdotte durante lo sviluppo del server e delle sue funzionalità:
   
 ### - GENNAIO 2022 -
@@ -67,5 +67,5 @@
 - Ottimizzazione dei vari sistemi e bug fixes 
 
 ### - FEBBRAIO 2023 -
-- Proseguimento del sistema Anti-Xray (30% di avanzamento)
-- Creazione e completamento dei soprannomi (comando /nick) 
+- Proseguimento del sistema Anti-Xray (100% di avanzamento)
+- Creazione e completamento dei soprannomi (comando /nick)
