@@ -10,6 +10,7 @@ function openAXRnotifications(p: player):
    if {settings::%{_p}%::glasspanes} is true:
       if {axr::alerts} is not set:
          send "{@prefix} &cQuesta pagina non è disponibile se gli avvisi minerali sono disattivati." to {_p}
+         send "{@prefix} &cVai su ""&dGestione minerali&c"" e clicca su ""&bAvvisi minerali&c"" per attivarli." to {_p}
          play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
       else:
          if {offline_ore_alerts} is not set:
@@ -19,12 +20,12 @@ function openAXRnotifications(p: player):
             set slot 9, 10, 11, 13, 14, 15, 16 and 17 of {_gui} to yellow stained glass pane named "&f"
             set slot 12 of {_gui} to orange stained glass pane named "&f"
             set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
-            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
-            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
-            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{offline_orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr::counter::info}%", " &bRiconoscimento automatico: %{autoalerts::info}%", " &bNotifiche in console: %{consolenotify::info}%", "&f" and "&eClicca per gestire i servizi."
             set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
             set slot 29 of {_gui} to writable book named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche", "&7riguardo i rilevamenti da parte del sistema", "&7per i giocatori che, durante la tua assenza,", "&7sono stati colti ad utilizzare l'Xray.", "&f", "&3Attualmente sono &cdisattivati&3.", "&f" and "&eClicca per attivarli."
-            set slot 30 of {_gui} to book named "&6Avvisi giocatori offline" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
+            set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
             set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
             set slot 33 of {_gui} to paper named "&cRipristina contatore offline" with lore "&7Azzera il contatore dei minerali", "&7di un giocatore scavati durante" and "&7la tua assenza."
             set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
@@ -36,12 +37,48 @@ function openAXRnotifications(p: player):
             set slot 9, 10, 11, 13, 14, 15, 16 and 17 of {_gui} to yellow stained glass pane named "&f"
             set slot 12 of {_gui} to orange stained glass pane named "&f"
             set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
-            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
-            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore."
-            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per" and "&7la rottura tra un minerale e un altro."
+            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{offline_orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr::counter::info}%", " &bRiconoscimento automatico: %{autoalerts::info}%", " &bNotifiche in console: %{consolenotify::info}%", "&f" and "&eClicca per gestire i servizi."
             set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
-            set slot 29 of {_gui} to writable book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche riguardo i", "&7rilevamenti da parte del sistema per i giocatori che,", "&7durante la tua assenza, sono stati colti ad utilizzare", "&7l'Xray.", "&f", "&3Attualmente sono &aattivati&3.", "&f", "&eClicca per disattivarli.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi offline, non riceverai più notifiche", "&csui rilevamenti che l'Anti-Xray effettua per i giocatori", "&cche potrebbero star utilizzando l'Xray in tua assenza."
-            set slot 30 of {_gui} to book named "&6Avvisi giocatori offline" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
+            set slot 29 of {_gui} to writable book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche riguardo i", "&7rilevamenti da parte del sistema per i giocatori che,", "&7durante la tua assenza, sono stati colti ad utilizzare", "&7l'Xray.", "&f", "&3Attualmente sono &aattivati&3.", "&f", "&eClicca per disattivarli.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi offline, non riceverai più notifiche", "&csui rilevamenti che l'Anti-Xray effettua per i giocatori" and "&cche potrebbero star utilizzando l'Xray in tua assenza."
+            set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
+            set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
+            set slot 33 of {_gui} to paper named "&cRipristina contatore offline" with lore "&7Azzera il contatore dei minerali", "&7di un giocatore scavati durante" and "&7la tua assenza."
+            set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+            open {_gui} to {_p}
+   else:
+      if {axr::alerts} is not set:
+         send "{@prefix} &cQuesta pagina non è disponibile se gli avvisi minerali sono disattivati." to {_p}
+         send "{@prefix} &cVai su ""&dGestione minerali&c"" e clicca su ""&bAvvisi minerali&c"" per attivarli." to {_p}
+         play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
+      else:
+         if {offline_ore_alerts} is not set:
+            set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Notifiche"
+            set slot 9, 10, 11, 13, 14, 15, 16 and 17 of {_gui} to yellow stained glass pane named "&f"
+            set slot 12 of {_gui} to orange stained glass pane named "&f"
+            set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{offline_orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr::counter::info}%", " &bRiconoscimento automatico: %{autoalerts::info}%", " &bNotifiche in console: %{consolenotify::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 29 of {_gui} to writable book named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche", "&7riguardo i rilevamenti da parte del sistema", "&7per i giocatori che, durante la tua assenza,", "&7sono stati colti ad utilizzare l'Xray.", "&f", "&3Attualmente sono &cdisattivati&3.", "&f" and "&eClicca per attivarli."
+            set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
+            set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
+            set slot 33 of {_gui} to paper named "&cRipristina contatore offline" with lore "&7Azzera il contatore dei minerali", "&7di un giocatore scavati durante" and "&7la tua assenza."
+            set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+            open {_gui} to {_p}
+         else:
+            set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Notifiche"
+            set slot 9, 10, 11, 13, 14, 15, 16 and 17 of {_gui} to yellow stained glass pane named "&f"
+            set slot 12 of {_gui} to orange stained glass pane named "&f"
+            set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
+            set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{offline_orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{orealerts::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr::counter::info}%", " &bRiconoscimento automatico: %{autoalerts::info}%", " &bNotifiche in console: %{consolenotify::info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr_worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 29 of {_gui} to writable book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche riguardo i", "&7rilevamenti da parte del sistema per i giocatori che,", "&7durante la tua assenza, sono stati colti ad utilizzare", "&7l'Xray.", "&f", "&3Attualmente sono &aattivati&3.", "&f", "&eClicca per disattivarli.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi offline, non riceverai più notifiche", "&csui rilevamenti che l'Anti-Xray effettua per i giocatori" and "&cche potrebbero star utilizzando l'Xray in tua assenza."
+            set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
             set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
             set slot 33 of {_gui} to paper named "&cRipristina contatore offline" with lore "&7Azzera il contatore dei minerali", "&7di un giocatore scavati durante" and "&7la tua assenza."
             set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
@@ -52,53 +89,53 @@ function openAXRofflineores(p: player, arg: offline player):
       set slot 0, 1, 3, 4, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "PlayerOfflineCounterGUI" of {_p} to black stained glass pane named "&f"
       set slot 37, 38, 42 and 43 of metadata tag "PlayerOfflineCounterGUI" of {_p} to gray stained glass pane named "&f"
       set slot 2 of metadata tag "PlayerOfflineCounterGUI" of {_p} to book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
-      set slot 5 of metadata tag "PlayerOfflineCounterGUI" of {_p} to {_arg}'s head named "&aMinerali scavati offline di &e%{_arg}%" with lore "&7Passa con il mouse sul minerale di cui vuoi", "&7sapere la quantità scavata da &c%{_arg}%&7.", "&7Clicca sul minerale del quale vorresti", "&7azzerarne il contatore.", "&f" and "&3Totale minerali scavati offline: &b%{axr::%{_arg}%::offline_total_ores}%"
+      set slot 5 of metadata tag "PlayerOfflineCounterGUI" of {_p} to {_arg}'s head named "&aMinerali scavati offline di &e%{_arg}%" with lore "&7Passa con il mouse sul minerale di cui vuoi", "&7sapere la quantità scavata da &c%{_arg}%&7.", "&7Clicca sul minerale del quale vorresti" and "&7azzerarne il contatore."
       set slot 6 of metadata tag "PlayerOfflineCounterGUI" of {_p} to paper named "&cRipristina contatore" with lore "&7Azzera il contatore dei minerali offline" and "&7di &c%{_arg}%."
       set slot 9, 11, 13, 15 and 17 of metadata tag "PlayerOfflineCounterGUI" of {_p} to yellow stained glass pane named "&f"
       set slot 10, 12, 14 and 16 of metadata tag "PlayerOfflineCounterGUI" of {_p} to orange stained glass pane named "&f"
-      set slot 19 of metadata tag "PlayerOfflineCounterGUI" of {_p} to iron ore named "&fFerro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_iron_ore}% &7blocchi", "&7di minerale di &fferro&7." 
-      set slot 20 of metadata tag "PlayerOfflineCounterGUI" of {_p} to copper ore named "&dRame" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_copper_ore}% &7blocchi", "&7di minerale di &drame&7." 
-      set slot 21 of metadata tag "PlayerOfflineCounterGUI" of {_p} to gold ore named "&eOro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_gold_ore}% &7blocchi", "&7di minerale d'&eoro&7." 
-      set slot 22 of metadata tag "PlayerOfflineCounterGUI" of {_p} to redstone ore named "&cRedstone" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_redstone_ore}% &7blocchi", "&7di minerale di &credstone&7." 
-      set slot 23 of metadata tag "PlayerOfflineCounterGUI" of {_p} to lapis ore named "&9Lapislazzuli" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_lapis_ore}% &7blocchi", "&7di minerale di &9lapislazzuli&7." 
-      set slot 24 of metadata tag "PlayerOfflineCounterGUI" of {_p} to emerald ore named "&aSmeraldo" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_emerald_ore}% &7blocchi", "&7di minerale di &asmeraldo&7." 
-      set slot 25 of metadata tag "PlayerOfflineCounterGUI" of {_p} to diamond ore named "&bDiamante" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_diamond_ore}% &7blocchi", "&7di minerale di &bdiamante&7." 
-      set slot 28 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate iron ore named "&fFerro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_iron_ore}% &7blocchi di minerale", "&7di &fferro in ardesia profonda&7." 
-      set slot 29 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate copper ore named "&dRame in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_copper_ore}% &7blocchi di minerale", "&7di &drame in ardesia profonda&7." 
-      set slot 30 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate gold ore named "&eOro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_gold_ore}% &7blocchi di minerale", "&7d'&eoro in ardesia profonda&7." 
-      set slot 31 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate redstone ore named "&cRedstone in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_redstone_ore}% &7blocchi di minerale", "&7di &credstone in ardesia profonda&7." 
-      set slot 32 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate lapis ore named "&9Lapislazzuli in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_lapis_ore}% &7blocchi di minerale", "&7di &9lapislazzuli in ardesia profonda&7." 
-      set slot 33 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate emerald ore named "&aSmeraldo in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_emerald_ore}% &7blocchi di minerale", "&7di &asmeraldo in ardesia profonda&7." 
-      set slot 34 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate diamond ore named "&bDiamante in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_diamond_ore}% &7blocchi di minerale", "&7di &bdiamante in ardesia profonda&7." 
-      set slot 39 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether quartz ore named "&fQuarzo del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_quartz_ore}% &7blocchi di minerale", "&7di &fquarzo del Nether&7." 
-      set slot 40 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether gold ore named "&6Oro del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_gold_ore}% &7blocchi di minerale", "&7d'&6oro del Nether&7." 
-      set slot 41 of metadata tag "PlayerOfflineCounterGUI" of {_p} to ancient debris named "&fDetriti antichi" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_ancient_debris}% &7blocchi di minerale", "&7di &fdetriti antichi&7." 
+      set slot 19 of metadata tag "PlayerOfflineCounterGUI" of {_p} to iron ore named "&fFerro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_iron_ore}% &7blocchi" and "&7di minerale di &fferro&7." 
+      set slot 20 of metadata tag "PlayerOfflineCounterGUI" of {_p} to copper ore named "&dRame" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_copper_ore}% &7blocchi" and "&7di minerale di &drame&7." 
+      set slot 21 of metadata tag "PlayerOfflineCounterGUI" of {_p} to gold ore named "&eOro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_gold_ore}% &7blocchi" and "&7di minerale d'&eoro&7." 
+      set slot 22 of metadata tag "PlayerOfflineCounterGUI" of {_p} to redstone ore named "&cRedstone" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_redstone_ore}% &7blocchi" and "&7di minerale di &credstone&7." 
+      set slot 23 of metadata tag "PlayerOfflineCounterGUI" of {_p} to lapis ore named "&9Lapislazzuli" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_lapis_ore}% &7blocchi" and "&7di minerale di &9lapislazzuli&7." 
+      set slot 24 of metadata tag "PlayerOfflineCounterGUI" of {_p} to emerald ore named "&aSmeraldo" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_emerald_ore}% &7blocchi" and "&7di minerale di &asmeraldo&7." 
+      set slot 25 of metadata tag "PlayerOfflineCounterGUI" of {_p} to diamond ore named "&bDiamante" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_diamond_ore}% &7blocchi" and "&7di minerale di &bdiamante&7." 
+      set slot 28 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate iron ore named "&fFerro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_iron_ore}% &7blocchi di minerale" and "&7di &fferro in ardesia profonda&7." 
+      set slot 29 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate copper ore named "&dRame in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_copper_ore}% &7blocchi di minerale" and "&7di &drame in ardesia profonda&7." 
+      set slot 30 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate gold ore named "&eOro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_gold_ore}% &7blocchi di minerale" and "&7d'&eoro in ardesia profonda&7." 
+      set slot 31 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate redstone ore named "&cRedstone in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_redstone_ore}% &7blocchi di minerale" and "&7di &credstone in ardesia profonda&7." 
+      set slot 32 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate lapis ore named "&9Lapislazzuli in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_lapis_ore}% &7blocchi di minerale" and "&7di &9lapislazzuli in ardesia profonda&7." 
+      set slot 33 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate emerald ore named "&aSmeraldo in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_emerald_ore}% &7blocchi di minerale" and "&7di &asmeraldo in ardesia profonda&7." 
+      set slot 34 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate diamond ore named "&bDiamante in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_diamond_ore}% &7blocchi di minerale" and "&7di &bdiamante in ardesia profonda&7." 
+      set slot 39 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether quartz ore named "&fQuarzo del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_quartz_ore}% &7blocchi di minerale" and "&7di &fquarzo del Nether&7." 
+      set slot 40 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether gold ore named "&6Oro del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_gold_ore}% &7blocchi di minerale" and "&7d'&6oro del Nether&7." 
+      set slot 41 of metadata tag "PlayerOfflineCounterGUI" of {_p} to ancient debris named "&fDetriti antichi" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_ancient_debris}% &7blocchi di minerale" and "&7di &fdetriti antichi&7." 
       set slot 49 of metadata tag "PlayerOfflineCounterGUI" of {_p} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
       open metadata tag "PlayerOfflineCounterGUI" of {_p} to {_p}
    else:
       set metadata tag "PlayerOfflineCounterGUI" of {_p} to a new chest inventory with 6 rows named "Anti-Xray: [&4%{_arg}%&r]"
       set slot 2 of metadata tag "PlayerOfflineCounterGUI" of {_p} to book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul" and "&7server."
-      set slot 5 of metadata tag "PlayerOfflineCounterGUI" of {_p} to {_arg}'s head named "&aMinerali scavati offline di &e%{_arg}%" with lore "&7Passa con il mouse sul minerale di cui vuoi", "&7sapere la quantità scavata da &c%{_arg}%&7.", "&7Clicca sul minerale del quale vorresti", "&7azzerarne il contatore.", "&f" and "&3Totale minerali scavati: &b%{axr::%{_arg}%::offline_total_ores}%"
+      set slot 5 of metadata tag "PlayerOfflineCounterGUI" of {_p} to {_arg}'s head named "&aMinerali scavati offline di &e%{_arg}%" with lore "&7Passa con il mouse sul minerale di cui vuoi", "&7sapere la quantità scavata da &c%{_arg}%&7.", "&7Clicca sul minerale del quale vorresti" and "&7azzerarne il contatore."
       set slot 6 of metadata tag "PlayerOfflineCounterGUI" of {_p} to paper named "&cRipristina contatore" with lore "&7Azzera il contatore dei minerali offline" and "&7di &c%{_arg}%."
       set slot 9, 11, 13, 15 and 17 of metadata tag "PlayerOfflineCounterGUI" of {_p} to yellow stained glass pane named "&f"
       set slot 10, 12, 14 and 16 of metadata tag "PlayerOfflineCounterGUI" of {_p} to orange stained glass pane named "&f"
-      set slot 19 of metadata tag "PlayerOfflineCounterGUI" of {_p} to iron ore named "&fFerro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_iron_ore}% &7blocchi", "&7di minerale di &fferro&7." 
-      set slot 20 of metadata tag "PlayerOfflineCounterGUI" of {_p} to copper ore named "&dRame" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_copper_ore}% &7blocchi", "&7di minerale di &drame&7." 
-      set slot 21 of metadata tag "PlayerOfflineCounterGUI" of {_p} to gold ore named "&eOro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_gold_ore}% &7blocchi", "&7di minerale d'&eoro&7." 
-      set slot 22 of metadata tag "PlayerOfflineCounterGUI" of {_p} to redstone ore named "&cRedstone" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_redstone_ore}% &7blocchi", "&7di minerale di &credstone&7." 
-      set slot 23 of metadata tag "PlayerOfflineCounterGUI" of {_p} to lapis ore named "&9Lapislazzuli" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_lapis_ore}% &7blocchi", "&7di minerale di &9lapislazzuli&7." 
-      set slot 24 of metadata tag "PlayerOfflineCounterGUI" of {_p} to emerald ore named "&aSmeraldo" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_emerald_ore}% &7blocchi", "&7di minerale di &asmeraldo&7." 
-      set slot 25 of metadata tag "PlayerOfflineCounterGUI" of {_p} to diamond ore named "&bDiamante" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_diamond_ore}% &7blocchi", "&7di minerale di &bdiamante&7." 
-      set slot 28 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate iron ore named "&fFerro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_iron_ore}% &7blocchi di minerale", "&7di &fferro in ardesia profonda&7." 
-      set slot 29 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate copper ore named "&dRame in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_copper_ore}% &7blocchi di minerale", "&7di &drame in ardesia profonda&7." 
-      set slot 30 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate gold ore named "&eOro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_gold_ore}% &7blocchi di minerale", "&7d'&eoro in ardesia profonda&7." 
-      set slot 31 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate redstone ore named "&cRedstone in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_redstone_ore}% &7blocchi di minerale", "&7di &credstone in ardesia profonda&7." 
-      set slot 32 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate lapis ore named "&9Lapislazzuli in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_lapis_ore}% &7blocchi di minerale", "&7di &9lapislazzuli in ardesia profonda&7." 
-      set slot 33 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate emerald ore named "&aSmeraldo in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_emerald_ore}% &7blocchi di minerale", "&7di &asmeraldo in ardesia profonda&7." 
-      set slot 34 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate diamond ore named "&bDiamante in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_diamond_ore}% &7blocchi di minerale", "&7di &bdiamante in ardesia profonda&7." 
-      set slot 39 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether quartz ore named "&fQuarzo del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_quartz_ore}% &7blocchi di minerale", "&7di &fquarzo del Nether&7." 
-      set slot 40 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether gold ore named "&6Oro del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_gold_ore}% &7blocchi di minerale", "&7d'&6oro del Nether&7." 
-      set slot 41 of metadata tag "PlayerOfflineCounterGUI" of {_p} to ancient debris named "&fDetriti antichi" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_ancient_debris}% &7blocchi di minerale", "&7di &fdetriti antichi&7." 
+      set slot 19 of metadata tag "PlayerOfflineCounterGUI" of {_p} to iron ore named "&fFerro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_iron_ore}% &7blocchi" and "&7di minerale di &fferro&7." 
+      set slot 20 of metadata tag "PlayerOfflineCounterGUI" of {_p} to copper ore named "&dRame" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_copper_ore}% &7blocchi" and "&7di minerale di &drame&7." 
+      set slot 21 of metadata tag "PlayerOfflineCounterGUI" of {_p} to gold ore named "&eOro" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_gold_ore}% &7blocchi" and "&7di minerale d'&eoro&7." 
+      set slot 22 of metadata tag "PlayerOfflineCounterGUI" of {_p} to redstone ore named "&cRedstone" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_redstone_ore}% &7blocchi" and "&7di minerale di &credstone&7." 
+      set slot 23 of metadata tag "PlayerOfflineCounterGUI" of {_p} to lapis ore named "&9Lapislazzuli" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_lapis_ore}% &7blocchi" and "&7di minerale di &9lapislazzuli&7." 
+      set slot 24 of metadata tag "PlayerOfflineCounterGUI" of {_p} to emerald ore named "&aSmeraldo" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_emerald_ore}% &7blocchi" and "&7di minerale di &asmeraldo&7." 
+      set slot 25 of metadata tag "PlayerOfflineCounterGUI" of {_p} to diamond ore named "&bDiamante" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_diamond_ore}% &7blocchi" and "&7di minerale di &bdiamante&7." 
+      set slot 28 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate iron ore named "&fFerro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_iron_ore}% &7blocchi di minerale" and "&7di &fferro in ardesia profonda&7." 
+      set slot 29 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate copper ore named "&dRame in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_copper_ore}% &7blocchi di minerale" and "&7di &drame in ardesia profonda&7." 
+      set slot 30 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate gold ore named "&eOro in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_gold_ore}% &7blocchi di minerale" and "&7d'&eoro in ardesia profonda&7." 
+      set slot 31 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate redstone ore named "&cRedstone in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_redstone_ore}% &7blocchi di minerale" and "&7di &credstone in ardesia profonda&7." 
+      set slot 32 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate lapis ore named "&9Lapislazzuli in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_lapis_ore}% &7blocchi di minerale" and "&7di &9lapislazzuli in ardesia profonda&7." 
+      set slot 33 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate emerald ore named "&aSmeraldo in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_emerald_ore}% &7blocchi di minerale" and "&7di &asmeraldo in ardesia profonda&7." 
+      set slot 34 of metadata tag "PlayerOfflineCounterGUI" of {_p} to deepslate diamond ore named "&bDiamante in ardesia profonda" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_deepslate_diamond_ore}% &7blocchi di minerale" and "&7di &bdiamante in ardesia profonda&7." 
+      set slot 39 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether quartz ore named "&fQuarzo del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_quartz_ore}% &7blocchi di minerale" and "&7di &fquarzo del Nether&7." 
+      set slot 40 of metadata tag "PlayerOfflineCounterGUI" of {_p} to nether gold ore named "&6Oro del Nether" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_nether_gold_ore}% &7blocchi di minerale" and "&7d'&6oro del Nether&7." 
+      set slot 41 of metadata tag "PlayerOfflineCounterGUI" of {_p} to ancient debris named "&fDetriti antichi" with lore "&f", "&c%{_arg}% &7ha scavato &6%{axr::%{_arg}%::offline_ancient_debris}% &7blocchi di minerale" and "&7di &fdetriti antichi&7." 
       set slot 49 of metadata tag "PlayerOfflineCounterGUI" of {_p} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
       open metadata tag "PlayerOfflineCounterGUI" of {_p} to {_p}
 on inventory click:
@@ -157,7 +194,6 @@ on inventory click:
          openAXRnotifications(player)
       else if index of event-slot is 6:
          cancel event
-         set {axr::%{checkofflineplayer::latest}%::offline_total_ores} to 0
          set {axr::%{checkofflineplayer::latest}%::offline_iron_ore} to 0
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_iron_ore} to 0
          set {axr::%{checkofflineplayer::latest}%::offline_copper_ore} to 0
@@ -180,87 +216,70 @@ on inventory click:
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 19:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_iron_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_iron_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 20:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_copper_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_copper_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 21:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_gold_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_gold_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 22:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_redstone_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_redstone_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 23:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_lapis_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_lapis_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 24:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_emerald_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_emerald_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 25:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_diamond_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_diamond_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 28:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_iron_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_iron_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 29:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_copper_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_copper_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 30:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_gold_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_gold_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 31:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_redstone_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_redstone_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 32:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_lapis_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_lapis_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 33:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_emerald_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_emerald_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 34:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_deepslate_diamond_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_deepslate_diamond_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 39:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_nether_quartz_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_nether_quartz_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 40:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_nether_gold_ore} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_nether_gold_ore} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 41:
          cancel event
-         remove {axr::%{checkofflineplayer::latest}%::offline_ancient_debris} from {axr::%{checkofflineplayer::latest}%::offline_total_ores}
          set {axr::%{checkofflineplayer::latest}%::offline_ancient_debris} to 0
          openAXRofflineores(player, {checkofflineplayer::latest})
       else if index of event-slot is 49:

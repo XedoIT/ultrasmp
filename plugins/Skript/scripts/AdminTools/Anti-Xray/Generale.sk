@@ -25,7 +25,6 @@
 # Detriti antichi -                                  %skript_axr::{player}::ancient_debris%
 # ---------------------------------------------------------------------------------------------------------
 # {--- [PLACEHOLDERS SCRIPT (OFFLINE)] ---}
-# Tutti i minerali -                                 %skript_axr::{player}::offline_total_ores%
 # Minerale di ferro -                                %skript_axr::{player}::offline_iron_ore%
 # Minerale di ferro in ardesia profonda -            %skript_axr::{player}::offline_deepslate_iron_ore%
 # Minerale di rame -                                 %skript_axr::{player}::offline_copper_ore%
@@ -137,7 +136,7 @@ options:
   # ORO DEL NETHER
     nether_gold_alert_msg: &7ha scavato &6%{axr_counter::%arg-1%::nether_gold_ore}% blocchi di minerale d'oro del Nether &7in &e%{timer}% secondi&7!
   # DETRITI ANTICHI
-    ancient_debris_alert_msg: &7ha scavato &f%{counter::%arg-1%::ancient_debris}% blocchi di detriti antichi &7in &e%{timer}% secondi&7!
+    ancient_debris_alert_msg: &7ha scavato &f%{axr_counter::%arg-1%::ancient_debris}% blocchi di detriti antichi &7in &e%{timer}% secondi&7!
   # MESSAGGIO NOTIFICA MINERALI
     hover_alert_msg: &7Clicca per teletrasportarti da &c%arg-1%
   # COMANDI MESSAGGIO NOTIFICA MINERALI
@@ -262,7 +261,13 @@ on load:
         set {detect_nether_gold_ore_mined_in_x_sec} to 21
  # CONFIGURAZIONE STATO VARIABILI SISTEMA
     else if {counter::status}, {autokick::status}, {orealerts::status} or {consolenotify::status} is not set:
-        set {counter::status}, {autokick::status}, {orealerts::status} or {consolenotify::status} to "&cDISATTIVATO"
+        set {counter::status}, {autokick::status}, {orealerts::status} or {consolenotify::status} to "{@disabled}"
+    else if {offline_orealerts::info} and {orealerts::info} is not set:
+        set {offline_orealerts::info} and {orealerts::info} to "&cdisattivati"
+    else if {axr::counter::info} and {autoalerts::info} is not set:
+        set {axr::counter::info} and {autoalerts::info} to "{@disabled}"
+    else if {consolenotify::info} is not set:
+        set {consolenotify::info} to "&cdisattivate"
  # CONFIGURAZIONE STATO VARIABILI MINERALI
     else if {alert_iron::status}, {alert_deepslate_iron::status}, {alert_copper::status}, {alert_deepslate_copper::status}, {alert_gold::status}, {alert_deepslate_gold::status}, {alert_redstone::status}, {alert_deepslate_redstone::status}, {alert_lapis::status}, {alert_deepslate_lapis::status}, {alert_emerald::status}, {alert_deepslate::status}, {alert_diamond::status}, {alert_deepslate_diamond::status}, {alert_ancient_debris::status}, {autoalert_iron::status}, {autoalert_deepslate_iron::status}, {autoalert_copper::status}, {autoalert_deepslate_copper::status}, {autoalert_gold::status}, {autoalert_deepslate_gold::status}, {autoalert_redstone::status}, {autoalert_deepslate_redstone::status}, {autoalert_lapis::status}, {autoalert_deepslate_lapis::status}, {autoalert_emerald::status}, {autoalert_deepslate_emerald::status}, {autoalert_diamond::status}, {autoalert_deepslate_diamond::status}, {autoalert_ancient_debris::status}, {autoalert_nether_quartz_ore::status} or {autoalert_nether_gold_ore::status} is not set:
         set {alert_iron::status}, {alert_deepslate_iron::status}, {alert_copper::status}, {alert_deepslate_copper::status}, {alert_gold::status}, {alert_deepslate_gold::status}, {alert_redstone::status}, {alert_deepslate_redstone::status}, {alert_lapis::status}, {alert_deepslate_lapis::status}, {alert_emerald::status}, {alert_deepslate_emerald::status}, {alert_diamond::status}, {alert_deepslate_diamond::status}, {alert_ancient_debris::status}, {autoalert_iron::status}, {autoalert_deepslate_iron::status}, {autoalert_copper::status}, {autoalert_deepslate_copper::status}, {autoalert_gold::status}, {autoalert_deepslate_gold::status}, {autoalert_redstone::status}, {autoalert_deepslate_redstone::status}, {autoalert_lapis::status}, {autoalert_deepslate_lapis::status}, {autoalert_emerald::status}, {autoalert_deepslate_emerald::status}, {autoalert_diamond::status}, {autoalert_deepslate_diamond::status}, {autoalert_ancient_debris::status}, {autoalert_nether_quartz_ore::status} or {autoalert_nether_gold_ore::status}, {offline_orealerts::status} to "&aattivato"
@@ -270,8 +275,8 @@ on load:
     loop all players:
         if {axr::%loop-player%::total_ores}, {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore}, {axr::%loop-player%::nether_quartz_ore}, {axr::%loop-player%::nether_gold_ore} or {axr::%loop-player%::ancient_debris} is not set:
             set {axr::%loop-player%::total_ores}, {axr::%loop-player%::iron_ore}, {axr::%loop-player%::deepslate_iron_ore}, {axr::%loop-player%::copper_ore}, {axr::%loop-player%::deepslate_copper_ore}, {axr::%loop-player%::gold_ore}, {axr::%loop-player%::deepslate_gold_ore}, {axr::%loop-player%::lapis_ore}, {axr::%loop-player%::deepslate_lapis_ore}, {axr::%loop-player%::redstone_ore}, {axr::%loop-player%::deepslate_redstone_ore}, {axr::%loop-player%::emerald_ore}, {axr::%loop-player%::deepslate_emerald_ore}, {axr::%loop-player%::diamond_ore}, {axr::%loop-player%::deepslate_diamond_ore}, {axr::%loop-player%::nether_quartz_ore}, {axr::%loop-player%::nether_gold_ore} or {axr::%loop-player%::ancient_debris} to 0
-        else if {axr::%loop-player%::offline_total_ores}, {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore}, {axr::%loop-player%::offline_nether_quartz_ore}, {axr::%loop-player%::offline_nether_gold_ore} or {axr::%loop-player%::offline_ancient_debris} is not set:
-            set {axr::%loop-player%::offline_total_ores}, {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore}, {axr::%loop-player%::offline_nether_quartz_ore}, {axr::%loop-player%::offline_nether_gold_ore} or {axr::%loop-player%::offline_ancient_debris} to 0
+        else if {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore}, {axr::%loop-player%::offline_nether_quartz_ore}, {axr::%loop-player%::offline_nether_gold_ore} or {axr::%loop-player%::offline_ancient_debris} is not set:
+            set {axr::%loop-player%::offline_iron_ore}, {axr::%loop-player%::offline_deepslate_iron_ore}, {axr::%loop-player%::offline_copper_ore}, {axr::%loop-player%::offline_deepslate_copper_ore}, {axr::%loop-player%::offline_gold_ore}, {axr::%loop-player%::offline_deepslate_gold_ore}, {axr::%loop-player%::offline_lapis_ore}, {axr::%loop-player%::offline_deepslate_lapis_ore}, {axr::%loop-player%::offline_redstone_ore}, {axr::%loop-player%::offline_deepslate_redstone_ore}, {axr::%loop-player%::offline_emerald_ore}, {axr::%loop-player%::offline_deepslate_emerald_ore}, {axr::%loop-player%::offline_diamond_ore}, {axr::%loop-player%::offline_deepslate_diamond_ore}, {axr::%loop-player%::offline_nether_quartz_ore}, {axr::%loop-player%::offline_nether_gold_ore} or {axr::%loop-player%::offline_ancient_debris} to 0
  # CONFIGURAZIONE MONDI
     if {axr_worlds::*} is not set:
         set {axr_worlds::*} to "&7Nessun mondo abilitato."
@@ -281,12 +286,13 @@ on load:
    # !! SOLO DEBUG !!
     #delete {axr_worlds::*}
     #delete {all_worlds::*}
+    #delete {axr::alerts}
     send "{@prefix} &9Sistema caricato e pronto! Versione di Minecraft: %minecraft version%" to console
 on join:
     if {axr::%player%::total_ores}, {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore}, {axr::%player%::ancient_debris}, {axr::%player%::nether_quartz_ore} or {axr::%player%::nether_gold_ore} is not set:
         set {axr::%player%::total_ores}, {axr::%player%::iron_ore}, {axr::%player%::deepslate_iron_ore}, {axr::%player%::copper_ore}, {axr::%player%::deepslate_copper_ore}, {axr::%player%::gold_ore}, {axr::%player%::deepslate_gold_ore}, {axr::%player%::lapis_ore}, {axr::%player%::deepslate_lapis_ore}, {axr::%player%::redstone_ore}, {axr::%player%::deepslate_redstone_ore}, {axr::%player%::emerald_ore}, {axr::%player%::deepslate_emerald_ore}, {axr::%player%::diamond_ore}, {axr::%player%::deepslate_diamond_ore}, {axr::%player%::ancient_debris}, {axr::%player%::nether_quartz_ore} or {axr::%player%::nether_gold_ore} to 0
-    else if {axr::%player%::offline_total_ores}, {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} is not set:
-        set {axr::%player%::offline_total_ores}, {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} to 0
+    else if {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} is not set:
+        set {axr::%player%::offline_iron_ore}, {axr::%player%::offline_deepslate_iron_ore}, {axr::%player%::offline_copper_ore}, {axr::%player%::offline_deepslate_copper_ore}, {axr::%player%::offline_gold_ore}, {axr::%player%::offline_deepslate_gold_ore}, {axr::%player%::offline_lapis_ore}, {axr::%player%::offline_deepslate_lapis_ore}, {axr::%player%::offline_redstone_ore}, {axr::%player%::offline_deepslate_redstone_ore}, {axr::%player%::offline_emerald_ore}, {axr::%player%::offline_deepslate_emerald_ore}, {axr::%player%::offline_diamond_ore}, {axr::%player%::offline_deepslate_diamond_ore}, {axr::%player%::offline_ancient_debris}, {axr::%player%::offline_nether_quartz_ore} or {axr::%player%::offline_nether_gold_ore} to 0
     wait 5 seconds
     if player has permission "axr.admin.alerts":
         if {offline_ore_alerts} is true:
@@ -335,7 +341,6 @@ on chat:
             send "{@prefix} &7Elimino i dati offline di &c%{_p}%&7..."
             remove {_p} from {offline_alerts_list::*}
             delete {axr_offline_location::%{_p}%}
-            set {axr::%{_p}%::offline_total_ores} to 0
             set {axr::%{_p}%::offline_iron_ore} to 0
             set {axr::%{_p}%::offline_deepslate_iron_ore} to 0
             set {axr::%{_p}%::offline_copper_ore} to 0
@@ -790,7 +795,7 @@ on chat:
         play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
         delete {auto_nether_gold_ore_set::%player%}
         openAXRsettingsNetherManual(player)
- # OGGETTO CHE APRE LA GUI DELL'ANTI-XRAY (DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!)
+ # OGGETTO CHE APRE LA GUI DELL'ANTI-XRAY
 on right click:
     if player has permission "axr.admin.gui.use":
         if player's tool is a recovery compass named "{@prefix} &7(Click destro)":
@@ -819,7 +824,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                     else:
                         send "{@prefix_hide} &cComando sconosciuto."
                         stop
-            # PARAMETRO DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!
+                        
             else if arg-1 is "item":
                 if arg-2 is not set:
                     if arg-3 is not set:
@@ -1112,6 +1117,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             if player has permission "axr.admin.ore.alerts":
                                 if {axr::alerts} is not set:
                                     set {axr::alerts} to true
+                                    set {orealerts::info} to "&aattivati"
                                     set {orealerts::status} to "{@enabled}"
                                     set {alert_iron::status} to "{@enabled}"
                                     set {alert_deepslate_iron::status} to "{@enabled}"
@@ -1135,7 +1141,9 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                     stop
                                 else:
                                     delete {axr::alerts}
+                                    set {orealerts::info} to "&cdisattivati"
                                     set {orealerts::status} to "{@disabled}"
+                                    set {offline_orealerts::status} to "{@disabled}"
                                     set {alert_iron::status} to "{@disabled}"
                                     set {alert_deepslate_iron::status} to "{@disabled}"
                                     set {alert_gold::status} to "{@disabled}"
@@ -1201,6 +1209,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         if arg-4 is not set:
                             if player has permission "axr.admin.settings.alerts.autocheck":
                                 if {axr::alerts} is not set:
+                                    set {autoalerts::info} to "{@disabled}"
                                     set {autoalerts::status} to "{@disabled}"
                                     set {autokick::status} to "{@disabled}"
                                     set {autoalert_iron::status} to "{@disabled}"
@@ -1226,8 +1235,9 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 else:
                                     if {autokick} is not set:
                                         set {autokick} to true
-                                        set {autokick::status} to "{@enabled}"
+                                        set {autoalerts::info} to "{@enabled}"
                                         set {autoalerts::status} to "{@enabled}"
+                                        set {autokick::status} to "{@enabled}"
                                         set {autoalert_iron::status} to "{@enabled}"
                                         set {autoalert_deepslate_iron::status} to "{@enabled}"
                                         set {autoalert_copper::status} to "{@enabled}"
@@ -1250,6 +1260,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                         stop
                                     else:
                                         delete {autokick}
+                                        set {autoalerts::info} to "{@disabled}"
                                         set {autokick::status} to "{@disabled}"
                                         set {autoalerts::status} to "{@disabled}"
                                         set {autoalert_iron::status} to "{@disabled}"
@@ -1287,16 +1298,16 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         if {console} is true:
                             delete {console}
                             set {consolenotify::status} to "{@disabled}"
+                            set {consolenotify::info} to "&cdisattivate"
                             send "{@prefix} &7Gli avvisi in console sono stati &cdisattivati&7."
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                            openAXRsettings(player)
                             stop
                         else:
                             set {console} to true
                             set {consolenotify::status} to "{@enabled}"
+                            set {consolenotify::info} to "&aattivate"
                             send "{@prefix} &7Gli avvisi in console sono stati &aattivati&7."
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                            openAXRsettings(player)
                             stop
                     
                     else if arg-3 is not "autocheck" or "console":
@@ -1337,6 +1348,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             if player has permission "axr.admin.settings.counter":
                                 if {axr::counter} is not set:
                                     set {axr::counter} to true
+                                    set {axr::counter::info} to "{@enabled}"
                                     send "{@prefix} &7Il contatore dei minerali è stato &aattivato&7."
                                     set {counter::status} to "{@enabled}"
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
@@ -1344,6 +1356,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                     stop
                                 else if {axr::counter} is true:
                                     delete {axr::counter}
+                                    set {axr::counter::info} to "{@disabled}"
                                     send "{@prefix} &7Il contatore dei minerali è stato &cdisattivato&7."
                                     set {counter::status} to "{@disabled}"
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
@@ -1364,7 +1377,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                         send "{@prefix} &cComando sconosciuto."
                         send "{@prefix} &cUtilizzo: &6/axr settings alerts"
                         send "{@prefix} &cUtilizzo: &6/axr settings timer"
-                        send "{@prefix} &cUtilizzo: &6/axr settings count"
+                        send "{@prefix} &cUtilizzo: &6/axr settings counter"
                         stop
             else if arg-1 is "offline":
                 if arg-2 is not set:
@@ -1389,12 +1402,14 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 if {offline_ore_alerts} is not set:
                                     set {offline_ore_alerts} to true
                                     set {offline_orealerts::status} to "{@enabled}"
+                                    set {offline_orealerts::info} to "&aattivati"
                                     send "{@prefix} &7Gli avvisi offline sono stati &aattivati."
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     stop
                                 else:
                                     delete {offline_ore_alerts}
                                     set {offline_orealerts::status} to "{@disabled}"
+                                    set {offline_orealerts::info} to "&cdisattivati"
                                     send "{@prefix} &7Gli avvisi offline sono stati &cdisattivati."
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     stop
@@ -1443,7 +1458,6 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                         send "{@prefix} &7Elimino i dati offline di &c%arg-4%&7..."
                                         remove arg-4 from {offline_alerts_list::*}
                                         delete {axr_offline_location::%arg-4%}
-                                        set {axr::%arg-4%::offline_total_ores} to 0
                                         set {axr::%arg-4%::offline_iron_ore} to 0
                                         set {axr::%arg-4%::offline_deepslate_iron_ore} to 0
                                         set {axr::%arg-4%::offline_copper_ore} to 0
@@ -1968,6 +1982,7 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                             else:
                                 delete {axr::alerts}
                                 set {orealerts::status} to "{@disabled}"
+                                set {offline_orealerts::status} to "{@disabled}"
                                 set {alert_iron::status} to "{@disabled}"
                                 set {alert_deepslate_iron::status} to "{@disabled}"
                                 set {alert_gold::status} to "{@disabled}"
@@ -2184,7 +2199,6 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                     send "{@prefix} &7Elimino i dati offline di &c%arg-4%&7..."
                                     remove arg-4 from {offline_alerts_list::*}
                                     delete {axr_offline_location::%arg-4%}
-                                    set {axr::%arg-4%::offline_total_ores} to 0
                                     set {axr::%arg-4%::offline_iron_ore} to 0
                                     set {axr::%arg-4%::offline_deepslate_iron_ore} to 0
                                     set {axr::%arg-4%::offline_copper_ore} to 0
@@ -2271,7 +2285,6 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                                 send "{@prefix} &c%arg-4% &7ha scavato &6%{axr::%arg-4%::offline_nether_quartz_ore}% &7blocchi di minerale di &fquarzo del Nether&7."
                                 send "{@prefix} &c%arg-4% &7ha scavato &6%{axr::%arg-4%::offline_nether_gold_ore}% &7blocchi di minerale d'&6oro del Nether&7."
                                 send "{@prefix} &c%arg-4% &7ha scavato &6%{axr::%arg-4%::offline_ancient_debris}% &7blocchi di minerale di &fdetriti antichi&7."
-                                send "{@prefix} &3Totale minerali scavati offline: &b%{axr::%arg-4%::offline_total_ores}%"
                                 stop
                         else if arg-4 has not played before:
                             send "{@prefix} &cNon ci sono dati per &6%arg-4%&c."
@@ -2362,6 +2375,20 @@ command /axr [<text>] [<text>] [<text>] [<offline player>]:
                 send "{@prefix} &cUtilizzo: &6/axr help"
                 send "{@prefix} &cUtilizzo: &6/axr reload"
                 stop
+
+on tab complete of "/axr" or "/antixray":
+    set tab completions for position 1 to "item", "world", "ore", "settings", "offline", "help" and "reload"
+    if tab arg-1 is "world":
+        set tab completions for position 2 to "add" and "remove"
+    else if tab arg-1 is "ore":
+        set tab completions for position 2 to "view for", "counter", "clear all" and "alerts all"
+    else if tab arg-1 is "settings":
+        set tab completions for position 2 to "alerts", "timer" and "counter"
+        if tab arg-2 is "alerts":
+            set tab completions for position 3 to "autocheck" and "console"
+    else if tab arg-1 is "offline":
+        set tab completions for position 2 to "toggle", "clear for", "clear all", "view for", "list" and "teleport to"
+
 command /axrtimer [<offline player>] [<integer>]:
     description: Gestione complessiva dell'Anti-Xray.
     usage: {@prefix} &cSecondo parametro non valido! &6Devi inserire un numero intero.
@@ -3166,7 +3193,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_iron_ore} to {axr_counter::%arg-1%::iron_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::iron_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@iron_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_iron_ore} is greater or equal to {deepslate_iron_ore_mined_in_x_sec}:
@@ -3175,7 +3201,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_iron_ore} to {axr_counter::%arg-1%::deepslate_iron_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_iron_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_iron_alert_msg}" to console
                             else if {axr_counter::%arg-1%::copper_ore} is greater or equal to {copper_ore_mined_in_x_sec}:
@@ -3184,7 +3209,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_copper_ore} to {axr_counter::%arg-1%::copper_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::copper_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@copper_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_copper_ore} is greater or equal to {deepslate_copper_ore_mined_in_x_sec}:
@@ -3193,7 +3217,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_copper_ore} to {axr_counter::%arg-1%::deepslate_copper_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_copper_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_copper_alert_msg}" to console
                             else if {axr_counter::%arg-1%::gold_ore} is greater or equal to {gold_ore_mined_in_x_sec}:
@@ -3202,7 +3225,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_gold_ore} to {axr_counter::%arg-1%::gold_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::gold_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@gold_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_gold_ore} is greater or equal to {deepslate_gold_ore_mined_in_x_sec}:
@@ -3211,7 +3233,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_gold_ore} to {axr_counter::%arg-1%::deepslate_gold_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_gold_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_gold_alert_msg}" to console
                             else if {axr_counter::%arg-1%::redstone_ore} is greater or equal to {redstone_ore_mined_in_x_sec}:
@@ -3220,7 +3241,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_redstone_ore} to {axr_counter::%arg-1%::redstone_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::redstone_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@redstone_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_redstone_ore} is greater or equal to {deepslate_redstone_ore_mined_in_x_sec}:
@@ -3229,7 +3249,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_redstone_ore} to {axr_counter::%arg-1%::deepslate_redstone_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_redstone_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_redstone_alert_msg}" to console
                             else if {axr_counter::%arg-1%::lapis_ore} is greater or equal to {lapis_ore_mined_in_x_sec}:
@@ -3238,7 +3257,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_lapis_ore} to {axr_counter::%arg-1%::lapis_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::lapis_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@lapis_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_lapis_ore} is greater or equal to {deepslate_lapis_ore_mined_in_x_sec}:
@@ -3247,7 +3265,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_lapis_ore} to {axr_counter::%arg-1%::deepslate_lapis_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_lapis_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_lapis_alert_msg}" to console
                             else if {axr_counter::%arg-1%::emerald_ore} is greater or equal to {emerald_ore_mined_in_x_sec}:
@@ -3256,7 +3273,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_emerald_ore} to {axr_counter::%arg-1%::emerald_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::emerald_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@emerald_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_emerald_ore} is greater or equal to {deepslate_emerald_ore_mined_in_x_sec}:
@@ -3265,7 +3281,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_emerald_ore} to {axr_counter::%arg-1%::deepslate_emerald_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_emerald_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_emerald_alert_msg}" to console
                             else if {axr_counter::%arg-1%::diamond_ore} is greater or equal to {diamond_ore_mined_in_x_sec}:
@@ -3274,7 +3289,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_diamond_ore} to {axr_counter::%arg-1%::diamond_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::diamond_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@diamond_alert_msg}" to console
                             else if {axr_counter::%arg-1%::deepslate_diamond_ore} is greater or equal to {deepslate_diamond_ore_mined_in_x_sec}:
@@ -3283,7 +3297,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_deepslate_diamond_ore} to {axr_counter::%arg-1%::deepslate_diamond_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::deepslate_diamond_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@deepslate_diamond_alert_msg}" to console
                             else if {axr_counter::%arg-1%::nether_quartz_ore} is greater or equal to {nether_quartz_ore_mined_in_x_sec}:
@@ -3292,7 +3305,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_nether_quartz_ore} to {axr_counter::%arg-1%::nether_quartz_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::nether_quartz_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@nether_quartz_alert_msg}" to console
                             else if {axr_counter::%arg-1%::nether_gold_ore} is greater or equal to {nether_gold_ore_mined_in_x_sec}:
@@ -3301,7 +3313,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_nether_gold_ore} to {axr_counter::%arg-1%::nether_gold_ore}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::nether_gold_ore} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@nether_gold_alert_msg}" to console
                             else if {axr_counter::%arg-1%::ancient_debris} is greater or equal to {ancient_debris_mined_in_x_sec}:
@@ -3310,7 +3321,6 @@ command /axrtimer [<offline player>] [<integer>]:
                                         add arg-1 to {offline_alerts_list::*}
                                         set {axr::%arg-1%::offline_ancient_debris} to {axr_counter::%arg-1%::ancient_debris}
                                         set {axr_offline_location::%arg-1%} to arg-1's location
-                                        add {axr_counter::%arg-1%::ancient_debris} to {axr::%arg-1%::offline_total_ores}
                                 if {console} is true:
                                     send "{@prefix} &c%arg-1% {@ancient_debris_alert_msg}" to console
                             wait 1 tick
