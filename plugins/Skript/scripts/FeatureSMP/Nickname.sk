@@ -31,7 +31,7 @@ command /nick [<text>] [<text>] [<offline player>]:
                     if arg-3 is not set:
                         if player has permission "nick.other":
                             send "{@prefix} &6Scegli il soprannome di un giocatore."
-                            send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6> [&egiocatore]"
+                            send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6> [&egiocatore&6]"
                             stop
                         else:
                             send "{@prefix} &6Scegli il tuo soprannome."
@@ -214,7 +214,7 @@ command /nick [<text>] [<text>] [<offline player>]:
                 if arg-2 is not set:
                     if arg-3 is not set:
                         send "{@prefix} &6Scegli il soprannome di un giocatore."
-                        send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6> <&egiocatore>"
+                        send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6> <&egiocatore&6>"
                         stop
             else if arg-1 is "set":
                 if arg-2 is not set:
@@ -282,3 +282,8 @@ command /nick [<text>] [<text>] [<offline player>]:
                 send "{@prefix} &cUtilizzo: &6/nick clear <&egiocatore&6>"
                 send "{@prefix} &cUtilizzo: &6/nick list"
                 stop
+
+on tab complete of "/nick" or "/nickname":
+    set tab completions for position 1 to "set", "list" and "clear"
+    if tab arg-1 is "set":
+        set tab completions for position 2 to "[<soprannome>]"

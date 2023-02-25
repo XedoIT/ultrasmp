@@ -150,7 +150,7 @@ command /gm [<text>] [<offline player>]:
 							play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
 							stop
 				
-		if sender is console:
+		else:
 			if arg-1 is not set:
 				if arg-2 is not set:
 					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
@@ -247,6 +247,9 @@ command /gm [<text>] [<offline player>]:
 							send "{@prefix} &6%arg-2% &cè già in modalità &aspettatore&c!"
 							stop
 
+on tab complete of "/gm":
+	set tab completions for position 1 to "survival", "creative", "adventure" and "spectator"
+	
 command /gms [<offline player>]:
 	permission: gms.use
 	permission message: &8[&4&lINFO&8] &cComando sconosciuto.

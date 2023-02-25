@@ -13,12 +13,11 @@ every tick:
 #--------------------------------------------#
 #          MESSAGGI AUTOMATICI CHAT          #
 #--------------------------------------------#
-every 45 minutes:
-    loop all players:
-        send "&c&lHai trovato qualche bug?" to loop-player
-        send "&c&lSegnalalo con &6/bug &c&lper far sì che venga risolto al più presto." to loop-player
-        play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
-        stop
+#every 45 minutes:
+    #loop all players:
+        #send "&c&lHai trovato qualche bug?" to loop-player
+        #send "&c&lSegnalalo con &6/bug &c&lper far sì che venga risolto al più presto." to loop-player
+        #play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
 #--------------------------------------------#
 #               TAB COMPLETER                #
 #--------------------------------------------#
@@ -27,59 +26,8 @@ import:
     java.util.ArrayList
     java.util.List
 
-on TabCompleteEvent:
-    if event.getBuffer() is "/points ", "/punti " or "/p ":
-        set {_list} to new ArrayList()
-        {_list}.add("check")
-        {_list}.add("reset")
-        {_list}.add("set")
-        {_list}.add("give")
-        {_list}.add("add")
-        {_list}.add("remove")
-        #{_list}.add("auto")
-        {_list}.add("help")
-        {_list}.add("info")
-        {_list}.add("reload")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/rank ", "/alignment " or "/reputazione ":
-        set {_list} to new ArrayList()
-        {_list}.add("check")
-        {_list}.add("set")
-        {_list}.add("list")
-        {_list}.add("reset")
-        {_list}.add("help")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/gm ":
-        set {_list} to new ArrayList()
-        {_list}.add("survival")
-        {_list}.add("creative")
-        {_list}.add("adventure")
-        {_list}.add("spectator")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/idle ":
-        set {_list} to new ArrayList()
-        {_list}.add("on")
-        {_list}.add("off")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/pvp ":
-        set {_list} to new ArrayList()
-        {_list}.add("on")
-        {_list}.add("off")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/aiuto ":
-        set {_list} to new ArrayList()
-        {_list}.add("skript")
-        {_list}.add("tp")
-        {_list}.add("homewarps")
-        {_list}.add("general")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/comandi ":
+on TabCompleteEvent:        
+    if event.getBuffer() is "/aiuto ":
         set {_list} to new ArrayList()
         {_list}.add("skript")
         {_list}.add("tp")
@@ -106,36 +54,6 @@ on TabCompleteEvent:
         {_list}.add("chatmessages")
         {_list}.add("chatmessages2")
         {_list}.add("chatmessages3")
-        event.setCompletions({_list})
-
-    else if event.getBuffer() is "/medals " or "/medaglie ":
-        set {_list} to new ArrayList()
-        {_list}.add("check")
-        {_list}.add("reset")
-        {_list}.add("set")
-        {_list}.add("add")
-        {_list}.add("remove")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/pings ":
-        set {_list} to new ArrayList()
-        {_list}.add("help")
-        {_list}.add("info")
-        {_list}.add("reload")
-        event.setCompletions({_list})
-
-    else if event.getBuffer() is "/playtime " or "/pt ":
-        set {_list} to new ArrayList()
-        {_list}.add("total")
-        {_list}.add("session")
-        event.setCompletions({_list})
-
-    else if event.getBuffer() is "/actionbar " or "/ab ":
-        set {_list} to new ArrayList()
-        {_list}.add("manutenzione")
-        {_list}.add("god")
-        {_list}.add("fly")
-        {_list}.add("uptime")
         event.setCompletions({_list})
 
 #--------------------------------------------#

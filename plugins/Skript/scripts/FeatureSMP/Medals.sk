@@ -260,3 +260,7 @@ command /medals [<text>] [<offline player>] [<integer>]:
 			else if arg-1 is not "check", "set", "add", "remove", "reset" or "reload":
 				send "{@error_prefix} &cParametro sconosciuto."
 				stop
+
+on tab complete of "/medals" or "/medaglie":
+	if player has permission "medals.commands":
+		set tab completions for position 1 to "check", "reset", "set", "add" and "remove"

@@ -154,21 +154,31 @@ on inventory click:
          openAXRminerals(player)
       else if index of event-slot is 31:
          cancel event
-         if {checkplayer::latest} is not set:
-            close player's inventory
-            send "{@prefix} &cSpecifica il nome del giocatore che vuoi controllare."
-            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-            set {lookup::%player%} to true
-         else:
-            send "{@prefix} &cQualcun altro sta controllando i minerali di un giocatore."
-            send "{@prefix} &cAttendi qualche istante prima di poter utilizzare questo comando."
+         if {axr::counter} isn't set:
+            send "{@prefix} &cQuesta funzione non è disponibile se il contatore dei minerali è disattivato."
+            send "{@prefix} &cVai su ""&eImpostazioni&c"" e clicca su ""&bContatore minerali&c"" per attivarlo."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+         else:
+            if {checkplayer::latest} isn't set:
+               close player's inventory
+               send "{@prefix} &cSpecifica il nome del giocatore che vuoi controllare."
+               play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+               set {lookup::%player%} to true
+            else:
+               send "{@prefix} &cQualcun altro sta controllando i minerali di un giocatore."
+               send "{@prefix} &cAttendi qualche istante prima di poter utilizzare questo comando."
+               play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
       else if index of event-slot is 33:
          cancel event
-         close player's inventory
-         send "{@prefix} &cSpecifica il nome del giocatore a cui vuoi azzerare i minerali."
-         play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-         set {clearall::%player%} to true
+         if {axr::counter} isn't set:
+            send "{@prefix} &cQuesta funzione non è disponibile se il contatore dei minerali è disattivato."
+            send "{@prefix} &cVai su ""&eImpostazioni&c"" e clicca su ""&bContatore minerali&c"" per attivarlo."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+         else:
+            close player's inventory
+            send "{@prefix} &cSpecifica il nome del giocatore di cui vuoi azzerare i minerali."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {clearall::%player%} to true
       else if index of event-slot is 49:
          cancel event
          send "&cIn arrivo..."

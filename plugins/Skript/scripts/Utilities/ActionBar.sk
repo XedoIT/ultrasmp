@@ -3,6 +3,7 @@ options:
 	
 command /actionbar [<text>]:
 	description: Attiva o disattiva la visualizzazione di una determinata action bar.
+	aliases: /ab
 	trigger:
 		if arg-1 is "manutenzione" or "maintenance":
 			if player has permission "maintenance.actionbar":
@@ -52,6 +53,9 @@ command /actionbar [<text>]:
 					send "{@prefix} &cAction bar disattivata per &6Flymode&a."
 					stop
 
+on tab complete of "/actionbar" or "/ab":
+	set tab completions for position 1 to "maintenance", "uptime", "god" and "fly"
+	
 every 10 ticks:
 	loop all players:
 		if {afk::%loop-player%} is true:

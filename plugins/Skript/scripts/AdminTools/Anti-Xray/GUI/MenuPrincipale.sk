@@ -1,7 +1,7 @@
 options:
  # GENERALI
     prefix: &6[&e&lAnti-Xray&6]
-    version: 1.2 (b321)
+    version: 1.0
  # SUONI
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport

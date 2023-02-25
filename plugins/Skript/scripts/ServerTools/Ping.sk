@@ -82,6 +82,10 @@ command /pings [<text>]:
 				wait 10 ticks
 				send "{@prefix} &aConfig ricaricato!"
 				stop
+
+on tab complete of "/pings":
+	set tab completions for position 1 to "help", "info" and "reload"
+	
 #--------------------------------------------#
 #				     PING					 #
 #--------------------------------------------#
