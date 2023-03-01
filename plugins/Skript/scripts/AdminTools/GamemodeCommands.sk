@@ -1,473 +1,539 @@
 options:
-	prefix: &6[&a&lGM&6]
+    prefix: &6[&a&lGM&6]
 
 on join:
-	if gamemode of player is survival:
-		set {gm::%player%::status} to "&fSopravvivenza"
-	else if gamemode of player is creative:
-		set {gm::%player%::status} to "&fCreativa"
-	else if gamemode of player is adventure:
-		set {gm::%player%::status} to "&fAvventura"
-	else if gamemode of player is spectator:
-		set {gm::%player%::status} to "&fSpettatore"
-		
+    if gamemode of player is survival:
+        if {gm::%player%::status} is not set:
+            set {gm::%player%::status} to "&fSopravvivenza"
+    else if gamemode of player is creative:
+        if {gm::%player%::status} is not set:
+            set {gm::%player%::status} to "&fCreativa"
+    else if gamemode of player is adventure:
+        if {gm::%player%::status} is not set:
+            set {gm::%player%::status} to "&fAvventura"
+    else if gamemode of player is spectator:
+        if {gm::%player%::status} is not set:
+            set {gm::%player%::status} to "&fSpettatore"
+        
 command /gm [<text>] [<offline player>]:
-	permission: gm.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-	description: Modifica la modalità di gioco di un giocatore.
-	executable by: player, console
-	trigger:
-		if sender is player:
-			if arg-1 is not set:
-				if arg-2 is not set:
-					send "{@prefix} &cUtilizzo: &6/gm < &e0&6 | &e1&6 | &e2&6 | &e3&6 > [&egiocatore&6]"
-					stop
-				else:
-					send "{@prefix} &cUtilizzo: &6/gm < &e0&6 | &e1&6 | &e2&6 | &e3&6 > [&egiocatore&6]"
-					stop
-						
-			else if arg-1 is "survival", "s" or "0":
-				if arg-2 is not set:
-					if gamemode of player is not survival:
-						set gamemode of player to survival
-						set {gm::%player%::status} to "&fSopravvivenza"
-						set {fly::%player%} to false
-						set player's flight mode to false
-						send "{@prefix} &aSei in modalità &csopravvivenza&a."
-						stop
-					else:
-						send "{@prefix} &cSei già in modalità &asopravvivenza&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-					else:
-						if gamemode of arg-2 is not survival:
-							set gamemode of arg-2 to survival
-							set {gm::%arg-2%::status} to "&fSopravvivenza"
-							set {fly::%arg-2%} to false
-							set arg-2's flight mode to false
-							send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to player
-							send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &asopravvivenza&c!"
-							play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-							stop
-						
-			else if arg-1 is "creative", "c" or "1":
-				if arg-2 is not set:
-					if gamemode of player is not creative:
-						set gamemode of player to creative
-						set {gm::%player%::status} to "&fCreativa"
-						set {fly::%player%} to true
-						set player's flight mode to true
-						send "{@prefix} &aSei in modalità &ccreativa&a."
-						stop
-					else:
-						send "{@prefix} &cSei già in modalità &acreativa&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-					else:
-						if gamemode of arg-2 is not creative:
-							set gamemode of arg-2 to creative
-							set {gm::%arg-2%::status} to "&fCreativa"
-							set {fly::%arg-2%} to true
-							set arg-2's flight mode to true
-							send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to player
-							send "{@prefix} &aSei in modalità &ccreativa&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &acreativa&c!"
-							play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-							stop
+    permission: gm.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Modifica la modalità di gioco di un giocatore.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    send "{@prefix} &cComando incompleto."
+                    send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> [&egiocatore&6]"
+                    send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> [&egiocatore&6]"
+                    send "{@prefix} &cUtilizzo: &6/gm <&eadventure&6> [&egiocatore&6]"
+                    send "{@prefix} &cUtilizzo: &6/gm <&espectator&6> [&egiocatore&6]"
+                    stop
+                        
+            else if arg-1 is "survival", "s" or "0":
+                if arg-2 is not set:
+                    if gamemode of player is not survival:
+                        set gamemode of player to survival
+                        set {gm::%player%::status} to "&fSopravvivenza"
+                        set player's flight mode to false
+                        set {fly::%player%} to false
+                        set {fly::%player%::status} to "&cNo"
+                        delete {fly::%player%::ab}
+                        send "{@prefix} &aSei in modalità &csopravvivenza&a."
+                        stop
+                    else:
+                        send "{@prefix} &cSei già in modalità &asopravvivenza&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        if gamemode of arg-2 is not survival:
+                            set gamemode of arg-2 to survival
+                            set {gm::%arg-2%::status} to "&fSopravvivenza"
+                            set arg-2's flight mode to false
+                            set {fly::%arg-2%} to false
+                            set {fly::%arg-2%::status} to "&cNo"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to player
+                            send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &asopravvivenza&c!"
+                            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                            stop
+                        
+            else if arg-1 is "creative", "c" or "1":
+                if arg-2 is not set:
+                    if gamemode of player is not creative:
+                        set gamemode of player to creative
+                        set {gm::%player%::status} to "&fCreativa"
+                        set player's flight mode to true
+                        set {fly::%player%} to true
+                        set {fly::%player%::status} to "&aSì"
+                        delete {fly::%player%::ab}
+                        send "{@prefix} &aSei in modalità &ccreativa&a."
+                        stop
+                    else:
+                        send "{@prefix} &cSei già in modalità &acreativa&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        if gamemode of arg-2 is not creative:
+                            set gamemode of arg-2 to creative
+                            set {gm::%arg-2%::status} to "&fCreativa"
+                            set arg-2's flight mode to true
+                            set {fly::%arg-2%} to true
+                            set {fly::%arg-2%::status} to "&aSì"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to player
+                            send "{@prefix} &aSei in modalità &ccreativa&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &acreativa&c!"
+                            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                            stop
 
-			else if arg-1 is "adventure", "a" or "2":
-				if arg-2 is not set:
-					if gamemode of player is not adventure:
-						set gamemode of player to adventure
-						set {gm::%player%::status} to "&fAvventura"
-						set {fly::%player%} to false
-						set player's flight mode to false
-						send "{@prefix} &aSei in modalità &cavventura&a."
-						stop
-					else:
-						send "{@prefix} &cSei già in modalità &aavventura&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-					else:
-						if gamemode of arg-2 is not adventure:
-							set gamemode of arg-2 to adventure
-							set {gm::%arg-2%::status} to "&fAvventura"
-							set {fly::%arg-2%} to false
-							set arg-2's flight mode to false
-							send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
-							send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &aavventura&c!"
-							play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-							stop
-						
-			else if arg-1 is "spectator", "sp" or "3":
-				if arg-2 is not set:
-					if gamemode of player is not spectator:
-						set gamemode of player to spectator
-						set {gm::%player%::status} to "&fSpettatore"
-						send "{@prefix} &aSei in modalità &cspettatore&a."
-						stop
-					else:
-						send "{@prefix} &cSei già in modalità &aspettatore&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-					else:
-						if gamemode of arg-2 is not spectator:
-							set gamemode of arg-2 to spectator
-							set {gm::%arg-2%::status} to "&fSpettatore"
-							send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
-							send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &aspettatore&c!"
-							play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-							stop
-				
-		else:
-			if arg-1 is not set:
-				if arg-2 is not set:
-					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-					send "{@prefix} &cSpecifica il nome di un giocatore!"
-					stop
-				else:
-					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-					send "{@prefix} &cSpecifica il nome di un giocatore!"
-					stop
+            else if arg-1 is "adventure", "a" or "2":
+                if arg-2 is not set:
+                    if gamemode of player is not adventure:
+                        set gamemode of player to adventure
+                        set {gm::%player%::status} to "&fAvventura"
+                        set player's flight mode to false
+                        set {fly::%player%} to false
+                        set {fly::%player%::status} to "&cNo"
+                        delete {fly::%player%::ab}
+                        send "{@prefix} &aSei in modalità &cavventura&a."
+                        stop
+                    else:
+                        send "{@prefix} &cSei già in modalità &aavventura&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        if gamemode of arg-2 is not adventure:
+                            set gamemode of arg-2 to adventure
+                            set {gm::%arg-2%::status} to "&fAvventura"
+                            set arg-2's flight mode to false
+                            set {fly::%arg-2%} to false
+                            set {fly::%arg-2%::status} to "&cNo"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
+                            send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &aavventura&c!"
+                            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                            stop
+                        
+            else if arg-1 is "spectator", "sp" or "3":
+                if arg-2 is not set:
+                    if gamemode of player is not spectator:
+                        set gamemode of player to spectator
+                        set {gm::%player%::status} to "&fSpettatore"
+                        set {fly::%player%::status} to "&aSì"
+                        delete {fly::%player%::ab}
+                        send "{@prefix} &aSei in modalità &cspettatore&a."
+                        stop
+                    else:
+                        send "{@prefix} &cSei già in modalità &aspettatore&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        if gamemode of arg-2 is not spectator:
+                            set gamemode of arg-2 to spectator
+                            set {gm::%arg-2%::status} to "&fSpettatore"
+                            set {fly::%arg-2%::status} to "&aSì"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
+                            send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &aspettatore&c!"
+                            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                            stop
+            else if arg-1 is not "survival", "s", "0", "creative", "c", "1", "adventure", "a", "2", "spectator", "sp" or "3":
+                send "{@prefix} &cComando sconosciuto."
+                send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> [&egiocatore&6]"
+                send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> [&egiocatore&6]"
+                send "{@prefix} &cUtilizzo: &6/gm <&eadventure&6> [&egiocatore&6]"
+                send "{@prefix} &cUtilizzo: &6/gm <&espectator&6> [&egiocatore&6]"
+                stop
+                
+        else:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    send "{@prefix} &cComando sconosciuto."
+                    send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> <&egiocatore&6>"
+                    send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> <&egiocatore&6>"
+                    send "{@prefix} &cUtilizzo: &6/gm <&eadventure&6> <&egiocatore&6>"
+                    send "{@prefix} &cUtilizzo: &6/gm <&espectator&6> <&egiocatore&6>"
+                    stop
 
-			else if arg-1 is "survival", "s" or "0":
-				if arg-2 is not set:
-					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-					send "{@prefix} &cSpecifica il nome di un giocatore!"
-					stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						stop
-					else:
-						if gamemode of arg-2 is not survival:
-							set gamemode of arg-2 to survival
-							set {gm::%arg-2%::status} to "&fSopravvivenza"
-							set {fly::%arg-2%} to false
-							set arg-2's flight mode to false
-							send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to console
-							send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &asopravvivenza&c!"
-							stop
+            else if arg-1 is "survival", "s" or "0":
+                if arg-2 is not set:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                    send "{@prefix} &cSpecifica il nome di un giocatore!"
+                    stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        stop
+                    else:
+                        if gamemode of arg-2 is not survival:
+                            set gamemode of arg-2 to survival
+                            set {gm::%arg-2%::status} to "&fSopravvivenza"
+                            set arg-2's flight mode to false
+                            set {fly::%arg-2%} to false
+                            set {fly::%arg-2%::status} to "&cNo"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to console
+                            send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &asopravvivenza&c!"
+                            stop
 
-			else if arg-1 is "creative", "c" or "1":
-				if arg-2 is not set:
-					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-					send "{@prefix} &cSpecifica il nome di un giocatore!"
-					stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						stop
-					else:
-						if gamemode of arg-2 is not creative:
-							set gamemode of arg-2 to creative
-							set {gm::%arg-2%::status} to "&fCreativa"
-							set {fly::%arg-2%} to false
-							set arg-2's flight mode to false
-							send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to console
-							send "{@prefix} &aSei in modalità &ccreativa&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &acreativa&c!"
-							stop
+            else if arg-1 is "creative", "c" or "1":
+                if arg-2 is not set:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                    send "{@prefix} &cSpecifica il nome di un giocatore!"
+                    stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        stop
+                    else:
+                        if gamemode of arg-2 is not creative:
+                            set gamemode of arg-2 to creative
+                            set {gm::%arg-2%::status} to "&fCreativa"
+                            set arg-2's flight mode to true
+                            set {fly::%arg-2%} to true
+                            set {fly::%arg-2%::status} to "&aSì"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to console
+                            send "{@prefix} &aSei in modalità &ccreativa&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &acreativa&c!"
+                            stop
 
-			else if arg-1 is "adventure", "a" or "2":
-				if arg-2 is not set:
-					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-					send "{@prefix} &cSpecifica il nome di un giocatore!"
-					stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						stop
-					else:
-						if gamemode of arg-2 is not adventure:
-							set gamemode of arg-2 to adventure
-							set {gm::%arg-2%::status} to "&fAvventura"
-							set {fly::%arg-2%} to false
-							set arg-2's flight mode to false
-							send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
-							send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &aavventura&c!"
-							stop
+            else if arg-1 is "adventure", "a" or "2":
+                if arg-2 is not set:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                    send "{@prefix} &cSpecifica il nome di un giocatore!"
+                    stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        stop
+                    else:
+                        if gamemode of arg-2 is not adventure:
+                            set gamemode of arg-2 to adventure
+                            set {gm::%arg-2%::status} to "&fAvventura"
+                            set arg-2's flight mode to false
+                            set {fly::%arg-2%} to false
+                            set {fly::%arg-2%::status} to "&cNo"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
+                            send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &aavventura&c!"
+                            stop
 
-			else if arg-1 is "spectator", "sp" or "3":
-				if arg-2 is not set:
-					send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-					send "{@prefix} &cSpecifica il nome di un giocatore!"
-					stop
-				else:
-					if arg-2 is offline:
-						send "{@prefix} &6%arg-2% &cnon è online!"
-						stop
-					else:
-						if gamemode of arg-2 is not spectator:
-							set gamemode of arg-2 to spectator
-							set {gm::%arg-2%::status} to "&fSpettatore"
-							send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
-							send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
-							stop
-						else:
-							send "{@prefix} &6%arg-2% &cè già in modalità &aspettatore&c!"
-							stop
+            else if arg-1 is "spectator", "sp" or "3":
+                if arg-2 is not set:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                    send "{@prefix} &cSpecifica il nome di un giocatore!"
+                    stop
+                else:
+                    if arg-2 is offline:
+                        send "{@prefix} &6%arg-2% &cnon è online!"
+                        stop
+                    else:
+                        if gamemode of arg-2 is not spectator:
+                            set gamemode of arg-2 to spectator
+                            set {gm::%arg-2%::status} to "&fSpettatore"
+                            set {fly::%arg-2%::status} to "&aSì"
+                            delete {fly::%arg-2%::ab}
+                            send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
+                            send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
+                            stop
+                        else:
+                            send "{@prefix} &6%arg-2% &cè già in modalità &aspettatore&c!"
+                            stop
+            else if arg-1 is not "survival", "s", "0", "creative", "c", "1", "adventure", "a", "2", "spectator", "sp" or "3":
+                send "{@prefix} &cComando sconosciuto."
+                send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> <&egiocatore&6>"
+                send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> <&egiocatore&6>"
+                send "{@prefix} &cUtilizzo: &6/gm <&eadventure&6> <&egiocatore&6>"
+                send "{@prefix} &cUtilizzo: &6/gm <&espectator&6> <&egiocatore&6>"
+                stop
 
 on tab complete of "/gm":
-	set tab completions for position 1 to "survival", "creative", "adventure" and "spectator"
-	
+    set tab completions for position 1 to "survival", "creative", "adventure" and "spectator"
+    
 command /gms [<offline player>]:
-	permission: gms.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-	description: Imposta la modalità di gioco di un giocatore in sopravvivenza.
-	executable by: player, console
-	trigger:
-		if sender is player:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop 
-				else:
-					if gamemode of arg-1 is not survival:
-						set gamemode of arg-1 to survival
-						set {gm::%arg-1%::status} to "&fSopravvivenza"
-						set {fly::%arg-1%} to false
-						set arg-1's flight mode to false
-						send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to player
-						send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &asopravvivenza&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-			else:
-				if gamemode of player is not survival:
-					set gamemode of player to survival
-					set {gm::%player%::status} to "&fSopravvivenza"
-					set {fly::%player%} to false
-					set player's flight mode to false
-					send "{@prefix} &aSei in modalità &csopravvivenza&a."
-					stop
-				else:
-					send "{@prefix} &cSei già in modalità &asopravvivenza&c!"
-					play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-					stop
-		else:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop
-				else:
-					if gamemode of arg-1 is not survival:
-						set gamemode of arg-1 to survival
-						set {gm::%arg-1%::status} to "&fSopravvivenza"
-						set {fly::%arg-1%} to false
-						set arg-1's flight mode to false
-						send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to console
-						send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &asopravvivenza&c!"
-						stop
-			else:
-				send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-				stop
-				
+    permission: gms.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Imposta la modalità di gioco di un giocatore in sopravvivenza.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop 
+                else:
+                    if gamemode of arg-1 is not survival:
+                        set gamemode of arg-1 to survival
+                        set {gm::%arg-1%::status} to "&fSopravvivenza"
+                        set arg-1's flight mode to false
+                        delete {fly::%arg-1%}
+                        set {fly::%arg-1%::status} to "&cNo"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to player
+                        send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &asopravvivenza&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+            else:
+                if gamemode of player is not survival:
+                    set gamemode of player to survival
+                    set {gm::%player%::status} to "&fSopravvivenza"
+                    set player's flight mode to false
+                    delete {fly::%player%}
+                    set {fly::%player%::status} to "&cNo"
+                    delete {fly::%player%::ab}
+                    send "{@prefix} &aSei in modalità &csopravvivenza&a."
+                    stop
+                else:
+                    send "{@prefix} &cSei già in modalità &asopravvivenza&c!"
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+        else:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop
+                else:
+                    if gamemode of arg-1 is not survival:
+                        set gamemode of arg-1 to survival
+                        set {gm::%arg-1%::status} to "&fSopravvivenza"
+                        set arg-1's flight mode to false
+                        delete {fly::%arg-1%}
+                        set {fly::%arg-1%::status} to "&cNo"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to console
+                        send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &asopravvivenza&c!"
+                        stop
+            else:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                stop
+                
 command /gmc [<offline player>]:
-	permission: gmc.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-	description: Imposta la modalità di gioco di un giocatore in creativa.
-	executable by: player, console
-	trigger:
-		if sender is player:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop 
-				else:
-					if gamemode of arg-1 is not creative:
-						set gamemode of arg-1 to creative
-						set {gm::%arg-1%::status} to "&fCreativa"
-						set {fly::%arg-1%} to true
-						set arg-1's flight mode to true
-						send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to player
-						send "{@prefix} &aSei in modalità &ccreativa&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &acreativa&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-			else:
-				if gamemode of player is not creative:
-					set gamemode of player to creative
-					set {gm::%player%::status} to "&fCreativa"
-					set {fly::%player%} to true
-					set player's flight mode to true
-					send "{@prefix} &aSei in modalità &ccreativa&a."
-					stop
-				else:
-					send "{@prefix} &cSei già in modalità &acreativa&c!"
-					play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-					stop
-		else:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop
-				else:
-					if gamemode of arg-1 is not creative:
-						set gamemode of arg-1 to creative
-						set {gm::%arg-1%::status} to "&fCreativa"
-						set {fly::%arg-1%} to true
-						set arg-1's flight mode to true
-						send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to console
-						send "{@prefix} &aSei in modalità &ccreativa&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &acreativa&c!"
-						stop
-			else:
-				send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-				stop
-			
+    permission: gmc.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Imposta la modalità di gioco di un giocatore in creativa.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop 
+                else:
+                    if gamemode of arg-1 is not creative:
+                        set gamemode of arg-1 to creative
+                        set {gm::%arg-1%::status} to "&fCreativa"
+                        set arg-1's flight mode to true
+                        set {fly::%arg-1%} to true
+                        set {fly::%arg-1%::status} to "&aSì"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to player
+                        send "{@prefix} &aSei in modalità &ccreativa&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &acreativa&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+            else:
+                if gamemode of player is not creative:
+                    set gamemode of player to creative
+                    set {gm::%player%::status} to "&fCreativa"
+                    set player's flight mode to true
+                    set {fly::%player%} to true
+                    set {fly::%player%::status} to "&aSì"
+                    delete {fly::%player%::ab}
+                    send "{@prefix} &aSei in modalità &ccreativa&a."
+                    stop
+                else:
+                    send "{@prefix} &cSei già in modalità &acreativa&c!"
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+        else:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop
+                else:
+                    if gamemode of arg-1 is not creative:
+                        set gamemode of arg-1 to creative
+                        set {gm::%arg-1%::status} to "&fCreativa"
+                        set arg-1's flight mode to true
+                        set {fly::%arg-1%} to true
+                        set {fly::%arg-1%::status} to "&aSì"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to console
+                        send "{@prefix} &aSei in modalità &ccreativa&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &acreativa&c!"
+                        stop
+            else:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                stop
+            
 command /gma [<offline player>]:
-	permission: gma.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-	description: Imposta la modalità di gioco di un giocatore in avventura.
-	executable by: player, console
-	trigger:
-		if sender is player:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop 
-				else:
-					if gamemode of arg-1 is not adventure:
-						set gamemode of arg-1 to adventure
-						set {gm::%arg-1%::status} to "&fAvventura"
-						set {fly::%arg-1%} to false
-						set arg-1's flight mode to false
-						send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to player
-						send "{@prefix} &aSei in modalità &cavventura&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &aavventura&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-			else:
-				if gamemode of player is not adventure:
-					set gamemode of player to adventure
-					set {gm::%player%::status} to "&fAvventura"
-					set {fly::%player%} to false
-					set player's flight mode to false
-					send "{@prefix} &aSei in modalità &cavventura&a."
-					stop
-				else:
-					send "{@prefix} &cSei già in modalità &aavventura&c!"
-					play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-					stop
-		else:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop
-				else:
-					if gamemode of arg-1 is not adventure:
-						set gamemode of arg-1 to adventure
-						set {gm::%arg-1%::status} to "&fAvventura"
-						set {fly::%arg-1%} to false
-						set arg-1's flight mode to false
-						send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to console
-						send "{@prefix} &aSei in modalità &cavventura&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &aavventura&c!"
-						stop
-			else:
-				send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-				stop
-			
+    permission: gma.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Imposta la modalità di gioco di un giocatore in avventura.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop 
+                else:
+                    if gamemode of arg-1 is not adventure:
+                        set gamemode of arg-1 to adventure
+                        set {gm::%arg-1%::status} to "&fAvventura"
+                        set arg-1's flight mode to false
+                        delete {fly::%arg-1%}
+                        set {fly::%arg-1%::status} to "&cNo"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to player
+                        send "{@prefix} &aSei in modalità &cavventura&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &aavventura&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+            else:
+                if gamemode of player is not adventure:
+                    set gamemode of player to adventure
+                    set {gm::%player%::status} to "&fAvventura"
+                    set player's flight mode to false
+                    delete {fly::%player%}
+                    set {fly::%player%::status} to "&cNo"
+                    delete {fly::%player%::ab}
+                    send "{@prefix} &aSei in modalità &cavventura&a."
+                    stop
+                else:
+                    send "{@prefix} &cSei già in modalità &aavventura&c!"
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+        else:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop
+                else:
+                    if gamemode of arg-1 is not adventure:
+                        set gamemode of arg-1 to adventure
+                        set {gm::%arg-1%::status} to "&fAvventura"
+                        set arg-1's flight mode to false
+                        delete {fly::%arg-1%}
+                        set {fly::%arg-1%::status} to "&cNo"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to console
+                        send "{@prefix} &aSei in modalità &cavventura&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &aavventura&c!"
+                        stop
+            else:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                stop
+            
 command /gmsp [<offline player>]:
-	permission: gmsp.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-	description: Imposta la modalità di gioco di un giocatore in spettatore.
-	executable by: player, console
-	trigger:
-		if sender is player:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop 
-				else:
-					if gamemode of arg-1 is not spectator:
-						set gamemode of arg-1 to spectator
-						set {gm::%arg-1%::status} to "&fSpettatore"
-						send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to player
-						send "{@prefix} &aSei in modalità &cspettatore&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &aspettatore&c!"
-						play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-						stop
-			else:
-				if gamemode of player is not spectator:
-					set gamemode of player to spectator
-					set {gm::%player%::status} to "&fSpettatore"
-					send "{@prefix} &aSei in modalità &cspettatore&a."
-					stop
-				else:
-					send "{@prefix} &cSei già in modalità &aspettatore&c!"
-					play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-					stop
-		else:
-			if arg-1 is set:
-				if arg-1 is offline:
-					send "{@prefix} &6%arg-1% &cnon è online!"
-					stop
-				else:
-					if gamemode of arg-1 is not spectator:
-						set gamemode of arg-1 to spectator
-						set {gm::%arg-1%::status} to "&fSpettatore"
-						send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to console
-						send "{@prefix} &aSei in modalità &cspettatore&a." to arg-1
-						stop
-					else:
-						send "{@prefix} &6%arg-1% &cè già in modalità &aspettatore&c!"
-						stop
-			else:
-				send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
-				stop
+    permission: gmsp.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Imposta la modalità di gioco di un giocatore in spettatore.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop 
+                else:
+                    if gamemode of arg-1 is not spectator:
+                        set gamemode of arg-1 to spectator
+                        set {gm::%arg-1%::status} to "&fSpettatore"
+                        set {fly::%arg-1%::status} to "&aSì"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to player
+                        send "{@prefix} &aSei in modalità &cspettatore&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &aspettatore&c!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+            else:
+                if gamemode of player is not spectator:
+                    set gamemode of player to spectator
+                    set {gm::%player%::status} to "&fSpettatore"
+                    set {fly::%player%::status} to "&aSì"
+                    delete {fly::%player%::ab}
+                    send "{@prefix} &aSei in modalità &cspettatore&a."
+                    stop
+                else:
+                    send "{@prefix} &cSei già in modalità &aspettatore&c!"
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+        else:
+            if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &6%arg-1% &cnon è online!"
+                    stop
+                else:
+                    if gamemode of arg-1 is not spectator:
+                        set gamemode of arg-1 to spectator
+                        set {gm::%arg-1%::status} to "&fSpettatore"
+                        set {fly::%arg-1%::status} to "&aSì"
+                        delete {fly::%arg-1%::ab}
+                        send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to console
+                        send "{@prefix} &aSei in modalità &cspettatore&a." to arg-1
+                        stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cè già in modalità &aspettatore&c!"
+                        stop
+            else:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
+                stop

@@ -1,6 +1,6 @@
 command /pvp:
 	permission: pvp.toggle
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	executable by: player, console
 	description: Attiva o disattiva il PvP nel server.
 	trigger:

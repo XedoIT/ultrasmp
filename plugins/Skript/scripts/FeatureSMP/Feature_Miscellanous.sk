@@ -2,30 +2,31 @@
 #		  LISTA SERVER PERSONALIZZATA    	 #
 #--------------------------------------------#
 on server list ping:
-	if {maintenance} is true:
-		set motd to "       &e&lDISAGIO SMP &c[1.19.3] &7- &4&lIN SVILUPPO!%newline%        &4&k0 &6&lMANUTENZIONE IN CORSO! &4&k0"
-		set fake max players count to 1
-		#cancel event
-	else:
-		set motd to "       &e&lDISAGIO SMP &c[1.19.3] &7- &4&lIN SVILUPPO!%newline%         &a&oUna Vanilla SMP un po'... disagiata!"
-		#set the fake max players count to (number of all players + 1)
+    if {maintenance} is true:
+        set motd to "     &e&lDISAGIO SMP &c[1.20] &7- &4&lIN SVILUPPO! &b(55%%)%newline%             &4&k0 &6&lMANUTENZIONE IN CORSO! &4&k0"
+        set fake max players count to 1
+        #cancel event
+    else:
+        set motd to "     &e&lDISAGIO SMP &c[1.20] &7- &4&lIN SVILUPPO! &b(55%%)%newline%              &a&oUna Vanilla SMP un po'... disagiata!"
+        #set the fake max players count to (number of all players + 1)
         
 #--------------------------------------------#
 #	   LUMINESCENZA CON BACCHE LUMINOSE    	 #
 #--------------------------------------------#    
-on eating glow berries:
-	loop all players:
-		apply glowing without any particles to loop-player for 4 seconds
-		send "&aSei luminescente per 3 secondi perché hai mangiato una bacca luminosa!"
-		wait 4 seconds
-		send "&cNon sei più luminescente."
-		stop
+#on eating glow berries:
+    #loop all players:
+        #if loop-player has not potion glowing:
+            #apply glowing without any particles to loop-player for 4 seconds
+            #send "&aSei luminescente per 3 secondi perché hai mangiato una bacca luminosa!"
+            #wait 4 seconds
+            #send "&cNon sei più luminescente."
+            #stop
 
 #--------------------------------------------#
 # DROP BLOCCO DI ARDESIA PROFONDA RINFORZATA #
 #--------------------------------------------# 
 on break of reinforced deepslate:
-    if gamemode of player is survival or spectator:
+    if gamemode of player is survival or adventure:
         if player's tool is not a netherite pickaxe:
             send "&cDavvero hai perso tutto questo tempo per scavare uno stupido blocco?!"
             wait 3 seconds
@@ -56,3 +57,36 @@ command /sleep:
         else:
             send "&cSolo i giocatori possono eseguire questo comando!"
             stop
+#--------------------------------------------#
+#             TITOLO MOB POTENTI             #
+#--------------------------------------------#
+#at 19:00:
+    #loop all players:
+        #if loop-player's world is "smp":
+            #if {settings::%loop-player%::notifications_title} is true:
+            #send title "&4&lÈ notte!" with subtitle "&cI mob saranno più forti. Fai attenzione!" to loop-player for 5 seconds
+            #play sound "entity.wolf.howl" with volume 1 at loop-player for loop-player
+#--------------------------------------------#
+#          AVVISO INVENTARIO PIENO           #
+#--------------------------------------------#
+on join:
+    if player's inventory can't hold 1 stone:
+        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+on break:
+    if player's inventory can't hold 1 stone:
+        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+on inventory pickup:
+    if player's inventory can't hold 1 stone:
+        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+on inventory close:
+    if player's inventory can't hold 1 stone:
+        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+on pickup:
+    wait 1 tick
+    if player's inventory can't hold 1 stone:
+        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+        play sound "block.chest.open" with volume 1 and pitch 2 at player for player

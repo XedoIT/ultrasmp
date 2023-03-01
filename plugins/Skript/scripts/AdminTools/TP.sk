@@ -4,7 +4,7 @@ options:
 
 command /tphere [<offline player>]:
 	permission: tphere.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	executable by: player, console
 	trigger:
 		if sender is player:
@@ -116,7 +116,7 @@ command /teleport [<offline player>] [<offline player>]:
 
 command /top [<offline player>]:
     permission: top.use
-    permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     executable by: player, console
     trigger:
         if sender is player:

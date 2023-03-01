@@ -5,7 +5,7 @@ options:
 command /skull [<offline player>]:
 	executable by: player, console
 	permission: skull.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Ottieni in modo facile la testa di qualsiasi giocatore che abbia Minecraft Premium.
 	usage: &cUtilizzo: &6/skull &e<giocatore>
 	trigger:

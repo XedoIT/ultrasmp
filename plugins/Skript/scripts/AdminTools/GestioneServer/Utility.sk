@@ -1,0 +1,284 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+on chat:
+    if {sm::%player%::gmsurvival} is true:
+        cancel event
+        set {_p} to message parsed as offline player
+        if gamemode of {_p} is not survival:
+            set gamemode of {_p} to survival
+            set {gm::%{_p}%::status} to "&fSopravvivenza"
+            set {_p}'s flight mode to false
+            delete {fly::%{_p}%}
+            set {fly::%{_p}%::status} to "&cNo"
+            delete {fly::%{_p}%::ab}
+            send "{@prefix} &7Modalità di gioco impostata a &9Sopravvivenza &7per &6%{_p}%&7."
+            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &9Sopravvivenza&7." to {_p}
+            delete {sm::%player%::gmsurvival}
+            openServerUtility(player)
+        else:
+            send "{@prefix} &6%{_p}% &cè già in modalità &asopravvivenza&c!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::gmsurvival}
+            openServerUtility(player)
+    else if {sm::%player%::gmcreative} is true:
+        cancel event
+        set {_p} to message parsed as offline player
+        if gamemode of {_p} is not creative:
+            set gamemode of {_p} to creative
+            set {gm::%{_p}%::status} to "&fCreativa"
+            set {_p}'s flight mode to true
+            set {fly::%{_p}%} to true
+            set {fly::%{_p}%::status} to "&aSì"
+            send "{@prefix} &7Modalità di gioco impostata a &aCreativa &7per &6%{_p}%&7."
+            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &aCreativa&7." to {_p}
+            delete {sm::%player%::gmcreative}
+            openServerUtility(player)
+        else:
+            send "{@prefix} &6%{_p}% &cè già in modalità &acreativa&c!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::gmcreative}
+            openServerUtility(player)
+    else if {sm::%player%::gmadventure} is true:
+        cancel event
+        set {_p} to message parsed as offline player
+        if gamemode of {_p} is not adventure:
+            set gamemode of {_p} to adventure
+            set {gm::%{_p}%::status} to "&fAvventura"
+            set {_p}'s flight mode to false
+            delete {fly::%{_p}%}
+            set {fly::%{_p}%::status} to "&cNo"
+            delete {fly::%{_p}%::ab}
+            send "{@prefix} &7Modalità di gioco impostata a &2Avventura &7per &6%{_p}%&7."
+            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &2Avventura&7." to {_p}
+            delete {sm::%player%::gmadventure}
+            openServerUtility(player)
+        else:
+            send "{@prefix} &6%{_p}% &cè già in modalità &aavventura&c!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::gmadventure}
+            openServerUtility(player)
+    else if {sm::%player%::gmspectator} is true:
+        cancel event
+        set {_p} to message parsed as offline player
+        if gamemode of {_p} is not spectator:
+            set gamemode of {_p} to spectator
+            set {gm::%{_p}%::status} to "&fSpettatore"
+            set {fly::%{_p}%::status} to "&aSì"
+            send "{@prefix} &7Modalità di gioco impostata a &bSpettatore &7per &6%{_p}%&7."
+            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &bSpettatore&7." to {_p}
+            delete {sm::%player%::gmspectator}
+            openServerUtility(player)
+        else:
+            send "{@prefix} &6%{_p}% &cè già in modalità &aspettatore&c!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::gmspectator}
+            openServerUtility(player)
+
+function openServerUtility(p: player):
+    if {settings::%{_p}%::glasspanes} is true:
+        set {_gui} to a new chest inventory with 6 rows named "&6&lUtilità Server"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+        set slot 40 of {_gui} to gray stained glass pane named "&f"
+        set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
+        set slot 11 of {_gui} to white concrete named "&fPacifica" with lore "&7Imposta la difficoltà del server", "&7su &f&lPacifica&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::peaceful}%"
+        set slot 12 of {_gui} to lime concrete named "&aFacile" with lore "&7Imposta la difficoltà del server", "&7su &a&lFacile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::easy}%"
+        set slot 13 of {_gui} to yellow concrete named "&eNormale" with lore "&7Imposta la difficoltà del server", "&7su &e&lNormale&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::normal}%"
+        set slot 14 of {_gui} to orange concrete named "&6Difficile" with lore "&7Imposta la difficoltà del server", "&7su &6&lDifficile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::hard}%"
+        set slot 15 of {_gui} to red concrete named "&cHardcore" with lore "&7Imposta la difficoltà del server", "&7su &c&lHardcore&7.", "&f", "&4&lATTENZIONE!", "&cQuesta difficoltà non permette di", "&crinascere alla morte!", "&4&lSelezionala a tuo rischio!", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::hardcore}%"
+        set slot 19 and 25 of {_gui} to clock named "&bOra di gioco" with lore "&7Modifica l'ora di gioco dell'SMP."
+        set slot 20 of {_gui} to yellow stained glass pane named "&eAlba" with lore "&7Imposta l'ora di gioco alle &c06:00"
+        set slot 21 of {_gui} to orange stained glass pane named "&6Prima mattinata" with lore "&7Imposta l'ora di gioco alle &c09:00"
+        set slot 22 of {_gui} to red stained glass pane named "&cMezzogiorno" with lore "&7Imposta l'ora di gioco alle &c12:00"
+        set slot 23 of {_gui} to orange stained glass pane named "&6Tramonto" with lore "&7Imposta l'ora di gioco alle &c18:30"
+        set slot 24 of {_gui} to blue stained glass pane named "&9Mezzanotte" with lore "&7Imposta l'ora di gioco alle &c00:00"
+        set slot 37 and 43 of {_gui} to skull of {_p} named "&eModalità di gioco" with lore "&7Modifica la modalità di gioco di" and "&7un determinato giocatore."
+        set slot 38 of {_gui} to iron sword with nbt compound from "{HideFlags:2}" named "&9Sopravvivenza" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eSopravvivenza&7."
+        set slot 39 of {_gui} to grass block named "&aCreativa" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eCreativa&7."
+        set slot 41 of {_gui} to map named "&2Avventura" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eAvventura&7."
+        set slot 42 of {_gui} to ender eye named "&bSpettatore" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eSpettatore&7."
+        set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 6 rows named "&6&lUtilità Server"
+        set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
+        set slot 11 of {_gui} to white concrete named "&fPacifica" with lore "&7Imposta la difficoltà del server", "&7su &f&lPacifica&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::peaceful}%"
+        set slot 12 of {_gui} to lime concrete named "&aFacile" with lore "&7Imposta la difficoltà del server", "&7su &a&lFacile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::easy}%"
+        set slot 13 of {_gui} to yellow concrete named "&eNormale" with lore "&7Imposta la difficoltà del server", "&7su &e&lNormale&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::normal}%"
+        set slot 14 of {_gui} to orange concrete named "&6Difficile" with lore "&7Imposta la difficoltà del server", "&7su &6&lDifficile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::hard}%"
+        set slot 15 of {_gui} to red concrete named "&cHardcore" with lore "&7Imposta la difficoltà del server", "&7su &c&lHardcore&7.", "&f", "&4&lATTENZIONE!", "&cQuesta difficoltà non permette di", "&crinascere alla morte!", "&4&lSelezionala a tuo rischio!", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::hardcore}%"
+        set slot 19 and 25 of {_gui} to clock named "&bOra di gioco" with lore "&7Modifica l'ora di gioco dell'SMP."
+        set slot 20 of {_gui} to yellow stained glass pane named "&eAlba" with lore "&7Imposta l'ora di gioco alle &c06:00"
+        set slot 21 of {_gui} to orange stained glass pane named "&6Prima mattinata" with lore "&7Imposta l'ora di gioco alle &c09:00"
+        set slot 22 of {_gui} to red stained glass pane named "&cMezzogiorno" with lore "&7Imposta l'ora di gioco alle &c12:00"
+        set slot 23 of {_gui} to orange stained glass pane named "&6Tramonto" with lore "&7Imposta l'ora di gioco alle &c18:30"
+        set slot 24 of {_gui} to blue stained glass pane named "&9Mezzanotte" with lore "&7Imposta l'ora di gioco alle &c00:00"
+        set slot 37 and 43 of {_gui} to skull of {_p} named "&eModalità di gioco" with lore "&7Modifica la modalità di gioco di" and "&7un determinato giocatore."
+        set slot 38 of {_gui} to iron sword with nbt compound from "{HideFlags:2}" named "&9Sopravvivenza" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eSopravvivenza&7."
+        set slot 39 of {_gui} to grass block named "&aCreativa" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eCreativa&7."
+        set slot 41 of {_gui} to map named "&2Avventura" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eAvventura&7."
+        set slot 42 of {_gui} to ender eye named "&bSpettatore" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eSpettatore&7."
+        set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "&6&lUtilità Server":
+        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
+            cancel event
+        else if index of event-slot is 11:
+            cancel event
+            if difficulty of all worlds is not peaceful:
+                set difficulty of all worlds to peaceful
+                set {difficulty::info} to "&fPacifica"
+                set {difficulty::peaceful} to "&aSELEZIONATO!"
+                set {difficulty::easy} to "&eClicca per selezionare."
+                set {difficulty::normal} to "&eClicca per selezionare."
+                set {difficulty::hard} to "&eClicca per selezionare."
+                set {difficulty::hardcore} to "&eClicca per selezionare."
+                delete {difficulty::hardcore_mode}
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
+                send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli!)." to all players
+                openServerUtility(player)
+            else:
+                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+        else if index of event-slot is 12:
+            cancel event
+            if difficulty of all worlds is not easy:
+                set difficulty of all worlds to easy
+                set {difficulty::info} to "&aFacile"
+                set {difficulty::peaceful} to "&eClicca per selezionare."
+                set {difficulty::easy} to "&aSELEZIONATO!"
+                set {difficulty::normal} to "&eClicca per selezionare."
+                set {difficulty::hard} to "&eClicca per selezionare."
+                set {difficulty::hardcore} to "&eClicca per selezionare."
+                delete {difficulty::hardcore_mode}
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
+                send "{@prefix} &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!" to all players
+                openServerUtility(player)
+            else:
+                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+        else if index of event-slot is 13:
+            cancel event
+            if difficulty of all worlds is not normal:
+                set difficulty of all worlds to normal
+                set {difficulty::info} to "&eNormale"
+                set {difficulty::peaceful} to "&eClicca per selezionare."
+                set {difficulty::easy} to "&eClicca per selezionare."
+                set {difficulty::normal} to "&aSELEZIONATO!"
+                set {difficulty::hard} to "&eClicca per selezionare."
+                set {difficulty::hardcore} to "&eClicca per selezionare."
+                delete {difficulty::hardcore_mode}
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
+                send "{@prefix} &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!" to all players
+                openServerUtility(player)
+            else:
+                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+        else if index of event-slot is 14:
+            cancel event
+            if difficulty of all worlds is not hard:
+                set difficulty of all worlds to hard
+                set {difficulty::info} to "&6&lDifficile"
+                set {difficulty::peaceful} to "&eClicca per selezionare."
+                set {difficulty::easy} to "&eClicca per selezionare."
+                set {difficulty::normal} to "&eClicca per selezionare."
+                set {difficulty::hard} to "&aSELEZIONATO!"
+                set {difficulty::hardcore} to "&eClicca per selezionare."
+                delete {difficulty::hardcore_mode}
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
+                send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                openServerUtility(player)
+            else:
+                if {difficulty::hardcore_mode} is true:
+                    set difficulty of all worlds to hard
+                    set {difficulty::info} to "&6&lDifficile"
+                    set {difficulty::peaceful} to "&eClicca per selezionare."
+                    set {difficulty::easy} to "&eClicca per selezionare."
+                    set {difficulty::normal} to "&eClicca per selezionare."
+                    set {difficulty::hard} to "&aSELEZIONATO!"
+                    set {difficulty::hardcore} to "&eClicca per selezionare."
+                    delete {difficulty::hardcore_mode}
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                    broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
+                    send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                    openServerUtility(player)
+                else:
+                    send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+        else if index of event-slot is 15:
+            cancel event
+            if {difficulty::hardcore_mode} is true:
+                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            else:
+                set difficulty of all worlds to hard
+                set {difficulty::info} to "&4&lHardcore"
+                set {difficulty::peaceful} to "&eClicca per selezionare."
+                set {difficulty::easy} to "&eClicca per selezionare."
+                set {difficulty::normal} to "&eClicca per selezionare."
+                set {difficulty::hard} to "&eClicca per selezionare."
+                set {difficulty::hardcore} to "&aSELEZIONATO!"
+                set {difficulty::hardcore_mode} to true
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
+                send "{@prefix} &cSe muori... &4&lhai perso!" to all players
+                send all players title "&c&k&l0 &4&lHARDCORE MODE &c&k&l0" with subtitle "&cSe muori... &4&lhai perso!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
+                play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
+                openServerUtility(player)
+        else if index of event-slot is 20:
+            cancel event
+            set time of the world "smp" to 06:00
+            send "{@prefix} &7Ora di gioco impostata alle &e06:00&7."
+        else if index of event-slot is 21:
+            cancel event
+            set time of the world "smp" to 09:00
+            send "{@prefix} &7Ora di gioco impostata alle &609:00&7."
+        else if index of event-slot is 22:
+            cancel event
+            set time of the world "smp" to 12:00
+            send "{@prefix} &7Ora di gioco impostata alle &c12:00&7."
+        else if index of event-slot is 23:
+            cancel event
+            set time of the world "smp" to 18:30
+            send "{@prefix} &7Ora di gioco impostata alle &618:30&7."
+        else if index of event-slot is 24:
+            cancel event
+            set time of the world "smp" to 00:00
+            send "{@prefix} &7Ora di gioco impostata alle &900:00&7."
+        else if index of event-slot is 38:
+            cancel event
+            close player's inventory
+            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &9Sopravvivenza&7."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {sm::%player%::gmsurvival} to true
+        else if index of event-slot is 39:
+            cancel event
+            close player's inventory
+            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &aCreativa&7."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {sm::%player%::gmcreative} to true
+        else if index of event-slot is 41:
+            cancel event
+            close player's inventory
+            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &2Avventura&7."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {sm::%player%::gmadventure} to true
+        else if index of event-slot is 42:
+            cancel event
+            close player's inventory
+            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &bSpettatore&7."
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {sm::%player%::gmspectator} to true
+        else if index of event-slot is 49:
+            cancel event
+            openServerManagement(player)

@@ -56,6 +56,6 @@ command /aiuto [<text>]:
 			stop trigger
 			
 		else if arg-1 is not "general", "homewarps", "tp" or "skript":
-			send "&8[&4&lINFO&8] &cParametro sconosciuto."
+			send "&4[&6&lS&e&lM&6&lP&4] &cParametro sconosciuto."
 			send "&cUtilizza: &6/help &e<general | homewarps | tp | skript>"
 			stop trigger

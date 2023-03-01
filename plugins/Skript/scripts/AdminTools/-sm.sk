@@ -3,7 +3,7 @@ options:
     full prefix: &8[&e&lScriptManager&8]
     full name: &e&lScriptManager
     permission: sm.use
-    permission_message: &8[&4&lINFO&8] &cComando sconsciuto.
+    permission_message: &4[&6&lS&e&lM&6&lP&4] &cComando sconsciuto.
     v: 1.5
 
 options:

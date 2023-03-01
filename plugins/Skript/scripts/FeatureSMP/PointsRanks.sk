@@ -38,7 +38,7 @@ options:
     p_prefix: &8[&b&lPUNTI&8]
     p_error: &8[&4&lPUNTI&8]
 
-    no_perm: &8[&4&lINFO&8]
+    no_perm: &4[&6&lS&e&lM&6&lP&4]
 
     r_prefix: &8[&b&lRANK&8]
     r_error: &8[&4&lRANK&8]

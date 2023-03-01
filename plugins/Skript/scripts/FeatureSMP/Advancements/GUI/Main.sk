@@ -86,4 +86,7 @@ on inventory click:
             send "&cQuesta pagina non è disponibile! Riprova più tardi."
         else if index of event-slot is 49:
             cancel event
-            openProfileGui(player)
+            if player has permission "admin.manage.server":
+                openProfileGuiAdmin(player)
+            else:
+                openProfileGui(player)

@@ -1,4 +1,4 @@
-#  Disagio SMP: 55% completato
+#  Disagio SMP: 57% completato
   Di seguito, tutte le modifiche effettuate/introdotte durante lo sviluppo del server e delle sue funzionalità:
   
 ### - GENNAIO 2022 -
@@ -67,5 +67,13 @@
 - Ottimizzazione dei vari sistemi e bug fixes 
 
 ### - FEBBRAIO 2023 -
-- Proseguimento del sistema Anti-Xray (100% di avanzamento)
+- Proseguimento del sistema Anti-Xray
 - Creazione e completamento dei soprannomi (comando /nick)
+- Creazione della sezione della Gestione del Server con scorciatoie annesse
+- Ri-creazione e ottimizzazione del sistema dei punti e delle reputazioni
+- Aggiunta dei Tab Completer ad alcuni comandi
+- Aggiunta della notifica dell'inventario pieno
+- Aggiunta della difficoltà "Hardcore" con titolo annesso
+- Aggiunto il titolo che avvisa della difficoltà aumentata dei mob durante la notte
+- Modificato il prefisso dei messaggi: da "INFO" a "SMP"
+- Ottimizzati "GodMode", "FlyMode" e "GamemodeCommands" con alcune migliorie delle prestazioni

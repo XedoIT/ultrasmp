@@ -114,7 +114,10 @@ on inventory click:
             openGenreSelectorGui(player)
         else if index of event-slot is 49:
             cancel event
-            openProfileGui(player)
+            if player has permission "admin.manage.server":
+                openProfileGuiAdmin(player)
+            else:
+                openProfileGui(player)
     else if name of event-inventory is "E adesso... scegli il tuo sesso!":
         if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34 or 35:
             cancel event
@@ -159,7 +162,10 @@ on inventory click:
             openPlayerSettingsGui(player)
         else if index of event-slot is 4:
             cancel event
-            openProfileGui(player)
+            if player has permission "admin.manage.server":
+                openProfileGuiAdmin(player)
+            else:
+                openProfileGui(player)
 
 on inventory close:
     if name of event-inventory is "E adesso... scegli il tuo sesso!":

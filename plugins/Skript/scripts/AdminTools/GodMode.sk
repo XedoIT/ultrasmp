@@ -1,108 +1,103 @@
-variables:
-	{god::%player%} = false
-	{god::%player%::status} = "&cNo"
-
-on skript start:
-	{god::%player%} = false
-	{god::%player%::status} = "&cNo"
-	
+options:
+    prefix_enabled: &a[&2&lGod&a]
+    prefix_disabled: &6[&c&lGod&6]
+    prefix_error: &7[&c&lGod&7]
+    warn: &6[&c&l!&6]
+    
 on join:
-	if {god::%player%} is not set:
-		set {god::%player%} to false
-		stop
-	else if {god::%player%} is false:
-		set {god::%player%::status} to "&cNo"
-		stop
-	else if {god::%player%} is true:
-		set {god::%player%::status} to "&aSì"
-		stop
-		
-	if player has permission "god.keep":
-		if {god::%player%} is true:
-			wait 3 seconds
-			send "&a[&2&lG&a] Sei ancora in modalità Dio!" to player
-			stop
-	else:
-		if {god::%player%} is true:
-			set {god::%player%} to false
-			delete {god::%player%::ab}
-			send "&6[&c&l!&6] &7Prima di uscire dal server, eri in modalità Dio. Adesso ti è stata tolta." to player
-			stop
-			
+    if {god::%player%} is true:
+        if player has permission "god.keep":
+            set {god::%player%} to true
+            set {god::%player%::status} to "&aSì"
+            set {god::%player%::ab} to true
+            wait 5 seconds
+            send "{@prefix_enabled} Sei ancora in modalità Dio!" to player
+            stop
+        else:
+            if {god::%player%} is true:
+                delete {god::%player%}
+                set {god::%player%::status} to "&cNo"
+                delete {god::%player%::ab}
+                send "{@warn} &7Prima di uscire dal server, eri immortale. Adesso non lo sei più. {@warn}" to player
+                stop
+    else:
+        set {god::%player%::status} to "&cNo"
+        delete {god::%player%::ab}
+        stop
+        
 on damage:
-	victim is a player
-	if {god::%victim%} is true:
-		cancel event
-			
+    victim is a player
+    if {god::%victim%} is true:
+        cancel event
+            
 on food level change:
-	if {god::%player%} is true:
-		cancel event
-			
+    if {god::%player%} is true:
+        cancel event
+            
 command /god [<offline player>]:
-	aliases: /godmode, /dio
-	permission: godmode.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
-	description: Diventa immortale con la modalità Dio.
-	trigger:
-		if sender is console:
-			if arg-1 is not set:
-				send "&7[&e&lG&7] &cNon puoi attivare la modalità Dio per te stesso se esegui questo comando dalla console!"
-				stop
-				
-			else if arg-1 is offline:
-				send "&7[&e&lG&7] &c%arg-1% non è online!" to player
-				stop
-			else:
-				if {god::%arg-1%} is false:
-					set {god::%arg-1%} to true
-					set {god::%arg-1%::status} to "&aSì"
-					set {god::%arg-1%::ab} to true
-					heal arg-1
-					feed arg-1
-					send "&a[&2&lG&a] &aHai dato la potenza della modalità Dio a &e%arg-1%&c." to player
-					send "&a[&2&lG&a] &eConsole &ati ha donato la potenza della modalità Dio." to arg-1
-					stop
-				else:
-					set {god::%arg-1%} to false
-					set {god::%arg-1%::status} to "&cNo"
-					delete {god::%arg-1%::ab}
-					send "&6[&c&lG&6] &cHai tolto la potenza della modalità Dio a &6%arg-1%&c." to player
-					send "&6[&c&lG&6] &6Console &cti ha tolto la potenza della modalità Dio." to arg-1
-					stop
-		else:
-			if arg-1 is not set:
-				if {god::%player%} is false:
-					set {god::%player%} to true
-					set {god::%player%::status} to "&aSì"
-					set {god::%player%::ab} to true
-					heal player
-					feed player
-					send "&a[&2&lG&a] &aModalità Dio attivata." to player
-					stop
-				else:
-					set {god::%player%} to false
-					set {god::%player%::status} to "&cNo"
-					delete {god::%player%::ab}
-					send "&6[&c&lG&6] &cModalità Dio disattivata." to player
-					stop
-					
-			else if arg-1 is offline:
-				send "&7[&e&lG&7] &c%arg-1% non è online!" to player
-				stop
-			else:
-				if {god::%arg-1%} is false:
-					set {god::%arg-1%} to true
-					set {god::%arg-1%::status} to "&aSì"
-					set {god::%arg-1%::ab} to true
-					heal arg-1
-					feed arg-1
-					send "&a[&2&lG&a] &aHai dato la potenza della modalità Dio a &e%arg-1%&c." to player
-					send "&a[&2&lG&a] &e%player% &ati ha donato la potenza della modalità Dio." to arg-1
-					stop
-				else:
-					set {god::%arg-1%} to false
-					set {god::%arg-1%::status} to "&cNo"
-					delete {god::%arg-1%::ab}
-					send "&6[&c&lG&6] &cHai tolto la potenza della modalità Dio a &6%arg-1%&c." to player
-					send "&6[&c&lG&6] &6%player% &cti ha tolto la potenza della modalità Dio." to arg-1
-					stop
+    description: "Potranno scalfirti ma non potranno ferirti!"
+    permission: god.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if {god::%player%} is true:
+                    delete {god::%player%}
+                    set {god::%player%::status} to "&cNo"
+                    delete {god::%player%::ab}
+                    send "{@prefix_disabled} &cModalità Dio disattivata." to player
+                    stop
+                else:
+                    set {god::%player%} to true
+                    set {god::%player%::status} to "&aSì"
+                    set {god::%player%::ab} to true
+                    heal player
+                    feed player
+                    send "{@prefix_enabled} &aModalità Dio attivata." to player
+                    stop
+                    
+            else if arg-1 is offline:
+                send "&7[&e&lG&7] &c%arg-1% non è online!" to player
+                stop
+            else:
+                if {god::%arg-1%} is true:
+                    delete {god::%arg-1%}
+                    set {god::%arg-1%::status} to "&cNo"
+                    delete {god::%arg-1%::ab}
+                    send "{@prefix_disabled} &cHai tolto l'immortalità &6%arg-1%&c." to player
+                    send "{@prefix_disabled} &6%player% &cti ha tolto l'immortalità." to arg-1
+                    stop
+                else:
+                    set {god::%arg-1%} to true
+                    set {god::%arg-1%::status} to "&aSì"
+                    set {god::%arg-1%::ab} to true
+                    heal arg-1
+                    feed arg-1
+                    send "{@prefix_enabled} &aHai reso &e%arg-1% &aimmortale." to player
+                    send "{@prefix_enabled} &e%player% &ati ha reso immortale." to arg-1
+                    stop
+        else:
+            if arg-1 is not set:
+                send "&7[&e&lG&7] &cSolo i giocatori possono eseguire questo comando."
+                stop
+                
+            else if arg-1 is offline:
+                send "&7[&e&lG&7] &c%arg-1% non è online!"
+                stop
+            else:
+                if {god::%arg-1%} is true:
+                    delete {god::%arg-1%}
+                    set {god::%arg-1%::status} to "&cNo"
+                    delete {god::%arg-1%::ab}
+                    send "{@prefix_disabled} &cHai tolto l'immortalità &6%arg-1%&c." to console
+                    send "{@prefix_disabled} &cLa &6console &cti ha dato l'immortalità." to arg-1
+                    stop
+                else:
+                    set {god::%arg-1%} to true
+                    set {god::%arg-1%::status} to "&aSì"
+                    set {god::%arg-1%::ab} to true
+                    heal arg-1
+                    feed arg-1
+                    send "{@prefix_enabled} &aHai reso &e%arg-1% &aimmortale." to console
+                    send "{@prefix_enabled} &aLa &econsole &ati ha dato l'immortalità." to arg-1
+                    stop

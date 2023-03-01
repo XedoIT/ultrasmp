@@ -82,5 +82,4 @@ on inventory click:
                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
         else if index of event-slot is 49:
             cancel event
-            send "&cIn arrivo..."
-            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            openServerManagement(player)

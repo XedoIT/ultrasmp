@@ -36,7 +36,6 @@ function openAXRmain(p: player):
         set slot 32 of {_gui} to paper named "&fStato servizi" with lore " &6● &7Avvisi offline&f: %{offline_orealerts::info}%", " &d● &7Avvisi minerali&f: %{orealerts::info}%", " &e● &7Contatore minerali&f: %{axr::counter::info}%", " &e● &7Riconosc. automatico&f: %{autoalerts::info}%" and " &e● &7Notifiche in console&f: %{consolenotify::info}%"
         set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
         open {_gui} to {_p}
-
 function openAXRmainguide(p: player):
     set {_l} to a written book
     set {_p1} to text component of "Questo sistema di Anti-Xray è stato ideato, creato e sviluppato da &9_Xedo_ &rprendendo spunto dalla versione di &5SoulStriker&r.%nl%%nl%&rNelle prossime pagine ti illustrerò le basi del funzionamento di questo Anti-Xray.%nl%%nl%&2&lBuona lettura!"
@@ -104,5 +103,4 @@ on inventory click:
             openAXRmainguide(player)
         else if index of event-slot is 49:
             cancel event
-            send "&cIn arrivo..."
-            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            openServerManagement(player)

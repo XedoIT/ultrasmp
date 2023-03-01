@@ -101,7 +101,7 @@
 options:
  # GENERALI
     prefix: &6[&e&lAnti-Xray&6]
-    prefix_hide: &8[&4&lINFO&8]
+    prefix_hide: &4[&6&lS&e&lM&6&lP&4]
     enabled: &aattivato
     disabled: &cdisattivato
     version: 1.0

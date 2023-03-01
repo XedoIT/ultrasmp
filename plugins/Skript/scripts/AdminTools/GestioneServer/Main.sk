@@ -1,0 +1,117 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+on chat:
+    if {sm::%player%::stop_confirm} is true:
+        cancel event
+        if message is "si", "sì", "yes", "s" or "y":
+            broadcast "{@prefix} &c&lIl server verrà chiuso tra 5 secondi!"
+            play sound "{@confirm_sound}" with volume 1 and pitch 2 at all players
+            delete {sm::%player%::stop_confirm}
+            send "{@prefix} &aSalvataggio dei dati del server in corso..."
+            execute console command "/save-all"
+            wait 1 second
+            send "{@prefix} &aSalvataggio dei dati completato."
+            wait 4 seconds
+            execute console command "/stop"
+        else if message is "no" or "n":
+            send "{@prefix} &7Chiusura del server &cannullata&7."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::stop_confirm}
+            openServerManagement(player)
+        else if message is not "si", "sì", "yes", "s", "y", "no" or "n":
+            send "{@prefix} &cNon capisco cosa intendi per &6%message%&c!"
+            send "{@prefix} &7Rispondi solo con &c""sì"" &7o &c""no""&7."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::stop_confirm}
+            openServerManagement(player)
+    else if {sm::%player%::restart_confirm} is true:
+        cancel event
+        if message is "si", "sì", "yes", "s" or "y":
+            broadcast "{@prefix} &c&lIl server verrà riavviato tra 5 secondi!"
+            play sound "{@confirm_sound}" with volume 1 and pitch 2 at all players
+            delete {sm::%player%::restart_confirm}
+            send "{@prefix} &aSalvataggio dei dati del server in corso..."
+            execute console command "/save-all"
+            wait 1 second
+            send "{@prefix} &aSalvataggio dei dati completato."
+            wait 4 seconds
+            execute console command "/restart"
+        else if message is "no" or "n":
+            send "{@prefix} &7Riavvio del server &cannullato&7."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::restart_confirm}
+            openServerManagement(player)
+        else if message is not "si", "sì", "yes", "s", "y", "no" or "n":
+            send "{@prefix} &cNon capisco cosa intendi per &6%message%&c!"
+            send "{@prefix} &7Rispondi solo con &c""sì"" &7o &c""no""&7."
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            delete {sm::%player%::restart_confirm}
+            openServerManagement(player)
+            
+command /server:
+    description: Gestisci il server.
+    aliases: /sm
+    permission: admin.manage.server
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            openServerManagement(player)
+            stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+function openServerManagement(p: player):
+    if {settings::%{_p}%::glasspanes} is true:
+        set {_gui} to a new chest inventory with 6 rows named "&4&lGestione Server"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+        set slot 10, 12, 14, 16, 28, 29, 30, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+        set slot 11 of {_gui} to barrier named "&4&lChiudi l'SMP" with lore "&7Una volta premuto, ti verrà chiesta la", "&7conferma per la chiusura effettiva" and "&7del server."
+        set slot 13 of {_gui} to chest named "&6Utilità" with lore "&7Gestisci la &cdifficoltà &7dell'SMP, la &cmodalità" and "&cdi gioco &7dei giocatori e l'&corario &7dell'SMP."
+        set slot 15 of {_gui} to diamond block named "&c&lRiavvia l'SMP" with lore "&7Una volta premuto, ti verrà chiesta", "&7la conferma per il riavvio effettivo" and "&7del server."
+        set slot 31 of {_gui} to recovery compass named "&9Anti-Xray" with lore "&7Gestisci le impostazioni dell'Anti-Xray", "&7dell'SMP, controlla i progressi dei", "&7giocatori e la lista di quelli" and "&7segnalati dal sistema per Xray."
+        set slot 49 of {_gui} to nether star named "&eIndietro" with lore "&7Torna a Il tuo profilo &7&lSMP"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 6 rows named "&4&lGestione Server"
+        set slot 11 of {_gui} to barrier named "&4&lChiudi l'SMP" with lore "&7Una volta premuto, ti verrà chiesta la", "&7conferma per la chiusura effettiva" and "&7del server."
+        set slot 13 of {_gui} to chest named "&6Utilità" with lore "&7Gestisci la &cdifficoltà &7dell'SMP, la &cmodalità" and "&cdi gioco &7dei giocatori e l'&corario &7dell'SMP."
+        set slot 15 of {_gui} to diamond block named "&c&lRiavvia l'SMP" with lore "&7Una volta premuto, ti verrà chiesta", "&7la conferma per il riavvio effettivo" and "&7del server."
+        set slot 31 of {_gui} to recovery compass named "&9Anti-Xray" with lore "&7Gestisci le impostazioni dell'Anti-Xray", "&7dell'SMP, controlla i progressi dei", "&7giocatori e la lista di quelli" and "&7segnalati dal sistema per Xray."
+        set slot 49 of {_gui} to nether star named "&eIndietro" with lore "&7Torna a Il tuo profilo &7&lSMP"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "&4&lGestione Server":
+        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
+            cancel event
+        else if index of event-slot is 11:
+            cancel event
+            close player's inventory
+            send "{@prefix} &cVuoi chiudere davvero il server?"
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {sm::%player%::stop_confirm} to true
+        else if index of event-slot is 13:
+            cancel event
+            openServerUtility(player)
+        else if index of event-slot is 15:
+            cancel event
+            close player's inventory
+            send "{@prefix} &cVuoi riavviare davvero il server?"
+            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+            set {sm::%player%::restart_confirm} to true
+        else if index of event-slot is 31:
+            cancel event
+            openAXRmain(player)
+        else if index of event-slot is 49:
+            cancel event
+            if player has permission "admin.manage.server":
+                openProfileGuiAdmin(player)
+            else:
+                openProfileGui(player)

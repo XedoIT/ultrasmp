@@ -1,3 +1,23 @@
+#function FreezePlayer(victim: player, forceFreeze: boolean = false, user: commandsender):
+#	set {_vUUID} to uuid of {_victim}
+#	if {_forceFreeze} is true:
+#		kill metadata tag "frozenEntity" of {_victim}
+#		clear metadata tag "frozenEntity" of {_victim}
+#	if metadata tag "frozenEntity" of {_victim} is not set:
+#		spawn 1 armor stand above {_victim}
+#		set {staffT::frozen::%{_vUUID}%} to true
+#		set metadata tag "frozenEntity" of {_victim} to last spawned armor stand
+#		add "{Invisible:1b,Invulnerable:1b,PersistenceRequired:1b,NoBasePlate:1b,NoGravity:1b,Small:1b,Marker:1b}" to nbt of metadata tag "frozenEntity" of {_victim}
+#		make {_victim} ride metadata tag "frozenEntity" of {_victim}
+#		if {_user} is not {_victim}:
+#			set {staffT::frozen::%{_vUUID}%::byUser} to {_user}
+#		while metadata tag "frozenEntity" of {_victim} is set:
+#			if {_victim} is not online:
+#				stop
+#			add "{TicksFrozen:200}" to nbt of {_victim}
+#			send title "&bFrozen" with subtitle "&7You've been frozen" to {_victim}
+#			wait 3 seconds
+
 every 20 seconds:
 	loop all players:
 		if biome at loop-player is desert:

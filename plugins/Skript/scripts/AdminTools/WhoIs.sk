@@ -1,5 +1,5 @@
 options:
-    prefix: &8[&4&lINFO&8]
+    prefix: &4[&6&lS&e&lM&6&lP&4]
 
 on quit:
     set {location} to player's location
@@ -8,7 +8,7 @@ on quit:
 command /whois [<offline player>]:
     aliases: /playerinfo
     permission: whois.use
-    permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     description: Visualizza tutte le informazioni necessarie di un giocatore.
     executable by: player, console
     trigger:

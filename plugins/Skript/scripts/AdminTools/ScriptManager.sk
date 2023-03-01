@@ -8,7 +8,7 @@ options:
   full prefix: &8[&e&lScriptManager&8]
   full name: &e&lScriptManager
   permission: script.manager
-  permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+  permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
   v: 1.5
   
 #not options like setting
@@ -49,7 +49,7 @@ on unload:
 command /{@sm} [<text>]:
   permission: {@permission}
   permission message: {@permission message}
-  aliases: /sm, /scriptm, /smanager
+  aliases: /scriptm, /smanager
   trigger:
     {@sm}_gui(player)
 function scriptmanager_gui(p: player):

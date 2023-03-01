@@ -1,108 +1,99 @@
-variables:
-	{fly::%player%} = false
-	{fly::%player%::status} = "&cNo"
+options:
+	prefix_enabled: &a[&2&lFly&a]
+	prefix_disabled: &6[&c&lFly&6]
+	prefix_error: &7[&c&lFly&7]
+	warn: &6[&c&l!&6]
 
-on skript start:
-	{fly::%player%} = false
-	{fly::%player%::status} = "&cNo"
 	
 on join:
-	if {fly::%player%} is not set:
-		set {fly::%player%} to false
-		stop
-	else if {fly::%player%} is false:
-		set {fly::%player%::status} to "&cNo"
-		stop
-	else if {fly::%player%} is true:
-		set {fly::%player%::status} to "&aSì"
-		stop
-		
-	if player has permission "fly.keep":
-		if {fly::%player%} is true:
-			if player's gamemode is creative or spectator:
-				stop
-			else:
+	if {fly::%player%} is true:
+		if player has permission "fly.keep":
+			if player's gamemode is survival or adventure:
 				set player's flight mode to true
-				wait 2 seconds
-				send "&a[&2&lF&a] Puoi ancora volare!" to player
-				stop
-	else:
-		if {fly::%player%} is true:
-			if player's gamemode is creative or spectator:
-				stop
-			else:
-				set {fly::%player%} to false
+				set {fly::%player%} to true
+				set {fly::%player%::status} to "&aSì"
+				set {fly::%player%::ab} to true
+				wait 4 seconds
+				send "{@prefix_enabled} Puoi ancora volare!" to player
+		else:
+			if {fly::%player%} is true:
+				delete {fly::%player%}
+				set {fly::%player%::status} to "&cNo"
 				delete {fly::%player%::ab}
 				set player's flight mode to false
 				wait 2 seconds
-				send "&6[&c&l!&6] &7Prima di uscire dal server, potevi volare. Adesso non puoi più." to player
+				send "{@warn} &7Prima di uscire dal server, potevi volare. Adesso non puoi più. {@warn}" to player
 				stop
+	else:
+		set {fly::%player%::status} to "&cNo"
+		delete {fly::%player%::ab}
+		stop
+	
 			
 command /fly [<offline player>]:
-	aliases: /volo
-	permission: fly.use
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
 	description: "Perché camminare quando puoi volare?"
+	permission: fly.use
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	trigger:
-		if sender is console:
+		if sender is player:
 			if arg-1 is not set:
-				send "&7[&e&lF&7] &cNon puoi attivare il volo per te stesso se esegui questo comando dalla console!"
-				stop
-					
-			else if arg-1 is offline:
-				send "&7[&e&lF&7] &c%arg-1% non è online!" to player
-				stop
-			else:
-				if {fly::%arg-1%} is false:
-					set {fly::%arg-1%} to true
-					set {fly::%arg-1%::status} to "&aSì"
-					set {fly::%arg-1%::ab} to true
-					set arg-1's flight mode to true
-					send "&a[&2&lF&a] &aHai donato un paio d'ali a &e%arg-1%&c." to player
-					send "&a[&2&lF&a] &eConsole &ati ha donato un paio di ali. Adesso puoi volare!" to arg-1
+				if {fly::%player%} is true:
+					set player's flight mode to false
+					delete {fly::%player%}
+					set {fly::%player%::status} to "&cNo"
+					delete {fly::%player%::ab}
+					send "{@prefix_disabled} &cVolo disabilitato." to player
 					stop
 				else:
-					set {fly::%arg-1%} to false
-					set {fly::%arg-1%::status} to "&cNo"
-					delete {fly::%arg-1%::ab}
-					set arg-1's flight mode to false
-					send "&6[&c&lF&6] &cHai tolto le ali a &6%arg-1%&c." to player
-					send "&6[&c&lF&6] &6Console &cti ha tolto le ali. Da adesso non potrai più volare!" to arg-1
-					stop
-		else:
-			if arg-1 is not set:
-				if {fly::%player%} is false:
+					set player's flight mode to true
 					set {fly::%player%} to true
 					set {fly::%player%::status} to "&aSì"
 					set {fly::%player%::ab} to true
-					set player's flight mode to true
-					send "&a[&2&lF&a] &aVolo abilitato." to player
-					stop
-				else:
-					set {fly::%player%} to false
-					set {fly::%player%::status} to "&cNo"
-					delete {fly::%player%::ab}
-					set player's flight mode to false
-					send "&6[&c&lF&6] &cVolo disabilitato." to player
+					send "{@prefix_enabled} &aVolo abilitato." to player
 					stop
 					
 			else if arg-1 is offline:
-				send "&7[&e&lF&7] &c%arg-1% non è online!" to player
+				send "{@prefix_error} &c%arg-1% non è online!" to player
 				stop
 			else:
-				if {fly::%arg-1%} is false:
+				if {fly::%arg-1%} is true:
+					set arg-1's flight mode to false
+					delete {fly::%arg-1%}
+					set {fly::%arg-1%::status} to "&cNo"
+					delete {fly::%arg-1%::ab}
+					send "{@prefix_disabled} &cHai tolto le ali a &6%arg-1%&c." to player
+					send "{@prefix_disabled} &6%player% &cti ha tolto le ali. Da adesso non potrai più volare!" to arg-1
+					stop
+				else:
+					set arg-1's flight mode to true
 					set {fly::%arg-1%} to true
 					set {fly::%arg-1%::status} to "&aSì"
 					set {fly::%arg-1%::ab} to true
-					set arg-1's flight mode to true
-					send "&a[&2&lF&a] &aHai donato un paio d'ali a &e%arg-1%&c." to player
-					send "&a[&2&lF&a] &e%player% &ati ha donato un paio di ali. Adesso puoi volare!" to arg-1
+					send "{@prefix_enabled} &aHai donato un paio d'ali a &e%arg-1%&a." to player
+					send "{@prefix_enabled} &e%player% &ati ha donato un paio di ali. Adesso puoi volare!" to arg-1
 					stop
-				else:
-					set {fly::%arg-1%} to false
+		else:
+			if arg-1 is not set:
+				send "{@prefix_error} &cSolo i giocatori possono eseguire questo comando."
+				stop
+					
+			else if arg-1 is offline:
+				send "{@prefix_error} &c%arg-1% non è online!" to console
+				stop
+			else:
+				if {fly::%arg-1%} is true:
+					set arg-1's flight mode to false
+					delete {fly::%arg-1%}
 					set {fly::%arg-1%::status} to "&cNo"
 					delete {fly::%arg-1%::ab}
-					set arg-1's flight mode to false
-					send "&6[&c&lF&6] &cHai tolto le ali a &6%arg-1%&c." to player
-					send "&6[&c&lF&6] &6%player% &cti ha tolto le ali. Da adesso non potrai più volare!" to arg-1
+					send "{@prefix_disabled} &cHai tolto le ali a &6%arg-1%&c." to console
+					send "{@prefix_disabled} &cLa &6console &cti ha tolto le ali. Da adesso non potrai più volare!" to arg-1
+					stop
+				else:
+					set arg-1's flight mode to true
+					set {fly::%arg-1%} to true
+					set {fly::%arg-1%::status} to "&aSì"
+					set {fly::%arg-1%::ab} to true
+					send "{@prefix_enabled} &aHai donato un paio d'ali a &e%arg-1%&a." to console
+					send "{@prefix_enabled} &aLa &econsole &ati ha donato un paio di ali. Adesso puoi volare!" to arg-1
 					stop

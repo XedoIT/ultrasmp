@@ -33,4 +33,8 @@ on inventory click:
         else if index of event-slot is 31:
             openBuildAchievementsGui(player)
         else if index of event-slot is 32:
-            openProfileGui(player)
+            cancel event
+            if player has permission "admin.manage.server":
+                openProfileGuiAdmin(player)
+            else:
+                openProfileGui(player)

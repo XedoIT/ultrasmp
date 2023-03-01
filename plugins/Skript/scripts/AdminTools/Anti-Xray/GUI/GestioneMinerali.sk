@@ -181,8 +181,7 @@ on inventory click:
             set {clearall::%player%} to true
       else if index of event-slot is 49:
          cancel event
-         send "&cIn arrivo..."
-         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+         openServerManagement(player)
    if event-inventory is (metadata tag "PlayerCounterGUI" of player):
       if index of event-slot is 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 26, 27, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
          cancel event
@@ -299,8 +298,7 @@ on inventory click:
          openAXRores(player, {checkplayer::latest})
       else if index of event-slot is 49:
          cancel event
-         send "&cIn arrivo..."
-         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+         openServerManagement(player)
 
 on inventory close:
    if event-inventory is (metadata tag "PlayerCounterGUI" of player):

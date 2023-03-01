@@ -20,21 +20,7 @@ function openTrashGui(p: player):
 
 on inventory click:
 	if name of event-inventory is "Cestino":
-		if index of event-slot is 45:
-			cancel event
-		else if index of event-slot is 46:
-			cancel event
-		else if index of event-slot is 47:
-			cancel event
-		else if index of event-slot is 48:
-			cancel event
-		else if index of event-slot is 49:
-			cancel event
-		else if index of event-slot is 50:
-			cancel event
-		else if index of event-slot is 51:
-			cancel event
-		else if index of event-slot is 52:
+		if index of event-slot is 45, 46, 47, 48, 49, 50, 51 or 52:
 			cancel event
 		else if index of event-slot is 53:
 			cancel event

@@ -1,6 +1,6 @@
 command /flyspeed [<offline player>] [<number>]:
 	permission: speed.change.fly
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Cambia la velocità di volo di un giocatore.
 	trigger:
 		if arg-1 is not set:
@@ -67,7 +67,7 @@ command /flyspeed [<offline player>] [<number>]:
                     
 command /walkspeed [<offline player>] [<number>]:
 	permission: speed.change.walk
-	permission message: &8[&4&lINFO&8] &cComando sconosciuto.
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Cambia la velocità del passo di un giocatore.
 	trigger:
 		if arg-1 is not set:
