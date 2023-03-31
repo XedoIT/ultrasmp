@@ -2,12 +2,13 @@
 #		  LISTA SERVER PERSONALIZZATA    	 #
 #--------------------------------------------#
 on server list ping:
+    hide all players from the server list
     if {maintenance} is true:
-        set motd to "     &e&lDISAGIO SMP &c[1.20] &7- &4&lIN SVILUPPO! &b(55%%)%newline%             &4&k0 &6&lMANUTENZIONE IN CORSO! &4&k0"
+        set motd to "     &e&lDISAGIO SMP &c[1.20] &7- &4&lIN SVILUPPO! &b(63%%)%newline%           &4&k0 &6&lMANUTENZIONE IN CORSO! &4&k0"
         set fake max players count to 1
         #cancel event
     else:
-        set motd to "     &e&lDISAGIO SMP &c[1.20] &7- &4&lIN SVILUPPO! &b(55%%)%newline%              &a&oUna Vanilla SMP un po'... disagiata!"
+        set motd to "     &e&lDISAGIO SMP &c[1.20] &7- &4&lIN SVILUPPO! &b(63%%)%newline%              &a&oUna Vanilla SMP un po'... disagiata!"
         #set the fake max players count to (number of all players + 1)
         
 #--------------------------------------------#
@@ -37,17 +38,22 @@ on break of reinforced deepslate:
             stop
 #--------------------------------------------#
 #               COMANDO /SLEEP               #
-#--------------------------------------------# 
+#--------------------------------------------#
+options:
+    get: &aQuesta medaglia l'hai ottenuta.
+    not_get: &cQuesta medaglia non l'hai ancora ottenuta.
+
 command /sleep:
     description: Torna al tuo letto in men che non si dica.
     executable by: player, console
     trigger:
         if sender is player:
-            if time in "smp" is between 18:30 and 5:59:
+            if time in "smp" is between 18:45 and 5:59:
                 send action bar "&fPuoi dormire solo di notte o durante un temporale" to player
                 stop
             else:
                 if bed of player exists:
+                    set {bed_entry.%player%} to true
                     teleport player to the player's bed
                     send "&7Eccoti al tuo letto!"
                     stop
@@ -57,6 +63,13 @@ command /sleep:
         else:
             send "&cSolo i giocatori possono eseguire questo comando!"
             stop
+
+on bed leave:
+    if {bed_entry.%player%} is true:
+        if {medals::%player%::suicide} is "{@get}":
+            wait 1 second
+            execute player command "/back"
+            delete {bed_entry.%player%}
 #--------------------------------------------#
 #             TITOLO MOB POTENTI             #
 #--------------------------------------------#
@@ -70,23 +83,28 @@ command /sleep:
 #          AVVISO INVENTARIO PIENO           #
 #--------------------------------------------#
 on join:
-    if player's inventory can't hold 1 stone:
-        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
-        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+    if gamemode of player is survival or adventure:
+        if player's inventory can't hold 1 stone:
+            send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+            play sound "block.chest.open" with volume 1 and pitch 2 at player for player
 on break:
-    if player's inventory can't hold 1 stone:
-        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
-        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+    if gamemode of player is survival or adventure:
+        if player's inventory can't hold 1 stone:
+            send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+            play sound "block.chest.open" with volume 1 and pitch 2 at player for player
 on inventory pickup:
-    if player's inventory can't hold 1 stone:
-        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
-        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+    if gamemode of player is survival or adventure:
+        if player's inventory can't hold 1 stone:
+            send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+            play sound "block.chest.open" with volume 1 and pitch 2 at player for player
 on inventory close:
-    if player's inventory can't hold 1 stone:
-        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
-        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+    if gamemode of player is survival or adventure:
+        if player's inventory can't hold 1 stone:
+            send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+            play sound "block.chest.open" with volume 1 and pitch 2 at player for player
 on pickup:
-    wait 1 tick
-    if player's inventory can't hold 1 stone:
-        send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
-        play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+    if gamemode of player is survival or adventure:
+        wait 1 tick
+        if player's inventory can't hold 1 stone:
+            send formatted "&cIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6/trash<reset> &7per svuotarlo." to player
+            play sound "block.chest.open" with volume 1 and pitch 2 at player for player

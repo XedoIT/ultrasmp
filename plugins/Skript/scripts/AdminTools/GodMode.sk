@@ -33,6 +33,11 @@ on damage:
 on food level change:
     if {god::%player%} is true:
         cancel event
+
+every 10 ticks:
+    loop all players:
+        if {god::%loop-player%::ab} is true:
+            send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player
             
 command /god [<offline player>]:
     description: "Potranno scalfirti ma non potranno ferirti!"

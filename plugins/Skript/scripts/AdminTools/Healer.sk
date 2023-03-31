@@ -17,7 +17,7 @@ command /heal [<offline player>]:
                     play sound "entity.player.levelup" with volume 1 and pitch 1 at arg-1 for the arg-1
                     stop
                 else:
-                    send "{@prefix} &cSembra che &6%arg-1% &cnon sia online."
+                    send "{@prefix} &6%arg-1% &cnon è online."
                     stop
             else:
                 heal player
@@ -35,8 +35,8 @@ command /heal [<offline player>]:
                     play sound "entity.player.levelup" with volume 1 and pitch 1 at arg-1 for the arg-1
                     stop
                 else:
-                    send "{@prefix} &cSembra che &6%arg-1% &cnon sia online."
+                    send "{@prefix} &6%arg-1% &cnon è online."
                     stop
             else:
-                send "{@prefix} &cSolo i giocatori possono curare se stessi."
+                send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
                 stop

@@ -1,6 +1,6 @@
 options:
     prefix: &e[&6&lIP&e]
-    ip: 79.32.165.223
+    ip: 95.250.101.15
 
 command /checkip [<text>] [<offline player>]:
     aliases: /ip
@@ -10,7 +10,7 @@ command /checkip [<text>] [<offline player>]:
         if sender is player:
             if arg-1 is not set:
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}:24367&7." to player
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to player
                     stop
             else if arg-1 is "server":
                 if arg-2 is not set:
@@ -18,7 +18,7 @@ command /checkip [<text>] [<offline player>]:
                         send "{@prefix} &cComando sconosciuto." to player
                         stop
                     else:
-                        send "{@prefix} &7L'IP del server è &c{@ip}:24367&7." to player
+                        send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to player
                         stop
                 else:
                     if player doesn't have permission "ip.admin":
@@ -55,11 +55,11 @@ command /checkip [<text>] [<offline player>]:
         else:
             if arg-1 is not set:
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}:24367&7." to console
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to console
                     stop
             else if arg-1 is "server":
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}:24367&7." to console
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to console
                     stop
                 else:
                     send "{@prefix} &cPer il comando richiesto non sono richiesti ulteriori parametri." to console

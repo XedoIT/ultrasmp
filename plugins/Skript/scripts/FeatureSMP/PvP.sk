@@ -1,48 +1,30 @@
+on load:
+    if {pvp_status} is not set:
+        set {pvp_status} to "&c● &c&lPvP disabilitato &c●"
+        
 command /pvp:
-	permission: pvp.toggle
-	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
-	executable by: player, console
-	description: Attiva o disattiva il PvP nel server.
-	trigger:
-		if sender is player:
-			if {pvp} is not set:
-				set {pvp} to true
-				broadcast "&8[&2●&8] &aPvP globale abilitato!"
-				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
-				stop
-			else if {pvp} is true:
-				set {pvp} to false
-				broadcast "&8[&4●&8] &cPvP globale disabilitato!"
-				send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
-				stop
-			else if {pvp} is false:
-				set {pvp} to true
-				broadcast "&8[&2●&8] &aPvP globale abilitato!"
-				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
-				stop
-		else:
-			if {pvp} is not set:
-				set {pvp} to true
-				broadcast "&8[&2●&8] &aPvP globale abilitato!"
-				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
-				stop
-			else if {pvp} is true:
-				set {pvp} to false
-				broadcast "&8[&4●&8] &cPvP globale disabilitato!"
-				send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
-				stop
-			else if {pvp} is false:
-				set {pvp} to true
-				broadcast "&8[&2●&8] &aPvP globale abilitato!"
-				send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
-				stop
+    permission: pvp.toggle
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    executable by: player, console
+    description: Attiva o disattiva il PvP nel server.
+    trigger:
+        if {pvp} is true:
+            delete {pvp}
+            set {pvp_status} to "&c● &c&lPvP disabilitato &c●"
+            broadcast "&8[&4●&8] &cPvP globale disabilitato!"
+            send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
+            stop
+        else:
+            set {pvp} to true
+            set {pvp_status} to "&a● &a&lPvP abilitato &a●"
+            broadcast "&8[&2●&8] &aPvP globale abilitato!"
+            send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
+            stop
 
 on damage:
-	if attacker is player:
-		if victim is a player:
-			if {pvp} is not set:
-				cancel event
-				send "&cIl PvP è disabilitato!" to attacker
-			else if {pvp} is false:
-				cancel event
-				send "&cIl PvP è disabilitato!" to attacker
+    if attacker is player:
+        if victim is a player:
+            if teleport type is not ender pearl:
+                if {pvp} is not set:
+                    cancel event
+                    send "&cIl PvP è disabilitato!" to attacker

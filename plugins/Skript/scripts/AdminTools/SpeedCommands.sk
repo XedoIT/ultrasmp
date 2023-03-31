@@ -1,4 +1,4 @@
-command /flyspeed [<offline player>] [<number>]:
+command /flyspeed [<offline player>] [<integer>]:
 	permission: speed.change.fly
 	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Cambia la velocità di volo di un giocatore.
@@ -6,66 +6,110 @@ command /flyspeed [<offline player>] [<number>]:
 		if arg-1 is not set:
 			if arg-2 is not set:
 				send "&cUtilizzo: &6/flyspeed &e<giocatore> <numero>"
-				stop trigger
+				stop
 		else if arg-1 is offline:
 			send "&6[&c&lFS&6] &c%arg-1% è offline."
-			stop trigger
+			stop
 			
 		else if arg-1 is set:
 			if arg-2 is not set:
 				send "&6[&c&lFS&6] &cIndica un numero per la velocità di volo!"
-				stop trigger
+				stop
 			else:
-				if arg-2 is 0:
+				if arg-2 < -10:
+					set flyspeed of arg-1 to -1
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -10:
+					set flyspeed of arg-1 to -1
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -9:
+					set flyspeed of arg-1 to -0.9
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -8:
+					set flyspeed of arg-1 to -0.8
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -7:
+					set flyspeed of arg-1 to -0.7
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -6:
+					set flyspeed of arg-1 to -0.6
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -5:
+					set flyspeed of arg-1 to -0.5
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -4:
+					set flyspeed of arg-1 to -0.4
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -3:
+					set flyspeed of arg-1 to -0.3
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -2:
+					set flyspeed of arg-1 to -0.2
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = -1:
+					set flyspeed of arg-1 to -0.1
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
+				else if arg-2 = 0:
 					set flyspeed of arg-1 to 0.0
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 1:
+					stop
+				else if arg-2 = 1:
 					set flyspeed of arg-1 to 0.1
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 2:
+					stop
+				else if arg-2 = 2:
 					set flyspeed of arg-1 to 0.2
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 3:
+					stop
+				else if arg-2 = 3:
 					set flyspeed of arg-1 to 0.3
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 4:
+					stop
+				else if arg-2 = 4:
 					set flyspeed of arg-1 to 0.4
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 5:
+					stop
+				else if arg-2 = 5:
 					set flyspeed of arg-1 to 0.5
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 6:
+					stop
+				else if arg-2 = 6:
 					set flyspeed of arg-1 to 0.6
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 7:
+					stop
+				else if arg-2 = 7:
 					set flyspeed of arg-1 to 0.7
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 8:
+					stop
+				else if arg-2 = 8:
 					set flyspeed of arg-1 to 0.8
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 9:
+					stop
+				else if arg-2 = 9:
 					set flyspeed of arg-1 to 0.9
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 10:
+					stop
+				else if arg-2 = 10:
 					set flyspeed of arg-1 to 1
 					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is higher than 10:
+					stop
+				else if arg-2 > 10:
 					set flyspeed of arg-1 to 1
-					send "&a[&2&lFS&a] Velocità di volo impostata su &610 &aper &e%arg-1%&a."
-					stop trigger
+					send "&a[&2&lFS&a] Velocità di volo impostata su &6%arg-2% &aper &e%arg-1%&a."
+					stop
                     
-command /walkspeed [<offline player>] [<number>]:
+command /walkspeed [<offline player>] [<integer>]:
 	permission: speed.change.walk
 	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Cambia la velocità del passo di un giocatore.
@@ -73,61 +117,64 @@ command /walkspeed [<offline player>] [<number>]:
 		if arg-1 is not set:
 			if arg-2 is not set:
 				send "&cUtilizzo: &6/walkspeed &e<giocatore> <numero>"
-				stop trigger
+				stop
 		else if arg-1 is offline:
 			send "&6[&c&lWS&6] &c%arg-1% è offline."
-			stop trigger
+			stop
 			
 		else if arg-1 is set:
 			if arg-2 is not set:
 				send "&6[&c&lWS&6] &cIndica un numero per la velocità del passo!"
-				stop trigger
+				stop
 			else:
-				if arg-2 is 0:
+				if arg-2 < 0:
+					send "&a[&2&lWS&a] &cLa velocità del passo deve essere superiore a 0."
+					stop
+				else if arg-2 = 0:
 					set walkspeed of arg-1 to 0.0
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 1:
+					stop
+				else if arg-2 = 1:
 					set walkspeed of arg-1 to 0.1
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 2:
+					stop
+				else if arg-2 = 2:
 					set walkspeed of arg-1 to 0.2
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 3:
+					stop
+				else if arg-2 = 3:
 					set walkspeed of arg-1 to 0.3
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 4:
+					stop
+				else if arg-2 = 4:
 					set walkspeed of arg-1 to 0.4
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 5:
+					stop
+				else if arg-2 = 5:
 					set walkspeed of arg-1 to 0.5
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 6:
+					stop
+				else if arg-2 = 6:
 					set walkspeed of arg-1 to 0.6
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 7:
+					stop
+				else if arg-2 = 7:
 					set walkspeed of arg-1 to 0.7
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 8:
+					stop
+				else if arg-2 = 8:
 					set walkspeed of arg-1 to 0.8
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 9:
+					stop
+				else if arg-2 = 9:
 					set walkspeed of arg-1 to 0.9
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 10:
+					stop
+				else if arg-2 = 10:
 					set walkspeed of arg-1 to 1
 					send "&a[&2&lWS&a] Velocità del passo impostata su &6%arg-2% &aper &e%arg-1%&a."
-					stop trigger
-				else if arg-2 is 30:
-					set walkspeed of arg-1 to 3
+					stop
+				else if arg-2 > 10:
+					set walkspeed of arg-1 to 1
 					send "&a[&2&lWS&a] Velocità del passo impostata su &611 &aper &e%arg-1%&a."
-					stop trigger
+					stop

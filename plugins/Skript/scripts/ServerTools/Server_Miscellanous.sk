@@ -1,3 +1,6 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+    
 #--------------------------------------------#
 #             DENOMINAZIONE MONDI            #
 #--------------------------------------------#
@@ -5,10 +8,13 @@ every tick:
     loop all players:
         if world of loop-player is "smp":
             set {world_position::%loop-player%} to "&aOverworld"
-        else if world of loop-player is "smp_nether":
+            #set {world_sign::%loop-player%} to "&b[&a&lO&b]"
+        if world of loop-player is "smp_nether":
             set {world_position::%loop-player%} to "&cNether"
-        else if world of loop-player is "smp_the_end":
+            #set {world_sign::%loop-player%} to "&4[&c&lN&4]"
+        if world of loop-player is "smp_the_end":
             set {world_position::%loop-player%} to "&dEnd"
+            #set {world_sign::%loop-player%} to "&5[&d&lE&5]"
 
 #--------------------------------------------#
 #          MESSAGGI AUTOMATICI CHAT          #
@@ -19,44 +25,6 @@ every tick:
         #send "&c&lSegnalalo con &6/bug &c&lper far sì che venga risolto al più presto." to loop-player
         #play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
 #--------------------------------------------#
-#               TAB COMPLETER                #
-#--------------------------------------------#
-import:
-    org.bukkit.event.server.TabCompleteEvent
-    java.util.ArrayList
-    java.util.List
-
-on TabCompleteEvent:        
-    if event.getBuffer() is "/aiuto ":
-        set {_list} to new ArrayList()
-        {_list}.add("skript")
-        {_list}.add("tp")
-        {_list}.add("homewarps")
-        {_list}.add("general")
-        event.setCompletions({_list})
-        
-    else if event.getBuffer() is "/gui edit ":
-        set {_list} to new ArrayList()
-        {_list}.add("chatmessages")
-        {_list}.add("chatmessages2")
-        {_list}.add("chatmessages3")
-        event.setCompletions({_list})
-
-    else if event.getBuffer() is "/gui open ":
-        set {_list} to new ArrayList()
-        {_list}.add("chatmessages")
-        {_list}.add("chatmessages2")
-        {_list}.add("chatmessages3")
-        event.setCompletions({_list})
-    
-    else if event.getBuffer() is "/gui delete ":
-        set {_list} to new ArrayList()
-        {_list}.add("chatmessages")
-        {_list}.add("chatmessages2")
-        {_list}.add("chatmessages3")
-        event.setCompletions({_list})
-
-#--------------------------------------------#
 #        TEMPO DI ATTIVITÀ DEL SERVER        #
 #--------------------------------------------#
 on skript load:
@@ -65,16 +33,27 @@ on skript load:
 on skript stop:
     log "[UPTIME] Il server è stato chiuso dopo %placeholder "server_uptime"% di attività." to "uptime.log"
     send "&cÈ stato salvato un file "".log"" con il resoconto della sessione del server." to console
-    send "&6Per consultarlo, vai a ""<server>\plugins\Skript\logs\uptime.log""." to console
+    send "&6Per consultarlo, vai a ""<root>\plugins\Skript\logs\uptime.log""." to console
 
-command /uptime [<text>]:
+command /uptime:
     description: "Visualizza il tempo di attività del server."
     trigger:
-        if arg-1 is not set:
-            send "&aIl server è stato avviato &b%placeholder "server_uptime"% &afa."
-            stop
+        send "&aIl server è stato avviato &b%placeholder "server_uptime"% &afa."
+        stop
 
 every 10 ticks:
     loop all players:
         if {uptimeac::%loop-player%} is true:
             send action bar "&b%placeholder "server_uptime"% &adi attività" to loop-player
+
+#--------------------------------------------#
+#            COMANDO AIUTO/WIKI              #
+#--------------------------------------------#
+command /wiki:
+    description: La guida per i novizi.
+    aliases: /aiuto, /smphelp
+    executable by: player, console
+    trigger:
+        send "{@prefix} &cQuesto comando non è ancora disponibile. Attendi il completamento del server per poterlo utilizzare."
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+        stop

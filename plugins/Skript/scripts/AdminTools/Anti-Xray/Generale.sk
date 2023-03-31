@@ -2457,6 +2457,10 @@ on tab complete of "/axr" or "/antixray":
     else if tab arg-1 is "offline":
         set tab completions for position 2 to "toggle", "clear for", "clear all", "view for", "list" and "teleport to"
 
+command /nothing:
+    trigger:
+        stop
+        
 command /axrtimer [<offline player>] [<integer>]:
     description: Gestione complessiva dell'Anti-Xray.
     usage: {@prefix} &cSecondo parametro non valido! &6Devi inserire un numero intero.

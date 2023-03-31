@@ -79,9 +79,42 @@ on chat:
             delete {sm::%player%::gmspectator}
             openServerUtility(player)
 
+on death of player:
+    if {difficulty::hardcore_mode} is true:
+        if {hardcore_teleport} is true:
+            if {settings::%victim%::genre::male} is true:
+                set gamemode of victim to spectator
+                set death message to "&4%victim% &cè morto. Non potrà giocare più finché la difficoltà sarà impostata su &4&lHardcore&c."
+                set {death_location} to victim's position
+                send "{@prefix} &4&lSei morto! &cAttendi la modifica della difficoltà per tornare in vita." to victim
+            else if {settings::%victim%::genre::female} is true:
+                set gamemode of victim to spectator
+                set death message to "&4%victim% &cè morta. Non potrà giocare più finché la difficoltà sarà impostata su &4&lHardcore&c."
+                set {death_location} to victim's position
+                send "{@prefix} &4&lSei morta! &cAttendi la modifica della difficoltà per tornare in vita." to victim
+            
+every tick:
+    loop all players:
+        if {difficulty::hardcore_mode} is not set:
+            if {hardcore_teleport} is true:
+                if {settings::%loop-player%::genre::male} is true:
+                    if gamemode of loop-player is spectator:
+                        teleport loop-player to {death_location}
+                        set gamemode of loop-player to survival
+                        send "{@prefix} &7Ti ho portato al tuo punto di morte." to loop-player
+                        send "&4[&c&lTP-DEATH&4] &7Ho teletrasportato &c%loop-player% &7al punto in cui è morto in difficoltà &4&lHardcore&7." to console
+                        play sound "entity.enderman.teleport" with volume 1 at loop-player for loop-player
+                else if {settings::%loop-player%::genre::female} is true:
+                    if gamemode of loop-player is spectator:
+                        teleport loop-player to {death_location}
+                        set gamemode of loop-player to survival
+                        send "{@prefix} &7Ti ho portata al tuo punto di morte." to loop-player
+                        send "&4[&c&lTP-DEATH&4] &7Ho teletrasportato &c%loop-player% &7al punto in cui è morta in difficoltà &4&lHardcore&7." to console
+                        play sound "entity.enderman.teleport" with volume 1 at loop-player for loop-player
+
 function openServerUtility(p: player):
     if {settings::%{_p}%::glasspanes} is true:
-        set {_gui} to a new chest inventory with 6 rows named "&6&lUtilità Server"
+        set {_gui} to a new chest inventory with 6 rows named "Utilità Server"
         set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
         set slot 40 of {_gui} to gray stained glass pane named "&f"
         set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
@@ -104,7 +137,7 @@ function openServerUtility(p: player):
         set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
         open {_gui} to {_p}
     else:
-        set {_gui} to a new chest inventory with 6 rows named "&6&lUtilità Server"
+        set {_gui} to a new chest inventory with 6 rows named "Utilità Server"
         set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
         set slot 11 of {_gui} to white concrete named "&fPacifica" with lore "&7Imposta la difficoltà del server", "&7su &f&lPacifica&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::peaceful}%"
         set slot 12 of {_gui} to lime concrete named "&aFacile" with lore "&7Imposta la difficoltà del server", "&7su &a&lFacile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty::info}%", "&f" and "%{difficulty::easy}%"
@@ -126,7 +159,7 @@ function openServerUtility(p: player):
         open {_gui} to {_p}
 
 on inventory click:
-    if name of event-inventory is "&6&lUtilità Server":
+    if name of event-inventory is "Utilità Server":
         if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
             cancel event
         else if index of event-slot is 11:
@@ -142,7 +175,8 @@ on inventory click:
                 delete {difficulty::hardcore_mode}
                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                 broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
-                send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli!)." to all players
+                send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
+                delete {hardcore_teleport}
                 openServerUtility(player)
             else:
                 send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
@@ -158,6 +192,7 @@ on inventory click:
                 set {difficulty::hard} to "&eClicca per selezionare."
                 set {difficulty::hardcore} to "&eClicca per selezionare."
                 delete {difficulty::hardcore_mode}
+                delete {hardcore_teleport}
                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                 broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
                 send "{@prefix} &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!" to all players
@@ -176,6 +211,7 @@ on inventory click:
                 set {difficulty::hard} to "&eClicca per selezionare."
                 set {difficulty::hardcore} to "&eClicca per selezionare."
                 delete {difficulty::hardcore_mode}
+                delete {hardcore_teleport}
                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                 broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
                 send "{@prefix} &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!" to all players
@@ -194,6 +230,7 @@ on inventory click:
                 set {difficulty::hard} to "&aSELEZIONATO!"
                 set {difficulty::hardcore} to "&eClicca per selezionare."
                 delete {difficulty::hardcore_mode}
+                delete {hardcore_teleport}
                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                 broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
                 send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
@@ -208,6 +245,7 @@ on inventory click:
                     set {difficulty::hard} to "&aSELEZIONATO!"
                     set {difficulty::hardcore} to "&eClicca per selezionare."
                     delete {difficulty::hardcore_mode}
+                    delete {hardcore_teleport}
                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                     broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
                     send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
@@ -229,6 +267,7 @@ on inventory click:
                 set {difficulty::hard} to "&eClicca per selezionare."
                 set {difficulty::hardcore} to "&aSELEZIONATO!"
                 set {difficulty::hardcore_mode} to true
+                set {hardcore_teleport} to true
                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                 broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
                 send "{@prefix} &cSe muori... &4&lhai perso!" to all players

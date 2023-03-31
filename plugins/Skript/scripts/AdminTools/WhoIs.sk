@@ -16,26 +16,7 @@ command /whois [<offline player>]:
             if arg-1 is not set:
                 send "{@prefix} &cUtilizzo: &6/whois <giocatore>"
                 stop
-            else if arg-1 is offline:
-                send "&6====== Informazioni per &c%arg-1% &4(Modalità Offline) &6======"
-                send "&cGENERALI"
-                send "&6- Nickname: &f%{nick::%arg-1%}%"
-                send formatted "&6- UUID: <tooltip:&7UUID di &c%arg-1%><url:https://mcuuid.net/?q=%arg-1%>&e%arg-1's uuid%<reset>"
-                send "&6- Posizione: &f(&a%{location}%&f)"
-                send "&6- Tempo di gioco totale: &f%placeholder "statistic_time_played:days" from arg-1% giorni, %placeholder "statistic_time_played:hours" from arg-1% ore, %placeholder "statistic_time_played:minutes" from arg-1% minuti e %placeholder "statistic_time_played:seconds" from arg-1% secondi"
-                send "&6- Tempo di gioco dell'ultima sessione: &f%{days::%arg-1%::archive}% giorni, &f%{hours::%arg-1%::archive}% ore, &f%{minutes::%arg-1%::archive}% minuti e &f%{seconds::%arg-1%::archive}% secondi"
-                send "&6- Punti: &f%{points::%arg-1%}%"
-                send "&6- Reputazione: %{points::%arg-1%::rank}%"
-                send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%"
-                send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
-                send "&bTECNICHE"
-                send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
-                send "&3- Modalità Dio: %{god::%arg-1%::status}%"
-                send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
-                send "&3- OP: %placeholder "player_is_op" from arg-1%"
-                stop
-            else:
+            else if arg-1 is online:
                 send "&6====== Informazioni per &c%arg-1% &6======"
                 send "&cGENERALI"
                 send "&6- Nickname: &f%{nick::%arg-1%}%"
@@ -48,33 +29,30 @@ command /whois [<offline player>]:
                 send "&6- Tempo di gioco della sessione: &f%{days::%arg-1%}% giorni, &f%{hours::%arg-1%}% ore, &f%{minutes::%arg-1%}% minuti e &f%{seconds::%arg-1%}% secondi"
                 send "&6- Punti: &f%{points::%arg-1%}%"
                 send "&6- Reputazione: %{points::%arg-1%::rank}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%"
+                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
                 send "&6- AFK: %{afk::%arg-1%::status}%"
                 send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
                 send "&bTECNICHE"
                 send "&3- Indirizzo IP: &e/%placeholder "player_ip" from arg-1%"
-                send "&3- Ping: &e%arg-1's ping% ms" 
+                send "&3- Ping: &e%arg-1's ping%ms" 
                 send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
                 send "&3- Modalità Dio: %{god::%arg-1%::status}%"
                 send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 send "&3- Velocità: &f%arg-1's flyspeed% (Volo), %arg-1's walkspeed% (Passo)"
                 stop
-        else:
-            if arg-1 is not set:
-                send "{@prefix} &cUtilizzo: &6/whois <giocatore>"
-                stop
-            else if arg-1 is offline:
+            else if arg-1 has played before:
                 send "&6====== Informazioni per &c%arg-1% &4(Modalità Offline) &6======"
                 send "&cGENERALI"
                 send "&6- Nickname: &f%{nick::%arg-1%}%"
-                send "&6- UUID: &e%uuid of arg-1%"
+                send formatted "&6- UUID: <tooltip:&7UUID di &c%arg-1%><url:https://mcuuid.net/?q=%arg-1%>&e%arg-1's uuid%<reset>"
                 send "&6- Posizione: &f(&a%{location}%&f)"
+                send "&6- Tempo di gioco totale: &f%placeholder "statistic_time_played:days" from arg-1% giorni, %placeholder "statistic_time_played:hours" from arg-1% ore, %placeholder "statistic_time_played:minutes" from arg-1% minuti e %placeholder "statistic_time_played:seconds" from arg-1% secondi"
                 send "&6- Tempo di gioco dell'ultima sessione: &f%{days::%arg-1%::archive}% giorni, &f%{hours::%arg-1%::archive}% ore, &f%{minutes::%arg-1%::archive}% minuti e &f%{seconds::%arg-1%::archive}% secondi"
                 send "&6- Punti: &f%{points::%arg-1%}%"
                 send "&6- Reputazione: %{points::%arg-1%::rank}%"
                 send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%"
+                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
                 send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
                 send "&bTECNICHE"
                 send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
@@ -83,6 +61,13 @@ command /whois [<offline player>]:
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 stop
             else:
+                send "{@prefix} &cNon ho trovato informazioni per &6%arg-1%&c."
+                stop
+        else:
+            if arg-1 is not set:
+                send "{@prefix} &cUtilizzo: &6/whois <giocatore>"
+                stop
+            else if arg-1 is online:
                 send "&6====== Informazioni per &c%arg-1% &6======"
                 send "&cGENERALI"
                 send "&6- Nickname: &f%{nick::%arg-1%}%"
@@ -96,14 +81,35 @@ command /whois [<offline player>]:
                 send "&6- Punti: &f%{points::%arg-1%}%"
                 send "&6- Reputazione: %{points::%arg-1%::rank}%"
                 send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%"
+                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
                 send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
                 send "&bTECNICHE"
                 send "&3- Indirizzo IP: &e/%placeholder "player_ip" from arg-1%"
-                send "&3- Ping: &e%arg-1's ping% ms" 
+                send "&3- Ping: &e%arg-1's ping%ms" 
                 send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
                 send "&3- Modalità Dio: %{god::%arg-1%::status}%"
                 send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 send "&3- Velocità: &f%arg-1's flyspeed% (Volo), %arg-1's walkspeed% (Passo)"
+                stop
+            else if arg-1 has played before:
+                send "&6====== Informazioni per &c%arg-1% &4(Modalità Offline) &6======"
+                send "&cGENERALI"
+                send "&6- Nickname: &f%{nick::%arg-1%}%"
+                send "&6- UUID: &e%uuid of arg-1%"
+                send "&6- Posizione: &f(&a%{location}%&f)"
+                send "&6- Tempo di gioco dell'ultima sessione: &f%{days::%arg-1%::archive}% giorni, &f%{hours::%arg-1%::archive}% ore, &f%{minutes::%arg-1%::archive}% minuti e &f%{seconds::%arg-1%::archive}% secondi"
+                send "&6- Punti: &f%{points::%arg-1%}%"
+                send "&6- Reputazione: %{points::%arg-1%::rank}%"
+                send "&6- AFK: %{afk::%arg-1%::status}%"
+                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
+                send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
+                send "&bTECNICHE"
+                send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
+                send "&3- Modalità Dio: %{god::%arg-1%::status}%"
+                send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
+                send "&3- OP: %placeholder "player_is_op" from arg-1%"
+                stop
+            else:
+                send "{@prefix} &cNon ho trovato informazioni per &6%arg-1%&c."
                 stop

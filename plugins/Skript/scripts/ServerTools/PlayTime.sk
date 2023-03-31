@@ -131,7 +131,7 @@ command /playtime [<text>] [<offline player>]:
 on tab complete of "/playtime" or "/pt":
     set tab completions for position 1 to "total" and "session"
     
-every real day:
+every day:
     loop all players:
         if {days::%loop-player%} is not set:
             add 1 to {days::%loop-player%}
@@ -140,7 +140,7 @@ every real day:
         else:
             set {days::%loop-player%} to 0
 
-every real hour:
+every hour:
     loop all players:
         if {hours::%loop-player%} is not set:
             add 1 to {hours::%loop-player%}
@@ -149,7 +149,7 @@ every real hour:
         else:
             set {hours::%loop-player%} to 0
 
-every real minute:
+every minute:
     loop all players:
         if {minutes::%loop-player%} is not set:
             add 1 to {minutes::%loop-player%}
@@ -158,7 +158,7 @@ every real minute:
         else:
             set {minutes::%loop-player%} to 0
 
-every real second:
+every second:
     loop all players:
         if {seconds::%loop-player%} is not set:
             add 1 to {seconds::%loop-player%}

@@ -45,7 +45,7 @@ command /difficulty [<text>]:
                     delete {difficulty::hardcore_mode}
                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                     broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
-                    send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli!)." to all players
+                    send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
                     stop
                 else:
                     send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"
@@ -167,7 +167,7 @@ command /difficulty [<text>]:
                     set {difficulty::hardcore} to "&eClicca per selezionare."
                     delete {difficulty::hardcore_mode}
                     broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty::info}%&7."
-                    send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli!)." to all players
+                    send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
                     stop
                 else:
                     send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty::info}%&c!"

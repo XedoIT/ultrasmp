@@ -77,3 +77,20 @@
 - Aggiunto il titolo che avvisa della difficoltà aumentata dei mob durante la notte
 - Modificato il prefisso dei messaggi: da "INFO" a "SMP"
 - Ottimizzati "GodMode", "FlyMode" e "GamemodeCommands" con alcune migliorie delle prestazioni
+
+### - MARZO 2023 -
+- Aggiunto il comando interno "/nothing" all'interno dello script dell'Anti-Xray
+- Modifiche minori ad alcuni script.
+- Ri-creazione delle medaglie con 15 nuove sfide da compiere per ottenerle.
+- Ricreata la GUI del Profilo SMP.
+- Introdotta la possibilità di tornare al punto precedente dopo aver eseguito il comando /sleep al risveglio (se la medaglia "Suicida" è stata sbloccata!).
+- Adesso il server controllerà se ci sono soprannomi attivi con la frequenza di un secondo.
+- Aggiustata l'assegnazione dei punti, dei ruoli e del prefisso del nome per quanto riguarda il primo accesso al server.
+- Unificato e ottimizzato lo script del PvP.
+- Da adesso, i danni provocati dall'Ender Pearl non saranno più controllati dal PvP (ad esempio, se il PvP è disabilitato, il giocatore prenderà comunque danno).
+- Rimossa la GUI della selezione del sesso in gioco.
+- Disabilitato il comando /tell: adesso quando si prova ad eseguirlo il server consiglierà al giocatore di utilizzare il comando /msg.
+- Aggiunto il comando /wiki, che permette di ottenere il link della Wiki della Disagio SMP, così da poterla consultare in modo facile e veloce.
+- Aggiunta la Tablist e la Scoreboard (con comando /sb che consente di attivarla o disattivarla).
+- Rimosse le action bar dal file "ActionBar" e riallocate nei rispettivi script (ad esempio, l'action bar della FlyMode è stata spostata nel file "FlyMode").
+- Ottimizzazione di tutti i file.

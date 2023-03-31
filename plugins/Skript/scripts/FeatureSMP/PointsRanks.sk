@@ -52,14 +52,15 @@ options:
 
 # Evento per Punti
 on join:
-    if {points::%player%} is not set:
-        set {points::%player%} to 0
-    if {points::%player%::rank} is not set:
-        set {points::%player%::rank} to "&7&lNeutrale"
-    if {points::%player%::rankprefix} is not set:
-        set {points::%player%::rankprefix} to "&8[&7&lN&8]"
-    if {points_idle} is not set:
-        set {points_idle} to true
+    loop all players:
+        if {points::%loop-player%} is not set:
+            set {points::%loop-player%} to 0
+        if {points::%loop-player%::rank} is not set:
+            set {points::%loop-player%::rank} to "&7&lNeutrale"
+        if {points::%loop-player%::rankprefix} is not set:
+            set {points::%loop-player%::rankprefix} to "&8[&7&lN&8]"
+        if {points_idle} is not set:
+            set {points_idle} to true
 
 on load:
     if {settings::%player%::genre::male} is set:
@@ -1712,7 +1713,7 @@ on death of elder guardian or guardian:
                 add ({_points}*4) to {points::%attacker%}
                 send action bar "&2&lMOB KILL &a+%{_points}% punti &6(%{points::%attacker%}% totali)" to attacker
                 stop
-on death of blaze, magma cube:
+on death of blaze or magma cube:
     set {_points} to random number between 1.5 and 3.5
     if gamemode of attacker is survival or adventure:
         if world is "smp":

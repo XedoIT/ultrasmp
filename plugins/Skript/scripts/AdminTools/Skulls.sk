@@ -1,20 +1,20 @@
 options:
-	prefix: &8[&1&lSKULLS&8]
+	prefix: &8[&9&lSKULLS&8]
 	error_prefix: &8[&4&lSKULLS&8]
 
 command /skull [<offline player>]:
-	executable by: player, console
+	description: Ottieni in modo facile la testa di qualsiasi giocatore che abbia Minecraft Premium.
 	permission: skull.use
 	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
-	description: Ottieni in modo facile la testa di qualsiasi giocatore che abbia Minecraft Premium.
 	usage: &cUtilizzo: &6/skull &e<giocatore>
+	executable by: player, console
 	trigger:
 		if sender is console:
 			if arg-1 is not set:
-				send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori!"
+				send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori."
 				stop
 			else:
-				send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori!"
+				send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori."
 				stop
 		else:
 			if player has enough space for 1 stone:

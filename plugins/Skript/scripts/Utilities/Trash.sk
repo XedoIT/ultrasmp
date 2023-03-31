@@ -1,32 +1,31 @@
 command /trash:
-	aliases: /cestino
-	description: "Utile per la spazzatura nel tuo inventario."
-	executable by: player, console
-	trigger:
-		if sender is player:
-			openTrashGui(player)
-			play sound "block.iron_door.open" with volume 1 and pitch 2 at player for the player
-		else:
-			send "&cSolo i giocatori possono eseguire questo comando!"
-			stop
+    aliases: /cestino
+    description: "Utile per la spazzatura nel tuo inventario."
+    executable by: player, console
+    trigger:
+        if sender is player:
+            openTrashGui(player)
+        else:
+            send "&cSolo i giocatori possono eseguire questo comando!"
+            stop
 
 function openTrashGui(p: player):
-	set {_gui} to a new chest inventory with 6 row with name "Cestino" 
-	set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 and 44 of {_gui} to air
-	set slot 45, 46, 47, 48, 49, 50, 51 and 52 of {_gui} to gray stained glass pane named "&4Metti qui gli oggetti che vuoi buttare" with lore "&7Quando hai fatto, clicca ""&c&lSvuota cestino&7""" and "&7per eliminarli per sempre!"
-	set slot 53 of {_gui} to barrier named "&c&lSvuota cestino" with lore "&4&lATTENZIONE!" and "&7Tutti gli oggetti qui presenti saranno irrecuperabili" and "&7una volta svuotato il cestino!" and "&f" and "&7Fai attenzione a ciò che butti."
-	open {_gui} to {_p}
-	stop
+    play sound "block.iron_door.open" with volume 1 and pitch 2 at {_p} for {_p}
+    set {_gui} to a new chest inventory with 6 row with name "Cestino"
+    set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 and 44 of {_gui} to air
+    set slot 45, 46, 47, 48, 49, 50, 51 and 52 of {_gui} to gray stained glass pane named "&4Metti qui gli oggetti che vuoi buttare" with lore "&7Quando hai fatto, clicca ""&c&lSvuota cestino&7""" and "&7per eliminarli per sempre!"
+    set slot 53 of {_gui} to lava bucket named "&c&lSvuota cestino" with lore "&4&lATTENZIONE!" and "&7Tutti gli oggetti qui presenti saranno irrecuperabili" and "&7una volta svuotato il cestino!" and "&f" and "&7Fai attenzione a ciò che butti."
+    open {_gui} to {_p}
 
 on inventory click:
-	if name of event-inventory is "Cestino":
-		if index of event-slot is 45, 46, 47, 48, 49, 50, 51 or 52:
-			cancel event
-		else if index of event-slot is 53:
-			cancel event
-			close player's inventory
+    if name of event-inventory is "Cestino":
+        if index of event-slot is 45, 46, 47, 48, 49, 50, 51 or 52:
+            cancel event
+        else if index of event-slot is 53:
+            cancel event
+            close player's inventory
 
 on inventory close:
-	if name of event-inventory is "Cestino":
-		play sound "block.iron_door.close" with volume 1 and pitch 0 at player for the player
-		send action bar "&4&k0 &cCestino svuotato! &4&k0" to player
+    if name of event-inventory is "Cestino":
+        play sound "block.iron_door.close" with volume 1 and pitch 0 at player for player
+        send action bar "&4&k0 &cCestino svuotato! &4&k0" to player

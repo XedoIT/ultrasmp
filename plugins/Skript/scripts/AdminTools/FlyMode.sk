@@ -29,7 +29,15 @@ on join:
 		delete {fly::%player%::ab}
 		stop
 	
-			
+every 10 ticks:
+    loop all players:    
+        if {fly::%loop-player%::ab} is true:
+            if gamemode of loop-player is not creative or spectator:
+                if loop-player is not flying:
+                    send action bar "&a&lA TERRA &7| &bVelocità del passo: &e%walkspeed of loop-player%" to loop-player
+                else:
+                    send action bar "&c&lIN VOLO &7| &aVelocità di volo: &6%flyspeed of loop-player%" to loop-player
+								
 command /fly [<offline player>]:
 	description: "Perché camminare quando puoi volare?"
 	permission: fly.use

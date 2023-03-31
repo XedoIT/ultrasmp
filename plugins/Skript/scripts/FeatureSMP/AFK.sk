@@ -1,74 +1,196 @@
-variables:
-	{afk::%player%} = false
-	{afk::%player%::info} = false
-	{afk::%player%::status} = "&cNo"
+options:
+    prefix: &8[&4&lAFK&8]
+    time: 30
+    time_period: minutes    #solo "seconds", "minutes" e "hours"
 
 on join:
-	if {afk::%player%} is true:
-		set {afk::%player%} to false
-	else if {afk::%player%::info} is true:
-		set {afk::%player%::info} to false
-	else if {afk::%player%::status} is not set:
-		set {afk::%player%::status} to "&cNo"
-		
-on pick up:
-	if {afk::%player%} is true:
-		cancel event
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        send "{@prefix} &6%player% &cnon è più AFK." to console
+        stop
 
 on quit:
-	if {afk::%player%} is not set:
-		set {afk::%player%} to false
-		stop
-	else if {afk::%player%} is true:
-		set {afk::%player%} to false
-		stop
-	else if {afk::%player%::info} is not set:
-		set {afk::%player%::info} to false
-		stop
-	else if {afk::%player%::info} is true:
-		set {afk::%player%::info} to false
-		stop
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        send "{@prefix} &6%player% &cnon è più AFK." to console
+        stop
+
+on pick up:
+    if {afk::%player%} is true:
+        cancel event
+
+on arm swing:
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+        stop
+
+on sneak toggle:
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+        stop
+
+on chat:
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+        stop
+
+on command:
+    if command is not "afk" or "away":
+        if {afk::%player%} is true:
+            delete {afk::%player%}
+            delete {afk::%player%::info}
+            set {afk::%player%::status} to "&cNo"
+            if {settings::%player%::genre::male} is true:
+                broadcast "&9%player% &7è tornato. Che bello!"
+            else if {settings::%player%::genre::female} is true:
+                broadcast "&d%player% &7è tornata. Che bello!"
+            stop
 
 on inventory click:
-	if {afk::%player%} is true:
-		set {afk::%player%} to false
-		execute console command "/afk %player%"
-		execute console command "/checkafk %player%"
-		stop
-	if {afk::%player%::info} is true:
-		set {afk::%player%::info} to false
-		stop
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+        stop
 
 on inventory open:
-	if {afk::%player%} is true:
-		set {afk::%player%} to false
-		execute console command "/afk %player%"
-		execute console command "/checkafk %player%"
-		stop
-	if {afk::%player%::info} is true:
-		set {afk::%player%::info} to false
-		stop
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+    #wait {@time} {@time_period}
+    #if {afk::%player%} is not true:
+        #set {afk::%player%} to true
+        #set {afk::%player%::info} to true
+        #set {afk::%player%::status} to "&aSì"
+        #if {settings::%player%::genre::male} is true:
+            #broadcast "&9%player% &7è andato a prendersi una pausa."
+        #else if {settings::%player%::genre::female} is true:
+            #broadcast "&d%player% &7è andata a prendersi una pausa."
+        stop
 
 on inventory close:
-	if {afk::%player%} is true:
-		set {afk::%player%} to false
-		execute console command "/afk %player%"
-		execute console command "/checkafk %player%"
-		stop
-	if {afk::%player%::info} is true:
-		set {afk::%player%::info} to false
-		stop
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+        stop
 
-command /checkafk [<offline player>]:
-	description: Attiva la modalità AFK di un giocatore.
-	trigger:
-		if {afk::%arg-1%} is false:
-			set {afk::%arg-1%} to true
-			set {afk::%arg-1%::info} to true
-			set {afk::%arg-1%::status} to "&aSì"
-			stop
-		else:
-			set {afk::%arg-1%} to false
-			set {afk::%arg-1%::info} to false
-			set {afk::%arg-1%::status} to "&cNo"
-			stop
+on player move:
+    if {afk::%player%} is true:
+        delete {afk::%player%}
+        delete {afk::%player%::info}
+        set {afk::%player%::status} to "&cNo"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è tornato. Che bello!"
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è tornata. Che bello!"
+        stop
+
+every 10 ticks:
+    loop all players:
+        if {afk::%loop-player%} is true:
+            send action bar "&c&lSei AFK! &6Per tornare a giocare, muoviti o scrivi in chat." to loop-player
+            
+command /afk [<offline player>]:
+    description: "Away From Keyboard"
+    aliases: /away
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if {afk::%player%} is true:
+                    delete {afk::%player%}
+                    delete {afk::%player%::info}
+                    set {afk::%player%::status} to "&cNo"
+                    if {settings::%player%::genre::male} is true:
+                        broadcast "&9%player% &7è tornato. Che bello!"
+                    else if {settings::%player%::genre::female} is true:
+                        broadcast "&d%player% &7è tornata. Che bello!"
+                    stop
+                else:
+                    set {afk::%player%} to true
+                    set {afk::%player%::info} to true
+                    set {afk::%player%::status} to "&aSì"
+                    if {settings::%player%::genre::male} is true:
+                        broadcast "&9%player% &7è andato a prendersi una pausa."
+                    else if {settings::%player%::genre::female} is true:
+                        broadcast "&d%player% &7è andata a prendersi una pausa."
+                    stop
+            else:
+                if player has permission "afk.other":
+                    if {afk::%arg-1%} is true:
+                        delete {afk::%arg-1%}
+                        delete {afk::%arg-1%::info}
+                        set {afk::%arg-1%::status} to "&cNo"
+                        if {settings::%arg-1%::genre::male} is true:
+                            broadcast "&9%arg-1% &7è tornato. Che bello!"
+                        else if {settings::%arg-1%::genre::female} is true:
+                            broadcast "&d%arg-1% &7è tornata. Che bello!"
+                        stop
+                    else:
+                        set {afk::%arg-1%} to true
+                        set {afk::%arg-1%::info} to true
+                        set {afk::%arg-1%::status} to "&aSì"
+                        if {settings::%arg-1%::genre::male} is true:
+                            broadcast "&9%arg-1% &7è andato a prendersi una pausa."
+                        else if {settings::%arg-1%::genre::female} is true:
+                            broadcast "&d%arg-1% &7è andata a prendersi una pausa."
+                        stop
+        else:
+            if arg-1 is not set:
+                send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+                stop
+            else:
+                if {afk::%arg-1%} is true:
+                    delete {afk::%arg-1%}
+                    delete {afk::%arg-1%::info}
+                    set {afk::%arg-1%::status} to "&cNo"
+                    if {settings::%arg-1%::genre::male} is true:
+                        broadcast "&9%arg-1% &7è tornato. Che bello!"
+                    else if {settings::%arg-1%::genre::female} is true:
+                        broadcast "&d%arg-1% &7è tornata. Che bello!"
+                    stop
+                else:
+                    set {afk::%arg-1%} to true
+                    set {afk::%arg-1%::info} to true
+                    set {afk::%arg-1%::status} to "&aSì"
+                    if {settings::%arg-1%::genre::male} is true:
+                        broadcast "&9%arg-1% &7è andato a prendersi una pausa."
+                    else if {settings::%arg-1%::genre::female} is true:
+                        broadcast "&d%arg-1% &7è andata a prendersi una pausa."
+                    stop

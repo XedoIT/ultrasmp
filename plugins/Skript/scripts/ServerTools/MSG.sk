@@ -1,97 +1,104 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+    
+on command "/tell":
+    send "{@prefix} &cComando disabilitato."
+    send "{@prefix} &cUtilizza &6/msg <&egiocatore&6> <&emessaggio&6> &cper inviare messaggi privati."
+
 command /msg [<offline player>] [<text>]:
-	aliases: /r
-	description: "Ti piacciono i messaggi privati?"
-	executable by: player, console
-	trigger:
-		if sender is console:
-			if arg-1 is not set:
-				if arg-2 is not set:
-					send "&cSpecifica il giocatore a cui vuoi mandare un messaggio!"
-					stop
-					
-			else if arg-1 is offline:
-				send "&6%arg-1% &cnon è online!"
-				stop
-				
-			else if arg-1 is set:
-				if arg-2 is not set:
-					send "&cCosa vuoi dire a %arg-1%?"
-					stop
-				else:
-					if arg-2 is set:
-						send "&6[&eTu &7a &e%arg-1%&6] &c&l> &f%arg-2%"
-						send "&6[&eConsole &7a &eTe&6] &c&l> &f%arg-2%" to arg-1
-						play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-						stop
-		else:
-			if arg-1 is not set:
-				if arg-2 is not set:
-					send "&cSpecifica il giocatore a cui vuoi mandare un messaggio!"
-					stop
-					
-			else if arg-1 is offline:
-				send "&6%arg-1% &cnon è online!"
-				stop
-				
-			else if arg-1 is player:
-				if {settings::%player%::genre::male} is true:
-					send "&cChe senso ha scrivere a te stesso?"
-					stop
-				else if {settings::%player%::genre::female} is true:
-					send "&cChe senso ha scrivere a te stessa?"
-					stop
-				
-			else if arg-1 is set:
-				if arg-2 is not set:
-					send "&cCosa vuoi dire a %arg-1%?"
-					stop
-				else:
-					if arg-2 is set:
-						if player's uuid is "cd1db3e8-73ee-488f-9367-73224ca93ef3":
-							send "&6[&bTu &7a &a%arg-1%&6] &9&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&b%player% &7a &aTe&6]<reset> &9&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "da71a28d-8da4-427d-8967-c77757f887f4":
-							send "&6[&cTu &7a &a%arg-1%&6] &4&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&c%player% &7a &aTe&6]<reset> &4&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "0809c6c4-6898-415c-90d5-dd6fee334fca":
-							send "&6[&4Tu &7a &a%arg-1%&6] &c&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&4%player% &7a &aTe&6]<reset> &c&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "d6c92f76-8c3b-4a1f-ac35-74fba37a0d44":
-							send "&6[&8Tu &7a &a%arg-1%&6] &7&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&8%player% &7a &aTe&6]<reset> &7&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "b1cdedbc-5f5a-4d13-9f75-d0c6c24bceec":
-							send "&6[&aTu &7a &3%arg-1%&6] &2&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&a%player% &7a &3Te&6]<reset> &2&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "a095c219-f7e9-478e-aff9-110c4a35d653":
-							send "&6[&dTu &7a &c%arg-1%&6] &5&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&d%player% &7a &aTe&6]<reset> &5&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "b8d563c2-b3eb-474f-bec2-ddab7cccae0d":
-							send "&6[&5Tu &7a &c%arg-1%&6] &d&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&5%player% &7a &aTe&6]<reset> &d&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
-						else if player's uuid is "cfc5251b-c55b-4a99-b020-23bdb1c2354a":
-							send "&6[&3Tu &7a &c%arg-1%&6] &1&l> &f%arg-2%"
-							send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&3%player% &7a &aTe&6]<reset> &1&l> &f%arg-2%" to arg-1
-							send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
-							play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
-							stop
+    aliases: /r
+    description: "Ti piacciono i messaggi privati?"
+    executable by: player, console
+    trigger:
+        if sender is console:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    send "&cSpecifica il giocatore a cui vuoi mandare un messaggio!"
+                    stop
+                    
+            else if arg-1 is offline:
+                send "&6%arg-1% &cnon è online!"
+                stop
+                
+            else if arg-1 is set:
+                if arg-2 is not set:
+                    send "&cCosa vuoi dire a %arg-1%?"
+                    stop
+                else:
+                    if arg-2 is set:
+                        send "&6[&eTu &7a &e%arg-1%&6] &c&l> &f%arg-2%"
+                        send "&6[&eConsole &7a &eTe&6] &c&l> &f%arg-2%" to arg-1
+                        play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                        stop
+        else:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    send "&cSpecifica il giocatore a cui vuoi mandare un messaggio!"
+                    stop
+                    
+            else if arg-1 is offline:
+                send "&6%arg-1% &cnon è online!"
+                stop
+                
+            else if arg-1 is player:
+                if {settings::%player%::genre::male} is true:
+                    send "&cChe senso ha scrivere a te stesso?"
+                    stop
+                else if {settings::%player%::genre::female} is true:
+                    send "&cChe senso ha scrivere a te stessa?"
+                    stop
+                
+            else if arg-1 is set:
+                if arg-2 is not set:
+                    send "&cCosa vuoi dire a %arg-1%?"
+                    stop
+                else:
+                    if arg-2 is set:
+                        if player's uuid is "cd1db3e8-73ee-488f-9367-73224ca93ef3":
+                            send "&6[&bTu &7a &a%arg-1%&6] &9&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&b%player% &7a &aTe&6]<reset> &9&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "da71a28d-8da4-427d-8967-c77757f887f4":
+                            send "&6[&cTu &7a &a%arg-1%&6] &4&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&c%player% &7a &aTe&6]<reset> &4&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "0809c6c4-6898-415c-90d5-dd6fee334fca":
+                            send "&6[&4Tu &7a &a%arg-1%&6] &c&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&4%player% &7a &aTe&6]<reset> &c&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "d6c92f76-8c3b-4a1f-ac35-74fba37a0d44":
+                            send "&6[&8Tu &7a &a%arg-1%&6] &7&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&8%player% &7a &aTe&6]<reset> &7&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "b1cdedbc-5f5a-4d13-9f75-d0c6c24bceec":
+                            send "&6[&aTu &7a &3%arg-1%&6] &2&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&a%player% &7a &3Te&6]<reset> &2&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "a095c219-f7e9-478e-aff9-110c4a35d653":
+                            send "&6[&dTu &7a &c%arg-1%&6] &5&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&d%player% &7a &aTe&6]<reset> &5&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "b8d563c2-b3eb-474f-bec2-ddab7cccae0d":
+                            send "&6[&5Tu &7a &c%arg-1%&6] &d&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&5%player% &7a &aTe&6]<reset> &d&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop
+                        else if player's uuid is "cfc5251b-c55b-4a99-b020-23bdb1c2354a":
+                            send "&6[&3Tu &7a &c%arg-1%&6] &1&l> &f%arg-2%"
+                            send formatted "<tooltip:&fClicca per rispondere rapidamente a %player%><suggest command:/r %player% >&6[&3%player% &7a &aTe&6]<reset> &1&l> &f%arg-2%" to arg-1
+                            send "&6[&f%player% a %arg-1%&6] &f&l> &7%arg-2%" to console
+                            play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
+                            stop

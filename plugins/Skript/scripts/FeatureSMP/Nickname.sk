@@ -2,23 +2,17 @@ options:
     prefix: &b[&3&lNICK&b]
 
 on load:
-    #delete {nick_list::*}
+    #delete {nick_list::*} --> SOLO DEBUG
+    if {nick_list::*} is not set:
+        set {nick_list::*} to "&7Non ci sono soprannomi attivi."
+        
+every second:
     if {nick_list::*} is not set:
         set {nick_list::*} to "&7Non ci sono soprannomi attivi."
     loop all players:
         if {nick::%loop-player%} is not set:
-            set {nick::%loop-player%} to loop-player
-
-on join:
-    if {nick::%player%} is not set:
-        set {nick::%player%} to player
-
-every tick:
-    if {nick_list::*} is not set:
-        set {nick_list::*} to "&7Non ci sono soprannomi attivi."
-    loop all players:
-        if {nick::%loop-player%} is not set:
-            set {nick::%loop-player%} to loop-player's display name
+            set {nick::%loop-player%} to name of loop-player
+            set loop-player's tablist name to loop-player's name
 
 command /nick [<text>] [<text>] [<offline player>]:
     aliases: /nickname
