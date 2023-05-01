@@ -88,15 +88,15 @@ on inventory open:
             broadcast "&9%player% &7è tornato. Che bello!"
         else if {settings::%player%::genre::female} is true:
             broadcast "&d%player% &7è tornata. Che bello!"
-    #wait {@time} {@time_period}
-    #if {afk::%player%} is not true:
-        #set {afk::%player%} to true
-        #set {afk::%player%::info} to true
-        #set {afk::%player%::status} to "&aSì"
-        #if {settings::%player%::genre::male} is true:
-            #broadcast "&9%player% &7è andato a prendersi una pausa."
-        #else if {settings::%player%::genre::female} is true:
-            #broadcast "&d%player% &7è andata a prendersi una pausa."
+    wait {@time} {@time_period}
+    if {afk::%player%} is not true:
+        set {afk::%player%} to true
+        set {afk::%player%::info} to true
+        set {afk::%player%::status} to "&aSì"
+        if {settings::%player%::genre::male} is true:
+            broadcast "&9%player% &7è andato a prendersi una pausa."
+        else if {settings::%player%::genre::female} is true:
+            broadcast "&d%player% &7è andata a prendersi una pausa."
         stop
 
 on inventory close:

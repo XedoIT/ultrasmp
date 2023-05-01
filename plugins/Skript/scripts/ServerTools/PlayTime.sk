@@ -5,11 +5,11 @@ options:
 on join:
     if {days::%player%} is not set:
         set {days::%player%} to 0
-    else if {hours::%player%} is not set:
+    if {hours::%player%} is not set:
         set {hours::%player%} to 0
-    else if {minutes::%player%} is not set:
+    if {minutes::%player%} is not set:
         set {minutes::%player%} to 0
-    else if {seconds::%player%} is not set:
+    if {seconds::%player%} is not set:
         set {seconds::%player%} to 0
 
 on quit:

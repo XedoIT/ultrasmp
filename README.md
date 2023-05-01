@@ -79,10 +79,11 @@
 - Ottimizzati "GodMode", "FlyMode" e "GamemodeCommands" con alcune migliorie delle prestazioni
 
 ### - MARZO 2023 -
-- Aggiunto il comando interno "/nothing" all'interno dello script dell'Anti-Xray
+- Aggiunto il comando interno "/nothing" all'interno dello script dell'Anti-Xray.
 - Modifiche minori ad alcuni script.
 - Ri-creazione delle medaglie con 15 nuove sfide da compiere per ottenerle.
 - Ricreata la GUI del Profilo SMP.
+- Ricreato e rivisitato il sistema dell'AFK con l'inserimento di messaggi personalizzati basati sul genere del giocatore e con vari bugfixes.
 - Introdotta la possibilità di tornare al punto precedente dopo aver eseguito il comando /sleep al risveglio (se la medaglia "Suicida" è stata sbloccata!).
 - Adesso il server controllerà se ci sono soprannomi attivi con la frequenza di un secondo.
 - Aggiustata l'assegnazione dei punti, dei ruoli e del prefisso del nome per quanto riguarda il primo accesso al server.
@@ -94,3 +95,8 @@
 - Aggiunta la Tablist e la Scoreboard (con comando /sb che consente di attivarla o disattivarla).
 - Rimosse le action bar dal file "ActionBar" e riallocate nei rispettivi script (ad esempio, l'action bar della FlyMode è stata spostata nel file "FlyMode").
 - Ottimizzazione di tutti i file.
+
+### - APRILE 2023 -
+- Ri-creazione dei pacchetti di messaggi di ingresso e uscita dal server con aggiunta di alcuni pacchetti già selezionabili dal giocatore.
+- Modifica di alcune parti del codice del contatore delle sessioni di gioco.
+- Modifica ad una stringa del codice per le impostazioni del giocatore.

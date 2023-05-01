@@ -88,7 +88,7 @@ on inventory click:
             openPlayerSettingsGui(player)
         else if index of event-slot is 23:
             cancel event
-            execute player command "/chatmessage"
+            openLogMessagesGui_1(player)
         else if index of event-slot is 40:
             cancel event
             if player has permission "admin.manage.server":
