@@ -100,3 +100,7 @@
 - Ri-creazione dei pacchetti di messaggi di ingresso e uscita dal server con aggiunta di alcuni pacchetti già selezionabili dal giocatore.
 - Modifica di alcune parti del codice del contatore delle sessioni di gioco.
 - Modifica ad una stringa del codice per le impostazioni del giocatore.
+
+### - MAGGIO 2023 -
+- Correzioni delle prime GUI del sistema degli obiettivi.
+- Miglioramento delle prestazioni.
