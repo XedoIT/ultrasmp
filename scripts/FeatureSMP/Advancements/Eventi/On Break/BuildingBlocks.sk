@@ -1,0 +1,858 @@
+on break:
+    if player's gamemode is survival or adventure:
+# QUERCIA
+        if event-block is oak log:
+            add 1 to {blocksbuild::%player%::broke::oak_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak wood:
+            add 1 to {blocksbuild::%player%::broke::oak_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped oak log:
+            add 1 to {blocksbuild::%player%::broke::stripped_oak_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped oak wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_oak_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak planks:
+            add 1 to {blocksbuild::%player%::broke::oak_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak stairs:
+            add 1 to {blocksbuild::%player%::broke::oak_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak slab:
+            add 1 to {blocksbuild::%player%::broke::oak_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak fence:
+            add 1 to {blocksbuild::%player%::broke::oak_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak fence gate:
+            add 1 to {blocksbuild::%player%::broke::oak_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak door:
+            add 1 to {blocksbuild::%player%::broke::oak_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is oak trapdoor:
+            add 1 to {blocksbuild::%player%::broke::oak_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# BETULLA
+        else if event-block is birch log:
+            add 1 to {blocksbuild::%player%::broke::birch_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch wood:
+            add 1 to {blocksbuild::%player%::broke::birch_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped birch log:
+            add 1 to {blocksbuild::%player%::broke::stripped_birch_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped birch wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_birch_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch planks:
+            add 1 to {blocksbuild::%player%::broke::birch_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch stairs:
+            add 1 to {blocksbuild::%player%::broke::birch_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch slab:
+            add 1 to {blocksbuild::%player%::broke::birch_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch fence:
+            add 1 to {blocksbuild::%player%::broke::birch_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch fence gate:
+            add 1 to {blocksbuild::%player%::broke::birch_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch door:
+            add 1 to {blocksbuild::%player%::broke::birch_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is birch trapdoor:
+            add 1 to {blocksbuild::%player%::broke::birch_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# QUERCIA SCURA
+        else if event-block is dark oak log:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_log}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak wood:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_wood}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is stripped dark oak log:
+            add 1 to {blocksbuild::%player%::broke::stripped_dark_oak_log}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is stripped dark oak wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_dark_oak_wood}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak planks:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_planks}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak stairs:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_stairs}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak slab:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_slab}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak fence:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_fence}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak fence gate:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_fence_gate}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak door:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_door}
+            add 1 to {blocksbuild::%player%}
+        else if event-block is dark oak trapdoor:
+            add 1 to {blocksbuild::%player%::broke::dark_oak_trapdoor}
+            add 1 to {blocksbuild::%player%}
+# ABETE
+        else if event-block is spruce log:
+            add 1 to {blocksbuild::%player%::broke::spruce_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce wood:
+            add 1 to {blocksbuild::%player%::broke::spruce_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped spruce log:
+            add 1 to {blocksbuild::%player%::broke::stripped_spruce_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped spruce wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_spruce_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce planks:
+            add 1 to {blocksbuild::%player%::broke::spruce_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce stairs:
+            add 1 to {blocksbuild::%player%::spruce_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce slab:
+            add 1 to {blocksbuild::%player%::spruce_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce fence:
+            add 1 to {blocksbuild::%player%::spruce_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce fence gate:
+            add 1 to {blocksbuild::%player%::spruce_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce door:
+            add 1 to {blocksbuild::%player%::spruce_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is spruce trapdoor:
+            add 1 to {blocksbuild::%player%::spruce_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# ACACIA
+        else if event-block is acacia log:
+            add 1 to {blocksbuild::%player%::broke::acacia_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia wood:
+            add 1 to {blocksbuild::%player%::broke::acacia_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped acacia log:
+            add 1 to {blocksbuild::%player%::broke::stripped_acacia_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped acacia wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_acacia_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia planks:
+            add 1 to {blocksbuild::%player%::broke::acacia_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia stairs:
+            add 1 to {blocksbuild::%player%::broke::acacia_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia slab:
+            add 1 to {blocksbuild::%player%::broke::acacia_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia fence:
+            add 1 to {blocksbuild::%player%::broke::acacia_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia fence gate:
+            add 1 to {blocksbuild::%player%::broke::acacia_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia door:
+            add 1 to {blocksbuild::%player%::broke::acacia_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is acacia trapdoor:
+            add 1 to {blocksbuild::%player%::broke::acacia_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# GIUNGLA
+        else if event-block is jungle log:
+            add 1 to {blocksbuild::%player%::broke::jungle_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle wood:
+            add 1 to {blocksbuild::%player%::broke::jungle_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped jungle log:
+            add 1 to {blocksbuild::%player%::broke::stripped_jungle_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped jungle wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_jungle_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle planks:
+            add 1 to {blocksbuild::%player%::broke::jungle_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle stairs:
+            add 1 to {blocksbuild::%player%::broke::jungle_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle slab:
+            add 1 to {blocksbuild::%player%::broke::jungle_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle fence:
+            add 1 to {blocksbuild::%player%::broke::jungle_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle fence gate:
+            add 1 to {blocksbuild::%player%::broke::jungle_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle door:
+            add 1 to {blocksbuild::%player%::broke::jungle_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is jungle trapdoor:
+            add 1 to {blocksbuild::%player%::broke::jungle_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# MANGROVIA
+        else if event-block is mangrove log:
+            add 1 to {blocksbuild::%player%::broke::mangrove_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove wood:
+            add 1 to {blocksbuild::%player%::broke::mangrove_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped mangrove log:
+            add 1 to {blocksbuild::%player%::broke::stripped_mangrove_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped mangrove wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_mangrove_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove planks:
+            add 1 to {blocksbuild::%player%::broke::mangrove_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove stairs:
+            add 1 to {blocksbuild::%player%::broke::mangrove_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove slab:
+            add 1 to {blocksbuild::%player%::broke::mangrove_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove fence:
+            add 1 to {blocksbuild::%player%::broke::mangrove_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove fence gate:
+            add 1 to {blocksbuild::%player%::broke::mangrove_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove door:
+            add 1 to {blocksbuild::%player%::broke::mangrove_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mangrove trapdoor:
+            add 1 to {blocksbuild::%player%::broke::mangrove_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# CILIEGIO
+        else if event-block is cherry log:
+            add 1 to {blocksbuild::%player%::broke::cherry_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry wood:
+            add 1 to {blocksbuild::%player%::broke::cherry_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped cherry log:
+            add 1 to {blocksbuild::%player%::broke::stripped_cherry_log}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped cherry wood:
+            add 1 to {blocksbuild::%player%::broke::stripped_cherry_wood}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry planks:
+            add 1 to {blocksbuild::%player%::broke::cherry_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry stairs:
+            add 1 to {blocksbuild::%player%::broke::cherry_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry slab:
+            add 1 to {blocksbuild::%player%::broke::cherry_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry fence:
+            add 1 to {blocksbuild::%player%::broke::cherry_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry fence gate:
+            add 1 to {blocksbuild::%player%::broke::cherry_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry door:
+            add 1 to {blocksbuild::%player%::broke::cherry_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cherry trapdoor:
+            add 1 to {blocksbuild::%player%::broke::cherry_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# CREMISI
+        else if event-block is crimson stem:
+            add 1 to {blocksbuild::%player%::broke::crimson_stem}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson hyphae:
+            add 1 to {blocksbuild::%player%::broke::crimson_hyphae}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped crimson stem:
+            add 1 to {blocksbuild::%player%::broke::stripped_crimson_stem}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped crimson hyphae:
+            add 1 to {blocksbuild::%player%::broke::stripped_crimson_hyphae}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson planks:
+            add 1 to {blocksbuild::%player%::broke::crimson_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson stairs:
+            add 1 to {blocksbuild::%player%::broke::crimson_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson slab:
+            add 1 to {blocksbuild::%player%::broke::crimson_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson fence:
+            add 1 to {blocksbuild::%player%::broke::crimson_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson fence gate:
+            add 1 to {blocksbuild::%player%::broke::crimson_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson door:
+            add 1 to {blocksbuild::%player%::broke::crimson_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crimson trapdoor:
+            add 1 to {blocksbuild::%player%::broke::crimson_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# DISTORTO
+        else if event-block is warped stem:
+            add 1 to {blocksbuild::%player%::broke::warped_stem}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped hyphae:
+            add 1 to {blocksbuild::%player%::broke::warped_hyphae}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped warped stem:
+            add 1 to {blocksbuild::%player%::broke::stripped_warped_stem}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stripped warped hyphae:
+            add 1 to {blocksbuild::%player%::broke::stripped_warped_hyphae}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped planks:
+            add 1 to {blocksbuild::%player%::broke::warped_planks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped stairs:
+            add 1 to {blocksbuild::%player%::broke::warped_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped slab:
+            add 1 to {blocksbuild::%player%::broke::warped_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped fence:
+            add 1 to {blocksbuild::%player%::broke::warped_fence}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped fence gate:
+            add 1 to {blocksbuild::%player%::broke::warped_fence_gate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped door:
+            add 1 to {blocksbuild::%player%::broke::warped_door}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped trapdoor:
+            add 1 to {blocksbuild::%player%::broke::warped_trapdoor}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRISCO
+        else if event-block is cobblestone:
+            add 1 to {blocksbuild::%player%::broke::cobblestone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobblestone stairs:
+            add 1 to {blocksbuild::%player%::broke::cobblestone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobblestone slab:
+            add 1 to {blocksbuild::%player%::broke::cobblestone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobblestone wall:
+            add 1 to {blocksbuild::%player%::broke::cobblestone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DI PIETRA
+        else if event-block is stone bricks:
+            add 1 to {blocksbuild::%player%::broke::stone_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cracked stone bricks:
+            add 1 to {blocksbuild::%player%::broke::cracked_stone_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stone brick stairs:
+            add 1 to {blocksbuild::%player%::broke::stone_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stone brick slab:
+            add 1 to {blocksbuild::%player%::broke::stone_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stone brick wall:
+            add 1 to {blocksbuild::%player%::broke::stone_brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled stone bricks:
+            add 1 to {blocksbuild::%player%::broke::chiseled_stone_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRA
+        else if event-block is stone:
+            add 1 to {blocksbuild::%player%::broke::stone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stone stairs:
+            add 1 to {blocksbuild::%player%::broke::stone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is stone slab:
+            add 1 to {blocksbuild::%player%::broke::stone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth stone:
+            add 1 to {blocksbuild::%player%::broke::smooth_stone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth stone slab:
+            add 1 to {blocksbuild::%player%::broke::smooth_stone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is calcite:
+            add 1 to {blocksbuild::%player%::broke::calcite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is tuff:
+            add 1 to {blocksbuild::%player%::broke::tuff}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRISCO MUSCHIOSO
+        else if event-block is mossy cobblestone:
+            add 1 to {blocksbuild::%player%::broke::mossy_cobblestone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mossy cobblestone stairs:
+            add 1 to {blocksbuild::%player%::broke::mossy_cobblestone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mossy cobblestone slab:
+            add 1 to {blocksbuild::%player%::broke::mossy_cobblestone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mossy cobblestone wall:
+            add 1 to {blocksbuild::%player%::broke::mossy_cobblestone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DI PIETRA MUSCHIOSI
+        else if event-block is mossy stone bricks:
+            add 1 to {blocksbuild::%player%::broke::mossy_stone_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mossy stone brick stairs:
+            add 1 to {blocksbuild::%player%::broke::mossy_stone_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mossy stone brick slab:
+            add 1 to {blocksbuild::%player%::broke::mossy_stone_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mossy stone brick wall:
+            add 1 to {blocksbuild::%player%::broke::mossy_stone_brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# GRANITO
+        else if event-block is granite:
+            add 1 to {blocksbuild::%player%::broke::granite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is granite stairs:
+            add 1 to {blocksbuild::%player%::broke::granite_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is granite slab:
+            add 1 to {blocksbuild::%player%::broke::granite_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is granite wall:
+            add 1 to {blocksbuild::%player%::broke::granite_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# GRANITO LEVIGATO
+        else if event-block is polished granite:
+            add 1 to {blocksbuild::%player%::broke::polished_granite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished granite stairs:
+            add 1 to {blocksbuild::%player%::broke::polished_granite_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished granite slab:
+            add 1 to {blocksbuild::%player%::broke::polished_granite_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# DIORITE
+        else if event-block is diorite:
+            add 1 to {blocksbuild::%player%::broke::diorite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is diorite stairs:
+            add 1 to {blocksbuild::%player%::broke::diorite_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is diorite slab:
+            add 1 to {blocksbuild::%player%::broke::diorite_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is diorite wall:
+            add 1 to {blocksbuild::%player%::broke::diorite_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# DIORITE LEVIGATA
+        else if event-block is polished diorite:
+            add 1 to {blocksbuild::%player%::broke::polished_diorite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished diorite stairs:
+            add 1 to {blocksbuild::%player%::broke::polished_diorite_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished diorite slab:
+            add 1 to {blocksbuild::%player%::broke::polished_diorite_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# ANDESITE
+        else if event-block is andesite:
+            add 1 to {blocksbuild::%player%::broke::andesite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is andesite stairs:
+            add 1 to {blocksbuild::%player%::broke::andesite_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is andesite slab:
+            add 1 to {blocksbuild::%player%::broke::andesite_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is andesite wall:
+            add 1 to {blocksbuild::%player%::broke::andesite_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# ANDESITE LEVIGATA
+        else if event-block is polished andesite:
+            add 1 to {blocksbuild::%player%::broke::polished_andesite}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished andesite stairs:
+            add 1 to {blocksbuild::%player%::broke::polished_andesite_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished andesite slab:
+            add 1 to {blocksbuild::%player%::broke::polished_andesite_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRISCO DI ARDESIA PROFONDA E ARDESIA PROFONDA
+        else if event-block is deepslate:
+            add 1 to {blocksbuild::%player%::broke::deepslate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobbled deepslate:
+            add 1 to {blocksbuild::%player%::broke::cobbled_deepslate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobbled deepslate stairs:
+            add 1 to {blocksbuild::%player%::broke::cobbled_deepslate_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobbled deepslate slab:
+            add 1 to {blocksbuild::%player%::broke::cobbled_deepslate_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cobbled deepslate wall:
+            add 1 to {blocksbuild::%player%::broke::cobbled_deepslate_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DI ARDESIA PROFONDA
+        else if event-block is deepslate bricks:
+            add 1 to {blocksbuild::%player%::broke::deepslate_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cracked deepslate bricks:
+            add 1 to {blocksbuild::%player%::broke::cracked_deepslate_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is deepslate brick stairs:
+            add 1 to {blocksbuild::%player%::broke::deepslate_bricks_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is deepslate brick slab:
+            add 1 to {blocksbuild::%player%::broke::deepslate_bricks_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is deepslate brick wall:
+            add 1 to {blocksbuild::%player%::broke::deepslate_bricks_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# ARDESIA PROFONDA LEVIGATA
+        else if event-block is polished deepslate:
+            add 1 to {blocksbuild::%player%::broke::polished_deepslate}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished deepslate stairs:
+            add 1 to {blocksbuild::%player%::broke::polished_deepslate_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished deepslate slab:
+            add 1 to {blocksbuild::%player%::broke::polished_deepslate_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished deepslate wall:
+            add 1 to {blocksbuild::%player%::broke::polished_deepslate_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# PIASTRELLE DI ARDESIA PROFONDA
+        else if event-block is deepslate tiles:
+            add 1 to {blocksbuild::%player%::broke::deepslate_tiles}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cracked deepslate tiles:
+            add 1 to {blocksbuild::%player%::broke::cracked_deepslate_tiles}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is deepslate tile stairs:
+            add 1 to {blocksbuild::%player%::broke::deepslate_tiles_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is deepslate tile slab:
+            add 1 to {blocksbuild::%player%::broke::deepslate_tiles_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is deepslate tile wall:
+            add 1 to {blocksbuild::%player%::broke::deepslate_tiles_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# ARDESIA PROFONDA RINFORZATA
+        else if event-block is reinforced deepslate:
+            add 1 to {blocksbuild::%player%::broke::reinforced_deepslate}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI
+        else if event-block is bricks:
+            add 1 to {blocksbuild::%player%::broke::bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is brick stairs:
+            add 1 to {blocksbuild::%player%::broke::brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is brick slab:
+            add 1 to {blocksbuild::%player%::broke::brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is brick wall:
+            add 1 to {blocksbuild::%player%::broke::brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# FANGO
+        else if event-block is mud:
+            add 1 to {blocksbuild::%player%::broke::mud}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is muddy mangrove roots:
+            add 1 to {blocksbuild::%player%::broke::muddy_mangrove_roots}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is packed mud:
+            add 1 to {blocksbuild::%player%::broke::packed_mud}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mud bricks:
+            add 1 to {blocksbuild::%player%::broke::mud_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mud brick stairs:
+            add 1 to {blocksbuild::%player%::broke::mud_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mud brick slab:
+            add 1 to {blocksbuild::%player%::broke::mud_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is mud brick wall:
+            add 1 to {blocksbuild::%player%::broke::mud_brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# ARENARIA
+        else if event-block is sandstone:
+            add 1 to {blocksbuild::%player%::broke::sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is sandstone stairs:
+            add 1 to {blocksbuild::%player%::broke::sandstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is sandstone slab:
+            add 1 to {blocksbuild::%player%::broke::sandstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is sandstone wall:
+            add 1 to {blocksbuild::%player%::broke::sandstone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled sandstone:
+            add 1 to {blocksbuild::%player%::broke::chiseled_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cut sandstone:
+            add 1 to {blocksbuild::%player%::broke::cut_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cut sandstone slab:
+            add 1 to {blocksbuild::%player%::broke::cut_sandstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth sandstone:
+            add 1 to {blocksbuild::%player%::broke::smooth_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth sandstone stairs:
+            add 1 to {blocksbuild::%player%::broke::smooth_sandstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth sandstone slab:
+            add 1 to {blocksbuild::%player%::broke::smooth_sandstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# ARENARIA ROSSA
+        else if event-block is red sandstone:
+            add 1 to {blocksbuild::%player%::broke::red_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red sandstone stairs:
+            add 1 to {blocksbuild::%player%::broke::red_sandstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red sandstone slab:
+            add 1 to {blocksbuild::%player%::broke::red_sandstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red sandstone wall:
+            add 1 to {blocksbuild::%player%::broke::red_sandstone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled red sandstone:
+            add 1 to {blocksbuild::%player%::broke::chiseled_red_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cut red sandstone:
+            add 1 to {blocksbuild::%player%::broke::cut_red_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cut red sandstone slab:
+            add 1 to {blocksbuild::%player%::broke::cut_red_sandstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth red sandstone:
+            add 1 to {blocksbuild::%player%::broke::smooth_red_sandstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth red sandstone stairs:
+            add 1 to {blocksbuild::%player%::broke::smooth_red_sandstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth red sandstone slab:
+            add 1 to {blocksbuild::%player%::broke::smooth_red_sandstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# PRISMARINO
+        else if event-block is prismarine:
+            add 1 to {blocksbuild::%player%::broke::prismarine}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is prismarine stairs:
+            add 1 to {blocksbuild::%player%::broke::prismarine_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is prismarine slab:
+            add 1 to {blocksbuild::%player%::broke::prismarine_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is prismarine wall:
+            add 1 to {blocksbuild::%player%::broke::prismarine_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DI PRISMARINO
+        else if event-block is prismarine bricks:
+            add 1 to {blocksbuild::%player%::broke::prismarine_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is prismarine brick stairs:
+            add 1 to {blocksbuild::%player%::broke::prismarine_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is prismarine brick slab:
+            add 1 to {blocksbuild::%player%::broke::prismarine_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# PRISMARINO SCURO
+        else if event-block is dark prismarine:
+            add 1 to {blocksbuild::%player%::broke::dark_prismarine}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is dark prismarine stairs:
+            add 1 to {blocksbuild::%player%::broke::dark_prismarine_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is dark prismarine slab:
+            add 1 to {blocksbuild::%player%::broke::dark_prismarine_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# LANTERNA MARINA
+        else if event-block is sea lantern:
+            add 1 to {blocksbuild::%player%::broke::sea_lantern}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DEL NETHER
+        else if event-block is nether bricks:
+            add 1 to {blocksbuild::%player%::broke::nether_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is cracked nether bricks:
+            add 1 to {blocksbuild::%player%::broke::cracked_nether_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled nether bricks:
+            add 1 to {blocksbuild::%player%::broke::chiseled_nether_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is nether brick stairs:
+            add 1 to {blocksbuild::%player%::broke::nether_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is nether brick slab:
+            add 1 to {blocksbuild::%player%::broke::nether_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is nether brick wall:
+            add 1 to {blocksbuild::%player%::broke::nether_brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is nether brick fence:
+            add 1 to {blocksbuild::%player%::broke::nether_brick_fence}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DEL NETHER ROSSI
+        else if event-block is red nether bricks:
+            add 1 to {blocksbuild::%player%::broke::red_nether_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red nether brick stairs:
+            add 1 to {blocksbuild::%player%::broke::red_nether_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red nether brick slab:
+            add 1 to {blocksbuild::%player%::broke::red_nether_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red nether brick wall:
+            add 1 to {blocksbuild::%player%::broke::red_nether_brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# NETHERRACK
+        else if event-block is netherrack:
+            add 1 to {blocksbuild::%player%::broke::netherrack}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRANERA
+        else if event-block is gilded blackstone:
+            add 1 to {blocksbuild::%player%::broke::gilded_blackstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is blackstone:
+            add 1 to {blocksbuild::%player%::broke::blackstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is blackstone stairs:
+            add 1 to {blocksbuild::%player%::broke::blackstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is blackstone slab:
+            add 1 to {blocksbuild::%player%::broke::blackstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is blackstone wall:
+            add 1 to {blocksbuild::%player%::broke::blackstone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRANERA LEVIGATA
+        else if event-block is polished blackstone:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished blackstone stairs:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished blackstone slab:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished blackstone wall:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled polished blackstone:
+            add 1 to {blocksbuild::%player%::broke::chiseled_polished_blackstone}
+            add 1 to {blocksbuild::%player%::broke}
+# MATTONI DI PIETRANERA LEVIGATA
+        else if event-block is polished blackstone bricks:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished blackstone stairs:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished blackstone slab:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished blackstone wall:
+            add 1 to {blocksbuild::%player%::broke::polished_blackstone_wall}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled polished blackstone:
+            add 1 to {blocksbuild::%player%::broke::chiseled_polished_blackstone}
+            add 1 to {blocksbuild::%player%::broke}
+# BASALTO
+        else if event-block is basalt:
+            add 1 to {blocksbuild::%player%::broke::basalt}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth basalt:
+            add 1 to {blocksbuild::%player%::broke::smooth_basalt}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is polished basalt:
+            add 1 to {blocksbuild::%player%::broke::polished_basalt}
+            add 1 to {blocksbuild::%player%::broke}
+# PIETRA DELL'END E MATTONI DI PIETRA DELL'END
+        else if event-block is end stone:
+            add 1 to {blocksbuild::%player%::broke::end_stone}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is end stone bricks:
+            add 1 to {blocksbuild::%player%::broke::end_stone_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is end stone brick stairs:
+            add 1 to {blocksbuild::%player%::broke::end_stone_brick_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is end stone brick slab:
+            add 1 to {blocksbuild::%player%::broke::end_stone_brick_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is end stone brick wall:
+            add 1 to {blocksbuild::%player%::broke::end_stone_brick_wall}
+            add 1 to {blocksbuild::%player%::broke}
+# PURPUR
+        else if event-block is purpur block:
+            add 1 to {blocksbuild::%player%::broke::purpur_block}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is purpur pillar:
+            add 1 to {blocksbuild::%player%::broke::purpur_pillar}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is purpur stairs:
+            add 1 to {blocksbuild::%player%::broke::purpur_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is purpur slab:
+            add 1 to {blocksbuild::%player%::broke::purpur_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# QUARZO
+        else if event-block is quartz block:
+            add 1 to {blocksbuild::%player%::broke::quartz_block}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is quartz stairs:
+            add 1 to {blocksbuild::%player%::broke::quartz_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is quartz slab:
+            add 1 to {blocksbuild::%player%::broke::quartz_slab}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is chiseled quartz block:
+            add 1 to {blocksbuild::%player%::broke::chiseled_quartz_block}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is quartz bricks:
+            add 1 to {blocksbuild::%player%::broke::quartz_bricks}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is quartz pillar:
+            add 1 to {blocksbuild::%player%::broke::quartz_pillar}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth quartz:
+            add 1 to {blocksbuild::%player%::broke::smooth_quartz}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth quartz stairs:
+            add 1 to {blocksbuild::%player%::broke::smooth_quartz_stairs}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is smooth quartz slab:
+            add 1 to {blocksbuild::%player%::broke::smooth_quartz_slab}
+            add 1 to {blocksbuild::%player%::broke}
+# BLOCCHI APPICCICOSI
+        else if event-block is slime block:
+            add 1 to {blocksbuild::%player%::broke::slime_block}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is honey block:
+            add 1 to {blocksbuild::%player%::broke::honey_block}
+            add 1 to {blocksbuild::%player%::broke}
+
+
+
+# SBARRE DI FERRO
+        else if event-block is iron bars:
+            add 1 to {blocksbuild::%player%::broke::iron_bars}
+            add 1 to {blocksbuild::%player%::broke}

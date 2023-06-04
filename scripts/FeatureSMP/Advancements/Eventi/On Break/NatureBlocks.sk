@@ -1,0 +1,236 @@
+on break:
+    if player's gamemode is survival or adventure:
+# - TERRA E VARIANTI - #
+        if event-block is grass block:
+            add 1 to {blocksnature::%player%::broke::grass_block}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is podzol:
+            add 1 to {blocksnature::%player%::broke::podzol}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is mycelium block:
+            add 1 to {blocksnature::%player%::broke::mycelium}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is dirt path:
+            add 1 to {blocksnature::%player%::broke::dirt_path}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is dirt:
+            add 1 to {blocksnature::%player%::broke::dirt}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is coarse dirt:
+            add 1 to {blocksnature::%player%::broke::coarse_dirt}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is rooted dirt:
+            add 1 to {blocksnature::%player%::broke::rooted_dirt}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is farmland:
+            add 1 to {blocksnature::%player%::broke::farmland}
+            add 1 to {blocksnature::%player%::broke}
+# - GHIACCIO - #
+        else if event-block is ice:
+            add 1 to {blocksnature::%player%::broke::ice}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is packed ice:
+            add 1 to {blocksnature::%player%::broke::packed_ice}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is blue ice:
+            add 1 to {blocksnature::%player%::broke::blue_ice}
+            add 1 to {blocksnature::%player%::broke}
+# - GHIAIA - #
+        else if event-block is gravel:
+            add 1 to {blocksnature::%player%::broke::gravel}
+            add 1 to {blocksnature::%player%::broke}
+# - SABBIA E SABBIA ROSSA - #
+        else if event-block is sand:
+            add 1 to {blocksnature::%player%::broke::sand}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::sand}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is red sand:
+            add 1 to {blocksnature::%player%::broke::red_sand}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::red_sand}
+            add 1 to {blocksbuild::%player%::broke}
+# - MUSCHIO - #
+        else if event-block is moss block:
+            add 1 to {blocksnature::%player%::broke::moss_block}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is moss carpet:
+            add 1 to {blocksnature::%player%::broke::moss_carpet}
+            add 1 to {blocksnature::%player%::broke}
+# - NECELI - #
+        else if event-block is crimson nylium:
+            add 1 to {blocksnature::%player%::broke::crymson_nylium}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::crymson_nylium}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped nylium:
+            add 1 to {blocksnature::%player%::broke::warped_nylium}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::warped_nylium}
+            add 1 to {blocksbuild::%player%::broke}
+# - SABBIA DELLE ANIME E TERRA DELLE ANIME - #
+        else if event-block is soul sand:
+            add 1 to {blocksnature::%player%::broke::soul_sand}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::soul_sand}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is soul soil:
+            add 1 to {blocksnature::%player%::broke::soul_soil}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::soul_soil}
+            add 1 to {blocksbuild::%player%::broke}
+# - SPELEOTEMA - #
+        else if event-block is dripstone block:
+            add 1 to {blocksnature::%player%::broke::dripstone_block}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is pointed dripstone:
+            add 1 to {blocksnature::%player%::broke::pointed_dripstone}
+            add 1 to {blocksnature::%player%::broke}
+# - OSSIDIANA - #
+        else if event-block is obsidian:
+            add 1 to {blocksnature::%player%::broke::obsidian}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::obsidian}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is crying obsidian:
+            add 1 to {blocksnature::%player%::broke::crying_obsidian}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::crying_obsidian}
+            add 1 to {blocksbuild::%player%::broke}
+# - FOGLIE - #
+        else if event-block is oak leaves:
+            add 1 to {blocksnature::%player%::broke::oak_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is spruce leaves:
+            add 1 to {blocksnature::%player%::broke::spruce_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is birch leaves:
+            add 1 to {blocksnature::%player%::broke::birch_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is jungle leaves:
+            add 1 to {blocksnature::%player%::broke::jungle_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is dark oak leaves:
+            add 1 to {blocksnature::%player%::broke::dark_oak_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is mangrove leaves:
+            add 1 to {blocksnature::%player%::broke::mangrove_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is mangrove roots:
+            add 1 to {blocksnature::%player%::broke::mangrove_roots}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is azalea leaves:
+            add 1 to {blocksnature::%player%::broke::azalea_leaves}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is flowering azalea leaves:
+            add 1 to {blocksnature::%player%::broke::flowering_azalea_leaves}
+            add 1 to {blocksnature::%player%::broke}
+# - BLOCCHI DI FUNGHI - #
+        else if event-block is brown mushroom block:
+            add 1 to {blocksnature::%player%::broke::brown_mushroom_block}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is red mushroom block:
+            add 1 to {blocksnature::%player%::broke::red_mushroom_block}
+            add 1 to {blocksnature::%player%::broke}
+# - BLOCCHI DI VERRUCHE DEL NETHER - #
+        else if event-block is nether wart block:
+            add 1 to {blocksnature::%player%::broke::nether_wart_block}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::nether_wart_block}
+            add 1 to {blocksbuild::%player%::broke}
+        else if event-block is warped wart block:
+            add 1 to {blocksnature::%player%::broke::warped_wart_block}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::warped_wart_block}
+            add 1 to {blocksbuild::%player%::broke}
+# - BLOCCO DI MAGMA - #
+        else if event-block is magma block:
+            add 1 to {blocksnature::%player%::broke::magma_block}
+            add 1 to {blocksnature::%player%::broke}
+            add 1 to {blocksbuild::%player%::broke::magma_block}
+            add 1 to {blocksbuild::%player%::broke}
+# - ARBOSCELLI - #
+        else if event-block is oak sapling:
+            add 1 to {blocksnature::%player%::broke::oak_sapling}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is spruce sapling:
+            add 1 to {blocksnature::%player%::broke::spruce_sapling}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is birch sapling:
+            add 1 to {blocksnature::%player%::broke::birch_sapling}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is jungle sapling:
+            add 1 to {blocksnature::%player%::broke::jungle_sapling}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is acacia sapling:
+            add 1 to {blocksnature::%player%::broke::acacia_sapling}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is dark oak sapling:
+            add 1 to {blocksnature::%player%::broke::dark_oak_sapling}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is mangrove propagule:
+            add 1 to {blocksnature::%player%::broke::mangrove_propagule}
+            add 1 to {blocksnature::%player%::broke}
+# - AZALEE FIORITE - #
+        else if event-block is azalea:
+            add 1 to {blocksnature::%player%::broke::azalea}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is flowering azalea:
+            add 1 to {blocksnature::%player%::broke::flowering_azalea}
+            add 1 to {blocksnature::%player%::broke}
+# - FIORI E VEGETAZIONE - #
+        else if event-block is poppy:
+            add 1 to {blocksnature::%player%::broke::poppy}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is blue orchid:
+            add 1 to {blocksnature::%player%::broke::blue_orchid}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is azure bluet:
+            add 1 to {blocksnature::%player%::broke::azure_bluet}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is red tulip:
+            add 1 to {blocksnature::%player%::broke::red_tulip}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is orange tulip:
+            add 1 to {blocksnature::%player%::broke::orange_tulip}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is white tulip:
+            add 1 to {blocksnature::%player%::broke::white_tulip}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is pink tulip:
+            add 1 to {blocksnature::%player%::broke::pink_tulip}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is oxeye daisy:
+            add 1 to {blocksnature::%player%::broke::oxeye_daisy}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is cornflower:
+            add 1 to {blocksnature::%player%::broke::cornflower}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is lilac:
+            add 1 to {blocksnature::%player%::broke::lilac}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is rose bush:
+            add 1 to {blocksnature::%player%::broke::rose_bush}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is peony:
+            add 1 to {blocksnature::%player%::broke::peony}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is spore blossom:
+            add 1 to {blocksnature::%player%::broke::spore_blossom}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is wither rose:
+            add 1 to {blocksnature::%player%::broke::wither_rose}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is bamboo:
+            add 1 to {blocksnature::%player%::broke::bamboo}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is sugar cane:
+            add 1 to {blocksnature::%player%::broke::sugar_cane}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is cactus:
+            add 1 to {blocksnature::%player%::broke::cactus}
+            add 1 to {blocksnature::%player%::broke}
+        else if event-block is kelp:
+            add 1 to {blocksnature::%player%::broke::kelp}
+            add 1 to {blocksnature::%player%::broke}
+# - SEMI E BLOCCHI DI ZUCCA, ANGURIA E FIENO - #

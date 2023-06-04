@@ -1,0 +1,57 @@
+function openStickyStatsGui(p: player):
+    if {settings::%{_p}%::glasspanes} is true:
+        set {_gui} to a new chest inventory with 5 rows with name "Blocchi appiccicosi"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 42, 43 and 44 of {_gui} to black stained glass pane named ""
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 22, 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named ""
+        set slot 21 of {_gui} to slime block named "&fBlocco di slime" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::slime_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::slime_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::slime_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::slime_block}%"
+        set slot 23 of {_gui} to honey block named "&fBlocco di miele" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::honey_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::honey_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::honey_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::honey_block}%"
+        set slot 40 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Blocchi da costruzione"
+        set slot 41 of {_gui} to paper named "&aStatistiche" with lore "&7Torna alla pagina principale" and "&7delle tue statistiche."
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 4 rows with name "Blocchi appiccicosi "
+        set slot 12 of {_gui} to slime block named "&fBlocco di slime" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::slime_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::slime_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::slime_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::slime_block}%"
+        set slot 14 of {_gui} to honey block named "&fBlocco di miele" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::honey_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::honey_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::honey_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::honey_block}%"
+        set slot 31 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Blocchi da costruzione"
+        set slot 32 of {_gui} to paper named "&aStatistiche" with lore "&7Torna alla pagina principale" and "&7delle tue statistiche."
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Blocchi appiccicosi":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 42, 43 or 44:
+                if click type is left mouse button:
+                    cancel event
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    openBuildStatsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 41:
+                if click type is left mouse button:
+                    cancel event
+                    openMainStatsGui(player)
+                else:
+                    cancel event
+    else if name of event-inventory is "Blocchi appiccicosi ":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 33, 34 or 35:
+                if click type is left mouse button:
+                    cancel event
+                else:
+                    cancel event
+            else if index of event-slot is 31:
+                if click type is left mouse button:
+                    cancel event
+                    openBuildStatsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 32:
+                if click type is left mouse button:
+                    cancel event
+                    openMainStatsGui(player)
+                else:
+                    cancel event
