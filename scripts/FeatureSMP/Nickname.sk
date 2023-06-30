@@ -149,6 +149,9 @@ command /nick [<text>] [<text>] [<offline player>]:
                     if arg-3 is not set:
                         if player has permission "nick.clear.other":
                             set {_arg2} to arg-2 parsed as offline player
+                            if {_arg2} is offline:
+                                send "{@prefix} &c%{_arg2}% &6è offline!"
+                                stop
                             if {nick::%{_arg2}%} is {_arg2}:
                                 send "{@prefix} &6%{_arg2}% &cnon ha impostato nessun soprannome!"
                                 play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player

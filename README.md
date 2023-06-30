@@ -79,28 +79,41 @@
 - Ottimizzati "GodMode", "FlyMode" e "GamemodeCommands" con alcune migliorie delle prestazioni
 
 ### - MARZO 2023 -
-- Aggiunto il comando interno "/nothing" all'interno dello script dell'Anti-Xray.
-- Modifiche minori ad alcuni script.
-- Ri-creazione delle medaglie con 15 nuove sfide da compiere per ottenerle.
-- Ricreata la GUI del Profilo SMP.
-- Ricreato e rivisitato il sistema dell'AFK con l'inserimento di messaggi personalizzati basati sul genere del giocatore e con vari bugfixes.
-- Introdotta la possibilità di tornare al punto precedente dopo aver eseguito il comando /sleep al risveglio (se la medaglia "Suicida" è stata sbloccata!).
-- Adesso il server controllerà se ci sono soprannomi attivi con la frequenza di un secondo.
-- Aggiustata l'assegnazione dei punti, dei ruoli e del prefisso del nome per quanto riguarda il primo accesso al server.
-- Unificato e ottimizzato lo script del PvP.
-- Da adesso, i danni provocati dall'Ender Pearl non saranno più controllati dal PvP (ad esempio, se il PvP è disabilitato, il giocatore prenderà comunque danno).
-- Rimossa la GUI della selezione del sesso in gioco.
-- Disabilitato il comando /tell: adesso quando si prova ad eseguirlo il server consiglierà al giocatore di utilizzare il comando /msg.
-- Aggiunto il comando /wiki, che permette di ottenere il link della Wiki della Disagio SMP, così da poterla consultare in modo facile e veloce.
-- Aggiunta la Tablist e la Scoreboard (con comando /sb che consente di attivarla o disattivarla).
-- Rimosse le action bar dal file "ActionBar" e riallocate nei rispettivi script (ad esempio, l'action bar della FlyMode è stata spostata nel file "FlyMode").
-- Ottimizzazione di tutti i file.
+- Aggiunto il comando interno "/nothing" all'interno dello script dell'Anti-Xray
+- Modifiche minori ad alcuni script
+- Ri-creazione delle medaglie con 15 nuove sfide da compiere per ottenerle
+- Ricreata la GUI del Profilo SMP
+- Ricreato e rivisitato il sistema dell'AFK con l'inserimento di messaggi personalizzati basati sul genere del giocatore e con vari bugfixes
+- Introdotta la possibilità di tornare al punto precedente dopo aver eseguito il comando /sleep al risveglio (se la medaglia "Suicida" è stata sbloccata!)
+- Adesso il server controllerà se ci sono soprannomi attivi con la frequenza di un secondo
+- Aggiustata l'assegnazione dei punti, dei ruoli e del prefisso del nome per quanto riguarda il primo accesso al server
+- Unificato e ottimizzato lo script del PvP
+- Da adesso, i danni provocati dall'Ender Pearl non saranno più controllati dal PvP (ad esempio, se il PvP è disabilitato, il giocatore prenderà comunque danno)
+- Rimossa la GUI della selezione del sesso in gioco
+- Disabilitato il comando /tell: adesso quando si prova ad eseguirlo il server consiglierà al giocatore di utilizzare il comando /msg
+- Aggiunto il comando /wiki, che permette di ottenere il link della Wiki della Disagio SMP, così da poterla consultare in modo facile e veloce
+- Aggiunta la Tablist e la Scoreboard (con comando /sb che consente di attivarla o disattivarla)
+- Rimosse le action bar dal file "ActionBar" e riallocate nei rispettivi script (ad esempio, l'action bar della FlyMode è stata spostata nel file "FlyMode")
+- Ottimizzazione di tutti i file
 
 ### - APRILE 2023 -
-- Ri-creazione dei pacchetti di messaggi di ingresso e uscita dal server con aggiunta di alcuni pacchetti già selezionabili dal giocatore.
-- Modifica di alcune parti del codice del contatore delle sessioni di gioco.
-- Modifica ad una stringa del codice per le impostazioni del giocatore.
+- Ri-creazione dei pacchetti di messaggi di ingresso e uscita dal server con aggiunta di alcuni pacchetti già selezionabili dal giocatore
+- Modifica di alcune parti del codice del contatore delle sessioni di gioco
+- Modifica ad una stringa del codice per le impostazioni del giocatore
 
 ### - MAGGIO 2023 -
-- Correzioni delle prime GUI del sistema degli obiettivi.
-- Miglioramento delle prestazioni.
+- Correzioni delle prime GUI del sistema degli obiettivi
+- Miglioramento delle prestazioni
+
+### - GIUGNO 2023 -
+- Completati gli eventi "on break", "on place" e "on pickup" della categoria "Blocchi da costruzione"
+- Completate le GUI rimanenti dei blocchi da costruzione
+- Creazione e ottimizzazione della Tablist e della Scoreboard
+- Creazione dei testi animati leggibili sulla Tablist e sulla Scoreboard
+- Aggiunto il sistema della rimozione automatica dei drop dopo un certo lasso di tempo
+- Risolto un problema del sistema dei soprannomi, il quale poteva assegnare un soprannome anche ai giocatori offline
+- Introdotti il sistema di rimborso dei materiali (valido soltanto per barche, armi, armature e attrezzi - per le barche verranno restituiti i blocchi del rispettivo tipo di legno, per armi, armature e attrezzi verranno restituiti dalla pietra alla netherite -)
+- Introdotti due nuovi crafting: il totem dell'immortalità e la mela d'oro incantata
+- Da adesso, i giocatori con un soprannome, quando scriveranno in chat, avranno un * prima del soprannome
+- Aggiunto il comando "/feedback" nello stesso script del comando "/bug"
+- Ottimizzazione delle prestazioni e rimozioni dei bug

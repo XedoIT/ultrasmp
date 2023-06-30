@@ -2,22 +2,6 @@
 # DA RIMUOVERE AL COMPLETAMENTO DELLO SCRIPT!!
 
 variables:
-# DIMENSIONI
-    {item::%player%::broke::overworld} = 0
-    {item::%player%::broke::nether} = 0
-    {item::%player%::broke::end} = 0
-    {item::%player%::placed::overworld} = 0
-    {item::%player%::placed::nether} = 0
-    {item::%player%::placed::end} = 0
-    {item::%player%::pickup::overworld} = 0
-    {item::%player%::pickup::nether} = 0
-    {item::%player%::pickup::end} = 0
-    {item::%player%::crafted::overworld} = 0
-    {item::%player%::crafted::nether} = 0
-    {item::%player%::crafted::end} = 0
-    {item::%player%::stripped::overworld} = 0
-    {item::%player%::stripped::nether} = 0
-    {item::%player%::stripped::end} = 0
 # BLOCCHI DA COSTRUZIONE
     {blocksbuild::%player%::broke} = 0
     {blocksbuild::%player%::placed} = 0

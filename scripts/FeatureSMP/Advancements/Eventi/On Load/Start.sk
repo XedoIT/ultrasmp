@@ -1,0 +1,32 @@
+on load:
+# COUNTER GENERALI
+  # BLOCCHI DA COSTRUZIONE
+    if {blocksbuild::%player%::broke}, {blocksbuild::%player%::placed}, {blocksbuild::%player%::pickup}, {blocksbuild::%player%::crafted} and {blocksbuild::%player%::stripped} is not set:
+        set {blocksbuild::%player%::broke}, {blocksbuild::%player%::placed}, {blocksbuild::%player%::pickup}, {blocksbuild::%player%::crafted} and {blocksbuild::%player%::stripped} to 0
+  # BLOCCHI COLORATI
+    if {blockscolor::%player%::broke}, {blockscolor::%player%::placed}, {blockscolor::%player%::pickup} and {blockscolor::%player%::crafted} is not set:
+        set {blockscolor::%player%::broke}, {blockscolor::%player%::placed}, {blockscolor::%player%::pickup} and {blockscolor::%player%::crafted} to 0
+  # BLOCCHI NATURALI
+    if {blocksnature::%player%::broke}, {blocksnature::%player%::placed}, {blocksnature::%player%::pickup} and {blocksnature::%player%::crafted} is not set:
+        set {blocksnature::%player%::broke}, {blocksnature::%player%::placed}, {blocksnature::%player%::pickup} and {blocksnature::%player%::crafted} to 0
+  # BLOCCHI FUNZIONALI
+    if {blocksfunction::%player%::broke}, {blocksfunction::%player%::placed}, {blocksfunction::%player%::pickup} and {blocksfunction::%player%::crafted} is not set:
+        set {blocksfunction::%player%::broke}, {blocksfunction::%player%::placed}, {blocksfunction::%player%::pickup} and {blocksfunction::%player%::crafted} to 0
+  # REDSTONE
+    if {blocksredstone::%player%::broke}, {blocksredstone::%player%::placed}, {blocksredstone::%player%::pickup} and {blocksredstone::%player%::crafted} is not set:
+        set {blocksredstone::%player%::broke}, {blocksredstone::%player%::placed}, {blocksredstone::%player%::pickup} and {blocksredstone::%player%::crafted} to 0
+  # CIBO
+    if {food::%player%} is not set:
+        set {food::%player%} to 0
+  # MINERALI
+    if {minerals::%player%::broke}, {minerals::%player%::placed} and {minerals::%player%::pickup} is not set:
+        set {minerals::%player%::broke}, {minerals::%player%::placed} and {minerals::%player%::pickup} to 0
+  # COLORANTI
+    if {dyes::%player%::pickup} and {dyes::%player%::crafted} is not set:
+        set {dyes::%player%::pickup} and {dyes::%player%::crafted} to 0
+  # UTILITÀ
+    if {utils::%player%::pickup} and {utils::%player%::crafted} is not set:
+        set {utils::%player%::pickup} and {utils::%player%::crafted} to 0
+  # MOBS
+    if {mobs::%player%::pickup} is not set:
+        set {mobs::%player%::pickup} to 0

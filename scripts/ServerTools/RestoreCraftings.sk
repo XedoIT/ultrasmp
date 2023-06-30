@@ -1,0 +1,156 @@
+on load:
+# BARCHE E ZATTERE
+  # BARCA DI QUERCIA
+    register new shapeless recipe for 5 oak planks using oak boat with id "oak_boat_to_oak_planks" in group "boat"
+  # BARCA DI BETULLA
+    register new shapeless recipe for 5 birch planks using birch boat with id "birch_boat_to_birch_planks" in group "boat"
+  # BARCA DI QUERCIA SCURA
+    register new shapeless recipe for 5 dark oak planks using dark oak boat with id "dark_oak_boat_to_dark_oak_planks" in group "boat"
+  # BARCA DI ABETE
+    register new shapeless recipe for 5 spruce planks using spruce boat with id "spruce_boat_to_spruce_planks" in group "boat"
+  # BARCA DI ACACIA
+    register new shapeless recipe for 5 acacia planks using acacia boat with id "acacia_boat_to_acacia_planks" in group "boat"
+  # BARCA DELLA GIUNGLA
+    register new shapeless recipe for 5 jungle planks using jungle boat with id "jungle_boat_to_jungle_planks" in group "boat"
+  # BARCA DI CILIEGIO
+    register new shapeless recipe for 5 cherry planks using cherry boat with id "cherry_boat_to_cherry_planks" in group "boat"
+  # ZATTERA DI BAMBÙ
+    register new shapeless recipe for 5 bamboo planks using bamboo raft with id "bamboo_raft_to_bamboo_planks" in group "boat"
+
+
+# ARMATURE
+  # CASCO DI CUOIO
+    register new shapeless recipe for 5 leather using leather helmet with id "leather_helmet_to_leather" in group "leather_armor"
+  # GIUBBA DI CUOIO
+    register new shapeless recipe for 8 leather using leather chestplate with id "leather_chestplate_to_leather" in group "leather_armor"
+  # PANTALONI DI CUOIO
+    register new shapeless recipe for 7 leather using leather leggings with id "leather_leggings_to_leather" in group "leather_armor"
+  # STIVALI DI CUOIO
+    register new shapeless recipe for 4 leather using leather boots with id "leather_boots_to_leather" in group "leather_armor"
+
+  # ELMO DI FERRO
+    register new shapeless recipe for 5 iron ingot using iron helmet with id "iron_helmet_to_iron_ingot" in group "iron_armor"
+  # CORAZZA DI FERRO
+    register new shapeless recipe for 8 iron ingot using iron chestplate with id "iron_chestplate_to_iron_ingot" in group "iron_armor"
+  # GAMBIERE DI FERRO
+    register new shapeless recipe for 7 iron ingot using iron leggings with id "iron_leggings_to_iron_ingot" in group "iron_armor"
+  # STIVALI DI FERRO
+    register new shapeless recipe for 4 iron ingot using iron boots with id "iron_boots_to_iron_ingot" in group "iron_armor"
+
+  # ELMO D'ORO
+    register new shapeless recipe for 5 gold ingot using golden helmet with id "golden_helmet_to_gold_ingot" in group "golden_armor"
+  # CORAZZA D'ORO
+    register new shapeless recipe for 8 gold ingot using golden chestplate with id "golden_chestplate_to_gold_ingot" in group "golden_armor"
+  # GAMBIERE D'ORO
+    register new shapeless recipe for 7 gold ingot using golden leggings with id "golden_leggings_to_gold_ingot" in group "golden_armor"
+  # STIVALI D'ORO
+    register new shapeless recipe for 4 gold ingot using golden boots with id "golden_boots_to_gold_ingot" in group "golden_armor"
+    
+  # ELMO DI DIAMANTE
+    register new shapeless recipe for 5 diamond using diamond helmet with id "diamond_helmet_to_diamond" in group "diamond_armor"
+  # CORAZZA DI DIAMANTE
+    register new shapeless recipe for 8 diamond using diamond chestplate with id "diamond_chestplate_to_diamond" in group "diamond_armor"
+  # GAMBIERE DI DIAMANTE
+    register new shapeless recipe for 7 diamond using diamond leggings with id "diamond_leggings_to_diamond" in group "diamond_armor"
+  # STIVALI DI DIAMANTE
+    register new shapeless recipe for 4 diamond using diamond boots with id "diamond_boots_to_diamond" in group "diamond_armor"
+
+  # ELMO DI NETHERITE
+    register new shapeless recipe for 2 netherite scrap using netherite helmet with id "netherite_helmet_to_netherite_scrap" in group "netherite_armor"
+  # CORAZZA DI NETHERITE
+    register new shapeless recipe for 2 netherite scrap using netherite chestplate with id "netherite_chestplate_to_netherite_scrap" in group "netherite_armor"
+  # GAMBIERE DI NETHERITE
+    register new shapeless recipe for 2 netherite scrap using netherite leggings with id "netherite_leggings_to_netherite_scrap" in group "netherite_armor"
+  # STIVALI DI NETHERITE
+    register new shapeless recipe for 2 netherite scrap using netherite boots with id "netherite_boots_to_netherite_scrap" in group "netherite_armor"
+
+  # CARAPACE DI TARTARUGA
+    register new shapeless recipe for 5 scute using turtle helmet with id "turtle_helmet_to_scute" in group "turtle_armor"
+
+  # BARDATURA DI CUOIO
+    register new shaped recipe for 1 leather horse armor using leather, air, leather, leather, leather, leather, leather, air and leather with id "leather_to_leather_horse_armor" in group "horse_armor"
+  # BARDATURA DI FERRO
+    register new shaped recipe for 1 iron horse armor using iron ingot, air, iron ingot, iron ingot, iron ingot, iron ingot, iron ingot, air and iron ingot with id "iron_ingot_to_iron_horse_armor" in group "horse_armor"
+  # BARDATURA D'ORO
+    register new shaped recipe for 1 golden horse armor using gold ingot, air, gold ingot, gold ingot, gold ingot, gold ingot, gold ingot, air and gold ingot with id "gold_ingot_to_gold_horse_armor" in group "horse_armor"
+  # BARDATURA DI DIAMANTE
+    register new shaped recipe for 1 diamond horse armor using diamond, air, diamond, diamond, diamond, diamond, diamond, air and diamond with id "diamond_to_diamond_horse_armor" in group "horse_armor"
+
+  # BARDATURA DI CUOIO (RIMBORSO)
+    register new shapeless recipe for 7 leather using leather horse armor with id "leather_horse_armor_to_leather" in group "rent_horse_armor"
+  # BARDATURA DI FERRO (RIMBORSO)
+    register new shapeless recipe for 7 iron ingot using iron horse armor with id "iron_horse_armor_to_iron_ingot" in group "rent_horse_armor"
+  # BARDATURA D'ORO (RIMBORSO)
+    register new shapeless recipe for 7 gold ingot using golden horse armor with id "golden_horse_armor_to_gold_ingot" in group "rent_horse_armor"
+  # BARDATURA DI DIAMANTE (RIMBORSO)
+    register new shapeless recipe for 7 diamond using diamond horse armor with id "diamond_horse_armor_to_leather" in group "rent_horse_armor"
+
+
+# ARMI
+  # SPADA DI PIETRA
+    register new shapeless recipe for 2 cobblestone using stone sword with id "stone_sword_to_cobblestone" in group "weapon"
+  # SPADA DI FERRO
+    register new shapeless recipe for 2 iron ingot using iron sword with id "iron_sword_to_iron_ingot" in group "weapon"
+  # SPADA D'ORO
+    register new shapeless recipe for 2 gold ingot using golden sword with id "golden_sword_to_gold_ingot" in group "weapon"
+  # SPADA DI DIAMANTE
+    register new shapeless recipe for 2 diamond using diamond sword with id "diamond_sword_to_diamond" in group "weapon"
+  # SPADA DI NETHERITE
+    register new shapeless recipe for 1 netherite scrap using netherite sword with id "netherite_sword_to_netherite_scrap" in group "weapon"
+
+
+# ATTREZZI
+  # PICCONE DI PIETRA
+    register new shapeless recipe for 3 cobblestone using stone pickaxe with id "stone_pickaxe_to_cobblestone" in group "stone_tool"
+  # ASCIA DI PIETRA
+    register new shapeless recipe for 3 cobblestone using stone axe with id "stone_axe_to_cobblestone" in group "stone_tool"
+  # PALA DI PIETRA
+    register new shapeless recipe for 1 cobblestone using stone shovel with id "stone_shovel_to_cobblestone" in group "stone_tool"
+  # ZAPPA DI PIETRA
+    register new shapeless recipe for 2 cobblestone using stone hoe with id "stone_hoe_to_cobblestone" in group "stone_tool"
+
+  # PICCONE DI FERRO
+    register new shapeless recipe for 3 iron ingot using iron pickaxe with id "iron_pickaxe_to_iron_ingot" in group "iron_tool"
+  # ASCIA DI FERRO
+    register new shapeless recipe for 3 iron ingot using iron axe with id "iron_axe_to_iron_ingot" in group "iron_tool"
+  # PALA DI FERRO
+    register new shapeless recipe for 1 iron ingot using iron shovel with id "iron_shovel_to_iron_ingot" in group "iron_tool"
+  # ZAPPA DI FERRO
+    register new shapeless recipe for 2 iron ingot using iron hoe with id "iron_hoe_to_iron_ingot" in group "iron_tool"
+
+  # PICCONE D'ORO
+    register new shapeless recipe for 3 gold ingot using golden pickaxe with id "golden_pickaxe_to_gold_ingot" in group "golden_tool"
+  # ASCIA D'ORO
+    register new shapeless recipe for 3 gold ingot using golden axe with id "golden_axe_to_gold_ingot" in group "golden_tool"
+  # PALA D'ORO
+    register new shapeless recipe for 1 gold ingot using golden shovel with id "golden_shovel_to_gold_ingot" in group "golden_tool"
+  # ZAPPA D'ORO
+    register new shapeless recipe for 2 gold ingot using golden hoe with id "golden_hoe_to_gold_ingot" in group "golden_tool"
+
+  # PICCONE DI DIAMANTE
+    register new shapeless recipe for 3 diamond using diamond pickaxe with id "diamond_pickaxe_to_diamond" in group "diamond_tool"
+  # ASCIA DI DIAMANTE
+    register new shapeless recipe for 3 diamond using diamond axe with id "diamond_axe_to_diamond" in group "diamond_tool"
+  # PALA DI DIAMANTE
+    register new shapeless recipe for 1 diamond using diamond shovel with id "diamond_shovel_to_diamond" in group "diamond_tool"
+  # ZAPPA DI DIAMANTE
+    register new shapeless recipe for 2 diamond using diamond hoe with id "diamond_hoe_to_diamond" in group "diamond_tool"
+
+  # PICCONE DI NETHERITE
+    register new shapeless recipe for 1 netherite scrap using netherite pickaxe with id "netherite_pickaxe_to_netherite_scrap" in group "netherite_tool"
+  # ASCIA DI NETHERITE
+    register new shapeless recipe for 1 netherite scrap using netherite axe with id "netherite_axe_to_netherite_scrap" in group "netherite_tool"
+  # PALA DI NETHERITE
+    register new shapeless recipe for 1 netherite scrap using netherite shovel with id "netherite_shovel_to_netherite_scrap" in group "netherite_tool"
+  # ZAPPA DI NETHERITE
+    register new shapeless recipe for 1 netherite scrap using netherite hoe with id "netherite_hoe_to_netherite_scrap" in group "netherite_tool"
+
+  # CESOIE
+    register new shapeless recipe for 2 iron ingot using shears with id "shears_to_iron_ingot" in group "iron_tool"
+
+
+# VARIO
+  # MELA D'ORO INCANTATA
+    register new shaped recipe for 1 enchanted golden apple using gold block, gold block, gold block, gold block, golden apple, gold block, gold block, gold block and gold block with id "enchanted_golden_apple" in group "miscellanous"
+  # TOTEM DELL'IMMORTALITÀ
+    register new shaped recipe for 1 totem of undying using emerald, air, emerald, enchanted golden apple, gold block, enchanted golden apple, air, enchanted golden apple and air with id "totem_of_undying" in group "miscellanous"

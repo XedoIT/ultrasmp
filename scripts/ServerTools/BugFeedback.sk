@@ -1,0 +1,49 @@
+command /bug [<text>]:
+	description: Segnala e gestisci i bug segnalati dai giocatori.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				send "&cUtilizzo: &6/bug <bug>"
+				stop
+			else:
+				log "[BUG] %player% ha segnalato un bug: ""%arg-1%""" to "bug.log"
+				send "&a&lBug segnalato correttamente!"
+				send "&b&l[&4&lBUG&b&l] &3&l>>> &e%player% ha segnalato un bug: ""&9%arg-1%&e"" &3&l<<< &b&l[&4&lBUG&b&l]" to console
+				send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log" to console
+				stop
+				
+		else:
+			if arg-1 is not set:
+				send "&cQual è il bug che vuoi segnalare?"
+				stop
+			else:
+				log "[BUG] La console ha segnalato un bug: ""%arg-1%""" to "bug.log"
+				send "&a&lBug segnalato correttamente!"
+				send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log"
+				stop
+
+command /feedback [<text>]:
+	description: Aiuta nello sviluppo del server dando consigli ai developer.
+	executable by: player, console
+	trigger:
+		if sender is player:
+			if arg-1 is not set:
+				send "&cUtilizzo: &6/feedback <la tua opinione>"
+				stop
+			else:
+				log "[FEEDBACK] %player% ha scritto: ""%arg-1%""" to "feedback.log"
+				send "&a&lAbbiamo trasmesso la tua opinione al server. Grazie mille per l'aiuto!"
+				send "&b&l[&4&lFEEDBACK&b&l] &3&l>>> &e%player% ha scritto: ""&9%arg-1%&e"" &3&l<<< &b&l[&4&lFEEDBACK&b&l]" to console
+				send "&ePuoi trovare i le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
+				stop
+				
+		else:
+			if arg-1 is not set:
+				send "&cQual è il bug che vuoi segnalare?"
+				stop
+			else:
+				log "[FEEDBACK] La console ha scritto: ""%arg-1%""" to "feedback.log"
+				send "&a&lAbbiamo trasmesso la tua opinione al server. Grazie mille per l'aiuto!"
+				send "&ePuoi trovare i le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
+				stop

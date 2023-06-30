@@ -6,67 +6,67 @@ on chat:
         if {nick::%player%} is player:
             set chat format to "&b[player] &9&l>&r [message]"
         else:
-            set chat format to "&b[player] &7(&f*&b%{nick::%player%}%&7) &9&l>&r [message]"
+            set chat format to "*&b%{nick::%player%}% &9&l>&r [message]"
 
     else if player's uuid is "da71a28d-8da4-427d-8967-c77757f887f4": #(_EryKa_ - Erika)
         if {nick::%player%} is player:
             set chat format to "&c[player] &4&l>&r [message]"
         else:
-            set chat format to "&c[player] &7(&f*&c%{nick::%player%}%&7) &4&l>&r [message]"
+            set chat format to "*&c%{nick::%player%}% &4&l>&r [message]"
             
     else if player's uuid is "0809c6c4-6898-415c-90d5-dd6fee334fca": #(Lucifero696 - Michael)
         if {nick::%player%} is player:
             set chat format to "&4[player] &c&l>&r [message]"
         else:
-            set chat format to "&4[player] &7(&f*&4%{nick::%player%}%&7) &c&l>&r [message]"
+            set chat format to "*&4%{nick::%player%}% &c&l>&r [message]"
 
     else if player's uuid is "d6c92f76-8c3b-4a1f-ac35-74fba37a0d44": #(Ghost_Huntress - Valentina)
         if {nick::%player%} is player:
             set chat format to "&8[player] &7&l>&r [message]"
         else:
-            set chat format to "&8[player] &7(&f*&8%{nick::%player%}%&7) &7&l>&r [message]"
+            set chat format to "*&8%{nick::%player%}% &7&l>&r [message]"
 
     else if player's uuid is "b1cdedbc-5f5a-4d13-9f75-d0c6c24bceec": #(IL_DIJO - Davide)
         if {nick::%player%} is player:
             set chat format to "&a[player] &2&l>&r [message]"
         else:
-            set chat format to "&a[player] &7(&f*&a%{nick::%player%}%&7) &2&l>&r [message]"
+            set chat format to "*&a%{nick::%player%}% &2&l>&r [message]"
 
     else if player's uuid is "a095c219-f7e9-478e-aff9-110c4a35d653": #(Andr3wOnTilt - Andrea)
         if {nick::%player%} is player:
             set chat format to "&d[player] &5&l>&r [message]"
         else:
-            set chat format to "&d[player] &7(&f*&d%{nick::%player%}%&7) &5&l>&r [message]"
+            set chat format to "*&d%{nick::%player%}% &5&l>&r [message]"
 
     else if player's uuid is "b8d563c2-b3eb-474f-bec2-ddab7cccae0d": #(_Dark_Ender_ - Manu)
         if {nick::%player%} is player:
             set chat format to "&5[player] &d&l>&r [message]"
         else:
-            set chat format to "&5[player] &7(&f*&5%{nick::%player%}%&7) &d&l>&r [message]"
+            set chat format to "*&5%{nick::%player%}% &d&l>&r [message]"
 
     #else if player's uuid is "UUID DI GABRY": #(NICK DI GABRY - Gabriele [Bedrock?])
         #if {nick::%player%} is player:
             #set chat format to "&1[player] &9&l>&r [message]"
         #else:
-            #set chat format to "&1[player] &7(&f*&1%{nick::%player%}%&7) &9&l>&r [message]"
+            #set chat format to "*&1%{nick::%player%}% &9&l>&r [message]"
 
     else if player's uuid is "cfc5251b-c55b-4a99-b020-23bdb1c2354a": #(Cla14 - Claudia)
         if {nick::%player%} is player:
             set chat format to "&3[player] &1&l>&r [message]"
         else:
-            set chat format to "&3[player] &7(&f*&3%{nick::%player%}%&7) &1&l>&r [message]"
+            set chat format to "*&3%{nick::%player%}% &1&l>&r [message]"
 
     else if player's uuid is "00000000-0000-0000-0009-01f3df6b780b": #(XedoIT - Francesco [Bedrock])
         if {nick::%player%} is player:
             set chat format to "&b[player] &9&l>&r [message]"
         else:
-            set chat format to "&b[player] &7(&f*&b%{nick::%player%}%&7) &9&l>&r [message]"
+            set chat format to "*&b%{nick::%player%}% &9&l>&r [message]"
 
     else if player's uuid is "00000000-0000-0000-0009-01f66f7a13ac": #(Volpe_Rossa5133 - Melissa [Bedrock])
         if {nick::%player%} is player:
             set chat format to "&d[player] &d&l>&r [message]"
         else:
-            set chat format to "&d[player] &7(&f*&d%{nick::%player%}%&7) &d&l>&r [message]"
+            set chat format to "*&d%{nick::%player%}% &d&l>&r [message]"
 
 #--------------------------------------------#
 #                  VITA MOB                  #

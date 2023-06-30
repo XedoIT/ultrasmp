@@ -1,61 +1,34 @@
 #
 # DIPENDENZE:
 #
-# - SkRayFall (Tablist)
-# - SkBee (Scoreboard)
+# - SkBee
 #
 
 options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
  # I MONDI NEL SERVER
     overworld: smp
     nether: smp_nether
     end: smp_the_end
-
-    peaceful: &fPacifica
-    easy: &aFacile
-    normal: &eNormale
-    hard: &6&lDifficile
-    hardcore: &4&lHardcore
-
 
 on first join:
     loop all players:
         if {scoreboard::%loop-player%} is not set:
             set {scoreboard::%loop-player%} to true
 
-# TABLIST
-every tick:
-    loop all players:
-        set loop-player's tab name to {nick::%loop-player%}
-        if world of loop-player is "{@overworld}":
-            if {settings::%loop-player%::genre::male} is true:
-                set tab header to "%placeholder "tab_placeholder_animation:DisagioSMP" from loop-player%%nl%%nl%&b&l>> %placeholder "tab_placeholder_animation:Benvenuto" from loop-player% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&b&k0 &a&lOverworld &b&k0%nl%&f&l>> &bGiorno %{days.overworld}% &f&l<<%nl%%nl%%placeholder "tab_placeholder_animation:OverWorld" from loop-player%" and footer to "%placeholder "tab_placeholder_animation:OverWorld" from loop-player%%nl%%nl%&f&lPunti e Reputazione:%nl%&7Hai accumulato &6%{points::%loop-player%}% &7punti%nl%&7e sei %{points::%loop-player%::rank}%&7.%nl%%nl%%{pvp_status}%%nl%%nl%&3Difficoltà: %{difficulty::info}%%nl%%nl%%placeholder "tab_placeholder_animation:time" from loop-player%" for loop-player
-            if {settings::%loop-player%::genre::female} is true:
-                set tab header to "%placeholder "tab_placeholder_animation:DisagioSMP" from loop-player%%nl%%nl%&b&l>> %placeholder "tab_placeholder_animation:Benvenuta" from loop-player% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&b&k0 &a&lOverworld &b&k0%nl%&f&l>> &bGiorno %{days.overworld}% &f&l<<%nl%%nl%%placeholder "tab_placeholder_animation:OverWorld" from loop-player%" and footer to "%placeholder "tab_placeholder_animation:OverWorld" from loop-player%%nl%%nl%&f&lPunti e Reputazione:%nl%&7Hai accumulato &6%{points::%loop-player%}% &7punti%nl%&7e sei %{points::%loop-player%::rank}%&7.%nl%%nl%%{pvp_status}%%nl%%nl%&3Difficoltà: %{difficulty::info}%%nl%%nl%%placeholder "tab_placeholder_animation:time" from loop-player%" for loop-player
-        if world of loop-player is "{@nether}":
-            if {settings::%loop-player%::genre::male} is true:
-                set tab header to "%placeholder "tab_placeholder_animation:DisagioSMP" from loop-player%%nl%%nl%&b&l>> %placeholder "tab_placeholder_animation:Benvenuto" from loop-player% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&4&k0 &c&lNether &4&k0%nl%&f&l>> &6Giorno %{days.nether}% &f&l<<%nl%%nl%%placeholder "tab_placeholder_animation:Nether" from loop-player%" and footer to "%placeholder "tab_placeholder_animation:Nether" from loop-player%%nl%%nl%&f&lPunti e Reputazione:%nl%&7Hai accumulato &6%{points::%loop-player%}% &7punti%nl%&7e sei %{points::%loop-player%::rank}%&7.%nl%%nl%%{pvp_status}%%nl%%nl%&3Difficoltà: %{difficulty::info}%%nl%%nl%%placeholder "tab_placeholder_animation:time" from loop-player%" for loop-player
-            if {settings::%loop-player%::genre::female} is true:
-                set tab header to "%placeholder "tab_placeholder_animation:DisagioSMP" from loop-player%%nl%%nl%&b&l>> %placeholder "tab_placeholder_animation:Benvenuta" from loop-player% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&4&k0 &c&lNether &4&k0%nl%&f&l>> &6Giorno %{days.nether}% &f&l<<%nl%%nl%%placeholder "tab_placeholder_animation:Nether" from loop-player%" and footer to "%placeholder "tab_placeholder_animation:Nether" from loop-player%%nl%%nl%&f&lPunti e Reputazione:%nl%&7Hai accumulato &6%{points::%loop-player%}% &7punti%nl%&7e sei %{points::%loop-player%::rank}%&7.%nl%%nl%%{pvp_status}%%nl%%nl%&3Difficoltà: %{difficulty::info}%%nl%%nl%%placeholder "tab_placeholder_animation:time" from loop-player%" for loop-player
-        if world of loop-player is "{@end}":
-            if {settings::%loop-player%::genre::male} is true:
-                set tab header to "%placeholder "tab_placeholder_animation:DisagioSMP" from loop-player%%nl%%nl%&b&l>> %placeholder "tab_placeholder_animation:Benvenuto" from loop-player% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&5&k0 &d&lEnd &5&k0%nl%&f&l>> &5Giorno %{days.end}% &f&l<<%nl%%nl%%placeholder "tab_placeholder_animation:End" from loop-player%" and footer to "%placeholder "tab_placeholder_animation:End" from loop-player%%nl%%nl%&f&lPunti e Reputazione:%nl%&7Hai accumulato &6%{points::%loop-player%}% &7punti%nl%&7e sei %{points::%loop-player%::rank}%&7.%nl%%nl%%{pvp_status}%%nl%%nl%&3Difficoltà: %{difficulty::info}%%nl%%nl%%placeholder "tab_placeholder_animation:time" from loop-player%" for loop-player
-            if {settings::%loop-player%::genre::female} is true:
-                set tab header to "%placeholder "tab_placeholder_animation:DisagioSMP" from loop-player%%nl%%nl%&b&l>> %placeholder "tab_placeholder_animation:Benvenuta" from loop-player% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&5&k0 &d&lEnd &5&k0%nl%&f&l>> &5Giorno %{days.end}% &f&l<<%nl%%nl%%placeholder "tab_placeholder_animation:End" from loop-player%" and footer to "%placeholder "tab_placeholder_animation:End" from loop-player%%nl%%nl%&f&lPunti e Reputazione:%nl%&7Hai accumulato &6%{points::%loop-player%}% &7punti%nl%&7e sei %{points::%loop-player%::rank}%&7.%nl%%nl%%{pvp_status}%%nl%%nl%&3Difficoltà: %{difficulty::info}%%nl%%nl%%placeholder "tab_placeholder_animation:time" from loop-player%" for loop-player
-
-# SCOREBOARD
 every tick:
     loop all players:
         if {scoreboard::%loop-player%} is true:
             if world of loop-player is "{@overworld}":
-                set title of loop-player's scoreboard to placeholder "tab_placeholder_animation:DisagioSMP" from loop-player
+                set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
                 set line 1 of loop-player's scoreboard to "&9%placeholder "player_light_level" from loop-player%/15"
                 set line 2 of loop-player's scoreboard to "&fLivello di luce:"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&b%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma:"
                 set line 6 of loop-player's scoreboard to ""
-                set line 7 of loop-player's scoreboard to "&a%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&b&l%placeholder "tab_placeholder_player_direction" from loop-player%&8]"
+                set line 7 of loop-player's scoreboard to "&a%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&b&l%placeholder "player_direction" from loop-player%&8]"
                 set line 8 of loop-player's scoreboard to "&fCoordinate:"
                 set line 9 of loop-player's scoreboard to ""
                 set line 10 of loop-player's scoreboard to placeholder "tab_placeholder_player_empty_slots" from loop-player 
@@ -63,16 +36,16 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%placeholder "tab_placeholder_date" from loop-player% &f- &b%placeholder "player_world_time_24" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "player_world_time_24" from loop-player%"
             else if world of loop-player is "{@nether}":
-                set title of loop-player's scoreboard to placeholder "tab_placeholder_animation:DisagioSMP" from loop-player
+                set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
                 set line 1 of loop-player's scoreboard to "&9%placeholder "player_light_level" from loop-player%/15"
                 set line 2 of loop-player's scoreboard to "&fLivello di luce:"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&c%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma:"
                 set line 6 of loop-player's scoreboard to ""
-                set line 7 of loop-player's scoreboard to "&6%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&c&l%placeholder "tab_placeholder_player_direction" from loop-player%&8]"
+                set line 7 of loop-player's scoreboard to "&6%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&c&l%placeholder "player_direction" from loop-player%&8]"
                 set line 8 of loop-player's scoreboard to "&fCoordinate:"
                 set line 9 of loop-player's scoreboard to ""
                 set line 10 of loop-player's scoreboard to placeholder "tab_placeholder_player_empty_slots" from loop-player 
@@ -80,16 +53,16 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%placeholder "tab_placeholder_date" from loop-player% &f- &6%placeholder "player_world_time_24" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &6%placeholder "player_world_time_24" from loop-player%"
             else if world of loop-player is "{@end}":
-                set title of loop-player's scoreboard to placeholder "tab_placeholder_animation:DisagioSMP" from loop-player
+                set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
                 set line 1 of loop-player's scoreboard to "&9%placeholder "player_light_level" from loop-player%/15"
                 set line 2 of loop-player's scoreboard to "&fLivello di luce:"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&5%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma:"
                 set line 6 of loop-player's scoreboard to ""
-                set line 7 of loop-player's scoreboard to "&d%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&5&l%placeholder "tab_placeholder_player_direction" from loop-player%&8]"
+                set line 7 of loop-player's scoreboard to "&d%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&5&l%placeholder "player_direction" from loop-player%&8]"
                 set line 8 of loop-player's scoreboard to "&fCoordinate:"
                 set line 9 of loop-player's scoreboard to ""
                 set line 10 of loop-player's scoreboard to placeholder "tab_placeholder_player_empty_slots" from loop-player 
@@ -97,10 +70,25 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%placeholder "tab_placeholder_date" from loop-player% &f- &5%placeholder "player_world_time_24" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &5%placeholder "player_world_time_24" from loop-player%"
         else:
             clear scoreboard of loop-player
-            
+
+every 1 hour: # AVVISO SCOREBOARD DISATTIVATA
+    loop all players:
+        if {scoreboard::%loop-player%} is not set:
+            if {settings::%loop-player%::ServiceAlerts} is true:
+                send "" to loop-player
+                send "{@prefix} &4&lNOTIFICA DI SERVIZIO" to loop-player
+                send "" to loop-player
+                send "{@prefix} &cAbbiamo notato che la tua scoreboard non è attivata." to loop-player
+                send "{@prefix} &6Attivala con <ttp:&fClicca qui per attivare la scoreboard><cmd:/sb>&e&n/sb<reset> &6per avere tutte le informazioni di cui hai bisogno a vista d'occhio." to loop-player
+                send "" to loop-player
+                send "" to loop-player
+                send "{@prefix} &ePuoi disattivare questa notifica in &fLe tue impostazioni &epresso &7Il tuo profilo &7&lSMP&e, oppure cliccando &c&nqui&e." to loop-player
+                send "" to loop-player
+                play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
+
 command /sb [<offline player>]:
     executable by: player, console
     trigger:
