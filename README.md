@@ -117,3 +117,7 @@
 - Da adesso, i giocatori con un soprannome, quando scriveranno in chat, avranno un * prima del soprannome
 - Aggiunto il comando "/feedback" nello stesso script del comando "/bug"
 - Ottimizzazione delle prestazioni e rimozioni dei bug
+
+### - LUGLIO 2023 -
+- Aggiunte le stagioni.
+- Sostituito "Livello di luce" con "Stagione" nella Scoreboard.

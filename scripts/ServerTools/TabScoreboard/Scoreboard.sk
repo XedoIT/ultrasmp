@@ -22,8 +22,8 @@ every tick:
         if {scoreboard::%loop-player%} is true:
             if world of loop-player is "{@overworld}":
                 set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
-                set line 1 of loop-player's scoreboard to "&9%placeholder "player_light_level" from loop-player%/15"
-                set line 2 of loop-player's scoreboard to "&fLivello di luce:"
+                set line 1 of loop-player's scoreboard to "%placeholder "rs_season" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
+                set line 2 of loop-player's scoreboard to "&fStagione:"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&b%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma:"
@@ -39,8 +39,8 @@ every tick:
                 set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "player_world_time_24" from loop-player%"
             else if world of loop-player is "{@nether}":
                 set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
-                set line 1 of loop-player's scoreboard to "&9%placeholder "player_light_level" from loop-player%/15"
-                set line 2 of loop-player's scoreboard to "&fLivello di luce:"
+                set line 1 of loop-player's scoreboard to "%placeholder "rs_season_smp" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
+                set line 2 of loop-player's scoreboard to "&fStagione:"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&c%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma:"
@@ -56,8 +56,8 @@ every tick:
                 set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &6%placeholder "player_world_time_24" from loop-player%"
             else if world of loop-player is "{@end}":
                 set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
-                set line 1 of loop-player's scoreboard to "&9%placeholder "player_light_level" from loop-player%/15"
-                set line 2 of loop-player's scoreboard to "&fLivello di luce:"
+                set line 1 of loop-player's scoreboard to "%placeholder "rs_season_smp" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
+                set line 2 of loop-player's scoreboard to "&fStagione:"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&5%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma:"
