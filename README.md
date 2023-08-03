@@ -1,4 +1,4 @@
-#  Disagio SMP: 63% completato
+#  Disagio SMP: 68% completato
   Di seguito, tutte le modifiche effettuate/introdotte durante lo sviluppo del server e delle sue funzionalità:
   
 ### - GENNAIO 2022 -
