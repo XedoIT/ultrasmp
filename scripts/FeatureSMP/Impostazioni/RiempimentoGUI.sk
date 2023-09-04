@@ -1,0 +1,9 @@
+function TriggerGuiFiller(p: player):
+    if {settings::%{_p}%::glasspanes} is not set:
+        set {settings::%{_p}%::glasspanes} to true
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&aRiempimento GUI attivato." to {_p}
+    else:
+        delete {settings::%{_p}%::glasspanes}
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&cRiempimento GUI disattivato." to {_p}

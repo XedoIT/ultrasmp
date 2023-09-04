@@ -1,0 +1,200 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+command /notify [<text>] [<offline player>]:
+    aliases: /notifiche
+    description: Gestisci le tue notifiche all'interno dell'SMP.
+    executable by: console, player
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if player has permission "notify.other":
+                    send "{@prefix} &cComando incompleto."
+                    send "{@prefix} &cUtilizzo: &6/notify service [&egiocatore&6]"
+                    send "{@prefix} &cUtilizzo: &6/notify general [&egiocatore&6]"
+                    send "{@prefix} &cUtilizzo: &6/notify all [&egiocatore&6]"
+                    stop
+                else:
+                    send "{@prefix} &cComando incompleto."
+                    send "{@prefix} &cUtilizzo: &6/notify service"
+                    send "{@prefix} &cUtilizzo: &6/notify general"
+                    send "{@prefix} &cUtilizzo: &6/notify all"
+                    stop
+
+            else if arg-1 is "service":
+                if arg-2 is not set:
+                    if {settings::%player%::ServiceAlerts} is not set:
+                        set {settings::%player%::ServiceAlerts} to true
+                        set {settings::%player%::ServiceAlertsInfo} to "&aattivate"
+                        delete {settings::%player%::AllAlertsOFF}
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        send "{@prefix} &aNotifiche di servizio attivate." to player
+                        stop
+                    else:
+                        delete {settings::%player%::ServiceAlerts}
+                        set {settings::%player%::ServiceAlertsInfo} to "&cdisattivate"
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        send "{@prefix} &cNotifiche di servizio disattivate." to player
+                        stop
+                else if arg-2 is offline:
+                    if player has permission "notify.service.other":
+                        send "{@prefix} &c%arg-2% &6non è online."
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                else if arg-2 is online:
+                    if player has permission "notify.service.other":
+                        if {settings::%arg-2%::ServiceAlerts} is not set:
+                            set {settings::%arg-2%::ServiceAlerts} to true
+                            set {settings::%arg-2%::ServiceAlertsInfo} to "&aattivate"
+                            delete {settings::%arg-2%::AllAlertsOFF}
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
+                            send "{@prefix} &aLe tue notifiche di servizio sono state attivate da &b%player%&a." to arg-2
+                            send "{@prefix} &aHai attivato le notifiche di servizio di &b%arg-2%&a." to player
+                            stop
+                        else:
+                            delete {settings::%arg-2%::ServiceAlerts}
+                            set {settings::%arg-2%::ServiceAlertsInfo} to "&cdisattivate"
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
+                            send "{@prefix} &cLe tue notifiche di servizio sono state disattivate da &6%player%&c." to arg-2
+                            send "{@prefix} &cHai disattivato le notifiche di servizio di &b%arg-2%&c." to player
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+
+            else if arg-1 is "general":
+                if arg-2 is not set:
+                    if {settings::%player%::Alerts} is not set:
+                        set {settings::%player%::Alerts} to true
+                        set {settings::%player%::AlertsInfo} to "&aattivate"
+                        delete {settings::%player%::AllAlertsOFF}
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        send "{@prefix} &aNotifiche generali attivate." to player
+                        stop
+                    else:
+                        delete {settings::%player%::Alerts}
+                        set {settings::%player%::AlertsInfo} to "&cdisattivate"
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        send "{@prefix} &cNotifiche generali disattivate." to player
+                        stop
+                else if arg-2 is offline:
+                    if player has permission "notify.general.other":
+                        send "{@prefix} &c%arg-2% &6non è online."
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                else if arg-2 is online:
+                    if player has permission "notify.general.other":
+                        if {settings::%arg-2%::Alerts} is not set:
+                            set {settings::%arg-2%::Alerts} to true
+                            set {settings::%arg-2%::AlertsInfo} to "&aattivate"
+                            delete {settings::%arg-2%::AllAlertsOFF}
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
+                            send "{@prefix} &aLe tue notifiche generali sono state attivate da &b%player%&a." to arg-2
+                            send "{@prefix} &aHai attivato le notifiche generali di &b%arg-2%&a." to player
+                            stop
+                        else:
+                            delete {settings::%arg-2%::Alerts}
+                            set {settings::%arg-2%::AlertsInfo} to "&cdisattivate"
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
+                            send "{@prefix} &cLe tue notifiche generali sono state disattivate da &6%player%&c." to arg-2
+                            send "{@prefix} &cHai disattivato le notifiche generali di &b%arg-2%&c." to player
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+
+            else if arg-1 is "all":
+                if arg-2 is not set:
+                    if {settings::%player%::AllAlertsOFF} is not set:
+                        set {settings::%player%::ServiceAlerts} to true
+                        set {settings::%player%::Alerts} to true
+                        set {settings::%player%::ServiceAlertsInfo} to "&aattivate"
+                        set {settings::%player%::AlertsInfo} to "&aattivate"
+                        set {settings::%player%::AllAlertsOFF} to true
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        send "{@prefix} &aHai attivato tutte le tue notifiche." to player
+                        stop
+                    else:
+                        delete {settings::%player%::ServiceAlerts}
+                        delete {settings::%player%::Alerts}
+                        set {settings::%player%::ServiceAlertsInfo} to "&cdisattivate"
+                        set {settings::%player%::AlertsInfo} to "&cdisattivate"
+                        delete {settings::%player%::AllAlertsOFF}
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        send "{@prefix} &cHai disattivato tutte le tue notifiche." to player
+                        stop
+                else if arg-2 is offline:
+                    if player has permission "notify.all.other":
+                        send "{@prefix} &c%arg-2% &6non è online."
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                else if arg-2 is online:
+                    if player has permission "notify.all.other":
+                        if {settings::%arg-2%::AllAlertsOFF} is not set:
+                            set {settings::%arg-2%::ServiceAlerts} to true
+                            set {settings::%arg-2%::Alerts} to true
+                            set {settings::%arg-2%::ServiceAlertsInfo} to "&aattivate"
+                            set {settings::%arg-2%::AlertsInfo} to "&aattivate"
+                            set {settings::%arg-2%::AllAlertsOFF} to true
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
+                            send "{@prefix} &aTutte le tue notifiche sono state attivate da &b%player%&a." to arg-2
+                            send "{@prefix} &aHai attivato tutte le notifiche di &b%arg-2%&a." to player
+                            stop
+                        else:
+                            delete {settings::%arg-2%::ServiceAlerts}
+                            delete {settings::%arg-2%::Alerts}
+                            set {settings::%arg-2%::ServiceAlertsInfo} to "&cdisattivate"
+                            set {settings::%arg-2%::AlertsInfo} to "&cdisattivate"
+                            delete {settings::%arg-2%::AllAlertsOFF}
+                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
+                            send "{@prefix} &cTutte le tue notifiche sono state disattivate da &6%player%&c." to arg-2
+                            send "{@prefix} &cHai disattivato tutte le notifiche di &b%arg-2%&c." to player
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+
+on tab complete of "/notify" or "/notifiche":
+    set tab completions for position 1 to "service", "general" and "all"
+
+
+function TriggerPlayerServiceAlerts(p: player):
+    if {settings::%{_p}%::ServiceAlerts} is not set:
+        set {settings::%{_p}%::ServiceAlerts} to true
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&aNotifiche di servizio attivate." to {_p}
+    else:
+        delete {settings::%{_p}%::ServiceAlerts}
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&cNotifiche di servizio disattivate." to {_p}
+
+function TriggerPlayerAlerts(p: player):
+    if {settings::%{_p}%::Alerts} is not set:
+        set {settings::%{_p}%::Alerts} to true
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&aNotifiche generali attivate." to {_p}
+    else:
+        delete {settings::%{_p}%::Alerts}
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&cNotifiche generali disattivate." to {_p}
+
+function TriggerAllPlayerAlerts(p: player):
+    if {settings::%{_p}%::AllAlertsOFF} is not set:
+        set {settings::%{_p}%::ServiceAlerts} to true
+        set {settings::%{_p}%::Alerts} to true
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&aHai attivato tutte le notifiche." to {_p}
+    else:
+        delete {settings::%{_p}%::ServiceAlerts}
+        delete {settings::%{_p}%::Alerts}
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+        send "&cHai disattivato tutte le notifiche." to {_p}

@@ -24,7 +24,8 @@ command /pvp:
 on damage:
     if attacker is player:
         if victim is a player:
-            if teleport type is not ender pearl:
-                if {pvp} is not set:
+            if {pvp} is not set:
+                cancel event
+                send "&cIl PvP è disabilitato!" to attacker
+                if teleport type is ender pearl:
                     cancel event
-                    send "&cIl PvP è disabilitato!" to attacker

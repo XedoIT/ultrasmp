@@ -36,7 +36,7 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "player_world_time_24" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &b%placeholder "rs_time_smp" from loop-player%"
             else if world of loop-player is "{@nether}":
                 set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season_smp" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
@@ -53,7 +53,7 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &6%placeholder "player_world_time_24" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &6%placeholder "rs_time_smp" from loop-player%"
             else if world of loop-player is "{@end}":
                 set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season_smp" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
@@ -70,7 +70,7 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%placeholder "localtime_time" from loop-player% &f- &5%placeholder "player_world_time_24" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &5%placeholder "rs_time_smp" from loop-player%"
         else:
             clear scoreboard of loop-player
 

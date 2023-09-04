@@ -764,11 +764,7 @@ command /points [<text>] [<offline player>] [<number>]:
 on tab complete of "/points", "/punti" or "/p":
     if player has permission "points.commands":
         set tab completions for position 1 to "check", "reset", "set", "add", "remove", "idle", "info", "help" and "reload"
-        if tab arg-1 is "set":
-            set tab completions for position 3 to "[<punti>]"
-        else if tab arg-1 is "add":
-            set tab completions for position 3 to "[<punti>]"
-        else if tab arg-1 is "remove":
+        if tab arg-1 is "set", "add" or "remove":
             set tab completions for position 3 to "[<punti>]"
     else:
         set tab completions for position 1 to "info" and "help"

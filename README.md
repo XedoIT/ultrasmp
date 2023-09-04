@@ -121,3 +121,6 @@
 ### - LUGLIO 2023 -
 - Aggiunte le stagioni.
 - Sostituito "Livello di luce" con "Stagione" nella Scoreboard.
+
+### - AGOSTO 2023 -
+- Aggiunte le notifiche personali nelle impostazioni del giocatore.
