@@ -2,65 +2,65 @@ on right click:
     if player's gamemode is survival or adventure:
         if player's tool is a wooden axe, stone axe, iron axe, gold axe, diamond axe or netherite axe:
             if event-block is oak log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_oak_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_oak_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is oak wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_oak_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_oak_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is birch log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_birch_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_birch_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is birch wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_birch_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_birch_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is dark oak log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_dark_oak_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_dark_oak_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is dark oak wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_dark_oak_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_dark_oak_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is spruce log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_spruce_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_spruce_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is spruce wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_spruce_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_spruce_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is acacia log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_acacia_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_acacia_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is acacia wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_acacia_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_acacia_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is jungle log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_jungle_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_jungle_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is jungle wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_jungle_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_jungle_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is mangrove log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_mangrove_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_mangrove_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is mangrove wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_mangrove_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_mangrove_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is cherry log:
-                add 1 to {blocksbuild::%player%::stripped::stripped_cherry_log}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_cherry_log}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is cherry wood:
-                add 1 to {blocksbuild::%player%::stripped::stripped_cherry_wood}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_cherry_wood}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is crimson stem:
-                add 1 to {blocksbuild::%player%::stripped::stripped_crimson_stem}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_crimson_stem}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is crimson hyphae:
-                add 1 to {blocksbuild::%player%::stripped::stripped_crimson_hyphae}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_crimson_hyphae}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is warped stem:
-                add 1 to {blocksbuild::%player%::stripped::stripped_warped_hyphae}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_warped_hyphae}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is warped hyphae:
-                add 1 to {blocksbuild::%player%::stripped::stripped_warped_stem}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_warped_stem}
+                add 1 to {blocksbuild.%player%.stripped}
             else if event-block is bamboo block:
-                add 1 to {blocksbuild::%player%::stripped::stripped_bamboo_block}
-                add 1 to {blocksbuild::%player%::stripped}
+                add 1 to {blocksbuild.%player%.stripped::stripped_bamboo_block}
+                add 1 to {blocksbuild.%player%.stripped}

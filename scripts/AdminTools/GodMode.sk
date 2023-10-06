@@ -3,40 +3,45 @@ options:
     prefix_disabled: &6[&c&lGod&6]
     prefix_error: &7[&c&lGod&7]
     warn: &6[&c&l!&6]
-    
+
+on load:
+    if {god.%player%.status} is not set:
+        set {god.%player%.status} to "&cNo"
+        
 on join:
-    if {god::%player%} is true:
+    if {god.%player%} is true:
         if player has permission "god.keep":
-            set {god::%player%} to true
-            set {god::%player%::status} to "&aSì"
-            set {god::%player%::ab} to true
-            wait 5 seconds
+            set {god.%player%} to true
+            set {god.%player%.status} to "&aSì"
+            set {god.%player%.ab} to true
+            wait 3 seconds
             send "{@prefix_enabled} Sei ancora in modalità Dio!" to player
             stop
         else:
-            if {god::%player%} is true:
-                delete {god::%player%}
-                set {god::%player%::status} to "&cNo"
-                delete {god::%player%::ab}
+            if {god.%player%} is true:
+                delete {god.%player%}
+                set {god.%player%.status} to "&cNo"
+                delete {god.%player%.ab}
+                wait 3 seconds
                 send "{@warn} &7Prima di uscire dal server, eri immortale. Adesso non lo sei più. {@warn}" to player
                 stop
     else:
-        set {god::%player%::status} to "&cNo"
-        delete {god::%player%::ab}
+        set {god.%player%.status} to "&cNo"
+        delete {god.%player%.ab}
         stop
         
 on damage:
     victim is a player
-    if {god::%victim%} is true:
+    if {god.%victim%} is true:
         cancel event
             
 on food level change:
-    if {god::%player%} is true:
+    if {god.%player%} is true:
         cancel event
 
 every 10 ticks:
     loop all players:
-        if {god::%loop-player%::ab} is true:
+        if {god.%loop-player%.ab} is true:
             send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player
             
 command /god [<offline player>]:
@@ -46,16 +51,16 @@ command /god [<offline player>]:
     trigger:
         if sender is player:
             if arg-1 is not set:
-                if {god::%player%} is true:
-                    delete {god::%player%}
-                    set {god::%player%::status} to "&cNo"
-                    delete {god::%player%::ab}
+                if {god.%player%} is true:
+                    delete {god.%player%}
+                    set {god.%player%.status} to "&cNo"
+                    delete {god.%player%.ab}
                     send "{@prefix_disabled} &cModalità Dio disattivata." to player
                     stop
                 else:
-                    set {god::%player%} to true
-                    set {god::%player%::status} to "&aSì"
-                    set {god::%player%::ab} to true
+                    set {god.%player%} to true
+                    set {god.%player%.status} to "&aSì"
+                    set {god.%player%.ab} to true
                     heal player
                     feed player
                     send "{@prefix_enabled} &aModalità Dio attivata." to player
@@ -65,17 +70,17 @@ command /god [<offline player>]:
                 send "&7[&e&lG&7] &c%arg-1% non è online!" to player
                 stop
             else:
-                if {god::%arg-1%} is true:
-                    delete {god::%arg-1%}
-                    set {god::%arg-1%::status} to "&cNo"
-                    delete {god::%arg-1%::ab}
+                if {god.%arg-1%} is true:
+                    delete {god.%arg-1%}
+                    set {god.%arg-1%.status} to "&cNo"
+                    delete {god.%arg-1%.ab}
                     send "{@prefix_disabled} &cHai tolto l'immortalità &6%arg-1%&c." to player
                     send "{@prefix_disabled} &6%player% &cti ha tolto l'immortalità." to arg-1
                     stop
                 else:
-                    set {god::%arg-1%} to true
-                    set {god::%arg-1%::status} to "&aSì"
-                    set {god::%arg-1%::ab} to true
+                    set {god.%arg-1%} to true
+                    set {god.%arg-1%.status} to "&aSì"
+                    set {god.%arg-1%.ab} to true
                     heal arg-1
                     feed arg-1
                     send "{@prefix_enabled} &aHai reso &e%arg-1% &aimmortale." to player
@@ -90,17 +95,17 @@ command /god [<offline player>]:
                 send "&7[&e&lG&7] &c%arg-1% non è online!"
                 stop
             else:
-                if {god::%arg-1%} is true:
-                    delete {god::%arg-1%}
-                    set {god::%arg-1%::status} to "&cNo"
-                    delete {god::%arg-1%::ab}
+                if {god.%arg-1%} is true:
+                    delete {god.%arg-1%}
+                    set {god.%arg-1%.status} to "&cNo"
+                    delete {god.%arg-1%.ab}
                     send "{@prefix_disabled} &cHai tolto l'immortalità &6%arg-1%&c." to console
                     send "{@prefix_disabled} &cLa &6console &cti ha dato l'immortalità." to arg-1
                     stop
                 else:
-                    set {god::%arg-1%} to true
-                    set {god::%arg-1%::status} to "&aSì"
-                    set {god::%arg-1%::ab} to true
+                    set {god.%arg-1%} to true
+                    set {god.%arg-1%.status} to "&aSì"
+                    set {god.%arg-1%.ab} to true
                     heal arg-1
                     feed arg-1
                     send "{@prefix_enabled} &aHai reso &e%arg-1% &aimmortale." to console

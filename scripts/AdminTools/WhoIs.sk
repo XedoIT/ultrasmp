@@ -2,8 +2,7 @@ options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
 
 on quit:
-    set {location} to player's location
-    stop
+    set {_last_location} to player's location
     
 command /whois [<offline player>]:
     aliases: /playerinfo
@@ -19,45 +18,45 @@ command /whois [<offline player>]:
             else if arg-1 is online:
                 send "&6====== Informazioni per &c%arg-1% &6======"
                 send "&cGENERALI"
-                send "&6- Nickname: &f%{nick::%arg-1%}%"
-                send formatted "&6- UUID: <tooltip:&7UUID di &c%arg-1%><url:https://mcuuid.net/?q=%arg-1%>&e%arg-1's uuid%<reset>"
+                send "&6- Nickname: &f%{nick.%arg-1%}%"
+                send formatted "&6- UUID: <tooltip:&7UUID di &c%arg-1%><url:https://it.namemc.com/profile/%arg-1's uuid%>&e%arg-1's uuid%<reset>"
                 send "&6- Salute: &f%placeholder "aureliumskills_hp" from arg-1%/%placeholder "aureliumskills_hp_max" from arg-1% &c❤"
                 send "&6- Sazietà: &f%placeholder "player_food_level" from arg-1%/20"
                 send "&6- EXP: &a%placeholder "player_current_exp" from arg-1% (&2%placeholder "player_level" from arg-1% livelli&a)"
-                send formatted "&6- Posizione: <tooltip:&fClicca per teletrasportarti><cmd:/teleport %arg-1%>&f(%{world_position::%arg-1%}%&f, &9%placeholder "player_x" from arg-1% &9%placeholder "player_y" from arg-1% &9%placeholder "player_z" from arg-1%&f, &b%placeholder "player_biome_capitalized" from arg-1%&f)<reset>"
-                send "&6- Tempo di gioco totale: &f%placeholder "statistic_time_played:days" from arg-1% giorni, %placeholder "statistic_time_played:hours" from arg-1% ore, %placeholder "statistic_time_played:minutes" from arg-1% minuti e %placeholder "statistic_time_played:seconds" from arg-1% secondi"
-                send "&6- Tempo di gioco della sessione: &f%{days::%arg-1%}% giorni, &f%{hours::%arg-1%}% ore, &f%{minutes::%arg-1%}% minuti e &f%{seconds::%arg-1%}% secondi"
-                send "&6- Punti: &f%{points::%arg-1%}%"
-                send "&6- Reputazione: %{points::%arg-1%::rank}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
-                send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
+                send formatted "&6- Posizione: <tooltip:&fClicca per teletrasportarti><cmd:/teleport %arg-1%>&f(%{position.%arg-1%.world}%&f, &9%placeholder "player_x" from arg-1% &9%placeholder "player_y" from arg-1% &9%placeholder "player_z" from arg-1%&f, &b%placeholder "player_biome_capitalized" from arg-1%&f)<reset>"
+                send "&6- Tempo di gioco totale: &f%{playtime.%arg-1%.total_days}% giorni, %{playtime.%arg-1%.total_hours}% ore, %{playtime.%arg-1%.total_minutes}% minuti e %{playtime.%arg-1%.total_seconds}% secondi"
+                send "&6- Tempo di gioco della sessione: &f%{playtime.%arg-1%.days}% giorni, &f%{playtime.%arg-1%.hours}% ore, &f%{playtime.%arg-1%.minutes}% minuti e &f%{playtime.%arg-1%.seconds}% secondi"
+                send "&6- Punti: &f%{points.%arg-1%}%"
+                send "&6- Reputazione: %{points.%arg-1%.rank}%"
+                send "&6- Medaglie: &e%{medals.%arg-1%}%&7/&e15 &6(&7Ultima medaglia ottenuta: %{medals.%arg-1%.last_obtained}%&6)"
+                #send "&6- AFK: %{afk.%arg-1%.status}%"
+                send "&6- Prima volta nel server: &f%{playtime.%arg-1%.first_login}%"
                 send "&bTECNICHE"
                 send "&3- Indirizzo IP: &e/%placeholder "player_ip" from arg-1%"
-                send "&3- Ping: &e%arg-1's ping%ms" 
-                send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
-                send "&3- Modalità Dio: %{god::%arg-1%::status}%"
-                send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
+                send "&3- Ping: &e%arg-1's ping% ms" 
+                send "&3- Modalità di gioco: &f%{gm.%arg-1%.status}%"
+                send "&3- Modalità Dio: %{god.%arg-1%.status}%"
+                send "&3- Modalità Volo: %{fly.%arg-1%.status}%"
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 send "&3- Velocità: &f%arg-1's flyspeed% (Volo), %arg-1's walkspeed% (Passo)"
                 stop
             else if arg-1 has played before:
                 send "&6====== Informazioni per &c%arg-1% &4(Modalità Offline) &6======"
                 send "&cGENERALI"
-                send "&6- Nickname: &f%{nick::%arg-1%}%"
-                send formatted "&6- UUID: <tooltip:&7UUID di &c%arg-1%><url:https://mcuuid.net/?q=%arg-1%>&e%arg-1's uuid%<reset>"
-                send "&6- Posizione: &f(&a%{location}%&f)"
-                send "&6- Tempo di gioco totale: &f%placeholder "statistic_time_played:days" from arg-1% giorni, %placeholder "statistic_time_played:hours" from arg-1% ore, %placeholder "statistic_time_played:minutes" from arg-1% minuti e %placeholder "statistic_time_played:seconds" from arg-1% secondi"
-                send "&6- Tempo di gioco dell'ultima sessione: &f%{days::%arg-1%::archive}% giorni, &f%{hours::%arg-1%::archive}% ore, &f%{minutes::%arg-1%::archive}% minuti e &f%{seconds::%arg-1%::archive}% secondi"
-                send "&6- Punti: &f%{points::%arg-1%}%"
-                send "&6- Reputazione: %{points::%arg-1%::rank}%"
-                send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
-                send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
+                send "&6- Nickname: &f%{nick.%arg-1%}%"
+                send formatted "&6- UUID: <tooltip:&7UUID di &c%arg-1%><url:https://it.namemc.com/profile/%arg-1's uuid%>&e%arg-1's uuid%<reset>"
+                send formatted "&6- Posizione: <tooltip:&fClicca per teletrasportarti><cmd:/tp %{position.%arg-1%.x}% %{position.%arg-1%.y}% %{position.%arg-1%.z}%>&f(%{position.%arg-1%.world}%&f, &9%{position.%arg-1%.x}% &9%{position.%arg-1%.y}% &9%{position.%arg-1%.z}%&f, &b%{position.%arg-1%.biome}%&f)<reset>"
+                send "&6- Tempo di gioco totale: &f%{playtime.%arg-1%.total_days}% giorni, %{playtime.%arg-1%.total_hours}% ore, %{playtime.%arg-1%.total_minutes}% minuti e %{playtime.%arg-1%.total_seconds}% secondi"
+                send "&6- Tempo di gioco dell'ultima sessione: &f%{playtime.%arg-1%.archived_days}% giorni, &f%{playtime.%arg-1%.archived_hours}% ore, &f%{playtime.%arg-1%.archived_minutes}% minuti e &f%{playtime.%arg-1%.archived_seconds}% secondi"
+                send "&6- Punti: &f%{points.%arg-1%}%"
+                send "&6- Reputazione: %{points.%arg-1%.rank}%"
+                #send "&6- AFK: %{afk.%arg-1%.status}%"
+                send "&6- Medaglie: &e%{medals.%arg-1%}%&7/&e15 &6(&7Ultima medaglia ottenuta: %{medals.%arg-1%.last_obtained}%&6)"
+                send "&6- Prima volta nel server: &f%{playtime.%arg-1%.first_login}%"
                 send "&bTECNICHE"
-                send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
-                send "&3- Modalità Dio: %{god::%arg-1%::status}%"
-                send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
+                send "&3- Modalità di gioco: &f%{gm.%arg-1%.status}%"
+                send "&3- Modalità Dio: %{god.%arg-1%.status}%"
+                send "&3- Modalità Volo: %{fly.%arg-1%.status}%"
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 stop
             else:
@@ -70,46 +69,75 @@ command /whois [<offline player>]:
             else if arg-1 is online:
                 send "&6====== Informazioni per &c%arg-1% &6======"
                 send "&cGENERALI"
-                send "&6- Nickname: &f%{nick::%arg-1%}%"
+                send "&6- Nickname: &f%{nick.%arg-1%}%"
                 send "&6- UUID: &e%uuid of arg-1%"
                 send "&6- Salute: &f%placeholder "aureliumskills_hp" from arg-1%/%placeholder "aureliumskills_hp_max" from arg-1% &c❤"
                 send "&6- Sazietà: &f%placeholder "player_food_level" from arg-1%/20"
                 send "&6- EXP: &a%placeholder "player_current_exp" from arg-1% (&2%placeholder "player_level" from arg-1% livelli&a)"
-                send "&6- Posizione: &f(%{world_position::%arg-1%}%&f, &9%placeholder "player_x" from arg-1% &9%placeholder "player_y" from arg-1% &9%placeholder "player_z" from arg-1%&f, &b%placeholder "player_biome_capitalized" from arg-1%&f)"
-                send "&6- Tempo di gioco totale: &f%placeholder "statistic_time_played:days" from arg-1% giorni, %placeholder "statistic_time_played:hours" from arg-1% ore, %placeholder "statistic_time_played:minutes" from arg-1% minuti e %placeholder "statistic_time_played:seconds" from arg-1% secondi"
-                send "&6- Tempo di gioco della sessione attuale: &f%{days::%arg-1%}% giorni, &f%{hours::%arg-1%}% ore, &f%{minutes::%arg-1%}% minuti e &f%{seconds::%arg-1%}% secondi"
-                send "&6- Punti: &f%{points::%arg-1%}%"
-                send "&6- Reputazione: %{points::%arg-1%::rank}%"
-                send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
-                send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
+                send "&6- Posizione: &f(%{position.%arg-1%.world}%&f, &9%placeholder "player_x" from arg-1% &9%placeholder "player_y" from arg-1% &9%placeholder "player_z" from arg-1%&f, &b%placeholder "player_biome_capitalized" from arg-1%&f)"
+                send "&6- Tempo di gioco totale: &f%{playtime.%arg-1%.total_days}% giorni, %{playtime.%arg-1%.total_hours}% ore, %{playtime.%arg-1%.total_minutes}% minuti e %{playtime.%arg-1%.total_seconds}% secondi"
+                send "&6- Tempo di gioco della sessione attuale: &f%{playtime.%arg-1%.days}% giorni, &f%{playtime.%arg-1%.hours}% ore, &f%{playtime.%arg-1%.minutes}% minuti e &f%{playtime.%arg-1%.seconds}% secondi"
+                send "&6- Punti: &f%{points.%arg-1%}%"
+                send "&6- Reputazione: %{points.%arg-1%.rank}%"
+                #send "&6- AFK: %{afk.%arg-1%.status}%"
+                send "&6- Medaglie: &e%{medals.%arg-1%}%&7/&e15 &6(&7Ultima medaglia ottenuta: %{medals.%arg-1%.last_obtained}%&6)"
+                send "&6- Prima volta nel server: &f%{playtime.%arg-1%.first_login}%"
                 send "&bTECNICHE"
                 send "&3- Indirizzo IP: &e/%placeholder "player_ip" from arg-1%"
-                send "&3- Ping: &e%arg-1's ping%ms" 
-                send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
-                send "&3- Modalità Dio: %{god::%arg-1%::status}%"
-                send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
+                send "&3- Ping: &e%arg-1's ping% ms" 
+                send "&3- Modalità di gioco: &f%{gm.%arg-1%.status}%"
+                send "&3- Modalità Dio: %{god.%arg-1%.status}%"
+                send "&3- Modalità Volo: %{fly.%arg-1%.status}%"
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 send "&3- Velocità: &f%arg-1's flyspeed% (Volo), %arg-1's walkspeed% (Passo)"
                 stop
             else if arg-1 has played before:
                 send "&6====== Informazioni per &c%arg-1% &4(Modalità Offline) &6======"
                 send "&cGENERALI"
-                send "&6- Nickname: &f%{nick::%arg-1%}%"
+                send "&6- Nickname: &f%{nick.%arg-1%}%"
                 send "&6- UUID: &e%uuid of arg-1%"
-                send "&6- Posizione: &f(&a%{location}%&f)"
-                send "&6- Tempo di gioco dell'ultima sessione: &f%{days::%arg-1%::archive}% giorni, &f%{hours::%arg-1%::archive}% ore, &f%{minutes::%arg-1%::archive}% minuti e &f%{seconds::%arg-1%::archive}% secondi"
-                send "&6- Punti: &f%{points::%arg-1%}%"
-                send "&6- Reputazione: %{points::%arg-1%::rank}%"
-                send "&6- AFK: %{afk::%arg-1%::status}%"
-                send "&6- Medaglie: &e%{medals::%arg-1%}%&7/&e15 &6(&7Ultima medaglia sbloccata: %{medals::%arg-1%::last_obtained}%&6)"
-                send "&6- Prima volta nel server: &f%placeholder "player_first_join_date" from arg-1%"
+                send "&6- Posizione: (%{position.%arg-1%.world}%&f, &9%{position.%arg-1%.x}% &9%{position.%arg-1%.y}% &9%{position.%arg-1%.z}%&f, &b%{position.%arg-1%.biome}%&f)"
+                send "&6- Tempo di gioco totale: &f%{playtime.%arg-1%.total_days}% giorni, %{playtime.%arg-1%.total_hours}% ore, %{playtime.%arg-1%.total_minutes}% minuti e %{playtime.%arg-1%.total_seconds}% secondi"
+                send "&6- Tempo di gioco dell'ultima sessione: &f%{playtime.%arg-1%.archived_days}% giorni, &f%{playtime.%arg-1%.archived_hours}% ore, &f%{playtime.%arg-1%.archived_minutes}% minuti e &f%{playtime.%arg-1%.archived_seconds}% secondi"
+                send "&6- Punti: &f%{points.%arg-1%}%"
+                send "&6- Reputazione: %{points.%arg-1%.rank}%"
+                #send "&6- AFK: %{afk.%arg-1%.status}%"
+                send "&6- Medaglie: &e%{medals.%arg-1%}%&7/&e15 &6(&7Ultima medaglia ottenuta: %{medals.%arg-1%.last_obtained}%&6)"
+                send "&6- Prima volta nel server: &f%{playtime.%arg-1%.first_login}%"
                 send "&bTECNICHE"
-                send "&3- Modalità di gioco: &f%{gm::%arg-1%::status}%"
-                send "&3- Modalità Dio: %{god::%arg-1%::status}%"
-                send "&3- Modalità Volo: %{fly::%arg-1%::status}%"
+                send "&3- Modalità di gioco: &f%{gm.%arg-1%.status}%"
+                send "&3- Modalità Dio: %{god.%arg-1%.status}%"
+                send "&3- Modalità Volo: %{fly.%arg-1%.status}%"
                 send "&3- OP: %placeholder "player_is_op" from arg-1%"
                 stop
             else:
                 send "{@prefix} &cNon ho trovato informazioni per &6%arg-1%&c."
                 stop
+
+every second:
+    loop all players:
+        if world of loop-player is "smp":
+            set {position.%loop-player%.world} to "&aOverworld"
+            #set {world_sign.%loop-player%} to "&b[&a&lO&b]"
+        if world of loop-player is "smp_nether":
+            set {position.%loop-player%.world} to "&cNether"
+            #set {world_sign.%loop-player%} to "&4[&c&lN&4]"
+        if world of loop-player is "smp_the_end":
+            set {position.%loop-player%.world} to "&dEnd"
+            #set {world_sign.%loop-player%} to "&5[&d&lE&5]"
+
+on quit:
+    set {_x} to placeholder "player_x" from player
+    set {position.%player%.x} to {_x}
+    set {_y} to placeholder "player_y" from player
+    set {position.%player%.y} to {_y}
+    set {_z} to placeholder "player_z" from player
+    set {position.%player%.z} to {_z}
+    set {_biome} to placeholder "player_biome_capitalized" from player
+    set {position.%player%.biome} to {_biome}
+    if world of player is "smp":
+        set {position.%player%.world} to "&aOverworld"
+    if world of player is "smp_nether":
+        set {position.%player%.world} to "&cNether"
+    if world of player is "smp_the_end":
+        set {position.%player%.world} to "&dEnd"

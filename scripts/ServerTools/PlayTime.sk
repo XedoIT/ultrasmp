@@ -1,40 +1,77 @@
 options:
     prefix: &6[&cPlayTime&6]
     prefix_tip: &2&k0&c&lTIP&2&k0
+    prefix_hide: &4[&6&lS&e&lM&6&lP&4]
+
+    no_more_args: &cQuesto comando non richiede parametri aggiuntivi.
+
+    permission: playtime.other
+
+on first join:
+    if {playtime.%player%.first_login} is not set:
+        set {playtime.%player%.first_login} to now
+
+on load:
+    if {playtime.%player%.days} is not set:
+        set {playtime.%player%.days} to 0
+    if {playtime.%player%.hours} is not set:
+        set {playtime.%player%.hours} to 0
+    if {playtime.%player%.minutes} is not set:
+        set {playtime.%player%.minutes} to 0
+    if {playtime.%player%.seconds} is not set:
+        set {playtime.%player%.seconds} to 0
+
+    if {playtime.%player%.total_days} is not set:
+        set {playtime.%player%.total_days} to 0
+    if {playtime.%player%.total_hours} is not set:
+        set {playtime.%player%.total_hours} to 0
+    if {playtime.%player%.total_minutes} is not set:
+        set {playtime.%player%.total_minutes} to 0
+    if {playtime.%player%.total_seconds} is not set:
+        set {playtime.%player%.total_seconds} to 0
 
 on join:
-    if {days::%player%} is not set:
-        set {days::%player%} to 0
-    if {hours::%player%} is not set:
-        set {hours::%player%} to 0
-    if {minutes::%player%} is not set:
-        set {minutes::%player%} to 0
-    if {seconds::%player%} is not set:
-        set {seconds::%player%} to 0
+    if {playtime.%player%.days} is not set:
+        set {playtime.%player%.days} to 0
+    if {playtime.%player%.hours} is not set:
+        set {playtime.%player%.hours} to 0
+    if {playtime.%player%.minutes} is not set:
+        set {playtime.%player%.minutes} to 0
+    if {playtime.%player%.seconds} is not set:
+        set {playtime.%player%.seconds} to 0
 
-on quit:
-    log "[PLAYTIME] Nella sua ultima sessione di gioco, %player% ha giocato per %{days::%player%}% giorni, %{hours::%player%}% ore, %{minutes::%player%}% minuti e %{seconds::%player%}% secondi." to "PlaytimeSessions.log"
-    set {days::%player%::archive} to {days::%player%}
-    set {hours::%player%::archive} to {hours::%player%}
-    set {minutes::%player%::archive} to {minutes::%player%}
-    set {seconds::%player%::archive} to {seconds::%player%}
-    wait 1 second
-    delete {days::%player%}
-    delete {hours::%player%}
-    delete {minutes::%player%}
-    delete {seconds::%player%}
+    if {playtime.%player%.total_days} is not set:
+        set {playtime.%player%.total_days} to 0
+    if {playtime.%player%.total_hours} is not set:
+        set {playtime.%player%.total_hours} to 0
+    if {playtime.%player%.total_minutes} is not set:
+        set {playtime.%player%.total_minutes} to 0
+    if {playtime.%player%.total_seconds} is not set:
+        set {playtime.%player%.total_seconds} to 0
 
 on unload:
-    log "[PLAYTIME] Nella sua ultima sessione di gioco, %player% ha giocato per %{days::%player%}% giorni, %{hours::%player%}% ore, %{minutes::%player%}% minuti e %{seconds::%player%}% secondi." to "PlaytimeSessions.log"
-    set {days::%player%::archive} to {days::%player%}
-    set {hours::%player%::archive} to {hours::%player%}
-    set {minutes::%player%::archive} to {minutes::%player%}
-    set {seconds::%player%::archive} to {seconds::%player%}
-    wait 1 second
-    delete {days::%player%}
-    delete {hours::%player%}
-    delete {minutes::%player%}
-    delete {seconds::%player%}
+    log "[PLAYTIME] Nella sua ultima sessione di gioco, %player% ha giocato per %{playtime.%player%.days}% giorni, %{playtime.%player%.hours}% ore, %{playtime.%player%.minutes}% minuti e %{playtime.%player%.seconds}% secondi." to "Sessioni di gioco.log"
+    set {playtime.%player%.archived_days} to {playtime.%player%.days}
+    set {playtime.%player%.archived_hours} to {playtime.%player%.hours}
+    set {playtime.%player%.archived_minutes} to {playtime.%player%.minutes}
+    set {playtime.%player%.archived_seconds} to {playtime.%player%.seconds}
+    wait 2 ticks
+    delete {playtime.%player%.days}
+    delete {playtime.%player%.hours}
+    delete {playtime.%player%.minutes}
+    delete {playtime.%player%.seconds}
+
+on quit:
+    log "[PLAYTIME] Nella sua ultima sessione di gioco, %player% ha giocato per %{playtime.%player%.days}% giorni, %{playtime.%player%.hours}% ore, %{playtime.%player%.minutes}% minuti e %{playtime.%player%.seconds}% secondi." to "Sessioni di gioco.log"
+    set {playtime.%player%.archived_days} to {playtime.%player%.days}
+    set {playtime.%player%.archived_hours} to {playtime.%player%.hours}
+    set {playtime.%player%.archived_minutes} to {playtime.%player%.minutes}
+    set {playtime.%player%.archived_seconds} to {playtime.%player%.seconds}
+    wait 2 ticks
+    delete {playtime.%player%.days}
+    delete {playtime.%player%.hours}
+    delete {playtime.%player%.minutes}
+    delete {playtime.%player%.seconds}
 
 command /playtime [<text>] [<offline player>]:
     aliases: /pt
@@ -43,66 +80,85 @@ command /playtime [<text>] [<offline player>]:
     trigger:
         if sender is player:
             if arg-1 is not set:
-                if player has permission "playtime.other":
-                    send "&cUtilizzo: &6/playtime < &etotal &6| &esession &6> [&egiocatore&6]"
+                if player has permission "{@permission}":
+                    send "&cComando incompleto."
+                    send "&cUtilizzo: &6/playtime <&etotal&6> [&egiocatore&6]"
+                    send "&cUtilizzo: &6/playtime <&esession&6> [&egiocatore&6]"
                     stop
                 else:
-                    send "&cUtilizzo: &6/playtime < &etotal &6| &esession &6>"
+                    send "&cComando incompleto."
+                    send "&cUtilizzo: &6/playtime <&etotal&6>"
+                    send "&cUtilizzo: &6/playtime <&esession&6>"
                     stop
+
             else if arg-1 is "total":
                 if arg-2 is not set:
-                    if player has permission "playtime.other":
-                        send "{@prefix} &7Il tuo tempo di gioco totale è di &c%placeholder "statistic_time_played:days" from player% giorni&f, &c%placeholder "statistic_time_played:hours" from player% ore&f, &c%placeholder "statistic_time_played:minutes" from player% minuti &fe &c%placeholder "statistic_time_played:seconds" from player% secondi&f."
+                    if player has permission "{@permission}":
+                        send "{@prefix} &7Tempo di gioco totale: &c%{playtime.%player%.total_days}% giorni&f, &c%{playtime.%player%.total_hours}% ore&f, &c%{playtime.%player%.total_minutes}% minuti &fe &c%{playtime.%player%.total_seconds}% secondi&f."
                         send ""
                         send "{@prefix_tip} &e/playtime total <giocatore> &aper vedere il tempo di gioco totale di un altro giocatore."
                         stop
                     else:
-                        send "{@prefix} &7Il tuo tempo di gioco totale è di &c%placeholder "statistic_time_played:days" from player% giorni&f, &c%placeholder "statistic_time_played:hours" from player% ore&f, &c%placeholder "statistic_time_played:minutes" from player% minuti &fe &c%placeholder "statistic_time_played:seconds" from player% secondi&f."
+                        send "{@prefix} &7Tempo di gioco totale: &c%{playtime.%player%.total_days}% giorni&f, &c%{playtime.%player%.total_hours}% ore&f, &c%{playtime.%player%.total_minutes}% minuti &fe &c%{playtime.%player%.total_seconds}% secondi&f."
                         stop
                 else if arg-2 is offline:
-                    if player has permission "playtime.other":
+                    if player has permission "{@permission}":
                         send "{@prefix} &c%arg-2% &6non è online!"
                         stop
                     else:
-                        send "{@prefix} &cNon hai i permessi per farlo!"
+                        send "{@prefix_hide} {@no_more_args}"
                         stop
+                else if arg-2 is online:
+                    if player has permission "{@permission}":
+                        send "{@prefix} &7Tempo di gioco totale di &6%arg-2%&7: &c%{playtime.%arg-2%.total_days}% giorni&f, &c%{playtime.%arg-2%.total_hours}% ore&f, &c%{playtime.%arg-2%.total_minutes}% minuti &fe &c%{playtime.%arg-2%.total_seconds}% secondi&f."
+                        stop
+                    else:
+                        send "{@prefix_hide} {@no_more_args}"
+                        stop
+
             else if arg-1 is "session":
                 if arg-2 is not set:
-                    if player has permission "playtime.other":
-                        send "{@prefix} &7Il tuo tempo di gioco per la sessione attuale è di &c%{days::%player%}% giorni&f, &c%{hours::%player%}% ore&f, &c%{minutes::%player%}% minuti &fe &c%{seconds::%player%}% secondi&f."
+                    if player has permission "{@permission}":
+                        send "{@prefix} &7Tempo di gioco della sessione attuale: &c%{playtime.%player%.days}% giorni&f, &c%{playtime.%player%.hours}% ore&f, &c%{playtime.%player%.minutes}% minuti &fe &c%{playtime.%player%.seconds}% secondi&f."
                         send ""
                         send "{@prefix_tip} &e/playtime session <giocatore> &aper vedere il tempo di gioco totale di un altro giocatore."
                         stop
                     else:
-                        send "{@prefix} &7Il tuo tempo di gioco della sessione attuale è di &c%{days::%player%}% giorni&f, &c%{hours::%player%}% ore&f, &c%{minutes::%player%}% minuti &fe &c%{seconds::%player%}% secondi&f."
+                        send "{@prefix} &7Tempo di gioco della sessione attuale: &c%{playtime.%player%.days}% giorni&f, &c%{playtime.%player%.hours}% ore&f, &c%{playtime.%player%.minutes}% minuti &fe &c%{playtime.%player%.seconds}% secondi&f."
                         stop
                 else if arg-2 is offline:
-                    if player has permission "playtime.other":
+                    if player has permission "{@permission}":
                         send "{@prefix} &c%arg-2% &6non è online!"
                         stop
                     else:
-                        send "{@prefix} &cNon hai i permessi per farlo!"
+                        send "{@prefix_hide} {@no_more_args}"
                         stop
-                else:
-                    if player has permission "playtime.other":
-                        send "{@prefix} &7Il tempo di gioco della sessione attuale di %arg-2% è di &c%{days::%arg-2%}% giorni&f, &c%{hours::%arg-2%}% ore&f, &c%{minutes::%arg-2%}% minuti &fe &c%{seconds::%arg-2%}% secondi&f."
+                else if arg-2 is online:
+                    if player has permission "{@permission}":
+                        send "{@prefix} &7Tempo di gioco della sessione attuale di &6%arg-2%&7: &c%{playtime.%arg-2%.days}% giorni&f, &c%{playtime.%arg-2%.hours}% ore&f, &c%{playtime.%arg-2%.minutes}% minuti &fe &c%{playtime.%arg-2%.seconds}% secondi&f."
                         stop
                     else:
-                        send "{@prefix} &cNon hai i permessi per farlo!"
+                        send "{@prefix_hide} {@no_more_args}"
                         stop
+
             else if arg-1 is not "total" or "session":
-                if player has permission "playtime.other":
+                if player has permission "{@permission}":
                     send "{@prefix} &cParametro sconosciuto."
-                    send "&cUtilizzo: &6/playtime < &etotal &6| &esession &6> [&egiocatore&6]"
+                    send "&cUtilizzo: &6/playtime <&etotal&6> [&egiocatore&6]"
+                    send "&cUtilizzo: &6/playtime <&esession&6> [&egiocatore&6]"
                     stop
                 else:
                     send "{@prefix} &cParametro sconosciuto."
-                    send "&cUtilizzo: &6/playtime < &etotal &6| &esession &6>"
+                    send "&cUtilizzo: &6/playtime <&etotal&6>"
+                    send "&cUtilizzo: &6/playtime <&esession&6>"
                     stop
         else:
             if arg-1 is not set:
-                send "&cUtilizzo: &6/playtime < &etotal &6| &esession &6> [&egiocatore&6]"
+                send "&cComando incompleto."
+                send "&cUtilizzo: &6/playtime <&etotal&6> [&egiocatore&6]"
+                send "&cUtilizzo: &6/playtime <&esession&6> [&egiocatore&6]"
                 stop
+
             else if arg-1 is "total":
                 if arg-2 is not set:
                     send "{@prefix} &cSolo i giocatori possono visualizzare il proprio tempo di gioco totale!"
@@ -111,8 +167,9 @@ command /playtime [<text>] [<offline player>]:
                     send "{@prefix} &c%arg-2% &6non è online!"
                     stop
                 else:
-                    send "{@prefix} &7Il tempo di gioco totale di %arg-2% è di &c%placeholder "statistic_time_played:days" from arg-2% giorni&f, &c%placeholder "statistic_time_played:hours" from arg-2% ore&f, &c%placeholder "statistic_time_played:minutes" from arg-2% minuti &fe &c%placeholder "statistic_time_played:seconds" from arg-2% secondi"
+                    send "{@prefix} &7Tempo di gioco totale di &6%arg-2%&7: &c%{playtime.%arg-2%.days}% giorni&f, &c%placeholder "statistic_time_played:hours" from arg-2% ore&f, &c%{playtime.%arg-2%.minutes}% minuti &fe &c%{playtime.%arg-2%.seconds}% secondi"
                     stop
+
             else if arg-1 is "session":
                 if arg-2 is not set:
                     send "{@prefix} &cSolo i giocatori possono visualizzare il proprio tempo di gioco per la sessione attuale!"
@@ -121,48 +178,74 @@ command /playtime [<text>] [<offline player>]:
                     send "{@prefix} &c%arg-2% &6non è online!"
                     stop
                 else:
-                    send "{@prefix} &7Il tempo di gioco per la sessione attuale di %arg-2% è di &c%{days::%arg-2%}% giorni&f, &c%{hours::%arg-2%}% ore&f, &c%{minutes::%arg-2%}% minuti &fe &c%{seconds::%arg-2%}% secondi"
+                    send "{@prefix} &7Tempo di gioco della sessione attuale di &6%arg-2%&7: &c%{playtime.%arg-2%.days}% giorni&f, &c%{playtime.%arg-2%.hours}% ore&f, &c%{playtime.%arg-2%.minutes}% minuti &fe &c%{playtime.%arg-2%.seconds}% secondi"
                     stop
+
             else if arg-1 is not "total" or "session":
                 send "{@prefix} &cParametro sconosciuto."
-                send "&cUtilizzo: &6/playtime < &etotal &6| &esession &6> [&egiocatore&6]"
+                send "&cUtilizzo: &6/playtime <&etotal&6> [&egiocatore&6]"
+                send "&cUtilizzo: &6/playtime <&esession&6> [&egiocatore&6]"
                 stop
 
 on tab complete of "/playtime" or "/pt":
     set tab completions for position 1 to "total" and "session"
     
-every day:
+every real day:
     loop all players:
-        if {days::%loop-player%} is not set:
-            add 1 to {days::%loop-player%}
-        if {days::%loop-player%} is lower than 30:
-            add 1 to {days::%loop-player%}
-        else:
-            set {days::%loop-player%} to 0
+        if {playtime.%loop-player%.days} is not set:
+            add 1 to {playtime.%loop-player%.days}
 
-every hour:
-    loop all players:
-        if {hours::%loop-player%} is not set:
-            add 1 to {hours::%loop-player%}
-        if {hours::%loop-player%} is lower than 23:
-            add 1 to {hours::%loop-player%}
+        if {playtime.%loop-player%.total_days} is not set:
+            add 1 to {playtime.%loop-player%.total_days}
+        if {playtime.%loop-player%.total_days} < 30:
+            add 1 to {playtime.%loop-player%.total_days}
         else:
-            set {hours::%loop-player%} to 0
+            set {playtime.%loop-player%.total_days} to 0
 
-every minute:
+every real hour:
     loop all players:
-        if {minutes::%loop-player%} is not set:
-            add 1 to {minutes::%loop-player%}
-        if {minutes::%loop-player%} is lower than 59:
-            add 1 to {minutes::%loop-player%}
+        if {playtime.%loop-player%.hours} is not set:
+            add 1 to {playtime.%loop-player%.hours}
+        if {playtime.%loop-player%.hours} < 23:
+            add 1 to {playtime.%loop-player%.hours}
         else:
-            set {minutes::%loop-player%} to 0
+            set {playtime.%loop-player%.hours} to 0
 
-every second:
-    loop all players:
-        if {seconds::%loop-player%} is not set:
-            add 1 to {seconds::%loop-player%}
-        if {seconds::%loop-player%} is lower than 59:
-            add 1 to {seconds::%loop-player%}
+        if {playtime.%loop-player%.total_hours} is not set:
+            add 1 to {playtime.%loop-player%.total_hours}
+        if {playtime.%loop-player%.total_hours} < 23:
+            add 1 to {playtime.%loop-player%.total_hours}
         else:
-            set {seconds::%loop-player%} to 0
+            set {playtime.%loop-player%.total_hours} to 0
+
+every real minute:
+    loop all players:
+        if {playtime.%loop-player%.minutes} is not set:
+            add 1 to {playtime.%loop-player%.minutes}
+        if {playtime.%loop-player%.minutes} < 59:
+            add 1 to {playtime.%loop-player%.minutes}
+        else:
+            set {playtime.%loop-player%.minutes} to 0
+        
+        if {playtime.%loop-player%.total_minutes} is not set:
+            add 1 to {playtime.%loop-player%.total_minutes}
+        if {playtime.%loop-player%.total_minutes} < 59:
+            add 1 to {playtime.%loop-player%.total_minutes}
+        else:
+            set {playtime.%loop-player%.total_minutes} to 0
+
+every real second:
+    loop all players:
+        if {playtime.%loop-player%.seconds} is not set:
+            add 1 to {playtime.%loop-player%.seconds}
+        if {playtime.%loop-player%.seconds} < 59:
+            add 1 to {playtime.%loop-player%.seconds}
+        else:
+            set {playtime.%loop-player%.seconds} to 0
+        
+        if {playtime.%loop-player%.total_seconds} is not set:
+            add 1 to {playtime.%loop-player%.total_seconds}
+        if {playtime.%loop-player%.total_seconds} < 59:
+            add 1 to {playtime.%loop-player%.total_seconds}
+        else:
+            set {playtime.%loop-player%.total_seconds} to 0

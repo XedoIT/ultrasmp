@@ -12,61 +12,101 @@ options:
     nether: smp_nether
     end: smp_the_end
 
+    fall: &x&f&b&a&6&0&0A&x&e&c&9&7&0&0u&x&d&d&8&8&0&0t&x&c&e&7&a&0&0u&x&b&e&6&b&0&0n&x&a&f&5&c&0&0n&x&a&0&4&d&0&0o
+    winter: &x&0&0&b&0&f&bI&x&2&1&b&3&f&2n&x&4&1&b&6&e&8v&x&6&2&b&a&d&fe&x&8&2&b&d&d&6r&x&a&3&c&0&c&cn&x&c&3&c&3&c&3o
+    spring: &x&0&4&f&b&2&bP&x&0&4&f&2&4&6r&x&0&3&e&9&6&0i&x&0&3&e&0&7&bm&x&0&2&d&7&9&5a&x&0&2&c&e&b&0v&x&0&1&c&5&c&ae&x&0&1&b&c&e&5r&x&0&0&b&3&f&fa&a
+    summer: &x&f&b&e&2&0&0E&x&f&c&c&7&0&0s&x&f&d&a&c&0&0t&x&f&d&9&2&0&0a&x&f&e&7&7&0&0t&x&f&f&5&c&0&0e
+
 on first join:
     loop all players:
-        if {scoreboard::%loop-player%} is not set:
-            set {scoreboard::%loop-player%} to true
+        if {scoreboard.%loop-player%} is not set:
+            set {scoreboard.%loop-player%} to true
+
+every second:
+    loop all players:
+        if weather in "{@overworld}" is clear:
+            set {_weather} to placeholder "rs_season_smp" from loop-player
+            if time in "smp" is between 6:00 and 19:00:
+                if {_weather} is not "{@winter}" or "{@fall}":
+                    set {weather.%loop-player%} to "&e☀"
+                else:
+                    set {weather.%loop-player%} to "&7☁"
+            else:
+                set {weather.%loop-player%} to "&9☽"
+        if weather in "{@overworld}" is rain:
+            set {weather.%loop-player%} to "%{weather.%loop-player%.rain}%"
+        if weather in "{@overworld}" is thunder:
+            set {weather.%loop-player%} to "%{weather.%loop-player%.thunder}%"
+
+every 5 seconds:
+    loop all players:
+        set {_weather_rain} to placeholder "rs_season_smp" from loop-player
+        if {_weather_rain} is not "{@winter}":
+            set {weather.%loop-player%.rain} to "&b🌧"
+            wait 2 seconds
+            set {weather.%loop-player%.rain} to "&3🌧"
+        else:
+            set {weather.%loop-player%.rain} to "&b❄"
+            wait 2 seconds
+            set {weather.%loop-player%.rain} to "&3❄"
+
+every 5 seconds:
+    loop all players:
+        set {_weather_thunder} to placeholder "rs_season_smp" from loop-player
+        set {weather.%loop-player%.thunder} to "&7⛈"
+        wait 2 seconds
+        set {weather.%loop-player%.thunder} to "&8⛈"
 
 every tick:
     loop all players:
-        if {scoreboard::%loop-player%} is true:
+        if {scoreboard.%loop-player%} is true:
             if world of loop-player is "{@overworld}":
-                set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
+                set title of loop-player's scoreboard to {animation.%loop-player%.DisagioSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
-                set line 2 of loop-player's scoreboard to "&fStagione:"
+                set line 2 of loop-player's scoreboard to "&fStagione %{weather.%loop-player%}%"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&b%placeholder "player_biome_capitalized" from loop-player%"
-                set line 5 of loop-player's scoreboard to "&fBioma:"
+                set line 5 of loop-player's scoreboard to "&fBioma"
                 set line 6 of loop-player's scoreboard to ""
                 set line 7 of loop-player's scoreboard to "&a%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&b&l%placeholder "player_direction" from loop-player%&8]"
-                set line 8 of loop-player's scoreboard to "&fCoordinate:"
+                set line 8 of loop-player's scoreboard to "&fCoordinate"
                 set line 9 of loop-player's scoreboard to ""
                 set line 10 of loop-player's scoreboard to placeholder "tab_placeholder_player_empty_slots" from loop-player 
-                set line 11 of loop-player's scoreboard to "&fInventario:"
+                set line 11 of loop-player's scoreboard to "&fInventario"
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
                 set line 15 of loop-player's scoreboard to "&7%placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &b%placeholder "rs_time_smp" from loop-player%"
             else if world of loop-player is "{@nether}":
-                set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
+                set title of loop-player's scoreboard to {animation.%loop-player%.DisagioSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season_smp" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
-                set line 2 of loop-player's scoreboard to "&fStagione:"
+                set line 2 of loop-player's scoreboard to "&fStagione %{weather.%loop-player%}%"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&c%placeholder "player_biome_capitalized" from loop-player%"
-                set line 5 of loop-player's scoreboard to "&fBioma:"
+                set line 5 of loop-player's scoreboard to "&fBioma"
                 set line 6 of loop-player's scoreboard to ""
                 set line 7 of loop-player's scoreboard to "&6%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&c&l%placeholder "player_direction" from loop-player%&8]"
-                set line 8 of loop-player's scoreboard to "&fCoordinate:"
+                set line 8 of loop-player's scoreboard to "&fCoordinate"
                 set line 9 of loop-player's scoreboard to ""
                 set line 10 of loop-player's scoreboard to placeholder "tab_placeholder_player_empty_slots" from loop-player 
-                set line 11 of loop-player's scoreboard to "&fInventario:"
+                set line 11 of loop-player's scoreboard to "&fInventario"
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
                 set line 15 of loop-player's scoreboard to "&7%placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &6%placeholder "rs_time_smp" from loop-player%"
             else if world of loop-player is "{@end}":
-                set title of loop-player's scoreboard to {animation::%loop-player%::DisagioSMP}
+                set title of loop-player's scoreboard to {animation.%loop-player%.DisagioSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season_smp" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
-                set line 2 of loop-player's scoreboard to "&fStagione:"
+                set line 2 of loop-player's scoreboard to "&fStagione %{weather.%loop-player%}%"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&5%placeholder "player_biome_capitalized" from loop-player%"
-                set line 5 of loop-player's scoreboard to "&fBioma:"
+                set line 5 of loop-player's scoreboard to "&fBioma"
                 set line 6 of loop-player's scoreboard to ""
                 set line 7 of loop-player's scoreboard to "&d%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&5&l%placeholder "player_direction" from loop-player%&8]"
-                set line 8 of loop-player's scoreboard to "&fCoordinate:"
+                set line 8 of loop-player's scoreboard to "&fCoordinate"
                 set line 9 of loop-player's scoreboard to ""
                 set line 10 of loop-player's scoreboard to placeholder "tab_placeholder_player_empty_slots" from loop-player 
-                set line 11 of loop-player's scoreboard to "&fInventario:"
+                set line 11 of loop-player's scoreboard to "&fInventario"
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
@@ -74,18 +114,18 @@ every tick:
         else:
             clear scoreboard of loop-player
 
-every 1 hour: # AVVISO SCOREBOARD DISATTIVATA
+every hour: # AVVISO SCOREBOARD DISATTIVATA
     loop all players:
-        if {scoreboard::%loop-player%} is not set:
-            if {settings::%loop-player%::ServiceAlerts} is true:
+        if {scoreboard.%loop-player%} is not set:
+            if {settings.%loop-player%.ServiceAlerts} is true:
                 send "" to loop-player
-                send "{@prefix} &4&lNOTIFICA DI SERVIZIO" to loop-player
+                send "{@prefix} &4&lNOTIFICA GENERALE" to loop-player
                 send "" to loop-player
                 send "{@prefix} &cAbbiamo notato che la tua scoreboard non è attivata." to loop-player
                 send "{@prefix} &6Attivala con <ttp:&fClicca qui per attivare la scoreboard><cmd:/sb>&e&n/sb<reset> &6per avere tutte le informazioni di cui hai bisogno a vista d'occhio." to loop-player
                 send "" to loop-player
                 send "" to loop-player
-                send "{@prefix} &ePuoi disattivare questa notifica in &fLe tue impostazioni &epresso &7Il tuo profilo &7&lSMP&e, oppure cliccando &c&nqui&e." to loop-player
+                send "{@prefix} &ePuoi disattivare questa notifica in &fLe tue impostazioni &epresso &7Profilo &7&lSMP&e, oppure cliccando <cmd:/notify general>&c&nqui&e." to loop-player
                 send "" to loop-player
                 play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
 
@@ -94,27 +134,27 @@ command /sb [<offline player>]:
     trigger:
         if sender is player:
             if arg-1 is not set:
-                if {scoreboard::%player%} is not set:
-                    set {scoreboard::%player%} to true
+                if {scoreboard.%player%} is not set:
+                    set {scoreboard.%player%} to true
                     send "&aLa tua scoreboard è stata attivata."
                     play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
                     stop
                 else:
-                    delete {scoreboard::%player%}
+                    delete {scoreboard.%player%}
                     send "&cLa tua scoreboard è stata disattivata."
                     play sound "block.beacon.deactivate" with volume 1 at player for player
                     stop
             else:
                 if arg-1 is online:
                     if player has permission "sb.toggle.other":
-                        if {scoreboard::%arg-1%} is not set:
-                            set {scoreboard::%arg-1%} to true
+                        if {scoreboard.%arg-1%} is not set:
+                            set {scoreboard.%arg-1%} to true
                             send "&aLa tua scoreboard è stata attivata da &e%player%&a." to arg-1
                             send "&aScoreboard attivata per &e%arg-1%&a." to player
                             play sound "entity.player.levelup" with volume 1 and pitch 2 at arg-1 for arg-1
                             stop
                         else:
-                            delete {scoreboard::%arg-1%}
+                            delete {scoreboard.%arg-1%}
                             send "&cLa tua scoreboard è stata disattivata da &6%player%&c." to arg-1
                             send "&cScoreboard disattivata per &6%arg-1%&c." to player
                             play sound "block.beacon.deactivate" with volume 1 at arg-1 for arg-1
@@ -136,14 +176,14 @@ command /sb [<offline player>]:
                 send "&cSolo i giocatori possono gestire la propria scoreboard!"
                 stop
             else if arg-1 is online:
-                if {scoreboard::%arg-1%} is not set:
-                    set {scoreboard::%arg-1%} to true
+                if {scoreboard.%arg-1%} is not set:
+                    set {scoreboard.%arg-1%} to true
                     send "&aLa tua scoreboard è stata attivata dalla &econsole&a." to arg-1
                     send "&aScoreboard attivata per &e%arg-1%&a." to console
                     play sound "entity.player.levelup" with volume 1 and pitch 2 at arg-1 for arg-1
                     stop
                 else:
-                    delete {scoreboard::%arg-1%}
+                    delete {scoreboard.%arg-1%}
                     send "&cLa tua scoreboard è stata disattivata dalla &6console&c." to arg-1
                     send "&cScoreboard disattivata per &6%arg-1%&c." to console
                     play sound "block.beacon.deactivate" with volume 1 at arg-1 for arg-1

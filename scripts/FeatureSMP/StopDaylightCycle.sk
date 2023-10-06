@@ -1,0 +1,52 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+    
+on load:
+    if {players.online} is not set:
+        set {players.online} to 0
+    if {players.online.0} is not set:
+        set {players.online.0} to true
+
+on join:
+    add 1 to {players.online}
+    if {players.online.0} is true:
+        wait 10 ticks
+        execute console command "/rs pausetime smp"
+        send "&aHo rilevato un giocatore nel server, adesso il tempo del mondo andrà avanti." to console
+        delete {players.online.0}
+
+on quit:
+    subtract 1 from {players.online}
+    if {players.online} = 0:
+        wait 10 ticks
+        execute console command "/rs pausetime smp"
+        send "&cNon ho rilevato giocatori nel server, pertanto ho bloccato il tempo del mondo." to console
+        set {players.online.0} to true
+
+command /stop:
+    permission: admin.stop.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    trigger:
+        loop all players:
+            if {settings.%loop-player%.genre.male} is true:
+                kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lsei stato espulso&6&l."
+            else if {settings.%loop-player%.genre.female} is true:
+                kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lsei stata espulsa&6&l."
+            wait 3 seconds
+            execute console command "/minecraft:stop"
+
+# ZONA DEBUG
+command /resetplayersonline:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Azzera il numero dei giocatori online ed elimina la variabile del controllo giocatori. DA ESEGUIRE A SERVER VUOTO!!
+    executable by: player, console
+    trigger:
+        delete {players.online.0}
+        delete {players.online}
+        send "&cHo azzerato i giocatori online ed eliminato la verifica di 0 giocatori." to sender
+        stop
+
+#on unload:
+    #set {players.online} to 0
+    #set {players.online.0} to true

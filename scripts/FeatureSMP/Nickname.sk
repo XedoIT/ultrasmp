@@ -5,13 +5,15 @@ on load:
     #delete {nick_list::*} --> SOLO DEBUG
     if {nick_list::*} is not set:
         set {nick_list::*} to "&7Non ci sono soprannomi attivi."
+    if {nick.%player%} is not set:
+        set {nick.%player%} to name of player
         
 every second:
     if {nick_list::*} is not set:
         set {nick_list::*} to "&7Non ci sono soprannomi attivi."
     loop all players:
-        if {nick::%loop-player%} is not set:
-            set {nick::%loop-player%} to name of loop-player
+        if {nick.%loop-player%} is not set:
+            set {nick.%loop-player%} to name of loop-player
             set loop-player's tablist name to loop-player's name
 
 command /nick [<text>] [<text>] [<offline player>]:
@@ -44,17 +46,17 @@ command /nick [<text>] [<text>] [<offline player>]:
                 else:
                     if arg-3 is not set:
                         if player has permission "nick.set.other":
-                            if {nick::%player%} is player:
+                            if {nick.%player%} is player:
                                 if {nick_list::*} is "&7Non ci sono soprannomi attivi.":
                                     delete {nick_list::*}
-                                    set {nick::%player%} to arg-2
-                                    add {nick::%player%} to {nick_list::*}
+                                    set {nick.%player%} to arg-2
+                                    add {nick.%player%} to {nick_list::*}
                                     send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome!"
                                     play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                     stop
                                 else if {nick_list::*} doesn't contain arg-2:
-                                    set {nick::%player%} to arg-2
-                                    add {nick::%player%} to {nick_list::*}
+                                    set {nick.%player%} to arg-2
+                                    add {nick.%player%} to {nick_list::*}
                                     send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome!"
                                     play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                     stop
@@ -67,17 +69,17 @@ command /nick [<text>] [<text>] [<offline player>]:
                                 play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                                 stop
                         else:
-                            if {nick::%player%} is player:
+                            if {nick.%player%} is player:
                                 if {nick_list::*} is "&7Non ci sono soprannomi attivi.":
                                     delete {nick_list::*}
-                                    set {nick::%player%} to arg-2
-                                    add {nick::%player%} to {nick_list::*}
+                                    set {nick.%player%} to arg-2
+                                    add {nick.%player%} to {nick_list::*}
                                     send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome!"
                                     play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                     stop
                                 else if {nick_list::*} doesn't contain arg-2:
-                                    set {nick::%player%} to arg-2
-                                    add {nick::%player%} to {nick_list::*}
+                                    set {nick.%player%} to arg-2
+                                    add {nick.%player%} to {nick_list::*}
                                     send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome!"
                                     play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                     stop
@@ -91,18 +93,18 @@ command /nick [<text>] [<text>] [<offline player>]:
                                 stop
                     else:
                         if player has permission "nick.set.other":
-                            if {nick::%arg-3%} is arg-3:
+                            if {nick.%arg-3%} is arg-3:
                                 if {nick_list::*} is "&7Non ci sono soprannomi attivi.":
                                     delete {nick_list::*}
-                                    set {nick::%arg-3%} to arg-2
-                                    add {nick::%arg-3%} to {nick_list::*}
+                                    set {nick.%arg-3%} to arg-2
+                                    add {nick.%arg-3%} to {nick_list::*}
                                     send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome per &3%arg-3%&a!" to player
                                     send "{@prefix} &b%player% &ati ha impostato &3%arg-2% &acome soprannome." to arg-3
                                     play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                     stop
                                 else if {nick_list::*} doesn't contain arg-2:
-                                    set {nick::%arg-3%} to arg-2
-                                    add {nick::%arg-3%} to {nick_list::*}
+                                    set {nick.%arg-3%} to arg-2
+                                    add {nick.%arg-3%} to {nick_list::*}
                                     send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome per &3%arg-3%&a!" to player
                                     send "{@prefix} &b%player% &ati ha impostato &3%arg-2% &acome soprannome." to arg-3
                                     play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
@@ -123,25 +125,25 @@ command /nick [<text>] [<text>] [<offline player>]:
                 if arg-2 is not set:
                     if arg-3 is not set:
                         if player has permission "nick.clear.other":
-                            if {nick::%player%} is player:
+                            if {nick.%player%} is player:
                                 send "{@prefix} &cNon hai nessun soprannome impostato!"
                                 play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                                 stop
                             else:
-                                remove {nick::%player%} from {nick_list::*}
-                                set {nick::%player%} to player's display name
+                                remove {nick.%player%} from {nick_list::*}
+                                set {nick.%player%} to player's display name
                                 send "{@prefix} &aHai rimosso il tuo soprannome."
                                 play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                 send "{@prefix} &6Puoi anche rimuoverlo ad un altro giocatore con &c/nick clear <&egiocatore&c>&6."
                                 stop
                         else:
-                            if {nick::%player%} is player:
+                            if {nick.%player%} is player:
                                 send "{@prefix} &cNon hai impostato nessun soprannome!"
                                 play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                                 stop
                             else:
-                                remove {nick::%player%} from {nick_list::*}
-                                set {nick::%player%} to player's display name
+                                remove {nick.%player%} from {nick_list::*}
+                                set {nick.%player%} to player's display name
                                 send "{@prefix} &aHai rimosso il tuo soprannome."
                                 play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                 stop
@@ -152,13 +154,13 @@ command /nick [<text>] [<text>] [<offline player>]:
                             if {_arg2} is offline:
                                 send "{@prefix} &c%{_arg2}% &6è offline!"
                                 stop
-                            if {nick::%{_arg2}%} is {_arg2}:
+                            if {nick.%{_arg2}%} is {_arg2}:
                                 send "{@prefix} &6%{_arg2}% &cnon ha impostato nessun soprannome!"
                                 play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                                 stop
                             else:
-                                remove {nick::%{_arg2}%} from {nick_list::*}
-                                set {nick::%{_arg2}%} to {_arg2}'s display name
+                                remove {nick.%{_arg2}%} from {nick_list::*}
+                                set {nick.%{_arg2}%} to {_arg2}'s display name
                                 send "{@prefix} &aHai rimosso il soprannome di &b%{_arg2}%&a." to player
                                 send "{@prefix} &b%player% &aha rimosso il tuo soprannome." to {_arg2}
                                 play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
@@ -224,17 +226,17 @@ command /nick [<text>] [<text>] [<offline player>]:
                         send "{@prefix} &cSolo i giocatori possono gestire il proprio soprannome!"
                         stop
                     else:
-                        if {nick::%arg-3%} is arg-3:
+                        if {nick.%arg-3%} is arg-3:
                             if {nick_list::*} is "&7Non ci sono soprannomi attivi.":
                                 delete {nick_list::*}
-                                set {nick::%arg-3%} to arg-2
-                                add {nick::%arg-3%} to {nick_list::*}
+                                set {nick.%arg-3%} to arg-2
+                                add {nick.%arg-3%} to {nick_list::*}
                                 send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome per &3%arg-3%&a!" to console
                                 send "{@prefix} &aLa &bconsole &ati ha impostato &3%arg-2% &acome soprannome." to arg-3
                                 stop
                             else if {nick_list::*} doesn't contain arg-2:
-                                set {nick::%arg-3%} to arg-2
-                                add {nick::%arg-3%} to {nick_list::*}
+                                set {nick.%arg-3%} to arg-2
+                                add {nick.%arg-3%} to {nick_list::*}
                                 send "{@prefix} &aHai impostato &b%arg-2% &acome soprannome per &3%arg-3%&a!" to console
                                 send "{@prefix} &aLa &bconsole &ati ha impostato &3%arg-2% &acome soprannome." to arg-3
                                 stop
@@ -252,12 +254,12 @@ command /nick [<text>] [<text>] [<offline player>]:
                 else:
                     if arg-3 is not set:
                         set {_arg2} to arg-2 parsed as offline player
-                        if {nick::%{_arg2}%} is {_arg2}:
+                        if {nick.%{_arg2}%} is {_arg2}:
                             send "{@prefix} &6%{_arg2}% &cnon ha impostato nessun soprannome!"
                             stop
                         else:
-                            remove {nick::%{_arg2}%} from {nick_list::*}
-                            set {nick::%{_arg2}%} to {_arg2}'s display name
+                            remove {nick.%{_arg2}%} from {nick_list::*}
+                            set {nick.%{_arg2}%} to {_arg2}'s display name
                             send "{@prefix} &aHai rimosso il soprannome di &b%{_arg2}%&a." to console
                             send "{@prefix} &aLa &bconsole &aha rimosso il tuo soprannome." to {_arg2}
                             stop

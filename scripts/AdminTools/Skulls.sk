@@ -1,31 +1,27 @@
 options:
-	prefix: &8[&9&lSKULLS&8]
-	error_prefix: &8[&4&lSKULLS&8]
+    prefix: &8[&9&lSKULLS&8]
+    error_prefix: &8[&4&lSKULLS&8]
 
 command /skull [<offline player>]:
-	description: Ottieni in modo facile la testa di qualsiasi giocatore che abbia Minecraft Premium.
-	permission: skull.use
-	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
-	usage: &cUtilizzo: &6/skull &e<giocatore>
-	executable by: player, console
-	trigger:
-		if sender is console:
-			if arg-1 is not set:
-				send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori."
-				stop
-			else:
-				send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori."
-				stop
-		else:
-			if player has enough space for 1 stone:
-				if arg-1 is not set:
-					send "{@error_prefix} &cSpecifica un giocatore da cui ottenere la testa!"
-					stop
-				else:
-					give arg-1's skull to player
-					send "{@prefix} &aHai ottenuto la testa di &b%arg-1%&a."
-					log "[SKULL] %player% ha richiesto la testa di ""%arg-1%""" to "Skull.log"
-					stop
-			else:
-				send "{@error_prefix} &cIl tuo inventario è pieno, pertanto non ho potuto darti la testa che hai richiesto!"
-				stop
+    description: Ottieni in modo facile la testa di qualsiasi giocatore che abbia Minecraft Premium.
+    permission: skull.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    usage: &cUtilizzo: &6/skull &e<giocatore>
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if player has enough space for 1 stone:
+                if arg-1 is not set:
+                    send "{@error_prefix} &cSpecifica un giocatore da cui ottenere la testa!"
+                    stop
+                else:
+                    give arg-1's skull to player
+                    send "{@prefix} &aHai ottenuto la testa di &b%arg-1%&a."
+                    log "[SKULL] %player% ha richiesto la testa di ""%arg-1%""" to "Skull.log"
+                    stop
+            else:
+                send "{@error_prefix} &cIl tuo inventario è pieno, pertanto non ho potuto darti la testa che hai richiesto!"
+                stop
+        else:
+            send "{@error_prefix} &cQuesto comando può essere eseguito solo dai giocatori."
+            stop

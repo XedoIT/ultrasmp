@@ -1,45 +1,6 @@
 on join:
-    if {settings::%player%::genre} is not set:
+    if {settings.%player%.genre} is not set:
         GenreSelectorIntroNO(player)
-
-function GenreSelectorIntroNO(p: player):
-    set {_gui} to a new chest inventory with 4 rows named "E adesso... scegli il tuo sesso!"
-    set slot 11 of {_gui} to light blue dye named "&9Maschio" with lore "&7Clicca per selezionare!", "&f", "&7Ciò farà sì che il server si rivolgerà" and "&7a te alla forma maschile."
-    set slot 15 of {_gui} to pink dye named "&dFemmina" with lore "&7Clicca per selezionare!", "&f", "&7Ciò farà sì che il server si rivolgerà" and "&7a te alla forma femminile."
-    set slot 31 of {_gui} to bedrock named "&cGioca!" with lore "&7Non puoi chiudere questa GUI se" and "&7prima non scegli il tuo sesso."
-    open {_gui} to {_p}
-function GenreSelectorIntroYES(p: player):
-    set {_gui} to a new chest inventory with 4 rows named "E adesso... scegli il tuo sesso! "
-    set slot 11 of {_gui} to light blue dye named "&9Maschio" with lore "&7Clicca per selezionare!", "&f", "&7Ciò farà sì che il server si rivolgerà" and "&7a te alla forma maschile."
-    set slot 15 of {_gui} to pink dye named "&dFemmina" with lore "&7Clicca per selezionare!", "&f", "&7Ciò farà sì che il server si rivolgerà" and "&7a te alla forma femminile."
-    set slot 31 of {_gui} to grass block named "&aGioca!" with lore "&7Chiudi questa GUI e inizia" and "&7la tua avventura nell'SMP."
-    open {_gui} to {_p}
-
-function GenreSelectorMale(p: player):
-    if {settings::%{_p}%::genre::male} is not set:
-        set {settings::%{_p}%::genre::male} to true
-        set {settings::%{_p}%::genre::male::sel} to "&aSELEZIONATO!"
-        set {settings::%{_p}%::genre::female::sel} to "&eClicca per selezionare!"
-        set {settings::%{_p}%::genre} to true
-        delete {settings::%{_p}%::genre::female}
-        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-        send "&9Da ora tutti i tuoi messaggi saranno rivolti al maschile!" to {_p}
-    else if {settings::%{_p}%::genre::male} is true:
-        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at {_p} for {_p}
-        send "&cSei già identificato come un maschio!" to {_p}
-
-function GenreSelectorFemale(p: player):
-    if {settings::%{_p}%::genre::female} is not set:
-        set {settings::%{_p}%::genre::female} to true
-        set {settings::%{_p}%::genre::female::sel} to "&aSELEZIONATO!"
-        set {settings::%{_p}%::genre::male::sel} to "&eClicca per selezionare!"
-        set {settings::%{_p}%::genre} to true
-        delete {settings::%{_p}%::genre::male}
-        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-        send "&dDa ora tutti i tuoi messaggi saranno rivolti al femminile!" to {_p}
-    else if {settings::%{_p}%::genre::female} is true:
-        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at {_p} for {_p}
-        send "&cSei già identificata come una femmina!" to {_p}
 
 on inventory click:
     if name of event-inventory is "E adesso... scegli il tuo sesso!":
@@ -55,9 +16,9 @@ on inventory click:
             GenreSelectorIntroYES(player)
         else if index of event-slot is 31:
             cancel event
-            if {settings::%player%::genre} is not set:
-                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            if {settings.%player%.genre} is not set:
                 send "&cDevi prima selezionare il tuo sesso!"
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
 
     else if name of event-inventory is "E adesso... scegli il tuo sesso! ":
         if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34 or 35:
@@ -74,11 +35,11 @@ on inventory click:
 
 on inventory close:
     if name of event-inventory is "E adesso... scegli il tuo sesso!":
-        if {settings::%player%::genre} is not set:
+        if {settings.%player%.genre} is not set:
             wait 1 tick
             GenreSelectorIntroNO(player)
-            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
             send "&cDevi prima selezionare il tuo sesso!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
     else if name of event-inventory is "E adesso... scegli il tuo sesso! ":
         send "&aBuon divertimento nell'SMP, &b%player%&a! L'avventura ti aspetta!"
         play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player

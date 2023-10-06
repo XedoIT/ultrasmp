@@ -1,0 +1,16 @@
+options:
+    armor: {Enchantments:[{id:""minecraft:protection"",lvl:100s},{id:""minecraft:fire_protection"",lvl:100s},{id:""minecraft:feather_falling"",lvl:100s},{id:""minecraft:blast_protection"",lvl:100s},{id:""minecraft:projectile_protection"",lvl:100s},{id:""minecraft:respiration"",lvl:100s},{id:""minecraft:aqua_affinity"",lvl:100s},{id:""minecraft:thorns"",lvl:100s},{id:""minecraft:depth_strider"",lvl:100s},{id:""minecraft:soul_speed"",lvl:100s},{id:""minecraft:swift_sneak"",lvl:100s}]}
+    sword: {Enchantments:[{id:""minecraft:sharpness"",lvl:100s},{id:""minecraft:smite"",lvl:100s},{id:""minecraft:bane_of_arthropods"",lvl:100s},{id:""minecraft:knockback"",lvl:5s},{id:""minecraft:fire_aspect"",lvl:100s},{id:""minecraft:looting"",lvl:100s},{id:""minecraft:sweeping"",lvl:100s},{id:""minecraft:unbreaking"",lvl:100s}]}
+    bow: {Enchantments:[{id:""minecraft:unbreaking"",lvl:100s},{id:""minecraft:power"",lvl:100s},{id:""minecraft:punch"",lvl:100s},{id:""minecraft:flame"",lvl:100s},{id:""minecraft:infinity"",lvl:100s}]}
+command /enderdragon:
+    trigger:
+        give 1 netherite helmet with nbt compound from "{@armor}" to player
+        give 1 netherite chestplate with nbt compound from "{@armor}" to player
+        give 1 netherite leggings with nbt compound from "{@armor}" to player
+        give 1 netherite boots with nbt compound from "{@armor}" to player
+        give 1 netherite sword with nbt compound from "{@sword}" to player
+        give 1 bow with nbt compound from "{@bow}" to player
+        give 16 golden apple to player
+        give 2 enchanted golden apple to player
+        give 1 arrow to player
+        stop

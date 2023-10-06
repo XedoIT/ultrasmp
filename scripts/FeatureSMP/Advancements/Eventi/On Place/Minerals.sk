@@ -1,0 +1,137 @@
+on break:
+    if player's gamemode is survival or adventure:
+# CARBONE
+        if event-block is coal ore:
+            add 1 to {minerals.%player%.broke.coal_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate coal ore:
+            add 1 to {minerals.%player%.broke.deepslate_coal_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+
+# FERRO
+        else if event-block is iron ore:
+            add 1 to {minerals.%player%.broke.iron_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate iron ore:
+            add 1 to {minerals.%player%.broke.deepslate_iron_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is raw iron block:
+            add 1 to {minerals.%player%.broke.raw_iron_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+            
+# RAME
+        else if event-block is copper ore:
+            add 1 to {minerals.%player%.broke.copper_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate copper ore:
+            add 1 to {minerals.%player%.broke.deepslate_copper_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is raw copper block:
+            add 1 to {minerals.%player%.broke.raw_copper_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+            
+# ORO
+        else if event-block is gold ore:
+            add 1 to {minerals.%player%.broke.gold_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate gold ore:
+            add 1 to {minerals.%player%.broke.deepslate_gold_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is raw gold block:
+            add 1 to {minerals.%player%.broke.raw_gold_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+            
+# REDSTONE
+        else if event-block is redstone ore:
+            add 1 to {minerals.%player%.broke.redstone_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate redstone ore:
+            add 1 to {minerals.%player%.broke.deepslate_redstone_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+            
+# SMERALDO
+        else if event-block is emerald ore:
+            add 1 to {minerals.%player%.broke.emerald_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate emerald ore:
+            add 1 to {minerals.%player%.broke.deepslate_emerald_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+            
+# LAPISLAZZULI
+        else if event-block is lapis ore:
+            add 1 to {minerals.%player%.broke.lapis_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate lapis ore:
+            add 1 to {minerals.%player%.broke.deepslate_lapis_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+            
+# DIAMANTE
+        else if event-block is diamond ore:
+            add 1 to {minerals.%player%.broke.diamond_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is deepslate diamond ore:
+            add 1 to {minerals.%player%.broke.deepslate_diamond_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+
+# ORO DEL NETHER
+        else if event-block is nether gold ore:
+            add 1 to {minerals.%player%.broke.nether_gold_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+
+# QUARZO DEL NETHER
+        else if event-block is nether quartz ore:
+            add 1 to {minerals.%player%.broke.nether_quartz_ore}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+
+# DETRITI ANTICHI
+        else if event-block is ancient debris:
+            add 1 to {minerals.%player%.broke.ancient_debris}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+
+# AMETISTA
+        else if event-block is amethyst block:
+            add 1 to {minerals.%player%.broke.amethyst_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is budding amethyst:
+            add 1 to {minerals.%player%.broke.budding_amethyst}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is small amethyst bud:
+            add 1 to {minerals.%player%.broke.small_amethyst_bud}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is medium amethyst bud:
+            add 1 to {minerals.%player%.broke.medium_amethyst_bud}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is large amethyst bud:
+            add 1 to {minerals.%player%.broke.large_amethyst_bud}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}
+        else if event-block is amethyst cluster:
+            add 1 to {minerals.%player%.broke.amethyst_cluster}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {minerals.%player%.total_broken}

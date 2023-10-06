@@ -41,10 +41,10 @@ command /msg [<offline player>] [<text>]:
                 stop
                 
             else if arg-1 is player:
-                if {settings::%player%::genre::male} is true:
+                if {settings.%player%.genre.male} is true:
                     send "&cChe senso ha scrivere a te stesso?"
                     stop
-                else if {settings::%player%::genre::female} is true:
+                else if {settings.%player%.genre.female} is true:
                     send "&cChe senso ha scrivere a te stessa?"
                     stop
                 

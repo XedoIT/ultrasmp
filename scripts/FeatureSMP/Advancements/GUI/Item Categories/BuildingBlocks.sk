@@ -4,10 +4,10 @@ options:
     error_sound: entity.enderman.teleport
 
 function openBuildStatsGui(p: player):
-    if {settings::%{_p}%::glasspanes} is true:
+    if {settings.%{_p}%.glasspanes} is true:
         set {_gui} to a new chest inventory with 5 rows with name "Blocchi da costruzione"
-        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 35, 36, 37, 38, 39, 42, 43 and 44 of {_gui} to black stained glass pane named ""
-        set slot 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named ""
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 35, 36, 37, 38, 39, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
+        set slot 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
         set slot 10 of {_gui} to oak log named "&fLegno" with lore "&7Visualizza le tue statistiche riguardo", "&7ai vari blocchi di &alegno&7.", "&f" and "{@more_info}"
         set slot 11 of {_gui} to cobblestone named "&fPietra" with lore "&7Visualizza le tue statistiche riguardo", "&7ai vari blocchi di &apietra&7.", "&f" and "{@more_info}"
         set slot 12 of {_gui} to cobbled deepslate named "&fArdesia profonda" with lore "&7Visualizza le tue statistiche riguardo", "&7ai vari blocchi di &aardesia", "&aprofonda&7.", "&f" and "{@more_info}"

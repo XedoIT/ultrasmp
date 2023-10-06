@@ -1,5 +1,5 @@
-#  Disagio SMP: 68% completato
-  Di seguito, tutte le modifiche effettuate/introdotte durante lo sviluppo del server e delle sue funzionalità:
+#  Disagio SMP: 70% completato
+  Di seguito troverai il changelog della Disagio SMP fin dal primo giorno di sviluppo!
   
 ### - GENNAIO 2022 -
 - Creazione server e configurazione primi plugin
@@ -124,3 +124,10 @@
 
 ### - AGOSTO 2023 -
 - Aggiunte le notifiche personali nelle impostazioni del giocatore.
+
+### - SETTEMBRE 2023 -
+- Rivisitate alcune delle variabili presenti in tutti gli script.
+- Eliminate molte variabili che potevano appesantire il server.
+- Modificati alcuni script.
+- Migliorata la raccolta di informazioni delle statistiche dei blocchi distrutti e piazzati.
+- Ottimizzazione delle prestazioni.

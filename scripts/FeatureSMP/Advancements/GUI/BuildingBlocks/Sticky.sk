@@ -1,17 +1,17 @@
 function openStickyStatsGui(p: player):
-    if {settings::%{_p}%::glasspanes} is true:
+    if {settings.%{_p}%.glasspanes} is true:
         set {_gui} to a new chest inventory with 5 rows with name "Blocchi appiccicosi"
-        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 42, 43 and 44 of {_gui} to black stained glass pane named ""
-        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 22, 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named ""
-        set slot 21 of {_gui} to slime block named "&fBlocco di slime" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::slime_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::slime_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::slime_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::slime_block}%"
-        set slot 23 of {_gui} to honey block named "&fBlocco di miele" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::honey_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::honey_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::honey_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::honey_block}%"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 22, 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
+        set slot 21 of {_gui} to slime block named "&fBlocco di slime" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::slime_block}%", " &7Piazzati: &f%{build::%{_p}%::placed::slime_block}%", " &7Craftati: &f%{build::%{_p}%::crafted::slime_block}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::slime_block}%"
+        set slot 23 of {_gui} to honey block named "&fBlocco di miele" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::honey_block}%", " &7Piazzati: &f%{build::%{_p}%::placed::honey_block}%", " &7Craftati: &f%{build::%{_p}%::crafted::honey_block}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::honey_block}%"
         set slot 40 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Blocchi da costruzione"
         set slot 41 of {_gui} to paper named "&aStatistiche" with lore "&7Torna alla pagina principale" and "&7delle tue statistiche."
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 4 rows with name "Blocchi appiccicosi "
-        set slot 12 of {_gui} to slime block named "&fBlocco di slime" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::slime_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::slime_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::slime_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::slime_block}%"
-        set slot 14 of {_gui} to honey block named "&fBlocco di miele" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::honey_block}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::honey_block}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::honey_block}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::honey_block}%"
+        set slot 12 of {_gui} to slime block named "&fBlocco di slime" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::slime_block}%", " &7Piazzati: &f%{build::%{_p}%::placed::slime_block}%", " &7Craftati: &f%{build::%{_p}%::crafted::slime_block}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::slime_block}%"
+        set slot 14 of {_gui} to honey block named "&fBlocco di miele" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::honey_block}%", " &7Piazzati: &f%{build::%{_p}%::placed::honey_block}%", " &7Craftati: &f%{build::%{_p}%::crafted::honey_block}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::honey_block}%"
         set slot 31 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Blocchi da costruzione"
         set slot 32 of {_gui} to paper named "&aStatistiche" with lore "&7Torna alla pagina principale" and "&7delle tue statistiche."
         open {_gui} to {_p}

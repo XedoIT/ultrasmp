@@ -1,19 +1,33 @@
 options:
     prefix: &6[&a&lGM&6]
 
+on load:
+    if gamemode of player is survival:
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fSopravvivenza"
+    else if gamemode of player is creative:
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fCreativa"
+    else if gamemode of player is adventure:
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fAvventura"
+    else if gamemode of player is spectator:
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fSpettatore"
+
 on join:
     if gamemode of player is survival:
-        if {gm::%player%::status} is not set:
-            set {gm::%player%::status} to "&fSopravvivenza"
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fSopravvivenza"
     else if gamemode of player is creative:
-        if {gm::%player%::status} is not set:
-            set {gm::%player%::status} to "&fCreativa"
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fCreativa"
     else if gamemode of player is adventure:
-        if {gm::%player%::status} is not set:
-            set {gm::%player%::status} to "&fAvventura"
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fAvventura"
     else if gamemode of player is spectator:
-        if {gm::%player%::status} is not set:
-            set {gm::%player%::status} to "&fSpettatore"
+        if {gm.%player%.status} is not set:
+            set {gm.%player%.status} to "&fSpettatore"
         
 command /gm [<text>] [<offline player>]:
     permission: gm.use
@@ -35,11 +49,11 @@ command /gm [<text>] [<offline player>]:
                 if arg-2 is not set:
                     if gamemode of player is not survival:
                         set gamemode of player to survival
-                        set {gm::%player%::status} to "&fSopravvivenza"
+                        set {gm.%player%.status} to "&fSopravvivenza"
                         set player's flight mode to false
-                        set {fly::%player%} to false
-                        set {fly::%player%::status} to "&cNo"
-                        delete {fly::%player%::ab}
+                        set {fly.%player%} to false
+                        set {fly.%player%.status} to "&cNo"
+                        delete {fly.%player%.ab}
                         send "{@prefix} &aSei in modalità &csopravvivenza&a."
                         stop
                     else:
@@ -54,11 +68,11 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not survival:
                             set gamemode of arg-2 to survival
-                            set {gm::%arg-2%::status} to "&fSopravvivenza"
+                            set {gm.%arg-2%.status} to "&fSopravvivenza"
                             set arg-2's flight mode to false
-                            set {fly::%arg-2%} to false
-                            set {fly::%arg-2%::status} to "&cNo"
-                            delete {fly::%arg-2%::ab}
+                            set {fly.%arg-2%} to false
+                            set {fly.%arg-2%.status} to "&cNo"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to player
                             send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-2
                             stop
@@ -71,11 +85,11 @@ command /gm [<text>] [<offline player>]:
                 if arg-2 is not set:
                     if gamemode of player is not creative:
                         set gamemode of player to creative
-                        set {gm::%player%::status} to "&fCreativa"
+                        set {gm.%player%.status} to "&fCreativa"
                         set player's flight mode to true
-                        set {fly::%player%} to true
-                        set {fly::%player%::status} to "&aSì"
-                        delete {fly::%player%::ab}
+                        set {fly.%player%} to true
+                        set {fly.%player%.status} to "&aSì"
+                        delete {fly.%player%.ab}
                         send "{@prefix} &aSei in modalità &ccreativa&a."
                         stop
                     else:
@@ -90,11 +104,11 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not creative:
                             set gamemode of arg-2 to creative
-                            set {gm::%arg-2%::status} to "&fCreativa"
+                            set {gm.%arg-2%.status} to "&fCreativa"
                             set arg-2's flight mode to true
-                            set {fly::%arg-2%} to true
-                            set {fly::%arg-2%::status} to "&aSì"
-                            delete {fly::%arg-2%::ab}
+                            set {fly.%arg-2%} to true
+                            set {fly.%arg-2%.status} to "&aSì"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to player
                             send "{@prefix} &aSei in modalità &ccreativa&a." to arg-2
                             stop
@@ -107,11 +121,11 @@ command /gm [<text>] [<offline player>]:
                 if arg-2 is not set:
                     if gamemode of player is not adventure:
                         set gamemode of player to adventure
-                        set {gm::%player%::status} to "&fAvventura"
+                        set {gm.%player%.status} to "&fAvventura"
                         set player's flight mode to false
-                        set {fly::%player%} to false
-                        set {fly::%player%::status} to "&cNo"
-                        delete {fly::%player%::ab}
+                        set {fly.%player%} to false
+                        set {fly.%player%.status} to "&cNo"
+                        delete {fly.%player%.ab}
                         send "{@prefix} &aSei in modalità &cavventura&a."
                         stop
                     else:
@@ -126,11 +140,11 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not adventure:
                             set gamemode of arg-2 to adventure
-                            set {gm::%arg-2%::status} to "&fAvventura"
+                            set {gm.%arg-2%.status} to "&fAvventura"
                             set arg-2's flight mode to false
-                            set {fly::%arg-2%} to false
-                            set {fly::%arg-2%::status} to "&cNo"
-                            delete {fly::%arg-2%::ab}
+                            set {fly.%arg-2%} to false
+                            set {fly.%arg-2%.status} to "&cNo"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
                             send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
                             stop
@@ -143,9 +157,9 @@ command /gm [<text>] [<offline player>]:
                 if arg-2 is not set:
                     if gamemode of player is not spectator:
                         set gamemode of player to spectator
-                        set {gm::%player%::status} to "&fSpettatore"
-                        set {fly::%player%::status} to "&aSì"
-                        delete {fly::%player%::ab}
+                        set {gm.%player%.status} to "&fSpettatore"
+                        set {fly.%player%.status} to "&aSì"
+                        delete {fly.%player%.ab}
                         send "{@prefix} &aSei in modalità &cspettatore&a."
                         stop
                     else:
@@ -160,9 +174,9 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not spectator:
                             set gamemode of arg-2 to spectator
-                            set {gm::%arg-2%::status} to "&fSpettatore"
-                            set {fly::%arg-2%::status} to "&aSì"
-                            delete {fly::%arg-2%::ab}
+                            set {gm.%arg-2%.status} to "&fSpettatore"
+                            set {fly.%arg-2%.status} to "&aSì"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
                             send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
                             stop
@@ -200,11 +214,11 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not survival:
                             set gamemode of arg-2 to survival
-                            set {gm::%arg-2%::status} to "&fSopravvivenza"
+                            set {gm.%arg-2%.status} to "&fSopravvivenza"
                             set arg-2's flight mode to false
-                            set {fly::%arg-2%} to false
-                            set {fly::%arg-2%::status} to "&cNo"
-                            delete {fly::%arg-2%::ab}
+                            set {fly.%arg-2%} to false
+                            set {fly.%arg-2%.status} to "&cNo"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to console
                             send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-2
                             stop
@@ -224,11 +238,11 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not creative:
                             set gamemode of arg-2 to creative
-                            set {gm::%arg-2%::status} to "&fCreativa"
+                            set {gm.%arg-2%.status} to "&fCreativa"
                             set arg-2's flight mode to true
-                            set {fly::%arg-2%} to true
-                            set {fly::%arg-2%::status} to "&aSì"
-                            delete {fly::%arg-2%::ab}
+                            set {fly.%arg-2%} to true
+                            set {fly.%arg-2%.status} to "&aSì"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to console
                             send "{@prefix} &aSei in modalità &ccreativa&a." to arg-2
                             stop
@@ -248,11 +262,11 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not adventure:
                             set gamemode of arg-2 to adventure
-                            set {gm::%arg-2%::status} to "&fAvventura"
+                            set {gm.%arg-2%.status} to "&fAvventura"
                             set arg-2's flight mode to false
-                            set {fly::%arg-2%} to false
-                            set {fly::%arg-2%::status} to "&cNo"
-                            delete {fly::%arg-2%::ab}
+                            set {fly.%arg-2%} to false
+                            set {fly.%arg-2%.status} to "&cNo"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
                             send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
                             stop
@@ -272,9 +286,9 @@ command /gm [<text>] [<offline player>]:
                     else:
                         if gamemode of arg-2 is not spectator:
                             set gamemode of arg-2 to spectator
-                            set {gm::%arg-2%::status} to "&fSpettatore"
-                            set {fly::%arg-2%::status} to "&aSì"
-                            delete {fly::%arg-2%::ab}
+                            set {gm.%arg-2%.status} to "&fSpettatore"
+                            set {fly.%arg-2%.status} to "&aSì"
+                            delete {fly.%arg-2%.ab}
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
                             send "{@prefix} &aSei in modalità &cavventura&a." to arg-2
                             stop
@@ -306,11 +320,11 @@ command /gms [<offline player>]:
                 else:
                     if gamemode of arg-1 is not survival:
                         set gamemode of arg-1 to survival
-                        set {gm::%arg-1%::status} to "&fSopravvivenza"
+                        set {gm.%arg-1%.status} to "&fSopravvivenza"
                         set arg-1's flight mode to false
-                        delete {fly::%arg-1%}
-                        set {fly::%arg-1%::status} to "&cNo"
-                        delete {fly::%arg-1%::ab}
+                        delete {fly.%arg-1%}
+                        set {fly.%arg-1%.status} to "&cNo"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to player
                         send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-1
                         stop
@@ -321,11 +335,11 @@ command /gms [<offline player>]:
             else:
                 if gamemode of player is not survival:
                     set gamemode of player to survival
-                    set {gm::%player%::status} to "&fSopravvivenza"
+                    set {gm.%player%.status} to "&fSopravvivenza"
                     set player's flight mode to false
-                    delete {fly::%player%}
-                    set {fly::%player%::status} to "&cNo"
-                    delete {fly::%player%::ab}
+                    delete {fly.%player%}
+                    set {fly.%player%.status} to "&cNo"
+                    delete {fly.%player%.ab}
                     send "{@prefix} &aSei in modalità &csopravvivenza&a."
                     stop
                 else:
@@ -340,11 +354,11 @@ command /gms [<offline player>]:
                 else:
                     if gamemode of arg-1 is not survival:
                         set gamemode of arg-1 to survival
-                        set {gm::%arg-1%::status} to "&fSopravvivenza"
+                        set {gm.%arg-1%.status} to "&fSopravvivenza"
                         set arg-1's flight mode to false
-                        delete {fly::%arg-1%}
-                        set {fly::%arg-1%::status} to "&cNo"
-                        delete {fly::%arg-1%::ab}
+                        delete {fly.%arg-1%}
+                        set {fly.%arg-1%.status} to "&cNo"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to console
                         send "{@prefix} &aSei in modalità &csopravvivenza&a." to arg-1
                         stop
@@ -369,11 +383,11 @@ command /gmc [<offline player>]:
                 else:
                     if gamemode of arg-1 is not creative:
                         set gamemode of arg-1 to creative
-                        set {gm::%arg-1%::status} to "&fCreativa"
+                        set {gm.%arg-1%.status} to "&fCreativa"
                         set arg-1's flight mode to true
-                        set {fly::%arg-1%} to true
-                        set {fly::%arg-1%::status} to "&aSì"
-                        delete {fly::%arg-1%::ab}
+                        set {fly.%arg-1%} to true
+                        set {fly.%arg-1%.status} to "&aSì"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to player
                         send "{@prefix} &aSei in modalità &ccreativa&a." to arg-1
                         stop
@@ -384,11 +398,11 @@ command /gmc [<offline player>]:
             else:
                 if gamemode of player is not creative:
                     set gamemode of player to creative
-                    set {gm::%player%::status} to "&fCreativa"
+                    set {gm.%player%.status} to "&fCreativa"
                     set player's flight mode to true
-                    set {fly::%player%} to true
-                    set {fly::%player%::status} to "&aSì"
-                    delete {fly::%player%::ab}
+                    set {fly.%player%} to true
+                    set {fly.%player%.status} to "&aSì"
+                    delete {fly.%player%.ab}
                     send "{@prefix} &aSei in modalità &ccreativa&a."
                     stop
                 else:
@@ -403,11 +417,11 @@ command /gmc [<offline player>]:
                 else:
                     if gamemode of arg-1 is not creative:
                         set gamemode of arg-1 to creative
-                        set {gm::%arg-1%::status} to "&fCreativa"
+                        set {gm.%arg-1%.status} to "&fCreativa"
                         set arg-1's flight mode to true
-                        set {fly::%arg-1%} to true
-                        set {fly::%arg-1%::status} to "&aSì"
-                        delete {fly::%arg-1%::ab}
+                        set {fly.%arg-1%} to true
+                        set {fly.%arg-1%.status} to "&aSì"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to console
                         send "{@prefix} &aSei in modalità &ccreativa&a." to arg-1
                         stop
@@ -432,11 +446,11 @@ command /gma [<offline player>]:
                 else:
                     if gamemode of arg-1 is not adventure:
                         set gamemode of arg-1 to adventure
-                        set {gm::%arg-1%::status} to "&fAvventura"
+                        set {gm.%arg-1%.status} to "&fAvventura"
                         set arg-1's flight mode to false
-                        delete {fly::%arg-1%}
-                        set {fly::%arg-1%::status} to "&cNo"
-                        delete {fly::%arg-1%::ab}
+                        delete {fly.%arg-1%}
+                        set {fly.%arg-1%.status} to "&cNo"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to player
                         send "{@prefix} &aSei in modalità &cavventura&a." to arg-1
                         stop
@@ -447,11 +461,11 @@ command /gma [<offline player>]:
             else:
                 if gamemode of player is not adventure:
                     set gamemode of player to adventure
-                    set {gm::%player%::status} to "&fAvventura"
+                    set {gm.%player%.status} to "&fAvventura"
                     set player's flight mode to false
-                    delete {fly::%player%}
-                    set {fly::%player%::status} to "&cNo"
-                    delete {fly::%player%::ab}
+                    delete {fly.%player%}
+                    set {fly.%player%.status} to "&cNo"
+                    delete {fly.%player%.ab}
                     send "{@prefix} &aSei in modalità &cavventura&a."
                     stop
                 else:
@@ -466,11 +480,11 @@ command /gma [<offline player>]:
                 else:
                     if gamemode of arg-1 is not adventure:
                         set gamemode of arg-1 to adventure
-                        set {gm::%arg-1%::status} to "&fAvventura"
+                        set {gm.%arg-1%.status} to "&fAvventura"
                         set arg-1's flight mode to false
-                        delete {fly::%arg-1%}
-                        set {fly::%arg-1%::status} to "&cNo"
-                        delete {fly::%arg-1%::ab}
+                        delete {fly.%arg-1%}
+                        set {fly.%arg-1%.status} to "&cNo"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to console
                         send "{@prefix} &aSei in modalità &cavventura&a." to arg-1
                         stop
@@ -495,9 +509,9 @@ command /gmsp [<offline player>]:
                 else:
                     if gamemode of arg-1 is not spectator:
                         set gamemode of arg-1 to spectator
-                        set {gm::%arg-1%::status} to "&fSpettatore"
-                        set {fly::%arg-1%::status} to "&aSì"
-                        delete {fly::%arg-1%::ab}
+                        set {gm.%arg-1%.status} to "&fSpettatore"
+                        set {fly.%arg-1%.status} to "&aSì"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to player
                         send "{@prefix} &aSei in modalità &cspettatore&a." to arg-1
                         stop
@@ -508,9 +522,9 @@ command /gmsp [<offline player>]:
             else:
                 if gamemode of player is not spectator:
                     set gamemode of player to spectator
-                    set {gm::%player%::status} to "&fSpettatore"
-                    set {fly::%player%::status} to "&aSì"
-                    delete {fly::%player%::ab}
+                    set {gm.%player%.status} to "&fSpettatore"
+                    set {fly.%player%.status} to "&aSì"
+                    delete {fly.%player%.ab}
                     send "{@prefix} &aSei in modalità &cspettatore&a."
                     stop
                 else:
@@ -525,9 +539,9 @@ command /gmsp [<offline player>]:
                 else:
                     if gamemode of arg-1 is not spectator:
                         set gamemode of arg-1 to spectator
-                        set {gm::%arg-1%::status} to "&fSpettatore"
-                        set {fly::%arg-1%::status} to "&aSì"
-                        delete {fly::%arg-1%::ab}
+                        set {gm.%arg-1%.status} to "&fSpettatore"
+                        set {fly.%arg-1%.status} to "&aSì"
+                        delete {fly.%arg-1%.ab}
                         send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to console
                         send "{@prefix} &aSei in modalità &cspettatore&a." to arg-1
                         stop

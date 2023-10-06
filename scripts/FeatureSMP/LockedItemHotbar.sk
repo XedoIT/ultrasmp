@@ -22,17 +22,17 @@ on inventory click:
     if click type is number key:
         if event-slot is not 8:
             if event-slot is air:
-                set {noswap::%player%} to air
+                set {noswap.%player%} to air
             else:
-                set {noswap::%player%} to event-item
+                set {noswap.%player%} to event-item
             wait 1 tick
             if event-item is nether star named "&eProfilo SMP &7(Click destro)":
-                set event-slot to {noswap::%player%}
+                set event-slot to {noswap.%player%}
                 set slot 8 of player's inventory to nether star named "&eProfilo SMP &7(Click destro)"
         if event-slot is 8:
             cancel event
         if cursor slot of player is nether star named "&eProfilo SMP &7(Click destro)":
-            set cursor slot of player to {noswap::%player%}
+            set cursor slot of player to {noswap.%player%}
             set slot 8 of player's inventory to nether star named "&eProfilo SMP &7(Click destro)"
 
 on drop:

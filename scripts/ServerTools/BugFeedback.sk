@@ -23,6 +23,17 @@ command /bug [<text>]:
 				send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log"
 				stop
 
+
+#every 45 minutes:
+    #loop all players:
+        #send "&c&lHai trovato qualche bug?" to loop-player
+        #send "&c&lSegnalalo con &6/bug &c&lper far sì che venga risolto al più presto." to loop-player
+        #play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
+
+on tab complete of "/bug":
+	set tab completion for position 1 to "[<bug>]"
+
+
 command /feedback [<text>]:
 	description: Aiuta nello sviluppo del server dando consigli ai developer.
 	executable by: player, console
@@ -47,3 +58,12 @@ command /feedback [<text>]:
 				send "&a&lAbbiamo trasmesso la tua opinione al server. Grazie mille per l'aiuto!"
 				send "&ePuoi trovare i le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
 				stop
+
+#every 50 minutes:
+    #loop all players:
+        #send "&c&lVuoi suggerire qualche modifica?" to loop-player
+        #send "&c&lUtilizza &6/feedback &c&lper comunicarla a Xedo e, magari, renderla effettiva." to loop-player
+        #play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
+
+on tab complete of "/feedback":
+	set tab completion for position 1 to "[<la tua opinione>]"

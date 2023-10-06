@@ -1,0 +1,36 @@
+# Questo file non è uno script, ma semplicemente una guida sulle parole predefinite quando vengono utilizzare negli script che le richiedono.
+
+# ATTENZIONE!! 
+# Non abilitare questo script!
+
+options:
+# IL PREFIX PREDEFINITO
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+# I PRINCIPALI SUONI
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+# COMANDO SCONOSCIUTO DELL'SMP
+    'unknown_command' o 'permission_message': &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+
+# PERMESSO DI DEBUG
+    permission: debug.commands
+
+# ERRORE UTILIZZO CONSOLE PREDEFINITO (da ignorare se in uno script è richiesta una funzionalità particolare, i.e. GamemodeCommands.sk)
+    send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+
+# GIOCATORE OFFLINE
+    send "{@prefix} &6%player% &cè offline."
+
+# SEPARATORI CATEGORIE/SEZIONE
+    # [nome categoria/sezione]
+
+
+
+# SISTEMA IMPEDIMENTO AVVIO SCRIPT
+on load:
+    send "{@prefix} &c&lÈ stato rilevato che lo script &6%script% &c&lè stato abilitato."
+    send "{@prefix} &cDisattivazione in corso..."
+    execute console command "/skript disable %script%"

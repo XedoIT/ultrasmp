@@ -1,0 +1,111 @@
+on break:
+    if player's gamemode is survival or adventure:
+# STRUMENTI REDSTONE
+        if event-block is redstone:
+            add 1 to {redstone.%player%.broke.redstone}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is redstone torch:
+            add 1 to {redstone.%player%.broke.redstone_torch}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is redstone block:
+            add 1 to {redstone.%player%.broke.redstone_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is repeater:
+            add 1 to {redstone.%player%.broke.repeater}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is comparator:
+            add 1 to {redstone.%player%.broke.comparator}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is target:
+            add 1 to {redstone.%player%.broke.target}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is lever:
+            add 1 to {redstone.%player%.broke.lever}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is sculk sensor:
+            add 1 to {redstone.%player%.broke.sculk_sensor}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is calibrated sculk sensor:
+            add 1 to {redstone.%player%.broke.calibrated_sculk_sensor}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is sculk shrieker:
+            add 1 to {redstone.%player%.broke.sculk_shrieker}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is tripwire hook:
+            add 1 to {redstone.%player%.broke.tripwire_hook}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is lectern:
+            add 1 to {redstone.%player%.broke.lectern}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is daylight detector:
+            add 1 to {redstone.%player%.broke.daylight_detector}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is piston:
+            add 1 to {redstone.%player%.broke.piston}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is sticky piston:
+            add 1 to {redstone.%player%.broke.sticky_piston}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is dispenser:
+            add 1 to {redstone.%player%.broke.dispenser}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is dropper:
+            add 1 to {redstone.%player%.broke.dropper}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is hopper:
+            add 1 to {redstone.%player%.broke.hopper}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is observer:
+            add 1 to {redstone.%player%.broke.observer}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is chiseled bookshelf:
+            add 1 to {redstone.%player%.broke.chiseled_bookshelf}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+
+# ROTAIE
+        else if event-block is rail:
+            add 1 to {redstone.%player%.broke.rail}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is powered rail:
+            add 1 to {redstone.%player%.broke.powered_rail}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is detector rail:
+            add 1 to {redstone.%player%.broke.detector_rail}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is activator rail:
+            add 1 to {redstone.%player%.broke.activator_rail}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+
+# SENZA CATEGORIA
+        else if event-block is tnt:
+            add 1 to {redstone.%player%.broke.tnt}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}
+        else if event-block is redstone lamp:
+            add 1 to {redstone.%player%.broke.redstone_lamp}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {redstone.%player%.total_broken}

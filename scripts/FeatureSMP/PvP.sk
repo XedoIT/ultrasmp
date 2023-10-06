@@ -11,21 +11,20 @@ command /pvp:
         if {pvp} is true:
             delete {pvp}
             set {pvp_status} to "&c● &c&lPvP disabilitato &c●"
-            broadcast "&8[&4●&8] &cPvP globale disabilitato!"
+            broadcast "&8[&4🗡&8] &cPvP globale disabilitato!"
             send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
             stop
         else:
             set {pvp} to true
             set {pvp_status} to "&a● &a&lPvP abilitato &a●"
-            broadcast "&8[&2●&8] &aPvP globale abilitato!"
+            broadcast "&8[&2🗡&8] &aPvP globale abilitato!"
             send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
             stop
 
 on damage:
-    if attacker is player:
+    if attacker is a player:
         if victim is a player:
             if {pvp} is not set:
-                cancel event
-                send "&cIl PvP è disabilitato!" to attacker
-                if teleport type is ender pearl:
+                if damage cause is not fall:
                     cancel event
+                    send "&8[&4🗡&8] &cIl PvP è disabilitato!" to attacker

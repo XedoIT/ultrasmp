@@ -1,12 +1,34 @@
 #  SCRIPT PER LA GESTIONE DELLE MEDAGLIE DEI GIOCATORI  #
 
-#PlaceHolder di PlaceHolderAPI: %skript_medals::{player}%
+#PlaceHolder di PlaceHolderAPI: %skript_medals.{player}%
 
 options:
     prefix: &8[&e&lMEDAGLIE&8]
     error_prefix: &8[&4&lMEDAGLIE&8]
     medals_sound: entity.player.levelup
-  
+
+    mining_pickaxe: diamond pickaxe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile"
+    carpenter_axe: diamond axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile"
+    forestboss_axe_male: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile"
+    forestboss_axe_female: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile"
+
+    netherboss_male: music disc pigstep named "&bDisco musicale" with lore "&f", "&7Il disco musicale più ascoltato dalla", "&7popolazione del sottosopra.", "&f", " &6● &2Ottenuto con &eRe degli Inferi", "&f" and "&9Copia personale di &b%attacker%"
+    netherboss_female: music disc pigstep named "&bDisco musicale" with lore "&f", "&7Il disco musicale più ascoltato dalla", "&7popolazione del sottosopra.", "&f", " &6● &2Ottenuto con &eRegina degli Inferi", "&f" and "&5Copia personale di &d%attacker%"
+
+    dragontrainer_male: dragon egg named "&dUovo di drago" with lore "&7Le leggende narrano che questo sia", "&7l'ultimo uovo di drago rimasto in", "&7circolazione.", "&f", " &6● &2Ottenuto con &eDomatore di Draghi", "&f" and "&9Quest'uovo appartiene a &b%attacker%"
+    dragontrainer_female: dragon egg named "&dUovo di drago" with lore "&7Le leggende narrano che questo sia", "&7l'ultimo uovo di drago rimasto in", "&7circolazione.", "&f", " &6● &2Ottenuto con &eDomatrice di Draghi", "&f" and "&5Quest'uovo appartiene a &d%attacker%"
+
+
+    mining_pickaxe_smithing: diamond pickaxe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+    carpenter_axe_smithing: diamond axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+    forestboss_axe_male_smithing: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legnogrezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+    forestboss_axe_female_smithing: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legnogrezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+
+    mining_pickaxe_grindstone: diamond pickaxe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&4&n&lNon puoi disincantare quest'oggetto!"
+    carpenter_axe_grindstone: diamond axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&4&n&lNon puoi disincantare quest'oggetto!"
+    forestboss_axe_male_grindstone: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legnogrezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&4&n&lNon puoi disincantare quest'oggetto!"
+    forestboss_axe_female_grindstone: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legnogrezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", "&7Quest'oggetto non può rompersi mai!", "&bTelecinesi", "&7Raccoglierai istantaneamente i drop", "&7degli oggetti che distruggerai..", "&f", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&4&n&lNon puoi disincantare quest'oggetto!"
+
   # FRASI STATO MEDAGLIE
     get: &aQuesta medaglia l'hai ottenuta.
     not_get: &cQuesta medaglia non l'hai ancora ottenuta.
@@ -19,177 +41,317 @@ options:
     ymin: 70
     ymax: 160
 
+on load:
+  # CONTATORE MEDAGLIE E ULTIMA MEDAGLIA OTTENUTA
+    if {medals.%player%} is not set:
+        set {medals.%player%} to 0
+    if {medals.%player%.last_obtained} is not set:
+        set {medals.%player%.last_obtained} to "&7-"
+  # MINING
+    if {medals.%player%.mining} is not set:
+        set {medals.%player%.mining} to "{@not_get}"
+    if {medals.%player%.mining.count} is not set:
+        set {medals.%player%.mining.count} to 0
+  # MOBKILLER
+    if {medals.%player%.mobkiller} is not set:
+        set {medals.%player%.mobkiller} to "{@not_get}"
+    if {medals.%player%.mobkiller.count} is not set:
+        set {medals.%player%.mobkiller.count} to 0
+  # CARPENTER
+    if {medals.%player%.carpenter} is not set:
+        set {medals.%player%.carpenter} to "{@not_get}"
+    if {medals.%player%.carpenter.total_logs}, {medals.%player%.carpenter.oak}, {medals.%player%.carpenter.birch}, {medals.%player%.carpenter.dark_oak}, {medals.%player%.carpenter.spruce}, {medals.%player%.carpenter.acacia}, {medals.%player%.carpenter.jungle}, {medals.%player%.carpenter.mangrove}, {medals.%player%.carpenter.cherry}, {medals.%player%.carpenter.crimson} or {medals.%player%.carpenter.warped} is not set:
+        set {medals.%player%.carpenter.total_logs}, {medals.%player%.carpenter.oak}, {medals.%player%.carpenter.birch}, {medals.%player%.carpenter.dark_oak}, {medals.%player%.carpenter.spruce}, {medals.%player%.carpenter.acacia}, {medals.%player%.carpenter.jungle}, {medals.%player%.carpenter.mangrove}, {medals.%player%.carpenter.cherry}, {medals.%player%.carpenter.crimson} or {medals.%player%.carpenter.warped} to 0
+  # BUILDING
+    if {medals.%player%.building} is not set:
+        set {medals.%player%.building} to "{@not_get}"
+    if {medals.%player%.building.totalblocks} is not set:
+        set {medals.%player%.building.totalblocks} to 0
+  # FARMER
+    if {medals.%player%.farmer} is not set:
+        set {medals.%player%.farmer} to "{@not_get}"
+    if {medals.%player%.farmer.total_seeds}, {medals.%player%.farmer.wheat}, {medals.%player%.farmer.beetroot}, {medals.%player%.farmer.pumpkin}, {medals.%player%.farmer.melon}, {medals.%player%.farmer.carrot}, {medals.%player%.farmer.potato}, {medals.%player%.farmer.cocoa} or {medals.%player%.farmer.nether_wart} is not set:
+        set {medals.%player%.farmer.total_seeds}, {medals.%player%.farmer.wheat}, {medals.%player%.farmer.beetroot}, {medals.%player%.farmer.pumpkin}, {medals.%player%.farmer.melon}, {medals.%player%.farmer.carrot}, {medals.%player%.farmer.potato}, {medals.%player%.farmer.cocoa} or {medals.%player%.farmer.nether_wart} to 0
+  # FISHING
+    if {medals.%player%.fishing} is not set:
+        set {medals.%player%.fishing} to "{@not_get}"
+    if {medals.%player%.fishing.total_fish} is not set:
+        set {medals.%player%.fishing.total_fish} to 0
+  # TAMING
+    if {medals.%player%.taming} is not set:
+        set {medals.%player%.taming} to "{@not_get}"
+    if {medals.%player%.taming.wolf}, {medals.%player%.taming.cat}, {medals.%player%.taming.parrot}, {medals.%player%.taming.wolf}, {medals.%player%.taming.trader_llama}, {medals.%player%.taming.llama}, {medals.%player%.taming.horse}, {medals.%player%.taming.mule} and {medals.%player%.taming.donkey} is not set:
+        set {medals.%player%.taming.wolf}, {medals.%player%.taming.cat}, {medals.%player%.taming.parrot}, {medals.%player%.taming.wolf}, {medals.%player%.taming.llama}, {medals.%player%.taming.trader_llama}, {medals.%player%.taming.horse}, {medals.%player%.taming.mule} and {medals.%player%.taming.donkey} to "{@not_done}"
+    if {medals.%player%.taming.count} is not set:
+        set {medals.%player%.taming.count} to 0
+  # CHATTER
+    if {medals.%player%.chatter} is not set:
+        set {medals.%player%.chatter} to "{@not_get}"
+    if {medals.%player%.chatter.messages} is not set:
+        set {medals.%player%.chatter.messages} to 0
+  # MURDERER
+    if {medals.%player%.murderer} is not set:
+        set {medals.%player%.murderer} to "{@not_get}"
+    if {medals.%player%.murderer.kills} is not set:
+        set {medals.%player%.murderer.kills} to 0
+  # SUICIDE
+    if {medals.%player%.suicide} is not set:
+        set {medals.%player%.suicide} to "{@not_get}"
+    if {medals.%player%.suicide.deaths} is not set:
+        set {medals.%player%.suicide.deaths} to 0
+  # FORESTBOSS
+    if {medals.%player%.forestboss} is not set:
+        set {medals.%player%.forestboss} to "{@not_get}"
+    if {medals.%player%.forestboss.total_logs}, {medals.%player%.forestboss.oak} or {medals.%player%.forestboss.birch} is not set:
+        set {medals.%player%.forestboss.total_logs}, {medals.%player%.forestboss.oak} or {medals.%player%.forestboss.birch} to 0
+  # SKYLOVER
+    if {medals.%player%.skylover} is not set:
+        set {medals.%player%.skylover} to "{@not_get}"
+    if {medals.%player%.skylover.count} is not set:
+        set {medals.%player%.skylover.count} to 0
+  # NETHERBOSS
+    #delete {medals.%player%.netherboss.count}
+    if {medals.%player%.netherboss} is not set:
+        set {medals.%player%.netherboss} to "{@not_get}"
+    if {medals.%player%.netherboss.count} is not set:
+        set {medals.%player%.netherboss.count} to 0
+  # DRAGONTRAINER
+    if {medals.%player%.dragontrainer} is not set:
+        set {medals.%player%.dragontrainer} to "{@not_get}"
+    if {medals.%player%.dragontrainer.count} is not set:
+        set {medals.%player%.dragontrainer.count} to 0
+  # WARDENBOSS
+    if {medals.%player%.wardenboss} is not set:
+        set {medals.%player%.wardenboss} to "{@not_get}"
+    if {medals.%player%.wardenboss.count} is not set:
+        set {medals.%player%.wardenboss.count} to 0
+
 on join:
   # CONTATORE MEDAGLIE E ULTIMA MEDAGLIA OTTENUTA
-    if {medals::%player%} is not set:
-        set {medals::%player%} to 0
-    if {medals::%player%::last_obtained} is not set:
-        set {medals::%player%::last_obtained} to "&7-"
+    if {medals.%player%} is not set:
+        set {medals.%player%} to 0
+    if {medals.%player%.last_obtained} is not set:
+        set {medals.%player%.last_obtained} to "&7-"
   # MINING
-    if {medals::%player%::mining} is not set:
-        set {medals::%player%::mining} to "{@not_get}"
-    if {medals::%player%::mining::count} is not set:
-        set {medals::%player%::mining::count} to 0
+    if {medals.%player%.mining} is not set:
+        set {medals.%player%.mining} to "{@not_get}"
+    if {medals.%player%.mining.count} is not set:
+        set {medals.%player%.mining.count} to 0
   # MOBKILLER
-    if {medals::%player%::mobkiller} is not set:
-        set {medals::%player%::mobkiller} to "{@not_get}"
-    if {medals::%player%::mobkiller::count} is not set:
-        set {medals::%player%::mobkiller::count} to 0
+    if {medals.%player%.mobkiller} is not set:
+        set {medals.%player%.mobkiller} to "{@not_get}"
+    if {medals.%player%.mobkiller.count} is not set:
+        set {medals.%player%.mobkiller.count} to 0
   # CARPENTER
-    if {medals::%player%::carpenter} is not set:
-        set {medals::%player%::carpenter} to "{@not_get}"
-    if {medals::%player%::carpenter::total_logs}, {medals::%player%::carpenter::oak}, {medals::%player%::carpenter::birch}, {medals::%player%::carpenter::dark_oak}, {medals::%player%::carpenter::spruce}, {medals::%player%::carpenter::acacia}, {medals::%player%::carpenter::jungle}, {medals::%player%::carpenter::mangrove}, {medals::%player%::carpenter::cherry}, {medals::%player%::carpenter::crimson} or {medals::%player%::carpenter::warped} is not set:
-        set {medals::%player%::carpenter::total_logs}, {medals::%player%::carpenter::oak}, {medals::%player%::carpenter::birch}, {medals::%player%::carpenter::dark_oak}, {medals::%player%::carpenter::spruce}, {medals::%player%::carpenter::acacia}, {medals::%player%::carpenter::jungle}, {medals::%player%::carpenter::mangrove}, {medals::%player%::carpenter::cherry}, {medals::%player%::carpenter::crimson} or {medals::%player%::carpenter::warped} to 0
+    if {medals.%player%.carpenter} is not set:
+        set {medals.%player%.carpenter} to "{@not_get}"
+    if {medals.%player%.carpenter.total_logs}, {medals.%player%.carpenter.oak}, {medals.%player%.carpenter.birch}, {medals.%player%.carpenter.dark_oak}, {medals.%player%.carpenter.spruce}, {medals.%player%.carpenter.acacia}, {medals.%player%.carpenter.jungle}, {medals.%player%.carpenter.mangrove}, {medals.%player%.carpenter.cherry}, {medals.%player%.carpenter.crimson} or {medals.%player%.carpenter.warped} is not set:
+        set {medals.%player%.carpenter.total_logs}, {medals.%player%.carpenter.oak}, {medals.%player%.carpenter.birch}, {medals.%player%.carpenter.dark_oak}, {medals.%player%.carpenter.spruce}, {medals.%player%.carpenter.acacia}, {medals.%player%.carpenter.jungle}, {medals.%player%.carpenter.mangrove}, {medals.%player%.carpenter.cherry}, {medals.%player%.carpenter.crimson} or {medals.%player%.carpenter.warped} to 0
   # BUILDING
-    if {medals::%player%::building} is not set:
-        set {medals::%player%::building} to "{@not_get}"
-    if {medals::%player%::building::totalblocks} is not set:
-        set {medals::%player%::building::totalblocks} to 0
+    if {medals.%player%.building} is not set:
+        set {medals.%player%.building} to "{@not_get}"
+    if {medals.%player%.building.totalblocks} is not set:
+        set {medals.%player%.building.totalblocks} to 0
   # FARMER
-    if {medals::%player%::farmer} is not set:
-        set {medals::%player%::farmer} to "{@not_get}"
-    if {medals::%player%::farmer::total_seeds}, {medals::%player%::farmer::wheat}, {medals::%player%::farmer::beetroot}, {medals::%player%::farmer::pumpkin}, {medals::%player%::farmer::melon}, {medals::%player%::farmer::carrot}, {medals::%player%::farmer::potato}, {medals::%player%::farmer::cocoa} or {medals::%player%::farmer::nether_wart} is not set:
-        set {medals::%player%::farmer::total_seeds}, {medals::%player%::farmer::wheat}, {medals::%player%::farmer::beetroot}, {medals::%player%::farmer::pumpkin}, {medals::%player%::farmer::melon}, {medals::%player%::farmer::carrot}, {medals::%player%::farmer::potato}, {medals::%player%::farmer::cocoa} or {medals::%player%::farmer::nether_wart} to 0
+    if {medals.%player%.farmer} is not set:
+        set {medals.%player%.farmer} to "{@not_get}"
+    if {medals.%player%.farmer.total_seeds}, {medals.%player%.farmer.wheat}, {medals.%player%.farmer.beetroot}, {medals.%player%.farmer.pumpkin}, {medals.%player%.farmer.melon}, {medals.%player%.farmer.carrot}, {medals.%player%.farmer.potato}, {medals.%player%.farmer.cocoa} or {medals.%player%.farmer.nether_wart} is not set:
+        set {medals.%player%.farmer.total_seeds}, {medals.%player%.farmer.wheat}, {medals.%player%.farmer.beetroot}, {medals.%player%.farmer.pumpkin}, {medals.%player%.farmer.melon}, {medals.%player%.farmer.carrot}, {medals.%player%.farmer.potato}, {medals.%player%.farmer.cocoa} or {medals.%player%.farmer.nether_wart} to 0
   # FISHING
-    if {medals::%player%::fishing} is not set:
-        set {medals::%player%::fishing} to "{@not_get}"
-    if {medals::%player%::fishing::total_fish} is not set:
-        set {medals::%player%::fishing::total_fish} to 0
+    if {medals.%player%.fishing} is not set:
+        set {medals.%player%.fishing} to "{@not_get}"
+    if {medals.%player%.fishing.total_fish} is not set:
+        set {medals.%player%.fishing.total_fish} to 0
   # TAMING
-    if {medals::%player%::taming} is not set:
-        set {medals::%player%::taming} to "{@not_get}"
-    if {medals::%player%::taming::wolf}, {medals::%player%::taming::cat}, {medals::%player%::taming::parrot}, {medals::%player%::taming::wolf}, {medals::%player%::taming::trader_llama}, {medals::%player%::taming::llama}, {medals::%player%::taming::horse}, {medals::%player%::taming::mule} and {medals::%player%::taming::donkey} is not set:
-        set {medals::%player%::taming::wolf}, {medals::%player%::taming::cat}, {medals::%player%::taming::parrot}, {medals::%player%::taming::wolf}, {medals::%player%::taming::llama}, {medals::%player%::taming::trader_llama}, {medals::%player%::taming::horse}, {medals::%player%::taming::mule} and {medals::%player%::taming::donkey} to "{@not_done}"
-    if {medals::%player%::taming::count} is not set:
-        set {medals::%player%::taming::count} to 0
+    if {medals.%player%.taming} is not set:
+        set {medals.%player%.taming} to "{@not_get}"
+    if {medals.%player%.taming.wolf}, {medals.%player%.taming.cat}, {medals.%player%.taming.parrot}, {medals.%player%.taming.wolf}, {medals.%player%.taming.trader_llama}, {medals.%player%.taming.llama}, {medals.%player%.taming.horse}, {medals.%player%.taming.mule} and {medals.%player%.taming.donkey} is not set:
+        set {medals.%player%.taming.wolf}, {medals.%player%.taming.cat}, {medals.%player%.taming.parrot}, {medals.%player%.taming.wolf}, {medals.%player%.taming.llama}, {medals.%player%.taming.trader_llama}, {medals.%player%.taming.horse}, {medals.%player%.taming.mule} and {medals.%player%.taming.donkey} to "{@not_done}"
+    if {medals.%player%.taming.count} is not set:
+        set {medals.%player%.taming.count} to 0
   # CHATTER
-    if {medals::%player%::chatter} is not set:
-        set {medals::%player%::chatter} to "{@not_get}"
-    if {medals::%player%::chatter::messages} is not set:
-        set {medals::%player%::chatter::messages} to 0
+    if {medals.%player%.chatter} is not set:
+        set {medals.%player%.chatter} to "{@not_get}"
+    if {medals.%player%.chatter.messages} is not set:
+        set {medals.%player%.chatter.messages} to 0
   # MURDERER
-    if {medals::%player%::murderer} is not set:
-        set {medals::%player%::murderer} to "{@not_get}"
-    if {medals::%player%::murderer::kills} is not set:
-        set {medals::%player%::murderer::kills} to 0
+    if {medals.%player%.murderer} is not set:
+        set {medals.%player%.murderer} to "{@not_get}"
+    if {medals.%player%.murderer.kills} is not set:
+        set {medals.%player%.murderer.kills} to 0
   # SUICIDE
-    if {medals::%player%::suicide} is not set:
-        set {medals::%player%::suicide} to "{@not_get}"
-    if {medals::%player%::suicide::deaths} is not set:
-        set {medals::%player%::suicide::deaths} to 0
+    if {medals.%player%.suicide} is not set:
+        set {medals.%player%.suicide} to "{@not_get}"
+    if {medals.%player%.suicide.deaths} is not set:
+        set {medals.%player%.suicide.deaths} to 0
   # FORESTBOSS
-    if {medals::%player%::forestboss} is not set:
-        set {medals::%player%::forestboss} to "{@not_get}"
-    if {medals::%player%::forestboss::total_logs}, {medals::%player%::forestboss::oak} or {medals::%player%::forestboss::birch} is not set:
-        set {medals::%player%::forestboss::total_logs}, {medals::%player%::forestboss::oak} or {medals::%player%::forestboss::birch} to 0
+    if {medals.%player%.forestboss} is not set:
+        set {medals.%player%.forestboss} to "{@not_get}"
+    if {medals.%player%.forestboss.total_logs}, {medals.%player%.forestboss.oak} or {medals.%player%.forestboss.birch} is not set:
+        set {medals.%player%.forestboss.total_logs}, {medals.%player%.forestboss.oak} or {medals.%player%.forestboss.birch} to 0
   # SKYLOVER
-    if {medals::%player%::skylover} is not set:
-        set {medals::%player%::skylover} to "{@not_get}"
-    if {medals::%player%::skylover::count} is not set:
-        set {medals::%player%::skylover::count} to 0
+    if {medals.%player%.skylover} is not set:
+        set {medals.%player%.skylover} to "{@not_get}"
+    if {medals.%player%.skylover.count} is not set:
+        set {medals.%player%.skylover.count} to 0
   # NETHERBOSS
-    #delete {medals::%player%::netherboss::count}
-    if {medals::%player%::netherboss} is not set:
-        set {medals::%player%::netherboss} to "{@not_get}"
-    if {medals::%player%::netherboss::count} is not set:
-        set {medals::%player%::netherboss::count} to 0
+    #delete {medals.%player%.netherboss.count}
+    if {medals.%player%.netherboss} is not set:
+        set {medals.%player%.netherboss} to "{@not_get}"
+    if {medals.%player%.netherboss.count} is not set:
+        set {medals.%player%.netherboss.count} to 0
   # DRAGONTRAINER
-    if {medals::%player%::dragontrainer} is not set:
-        set {medals::%player%::dragontrainer} to "{@not_get}"
-    if {medals::%player%::dragontrainer::count} is not set:
-        set {medals::%player%::dragontrainer::count} to 0
+    if {medals.%player%.dragontrainer} is not set:
+        set {medals.%player%.dragontrainer} to "{@not_get}"
+    if {medals.%player%.dragontrainer.count} is not set:
+        set {medals.%player%.dragontrainer.count} to 0
   # WARDENBOSS
-    if {medals::%player%::wardenboss} is not set:
-        set {medals::%player%::wardenboss} to "{@not_get}"
-    if {medals::%player%::wardenboss::count} is not set:
-        set {medals::%player%::wardenboss::count} to 0
+    if {medals.%player%.wardenboss} is not set:
+        set {medals.%player%.wardenboss} to "{@not_get}"
+    if {medals.%player%.wardenboss.count} is not set:
+        set {medals.%player%.wardenboss.count} to 0
 
 on inventory click:
     if type of event-inventory is smithing inventory:
-        if slot 0 of event-inventory is a diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile":
-            if index of event-slot is 2:
+        if slot 1 of event-inventory is {@mining_pickaxe}:
+            if index of event-slot is 3:
                 cancel event
-                if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+                if slot 3 of event-inventory is not air:
+                    set slot 3 of event-inventory to {@mining_pickaxe_smithing}
                     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                     #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 0 of event-inventory is diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile":
-            if index of event-slot is 2:
+        else if slot 1 of event-inventory is {@carpenter_axe}:
+            if index of event-slot is 3:
                 cancel event
-                if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+                if slot 3 of event-inventory is not air:
+                    set slot 3 of event-inventory to {@carpenter_axe_smithing}
                     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                     #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 0 of event-inventory is iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile" or iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile":
-            if index of event-slot is 2:
+        else if slot 1 of event-inventory is {@forestboss_axe_male} and {@forestboss_axe_female}:
+            if index of event-slot is 3:
                 cancel event
-                if slot 2 of event-inventory is not air:
-                    if {settings::%player%::genre::male} is true:
-                        set slot 2 of event-inventory to iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+                if slot 3 of event-inventory is not air:
+                    if {settings.%player%.genre.male} is true:
+                        set slot 3 of event-inventory to {@forestboss_axe_male_smithing}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings::%player%::genre::female} is true:
-                        set slot 2 of event-inventory to iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&4&n&lNon puoi migliorare quest'oggetto!"
+                    else if {settings.%player%.genre.female} is true:
+                        set slot 3 of event-inventory to {@forestboss_axe_female_smithing}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
 
     else if type of event-inventory is grindstone inventory:
-        if slot 0 of event-inventory is a diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile":
+        if slot 0 of event-inventory is {@mining_pickaxe}:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&4&n&lNon puoi disincatare quest'oggetto!"
+                    set slot 2 of event-inventory to {@mining_pickaxe_grindstone}
                     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                     #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 0 of event-inventory is diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile":
+        else if slot 1 of event-inventory is {@mining_pickaxe}:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&4&n&lNon puoi disincatare quest'oggetto!"
+                    set slot 2 of event-inventory to {@mining_pickaxe_grindstone}
                     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                     #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 0 of event-inventory is iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile" or iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile":
+        if slot 0 of event-inventory is {@carpenter_axe}:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    if {settings::%player%::genre::male} is true:
-                        set slot 2 of event-inventory to iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&4&n&lNon puoi disincantare quest'oggetto!"
+                    set slot 2 of event-inventory to {@carpenter_axe_grindstone}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@carpenter_axe}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    set slot 2 of event-inventory to {@carpenter_axe_grindstone}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        if slot 0 of event-inventory is {@forestboss_axe_male}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.genre.male} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings::%player%::genre::female} is true:
-                        set slot 2 of event-inventory to iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&4&n&lNon puoi disincantare quest'oggetto!"
+                    else if {settings.%player%.genre.female} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@forestboss_axe_male}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.genre.male} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.genre.female} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        if slot 0 of event-inventory is {@forestboss_axe_female}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.genre.male} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.genre.female} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@forestboss_axe_female}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.genre.male} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.genre.female} is true:
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+
 on anvil prepare:
-    if slot 0 of event-inventory is diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile":
+    if slot 0 of event-inventory is {@mining_pickaxe}:
         set {_i} to air
         set event-slot to {_i}
 
-    if slot 0 of event-inventory is diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile":
+    else if slot 0 of event-inventory is {@carpenter_axe}:
         set {_i} to air
         set event-slot to {_i}
 
-    if slot 0 of event-inventory is iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile" or iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dI blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile":
+    else if slot 0 of event-inventory is {@forestboss_axe_male}:
+        set {_i} to air
+        set event-slot to {_i}
+        
+    else if slot 0 of event-inventory is {@forestboss_axe_female}:
         set {_i} to air
         set event-slot to {_i}
 
 # PARTE FUNZIONALE
 # MINING
-on mine of coal ore, deepslate coal ore, iron ore, deepslate iron ore, copper ore, deepslate copper ore, gold ore, deepslate gold ore, redstone ore, deepslate redstone ore, lapis ore, deepslate lapis ore, emerald ore, deepslate emerald ore, diamond ore, deepslate diamond ore, nether quartz ore, nether gold ore or ancient debris:
-    if tool of player is not diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile":
-        if {medals::%player%::mining::count} < 49999:
+on mine of coal ore, deepslate coal ore, iron ore, deepslate iron ore, raw iron block, copper ore, deepslate copper ore, raw copper block, gold ore, deepslate gold ore, raw gold block, redstone ore, deepslate redstone ore, lapis ore, deepslate lapis ore, emerald ore, deepslate emerald ore, diamond ore, deepslate diamond ore, nether quartz ore, nether gold ore, ancient debris, gilded blackstone, amethyst block, small amethyst bud, medium amethyst bud, large amethyst bud or amethyst cluster:
+    if tool of player is not {@mining_pickaxe}:
+        if {medals.%player%.mining.count} < 49999:
             if gamemode of player is survival or adventure:
-                add 1 to {medals::%player%::mining::count}
-        else if {medals::%player%::mining::count} = 49999:
-            add 1 to {medals::%player%::mining::count}
-            if {medals::%player%::mining} is "{@not_get}":
-                set {medals::%player%::mining} to "{@get}"
-                set {medals::%player%::mining::when_get} to now
-                set {medals::%player%::last_obtained} to "&aEstrazione"
-                set {medals::%player%::mining::can_use_pickaxe} to true
-                add 1 to {medals::%player%}
-                add 350 to {points::%player%}
-                give 1 diamond pickaxe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile" to player
+                add 1 to {medals.%player%.mining.count}
+        else if {medals.%player%.mining.count} = 49999:
+            add 1 to {medals.%player%.mining.count}
+            if {medals.%player%.mining} is "{@not_get}":
+                set {medals.%player%.mining} to "{@get}"
+                set {medals.%player%.mining.when_get} to now
+                set {medals.%player%.last_obtained} to "&aEstrazione"
+                set {medals.%player%.mining.can_use_pickaxe} to true
+                add 1 to {medals.%player%}
+                add 350 to {points.%player%}
+                give 1 {@mining_pickaxe} to player
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                 send "&6&m----------------------------------------" to player
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lEstrazione" to player
@@ -199,26 +361,27 @@ on mine of coal ore, deepslate coal ore, iron ore, deepslate iron ore, copper or
                 send "  &aHai sbloccato il &5MineKinetor" to player
                 send "&6&m----------------------------------------" to player
     else:
-        if {medals::%player%::mining::can_use_pickaxe} is true:
+        if {medals.%player%.mining.can_use_pickaxe} is true:
             if gamemode of player is survival or adventure:
-                cancel drops
-                give drops of event-block using player's tool to player
+                if player's inventory has enough space for 1 of event-block:
+                    cancel drops
+                    give drops of event-block using player's tool to player
 
 # MOBKILLER
 on death:
-    victim is not player
-    attacker is player
-    if {medals::%attacker%::mobkiller::count} < 4999:
+    victim is not a player
+    attacker is a player
+    if {medals.%attacker%.mobkiller.count} < 4999:
         if gamemode of attacker is survival or adventure:
-            add 1 to {medals::%attacker%::mobkiller::count}
-    else if {medals::%attacker%::mobkiller::count} = 4999:
-        add 1 to {medals::%attacker%::mobkiller::count}
-        if {medals::%attacker%::mobkiller} is "{@not_get}":
-            set {medals::%attacker%::mobkiller} to "{@get}"
-            set {medals::%attacker%::mobkiller::when_get} to now
-            set {medals::%attacker%::last_obtained} to "&aMobicida"
-            add 1 to {medals::%attacker%}
-            add 200 to {points::%attacker%}
+            add 1 to {medals.%attacker%.mobkiller.count}
+    else if {medals.%attacker%.mobkiller.count} = 4999:
+        add 1 to {medals.%attacker%.mobkiller.count}
+        if {medals.%attacker%.mobkiller} is "{@not_get}":
+            set {medals.%attacker%.mobkiller} to "{@get}"
+            set {medals.%attacker%.mobkiller.when_get} to now
+            set {medals.%attacker%.last_obtained} to "&aMobicida"
+            add 1 to {medals.%attacker%}
+            add 200 to {points.%attacker%}
             apply strength 5 without any particles to attacker for 2 minutes
             play sound "{@medals_sound}" with volume 5 and pitch 2 at attacker for attacker
             send "&6&m----------------------------------------" to attacker
@@ -230,119 +393,119 @@ on death:
             send "&6&m----------------------------------------" to attacker
 
 # CARPENTER
-on break of oak log, oak wood, stripped oak log, stripped oak wood, oak planks, oak stairs, oak slab, oak fence, oak fence gate, oak door, oak trapdoor, oak pressure plate, oak button, birch log, birch wood, stripped birch log, stripped birch wood, birch planks, birch stairs, birch slab, birch fence, birch fence gate, birch door, birch trapdoor, birch pressure plate, birch button, dark oak log, dark oak wood, stripped dark oak log, stripped dark oak wood, dark oak planks, dark oak stairs, dark oak slab, dark oak fence, dark oak fence gate, dark oak door, dark oak trapdoor, dark oak pressure plate, dark oak button, spruce log, spruce wood, stripped spruce log, stripped spruce wood, spruce planks, spruce stairs, spruce slab, spruce fence, spruce fence gate, spruce door, spruce trapdoor, spruce pressure plate, spruce button, acacia log, acacia wood, stripped acacia log, stripped acacia wood, acacia planks, acacia stairs, acacia slab, acacia fence, acacia fence gate, acacia door, acacia trapdoor, acacia pressure plate, acacia button, jungle log, jungle wood, stripped jungle log, stripped jungle wood, jungle planks, jungle stairs, jungle slab, jungle fence, jungle fence gate, jungle door, jungle trapdoor, jungle pressure plate, jungle button, mangrove log, mangrove wood, stripped mangrove log, stripped mangrove wood, mangrove planks, mangrove stairs, mangrove slab, mangrove fence, mangrove fence gate, mangrove door, mangrove trapdoor, mangrove pressure plate, mangrove button, crimson stem, crimson hyphae, stripped crimson stem, stripped crimson hyphae, crimson planks, crimson stairs, crimson slab, crimson fence, crimson fence gate, crimson door, crimson trapdoor, crimson pressure plate, crimson button, warped stem, warped hyphae, stripped warped stem, stripped warped hyphae, warped planks, warped stairs, warped slab, warped fence, warped fence gate, warped door, warped trapdoor, warped pressure plate or warped button: #cherry log, cherry wood, stripped cherry log, stripped cherry wood, cherry planks, cherry stairs, cherry slab, cherry fence, cherry fence gate, cherry door, cherry trapdoor, cherry pressure plate or cherry button:
-    if tool of player is not diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile":
-        if {medals::%player%::carpenter::total_logs} < 49999:
+on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, stripped oak log, stripped oak wood, oak planks, oak stairs, oak slab, oak fence, oak fence gate, oak door, oak trapdoor, oak pressure plate, oak button, birch log, birch wood, stripped birch log, stripped birch wood, birch planks, birch stairs, birch slab, birch fence, birch fence gate, birch door, birch trapdoor, birch pressure plate, birch button, dark oak log, dark oak wood, stripped dark oak log, stripped dark oak wood, dark oak planks, dark oak stairs, dark oak slab, dark oak fence, dark oak fence gate, dark oak door, dark oak trapdoor, dark oak pressure plate, dark oak button, spruce log, spruce wood, stripped spruce log, stripped spruce wood, spruce planks, spruce stairs, spruce slab, spruce fence, spruce fence gate, spruce door, spruce trapdoor, spruce pressure plate, spruce button, acacia log, acacia wood, stripped acacia log, stripped acacia wood, acacia planks, acacia stairs, acacia slab, acacia fence, acacia fence gate, acacia door, acacia trapdoor, acacia pressure plate, acacia button, jungle log, jungle wood, stripped jungle log, stripped jungle wood, jungle planks, jungle stairs, jungle slab, jungle fence, jungle fence gate, jungle door, jungle trapdoor, jungle pressure plate, jungle button, mangrove log, mangrove wood, stripped mangrove log, stripped mangrove wood, mangrove planks, mangrove stairs, mangrove slab, mangrove fence, mangrove fence gate, mangrove door, mangrove trapdoor, mangrove pressure plate, mangrove button, crimson stem, crimson hyphae, stripped crimson stem, stripped crimson hyphae, crimson planks, crimson stairs, crimson slab, crimson fence, crimson fence gate, crimson door, crimson trapdoor, crimson pressure plate, crimson button, warped stem, warped hyphae, stripped warped stem, stripped warped hyphae, warped planks, warped stairs, warped slab, warped fence, warped fence gate, warped door, warped trapdoor, warped pressure plate, warped button, cherry log, cherry wood, stripped cherry log, stripped cherry wood, cherry planks, cherry stairs, cherry slab, cherry fence, cherry fence gate, cherry door, cherry trapdoor, cherry pressure plate or cherry button:
+    if tool of player is not {@carpenter_axe}:
+        if {medals.%player%.carpenter.total_logs} < 49999:
             if event-block is oak log:
-                if {medals::%player%::carpenter::oak} < 4999:
+                if {medals.%player%.carpenter.oak} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::oak}
-                else if {medals::%player%::carpenter::oak} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::oak}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.oak}
+                else if {medals.%player%.carpenter.oak} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.oak}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di quercia&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is birch log:
-                if {medals::%player%::carpenter::birch} < 4999:
+                if {medals.%player%.carpenter.birch} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::birch}
-                else if {medals::%player%::carpenter::birch} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::birch}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.birch}
+                else if {medals.%player%.carpenter.birch} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.birch}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di betulla&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is dark oak log:
-                if {medals::%player%::carpenter::dark_oak} < 4999:
+                if {medals.%player%.carpenter.dark_oak} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::dark_oak}
-                else if {medals::%player%::carpenter::dark_oak} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::dark_oak}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.dark_oak}
+                else if {medals.%player%.carpenter.dark_oak} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.dark_oak}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di quercia scura&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is spruce log:
-                if {medals::%player%::carpenter::spruce} < 4999:
+                if {medals.%player%.carpenter.spruce} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::spruce}
-                else if {medals::%player%::carpenter::spruce} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::spruce}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.spruce}
+                else if {medals.%player%.carpenter.spruce} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.spruce}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di abete&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is acacia log:
-                if {medals::%player%::carpenter::acacia} < 4999:
+                if {medals.%player%.carpenter.acacia} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::acacia}
-                else if {medals::%player%::carpenter::acacia} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::acacia}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.acacia}
+                else if {medals.%player%.carpenter.acacia} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.acacia}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di acacia&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is jungle log:
-                if {medals::%player%::carpenter::jungle} < 4999:
+                if {medals.%player%.carpenter.jungle} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::jungle}
-                else if {medals::%player%::carpenter::jungle} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::jungle}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.jungle}
+                else if {medals.%player%.carpenter.jungle} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.jungle}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco della giungla &7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is mangrove log:
-                if {medals::%player%::carpenter::mangrove} < 4999:
+                if {medals.%player%.carpenter.mangrove} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::mangrove}
-                else if {medals::%player%::carpenter::mangrove} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::mangrove}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.mangrove}
+                else if {medals.%player%.carpenter.mangrove} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.mangrove}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di mangrovia&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
-            #else if event-block is cherry log:
-                #if {medals::%player%::carpenter::cherry} < 4999:
-                    #if gamemode of player is survival or adventure:
-                        #add 1 to {medals::%player%::carpenter::total_logs}
-                        #add 1 to {medals::%player%::carpenter::cherry}
-                #else if {medals::%player%::carpenter::cherry} = 4999:
-                    #add 1 to {medals::%player%::carpenter::total_logs}
-                    #add 1 to {medals::%player%::carpenter::cherry}
-                    #send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di ciliegio&7."
-                    #play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
-            else if event-block is crimson stem:
-                if {medals::%player%::carpenter::crimson} < 4999:
+            else if event-block is cherry log:
+                if {medals.%player%.carpenter.cherry} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::crimson}
-                else if {medals::%player%::carpenter::crimson} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::crimson}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.cherry}
+                else if {medals.%player%.carpenter.cherry} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.cherry}
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di ciliegio&7."
+                    play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
+            else if event-block is crimson stem:
+                if {medals.%player%.carpenter.crimson} < 4999:
+                    if gamemode of player is survival or adventure:
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.crimson}
+                else if {medals.%player%.carpenter.crimson} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.crimson}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &bgambo cremisi&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is warped stem:
-                if {medals::%player%::carpenter::warped} < 4999:
+                if {medals.%player%.carpenter.warped} < 4999:
                     if gamemode of player is survival or adventure:
-                        add 1 to {medals::%player%::carpenter::total_logs}
-                        add 1 to {medals::%player%::carpenter::warped}
-                else if {medals::%player%::carpenter::warped} = 4999:
-                    add 1 to {medals::%player%::carpenter::total_logs}
-                    add 1 to {medals::%player%::carpenter::warped}
+                        add 1 to {medals.%player%.carpenter.total_logs}
+                        add 1 to {medals.%player%.carpenter.warped}
+                else if {medals.%player%.carpenter.warped} = 4999:
+                    add 1 to {medals.%player%.carpenter.total_logs}
+                    add 1 to {medals.%player%.carpenter.warped}
                     send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &bgambo distorto&7."
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
-        else if {medals::%player%::carpenter::total_logs} = 49999:
-            add 1 to {medals::%player%::carpenter::total_logs}
-            if {medals::%player%::carpenter} is "{@not_get}":
-                set {medals::%player%::carpenter} to "{@get}"
-                set {medals::%player%::carpenter::when_get} to now
-                set {medals::%player%::last_obtained} to "&aFalegname"
-                set {medals::%player%::carpenter::can_use_axe} to true
-                add 1 to {medals::%player%}
-                add 350 to {points::%player%}
-                give 1 diamond axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile" to player
+        else if {medals.%player%.carpenter.total_logs} = 49999:
+            add 1 to {medals.%player%.carpenter.total_logs}
+            if {medals.%player%.carpenter} is "{@not_get}":
+                set {medals.%player%.carpenter} to "{@get}"
+                set {medals.%player%.carpenter.when_get} to now
+                set {medals.%player%.last_obtained} to "&aFalegname"
+                set {medals.%player%.carpenter.can_use_axe} to true
+                add 1 to {medals.%player%}
+                add 350 to {points.%player%}
+                give 1 {@carpenter_axe} to player
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                 send "&6&m----------------------------------------" to player
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lFalegname" to player
@@ -352,24 +515,25 @@ on break of oak log, oak wood, stripped oak log, stripped oak wood, oak planks, 
                 send "  &bHai sbloccato il &5TreeKinetor Plus" to player
                 send "&6&m----------------------------------------" to player
     else:
-        if {medals::%player%::carpenter::can_use_axe} is true:
+        if {medals.%player%.carpenter.can_use_axe} is true:
             if gamemode of player is survival or adventure:
-                cancel drops
-                give drops of event-block using player's tool to player
+                if player's inventory has enough space for 1 of event-block:
+                    cancel drops
+                    give drops of event-block using player's tool to player
 
 # BUILDING
 on break:
-    if {medals::%player%::building::totalblocks} < 9999999:
+    if {medals.%player%.building.totalblocks} < 9999999:
         if gamemode of player is survival or adventure:
-            add 1 to {medals::%player%::building::totalblocks}
-    else if {medals::%player%::building::totalblocks} = 9999999:
-        add 1 to {medals::%player%::building::totalblocks}
-        if {medals::%player%::building} is "{@not_get}":
-            set {medals::%player%::building} to "{@get}"
-            set {medals::%player%::building::when_get} to now
-            set {medals::%player%::last_obtained} to "&aCostruzione"
-            add 1 to {medals::%player%}
-            add 500 to {points::%player%}
+            add 1 to {medals.%player%.building.totalblocks}
+    else if {medals.%player%.building.totalblocks} = 9999999:
+        add 1 to {medals.%player%.building.totalblocks}
+        if {medals.%player%.building} is "{@not_get}":
+            set {medals.%player%.building} to "{@get}"
+            set {medals.%player%.building.when_get} to now
+            set {medals.%player%.last_obtained} to "&aCostruzione"
+            add 1 to {medals.%player%}
+            add 500 to {points.%player%}
             execute console command "/lp user %player% permission settemp fly.use true 6h"
             play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
             send "&6&m----------------------------------------" to player
@@ -382,98 +546,98 @@ on break:
 
 # FARMER
 on place:
-    if {medals::%player%::farmer::total_seeds} < 7999:
+    if {medals.%player%.farmer.total_seeds} < 7999:
         if tool of player is wheat seeds:
-            if {medals::%player%::farmer::wheat} < 999:
+            if {medals.%player%.farmer.wheat} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::wheat}
-            else if {medals::%player%::farmer::wheat} = 999:
-                add 1 to {medals::%player%::farmer::wheat}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.wheat}
+            else if {medals.%player%.farmer.wheat} = 999:
+                add 1 to {medals.%player%.farmer.wheat}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2grano&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is beetroot seeds:
-            if {medals::%player%::farmer::beetroot} < 999:
+            if {medals.%player%.farmer.beetroot} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::beetroot}
-            else if {medals::%player%::farmer::beetroot} = 999:
-                add 1 to {medals::%player%::farmer::beetroot}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.beetroot}
+            else if {medals.%player%.farmer.beetroot} = 999:
+                add 1 to {medals.%player%.farmer.beetroot}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2barbabietola&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is potato:
-            if {medals::%player%::farmer::potato} < 999:
+            if {medals.%player%.farmer.potato} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::potato}
-            else if {medals::%player%::farmer::potato} = 999:
-                add 1 to {medals::%player%::farmer::potato}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.potato}
+            else if {medals.%player%.farmer.potato} = 999:
+                add 1 to {medals.%player%.farmer.potato}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &2patate&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is carrot:
-            if {medals::%player%::farmer::potato} < 999:
+            if {medals.%player%.farmer.potato} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::carrot}
-            else if {medals::%player%::farmer::carrot} = 999:
-                add 1 to {medals::%player%::farmer::carrot}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.carrot}
+            else if {medals.%player%.farmer.carrot} = 999:
+                add 1 to {medals.%player%.farmer.carrot}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &2carote&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is pumpkin seeds:
-            if {medals::%player%::farmer::pumpkin} < 999:
+            if {medals.%player%.farmer.pumpkin} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::pumpkin}
-            else if {medals::%player%::farmer::pumpkin} = 999:
-                add 1 to {medals::%player%::farmer::pumpkin}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.pumpkin}
+            else if {medals.%player%.farmer.pumpkin} = 999:
+                add 1 to {medals.%player%.farmer.pumpkin}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2zucca&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is melon seeds:
-            if {medals::%player%::farmer::melon} < 999:
+            if {medals.%player%.farmer.melon} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::melon}
-            else if {medals::%player%::farmer::melon} = 999:
-                add 1 to {medals::%player%::farmer::melon}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.melon}
+            else if {medals.%player%.farmer.melon} = 999:
+                add 1 to {medals.%player%.farmer.melon}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2anguria&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is cocoa beans:
-            if {medals::%player%::farmer::cocoa} < 999:
+            if {medals.%player%.farmer.cocoa} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::cocoa}
-            else if {medals::%player%::farmer::cocoa} = 999:
-                add 1 to {medals::%player%::farmer::cocoa}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.cocoa}
+            else if {medals.%player%.farmer.cocoa} = 999:
+                add 1 to {medals.%player%.farmer.cocoa}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7fave di &2cacao&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is nether wart:
-            if {medals::%player%::farmer::nether_wart} < 999:
+            if {medals.%player%.farmer.nether_wart} < 999:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::farmer::total_seeds}
-                    add 1 to {medals::%player%::farmer::nether_wart}
-            else if {medals::%player%::farmer::nether_wart} = 999:
-                add 1 to {medals::%player%::farmer::nether_wart}
+                    add 1 to {medals.%player%.farmer.total_seeds}
+                    add 1 to {medals.%player%.farmer.nether_wart}
+            else if {medals.%player%.farmer.nether_wart} = 999:
+                add 1 to {medals.%player%.farmer.nether_wart}
                 send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &cverruche del Nether&7."
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
-    else if {medals::%player%::farmer::total_seeds} = 7999:
-        add 1 to {medals::%player%::farmer::total_seeds}
-        if {medals::%player%::farmer} is "{@not_get}":
-            set {medals::%player%::farmer} to "{@get}"
-            set {medals::%player%::farmer::when_get} to now
-            add 1 to {medals::%player%}
-            add 150 to {points::%player%}
+    else if {medals.%player%.farmer.total_seeds} = 7999:
+        add 1 to {medals.%player%.farmer.total_seeds}
+        if {medals.%player%.farmer} is "{@not_get}":
+            set {medals.%player%.farmer} to "{@get}"
+            set {medals.%player%.farmer.when_get} to now
+            add 1 to {medals.%player%}
+            add 150 to {points.%player%}
             apply hero of the village without any particles to player for 2 hours
             play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-            if {settings::%player%::genre::male} is true:
-                set {medals::%player%::last_obtained} to "&aContadino"
+            if {settings.%player%.genre.male} is true:
+                set {medals.%player%.last_obtained} to "&aContadino"
                 send "&6&m----------------------------------------" to player
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to player
                 send "&f" to player
@@ -481,8 +645,8 @@ on place:
                 send "  &a+150 punti" to player
                 send "  &b+2 ore di &2Eroe del villaggio" to player
                 send "&6&m----------------------------------------" to player
-            else if {settings::%player%::genre::female} is true:
-                set {medals::%player%::last_obtained} to "&aContadina"
+            else if {settings.%player%.genre.female} is true:
+                set {medals.%player%.last_obtained} to "&aContadina"
                 send "&6&m----------------------------------------" to player
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to player
                 send "&f" to player
@@ -494,39 +658,39 @@ on place:
 # FISHING
 on fish:
     if fishing state is caught fish:
-        if {medals::%player%::fishing::total_fish} < 3:
-            if {medals::%player%::fishing::cod} is not set:
+        if {medals.%player%.fishing.total_fish} < 3:
+            if {medals.%player%.fishing.cod} is not set:
                 if gamemode of player is survival or adventure:
                     if chance of 25%:
                         set item of fishing caught entity to cod
-                        set {medals::%player%::fishing::cod} to true
-                        add 1 to {medals::%player%::fishing::total_fish}
-            if {medals::%player%::fishing::salmon} is not set:
+                        set {medals.%player%.fishing.cod} to true
+                        add 1 to {medals.%player%.fishing.total_fish}
+            if {medals.%player%.fishing.salmon} is not set:
                 if gamemode of player is survival or adventure:
                     if chance of 25%:
                         set item of fishing caught entity to salmon
-                        set {medals::%player%::fishing::salmon} to true
-                        add 1 to {medals::%player%::fishing::total_fish}
-            if {medals::%player%::fishing::pufferfish} is not set:
+                        set {medals.%player%.fishing.salmon} to true
+                        add 1 to {medals.%player%.fishing.total_fish}
+            if {medals.%player%.fishing.pufferfish} is not set:
                 if gamemode of player is survival or adventure:
                     if chance of 25%:
                         set item of fishing caught entity to pufferfish
-                        set {medals::%player%::fishing::pufferfish} to true
-                        add 1 to {medals::%player%::fishing::total_fish}
-            if {medals::%player%::fishing::tropical} is not set:
+                        set {medals.%player%.fishing.pufferfish} to true
+                        add 1 to {medals.%player%.fishing.total_fish}
+            if {medals.%player%.fishing.tropical} is not set:
                 if gamemode of player is survival or adventure:
                     if chance of 25%:
                         set item of fishing caught entity to tropical fish
-                        set {medals::%player%::fishing::tropical} to true
-                        add 1 to {medals::%player%::fishing::total_fish}
-        else if {medals::%player%::fishing::total_fish} = 3:
-            add 1 to {medals::%player%::fishing::total_fish}
-            if {medals::%player%::fishing} is "{@not_get}":
-                set {medals::%player%::fishing} to "{@get}"
-                set {medals::%player%::fishing::when_get} to now
-                set {medals::%player%::last_obtained} to "&aPesca"
-                add 1 to {medals::%player%}
-                add 50 to {points::%player%}
+                        set {medals.%player%.fishing.tropical} to true
+                        add 1 to {medals.%player%.fishing.total_fish}
+        else if {medals.%player%.fishing.total_fish} = 3:
+            add 1 to {medals.%player%.fishing.total_fish}
+            if {medals.%player%.fishing} is "{@not_get}":
+                set {medals.%player%.fishing} to "{@get}"
+                set {medals.%player%.fishing.when_get} to now
+                set {medals.%player%.last_obtained} to "&aPesca"
+                add 1 to {medals.%player%}
+                add 50 to {points.%player%}
                 apply water breathing without any particles to player for 3 hours
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                 send "&6&m----------------------------------------" to player
@@ -539,67 +703,67 @@ on fish:
 
 # TAMING
 on tame:
-    if {medals::%tamer%::taming::count} < 6:
+    if {medals.%tamer%.taming.count} < 6:
         if event-entity is wolf:
-            if {medals::%tamer%::taming::wolf} is "{@not_done}":
+            if {medals.%tamer%.taming.wolf} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::wolf} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.wolf} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &blupo&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         if event-entity is cat:
-            if {medals::%tamer%::taming::cat} is "{@not_done}":
+            if {medals.%tamer%.taming.cat} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::cat} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.cat} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &bgatto&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         if event-entity is parrot:
-            if {medals::%tamer%::taming::parrot} is "{@not_done}":
+            if {medals.%tamer%.taming.parrot} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::parrot} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.parrot} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &bpappagallo&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         if event-entity is llama:
-            if {medals::%tamer%::taming::llama} is "{@not_done}":
+            if {medals.%tamer%.taming.llama} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::llama} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.llama} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &blama&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         if event-entity is horse:
-            if {medals::%tamer%::taming::horse} is "{@not_done}":
+            if {medals.%tamer%.taming.horse} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::horse} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.horse} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &bcavallo&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         if event-entity is mule:
-            if {medals::%tamer%::taming::mule} is "{@not_done}":
+            if {medals.%tamer%.taming.mule} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::mule} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.mule} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &bmulo&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         if event-entity is donkey:
-            if {medals::%tamer%::taming::donkey} is "{@not_done}":
+            if {medals.%tamer%.taming.donkey} is "{@not_done}":
                 if gamemode of tamer is survival or adventure:
-                    set {medals::%tamer%::taming::donkey} to "{@done}"
-                    add 1 to {medals::%tamer%::taming::count}
+                    set {medals.%tamer%.taming.donkey} to "{@done}"
+                    add 1 to {medals.%tamer%.taming.count}
                     send "{@prefix} &aGrande! &7Hai addomesticato il tuo primo &basino&7." to tamer
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
-    else if {medals::%tamer%::taming::count} = 6:
-        add 1 to {medals::%tamer%::taming::count}
-        if {medals::%tamer%::taming} is not "{@not_get}":
-            set {medals::%tamer%::taming} to "{@get}"
-            add 1 to {medals::%tamer%}
-            set {medals::%tamer%::taming::when_get} to now
-            add 150 to {points::%tamer%}
+    else if {medals.%tamer%.taming.count} = 6:
+        add 1 to {medals.%tamer%.taming.count}
+        if {medals.%tamer%.taming} is not "{@not_get}":
+            set {medals.%tamer%.taming} to "{@get}"
+            add 1 to {medals.%tamer%}
+            set {medals.%tamer%.taming.when_get} to now
+            add 150 to {points.%tamer%}
             apply regeneration without any particles to tamer for 1 hour
             play sound "{@medals_sound}" with volume 5 and pitch 2 at tamer for tamer
-            if {settings::%tamer%::genre::male} is true:
-                set {medals::%player%::last_obtained} to "&aAddestratore"
+            if {settings.%tamer%.genre.male} is true:
+                set {medals.%player%.last_obtained} to "&aAddestratore"
                 send "&6&m----------------------------------------" to tamer
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to tamer
                 send "&f" to tamer
@@ -607,8 +771,8 @@ on tame:
                 send "  &a+150 punti" to tamer
                 send "  &b+1 ora di &6Rigenerazione" to tamer
                 send "&6&m----------------------------------------" to tamer
-            else if {settings::%tamer%::genre::female} is true:
-                set {medals::%player%::last_obtained} to "&aAddestratrice"
+            else if {settings.%tamer%.genre.female} is true:
+                set {medals.%player%.last_obtained} to "&aAddestratrice"
                 send "&6&m----------------------------------------" to tamer
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to tamer
                 send "&f" to tamer
@@ -619,26 +783,26 @@ on tame:
 
 # CHATTER
 on chat:
-    if {medals::%player%::chatter::messages} < 99999:
-        add 1 to {medals::%player%::chatter::messages}
-    else if {medals::%player%::chatter::messages} = 99999:
-        if {medals::%player%::chatter} is "{@not_get}":
-            set {medals::%player%::chatter} to "{@get}"
-            set {medals::%player%::chatter::when_get} to now
-            add 1 to {medals::%player%}
-            add 400 to {points::%player%}
+    if {medals.%player%.chatter.messages} < 99999:
+        add 1 to {medals.%player%.chatter.messages}
+    else if {medals.%player%.chatter.messages} = 99999:
+        if {medals.%player%.chatter} is "{@not_get}":
+            set {medals.%player%.chatter} to "{@get}"
+            set {medals.%player%.chatter.when_get} to now
+            add 1 to {medals.%player%}
+            add 400 to {points.%player%}
             play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-            if {settings::%player%::genre::male} is true:
+            if {settings.%player%.genre.male} is true:
                 send "&6&m----------------------------------------" to player
-                set {medals::%player%::last_obtained} to "&aChiacchierone"
+                set {medals.%player%.last_obtained} to "&aChiacchierone"
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to player
                 send "&f" to player
                 send " &9Ricompense sbloccate:" to player
                 send "  &a+400 punti" to player
                 send "&6&m----------------------------------------" to player
-            else if {settings::%player%::genre::female} is true:
+            else if {settings.%player%.genre.female} is true:
                 send "&6&m----------------------------------------" to player
-                set {medals::%player%::last_obtained} to "&aChiacchierona"
+                set {medals.%player%.last_obtained} to "&aChiacchierona"
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierona" to player
                 send "&f" to player
                 send " &9Ricompense sbloccate:" to player
@@ -647,17 +811,17 @@ on chat:
 
 # MURDERER
 on death of player:
-    if attacker is player:
-        if {medals::%attacker%::murderer::kills} < 99:
+    if attacker is a player:
+        if {medals.%attacker%.murderer.kills} < 99:
             if gamemode of attacker is survival or adventure:
-                add 1 to {medals::%attacker%::murderer::kills}
-        else if {medals::%attacker%::murderer::kills} = 99:
-            if {medals::%attacker%::murderer} is "{@not_get}":
-                set {medals::%attacker%::murderer} to "{@get}"
-                set {medals::%attacker%::murderer::when_get} to now
-                set {medals::%attacker%::last_obtained} to "&aOmicida"
-                add 1 to {medals::%attacker%}
-                add 500 to {points::%attacker%}
+                add 1 to {medals.%attacker%.murderer.kills}
+        else if {medals.%attacker%.murderer.kills} = 99:
+            if {medals.%attacker%.murderer} is "{@not_get}":
+                set {medals.%attacker%.murderer} to "{@get}"
+                set {medals.%attacker%.murderer.when_get} to now
+                set {medals.%attacker%.last_obtained} to "&aOmicida"
+                add 1 to {medals.%attacker%}
+                add 500 to {points.%attacker%}
                 apply strength 3 without any particles to attacker for 4 hours
                 apply speed 1 without any particles to attacker for 1 hour
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at attacker for attacker
@@ -672,18 +836,18 @@ on death of player:
 
 # SUICIDE
 on death of player:
-    if attacker is not player:
-        if {medals::%victim%::suicide::deaths} < 199:
+    if attacker is not a player:
+        if {medals.%victim%.suicide.deaths} < 199:
             if gamemode of victim is survival or adventure:
-                add 1 to {medals::%victim%::suicide::deaths}
-        else if {medals::%victim%::suicide::deaths} = 199:
-            add 1 to {medals::%victim%::suicide::deaths}
-            if {medals::%victim%::suicide} is "{@not_get}":
-                set {medals::%victim%::suicide} to "{@get}"
-                set {medals::%victim%::suicide::when_get} to now
-                set {medals::%victim%::last_obtained} to "&aSuicida"
-                add 1 to {medals::%victim%}
-                add 500 to {points::%victim%}
+                add 1 to {medals.%victim%.suicide.deaths}
+        else if {medals.%victim%.suicide.deaths} = 199:
+            add 1 to {medals.%victim%.suicide.deaths}
+            if {medals.%victim%.suicide} is "{@not_get}":
+                set {medals.%victim%.suicide} to "{@get}"
+                set {medals.%victim%.suicide.when_get} to now
+                set {medals.%victim%.last_obtained} to "&aSuicida"
+                add 1 to {medals.%victim%}
+                add 500 to {points.%victim%}
                 execute console command "/lp user %victim% permission set at.member.back"
                 execute console command "/lp user %victim% permission set at.member.back.death"
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at victim for victim
@@ -696,42 +860,40 @@ on death of player:
                 send "&6&m----------------------------------------" to victim
 
 # FORESTBOSS
-on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log, mangrove log, crimson stem or warped stem: #cherry log
-    set {_axe1} to iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile"
-    set {_axe2} to iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile"
-    if tool of player is not {_axe1} or {_axe2}:
-        if {medals::%player%::forestboss::total_logs} < 5999:
+on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log, mangrove log, crimson stem, warped stem or cherry log:
+    if tool of player is not {@forestboss_axe_male} and {@forestboss_axe_female}:
+        if {medals.%player%.forestboss.total_logs} < 5999:
             if biome at player is forest:
                 if event-block is oak log:
-                    if {medals::%player%::forestboss::oak} < 2999:
+                    if {medals.%player%.forestboss.oak} < 2999:
                         if gamemode of player is survival or adventure:
-                            add 1 to {medals::%player%::forestboss::total_logs}
-                            add 1 to {medals::%player%::forestboss::oak}
-                    else if {medals::%player%::forestboss::oak} = 2999:
-                        add 1 to {medals::%player%::forestboss::oak}
+                            add 1 to {medals.%player%.forestboss.total_logs}
+                            add 1 to {medals.%player%.forestboss.oak}
+                    else if {medals.%player%.forestboss.oak} = 2999:
+                        add 1 to {medals.%player%.forestboss.oak}
                         send "{@prefix} &aCongratulazioni! &7Hai raccolto &63000 &7blocchi di &btronco di quercia&7."
                         play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
                 else if event-block is birch log:
-                    if {medals::%player%::forestboss::birch} < 2999:
+                    if {medals.%player%.forestboss.birch} < 2999:
                         if gamemode of player is survival or adventure:
-                            add 1 to {medals::%player%::forestboss::total_logs}
-                            add 1 to {medals::%player%::forestboss::birch}
-                    else if {medals::%player%::forestboss::birch} = 2999:
-                        add 1 to {medals::%player%::forestboss::birch}
+                            add 1 to {medals.%player%.forestboss.total_logs}
+                            add 1 to {medals.%player%.forestboss.birch}
+                    else if {medals.%player%.forestboss.birch} = 2999:
+                        add 1 to {medals.%player%.forestboss.birch}
                         send "{@prefix} &aCongratulazioni! &7Hai raccolto &63000 &7blocchi di &btronco di betulla&7."
                         play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
-        else if {medals::%player%::forestboss::total_logs} = 5999:
-            add 1 to {medals::%player%::forestboss::total_logs}
-            if {medals::%player%::forestboss} is "{@not_get}":
-                set {medals::%player%::forestboss} to "{@get}"
-                set {medals::%player%::forestboss::when_get} to now
-                set {medals::%player%::forestboss::can_use_axe} to true
-                add 1 to {medals::%player%}
-                add 400 to {points::%player%}
+        else if {medals.%player%.forestboss.total_logs} = 5999:
+            add 1 to {medals.%player%.forestboss.total_logs}
+            if {medals.%player%.forestboss} is "{@not_get}":
+                set {medals.%player%.forestboss} to "{@get}"
+                set {medals.%player%.forestboss.when_get} to now
+                set {medals.%player%.forestboss.can_use_axe} to true
+                add 1 to {medals.%player%}
+                add 400 to {points.%player%}
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-                if {settings::%player%::genre::male} is true:
-                    give 1 iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile" to player
-                    set {medals::%player%::last_obtained} to "&aRe della Foresta"
+                if {settings.%player%.genre.male} is true:
+                    give 1 {@forestboss_axe_male} to player
+                    set {medals.%player%.last_obtained} to "&aRe della Foresta"
                     send "&6&m----------------------------------------" to player
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe della Foresta" to player
                     send "&f" to player
@@ -739,9 +901,9 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                     send "  &a+400 punti" to player
                     send "  &bHai sbloccato il &5TreeKinetor" to player
                     send "&6&m----------------------------------------" to player
-                else if {settings::%player%::genre::female} is true:
-                    set {medals::%player%::last_obtained} to "&aRegina della Foresta"
-                    give 1 iron axe with nbt compound from "{HideFlags:5,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità ∞", "&bTelecinesi", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile" to player
+                else if {settings.%player%.genre.female} is true:
+                    set {medals.%player%.last_obtained} to "&aRegina della Foresta"
+                    give 1 {@forestboss_axe_female} to player
                     send "&6&m----------------------------------------" to player
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina della Foresta" to player
                     send "&f" to player
@@ -750,26 +912,27 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                     send "  &bHai sbloccato il &5TreeKinetor" to player
                     send "&6&m----------------------------------------" to player
     else:
-        if {medals::%player%::forestboss::can_use_axe} is true:
+        if {medals.%player%.forestboss.can_use_axe} is true:
             if gamemode of player is survival or adventure:
-                cancel drops
-                give drops of event-block using player's tool to player
+                if player's inventory has enough space for 1 of event-block:
+                    cancel drops
+                    give drops of event-block using player's tool to player
 
 # SKYLOVER
 on pickup:
-    if {medals::%player%::skylover::count} < 49:
+    if {medals.%player%.skylover.count} < 49:
         if world of player is "smp_the_end":
             if y-coordinate of player is between {@ymin} and {@ymax}:
                 if gamemode of player is survival or adventure:
-                    add 1 to {medals::%player%::skylover::count}
-    else if {medals::%player%::skylover::count} = 49:
-        add 1 to {medals::%player%::skylover::count}
-        if {medals::%player%::skylover} is "{@not_get}":
-            set {medals::%player%::skylover} to "{@get}"
-            set {medals::%player%::skylover::when_get} to now
-            set {medals::%player%::last_obtained} to "&aAmante dei Cieli"
-            add 1 to {medals::%player%}
-            add 800 to {points::%player%}
+                    add 1 to {medals.%player%.skylover.count}
+    else if {medals.%player%.skylover.count} = 49:
+        add 1 to {medals.%player%.skylover.count}
+        if {medals.%player%.skylover} is "{@not_get}":
+            set {medals.%player%.skylover} to "{@get}"
+            set {medals.%player%.skylover.when_get} to now
+            set {medals.%player%.last_obtained} to "&aAmante dei Cieli"
+            add 1 to {medals.%player%}
+            add 800 to {points.%player%}
             apply slow falling without any particles to player for 6 hours
             play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
             send "&6&m----------------------------------------" to player
@@ -782,20 +945,20 @@ on pickup:
 
 # NETHERBOSS
 on death of wither:
-    if attacker is player:
-        if {medals::%attacker%::netherboss::count} < 49:
+    if attacker is a player:
+        if {medals.%attacker%.netherboss.count} < 49:
             if gamemode of attacker is survival or adventure:
-                add 1 to {medals::%attacker%::netherboss::count}
-        else if {medals::%attacker%::netherboss::count} = 49:
-            add 1 to {medals::%attacker%::netherboss::count}
-            if {medals::%attacker%::netherboss} is "{@not_get}":
-                set {medals::%attacker%::netherboss} to "{@get}"
-                set {medals::%attacker%::netherboss::when_get} to now
-                add 800 to {points::%attacker%}
+                add 1 to {medals.%attacker%.netherboss.count}
+        else if {medals.%attacker%.netherboss.count} = 49:
+            add 1 to {medals.%attacker%.netherboss.count}
+            if {medals.%attacker%.netherboss} is "{@not_get}":
+                set {medals.%attacker%.netherboss} to "{@get}"
+                set {medals.%attacker%.netherboss.when_get} to now
+                add 800 to {points.%attacker%}
                 apply fire resistance without any particles to attacker for 6 hours
-                if {settings::%attacker%::genre::male} is true:
-                    set {medals::%attacker%::last_obtained} to "&aRe degli Inferi"
-                    give 1 music disc pigstep named "&bDisco musicale" with lore "&f", "&7Il disco musicale più ascoltato dalla", "&7popolazione del sottosopra.", "&f", " &6● &2Ottenuto con &eRe degli Inferi", "&f" and "&9Copia personale di &b%attacker%" to attacker
+                if {settings.%attacker%.genre.male} is true:
+                    set {medals.%attacker%.last_obtained} to "&aRe degli Inferi"
+                    give 1 {@netherboss_male} to attacker
                     send "&6&m----------------------------------------" to attacker
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe degli Inferi" to attacker
                     send "&f" to attacker
@@ -804,9 +967,9 @@ on death of wither:
                     send "  &b+6 ore di &6Resistenza al fuoco" to attacker
                     send "  &bHai ottenuto un disco musicale: &cPigstep" to attacker
                     send "&6&m----------------------------------------" to attacker
-                else if {settings::%attacker%::genre::female} is true:
-                    set {medals::%attacker%::last_obtained} to "&aRegina degli Inferi"
-                    give 1 music disc pigstep named "&bDisco musicale" with lore "&f", "&7Il disco musicale più ascoltato dalla", "&7popolazione del sottosopra.", "&f", " &6● &2Ottenuto con &eRegina degli Inferi", "&f" and "&5Copia personale di &d%attacker%" to attacker
+                else if {settings.%attacker%.genre.female} is true:
+                    set {medals.%attacker%.last_obtained} to "&aRegina degli Inferi"
+                    give 1 {@netherboss_female} to attacker
                     send "&6&m----------------------------------------" to attacker
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina degli Inferi" to attacker
                     send "&f" to attacker
@@ -818,19 +981,19 @@ on death of wither:
 
 # DRAGONTRAINER
 on death of ender dragon:
-    if attacker is player:
-        if {medals::%attacker%::dragontrainer::count} < 49:
+    if attacker is a player:
+        if {medals.%attacker%.dragontrainer.count} < 49:
             if gamemode of attacker is survival or adventure:
-                add 1 to {medals::%attacker%::dragontrainer::count}
-        else if {medals::%attacker%::dragontrainer::count} = 49:
-            add 1 to {medals::%attacker%::dragontrainer::count}
-            if {medals::%attacker%::dragontrainer} is "{@not_get}":
-                set {medals::%attacker%::dragontrainer} to "{@get}"
-                set {medals::%attacker%::dragontrainer::when_get} to now
-                add 1000 to {points::%attacker%}
-                if {settings::%attacker%::genre::male} is true:
-                    give 1 dragon egg named "&dUovo di drago" with lore "&7Le leggende narrano che questo sia", "&7l'ultimo uovo di drago rimasto in", "&7circolazione.", "&f", " &6● &2Ottenuto con &eDomatore di Draghi", "&f" and "&9Quest'uovo appartiene a &b%attacker%" to attacker
-                    set {medals::%attacker%::last_obtained} to "&aDomatore di Draghi"
+                add 1 to {medals.%attacker%.dragontrainer.count}
+        else if {medals.%attacker%.dragontrainer.count} = 49:
+            add 1 to {medals.%attacker%.dragontrainer.count}
+            if {medals.%attacker%.dragontrainer} is "{@not_get}":
+                set {medals.%attacker%.dragontrainer} to "{@get}"
+                set {medals.%attacker%.dragontrainer.when_get} to now
+                add 1000 to {points.%attacker%}
+                if {settings.%attacker%.genre.male} is true:
+                    give 1 {@dragontrainer_male} to attacker
+                    set {medals.%attacker%.last_obtained} to "&aDomatore di Draghi"
                     send "&6&m----------------------------------------" to attacker
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatore di Draghi" to attacker
                     send "&f" to attacker
@@ -838,9 +1001,9 @@ on death of ender dragon:
                     send "  &a+1000 punti" to attacker
                     send "  &bHai ottenuto un &dUovo di drago" to attacker
                     send "&6&m----------------------------------------" to attacker
-                else if {settings::%attacker%::genre::female} is true:
-                    give 1 dragon egg named "&dUovo di drago" with lore "&7Le leggende narrano che questo sia", "&7l'ultimo uovo di drago rimasto in", "&7circolazione.", "&f", " &6● &2Ottenuto con &eDomatrice di Draghi", "&f" and "&5Quest'uovo appartiene a &d%attacker%" to attacker
-                    set {medals::%attacker%::last_obtained} to "&aDomatrice di Draghi"
+                else if {settings.%attacker%.genre.female} is true:
+                    give 1 {@dragontrainer_female} to attacker
+                    set {medals.%attacker%.last_obtained} to "&aDomatrice di Draghi"
                     send "&6&m----------------------------------------" to attacker
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatrice di Draghi" to attacker
                     send "&f" to attacker
@@ -851,22 +1014,22 @@ on death of ender dragon:
 
 # WARDENBOSS
 on death of warden:
-    if attacker is player:
-        if {medals::%attacker%::wardenboss::count} < 9:
+    if attacker is a player:
+        if {medals.%attacker%.wardenboss.count} < 9:
             if gamemode of attacker is survival or adventure:
-                add 1 to {medals::%attacker%::wardenboss::count}
-        else if {medals::%attacker%::wardenboss::count} = 9:
-            add 1 to {medals::%attacker%::wardenboss::count}
-            if {medals::%attacker%::wardenboss} is "{@not_get}":
-                set {medals::%attacker%::wardenboss} to "{@get}"
-                set {medals::%attacker%::wardenboss::when_get} to now
-                add 1200 to {points::%attacker%}
+                add 1 to {medals.%attacker%.wardenboss.count}
+        else if {medals.%attacker%.wardenboss.count} = 9:
+            add 1 to {medals.%attacker%.wardenboss.count}
+            if {medals.%attacker%.wardenboss} is "{@not_get}":
+                set {medals.%attacker%.wardenboss} to "{@get}"
+                set {medals.%attacker%.wardenboss.when_get} to now
+                add 1200 to {points.%attacker%}
                 apply strength 5 without any particles to attacker for 24 hours
                 apply resistance 5 without any particles to attacker for 24 hours
                 apply regeneration 5 without any particles to attacker for 24 hours
                 apply night vision without any particles to attacker for 24 hours
-                if {settings::%attacker%::genre::male} is true:
-                    set {medals::%attacker%::last_obtained} to "&aDevastatore di Sorveglianti"
+                if {settings.%attacker%.genre.male} is true:
+                    set {medals.%attacker%.last_obtained} to "&aDevastatore di Sorveglianti"
                     send "&6&m----------------------------------------" to attacker
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to attacker
                     send "&f" to attacker
@@ -877,8 +1040,8 @@ on death of warden:
                     send "  &b+24 ore di &6Rigenerazione V" to attacker
                     send "  &b+24 ore di &aVisione notturna" to attacker
                     send "&6&m----------------------------------------" to attacker
-                else if {settings::%attacker%::genre::female} is true:
-                    set {medals::%attacker%::last_obtained} to "&aDevastatrice di Sorveglianti"
+                else if {settings.%attacker%.genre.female} is true:
+                    set {medals.%attacker%.last_obtained} to "&aDevastatrice di Sorveglianti"
                     send "&6&m----------------------------------------" to attacker
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to attacker
                     send "&f" to attacker
@@ -892,4 +1055,4 @@ on death of warden:
 
 
 # VERSIONE
-#   1.0
+#   1.0.4.1

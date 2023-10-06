@@ -1,23 +1,23 @@
 function openBricksStatsGui(p: player):
-    if {settings::%{_p}%::glasspanes} is true:
+    if {settings.%{_p}%.glasspanes} is true:
         set {_gui} to a new chest inventory with 4 rows named "Mattoni"
-        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 30, 33, 34 and 35 of {_gui} to black stained glass pane named ""
-        set slot 10, 16, 19, 20, 21, 22, 23, 24 and 25 of {_gui} to gray stained glass pane named ""
-        set slot 11 of {_gui} to brick block named "&fMattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::bricks}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::bricks}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::bricks}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::bricks}%"
-        set slot 12 of {_gui} to brick stairs named "&fScalini di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::brick_stairs}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::brick_stairs}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::brick_stairs}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick_stairs}%"
-        set slot 13 of {_gui} to brick named "&fMattone" with lore "&aOverworld" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick}%"
-        set slot 14 of {_gui} to brick slab named "&fLastra di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::brick_slab}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::brick_slab}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::brick_slab}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick_slab}%"
-        set slot 15 of {_gui} to brick wall named "&fMuretto di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::brick_wall}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::brick_wall}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::brick_wall}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick_wall}%"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 30, 33, 34 and 35 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 16, 19, 20, 21, 22, 23, 24 and 25 of {_gui} to gray stained glass pane named "&r"
+        set slot 11 of {_gui} to brick block named "&fMattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::bricks}%", " &7Piazzati: &f%{build::%{_p}%::placed::bricks}%", " &7Craftati: &f%{build::%{_p}%::crafted::bricks}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::bricks}%"
+        set slot 12 of {_gui} to brick stairs named "&fScalini di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::brick_stairs}%", " &7Piazzati: &f%{build::%{_p}%::placed::brick_stairs}%", " &7Craftati: &f%{build::%{_p}%::crafted::brick_stairs}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick_stairs}%"
+        set slot 13 of {_gui} to brick named "&fMattone" with lore "&aOverworld" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick}%"
+        set slot 14 of {_gui} to brick slab named "&fLastra di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::brick_slab}%", " &7Piazzati: &f%{build::%{_p}%::placed::brick_slab}%", " &7Craftati: &f%{build::%{_p}%::crafted::brick_slab}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick_slab}%"
+        set slot 15 of {_gui} to brick wall named "&fMuretto di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::brick_wall}%", " &7Piazzati: &f%{build::%{_p}%::placed::brick_wall}%", " &7Craftati: &f%{build::%{_p}%::crafted::brick_wall}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick_wall}%"
         set slot 31 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Blocchi da costruzione"
         set slot 32 of {_gui} to paper named "&aStatistiche" with lore "&7Torna alla pagina principale" and "&7delle tue statistiche."
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 4 rows named "Mattoni"
-        set slot 11 of {_gui} to brick block named "&fMattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::bricks}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::bricks}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::bricks}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::bricks}%"
-        set slot 12 of {_gui} to brick stairs named "&fScalini di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::brick_stairs}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::brick_stairs}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::brick_stairs}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick_stairs}%"
-        set slot 13 of {_gui} to brick named "&fMattone" with lore "&aOverworld" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick}%"
-        set slot 14 of {_gui} to brick slab named "&fLastra di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::brick_slab}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::brick_slab}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::brick_slab}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick_slab}%"
-        set slot 15 of {_gui} to brick wall named "&fMuretto di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{blocksbuild::%{_p}%::broke::brick_wall}%", " &7Piazzati: &f%{blocksbuild::%{_p}%::placed::brick_wall}%", " &7Craftati: &f%{blocksbuild::%{_p}%::crafted::brick_wall}%" and " &7Raccolti: &f%{blocksbuild::%{_p}%::pickup::brick_wall}%"
+        set slot 11 of {_gui} to brick block named "&fMattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::bricks}%", " &7Piazzati: &f%{build::%{_p}%::placed::bricks}%", " &7Craftati: &f%{build::%{_p}%::crafted::bricks}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::bricks}%"
+        set slot 12 of {_gui} to brick stairs named "&fScalini di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::brick_stairs}%", " &7Piazzati: &f%{build::%{_p}%::placed::brick_stairs}%", " &7Craftati: &f%{build::%{_p}%::crafted::brick_stairs}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick_stairs}%"
+        set slot 13 of {_gui} to brick named "&fMattone" with lore "&aOverworld" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick}%"
+        set slot 14 of {_gui} to brick slab named "&fLastra di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::brick_slab}%", " &7Piazzati: &f%{build::%{_p}%::placed::brick_slab}%", " &7Craftati: &f%{build::%{_p}%::crafted::brick_slab}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick_slab}%"
+        set slot 15 of {_gui} to brick wall named "&fMuretto di mattoni" with lore "&aOverworld", " &7Distrutti: &f%{build::%{_p}%::broke::brick_wall}%", " &7Piazzati: &f%{build::%{_p}%::placed::brick_wall}%", " &7Craftati: &f%{build::%{_p}%::crafted::brick_wall}%" and " &7Raccolti: &f%{build::%{_p}%::pickup::brick_wall}%"
         set slot 31 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Blocchi da costruzione"
         set slot 32 of {_gui} to paper named "&aStatistiche" with lore "&7Torna alla pagina principale" and "&7delle tue statistiche."
         open {_gui} to {_p}

@@ -1,0 +1,1837 @@
+on break:
+    if player's gamemode is survival or adventure:
+# QUERCIA
+        if event-block is oak log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped oak log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_oak_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped oak wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_oak_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oak button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oak_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# BETULLA
+        else if event-block is birch log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped birch log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_birch_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped birch wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_birch_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is birch button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.birch_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# QUERCIA SCURA
+        else if event-block is dark oak log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped dark oak log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_dark_oak_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped dark oak wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_dark_oak_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark oak button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_oak_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ABETE
+        else if event-block is spruce log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.spruce_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.spruce_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped spruce log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_spruce_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped spruce wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_spruce_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.spruce_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {blocksbuild.%player%.spruce_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {blocksbuild.%player%.spruce_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {blocksbuild.%player%.spruce_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {blocksbuild.%player%.spruce_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {blocksbuild.%player%.spruce_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {blocksbuild.%player%.spruce_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.spruce_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is spruce button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.spruce_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ACACIA
+        else if event-block is acacia log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped acacia log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_acacia_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped acacia wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_acacia_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is acacia button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.acacia_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# GIUNGLA
+        else if event-block is jungle log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped jungle log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_jungle_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped jungle wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_jungle_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is jungle button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.jungle_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MANGROVIA
+        else if event-block is mangrove log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped mangrove log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_mangrove_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped mangrove wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_mangrove_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mangrove button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mangrove_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# CILIEGIO
+        else if event-block is cherry log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped cherry log:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_cherry_log}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped cherry wood:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_cherry_wood}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cherry button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cherry_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# BAMBÙ
+        else if event-block is bamboo block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped bamboo block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_bamboo_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo mosaic:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_mosaic}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo mosaic stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_mosaic_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo mosaic slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_mosaic_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is bamboo button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bamboo_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# CREMISI
+        else if event-block is crimson stem:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_stem}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson hyphae:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_hyphae}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped crimson stem:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_crimson_stem}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped crimson hyphae:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_crimson_hyphae}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is crimson button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.crimson_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# DISTORTO
+        else if event-block is warped stem:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_stem}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped hyphae:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_hyphae}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped warped stem:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_warped_stem}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stripped warped hyphae:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stripped_warped_hyphae}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped planks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_planks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped fence gate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_fence_gate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_door}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_trapdoor}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is warped button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.warped_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIETRA, CALCITE, TUFO E PIETRA LISCIA
+        else if event-block is stone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_pressure plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is calcite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.calcite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is tuff:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.tuff}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth stone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_stone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth stone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_stone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIETRISCO E PIETRISCO MUSCHIOSO
+        else if event-block is cobblestone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobblestone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobblestone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobblestone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobblestone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobblestone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobblestone wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobblestone_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy cobblestone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_cobblestone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy cobblestone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_cobblestone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy cobblestone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_cobblestone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy cobblestone wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_cobblestone_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI DI PIETRA E MATTONI DI PIETRA MUSCHIOSI
+        else if event-block is stone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cracked stone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cracked_stone_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is stone brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.stone_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is chiseled stone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_stone_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy stone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_stone_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy stone brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_stone_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy stone brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_stone_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mossy stone brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mossy_stone_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# GRANITO E GRANITO LEVIGATO
+        else if event-block is granite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.granite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is granite stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.granite_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is granite slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.granite_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is granite wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.granite_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished granite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_granite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished granite stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_granite_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished granite slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_granite_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# DIORITE E DIORITE LEVIGATA
+        else if event-block is diorite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.diorite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is diorite stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.diorite_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is diorite slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.diorite_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is diorite wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.diorite_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished diorite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_diorite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished diorite stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_diorite_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished diorite slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_diorite_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ANDESITE E ANDESITE LEVIGATA
+        else if event-block is andesite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.andesite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is andesite stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.andesite_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is andesite slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.andesite_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is andesite wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.andesite_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished andesite:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_andesite}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished andesite stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_andesite_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished andesite slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_andesite_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIETRISCO DI ARDESIA PROFONDA E ARDESIA PROFONDA
+        else if event-block is deepslate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobbled deepslate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobbled_deepslate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobbled deepslate stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobbled_deepslate_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobbled deepslate slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobbled_deepslate_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cobbled deepslate wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cobbled_deepslate_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ARDESIA PROFONDA CESELLATA E LEVIGATA
+        else if event-block is chiseled deepslate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_deepslate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished deepslate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_deepslate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished deepslate stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_deepslate_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished deepslate slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_deepslate_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished deepslate wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_deepslate_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI DI ARDESIA PROFONDA
+        else if event-block is deepslate bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cracked deepslate bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cracked_deepslate_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is deepslate brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_bricks_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is deepslate brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_bricks_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is deepslate brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_bricks_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIASTRELLE DI ARDESIA PROFONDA
+        else if event-block is deepslate tiles:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_tiles}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cracked deepslate tiles:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cracked_deepslate_tiles}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is deepslate tile stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_tiles_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is deepslate tile slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_tiles_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is deepslate tile wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.deepslate_tiles_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ARDESIA PROFONDA RINFORZATA
+        else if event-block is reinforced deepslate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.reinforced_deepslate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI
+        else if event-block is bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# FANGO
+        else if event-block is packed mud:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.packed_mud}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mud bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mud_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mud brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mud_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mud brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mud_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is mud brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.mud_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ARENARIA
+        else if event-block is sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is sandstone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.sandstone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is sandstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.sandstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is sandstone wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.sandstone_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is chiseled sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth sandstone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_sandstone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth sandstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_sandstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut sandstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_sandstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# ARENARIA ROSSA
+        else if event-block is red sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is red sandstone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_sandstone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is red sandstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_sandstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is red sandstone wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_sandstone_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is chiseled red sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_red_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth red sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_red_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth red sandstone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_red_sandstone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth red sandstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_red_sandstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut red sandstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_red_sandstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut red sandstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_red_sandstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+            
+# PRISMARINO
+        else if event-block is prismarine:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is prismarine stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is prismarine slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is prismarine wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI DI PRISMARINO
+        else if event-block is prismarine bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is prismarine brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is prismarine brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.prismarine_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PRISMARINO SCURO
+        else if event-block is dark prismarine:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_prismarine}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark prismarine stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_prismarine_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is dark prismarine slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.dark_prismarine_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# NETHERRACK
+        else if event-block is netherrack:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.netherrack}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI DEL NETHER
+        else if event-block is nether bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.nether_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cracked nether bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cracked_nether_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is chiseled nether bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_nether_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is nether brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.nether_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is nether brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.nether_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is nether brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.nether_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is nether brick fence:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.nether_brick_fence}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI DEL NETHER ROSSI
+        else if event-block is red nether bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_nether_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is red nether brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_nether_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is red nether brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_nether_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is red nether brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.red_nether_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# BASALTO
+        else if event-block is basalt:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.basalt}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth basalt:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_basalt}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished basalt:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_basalt}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIETRANERA
+        else if event-block is blackstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.blackstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is gilded blackstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.gilded_blackstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is blackstone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.blackstone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is blackstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.blackstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is blackstone wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.blackstone_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIETRANERA LEVIGATA
+        else if event-block is chiseled polished blackstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_polished_blackstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone button:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_button}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# MATTONI DI PIETRANERA LEVIGATA
+        else if event-block is polished blackstone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cracked polished blackstone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cracked_polished_blackstone_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is polished blackstone brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.polished_blackstone_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PIETRA DELL'END E MATTONI DI PIETRA DELL'END
+        else if event-block is end stone:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.end_stone}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is end stone bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.end_stone_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is end stone brick stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.end_stone_brick_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is end stone brick slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.end_stone_brick_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is end stone brick wall:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.end_stone_brick_wall}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# PURPUR
+        else if event-block is purpur block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.purpur_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is purpur pillar:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.purpur_pillar}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is purpur stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.purpur_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is purpur slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.purpur_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# OGGETTI IN FERRO
+        else if event-block is iron block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.iron_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is iron bars:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.iron_bars}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is iron door:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.iron_bars}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is iron trapdoor:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.iron_bars}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is heavy weighted pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.heavy_weighted_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is chain:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chain}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# OGGETTI IN ORO
+        else if event-block is gold block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.gold_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is light weighted pressure plate:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.light_weighted_pressure_plate}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# BLOCCHI DI MINERALI
+        else if event-block is coal block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.coal_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is redstone block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.redstone_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is emerald block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.emerald_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is lapis block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.lapis_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is diamond block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.diamond_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is netherite block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.netherite_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# QUARZO
+        else if event-block is quartz block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.quartz_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is quartz stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.quartz_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is quartz slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.quartz_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is chiseled quartz block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.chiseled_quartz_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is quartz bricks:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.quartz_bricks}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is quartz pillar:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.quartz_pillar}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth quartz:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_quartz}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth quartz stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_quartz_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is smooth quartz slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.smooth_quartz_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# BLOCCHI DI RAME
+    # NORMALI
+        else if event-block is copper block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.copper_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+    # ESPOSTI
+        else if event-block is exposed copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.exposed_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is exposed cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.exposed_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is exposed cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.exposed_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is exposed cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.exposed_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+    # CORROSI
+        else if event-block is weathered copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.weathered_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is weathered cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.weathered_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is weathered cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.weathered_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is weathered cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.weathered_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+    # OSSIDATI
+        else if event-block is oxidized copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oxidized_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oxidized cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oxidized_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oxidized cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oxidized_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is oxidized cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.oxidized_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+
+# BLOCCHI DI RAME CERATI
+    # NORMALI
+        else if event-block is waxed copper block:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_copper_block}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+    # ESPOSTI
+        else if event-block is waxed exposed copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_exposed_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed exposed cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_exposed_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed exposed cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_exposed_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed exposed cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_exposed_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+    # CORROSI
+        else if event-block is waxed weathered copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_weathered_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed weathered cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_weathered_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed weathered cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_weathered_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed weathered cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_weathered_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+    # OSSIDATI
+        else if event-block is waxed oxidized copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_oxidized_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed oxidized cut copper:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_oxidized_cut_copper}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed oxidized cut copper stairs:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_oxidized_cut_copper_stairs}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}
+        else if event-block is waxed oxidized cut copper slab:
+            if {blocks::%player%::*} doesn't contain event-location:
+                add 1 to {build.%player%.broke.waxed_oxidized_cut_copper_slab}
+                add 1 to {stats.%player%.broken_blocks}
+                add 1 to {build.%player%.total_broken}

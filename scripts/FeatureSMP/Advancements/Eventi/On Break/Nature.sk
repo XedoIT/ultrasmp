@@ -1,0 +1,753 @@
+on break:
+    if player's gamemode is survival or adventure:
+# TERRA E VARIANTI
+        if event-block is grass block:
+            add 1 to {nature.%player%.broke.grass_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is podzol:
+            add 1 to {nature.%player%.broke.podzol}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is mycelium block:
+            add 1 to {nature.%player%.broke.mycelium}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dirt path:
+            add 1 to {nature.%player%.broke.dirt_path}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dirt:
+            add 1 to {nature.%player%.broke.dirt}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is coarse dirt:
+            add 1 to {nature.%player%.broke.coarse_dirt}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is rooted dirt:
+            add 1 to {nature.%player%.broke.rooted_dirt}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is farmland:
+            add 1 to {nature.%player%.broke.farmland}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# FANGO
+        else if event-block is mud:
+            add 1 to {nature.%player%.broke.mud}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is muddy mangrove roots:
+            add 1 to {nature.%player%.broke.muddy_mangrove_roots}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# ARGILLA
+        else if event-block is clay:
+            add 1 to {nature.%player%.broke.clay}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# GHIAIA
+        else if event-block is gravel:
+            add 1 to {nature.%player%.broke.gravel}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is suspicious gravel:
+            add 1 to {function.%player%.broke.suspicious_gravel}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {function.%player%.total_broken}
+
+
+# SABBIA E SABBIA ROSSA
+        else if event-block is sand:
+            add 1 to {nature.%player%.broke.sand}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is suspicious sand:
+            add 1 to {function.%player%.broke.suspicious_sand}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {function.%player%.total_broken}
+        else if event-block is red sand:
+            add 1 to {nature.%player%.broke.red_sand}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# GHIACCIO
+        else if event-block is ice:
+            add 1 to {nature.%player%.broke.ice}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is packed ice:
+            add 1 to {nature.%player%.broke.packed_ice}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is blue ice:
+            add 1 to {nature.%player%.broke.blue_ice}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# NEVE
+        else if event-block is snow block:
+            add 1 to {nature.%player%.broke.snow_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is snow:
+            add 1 to {nature.%player%.broke.snow}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# MUSCHIO
+        else if event-block is moss block:
+            add 1 to {nature.%player%.broke.moss_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is moss carpet:
+            add 1 to {nature.%player%.broke.moss_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# SPELEOTEMA
+        else if event-block is dripstone block:
+            add 1 to {nature.%player%.broke.dripstone_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pointed dripstone:
+            add 1 to {nature.%player%.broke.pointed_dripstone}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# BLOCCO DI MAGMA
+        else if event-block is magma block:
+            add 1 to {nature.%player%.broke.magma_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# OSSIDIANA
+        else if event-block is obsidian:
+            add 1 to {nature.%player%.broke.obsidian}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is crying obsidian:
+            add 1 to {nature.%player%.broke.crying_obsidian}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# NECELI
+        else if event-block is crimson nylium:
+            add 1 to {nature.%player%.broke.crymson_nylium}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is warped nylium:
+            add 1 to {nature.%player%.broke.warped_nylium}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# SABBIA DELLE ANIME E TERRA DELLE ANIME
+        else if event-block is soul sand:
+            add 1 to {nature.%player%.broke.soul_sand}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is soul soil:
+            add 1 to {nature.%player%.broke.soul_soil}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# BLOCCO DI OSSA
+        else if event-block is bone block:
+            add 1 to {nature.%player%.broke.bone_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# FOGLIE
+        else if event-block is oak leaves:
+            add 1 to {nature.%player%.broke.oak_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is spruce leaves:
+            add 1 to {nature.%player%.broke.spruce_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is birch leaves:
+            add 1 to {nature.%player%.broke.birch_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is jungle leaves:
+            add 1 to {nature.%player%.broke.jungle_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is acacia leaves:
+            add 1 to {nature.%player%.broke.acacia_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dark oak leaves:
+            add 1 to {nature.%player%.broke.dark_oak_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is mangrove leaves:
+            add 1 to {nature.%player%.broke.mangrove_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is cherry leaves:
+            add 1 to {nature.%player%.broke.cherry_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is azalea leaves:
+            add 1 to {nature.%player%.broke.azalea_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is flowering azalea leaves:
+            add 1 to {nature.%player%.broke.flowering_azalea_leaves}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is mangrove roots:
+            add 1 to {nature.%player%.broke.mangrove_roots}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# FUNGHI E BLOCCHI DI FUNGHI
+        else if event-block is brown mushroom:
+            add 1 to {nature.%player%.broke.brown_mushroom}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is red mushroom:
+            add 1 to {nature.%player%.broke.red_mushroom}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is brown mushroom block:
+            add 1 to {nature.%player%.broke.brown_mushroom_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is red mushroom block:
+            add 1 to {nature.%player%.broke.red_mushroom_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# BLOCCHI DI VERRUCHE DEL NETHER
+        else if event-block is nether wart block:
+            add 1 to {nature.%player%.broke.nether_wart_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is warped wart block:
+            add 1 to {nature.%player%.broke.warped_wart_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# FUNGOLUME
+        else if event-block is shroomlight:
+            add 1 to {nature.%player%.broke.shroomlight}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# ARBOSCELLI
+        else if event-block is oak sapling:
+            add 1 to {nature.%player%.broke.oak_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is spruce sapling:
+            add 1 to {nature.%player%.broke.spruce_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is birch sapling:
+            add 1 to {nature.%player%.broke.birch_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is jungle sapling:
+            add 1 to {nature.%player%.broke.jungle_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is acacia sapling:
+            add 1 to {nature.%player%.broke.acacia_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dark oak sapling:
+            add 1 to {nature.%player%.broke.dark_oak_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is mangrove propagule:
+            add 1 to {nature.%player%.broke.mangrove_propagule}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is cherry sapling:
+            add 1 to {nature.%player%.broke.cherry_sapling}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# AZALEE FIORITE
+        else if event-block is azalea:
+            add 1 to {nature.%player%.broke.azalea}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is flowering azalea:
+            add 1 to {nature.%player%.broke.flowering_azalea}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# VEGETAZIONE
+    # AMBIENTE - OVERWORLD
+        else if event-block is grass:
+            add 1 to {nature.%player%.broke.grass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is tall grass:
+            add 1 to {nature.%player%.broke.tall_grass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is fern:
+            add 1 to {nature.%player%.broke.fern}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is large fern:
+            add 1 to {nature.%player%.broke.large_fern}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead bush:
+            add 1 to {nature.%player%.broke.dead_bush}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is glow lichen:
+            add 1 to {nature.%player%.broke.glow_lichen}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is hanging roots:
+            add 1 to {nature.%player%.broke.hanging_roots}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is seagrass:
+            add 1 to {nature.%player%.broke.seagrass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sea pickle:
+            add 1 to {nature.%player%.broke.sea_pickle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is vine:
+            add 1 to {nature.%player%.broke.vine}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is lily pad:
+            add 1 to {nature.%player%.broke.lily_pad}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # AMBIENTE - NETHER
+        else if event-block is crimson roots:
+            add 1 to {nature.%player%.broke.crimson_roots}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is warped roots:
+            add 1 to {nature.%player%.broke.warped_roots}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is nether sprouts:
+            add 1 to {nature.%player%.broke.nether_sprouts}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is weeping vines:
+            add 1 to {nature.%player%.broke.weeping_vines}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is twisting vines:
+            add 1 to {nature.%player%.broke.twisting_vines}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # FIORI
+        else if event-block is dandelion:
+            add 1 to {nature.%player%.broke.dandelion}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is poppy:
+            add 1 to {nature.%player%.broke.poppy}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is blue orchid:
+            add 1 to {nature.%player%.broke.blue_orchid}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is allium:
+            add 1 to {nature.%player%.broke.allium}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is azure bluet:
+            add 1 to {nature.%player%.broke.azure_bluet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is red tulip:
+            add 1 to {nature.%player%.broke.red_tulip}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is orange tulip:
+            add 1 to {nature.%player%.broke.orange_tulip}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is white tulip:
+            add 1 to {nature.%player%.broke.white_tulip}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pink tulip:
+            add 1 to {nature.%player%.broke.pink_tulip}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is oxeye daisy:
+            add 1 to {nature.%player%.broke.oxeye_daisy}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is cornflower:
+            add 1 to {nature.%player%.broke.cornflower}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is lily of the valley:
+            add 1 to {nature.%player%.broke.lily_of_the_valley}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is torchflower:
+            add 1 to {nature.%player%.broke.torchflower}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is wither rose:
+            add 1 to {nature.%player%.broke.wither_rose}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pink petals:
+            add 1 to {nature.%player%.broke.pink_petals}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is spore blossom:
+            add 1 to {nature.%player%.broke.spore_blossom}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sunflower:
+            add 1 to {nature.%player%.broke.sunflower}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is lilac:
+            add 1 to {nature.%player%.broke.lilac}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is rose bush:
+            add 1 to {nature.%player%.broke.rose_bush}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is peony:
+            add 1 to {nature.%player%.broke.peony}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pitcher plant:
+            add 1 to {nature.%player%.broke.pitcher_plant}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is chorus flower:
+            add 1 to {nature.%player%.broke.chorus_flower}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # PIANTE
+        else if event-block is bamboo:
+            add 1 to {nature.%player%.broke.bamboo}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sugar cane:
+            add 1 to {nature.%player%.broke.sugar_cane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is cactus:
+            add 1 to {nature.%player%.broke.cactus}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is big dripleaf:
+            add 1 to {nature.%player%.broke.big_dripleaf}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is small dripleaf:
+            add 1 to {nature.%player%.broke.small_dripleaf}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is chorus plant:
+            add 1 to {nature.%player%.broke.chorus_plant}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# UOVA DI MOB
+        else if event-block is frogspawn:
+            add 1 to {nature.%player%.broke.frogspawn}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is turtle egg:
+            add 1 to {nature.%player%.broke.turtle_egg}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sniffer egg:
+            add 1 to {nature.%player%.broke.sniffer_egg}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# ALGHE
+        else if event-block is kelp:
+            add 1 to {nature.%player%.broke.kelp}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dried kelp block:
+            add 1 to {nature.%player%.broke.dried_kelp_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# COLTIVAZIONI
+    # OVERWORLD
+        else if event-block is wheat seeds:
+            add 1 to {nature.%player%.broke.wheat_seeds}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is cocoa beans:
+            add 1 to {nature.%player%.broke.cocoa_beans}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pumpkin seeds:
+            add 1 to {nature.%player%.broke.pumpkin_seeds}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is melon seeds:
+            add 1 to {nature.%player%.broke.melon_seeds}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is beetroot seeds:
+            add 1 to {nature.%player%.broke.beetroot_seeds}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is torchflower seeds:
+            add 1 to {nature.%player%.broke.torchflower_seeds}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pitcher pod:
+            add 1 to {nature.%player%.broke.pitcher_pod}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is glow berries:
+            add 1 to {nature.%player%.broke.glow_berries}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sweet berries:
+            add 1 to {nature.%player%.broke.sweet_berries}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+            
+    # NETHER
+        else if event-block is crimson fungus:
+            add 1 to {nature.%player%.broke.crimson_fungus}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is warped fungus:
+            add 1 to {nature.%player%.broke.warped_fungus}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is nether wart:
+            add 1 to {nature.%player%.broke.nether_wart}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# CORALLI
+    # BLOCCHI - VIVI
+        else if event-block is tube coral block:
+            add 1 to {nature.%player%.broke.tube_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is brain coral block:
+            add 1 to {nature.%player%.broke.brain_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is bubble coral block:
+            add 1 to {nature.%player%.broke.bubble_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is fire coral block:
+            add 1 to {nature.%player%.broke.fire_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is horn coral block:
+            add 1 to {nature.%player%.broke.horn_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # BLOCCHI - MORTI
+        else if event-block is dead tube coral block:
+            add 1 to {nature.%player%.broke.dead_tube_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead brain coral block:
+            add 1 to {nature.%player%.broke.dead_brain_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead bubble coral block:
+            add 1 to {nature.%player%.broke.dead_bubble_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead fire coral block:
+            add 1 to {nature.%player%.broke.dead_fire_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead horn coral block:
+            add 1 to {nature.%player%.broke.dead_horn_coral_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # STRUTTURE - VIVE
+        else if event-block is tube coral:
+            add 1 to {nature.%player%.broke.tube_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is brain coral:
+            add 1 to {nature.%player%.broke.brain_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is bubble coral:
+            add 1 to {nature.%player%.broke.bubble_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is fire coral:
+            add 1 to {nature.%player%.broke.fire_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is horn coral:
+            add 1 to {nature.%player%.broke.horn_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # STRUTTURE - MORTE
+        else if event-block is dead tube coral:
+            add 1 to {nature.%player%.broke.dead_tube_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead brain coral:
+            add 1 to {nature.%player%.broke.dead_brain_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead bubble coral:
+            add 1 to {nature.%player%.broke.dead_bubble_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead fire coral:
+            add 1 to {nature.%player%.broke.dead_fire_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead horn coral:
+            add 1 to {nature.%player%.broke.dead_horn_coral}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # GORGONIE - VIVE
+        else if event-block is tube coral fan:
+            add 1 to {nature.%player%.broke.tube_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is brain coral fan:
+            add 1 to {nature.%player%.broke.brain_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is bubble coral fan:
+            add 1 to {nature.%player%.broke.bubble_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is fire coral fan:
+            add 1 to {nature.%player%.broke.fire_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is horn coral fan:
+            add 1 to {nature.%player%.broke.horn_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+    # GORGONIE - MORTE
+        else if event-block is dead tube coral fan:
+            add 1 to {nature.%player%.broke.dead_tube_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead brain coral fan:
+            add 1 to {nature.%player%.broke.dead_brain_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead bubble coral fan:
+            add 1 to {nature.%player%.broke.dead_bubble_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead fire coral fan:
+            add 1 to {nature.%player%.broke.dead_fire_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is dead horn coral fan:
+            add 1 to {nature.%player%.broke.dead_horn_coral_fan}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+            
+# SPUGNE
+        else if event-block is sponge:
+            add 1 to {nature.%player%.broke.sponge}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is wet sponge:
+            add 1 to {nature.%player%.broke.wet_sponge}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# MELONE, ZUCCA E FIENO
+        else if event-block is melon:
+            add 1 to {nature.%player%.broke.melon}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pumpkin:
+            add 1 to {nature.%player%.broke.pumpkin}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is carved pumpkin:
+            add 1 to {nature.%player%.broke.carved_pumpkin}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is jack o lantern:
+            add 1 to {nature.%player%.broke.jack_o_lantern}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is hay block:
+            add 1 to {nature.%player%.broke.hay_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# API E MIELE
+        else if event-block is honeycomb block:
+            add 1 to {nature.%player%.broke.honeycomb_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is honey block:
+            add 1 to {nature.%player%.broke.honey_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# LANTERANE
+        else if event-block is ochre froglight:
+            add 1 to {nature.%player%.broke.ochre_froglight}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is verdant froglight:
+            add 1 to {nature.%player%.broke.verdant_froglight}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is pearlescent froglight:
+            add 1 to {nature.%player%.broke.pearlescent_froglight}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# SCULK
+        else if event-block is sculk:
+            add 1 to {nature.%player%.broke.sculk}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sculk vein:
+            add 1 to {nature.%player%.broke.sculk_vein}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is sculk catalyst:
+            add 1 to {nature.%player%.broke.sculk_catalyst}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+
+# SENZA CATEGORIA
+        else if event-block is slime block:
+            add 1 to {nature.%player%.broke.slime_block}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}
+        else if event-block is cobweb:
+            add 1 to {nature.%player%.broke.cobweb}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {nature.%player%.total_broken}

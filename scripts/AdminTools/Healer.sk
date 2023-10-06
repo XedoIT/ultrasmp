@@ -1,39 +1,60 @@
 options:
-    prefix: &8[&a&lC&b&lU&a&lR&b&lE&8]&f
+    prefix: &8[&a&lC&b&lU&a&lR&b&lE&8]
+    error_prefix: &8[&c&lC&6&lU&c&lR&6&lE&8]
+    hide_prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    confirm_sound: entity.player.levelup
+    error_sound: entity.enderman.teleport
 
 command /heal [<offline player>]:
     permission: heal.use
-    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    permission message: {@hide_prefix} &cComando sconosciuto.
     description: Cura e sazia i giocatori.
     executable by: player, console
     trigger:
         if sender is player:
             if arg-1 is set:
                 if arg-1 is online:
-                    heal arg-1
-                    feed arg-1
-                    send "{@prefix} &aHai curato e saziato &b%arg-1%&a." to player
-                    send "{@prefix} &b%player% &ati ha curato e saziato." to arg-1
-                    play sound "entity.player.levelup" with volume 1 and pitch 1 at arg-1 for the arg-1
-                    stop
+                    set {player_hp} to placeholder "aureliumskills_hp" from arg-1
+                    set {player_hp_max} to placeholder "aureliumskills_hp_max" from arg-1
+                    if {player_hp} != {player_hp_max}:
+                        heal arg-1
+                        feed arg-1
+                        send "{@prefix} &aHai curato e saziato &b%arg-1%&a." to player
+                        send "{@prefix} &b%player% &ati ha curato e saziato." to arg-1
+                        play sound "{@confirm_sound}" with volume 1 and pitch 1 at arg-1 for the arg-1
+                        stop
+                    else:
+                        send "{@error_prefix} &6%arg-1% &cha già la vita al massimo!" to player
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                        stop
                 else:
                     send "{@prefix} &6%arg-1% &cnon è online."
                     stop
             else:
-                heal player
-                feed player
-                send "{@prefix} &aTi sei curato e saziato."
-                play sound "entity.player.levelup" with volume 1 and pitch 1 at player for the player
-                stop
+                set {player_hp} to placeholder "aureliumskills_hp" from player
+                set {player_hp_max} to placeholder "aureliumskills_hp_max" from player
+                if {player_hp} != {player_hp_max}:
+                    heal player
+                    feed player
+                    send "{@prefix} &aTi sei curato e saziato."
+                    play sound "{@confirm_sound}" with volume 1 and pitch 1 at player for the player
+                    stop
         else:
             if arg-1 is set:
                 if arg-1 is online:
-                    heal arg-1
-                    feed arg-1
-                    send "{@prefix} &aHai curato e saziato &b%arg-1%&a." to console
-                    send "{@prefix} &b%player% &ati ha curato e saziato." to arg-1
-                    play sound "entity.player.levelup" with volume 1 and pitch 1 at arg-1 for the arg-1
-                    stop
+                    set {player_hp} to placeholder "aureliumskills_hp" from arg-1
+                    set {player_hp_max} to placeholder "aureliumskills_hp_max" from arg-1
+                    if {player_hp} != {player_hp_max}:
+                        heal arg-1
+                        feed arg-1
+                        send "{@prefix} &aHai curato e saziato &b%arg-1%&a." to console
+                        send "{@prefix} &aLa &bconsole &ati ha curato e saziato." to arg-1
+                        play sound "{@confirm_sound}" with volume 1 and pitch 1 at arg-1 for the arg-1
+                        stop
+                    else:
+                        send "{@error_prefix} &6%arg-1% &cha già la vita al massimo!" to console
+                        stop
                 else:
                     send "{@prefix} &6%arg-1% &cnon è online."
                     stop

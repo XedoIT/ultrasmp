@@ -1,6 +1,13 @@
 options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
+    enabled: "&aattivate"
+    disabled: "&cdisattivate"
 
+on join:
+    if {settings.%player%.ServiceAlerts}, {settings.%player%.ServiceAlertsInfo}, {settings.%player%.Alerts} and {settings.%player%.AlertsInfo} is not set:
+        set {settings.%player%.ServiceAlerts} and {settings.%player%.Alerts} to true
+        set {settings.%player%.ServiceAlertsInfo} and {settings.%player%.AlertsInfo} to {@enabled}
+    
 command /notify [<text>] [<offline player>]:
     aliases: /notifiche
     description: Gestisci le tue notifiche all'interno dell'SMP.
@@ -12,27 +19,25 @@ command /notify [<text>] [<offline player>]:
                     send "{@prefix} &cComando incompleto."
                     send "{@prefix} &cUtilizzo: &6/notify service [&egiocatore&6]"
                     send "{@prefix} &cUtilizzo: &6/notify general [&egiocatore&6]"
-                    send "{@prefix} &cUtilizzo: &6/notify all [&egiocatore&6]"
                     stop
                 else:
                     send "{@prefix} &cComando incompleto."
                     send "{@prefix} &cUtilizzo: &6/notify service"
                     send "{@prefix} &cUtilizzo: &6/notify general"
-                    send "{@prefix} &cUtilizzo: &6/notify all"
                     stop
 
             else if arg-1 is "service":
                 if arg-2 is not set:
-                    if {settings::%player%::ServiceAlerts} is not set:
-                        set {settings::%player%::ServiceAlerts} to true
-                        set {settings::%player%::ServiceAlertsInfo} to "&aattivate"
-                        delete {settings::%player%::AllAlertsOFF}
+                    if {settings.%player%.ServiceAlerts} is not set:
+                        set {settings.%player%.ServiceAlerts} to true
+                        set {settings.%player%.ServiceAlertsInfo} to {@enabled}
+                        delete {settings.%player%.AllAlertsOFF}
                         play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                         send "{@prefix} &aNotifiche di servizio attivate." to player
                         stop
                     else:
-                        delete {settings::%player%::ServiceAlerts}
-                        set {settings::%player%::ServiceAlertsInfo} to "&cdisattivate"
+                        delete {settings.%player%.ServiceAlerts}
+                        set {settings.%player%.ServiceAlertsInfo} to {@disabled}
                         play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                         send "{@prefix} &cNotifiche di servizio disattivate." to player
                         stop
@@ -46,17 +51,17 @@ command /notify [<text>] [<offline player>]:
                         stop
                 else if arg-2 is online:
                     if player has permission "notify.service.other":
-                        if {settings::%arg-2%::ServiceAlerts} is not set:
-                            set {settings::%arg-2%::ServiceAlerts} to true
-                            set {settings::%arg-2%::ServiceAlertsInfo} to "&aattivate"
-                            delete {settings::%arg-2%::AllAlertsOFF}
+                        if {settings.%arg-2%.ServiceAlerts} is not set:
+                            set {settings.%arg-2%.ServiceAlerts} to true
+                            set {settings.%arg-2%.ServiceAlertsInfo} to {@enabled}
+                            delete {settings.%arg-2%.AllAlertsOFF}
                             play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &aLe tue notifiche di servizio sono state attivate da &b%player%&a." to arg-2
                             send "{@prefix} &aHai attivato le notifiche di servizio di &b%arg-2%&a." to player
                             stop
                         else:
-                            delete {settings::%arg-2%::ServiceAlerts}
-                            set {settings::%arg-2%::ServiceAlertsInfo} to "&cdisattivate"
+                            delete {settings.%arg-2%.ServiceAlerts}
+                            set {settings.%arg-2%.ServiceAlertsInfo} to {@disabled}
                             play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &cLe tue notifiche di servizio sono state disattivate da &6%player%&c." to arg-2
                             send "{@prefix} &cHai disattivato le notifiche di servizio di &b%arg-2%&c." to player
@@ -67,16 +72,16 @@ command /notify [<text>] [<offline player>]:
 
             else if arg-1 is "general":
                 if arg-2 is not set:
-                    if {settings::%player%::Alerts} is not set:
-                        set {settings::%player%::Alerts} to true
-                        set {settings::%player%::AlertsInfo} to "&aattivate"
-                        delete {settings::%player%::AllAlertsOFF}
+                    if {settings.%player%.Alerts} is not set:
+                        set {settings.%player%.Alerts} to true
+                        set {settings.%player%.AlertsInfo} to {@enabled}
+                        delete {settings.%player%.AllAlertsOFF}
                         play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                         send "{@prefix} &aNotifiche generali attivate." to player
                         stop
                     else:
-                        delete {settings::%player%::Alerts}
-                        set {settings::%player%::AlertsInfo} to "&cdisattivate"
+                        delete {settings.%player%.Alerts}
+                        set {settings.%player%.AlertsInfo} to {@disabled}
                         play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                         send "{@prefix} &cNotifiche generali disattivate." to player
                         stop
@@ -90,17 +95,17 @@ command /notify [<text>] [<offline player>]:
                         stop
                 else if arg-2 is online:
                     if player has permission "notify.general.other":
-                        if {settings::%arg-2%::Alerts} is not set:
-                            set {settings::%arg-2%::Alerts} to true
-                            set {settings::%arg-2%::AlertsInfo} to "&aattivate"
-                            delete {settings::%arg-2%::AllAlertsOFF}
+                        if {settings.%arg-2%.Alerts} is not set:
+                            set {settings.%arg-2%.Alerts} to true
+                            set {settings.%arg-2%.AlertsInfo} to {@enabled}
+                            delete {settings.%arg-2%.AllAlertsOFF}
                             play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &aLe tue notifiche generali sono state attivate da &b%player%&a." to arg-2
                             send "{@prefix} &aHai attivato le notifiche generali di &b%arg-2%&a." to player
                             stop
                         else:
-                            delete {settings::%arg-2%::Alerts}
-                            set {settings::%arg-2%::AlertsInfo} to "&cdisattivate"
+                            delete {settings.%arg-2%.Alerts}
+                            set {settings.%arg-2%.AlertsInfo} to {@disabled}
                             play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &cLe tue notifiche generali sono state disattivate da &6%player%&c." to arg-2
                             send "{@prefix} &cHai disattivato le notifiche generali di &b%arg-2%&c." to player
@@ -108,93 +113,118 @@ command /notify [<text>] [<offline player>]:
                     else:
                         send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
                         stop
-
-            else if arg-1 is "all":
-                if arg-2 is not set:
-                    if {settings::%player%::AllAlertsOFF} is not set:
-                        set {settings::%player%::ServiceAlerts} to true
-                        set {settings::%player%::Alerts} to true
-                        set {settings::%player%::ServiceAlertsInfo} to "&aattivate"
-                        set {settings::%player%::AlertsInfo} to "&aattivate"
-                        set {settings::%player%::AllAlertsOFF} to true
-                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
-                        send "{@prefix} &aHai attivato tutte le tue notifiche." to player
-                        stop
-                    else:
-                        delete {settings::%player%::ServiceAlerts}
-                        delete {settings::%player%::Alerts}
-                        set {settings::%player%::ServiceAlertsInfo} to "&cdisattivate"
-                        set {settings::%player%::AlertsInfo} to "&cdisattivate"
-                        delete {settings::%player%::AllAlertsOFF}
-                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
-                        send "{@prefix} &cHai disattivato tutte le tue notifiche." to player
-                        stop
-                else if arg-2 is offline:
-                    if player has permission "notify.all.other":
-                        send "{@prefix} &c%arg-2% &6non è online."
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        stop
-                    else:
-                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
-                        stop
-                else if arg-2 is online:
-                    if player has permission "notify.all.other":
-                        if {settings::%arg-2%::AllAlertsOFF} is not set:
-                            set {settings::%arg-2%::ServiceAlerts} to true
-                            set {settings::%arg-2%::Alerts} to true
-                            set {settings::%arg-2%::ServiceAlertsInfo} to "&aattivate"
-                            set {settings::%arg-2%::AlertsInfo} to "&aattivate"
-                            set {settings::%arg-2%::AllAlertsOFF} to true
-                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
-                            send "{@prefix} &aTutte le tue notifiche sono state attivate da &b%player%&a." to arg-2
-                            send "{@prefix} &aHai attivato tutte le notifiche di &b%arg-2%&a." to player
-                            stop
-                        else:
-                            delete {settings::%arg-2%::ServiceAlerts}
-                            delete {settings::%arg-2%::Alerts}
-                            set {settings::%arg-2%::ServiceAlertsInfo} to "&cdisattivate"
-                            set {settings::%arg-2%::AlertsInfo} to "&cdisattivate"
-                            delete {settings::%arg-2%::AllAlertsOFF}
-                            play sound "block.note_block.pling" with volume 1 and pitch 2 at arg-2 for arg-2
-                            send "{@prefix} &cTutte le tue notifiche sono state disattivate da &6%player%&c." to arg-2
-                            send "{@prefix} &cHai disattivato tutte le notifiche di &b%arg-2%&c." to player
-                            stop
-                    else:
-                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
-                        stop
+            else if arg-1 is not "general" or "service":
+                if player has permission "notify.other":
+                    send "{@prefix} &cComando sconosciuto."
+                    send "{@prefix} &cUtilizzo: &6/notify service [&egiocatore&6]"
+                    send "{@prefix} &cUtilizzo: &6/notify general [&egiocatore&6]"
+                    stop
+                else:
+                    send "{@prefix} &cComando sconosciuto."
+                    send "{@prefix} &cUtilizzo: &6/notify service"
+                    send "{@prefix} &cUtilizzo: &6/notify general"
+                    stop
 
 on tab complete of "/notify" or "/notifiche":
-    set tab completions for position 1 to "service", "general" and "all"
+    set tab completions for position 1 to "service" and "general"
 
 
 function TriggerPlayerServiceAlerts(p: player):
-    if {settings::%{_p}%::ServiceAlerts} is not set:
-        set {settings::%{_p}%::ServiceAlerts} to true
+    if {settings.%{_p}%.ServiceAlerts} is not set:
+        set {settings.%{_p}%.ServiceAlerts} to true
+        set {settings.%{_p}%.ServiceAlertsInfo} to {@enabled}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-        send "&aNotifiche di servizio attivate." to {_p}
+        send "{@prefix} &aNotifiche di servizio attivate." to {_p}
     else:
-        delete {settings::%{_p}%::ServiceAlerts}
+        delete {settings.%{_p}%.ServiceAlerts}
+        set {settings.%{_p}%.ServiceAlertsInfo} to {@disabled}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-        send "&cNotifiche di servizio disattivate." to {_p}
+        send "{@prefix} &cNotifiche di servizio disattivate." to {_p}
 
 function TriggerPlayerAlerts(p: player):
-    if {settings::%{_p}%::Alerts} is not set:
-        set {settings::%{_p}%::Alerts} to true
+    if {settings.%{_p}%.Alerts} is not set:
+        set {settings.%{_p}%.Alerts} to true
+        set {settings.%{_p}%.AlertsInfo} to {@enabled}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-        send "&aNotifiche generali attivate." to {_p}
+        send "{@prefix} &aNotifiche generali attivate." to {_p}
     else:
-        delete {settings::%{_p}%::Alerts}
+        delete {settings.%{_p}%.Alerts}
+        set {settings.%{_p}%.AlertsInfo} to {@disabled}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-        send "&cNotifiche generali disattivate." to {_p}
+        send "{@prefix} &cNotifiche generali disattivate." to {_p}
 
 function TriggerAllPlayerAlerts(p: player):
-    if {settings::%{_p}%::AllAlertsOFF} is not set:
-        set {settings::%{_p}%::ServiceAlerts} to true
-        set {settings::%{_p}%::Alerts} to true
+    if {settings.%{_p}%.AllAlertsOFF} is not set:
+        set {settings.%{_p}%.ServiceAlerts} to true
+        set {settings.%{_p}%.Alerts} to true
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
         send "&aHai attivato tutte le notifiche." to {_p}
     else:
-        delete {settings::%{_p}%::ServiceAlerts}
-        delete {settings::%{_p}%::Alerts}
+        delete {settings.%{_p}%.ServiceAlerts}
+        delete {settings.%{_p}%.Alerts}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
         send "&cHai disattivato tutte le notifiche." to {_p}
+
+
+function openAlertsGui(p: player):
+    if {settings.%{_p}%.glasspanes} is true:
+        set {_gui} to a new chest inventory with 5 rows named "Notifiche"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
+        if {settings.%{_p}%.ServiceAlerts} is true:
+            set slot 20 of {_gui} to orange dye named "&6Notifiche di servizio" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Riavvii programmati del server", " &7- Problemi prestazionali del server (lag)", " &7- Chiusure programmate del server", "&r", "&7Attualmente sono %{settings.%{_p}%.ServiceAlertsInfo}%&7.", "&r" and "&eClicca per &cdisattivarle&e."
+        else:
+            set slot 20 of {_gui} to orange dye named "&6Notifiche di servizio" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Riavvii programmati del server", " &7- Problemi prestazionali del server (lag)", " &7- Chiusure programmate del server", "&r", "&7Attualmente sono %{settings.%{_p}%.ServiceAlertsInfo}%&7.", "&r" and "&eClicca per &aattivarle&e."
+        if {settings.%{_p}%.Alerts} is true:
+            set slot 22 of {_gui} to green dye named "&2Notifiche generali" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Scoreboard disattivata", " &7- Inventario pieno", "&r", "&7Attualmente sono %{settings.%{_p}%.AlertsInfo}%&7.", "&r" and "&eClicca per &cdisattivarle&e."
+        else:
+            set slot 22 of {_gui} to green dye named "&2Notifiche generali" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Scoreboard disattivata", " &7- Inventario pieno", "&r", "&7Attualmente sono %{settings.%{_p}%.AlertsInfo}%&7.", "&r" and "&eClicca per &aattivarle&e."
+        set slot 24 of {_gui} to comparator named "&aOpzioni notifiche" with lore "&7Seleziona quali notifiche ricevere", "&7per le &6notifiche di servizio &7e per", "&7le &2notifiche generali&7.", "&r" and "&eClicca per personalizzarle."
+        set slot 40 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 5 rows named "Notifiche"
+        if {settings.%{_p}%.ServiceAlerts} is true:
+            set slot 20 of {_gui} to orange dye named "&6Notifiche di servizio" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Riavvii programmati del server", " &7- Problemi prestazionali del server (lag)", " &7- Chiusure programmate del server", "&r", "&7Attualmente sono %{settings.%{_p}%.ServiceAlertsInfo}%&e.", "&r" and "&eClicca per &cdisattivarle&e."
+        else:
+            set slot 20 of {_gui} to orange dye named "&6Notifiche di servizio" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Riavvii programmati del server", " &7- Problemi prestazionali del server (lag)", " &7- Chiusure programmate del server", "&r", "&7Attualmente sono %{settings.%{_p}%.ServiceAlertsInfo}%&e.", "&r" and "&eClicca per &aattivarle&e."
+        if {settings.%{_p}%.Alerts} is true:
+            set slot 22 of {_gui} to green dye named "&2Notifiche generali" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Scoreboard disattivata", " &7- Inventario pieno", "&r", "&7Attualmente sono %{settings.%{_p}%.AlertsInfo}%&e.", "&r" and "&eClicca per &cdisattivarle&e."
+        else:
+            set slot 22 of {_gui} to green dye named "&2Notifiche generali" with lore "&r", "&fQueste notifiche includono gli avvisi per:", " &7- Scoreboard disattivata", " &7- Inventario pieno", "&r", "&7Attualmente sono %{settings.%{_p}%.AlertsInfo}%&e.", "&r" and "&eClicca per &aattivarle&e."
+        set slot 24 of {_gui} to comparator named "&aOpzioni notifiche" with lore "&7Seleziona quali notifiche ricevere", "&7per le &6notifiche di servizio &7e per", "&7le &2notifiche generali&7.", "&r" and "&eClicca per personalizzarle."
+        set slot 40 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        open {_gui} to {_p}
+
+#function openCustomAlertsGui(p: player):
+
+on inventory click:
+    if name of event-inventory is "Notifiche":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43 or 44:
+                cancel event
+            else if index of event-slot is 20:
+                if click type is left mouse button:
+                    cancel event
+                    TriggerPlayerServiceAlerts(player)
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    TriggerPlayerAlerts(player)
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 24:
+                if click type is left mouse button:
+                    cancel event
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    openPlayerSettingsGui(player)
+                else:
+                    cancel event

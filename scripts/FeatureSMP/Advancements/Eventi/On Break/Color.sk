@@ -1,0 +1,817 @@
+on break:
+    if player's gamemode is survival or adventure:
+# LANA
+        if event-block is white wool:
+            add 1 to {color.%player%.broke.white_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray wool:
+            add 1 to {color.%player%.broke.light_gray_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray wool:
+            add 1 to {color.%player%.broke.gray_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black wool:
+            add 1 to {color.%player%.broke.black_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown wool:
+            add 1 to {color.%player%.broke.brown_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red wool:
+            add 1 to {color.%player%.broke.red_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange wool:
+            add 1 to {color.%player%.broke.orange_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow wool:
+            add 1 to {color.%player%.broke.yellow_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime wool:
+            add 1 to {color.%player%.broke.lime_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green wool:
+            add 1 to {color.%player%.broke.green_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan wool:
+            add 1 to {color.%player%.broke.cyan_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue wool:
+            add 1 to {color.%player%.broke.light_blue_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue wool:
+            add 1 to {color.%player%.broke.blue_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple wool:
+            add 1 to {color.%player%.broke.purple_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta wool:
+            add 1 to {color.%player%.broke.magenta_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink wool:
+            add 1 to {color.%player%.broke.pink_wool}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# TAPPETI
+        else if event-block is white carpet:
+            add 1 to {color.%player%.broke.white_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray carpet:
+            add 1 to {color.%player%.broke.light_gray_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray carpet:
+            add 1 to {color.%player%.broke.gray_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black carpet:
+            add 1 to {color.%player%.broke.black_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown carpet:
+            add 1 to {color.%player%.broke.brown_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red carpet:
+            add 1 to {color.%player%.broke.red_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange carpet:
+            add 1 to {color.%player%.broke.orange_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow carpet:
+            add 1 to {color.%player%.broke.yellow_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime carpet:
+            add 1 to {color.%player%.broke.lime_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green carpet:
+            add 1 to {color.%player%.broke.green_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan carpet:
+            add 1 to {color.%player%.broke.cyan_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue carpet:
+            add 1 to {color.%player%.broke.light_blue_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue carpet:
+            add 1 to {color.%player%.broke.blue_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple carpet:
+            add 1 to {color.%player%.broke.purple_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta carpet:
+            add 1 to {color.%player%.broke.magenta_carpet}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink carpet:
+            add 1 to {color.%player%.broke.pink_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# TERRACOTTA
+        else if event-block is terracotta:
+            add 1 to {color.%player%.broke.terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is white terracotta:
+            add 1 to {color.%player%.broke.white_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray terracotta:
+            add 1 to {color.%player%.broke.light_gray_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray terracotta:
+            add 1 to {color.%player%.broke.gray_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black terracotta:
+            add 1 to {color.%player%.broke.black_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown terracotta:
+            add 1 to {color.%player%.broke.brown_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red terracotta:
+            add 1 to {color.%player%.broke.red_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange terracotta:
+            add 1 to {color.%player%.broke.orange_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow terracotta:
+            add 1 to {color.%player%.broke.yellow_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime terracotta:
+            add 1 to {color.%player%.broke.lime_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green terracotta:
+            add 1 to {color.%player%.broke.green_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan terracotta:
+            add 1 to {color.%player%.broke.cyan_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue terracotta:
+            add 1 to {color.%player%.broke.light_blue_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue terracotta:
+            add 1 to {color.%player%.broke.blue_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple terracotta:
+            add 1 to {color.%player%.broke.purple_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta terracotta:
+            add 1 to {color.%player%.broke.magenta_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink terracotta:
+            add 1 to {color.%player%.broke.pink_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# TERRACOTTA SMALTATA
+        else if event-block is white glazed terracotta:
+            add 1 to {color.%player%.broke.white_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray glazed terracotta:
+            add 1 to {color.%player%.broke.light_gray_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray glazed terracotta:
+            add 1 to {color.%player%.broke.gray_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black glazed terracotta:
+            add 1 to {color.%player%.broke.black_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown glazed terracotta:
+            add 1 to {color.%player%.broke.brown_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red glazed terracotta:
+            add 1 to {color.%player%.broke.red_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange glazed terracotta:
+            add 1 to {color.%player%.broke.orange_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow glazed terracotta:
+            add 1 to {color.%player%.broke.yellow_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime glazed terracotta:
+            add 1 to {color.%player%.broke.lime_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green glazed terracotta:
+            add 1 to {color.%player%.broke.green_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan glazed terracotta:
+            add 1 to {color.%player%.broke.cyan_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue glazed terracotta:
+            add 1 to {color.%player%.broke.light_blue_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue glazed terracotta:
+            add 1 to {color.%player%.broke.blue_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple glazed terracotta:
+            add 1 to {color.%player%.broke.purple_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta glazed terracotta:
+            add 1 to {color.%player%.broke.magenta_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink glazed terracotta:
+            add 1 to {color.%player%.broke.pink_glazed_terracotta}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# CALCESTRUZZO
+        else if event-block is white concrete:
+            add 1 to {color.%player%.broke.white_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray concrete:
+            add 1 to {color.%player%.broke.light_gray_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray concrete:
+            add 1 to {color.%player%.broke.gray_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black concrete:
+            add 1 to {color.%player%.broke.black_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown concrete:
+            add 1 to {color.%player%.broke.brown_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red concrete:
+            add 1 to {color.%player%.broke.red_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange concrete:
+            add 1 to {color.%player%.broke.orange_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow concrete:
+            add 1 to {color.%player%.broke.yellow_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime concrete:
+            add 1 to {color.%player%.broke.lime_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green concrete:
+            add 1 to {color.%player%.broke.green_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan concrete:
+            add 1 to {color.%player%.broke.cyan_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue concrete:
+            add 1 to {color.%player%.broke.light_blue_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue concrete:
+            add 1 to {color.%player%.broke.blue_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple concrete:
+            add 1 to {color.%player%.broke.purple_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta concrete:
+            add 1 to {color.%player%.broke.magenta_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink concrete:
+            add 1 to {color.%player%.broke.pink_concrete}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# POLVERE DI CALCESTRUZZO
+        else if event-block is white concrete powder:
+            add 1 to {color.%player%.broke.white_concrete_powder_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray concrete powder:
+            add 1 to {color.%player%.broke.light_gray_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray concrete powder:
+            add 1 to {color.%player%.broke.gray_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black concrete powder:
+            add 1 to {color.%player%.broke.black_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown concrete powder: 
+            add 1 to {color.%player%.broke.brown_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red concrete powder:
+            add 1 to {color.%player%.broke.red_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange concrete powder:
+            add 1 to {color.%player%.broke.orange_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow concrete powder:
+            add 1 to {color.%player%.broke.yellow_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime concrete powder:
+            add 1 to {color.%player%.broke.lime_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green concrete powder:
+            add 1 to {color.%player%.broke.green_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan concrete powder:
+            add 1 to {color.%player%.broke.cyan_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue concrete powder:
+            add 1 to {color.%player%.broke.light_blue_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue concrete powder:
+            add 1 to {color.%player%.broke.blue_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple concrete powder:
+            add 1 to {color.%player%.broke.purple_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta concrete powder:
+            add 1 to {color.%player%.broke.magenta_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink concrete powder:
+            add 1 to {color.%player%.broke.pink_concrete_powder}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# VETRO
+        else if event-block is glass:
+            add 1 to {color.%player%.broke.glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is tinted glass:
+            add 1 to {color.%player%.broke.tinted_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is white stained glass:
+            add 1 to {color.%player%.broke.white_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray stained glass:
+            add 1 to {color.%player%.broke.light_gray_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray stained glass:
+            add 1 to {color.%player%.broke.gray_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black stained glass:
+            add 1 to {color.%player%.broke.black_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown stained glass:
+            add 1 to {color.%player%.broke.brown_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red stained glass:
+            add 1 to {color.%player%.broke.red_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange stained glass:
+            add 1 to {color.%player%.broke.orange_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow stained glass:
+            add 1 to {color.%player%.broke.yellow_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime stained glass:
+            add 1 to {color.%player%.broke.lime_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green stained glass:
+            add 1 to {color.%player%.broke.green_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan stained glass:
+            add 1 to {color.%player%.broke.cyan_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue stained glass:
+            add 1 to {color.%player%.broke.light_blue_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue stained glass:
+            add 1 to {color.%player%.broke.blue_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple stained glass:
+            add 1 to {color.%player%.broke.purple_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta stained glass:
+            add 1 to {color.%player%.broke.magenta_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink stained glass:
+            add 1 to {color.%player%.broke.pink_stained_glass}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# PANNELLI DI VETRO
+        else if event-block is glass pane:
+            add 1 to {color.%player%.broke.glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is white stained glass pane:
+            add 1 to {color.%player%.broke.white_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray stained glass pane:
+            add 1 to {color.%player%.broke.light_gray_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray stained glass pane:
+            add 1 to {color.%player%.broke.gray_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black stained glass pane:
+            add 1 to {color.%player%.broke.black_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown stained glass pane:
+            add 1 to {color.%player%.broke.brown_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red stained glass pane:
+            add 1 to {color.%player%.broke.red_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange stained glass pane:
+            add 1 to {color.%player%.broke.orange_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow stained glass pane:
+            add 1 to {color.%player%.broke.yellow_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime stained glass pane:
+            add 1 to {color.%player%.broke.lime_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green stained glass pane:
+            add 1 to {color.%player%.broke.green_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan stained glass pane:
+            add 1 to {color.%player%.broke.cyan_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue stained glass pane:
+            add 1 to {color.%player%.broke.light_blue_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue stained glass pane:
+            add 1 to {color.%player%.broke.blue_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple stained glass pane:
+            add 1 to {color.%player%.broke.purple_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta stained glass pane:
+            add 1 to {color.%player%.broke.magenta_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink stained glass pane:
+            add 1 to {color.%player%.broke.pink_stained_glass_pane}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# SHULKER BOX
+        else if event-block is shulker box:
+            add 1 to {color.%player%.broke.shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is white shulker box:
+            add 1 to {color.%player%.broke.white_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray shulker box:
+            add 1 to {color.%player%.broke.light_gray_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray shulker box:
+            add 1 to {color.%player%.broke.gray_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black shulker box:
+            add 1 to {color.%player%.broke.black_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown shulker box:
+            add 1 to {color.%player%.broke.brown_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red shulker box:
+            add 1 to {color.%player%.broke.red_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange shulker box:
+            add 1 to {color.%player%.broke.orange_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow shulker box:
+            add 1 to {color.%player%.broke.yellow_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime shulker box:
+            add 1 to {color.%player%.broke.lime_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green shulker box:
+            add 1 to {color.%player%.broke.green_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan shulker box:
+            add 1 to {color.%player%.broke.cyan_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue shulker box:
+            add 1 to {color.%player%.broke.light_blue_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue shulker box:
+            add 1 to {color.%player%.broke.blue_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple shulker box:
+            add 1 to {color.%player%.broke.purple_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta shulker box:
+            add 1 to {color.%player%.broke.magenta_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink shulker box:
+            add 1 to {color.%player%.broke.pink_shulker_box}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# LETTI
+        else if event-block is white bed:
+            add 1 to {color.%player%.broke.white_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray bed:
+            add 1 to {color.%player%.broke.light_gray_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray bed:
+            add 1 to {color.%player%.broke.gray_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black bed:
+            add 1 to {color.%player%.broke.black_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown bed:
+            add 1 to {color.%player%.broke.brown_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red bed:
+            add 1 to {color.%player%.broke.red_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange bed:
+            add 1 to {color.%player%.broke.orange_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow bed:
+            add 1 to {color.%player%.broke.yellow_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime bed:
+            add 1 to {color.%player%.broke.lime_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green bed:
+            add 1 to {color.%player%.broke.green_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan bed:
+            add 1 to {color.%player%.broke.cyan_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue bed:
+            add 1 to {color.%player%.broke.light_blue_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue bed:
+            add 1 to {color.%player%.broke.blue_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple bed:
+            add 1 to {color.%player%.broke.purple_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta bed:
+            add 1 to {color.%player%.broke.magenta_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink bed:
+            add 1 to {color.%player%.broke.pink_bed}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# CANDELA
+        else if event-block is candle:
+            add 1 to {color.%player%.broke.candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is white candle:
+            add 1 to {color.%player%.broke.white_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray candle:
+            add 1 to {color.%player%.broke.light_gray_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray candle:
+            add 1 to {color.%player%.broke.gray_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black candle:
+            add 1 to {color.%player%.broke.black_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown candle:
+            add 1 to {color.%player%.broke.brown_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red candle:
+            add 1 to {color.%player%.broke.red_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange candle:
+            add 1 to {color.%player%.broke.orange_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow candle:
+            add 1 to {color.%player%.broke.yellow_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime candle:
+            add 1 to {color.%player%.broke.lime_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green candle:
+            add 1 to {color.%player%.broke.green_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan candle:
+            add 1 to {color.%player%.broke.cyan_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue candle:
+            add 1 to {color.%player%.broke.light_blue_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue candle:
+            add 1 to {color.%player%.broke.blue_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple candle:
+            add 1 to {color.%player%.broke.purple_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta candle:
+            add 1 to {color.%player%.broke.magenta_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink candle:
+            add 1 to {color.%player%.broke.pink_candle}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+
+# STENDARDI
+        else if event-block is white banner:
+            add 1 to {color.%player%.broke.white_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light gray banner:
+            add 1 to {color.%player%.broke.light_gray_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is gray banner:
+            add 1 to {color.%player%.broke.gray_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is black banner:
+            add 1 to {color.%player%.broke.black_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is brown banner:
+            add 1 to {color.%player%.broke.brown_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is red banner:
+            add 1 to {color.%player%.broke.red_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is orange banner:
+            add 1 to {color.%player%.broke.orange_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is yellow banner:
+            add 1 to {color.%player%.broke.yellow_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is lime banner:
+            add 1 to {color.%player%.broke.lime_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is green banner:
+            add 1 to {color.%player%.broke.green_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is cyan banner:
+            add 1 to {color.%player%.broke.cyan_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is light blue banner:
+            add 1 to {color.%player%.broke.light_blue_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is blue banner:
+            add 1 to {color.%player%.broke.blue_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is purple banner:
+            add 1 to {color.%player%.broke.purple_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is magenta banner:
+            add 1 to {color.%player%.broke.magenta_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}
+        else if event-block is pink banner:
+            add 1 to {color.%player%.broke.pink_banner}
+            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {color.%player%.total_broken}

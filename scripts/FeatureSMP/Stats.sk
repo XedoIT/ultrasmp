@@ -1,0 +1,63 @@
+on join:
+    if {stats.%player%.kills}, {stats.%player%.deaths}, {stats.%player%.killstreak}, {stats.%player%.damage_inflicted} and {stats.%player%.damage_suffered} is not set:
+        set {stats.%player%.kills}, {stats.%player%.deaths}, {stats.%player%.killstreak}, {stats.%player%.damage_inflicted} and {stats.%player%.damage_suffered} to 0
+    if {stats.%player%.broken_blocks} and {stats.%player%.placed_blocks} is not set:
+        set {stats.%player%.broken_blocks} and {stats.%player%.placed_blocks} to 0
+
+# DANNI INFLITTI E DANNI SUBITI
+on damage:
+    if attacker is a player:
+        if victim is a player:
+            DamageInflicted(damage,attacker)
+            DamageSuffered(damage,victim)
+        else:
+            DamageInflicted(damage,attacker)
+    else:
+        if victim is a player:
+            DamageSuffered(damage,victim)
+
+
+function DamageInflicted(i: number, p: player):
+    add {_i} to {stats.%{_p}%.damage_inflicted}
+
+function DamageSuffered(i: number, p: player):
+    add {_i} to {stats.%{_p}%.damage_suffered}
+
+# UCCISIONI, MORTI E SERIE DI UCCISIONI
+on death:
+    if victim is not a player:
+        if attacker is a player:
+            add 1 to {stats.%attacker%.kills}
+            add 1 to {stats.%attacker%.killstreak}
+    else:
+        if attacker is a player:
+            add 1 to {stats.%attacker%.kills}
+            add 1 to {stats.%victim%.deaths}
+            add 1 to {stats.%attacker%.killstreak}
+            if {stats.%victim%.killstreak} != 0:
+                if {settings.%victim%.genre.male} is true:
+                    wait 2 ticks
+                    send "" to victim
+                    send "&4&k00 &cSei morto con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
+                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                    set {stats.%victim%.killstreak} to 0
+                    send "" to victim
+                if {settings.%victim%.genre.female} is true:
+                    wait 2 ticks
+                    send "" to victim
+                    send "&4&k00 &cSei morta con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
+                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                    set {stats.%victim%.killstreak} to 0
+                    send "" to victim
+
+# BLOCCHI DISTRUTTI E BLOCCHI PIAZZATI
+on break:
+    if player's gamemode is survival or adventure:
+        if {blocks::%player%::*} doesn't contain event-location:
+            add 1 to {stats.%player%.broken_blocks}
+
+on place:
+    if player's gamemode is survival or adventure:
+        if {blocks::%player%::*} is not set:
+            add event-location to {blocks::%player%::*}
+            add 1 to {stats.%player%.placed_blocks}

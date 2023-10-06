@@ -2,29 +2,6 @@ options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
     
 #--------------------------------------------#
-#             DENOMINAZIONE MONDI            #
-#--------------------------------------------#
-every tick:
-    loop all players:
-        if world of loop-player is "smp":
-            set {world_position::%loop-player%} to "&aOverworld"
-            #set {world_sign::%loop-player%} to "&b[&a&lO&b]"
-        if world of loop-player is "smp_nether":
-            set {world_position::%loop-player%} to "&cNether"
-            #set {world_sign::%loop-player%} to "&4[&c&lN&4]"
-        if world of loop-player is "smp_the_end":
-            set {world_position::%loop-player%} to "&dEnd"
-            #set {world_sign::%loop-player%} to "&5[&d&lE&5]"
-
-#--------------------------------------------#
-#          MESSAGGI AUTOMATICI CHAT          #
-#--------------------------------------------#
-#every 45 minutes:
-    #loop all players:
-        #send "&c&lHai trovato qualche bug?" to loop-player
-        #send "&c&lSegnalalo con &6/bug &c&lper far sì che venga risolto al più presto." to loop-player
-        #play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
-#--------------------------------------------#
 #        TEMPO DI ATTIVITÀ DEL SERVER        #
 #--------------------------------------------#
 on skript load:
@@ -43,17 +20,16 @@ command /uptime:
 
 every 10 ticks:
     loop all players:
-        if {uptimeac::%loop-player%} is true:
+        if {uptimeac.%loop-player%} is true:
             send action bar "&b%placeholder "server_uptime"% &adi attività" to loop-player
 
 #--------------------------------------------#
 #            COMANDO AIUTO/WIKI              #
 #--------------------------------------------#
 command /wiki:
-    description: La guida per i novizi.
-    aliases: /aiuto, /smphelp
+    description: La guida per i nuovi arrivati.
     executable by: player, console
     trigger:
-        send "{@prefix} &cQuesto comando non è ancora disponibile. Attendi il completamento del server per poterlo utilizzare."
-        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+        send "{@prefix} &aPer consultare la Wiki della Disagio SMP clicca <link:https://disagio-smp.gitbook.io/disagiosmp>&e&nqui&a."
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
         stop
