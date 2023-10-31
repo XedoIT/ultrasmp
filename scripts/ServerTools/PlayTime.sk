@@ -7,9 +7,10 @@ options:
 
     permission: playtime.other
 
-on first join:
-    if {playtime.%player%.first_login} is not set:
-        set {playtime.%player%.first_login} to now
+on join:
+    if player has not played before:
+        if {playtime.%player%.first_login} is not set:
+            set {playtime.%player%.first_login} to now
 
 on load:
     if {playtime.%player%.days} is not set:

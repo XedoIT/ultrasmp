@@ -64,7 +64,7 @@ every 14 seconds: # DisagioSMP
             delete {animation.%loop-player%.DisagioSMP.status}
 every 198 ticks: # Benvenuto/Benvenuta
     loop all players:
-        if {settings.%loop-player%.genre.male} is true:
+        if {settings.%loop-player%.user.genre} is "&9Maschio":
             if {animation.%loop-player%.Benvenuto.status} is not set:
                 set {animation.%loop-player%.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
@@ -111,7 +111,7 @@ every 198 ticks: # Benvenuto/Benvenuta
                 set {animation.%loop-player%.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
                 delete {animation.%loop-player%.Benvenuto.status}
-        if {settings.%loop-player%.genre.female} is true:
+        else if {settings.%loop-player%.user.genre} is "&dFemmina":
             if {animation.%loop-player%.Benvenuta.status} is not set:
                 set {animation.%loop-player%.Benvenuta} to "&6&lB_"
                 wait 9 ticks 

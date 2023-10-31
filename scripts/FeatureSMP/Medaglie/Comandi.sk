@@ -73,7 +73,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.mining.count} to 50000
                                 set {medals.%arg-2%.last_obtained} to "&aEstrazione"
                                 add 1 to {medals.%arg-2%}
-                                add 350 to {points.%arg-2%}
+                                add 350 to {fame.%arg-2%}
                                 set {medals.%arg-2%.mining.can_use_pickaxe} to true
                                 give 1 {@mining_pickaxe} to {_pl}
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
@@ -81,7 +81,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lEstrazione" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &b+350 punti" to arg-2
+                                send "  &b+350 fama" to arg-2
                                 send "  &aHai sbloccato il &5MineKinetor" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &eEstrazione&7." to arg-2
@@ -106,14 +106,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.mobkiller.count} to 5000
                                 set {medals.%arg-2%.last_obtained} to "&aMobicida"
                                 add 1 to {medals.%arg-2%}
-                                add 200 to {points.%arg-2%}
+                                add 200 to {fame.%arg-2%}
                                 apply strength 5 without any particles to arg-2 for 2 minutes
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lMobicida" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+200 punti" to arg-2
+                                send "  &a+200 fama" to arg-2
                                 send "  &b+2 minuti di &4Forza V" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &eMobicida&7." to arg-2
@@ -150,14 +150,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.carpenter.can_use_axe} to true
                                 set {medals.%arg-2%.last_obtained} to "&aFalegname"
                                 add 1 to {medals.%arg-2%}
-                                add 350 to {points.%arg-2%}
+                                add 350 to {fame.%arg-2%}
                                 give 1 {@carpenter_axe} to {_pl}
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lFalegname" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+350 punti" to arg-2
+                                send "  &a+350 fama" to arg-2
                                 send "  &bHai sbloccato il &5TreeKinetor Plus" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &eFalegname&7." to arg-2
@@ -182,14 +182,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.building.totalblocks} to 10000000
                                 set {medals.%arg-2%.last_obtained} to "&aCostruzione"
                                 add 1 to {medals.%arg-2%}
-                                add 500 to {points.%arg-2%}
+                                add 500 to {fame.%arg-2%}
                                 execute console command "/lp user %arg-2% permission settemp fly.use true 6h"
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lCostruzione" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+500 punti" to arg-2
+                                send "  &a+500 fama" to arg-2
                                 send "  &bPuoi utilizzare il comando &e/fly &bper &66 ore" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &eCostruzione&7." to arg-2
@@ -221,16 +221,16 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.farmer.cocoa} to 1000
                                 set {medals.%arg-2%.farmer.nether_wart} to 1000
                                 add 1 to {medals.%arg-2%}
-                                add 150 to {points.%arg-2%}
+                                add 150 to {fame.%arg-2%}
                                 apply hero of the village without any particles to arg-2 for 2 hours
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     set {medals.%arg-2%.last_obtained} to "&aContadino"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+150 punti" to arg-2
+                                    send "  &a+150 fama" to arg-2
                                     send "  &b+2 ore di &2Eroe del villaggio" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eContadino&7." to arg-2
@@ -238,13 +238,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eContadino &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     set {medals.%arg-2%.last_obtained} to "&aContadina"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+150 punti" to arg-2
+                                    send "  &a+150 fama" to arg-2
                                     send "  &b+2 ore di &2Eroe del villaggio" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eContadina&7." to arg-2
@@ -253,11 +253,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eContadina &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eContadino&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eContadina&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -278,14 +278,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.fishing.when_get} to now
                                 set {medals.%arg-2%.last_obtained} to "&aPesca"
                                 add 1 to {medals.%arg-2%}
-                                add 50 to {points.%arg-2%}
+                                add 50 to {fame.%arg-2%}
                                 apply water breathing without any particles to arg-2 for 3 hours
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lPesca" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+50 punti" to arg-2
+                                send "  &a+50 fama" to arg-2
                                 send "  &b+3 ore di &2Respirazione acquatica" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &ePesca&7." to arg-2
@@ -316,16 +316,16 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.taming} to "{@get}"
                                 set {medals.%arg-2%.taming.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 150 to {points.%arg-2%}
+                                add 150 to {fame.%arg-2%}
                                 apply regeneration without any particles to arg-2 for 1 hour
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     set {medals.%arg-2%.last_obtained} to "&aAddestratore"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+150 punti" to arg-2
+                                    send "  &a+150 fama" to arg-2
                                     send "  &b+1 ora di &6Rigenerazione" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eAddestratore&7." to arg-2
@@ -333,13 +333,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eAddestratore &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     set {medals.%arg-2%.last_obtained} to "&aAddestratrice"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+150 punti" to arg-2
+                                    send "  &a+150 fama" to arg-2
                                     send "  &b+1 ora di &6Rigenerazione" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eAddestratrice&7." to arg-2
@@ -348,11 +348,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eAddestratrice &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eAddestratore&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eAddestratrice&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -368,28 +368,28 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.chatter} to "{@get}"
                                 set {medals.%arg-2%.chatter.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 400 to {points.%arg-2%}
+                                add 400 to {fame.%arg-2%}
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     set {medals.%arg-2%.last_obtained} to "&aChiacchierone"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+400 punti" to arg-2
+                                    send "  &a+400 fama" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eChiacchierone&7." to arg-2
                                     send "{@prefix} &aHai assegnato la medaglia &eChiacchierone &aa &b%arg-2%&e" to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eChiacchierone &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     set {medals.%arg-2%.last_obtained} to "&aChiacchierona"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+400 punti" to arg-2
+                                    send "  &a+400 fama" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eChiacchierona&7." to arg-2
                                     send "{@prefix} &aHai assegnato la medaglia &eChiacchierona &aa &b%arg-2%&e" to player
@@ -397,11 +397,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eChiacchierona &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eChiacchierone&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eAChiacchierona&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -417,7 +417,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.murderer} to "{@get}"
                                 set {medals.%arg-2%.murderer.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 500 to {points.%arg-2%}
+                                add 500 to {fame.%arg-2%}
                                 apply strength 3 without any particles to arg-2 for 4 hours
                                 apply speed 1 without any particles to arg-2 for 1 hours
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
@@ -426,7 +426,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lOmicida" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+500 punti" to arg-2
+                                send "  &a+500 fama" to arg-2
                                 send "  &b+4 ore di &4Forza III" to arg-2
                                 send "  &b+1 ora di &2Velocità I" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
@@ -450,7 +450,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.suicide} to "{@get}"
                                 set {medals.%arg-2%.suicide.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 500 to {points.%arg-2%}
+                                add 500 to {fame.%arg-2%}
                                 execute console command "/lp user %arg-2% permission set at.member.back"
                                 execute console command "/lp user %arg-2% permission set at.member.back.death"
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
@@ -459,7 +459,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lSuicida" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+500 punti" to arg-2
+                                send "  &a+500 fama" to arg-2
                                 send "  &aHai sbloccato il comando &e/back" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &eSuicida&7." to arg-2
@@ -486,15 +486,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.forestboss.when_get} to now
                                 set {medals.%arg-2%.forestboss.can_use_axe} to true
                                 add 1 to {medals.%arg-2%}
-                                add 400 to {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                add 400 to {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     give 1 {@forestboss_axe_male} to {_pl}
                                     set {medals.%arg-2%.last_obtained} to "&aRe della Foresta"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe della Foresta" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+400 punti" to arg-2
+                                    send "  &a+400 fama" to arg-2
                                     send "  &bHai sbloccato il &5TreeKinetor" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eRe della Foresta&7." to arg-2
@@ -502,14 +502,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eRe della Foresta &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     set {medals.%arg-2%.last_obtained} to "&aRegina della Foresta"
                                     give 1 {@forestboss_axe_female} to {_pl}
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina della Foresta" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+400 punti" to arg-2
+                                    send "  &a+400 fama" to arg-2
                                     send "  &bHai sbloccato il &5TreeKinetor" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eRegina della Foresta&7." to arg-2
@@ -518,11 +518,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eRegina della Foresta &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRe della Foresta&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRegina della Foresta&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -539,14 +539,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.skylover.when_get} to now
                                 set {medals.%arg-2%.last_obtained} to "&aAmante dei Cieli"
                                 add 1 to {medals.%arg-2%}
-                                add 800 to {points.%arg-2%}
+                                add 800 to {fame.%arg-2%}
                                 apply slow falling without any particles to arg-2 for 6 hours
                                 play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAmante dei Cieli" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+800 punti" to arg-2
+                                send "  &a+800 fama" to arg-2
                                 send "  &b+6 ore di &eCaduta lenta" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &6%player% &7ti ha dato la medaglia &eAmante dei Cieli&7." to arg-2
@@ -571,16 +571,16 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.netherboss.count} to 50
                                 set {medals.%arg-2%.netherboss.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 800 to {points.%arg-2%}
+                                add 800 to {fame.%arg-2%}
                                 apply fire resistance without any particles to arg-2 for 6 hours
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     set {medals.%arg-2%.last_obtained} to "&aRe degli Inferi"
                                     give 1 {@netherboss_male} to {_pl}
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe degli Inferi" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+800 punti" to arg-2
+                                    send "  &a+800 fama" to arg-2
                                     send "  &b+6 ore di &6Resistenza al fuoco" to arg-2
                                     send "  &bHai ottenuto un disco musicale: &cPigstep" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
@@ -589,14 +589,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eRe degli Inferi &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     set {medals.%arg-2%.last_obtained} to "&aRegina degli Inferi"
                                     give 1 {@netherboss_female} to {_pl}
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina degli Inferi" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+800 punti" to arg-2
+                                    send "  &a+800 fama" to arg-2
                                     send "  &b+6 ore di &6Resistenza al fuoco" to arg-2
                                     send "  &bHai ottenuto un disco musicale: &cPigstep" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
@@ -606,11 +606,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eRegina degli Inferi &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRe degli Inferi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRegina degli Inferi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -627,15 +627,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.dragontrainer.count} to 50
                                 set {medals.%arg-2%.dragontrainer.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 1000 to {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                add 1000 to {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     give 1 {@dragontrainer_male} to {_pl}
                                     set {medals.%arg-2%.last_obtained} to "&aDomatore di Draghi"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatore di Draghi" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+1000 punti" to arg-2
+                                    send "  &a+1000 fama" to arg-2
                                     send "  &bHai ottenuto un &dUovo di drago" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eDomatore di Draghi&7." to arg-2
@@ -643,14 +643,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eDomatore di Draghi &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     give 1 {@dragontrainer_female} to {_pl}
                                     set {medals.%arg-2%.last_obtained} to "&aDomatrice di Draghi"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatrice di Draghi" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+1000 punti" to arg-2
+                                    send "  &a+1000 fama" to arg-2
                                     send "  &bHai ottenuto un &dUovo di drago" to arg-2
                                     send "&6&m----------------------------------------" to arg-2
                                     send "{@prefix} &6%player% &7ti ha dato la medaglia &eDomatrice di Draghi&7." to arg-2
@@ -659,11 +659,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eDomatrice di Draghi &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDomatore di Draghi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDomatrice di Draghi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -678,18 +678,18 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.wardenboss.count} to 10
                                 set {medals.%arg-2%.wardenboss.when_get} to now
                                 add 1 to {medals.%arg-2%}
-                                add 1200 to {points.%arg-2%}
+                                add 1200 to {fame.%arg-2%}
                                 apply strength 5 without any particles to arg-2 for 24 hours
                                 apply resistance 5 without any particles to arg-2 for 24 hours
                                 apply regeneration 5 without any particles to arg-2 for 24 hours
                                 apply night vision without any particles to arg-2 for 24 hours
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     set {medals.%arg-2%.last_obtained} to "&aDevastatore di Sorveglianti"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+1200 punti" to arg-2
+                                    send "  &a+1200 fama" to arg-2
                                     send "  &b+24 ore di &4Forza V" to arg-2
                                     send "  &b+24 ore di &9Resistenza V" to arg-2
                                     send "  &b+24 ore di &6Rigenerazione V" to arg-2
@@ -700,13 +700,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eDevastatore di Sorveglianti &aa &b%arg-2%&a." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     set {medals.%arg-2%.last_obtained} to "&aDevastatrice di Sorveglianti"
                                     send "&6&m----------------------------------------" to arg-2
                                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to arg-2
                                     send "&f" to arg-2
                                     send " &9Ricompense sbloccate:" to arg-2
-                                    send "  &a+1200 punti" to arg-2
+                                    send "  &a+1200 fama" to arg-2
                                     send "  &b+24 ore di &4Forza V" to arg-2
                                     send "  &b+24 ore di &9Resistenza V" to arg-2
                                     send "  &b+24 ore di &6Rigenerazione V" to arg-2
@@ -718,11 +718,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                                     send "{@prefix} &6%player% &aha assegnato la medaglia &eDevastatrice di Sorveglianti &aa &b%arg-2%&a." to console
                                     stop
                             else:
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDevastatore di Sorveglianti&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDevastatrice di Sorveglianti&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -805,7 +805,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.mining.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 350 from {points.%arg-2%}
+                                subtract 350 from {fame.%arg-2%}
                                 delete {medals.%arg-2%.mining.can_use_pickaxe}
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eEstrazione&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
@@ -830,7 +830,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.mobkiller.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 200 from {points.%arg-2%}
+                                subtract 200 from {fame.%arg-2%}
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eMobicida&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eMobicida &7a &c%arg-2%&7." to player
@@ -865,7 +865,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.carpenter.can_use_axe}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 350 from {points.%arg-2%}
+                                subtract 350 from {fame.%arg-2%}
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eFalegname&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eFalegname &7a &c%arg-2%&7." to player
@@ -889,7 +889,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.building.totalblocks} to 0
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 500 from {points.%arg-2%}
+                                subtract 500 from {fame.%arg-2%}
                                 execute console command "/lp user %arg-2% permission unsettemp fly.use"
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eCostruzione&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
@@ -905,11 +905,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "farmer":
                         if player has permission "medals.revoke.farmer":
                             if {medals.%arg-2%.farmer} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eContadino&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eContadina&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -927,15 +927,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.farmer.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 150 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 150 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eContadino&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eContadino &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eContadino &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eContadina&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eContadina &7a &c%arg-2%&7." to player
@@ -963,7 +963,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.fishing.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 50 from {points.%arg-2%}
+                                subtract 50 from {fame.%arg-2%}
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &ePesca&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &ePesca &7a &c%arg-2%&7." to player
@@ -978,11 +978,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "taming":
                         if player has permission "medals.revoke.taming":
                             if {medals.%arg-2%.taming} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eAddestratore&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eAddestratrice&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -999,15 +999,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.taming.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 150 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 150 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eAddestratore&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eAddestratore &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eAddestratore &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eAddestratrice&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eAddestratrice &7a &c%arg-2%&7." to player
@@ -1022,11 +1022,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "chatter":
                         if player has permission "medals.revoke.chatter":
                             if {medals.%arg-2%.chatter} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eChiacchierone&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eChiacchierona&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -1036,15 +1036,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.chatter.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 400 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 400 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eChiacchierone&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eChiacchierone &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eChiacchierone &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eChiacchierona&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eChiacchierona &7a &c%arg-2%&7." to player
@@ -1068,7 +1068,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.murderer.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 500 from {points.%arg-2%}
+                                subtract 500 from {fame.%arg-2%}
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eOmicida&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eOmicida &7a &c%arg-2%&7." to player
@@ -1092,7 +1092,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.suicide.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 500 from {points.%arg-2%}
+                                subtract 500 from {fame.%arg-2%}
                                 execute console command "/lp user %arg-2% permission unset at.member.back"
                                 execute console command "/lp user %arg-2% permission unset at.member.back.death"
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eSuicida&7." to arg-2
@@ -1108,11 +1108,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "forestboss":
                         if player has permission "medals.revoke.forestboss":
                             if {medals.%arg-2%.forestboss} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRe della Foresta&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRegina della Foresta&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -1125,15 +1125,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 delete {medals.%arg-2%.forestboss.can_use_axe}
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 400 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 400 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eRe della Foresta&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eRe della Foresta &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eRe della Foresta &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eRegina della Foresta&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eRegina della Foresta &7a &c%arg-2%&7." to player
@@ -1157,7 +1157,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.skylover.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 800 from {points.%arg-2%}
+                                subtract 800 from {fame.%arg-2%}
                                 send "{@prefix} &6%player% &7ti ha tolto la medaglia &eAmante dei Cieli&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eAmante dei Cieli &7a &c%arg-2%&7." to player
@@ -1172,11 +1172,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "netherboss":
                         if player has permission "medals.revoke.netherboss":
                             if {medals.%arg-2%.netherboss} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRe degli Inferi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRegina degli Inferi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -1186,15 +1186,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.netherboss.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 800 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 800 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eRe degli Inferi&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eRe degli Inferi &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eRe degli Inferi &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eRegina degli Inferi&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eRegina degli Inferi &7a &c%arg-2%&7." to player
@@ -1209,11 +1209,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "dragontrainer":
                         if player has permission "medals.revoke.dragontrainer":
                             if {medals.%arg-2%.dragontrainer} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDomatore di Draghi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDomatrice di Draghi&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -1223,15 +1223,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.dragontrainer.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 1000 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 1000 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eDomatore di Draghi&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eDomatore di Draghi &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eDomatore di Draghi &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eDomatrice di Draghi&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eDomatrice di Draghi &7a &c%arg-2%&7." to player
@@ -1245,11 +1245,11 @@ command /medals [<text>] [<offline player>] [<text>]:
                     else if arg-3 is "wardenboss":
                         if player has permission "medals.revoke.wardenboss":
                             if {medals.%arg-2%.wardenboss} is "{@not_get}":
-                                if {settings.%arg-2%.genre.male} is true:
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDevastatore di Sorveglianti&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDevastatrice di Sorveglianti&c."
                                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                     stop
@@ -1259,15 +1259,15 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 delete {medals.%arg-2%.wardenboss.when_get}
                                 set {medals.%arg-2%.last_obtained} to "&7-"
                                 subtract 1 from {medals.%arg-2%}
-                                subtract 1200 from {points.%arg-2%}
-                                if {settings.%arg-2%.genre.male} is true:
+                                subtract 1200 from {fame.%arg-2%}
+                                if {settings.%arg-2%.user.genre} is "&9Maschio":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eDevastatore di Sorveglianti&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eDevastatore di Sorveglianti &7a &c%arg-2%&7." to player
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                                     send "{@prefix} &6%player% &cha tolto la medaglia &eDevastatore di Sorveglianti &ca &b%arg-2%&c." to console
                                     stop
-                                else if {settings.%arg-2%.genre.female} is true:
+                                else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                     send "{@prefix} &6%player% &7ti ha tolto la medaglia &eDevastatrice di Sorveglianti&7." to arg-2
                                     play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                     send "{@prefix} &7Hai tolto la medaglia &eDevastatrice di Sorveglianti &7a &c%arg-2%&7." to player
@@ -1354,7 +1354,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.mining.count} to 50000
                             set {medals.%arg-2%.last_obtained} to "&aEstrazione"
                             add 1 to {medals.%arg-2%}
-                            add 350 to {points.%arg-2%}
+                            add 350 to {fame.%arg-2%}
                             set {medals.%arg-2%.mining.can_use_pickaxe} to true
                             give 1 {@mining_pickaxe} to {_pl}
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
@@ -1362,7 +1362,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lEstrazione" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &b+350 punti" to arg-2
+                            send "  &b+350 fama" to arg-2
                             send "  &aHai sbloccato il &5MineKinetor" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &eEstrazione&7." to arg-2
@@ -1379,14 +1379,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.mobkiller.count} to 5000
                             set {medals.%arg-2%.last_obtained} to "&aMobicida"
                             add 1 to {medals.%arg-2%}
-                            add 200 to {points.%arg-2%}
+                            add 200 to {fame.%arg-2%}
                             apply strength 5 without any particles to arg-2 for 2 minutes
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lMobicida" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+200 punti" to arg-2
+                            send "  &a+200 fama" to arg-2
                             send "  &b+2 minuti di &4Forza V" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &eMobicida&7." to arg-2
@@ -1415,14 +1415,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.carpenter.can_use_axe} to true
                             set {medals.%arg-2%.last_obtained} to "&aFalegname"
                             add 1 to {medals.%arg-2%}
-                            add 350 to {points.%arg-2%}
+                            add 350 to {fame.%arg-2%}
                             give 1 {@carpenter_axe} to {_pl}
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lFalegname" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+350 punti" to arg-2
+                            send "  &a+350 fama" to arg-2
                             send "  &bHai sbloccato il &5TreeKinetor Plus" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &eFalegname&7." to arg-2
@@ -1439,14 +1439,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.building.totalblocks} to 10000000
                             set {medals.%arg-2%.last_obtained} to "&aCostruzione"
                             add 1 to {medals.%arg-2%}
-                            add 500 to {points.%arg-2%}
+                            add 500 to {fame.%arg-2%}
                             execute console command "/lp user %arg-2% permission settemp fly.use true 6h"
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lCostruzione" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+500 punti" to arg-2
+                            send "  &a+500 fama" to arg-2
                             send "  &bPuoi utilizzare il comando &e/fly &bper &66 ore" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &eCostruzione&7." to arg-2
@@ -1470,38 +1470,38 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.farmer.cocoa} to 1000
                             set {medals.%arg-2%.farmer.nether_wart} to 1000
                             add 1 to {medals.%arg-2%}
-                            add 150 to {points.%arg-2%}
+                            add 150 to {fame.%arg-2%}
                             apply hero of the village without any particles to arg-2 for 2 hours
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 set {medals.%arg-2%.last_obtained} to "&aContadino"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+150 punti" to arg-2
+                                send "  &a+150 fama" to arg-2
                                 send "  &b+2 ore di &2Eroe del villaggio" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eContadino&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eContadino &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 set {medals.%arg-2%.last_obtained} to "&aContadina"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+150 punti" to arg-2
+                                send "  &a+150 fama" to arg-2
                                 send "  &b+2 ore di &2Eroe del villaggio" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eContadina&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eContadina &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eContadino&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eContadina&c."
                                 stop
 
@@ -1516,14 +1516,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.fishing.when_get} to now
                             set {medals.%arg-2%.last_obtained} to "&aPesca"
                             add 1 to {medals.%arg-2%}
-                            add 50 to {points.%arg-2%}
+                            add 50 to {fame.%arg-2%}
                             apply water breathing without any particles to arg-2 for 3 hours
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lPesca" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+50 punti" to arg-2
+                            send "  &a+50 fama" to arg-2
                             send "  &b+3 ore di &2Respirazione acquatica" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &ePesca&7." to arg-2
@@ -1546,38 +1546,38 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.taming} to "{@get}"
                             set {medals.%arg-2%.taming.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 150 to {points.%arg-2%}
+                            add 150 to {fame.%arg-2%}
                             apply regeneration without any particles to arg-2 for 1 hour
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 set {medals.%arg-2%.last_obtained} to "&aAddestratore"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+150 punti" to arg-2
+                                send "  &a+150 fama" to arg-2
                                 send "  &b+1 ora di &6Rigenerazione" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eAddestratore&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eAddestratore &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 set {medals.%arg-2%.last_obtained} to "&aAddestratrice"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+150 punti" to arg-2
+                                send "  &a+150 fama" to arg-2
                                 send "  &b+1 ora di &6Rigenerazione" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eAddestratrice&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eAddestratrice &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eAddestratore&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eAddestratrice&c."
                                 stop
 
@@ -1587,35 +1587,35 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.chatter} to "{@get}"
                             set {medals.%arg-2%.chatter.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 400 to {points.%arg-2%}
+                            add 400 to {fame.%arg-2%}
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 set {medals.%arg-2%.last_obtained} to "&aChiacchierone"
                                 send "&6&m----------------------------------------" to player
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+400 punti" to arg-2
+                                send "  &a+400 fama" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eChiacchierone&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eChiacchierone &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 set {medals.%arg-2%.last_obtained} to "&aChiacchierona"
                                 send "&6&m----------------------------------------" to player
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+400 punti" to arg-2
+                                send "  &a+400 fama" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eChiacchierona&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eChiacchierona &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eChiacchierone&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eChiacchierona&c."
                                 stop
 
@@ -1625,7 +1625,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.murderer} to "{@get}"
                             set {medals.%arg-2%.murderer.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 500 to {points.%arg-2%}
+                            add 500 to {fame.%arg-2%}
                             apply strength 3 without any particles to arg-2 for 4 hours
                             apply speed 1 without any particles to arg-2 for 1 hours
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
@@ -1634,7 +1634,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lOmicida" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+500 punti" to arg-2
+                            send "  &a+500 fama" to arg-2
                             send "  &b+4 ore di &4Forza III" to arg-2
                             send "  &b+1 ora di &2Velocità I" to arg-2
                             send "&6&m----------------------------------------" to arg-2
@@ -1651,7 +1651,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.suicide} to "{@get}"
                             set {medals.%arg-2%.suicide.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 500 to {points.%arg-2%}
+                            add 500 to {fame.%arg-2%}
                             execute console command "/lp user %arg-2% permission set at.member.back"
                             execute console command "/lp user %arg-2% permission set at.member.back.death"
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
@@ -1660,7 +1660,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lSuicida" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+500 punti" to arg-2
+                            send "  &a+500 fama" to arg-2
                             send "  &aHai sbloccato il comando &e/back" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &eSuicida&7." to arg-2
@@ -1679,38 +1679,38 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.forestboss.when_get} to now
                             set {medals.%arg-2%.forestboss.can_use_axe} to true
                             add 1 to {medals.%arg-2%}
-                            add 400 to {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            add 400 to {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 give 1 {@forestboss_axe_male} to {_pl}
                                 set {medals.%arg-2%.last_obtained} to "&aRe della Foresta"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe della Foresta" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+400 punti" to arg-2
+                                send "  &a+400 fama" to arg-2
                                 send "  &bHai sbloccato il &5TreeKinetor" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eRe della Foresta&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eRe della Foresta &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 set {medals.%arg-2%.last_obtained} to "&aRegina della Foresta"
                                 give 1 {@forestboss_axe_female} to {_pl}
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina della Foresta" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+400 punti" to arg-2
+                                send "  &a+400 fama" to arg-2
                                 send "  &bHai sbloccato il &5TreeKinetor" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eRegina della Foresta&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eRegina della Foresta &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRe della Foresta&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRegina della Foresta&c."
                                 stop
 
@@ -1721,14 +1721,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.skylover.when_get} to now
                             set {medals.%arg-2%.last_obtained} to "&aAmante dei Cieli"
                             add 1 to {medals.%arg-2%}
-                            add 800 to {points.%arg-2%}
+                            add 800 to {fame.%arg-2%}
                             apply slow falling without any particles to arg-2 for 6 hours
                             play sound "{@medals_sound}" with volume 5 and pitch 2 at arg-2 for arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAmante dei Cieli" to arg-2
                             send "&f" to arg-2
                             send " &9Ricompense sbloccate:" to arg-2
-                            send "  &a+800 punti" to arg-2
+                            send "  &a+800 fama" to arg-2
                             send "  &b+6 ore di &eCaduta lenta" to arg-2
                             send "&6&m----------------------------------------" to arg-2
                             send "{@prefix} &7La &6console &7ti ha dato la medaglia &eAmante dei Cieli&7." to arg-2
@@ -1745,30 +1745,30 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.netherboss.count} to 50
                             set {medals.%arg-2%.netherboss.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 800 to {points.%arg-2%}
+                            add 800 to {fame.%arg-2%}
                             apply fire resistance without any particles to arg-2 for 6 hours
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 set {medals.%arg-2%.last_obtained} to "&aRe degli Inferi"
                                 give 1 {@netherboss_male} to {_pl}
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe degli Inferi" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+800 punti" to arg-2
+                                send "  &a+800 fama" to arg-2
                                 send "  &b+6 ore di &6Resistenza al fuoco" to arg-2
                                 send "  &bHai ottenuto un disco musicale: &cPigstep" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eRe degli Inferi&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eRe degli Inferi &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 set {medals.%arg-2%.last_obtained} to "&aRegina degli Inferi"
                                 give 1 {@netherboss_female} to {_pl}
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina degli Inferi" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+800 punti" to arg-2
+                                send "  &a+800 fama" to arg-2
                                 send "  &b+6 ore di &6Resistenza al fuoco" to arg-2
                                 send "  &bHai ottenuto un disco musicale: &cPigstep" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
@@ -1776,10 +1776,10 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 send "{@prefix} &aHai assegnato la medaglia &eRegina degli Inferi &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRe degli Inferi&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eRegina degli Inferi&c."
                                 stop
 
@@ -1790,38 +1790,38 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.dragontrainer.count} to 50
                             set {medals.%arg-2%.dragontrainer.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 1000 to {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            add 1000 to {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 give 1 {@dragontrainer_male} to {_pl}
                                 set {medals.%arg-2%.last_obtained} to "&aDomatore di Draghi"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatore di Draghi" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+1000 punti" to arg-2
+                                send "  &a+1000 fama" to arg-2
                                 send "  &bHai ottenuto un &dUovo di drago" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eDomatore di Draghi&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eDomatore di Draghi &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 give 1 {@dragontrainer_female} to {_pl}
                                 set {medals.%arg-2%.last_obtained} to "&aDomatrice di Draghi"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatrice di Draghi" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+1000 punti" to arg-2
+                                send "  &a+1000 fama" to arg-2
                                 send "  &bHai ottenuto un &dUovo di drago" to arg-2
                                 send "&6&m----------------------------------------" to arg-2
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eDomatrice di Draghi&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eDomatrice di Draghi &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDomatore di Draghi&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDomatrice di Draghi&c."
                                 stop
                     else if arg-3 is "wardenboss":
@@ -1830,18 +1830,18 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.wardenboss.count} to 10
                             set {medals.%arg-2%.wardenboss.when_get} to now
                             add 1 to {medals.%arg-2%}
-                            add 1200 to {points.%arg-2%}
+                            add 1200 to {fame.%arg-2%}
                             apply strength 5 without any particles to arg-2 for 24 hours
                             apply resistance 5 without any particles to arg-2 for 24 hours
                             apply regeneration 5 without any particles to arg-2 for 24 hours
                             apply night vision without any particles to arg-2 for 24 hours
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 set {medals.%arg-2%.last_obtained} to "&aDevastatore di Sorveglianti"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+1200 punti" to arg-2
+                                send "  &a+1200 fama" to arg-2
                                 send "  &b+24 ore di &4Forza V" to arg-2
                                 send "  &b+24 ore di &9Resistenza V" to arg-2
                                 send "  &b+24 ore di &6Rigenerazione V" to arg-2
@@ -1850,13 +1850,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 send "{@prefix} &7La &6console &7ti ha dato la medaglia &eDevastatore di Sorveglianti&7." to arg-2
                                 send "{@prefix} &aHai assegnato la medaglia &eDevastatore di Sorveglianti &aa &b%arg-2%&e" to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 set {medals.%arg-2%.last_obtained} to "&aDevastatrice di Sorveglianti"
                                 send "&6&m----------------------------------------" to arg-2
                                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to arg-2
                                 send "&f" to arg-2
                                 send " &9Ricompense sbloccate:" to arg-2
-                                send "  &a+1200 punti" to arg-2
+                                send "  &a+1200 fama" to arg-2
                                 send "  &b+24 ore di &4Forza V" to arg-2
                                 send "  &b+24 ore di &9Resistenza V" to arg-2
                                 send "  &b+24 ore di &6Rigenerazione V" to arg-2
@@ -1866,10 +1866,10 @@ command /medals [<text>] [<offline player>] [<text>]:
                                 send "{@prefix} &aHai assegnato la medaglia &eDevastatrice di Sorveglianti &aa &b%arg-2%&e" to console
                                 stop
                         else:
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDevastatore di Sorveglianti&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cha già ottenuto la medaglia &eDevastatrice di Sorveglianti&c."
                                 stop
                     else if arg-3 is "all":
@@ -1920,7 +1920,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.mining.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 350 from {points.%arg-2%}
+                            subtract 350 from {fame.%arg-2%}
                             delete {medals.%arg-2%.mining.can_use_pickaxe}
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eEstrazione&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
@@ -1937,7 +1937,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.mobkiller.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 200 from {points.%arg-2%}
+                            subtract 200 from {fame.%arg-2%}
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eMobicida&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &7Hai tolto la medaglia &eMobicida &7a &c%arg-2%&7." to console
@@ -1964,7 +1964,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.carpenter.can_use_axe}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 350 from {points.%arg-2%}
+                            subtract 350 from {fame.%arg-2%}
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eFalegname&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &7Hai tolto la medaglia &eFalegname &7a &c%arg-2%&7." to console
@@ -1980,7 +1980,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.building.totalblocks} to 0
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 500 from {points.%arg-2%}
+                            subtract 500 from {fame.%arg-2%}
                             execute console command "/lp user %arg-2% permission unsettemp fly.use"
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eCostruzione&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
@@ -1989,10 +1989,10 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "farmer":
                         if {medals.%arg-2%.farmer} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eContadino&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eContadina&c."
                                 stop
                         else:
@@ -2009,13 +2009,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.farmer.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 150 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 150 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eContadino&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eContadino &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eContadina&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eContadina &7a &c%arg-2%&7." to console
@@ -2036,7 +2036,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.fishing.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 50 from {points.%arg-2%}
+                            subtract 50 from {fame.%arg-2%}
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &ePesca&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &7Hai tolto la medaglia &ePesca &7a &c%arg-2%&7." to console
@@ -2044,10 +2044,10 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "taming":
                         if {medals.%arg-2%.taming} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eAddestratore&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eAddestratrice&c."
                                 stop
                         else:
@@ -2063,13 +2063,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.taming.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 150 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 150 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eAddestratore&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eAddestratore &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eAddestratrice&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eAddestratrice &7a &c%arg-2%&7." to console
@@ -2077,10 +2077,10 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "chatter":
                         if {medals.%arg-2%.chatter} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eChiacchierone&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eChiacchierona&c."
                                 stop
                         else:
@@ -2089,13 +2089,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.chatter.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 400 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 400 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eChiacchierone&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eChiacchierone &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eChiacchierona&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eChiacchierona &7a &c%arg-2%&7." to console
@@ -2111,7 +2111,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.murderer.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 500 from {points.%arg-2%}
+                            subtract 500 from {fame.%arg-2%}
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eOmicida&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &7Hai tolto la medaglia &eOmicida &7a &c%arg-2%&7." to console
@@ -2127,7 +2127,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.suicide.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 500 from {points.%arg-2%}
+                            subtract 500 from {fame.%arg-2%}
                             execute console command "/lp user %arg-2% permission unset at.member.back"
                             execute console command "/lp user %arg-2% permission unset at.member.back.death"
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eSuicida&7." to arg-2
@@ -2137,11 +2137,11 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "forestboss":
                         if {medals.%arg-2%.forestboss} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRe della Foresta&c."
                                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRegina della Foresta&c."
                                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                                 stop
@@ -2154,13 +2154,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             delete {medals.%arg-2%.forestboss.can_use_axe}
                             subtract 1 from {medals.%arg-2%}
-                            subtract 400 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 400 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eRe della Foresta&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eRe della Foresta &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eRegina della Foresta&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eRegina della Foresta &7a &c%arg-2%&7." to console
@@ -2176,7 +2176,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.skylover.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 800 from {points.%arg-2%}
+                            subtract 800 from {fame.%arg-2%}
                             send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eAmante dei Cieli&7." to arg-2
                             play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                             send "{@prefix} &7Hai tolto la medaglia &eAmante dei Cieli &7a &c%arg-2%&7." to console
@@ -2184,10 +2184,10 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "netherboss":
                         if {medals.%arg-2%.netherboss} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRe degli Inferi&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eRegina degli Inferi&c."
                                 stop
                         else:
@@ -2196,13 +2196,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.netherboss.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 800 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 800 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eRe degli Inferi&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eRe degli Inferi &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eRegina degli Inferi&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eRegina degli Inferi &7a &c%arg-2%&7." to console
@@ -2210,10 +2210,10 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "dragontrainer":
                         if {medals.%arg-2%.dragontrainer} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDomatore di Draghi&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDomatrice di Draghi&c."
                                 stop
                         else:
@@ -2222,13 +2222,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.dragontrainer.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 1000 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 1000 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eDomatore di Draghi&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eDomatore di Draghi &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eDomatrice di Draghi&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eDomatrice di Draghi &7a &c%arg-2%&7." to console
@@ -2236,10 +2236,10 @@ command /medals [<text>] [<offline player>] [<text>]:
 
                     else if arg-3 is "wardenboss":
                         if {medals.%arg-2%.wardenboss} is "{@not_get}":
-                            if {settings.%arg-2%.genre.male} is true:
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDevastatore di Sorveglianti&c."
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &6%arg-2% &cnon ha ancora ottenuto la medaglia &eDevastatrice di Sorveglianti&c."
                                 stop
                         else:
@@ -2248,13 +2248,13 @@ command /medals [<text>] [<offline player>] [<text>]:
                             delete {medals.%arg-2%.wardenboss.when_get}
                             set {medals.%arg-2%.last_obtained} to "&7-"
                             subtract 1 from {medals.%arg-2%}
-                            subtract 1200 from {points.%arg-2%}
-                            if {settings.%arg-2%.genre.male} is true:
+                            subtract 1200 from {fame.%arg-2%}
+                            if {settings.%arg-2%.user.genre} is "&9Maschio":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eDevastatore di Sorveglianti&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eDevastatore di Sorveglianti &7a &c%arg-2%&7." to console
                                 stop
-                            else if {settings.%arg-2%.genre.female} is true:
+                            else if {settings.%arg-2%.user.genre} is "&dFemmina":
                                 send "{@prefix} &7La &6console &7ti ha tolto la medaglia &eDevastatrice di Sorveglianti&7." to arg-2
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at arg-2 for arg-2
                                 send "{@prefix} &7Hai tolto la medaglia &eDevastatrice di Sorveglianti &7a &c%arg-2%&7." to console

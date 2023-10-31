@@ -33,3 +33,19 @@ command /wiki:
         send "{@prefix} &aPer consultare la Wiki della Disagio SMP clicca <link:https://disagio-smp.gitbook.io/disagiosmp>&e&nqui&a."
         play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
         stop
+
+#--------------------------------------------#
+#           ANNULLA COMANDO KILL             #
+#--------------------------------------------#
+on command "/kill":
+    if sender is player:
+        if player has permission "minecraft.command.kill":
+            #subtract 170141173319264430000000000000000000000 from {stats.%arg-1%.damage_suffered}
+            cancel event
+            send "{@prefix} &cQuesto comando è temporaneamente disabilitato!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+    else:
+        cancel event
+        #subtract 170141173319264430000000000000000000000 from {stats.%arg-1%.damage_suffered}
+        send "{@prefix} &cQuesto comando è temporaneamente disabilitato!"
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player

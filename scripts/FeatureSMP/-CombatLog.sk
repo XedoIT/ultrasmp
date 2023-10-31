@@ -1,0 +1,120 @@
+# DA RIVEDERE DOPO L'APERTURA UFFICIALE DEL SERVER O DOPO AVER TERMINATO LA WIKI DEL SERVER!!!
+# NON AVVIARE SENZA AVER CONTROLLATO L'INTERO SCRIPT!!!
+
+on damage:
+    if {pvp} is true:
+        attacker is a player
+        victim is a player
+
+        CombatLogSys(victim)
+        CombatLogSys(attacker)
+
+
+function CombatLogSys(p: player):
+    if {combat.%{_p}%} is not set:
+        set {combat.%{_p}%.cooldown} to 15
+        set {combat.%{_p}%} to true
+
+        while {combat.%{_p}%.cooldown} != 0:
+            subtract 1 from {combat.%{_p}%.cooldown}
+            send action bar "&4&lSei in combattimento! &7(&c%{combat.%{_p}%.cooldown}% secondi rimanenti&7)" to {_p}
+            
+            if {combat.%{_p}%.cooldown} = 0:
+                delete {combat.%{_p}%}
+            wait 1 second
+    else:
+        set {combat.%{_p}%.cooldown} to 15
+
+
+on quit:
+    if {combat.%player%} is true:
+        kill player
+        delete {combat.%player%}
+        set {combat.%player%.cooldown} to 0
+
+on death:
+    delete {combat.%victim%}
+    set {combat.%victim%.cooldown} to 0
+
+
+
+
+
+
+options:
+    Prefix: &8&l[&c&l!&8&l]
+    CT-Time: 15
+    MobsCombat-Tag: true
+
+command /combattag:
+    aliases: /combatlog,/ct,/cl
+    trigger:
+        if {combatlog::*} contains player:
+            set {_CT.span} to difference between {%player%.combatlog.time} and now
+            set {_CT.cd} to "{@CT-Time} seconds" parsed as timespan
+            send "{@Prefix} &fYou are Combat Tag for &e%difference between {_CT.span} and {_CT.cd}%"
+        else:
+            send "{@Prefix} &fYou are not in Combat Tag"
+on unload:
+    delete {combatlog::*}
+    delete {combatlag.blocked-cmds::*}
+    delete {kill.combat::*}
+
+on load:
+    add "tpa" to {combatlag.blocked-cmds::*}
+    add "home" to {combatlag.blocked-cmds::*}
+    add "spawn" to {combatlag.blocked-cmds::*}
+    add "fly" to {combatlag.blocked-cmds::*}
+
+on damage:
+    if attacker is player:
+        if attacker is not victim:
+            if {combatlog::*} doesn't contain "%attacker%":
+                if attacker doesn't have permission "CT.Bypass.Player":
+                    add "%attacker%" to {combatlog::*}
+                    send "{@Prefix} &fYou are &cCombat Tag &fwith &e%victim%" to attacker
+                    console command "/fly %attacker% disable"
+            if {combatlog::*} doesn't contain "%victim%":
+                if victim doesn't have permission "CT.Bypass.Player":   
+                    add "%victim%" to {combatlog::*}
+                    send "{@Prefix} &fYou are &cCombat Tag &fwith &e%attacker%" to victim
+                    console command "/fly %victim% disable"
+            set {%attacker%.combatlog.time} to now
+            set {%victim%.combatlog.time} to now
+    else:
+        if {@MobsCombat-Tag} is true:
+            if attacker doesn't have permission "CT.Bypass.Mobs":
+                if {combatlog::*} doesn't contain "%attacker%":
+                    add "%attacker%" to {combatlog::*}
+                    send "{@Prefix} &fYou are &cCombat Tag &fwith &e%victim%" to attacker
+                    console command "/fly %attacker% disable"
+on command:
+    if {combatlog::*} contains player:
+        if {combatlag.blocked-cmds::*} contains command:
+            cancel event
+            send "{@Prefix} &fYou can't use that command while in &cCombat Tag" to player
+
+on join:
+    if {kill.combat::*} contains player:
+        wait 1 second
+        console command "/kill %player%"
+        remove player from {kill.combat::*}
+
+on quit:
+    if {combatlog::*} contains player:
+        loop player's inventory:
+            drop loop-value
+        clear player's inventory
+        add player to {kill.combat::*}
+        remove player from {combatlog::*}
+
+on death of player:
+    if {combatlog::*} contains player:
+        remove player from {combatlog::*}
+        
+every 1 second:
+    loop {combatlog::*}:
+        set {_combatlog.gettime} to difference between {%loop-value%.combatlog.time} and now
+        if {_combatlog.gettime} > {@CT-Time} seconds:
+            remove loop-value from {combatlog::*}
+            send "{@Prefix} &fYou are no longer in &cCombat Tag" to loop-value parsed as player

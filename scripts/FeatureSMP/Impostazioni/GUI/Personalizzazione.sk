@@ -1,0 +1,280 @@
+options:
+# GENERALI
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    scoreboard_on: entity.player.levelup
+    scoreboard_off: block.beacon.deactivate
+    
+    male: &9Maschio
+    female: &dFemmina
+    
+    no_flags: {HideFlags:255}
+
+    no: &c✖
+    yes: &a✔
+
+# MESSAGGI FUNZIONALITÀ PERSONALIZZABILI
+  # SFONDO GUI
+    gui_fill: &aSfondo GUI attivato.
+    gui_empty: &cSfondo GUI disattivato.
+
+  # MESSAGGIO DI BENTORNATO
+    msg_on: &aMessaggio di bentornato attivato.
+    msg_off: &cMessaggio di bentornato disattivato.
+
+  # SCOREBOARD
+    sb_on: &aLa tua scoreboard è stata attivata.
+    sb_off: &cLa tua scoreboard è stata disattivata.
+
+  # INFORMAZIONI GIOCATORI
+    playersinfo_on: &aDa adesso potrai consultare i profili degli altri giocatori.
+    playersinfo_off: &cDa adesso non potrai più consultare i profili degli altri giocatori.
+
+  # INDICATORE DANNI GIOCATORI
+    pdi_on: &aIndicatore danni attivato per i &egiocatori&a.
+    pdi_off: &cIndicatore danni disattivato per i &6giocatori&c.
+
+  # INDICATORE DANNI MOB
+    mdi_on: &aIndicatore danni attivato per i &emob&a.
+    mdi_off: &cIndicatore danni disattivato per i &6mob&c.
+
+  # ATTIVA/DISATTIVA
+    turn_on: &eClicca per attivare.
+    turn_off: &eClicca per disattivare.
+
+on join:
+    if {settings.%player%.custom.glasspanes.marker} and {settings.%player%.custom.damageindicator.players.marker} is not set:
+        set {settings.%player%.custom.glasspanes.marker} and {settings.%player%.custom.damageindicator.players.marker} to "{@no}"
+    if {settings.%player%.custom.joinmessage.marker}, {scoreboard.%player%.marker}, {settings.%player%.custom.playersinfo.self_to_other.marker} and {settings.%player%.custom.damageindicator.mobs.marker} is not set:
+        set {settings.%player%.custom.joinmessage.marker}, {scoreboard.%player%.marker}, {settings.%player%.custom.playersinfo.self_to_other.marker} and {settings.%player%.custom.damageindicator.mobs.marker} to "{@yes}"
+
+    if {settings.%player%.custom.glasspanes} and {settings.%player%.custom.damageindicator.players} is not set:
+        set {settings.%player%.custom.glasspanes} and {settings.%player%.custom.damageindicator.players} to false
+    if {settings.%player%.custom.joinmessage}, {scoreboard.%player%}, {settings.%player%.custom.playersinfo.self_to_other} and {settings.%player%.custom.damageindicator.mobs} is not set:
+        set {settings.%player%.custom.joinmessage}, {scoreboard.%player%}, {settings.%player%.custom.playersinfo.self_to_other} and {settings.%player%.custom.damageindicator.mobs} to true
+        
+# SFONDO GUI
+function ToggleGuiFiller(p: player):
+    if {settings.%{_p}%.custom.glasspanes} is false:
+        set {settings.%{_p}%.custom.glasspanes} to true
+        set {settings.%{_p}%.custom.glasspanes.marker} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@gui_fill}" to {_p}
+    else:
+        set {settings.%{_p}%.custom.glasspanes} to false
+        set {settings.%{_p}%.custom.glasspanes.marker} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@gui_empty}" to {_p}
+
+# MESSAGGIO DI BENTORNATO
+function ToggleWelcomeMessage(p: player):
+    if {settings.%{_p}%.custom.joinmessage} is false:
+        set {settings.%{_p}%.custom.joinmessage} to true
+        set {settings.%{_p}%.custom.joinmessage.marker} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@msg_on}" to {_p}
+    else:
+        set {settings.%{_p}%.custom.joinmessage} to false
+        set {settings.%{_p}%.custom.joinmessage.marker} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@msg_off}" to {_p}
+
+# GESTIONE SCOREBOARD
+function ScoreboardManagement(p: player):
+    if {scoreboard.%{_p}%} is false:
+        set {scoreboard.%{_p}%} to true
+        set {scoreboard.%{_p}%.marker} to "{@yes}"
+        play sound "{@scoreboard_on}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@sb_on}" to {_p}
+    else:
+        set {scoreboard.%{_p}%} to false
+        set {scoreboard.%{_p}%.marker} to "{@no}"
+        play sound "{@scoreboard_off}" with volume 1 at {_p} for {_p}
+        send "{@prefix} {@sb_off}" to {_p}
+
+# INFORMAZIONI GIOCATORI
+function TogglePlayersInformationToOther(p: player):
+    if {settings.%{_p}%.custom.playersinfo.self_to_other} is false:
+        set {settings.%{_p}%.custom.playersinfo.self_to_other} to true
+        set {settings.%{_p}%.custom.playersinfo.self_to_other.marker} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@playersinfo_on}" to {_p}
+    else:
+        set {settings.%{_p}%.custom.playersinfo.self_to_other} to false
+        set {settings.%{_p}%.custom.playersinfo.self_to_other.marker} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@playersinfo_off}" to {_p}
+
+# INDICATORE DANNI GIOCATORI
+function TogglePlayersDamageIndicator(p: player):
+    if {settings.%{_p}%.custom.damageindicator.players} is false:
+        set {settings.%{_p}%.custom.damageindicator.players} to true
+        set {settings.%{_p}%.custom.damageindicator.players.marker} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@pdi_on}" to {_p}
+    else:
+        set {settings.%{_p}%.custom.damageindicator.players} to false
+        set {settings.%{_p}%.custom.damageindicator.players.marker} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@pdi_off}" to {_p}
+
+# INDICATORE DANNI MOB
+function ToggleMobsDamageIndicator(p: player):
+    if {settings.%{_p}%.custom.damageindicator.mobs} is false:
+        set {settings.%{_p}%.custom.damageindicator.mobs} to true
+        set {settings.%{_p}%.custom.damageindicator.mobs.marker} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@mdi_on}" to {_p}
+    else:
+        set {settings.%{_p}%.custom.damageindicator.mobs} to false
+        set {settings.%{_p}%.custom.damageindicator.mobs.marker} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@mdi_off}" to {_p}
+
+# GUI PRINCIPALE
+function openCustomPlayerSettingsGUI(p: player):
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set {_gui} to a new chest inventory with 6 rows named "Impostazioni: &9Personalizzazione"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+        set slot 11, 13, 15, 20, 22, 24, 28, 30, 32, 34, 37, 39, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
+        set slot 10 of {_gui} to black stained glass named "&aSfondo GUI" with lore "&7Gli slot delle GUI dei vari menu", "&7saranno riempiti da pannelli" and "&7di vetro scuri."
+        set slot 12 of {_gui} to oak door named "&aMessaggio di bentornato" with lore "&7Al tuo rientro nel server", "&7leggerai un simpatico messaggio" and "&7di bentornato in chat."
+        set slot 14 of {_gui} to writable book named "&aScoreboard" with lore "&7Attiva o disattiva la tua scoreboard."
+        set slot 16 of {_gui} to {_p}'s head named "&aProfilo giocatori" with lore "&7Consulta il profilo degli altri", "&7giocatori e fai competere le", "&7tue statistiche con le loro.", "&f", "&4&lATTENZIONE!", "&cAlcuni giocatori potrebbero", "&cimpedirti di consultare il", "&cproprio profilo a causa di", "&cun'impostazione per la privacy.", "&f", "&cPer saperne di più, vai su" and "&c""&fImpostazioni > &6Privacy&c""."
+        set slot 29 of {_gui} to player head named "&aIndicatore danni giocatori" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un giocatore.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
+        set slot 31 of {_gui} to zombie head named "&aIndicatore danni mob" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un mob.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
+        set slot 33 of {_gui} to oak sign named "&aMessaggi in/out" with lore "&7Seleziona uno tra tanti pacchetti", "&7di messaggi di ingresso e uscita" and "&7dal server e sfoggialo con orgoglio."
+        set slot 42 of {_gui} to paper named "&aMessaggi in/out" with lore "&eIn uso: %{logmsg.%{_p}%.info}%"
+        set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        if {settings.%{_p}%.custom.glasspanes} is true:
+            set slot 19 of {_gui} to lime dye named "&aSfondo GUI" with lore "{@turn_off}"
+        else:
+            set slot 19 of {_gui} to gray dye named "&cSfondo GUI" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.joinmessage} is true:
+            set slot 21 of {_gui} to lime dye named "&aMessaggio di bentornato" with lore "{@turn_off}"
+        else:
+            set slot 21 of {_gui} to gray dye named "&cMessaggio di bentornato" with lore "{@turn_on}"
+        if {scoreboard.%{_p}%} is true:
+            set slot 23 of {_gui} to lime dye named "&aScoreboard" with lore "{@turn_off}"
+        else:
+            set slot 23 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.playersinfo.self_to_other} is true:
+            set slot 25 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+        else:
+            set slot 25 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.damageindicator.players} is true:
+            set slot 38 of {_gui} to lime dye named "&aIndicatore danni giocatori" with lore "{@turn_off}"
+        else:
+            set slot 38 of {_gui} to gray dye named "&cIndicatore danni giocatori" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.damageindicator.mobs} is true:
+            set slot 40 of {_gui} to lime dye named "&aIndicatore danni mob" with lore "{@turn_off}"
+        else:
+            set slot 40 of {_gui} to gray dye named "&cIndicatore danni mob" with lore "{@turn_on}"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 6 rows named "Impostazioni: &9Personalizzazione"
+        set slot 10 of {_gui} to black stained glass named "&aSfondo GUI" with lore "&7Gli slot delle GUI dei vari menu", "&7saranno riempiti da pannelli" and "&7di vetro scuri."
+        set slot 12 of {_gui} to oak door named "&aMessaggio di bentornato" with lore "&7Al tuo rientro nel server", "&7leggerai un simpatico messaggio" and "&7di bentornato in chat."
+        set slot 14 of {_gui} to writable book named "&aScoreboard" with lore "&7Attiva o disattiva la tua scoreboard."
+        set slot 16 of {_gui} to {_p}'s head named "&aProfilo giocatori" with lore "&7Consulta il profilo degli altri", "&7giocatori e fai competere le", "&7tue statistiche con le loro.", "&f", "&4&lATTENZIONE!", "&cAlcuni giocatori potrebbero", "&cimpedirti di consultare il", "&cproprio profilo a causa di", "&cun'impostazione per la privacy.", "&f", "&cPer saperne di più, vai su" and "&c""&fImpostazioni > &6Privacy&c""."
+        set slot 29 of {_gui} to player head named "&aIndicatore danni giocatori" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un giocatore.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
+        set slot 31 of {_gui} to zombie head named "&aIndicatore danni mob" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un mob.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
+        set slot 33 of {_gui} to oak sign named "&aMessaggi in/out" with lore "&7Seleziona uno tra tanti pacchetti", "&7di messaggi di ingresso e uscita" and "&7dal server e sfoggialo con orgoglio."
+        set slot 42 of {_gui} to paper named "&aMessaggi in/out" with lore "&eIn uso: %{logmsg.%{_p}%.info}%"
+        set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        if {settings.%{_p}%.custom.glasspanes} is true:
+            set slot 19 of {_gui} to lime dye named "&aSfondo GUI" with lore "{@turn_off}"
+        else:
+            set slot 19 of {_gui} to gray dye named "&cSfondo GUI" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.joinmessage} is true:
+            set slot 21 of {_gui} to lime dye named "&aMessaggio di bentornato" with lore "{@turn_off}"
+        else:
+            set slot 21 of {_gui} to gray dye named "&cMessaggio di bentornato" with lore "{@turn_on}"
+        if {scoreboard.%{_p}%} is true:
+            set slot 23 of {_gui} to lime dye named "&aScoreboard" with lore "{@turn_off}"
+        else:
+            set slot 23 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.playersinfo.self_to_other} is true:
+            set slot 25 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+        else:
+            set slot 25 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.damageindicator.players} is true:
+            set slot 38 of {_gui} to lime dye named "&aIndicatore danni giocatori" with lore "{@turn_off}"
+        else:
+            set slot 38 of {_gui} to gray dye named "&cIndicatore danni giocatori" with lore "{@turn_on}"
+        if {settings.%{_p}%.custom.damageindicator.mobs} is true:
+            set slot 40 of {_gui} to lime dye named "&aIndicatore danni mob" with lore "{@turn_off}"
+        else:
+            set slot 40 of {_gui} to gray dye named "&cIndicatore danni mob" with lore "{@turn_on}"
+        open {_gui} to {_p}
+
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Personalizzazione":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37, 39, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52 or 53:
+                cancel event
+            else if index of event-slot is 19:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleGuiFiller(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 21:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleWelcomeMessage(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 23:
+                if click type is left mouse button:
+                    cancel event
+                    ScoreboardManagement(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 25:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersInformationToOther(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 38:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersDamageIndicator(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleMobsDamageIndicator(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 33:
+                if click type is left mouse button:
+                    cancel event
+                    openLogMessagesGui_1(player)
+                else:
+                    cancel event
+            else if index of event-slot is 48:
+                if click type is left mouse button:
+                    cancel event
+                    openPlayerSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event

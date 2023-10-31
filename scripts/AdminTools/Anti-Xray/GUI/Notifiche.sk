@@ -7,7 +7,7 @@ options:
     check_sound: entity.player.levelup
 
 function openAXRnotifications(p: player):
-   if {settings.%{_p}%.glasspanes} is true:
+   if {settings.%{_p}%.custom.glasspanes} is true:
       if {axr.alerts} is not set:
          send "{@prefix} &cQuesta pagina non è disponibile se gli avvisi minerali sono disattivati." to {_p}
          send "{@prefix} &cVai su ""&dGestione minerali&c"" e clicca su ""&bAvvisi minerali&c"" per attivarli." to {_p}
@@ -84,7 +84,7 @@ function openAXRnotifications(p: player):
             set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
             open {_gui} to {_p}
 function openAXRofflineores(p: player, arg: offline player):
-   if {settings.%{_p}%.glasspanes} is true:
+   if {settings.%{_p}%.custom.glasspanes} is true:
       set metadata tag "PlayerOfflineCounterGUI" of {_p} to a new chest inventory with 6 rows named "Anti-Xray: [&4%{_arg}%&r]"
       set slot 0, 1, 3, 4, 7, 8, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "PlayerOfflineCounterGUI" of {_p} to black stained glass pane named "&r"
       set slot 37, 38, 42 and 43 of metadata tag "PlayerOfflineCounterGUI" of {_p} to gray stained glass pane named "&r"

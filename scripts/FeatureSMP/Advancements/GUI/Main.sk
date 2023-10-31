@@ -1,209 +1,43 @@
 options:
     stats_info: &eClicca per controllare nel dettaglio.
     nopage: &cQuesta pagina non è ancora disponibile! Riprova più tardi.
+    nopagebeta: &cQuesta funzionalità è ancora in fase di sviluppo e sarà disponibile all'apertura ufficiale del server.
     error_sound: entity.enderman.teleport
 
-function openAchievementsSelectorGui(p: player):
-    if {settings.%{_p}%.glasspanes} is true:
-        set {_gui} to a new chest inventory with 4 rows with name "Obiettivi SMP"
-        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 and 26 of {_gui} to gray stained glass pane named "&r"
-        set slot 27, 28, 29, 30, 32, 33, 34 and 35 of {_gui} to black stained glass pane named "&r"
-        set slot 11 of {_gui} to writable book named "&cObiettivi e Sfide" with lore "&7Mettiti alla prova superando gli obiettivi" and "&7e le sfide proposte per te."
-        set slot 15 of {_gui} to paper named "&aStatistiche" with lore "&7Controlla l'andamento delle tue statistiche", "&7dei blocchi e oggetti con i quali hai", "&7interagito nel corso della tua avventura" and "&7all'interno della Disagio SMP."
-        set slot 31 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Profilo &7&lSMP&7"
-        open {_gui} to {_p}
-    else:
-        set {_gui} to a new chest inventory with 4 rows with name "Obiettivi SMP"
-        set slot 11 of {_gui} to writable book named "&cObiettivi e Sfide" with lore "&7Mettiti alla prova superando gli obiettivi" and "&7e le sfide proposte per te."
-        set slot 15 of {_gui} to paper named "&aStatistiche" with lore "&7Controlla l'andamento delle tue statistiche", "&7dei blocchi e oggetti con i quali hai", "&7interagito nel corso della tua avventura" and "&7all'interno della Disagio SMP."
-        set slot 31 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Profilo &7&lSMP&7"
-        open {_gui} to {_p}
-
-function openMainStatsGui(p: player):
-    if {settings.%{_p}%.glasspanes} is true:
-        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi: Statistiche"
-        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34 and 35 of {_gui} to gray stained glass pane named "&r"
-        set slot 36, 37, 38, 39, 40, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
-        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione" with lore "&7Le tue statistiche per i blocchi", "&7da costruzione.", "", " &7- Blocchi distrutti: &c%{build.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{build.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{build.%{_p}%.total_pickup}%", " &7- Blocchi scortecciati: &e%{build.%{_p}%.total_stripped}%", "" and "{@stats_info}"
-        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati" with lore "&7Le tue statistiche per i blocchi", "&7colorati.", "", " &7- Blocchi distrutti: &c%{color.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{color.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{color.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 13 of {_gui} to grass block named "&fBlocchi naturali" with lore "&7Le tue statistiche per i blocchi", "&7naturali.", "", " &7- Blocchi distrutti: &c%{nature.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{nature.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{nature.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali" with lore "&7Le tue statistiche per i blocchi", "&7funzionali.", "", " &7- Blocchi distrutti: &c%{function.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{function.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{function.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 15 of {_gui} to iron ingot named "&fMinerali" with lore "&7Le tue statistiche per i blocchi", "&7di minerali.", "", " &7- Minerali distrutti: &c%{minerals.%{_p}%.total_broken}%", " &7- Minerali piazzati: &a%{minerals.%{_p}%.total_placed}%", " &7- Minerali raccolti: &b%{minerals.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 20 of {_gui} to golden apple named "&fCibo" with lore "&7Le tue statistiche per i cibi ingeriti", "", " &7- Cibo ingerito: &b%{food.%{_p}%}%", "" and "{@stats_info}"
-        set slot 21 of {_gui} to redstone named "&fRedstone" with lore "&7Le tue statistiche per i blocchi", "&7riguardanti la redstone.", "", " &7- Blocchi distrutti: &c%{redstone.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{redstone.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{redstone.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 22 of {_gui} to red dye named "&fColoranti" with lore "&7Le tue statistiche per i coloranti", "&7del gioco.", "", " &7- Coloranti raccolti: &b%{dyes.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 23 of {_gui} to ender eye named "&fUtilità" with lore "&7Le tue statistiche per i blocchi", "&7e oggetti utili.", "", " &7- Oggetti raccolti: &b%{utils.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 24 of {_gui} to rotten flesh named "&fMob" with lore "&7Le tue statistiche per i drop", "&7dei mob raccolti.", "", " &7- Drop raccolti: &b%{mobs.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 40 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Obiettivi SMP"
-        open {_gui} to {_p}
-    else:
-        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi: Statistiche"
-        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione" with lore "&7Le tue statistiche per i blocchi", "&7da costruzione.", "", " &7- Blocchi distrutti: &c%{build.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{build.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{build.%{_p}%.total_pickup}%", " &7- Blocchi scortecciati: &e%{build.%{_p}%.total_stripped}%", "" and "{@stats_info}"
-        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati" with lore "&7Le tue statistiche per i blocchi", "&7colorati.", "", " &7- Blocchi distrutti: &c%{color.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{color.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{color.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 13 of {_gui} to grass block named "&fBlocchi naturali" with lore "&7Le tue statistiche per i blocchi", "&7naturali.", "", " &7- Blocchi distrutti: &c%{nature.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{nature.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{nature.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali" with lore "&7Le tue statistiche per i blocchi", "&7funzionali.", "", " &7- Blocchi distrutti: &c%{function.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{function.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{function.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 15 of {_gui} to iron ingot named "&fMinerali" with lore "&7Le tue statistiche per i blocchi", "&7di minerali.", "", " &7- Minerali distrutti: &c%{minerals.%{_p}%.total_broken}%", " &7- Minerali piazzati: &a%{minerals.%{_p}%.total_placed}%", " &7- Minerali raccolti: &b%{minerals.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 20 of {_gui} to golden apple named "&fCibo" with lore "&7Le tue statistiche per i cibi ingeriti", "", " &7- Cibo ingerito: &b%{food.%{_p}%}%", "" and "{@stats_info}"
-        set slot 21 of {_gui} to redstone named "&fRedstone" with lore "&7Le tue statistiche per i blocchi", "&7riguardanti la redstone.", "", " &7- Blocchi distrutti: &c%{redstone.%{_p}%.total_broken}%", " &7- Blocchi piazzati: &a%{redstone.%{_p}%.total_placed}%", " &7- Blocchi raccolti: &b%{redstone.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 22 of {_gui} to red dye named "&fColoranti" with lore "&7Le tue statistiche per i coloranti", "&7del gioco.", "", " &7- Coloranti raccolti: &b%{dyes.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 23 of {_gui} to ender eye named "&fUtilità" with lore "&7Le tue statistiche per i blocchi", "&7e oggetti utili.", "", " &7- Oggetti raccolti: &b%{utils.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 24 of {_gui} to rotten flesh named "&fMob" with lore "&7Le tue statistiche per i drop", "&7dei mob raccolti.", "", " &7- Drop raccolti: &b%{mobs.%{_p}%.total_pickup}%", "" and "{@stats_info}"
-        set slot 40 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Obiettivi SMP"
-        open {_gui} to {_p}
-
 function openMainAchievementsGui(p: player):
-    if {settings.%{_p}%.glasspanes} is true:
-        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi: Obiettivi e Sfide"
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
         set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34 and 35 of {_gui} to gray stained glass pane named "&r"
         set slot 36, 37, 38, 39, 40, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
-        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione"
-        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati"
-        set slot 13 of {_gui} to grass block named "&fBlocchi naturali"
-        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali"
-        set slot 15 of {_gui} to iron ingot named "&fMinerali"
-        set slot 20 of {_gui} to golden apple named "&fCibo"
-        set slot 21 of {_gui} to redstone named "&fRedstone"
-        set slot 22 of {_gui} to red dye named "&fColoranti"
-        set slot 23 of {_gui} to ender eye named "&fUtilità"
-        set slot 24 of {_gui} to rotten flesh named "&fMob"
-        set slot 40 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Obiettivi SMP"
+        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione" with lore "&c&oIn arrivo..."
+        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati" with lore "&c&oIn arrivo..."
+        set slot 13 of {_gui} to grass block named "&fBlocchi naturali" with lore "&c&oIn arrivo..."
+        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali" with lore "&c&oIn arrivo..."
+        set slot 15 of {_gui} to iron ingot named "&fMinerali" with lore "&c&oIn arrivo..."
+        set slot 20 of {_gui} to golden apple named "&fCibo" with lore "&c&oIn arrivo..."
+        set slot 21 of {_gui} to redstone named "&fRedstone" with lore "&c&oIn arrivo..."
+        set slot 22 of {_gui} to red dye named "&fColoranti" with lore "&c&oIn arrivo..."
+        set slot 23 of {_gui} to ender eye named "&fUtilità" with lore "&c&oIn arrivo..."
+        set slot 24 of {_gui} to rotten flesh named "&fMob" with lore "&c&oIn arrivo..."
+        set slot 40 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
         open {_gui} to {_p}
     else:
-        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi: Obiettivi e Sfide"
-        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione"
-        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati"
-        set slot 13 of {_gui} to grass block named "&fBlocchi naturali"
-        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali"
-        set slot 15 of {_gui} to iron ingot named "&fMinerali"
-        set slot 20 of {_gui} to golden apple named "&fCibo"
-        set slot 21 of {_gui} to redstone named "&fRedstone"
-        set slot 22 of {_gui} to red dye named "&fColoranti"
-        set slot 23 of {_gui} to ender eye named "&fUtilità"
-        set slot 24 of {_gui} to rotten flesh named "&fMob"
-        set slot 40 of {_gui} to arrow named "&fIndietro" with lore "&7Torna a Obiettivi SMP"
+        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
+        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione" with lore "&c&oIn arrivo..."
+        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati" with lore "&c&oIn arrivo..."
+        set slot 13 of {_gui} to grass block named "&fBlocchi naturali" with lore "&c&oIn arrivo..."
+        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali" with lore "&c&oIn arrivo..."
+        set slot 15 of {_gui} to iron ingot named "&fMinerali" with lore "&c&oIn arrivo..."
+        set slot 20 of {_gui} to golden apple named "&fCibo" with lore "&c&oIn arrivo..."
+        set slot 21 of {_gui} to redstone named "&fRedstone" with lore "&c&oIn arrivo..."
+        set slot 22 of {_gui} to red dye named "&fColoranti" with lore "&c&oIn arrivo..."
+        set slot 23 of {_gui} to ender eye named "&fUtilità" with lore "&c&oIn arrivo..."
+        set slot 24 of {_gui} to rotten flesh named "&fMob" with lore "&c&oIn arrivo..."
+        set slot 40 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
         open {_gui} to {_p}
         
 on inventory click:
     if name of event-inventory is "Obiettivi SMP":
-        if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34 or 35:
-                if click type is left mouse button:
-                    cancel event
-                else:
-                    cancel event
-            else if index of event-slot is 11:
-                if click type is left mouse button:
-                    cancel event
-                    openMainAchievementsGui(player)
-                else:
-                    cancel event
-            else if index of event-slot is 15:
-                if click type is left mouse button:
-                    cancel event
-                    openMainStatsGui(player)
-                else:
-                    cancel event
-            else if index of event-slot is 31:
-                if click type is left mouse button:
-                    cancel event
-                    if player has permission "admin.manage.server":
-                        openProfileGuiAdmin(player)
-                    else:
-                        openProfileGui(player)
-                else:
-                    cancel event
-    else if name of event-inventory is "Obiettivi: Statistiche":
-        if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43 or 44:
-                if click type is left mouse button:
-                    cancel event
-                else:
-                    cancel event
-            else if index of event-slot is 11:
-                if click type is left mouse button:
-                    cancel event
-                    openBuildStatsGui(player)
-                else:
-                    cancel event
-            else if index of event-slot is 12:
-                if click type is left mouse button:
-                    cancel event
-                    #openColorAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 13:
-                if click type is left mouse button:
-                    cancel event
-                    #openNatureAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 14:
-                if click type is left mouse button:
-                    cancel event
-                    #openFunctionAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 15:
-                if click type is left mouse button:
-                    cancel event
-                    #openMineralsAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 20:
-                if click type is left mouse button:
-                    cancel event
-                    #openFoodAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 21:
-                if click type is left mouse button:
-                    cancel event
-                    #openRedstoneAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 22:
-                if click type is left mouse button:
-                    cancel event
-                    #openDyesAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 23:
-                if click type is left mouse button:
-                    cancel event
-                    #openUtilsAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 24:
-                if click type is left mouse button:
-                    cancel event
-                    #openMobsAchievementsGui(player)
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
-                else:
-                    cancel event
-            else if index of event-slot is 40:
-                if click type is left mouse button:
-                    cancel event
-                    openAchievementsSelectorGui(player)
-                else:
-                    cancel event
-    else if name of event-inventory is "Obiettivi: Obiettivi e Sfide":
         if type of event-inventory is chest inventory:
             if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43 or 44:
                 if click type is left mouse button:
@@ -215,7 +49,7 @@ on inventory click:
                     cancel event
                     #openBuildAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 12:
@@ -223,7 +57,7 @@ on inventory click:
                     cancel event
                     #openColorAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 13:
@@ -231,7 +65,7 @@ on inventory click:
                     cancel event
                     #openNatureAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 14:
@@ -239,7 +73,7 @@ on inventory click:
                     cancel event
                     #openFunctionAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 15:
@@ -247,7 +81,7 @@ on inventory click:
                     cancel event
                     #openMineralsAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 20:
@@ -255,7 +89,7 @@ on inventory click:
                     cancel event
                     #openFoodAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 21:
@@ -263,7 +97,7 @@ on inventory click:
                     cancel event
                     #openRedstoneAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 22:
@@ -271,7 +105,7 @@ on inventory click:
                     cancel event
                     #openDyesAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 23:
@@ -279,7 +113,7 @@ on inventory click:
                     cancel event
                     #openUtilsAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 24:
@@ -287,12 +121,12 @@ on inventory click:
                     cancel event
                     #openMobsAchievementsGui(player)
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                    send "{@nopage}"
+                    send "{@nopagebeta}"
                 else:
                     cancel event
             else if index of event-slot is 40:
                 if click type is left mouse button:
                     cancel event
-                    openAchievementsSelectorGui(player)
+                    openProfileGui(player)
                 else:
                     cancel event

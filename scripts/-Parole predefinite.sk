@@ -27,6 +27,10 @@ options:
 # SEPARATORI CATEGORIE/SEZIONE
     # [nome categoria/sezione]
 
+# SESSI GIOCATORE
+    male: &9Maschio
+    female: &dFemmina
+
 
 
 # SISTEMA IMPEDIMENTO AVVIO SCRIPT

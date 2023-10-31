@@ -15,7 +15,7 @@ command /aiuto [<text>]:
 			send "&f5. &c/checkping &7- (come /chkping o /ping) Controlla il tuo ping all'interno del server"
 			send "&f6. &c/crafting &7- (come /fabbricazione) Apri la crafting table direttamente con questo comando"
 			send "&f7. &c/msg &7- Invia messaggi privati ai giocatori"
-			send "&f8. &c/points &7- (come /p o /punti) Mostra quanti punti hai accumulato"
+			send "&f8. &c/points &7- (come /f o /fama) Mostra quanta fama hai accumulato"
 			send "&e> &7&m---------------&a&l SKRIPT &7&m---------------&e<"
 			stop trigger
 			

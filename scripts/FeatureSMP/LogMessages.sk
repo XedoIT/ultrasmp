@@ -36,7 +36,7 @@ options:
 
 on join:
     if player has played before:
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             if {logmsg.%player%.info} is "{@none}":
                 set join message to ""
             if {logmsg.%player%.info} is "{@smp}":
@@ -79,7 +79,7 @@ on join:
                 set join message to "&9%player% &7è andato a prendersi una pausa."
             if {logmsg.%player%.info} is "{@love}":
                 set join message to "%player% è venuto a portare amore nel server"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             if {logmsg.%player%.info} is "{@none}":
                 set join message to ""
             if {logmsg.%player%.info} is "{@smp}":
@@ -128,7 +128,7 @@ on join:
         set {logmsg.%player%.info} to "{@smp}"
 
 on quit:
-    if {settings.%player%.genre.male} is true:
+    if {settings.%player%.user.genre} is "&9Maschio":
         if {logmsg.%player%.info} is "{@none}":
             set quit message to ""
         if {logmsg.%player%.info} is "{@smp}":
@@ -171,7 +171,7 @@ on quit:
             set quit message to "&9%player% &7è tornato. Che bello!"
         if {logmsg.%player%.info} is "{@love}":
             set quit message to "Cupido ha portato con sé %player%"
-    else if {settings.%player%.genre.female} is true:
+    else if {settings.%player%.user.genre} is "&dFemmina":
         if {logmsg.%player%.info} is "{@none}":
             set quit message to ""
         if {logmsg.%player%.info} is "{@smp}":
@@ -216,9 +216,9 @@ on quit:
             set quit message to "Cupido ha portato con sé %player%"
 
 function openLogMessagesGui_1(p: player):
-    if {settings.%{_p}%.glasspanes} is true:
-        if {settings.%{_p}%.genre.male} is true:
-            set {_gui} to a new chest inventory with 6 rows named "Messaggi Server (1/1)"
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        if {settings.%{_p}%.user.genre} is "&9Maschio":
+            set {_gui} to a new chest inventory with 6 rows named "Messaggi in/out (1/1)"
             set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 51 and 52 of {_gui} to black stained glass pane named "&r"
             set slot 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
             if {logmsg.%{_p}%.info} is not "{@none}":
@@ -285,15 +285,16 @@ function openLogMessagesGui_1(p: player):
                 set slot 29 of {_gui} to blaze powder named "{@onfire}" with lore "&8Messaggi Server", "&f", "&7Diventa il giocatore più caldo", "&7dell'intero server grazie a", "&7questo pacchetto di messaggi.", "&f", "{@preview}", "&f" and "{@available}"
             else:
                 set slot 29 of {_gui} to blaze powder named "{@onfire}" with lore "&8Messaggi Server", "&f", "&7Diventa il giocatore più caldo", "&7dell'intero server grazie a", "&7questo pacchetto di messaggi.", "&f", "{@preview}", "&f" and "{@selected}"
-            set slot 49 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Le tue impostazioni"
+            set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Le tue impostazioni"
+            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
             set slot 50 of {_gui} to paper named "&c&lInfo" with lore "&7GUI in aggiornamento!", "&f", "&bSuggerisci dei nuovi pacchetti", "&bdi messaggi utilizzando il" and "&bcomando &6/feedback&b."
             set slot 53 of {_gui} to arrow named "&aPagina successiva" with lore "&7&oIn arrivo..."
             open {_gui} to {_p}
 
 on inventory click:
-    if name of event-inventory is "Messaggi Server (1/1)":
+    if name of event-inventory is "Messaggi in/out (1/1)":
         if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51 or 52:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 50, 51 or 52:
                 cancel event
 
             else if index of event-slot is 10:
@@ -331,7 +332,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -341,7 +342,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -369,7 +370,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -379,7 +380,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -407,7 +408,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -417,7 +418,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -445,7 +446,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -455,7 +456,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -483,7 +484,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -493,7 +494,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -521,7 +522,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -531,7 +532,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -559,7 +560,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -569,7 +570,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -597,7 +598,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -607,7 +608,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -635,7 +636,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -645,7 +646,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -673,7 +674,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -683,7 +684,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -699,7 +700,7 @@ on inventory click:
             else if index of event-slot is 23:
                 if click type is left mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         if {logmsg.%player%.info} is not "{@dragon_male}":
                             set {logmsg.%player%.info} to "{@dragon_male}"
                             send "&6Hai selezionato: {@dragon_male}"
@@ -708,7 +709,7 @@ on inventory click:
                         else:
                             send "&cHai già selezionato questo pacchetto di messaggi!"
                             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         if {logmsg.%player%.info} is not "{@dragon_female}":
                             set {logmsg.%player%.info} to "{@dragon_female}"
                             send "&6Hai selezionato: {@dragon_female}"
@@ -721,7 +722,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -731,7 +732,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -747,7 +748,7 @@ on inventory click:
             else if index of event-slot is 24:
                 if click type is left mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         if {logmsg.%player%.info} is not "{@nether_male}":
                             set {logmsg.%player%.info} to "{@nether_male}"
                             send "&6Hai selezionato: {@nether_male}"
@@ -756,7 +757,7 @@ on inventory click:
                         else:
                             send "&cHai già selezionato questo pacchetto di messaggi!"
                             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         if {logmsg.%player%.info} is not "{@nether_female}":
                             set {logmsg.%player%.info} to "{@nether_female}"
                             send "&6Hai selezionato: {@nether_female}"
@@ -769,7 +770,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -779,7 +780,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -807,7 +808,7 @@ on inventory click:
                     cancel event
                 if click type is right mouse button:
                     cancel event
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -817,7 +818,7 @@ on inventory click:
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         wait 5 seconds
                         openLogMessagesGui_1(player)
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         close player's inventory
                         send "&7--------------- &7&lANTEPRIMA &7-----------------"
                         send ""
@@ -829,10 +830,16 @@ on inventory click:
                         openLogMessagesGui_1(player)
                 else:
                     cancel event
+            else if index of event-slot is 48:
+                if click type is left mouse button:
+                    cancel event
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
             else if index of event-slot is 49:
                 if click type is left mouse button:
                     cancel event
-                    openPlayerSettingsGui(player)
+                    close player's inventory
                 else:
                     cancel event
             else if index of event-slot is 53:

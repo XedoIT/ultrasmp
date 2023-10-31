@@ -24,10 +24,10 @@ command /tphere [<offline player>]:
                 else:
                     teleport arg-1 to player's location
                     send "{@tp_prefix} &7Hai portato &c%arg-1% &7da te." to player
-                    if {settings.%arg-1%.genre.male} is true:
+                    if {settings.%arg-1%.user.genre} is "&9Maschio":
                         send "{@tp_prefix} &c%player% &7ti ha portato alla sua posizione." to arg-1
                         stop
-                    else if {settings.%arg-1%.genre.female} is true:
+                    else:
                         send "{@tp_prefix} &c%player% &7ti ha portata alla sua posizione." to arg-1
                         stop
                     stop
@@ -50,25 +50,25 @@ command /teleport [<offline player>] [<offline player>]:
                     stop
             else if arg-1 is player:
                 if arg-2 is not set:
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         send "{@tp_prefix} &cNon puoi teletrasportarti da te stesso!"
                         stop
-                    else if {settings.%player%.genre.female} is true:
+                    else:
                         send "{@tp_prefix} &cNon puoi teletrasportarti da te stessa!"
                         stop
                 if arg-2 is player:
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         send "{@tp_prefix} &cNon puoi teletrasportare te stesso da te stesso!"
                         stop
-                    else if {settings.%player%.genre.female} is true:
+                    else:
                         send "{@tp_prefix} &cNon puoi teletrasportare te stessa da te stessa!"
                         stop
                 else if arg-2 is not player:
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         teleport player at arg-2's location
                         send "{@tp_prefix} &7Ti ho portato da &c%arg-2%&7."
                         stop
-                    else if {settings.%player%.genre.female} is true:
+                    else:
                         send "{@tp_prefix} &7Ti ho portata da &c%arg-2%&7."
                         stop
             else if arg-1 is offline:
@@ -76,11 +76,11 @@ command /teleport [<offline player>] [<offline player>]:
                 stop
             else if arg-1 is online:
                 if arg-2 is not set:
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         teleport player at arg-1's location
                         send "{@tp_prefix} &7Ti ho portato da &c%arg-1%&7."
                         stop
-                    else if {settings.%player%.genre.female} is true:
+                    else:
                         teleport player at arg-1's location
                         send "{@tp_prefix} &7Ti ho portata da &c%arg-1%&7."
                         stop

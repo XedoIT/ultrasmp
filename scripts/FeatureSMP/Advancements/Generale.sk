@@ -14,8 +14,3 @@ command /achievements:
     aliases: /obiettivi
     trigger:
         openMainAchievementsGui(player)
-
-command /statistics:
-    aliases: /stats
-    trigger:
-        openMainStatsGui(player)

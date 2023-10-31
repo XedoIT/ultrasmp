@@ -1,7 +1,7 @@
 options:
     prefix: &b[&3&lNICK&b]
 
-on load:
+on join:
     #delete {nick_list::*} --> SOLO DEBUG
     if {nick_list::*} is not set:
         set {nick_list::*} to "&7Non ci sono soprannomi attivi."

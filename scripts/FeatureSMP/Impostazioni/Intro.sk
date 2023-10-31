@@ -1,45 +1,112 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+    select: &eClicca per selezionare!
+    selected: &aSELEZIONATO!
+
+    male: &9Maschio
+    female: &dFemmina
+    
+    glinted: {HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}
+
+
 on join:
-    if {settings.%player%.genre} is not set:
-        GenreSelectorIntroNO(player)
+    if {settings.%player%.user.genre} is not set:
+        GenrePrompt(player)
+
+function GenrePrompt(p: player):
+    if {settings.%{_p}%.user.genre} is not set:
+        set {_gui} to a new chest inventory with 5 rows named "Seleziona il tuo sesso!"
+        set slot 40 of {_gui} to bedrock named "&cGioca!" with lore "&7Non puoi chiudere questa GUI se" and "&7prima non scegli il tuo sesso."
+    else:
+        set {_gui} to a new chest inventory with 5 rows named "Confermi?"
+        set slot 40 of {_gui} to grass block named "&aGioca!" with lore "&7Chiudi questa GUI e inizia" and "&7la tua avventura nell'SMP."
+    set slot 4 of {_gui} to skull of {_p} named "&eIl tuo sesso" with lore "&7Clicca su uno dei pannelli per", "&7selezionare il tuo sesso,", "&7quindi clicca su ""&aGioca!&7"" &7per", "&7iniziare a giocare.", "&f", "&4&lATTENZIONE!", "&cUna volta confermato il sesso" and "&cnon potrai più cambiarlo."
+    if {settings.%{_p}%.user.genre} is not set:
+        set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
+        set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
+    if {settings.%{_p}%.user.genre} is "&9Maschio":
+        set slot 20 of {_gui} to light blue stained glass pane with nbt compound from "{@glinted}" named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@selected}"
+        set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
+    else if {settings.%{_p}%.user.genre} is "&dFemmina":
+        set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
+        set slot 24 of {_gui} to pink stained glass pane with nbt compound from "{@glinted}" named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@selected}"
+    open {_gui} to {_p}
+    
+    
+function GenreSelectMale(p: player):
+    if {settings.%{_p}%.user.genre} is not "{@male}":
+        set {settings.%{_p}%.genre.male} to "{@selected}"
+        set {settings.%{_p}%.genre.female} to "{@select}"
+        set {settings.%{_p}%.user.genre} to "{@male}"
+        send "{@prefix} &9Da ora tutti i tuoi messaggi saranno rivolti al maschile!" to {_p}
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+    else if {settings.%{_p}%.user.genre} is "{@male}":
+        send "{@prefix} &cSei già identificato come un maschio!" to {_p}
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at {_p} for {_p}
+
+function GenreSelectFemale(p: player):
+    if {settings.%{_p}%.user.genre} is not "{@female}":
+        set {settings.%{_p}%.genre.male} to "{@select}"
+        set {settings.%{_p}%.genre.female} to "{@selected}"
+        set {settings.%{_p}%.user.genre} to "{@female}"
+        send "{@prefix} &dDa ora tutti i tuoi messaggi saranno rivolti al femminile!" to {_p}
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send "{@prefix} &cSei già identificata come una femmina!" to {_p}
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at {_p} for {_p}
 
 on inventory click:
-    if name of event-inventory is "E adesso... scegli il tuo sesso!":
-        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34 or 35:
+    if name of event-inventory is "Seleziona il tuo sesso!":
+        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 or 53:
             cancel event
-        else if index of event-slot is 11:
+        else if index of event-slot is 20:
             cancel event
-            GenreSelectorMale(player)
-            GenreSelectorIntroYES(player)
-        else if index of event-slot is 15:
+            GenreSelectMale(player)
+            GenrePrompt(player)
+        else if index of event-slot is 24:
             cancel event
-            GenreSelectorFemale(player)
-            GenreSelectorIntroYES(player)
-        else if index of event-slot is 31:
+            GenreSelectFemale(player)
+            GenrePrompt(player)
+        else if index of event-slot is 40:
             cancel event
-            if {settings.%player%.genre} is not set:
-                send "&cDevi prima selezionare il tuo sesso!"
+            if {settings.%player%.user.genre} is not set:
+                send "{@prefix} &cDevi prima selezionare il tuo sesso!"
                 play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
 
-    else if name of event-inventory is "E adesso... scegli il tuo sesso! ":
-        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34 or 35:
+    else if name of event-inventory is "Confermi?":
+        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52 or 53:
             cancel event
-        else if index of event-slot is 11:
+        else if index of event-slot is 20:
             cancel event
-            GenreSelectorMale(player)
-        else if index of event-slot is 15:
+            GenreSelectMale(player)
+            GenrePrompt(player)
+        else if index of event-slot is 24:
             cancel event
-            GenreSelectorFemale(player)
-        else if index of event-slot is 31:
+            GenreSelectFemale(player)
+            GenrePrompt(player)
+        else if index of event-slot is 40:
             cancel event
             close player's inventory
+            send ""
+            send "{@prefix} &aBuon divertimento nell'SMP, &b%player%&a!"
+            send "{@prefix} &aL'avventura ti aspetta!"
+            send ""
+            play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+            delete {settings.%player%.genre.male}
+            delete {settings.%player%.genre.female}
 
 on inventory close:
-    if name of event-inventory is "E adesso... scegli il tuo sesso!":
-        if {settings.%player%.genre} is not set:
+    if name of event-inventory is "Seleziona il tuo sesso!":
+        if {settings.%player%.user.genre} is not set:
             wait 1 tick
-            GenreSelectorIntroNO(player)
-            send "&cDevi prima selezionare il tuo sesso!"
+            GenrePrompt(player)
+            send "{@prefix} &cDevi prima selezionare il tuo sesso!"
             play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-    else if name of event-inventory is "E adesso... scegli il tuo sesso! ":
-        send "&aBuon divertimento nell'SMP, &b%player%&a! L'avventura ti aspetta!"
-        play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+
+
+# ZONA DEBUG
+command /resetgenre:
+    trigger:
+        delete {settings.%player%.user.genre}
+        delete {settings.%player%.genre.male}
+        delete {settings.%player%.genre.female}

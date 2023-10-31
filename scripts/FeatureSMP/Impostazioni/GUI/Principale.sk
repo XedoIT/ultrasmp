@@ -1,0 +1,74 @@
+options:
+    interactable: &e≡
+    manage: &eClicca per gestirle.
+    warning: &c[&4&l!&c]
+
+command /settings:
+    aliases: /impostazioni
+    description: Gestisci le tue impostazioni all'interno dell'SMP.
+    executable by: console, player
+    trigger:
+        if sender is player:
+            openPlayerSettingsGui(player)
+            stop
+        else:
+            send "&cSolo i giocatori possono eseguire questo comando!"
+            stop
+
+function openPlayerSettingsGui(p: player):
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set {_gui} to a new chest inventory with 5 rows named "Impostazioni"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
+        set slot 20 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "&f", "&7Include:", "%{settings.%{_p}%.custom.glasspanes.marker}% &7Sfondo GUI", "%{settings.%{_p}%.custom.joinmessage.marker}% &7Messaggio di bentornato", "%{scoreboard.%{_p}%.marker}% &7Scoreboard", "%{settings.%{_p}%.custom.playersinfo.self_to_other.marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{settings.%{_p}%.custom.damageindicator.players.marker}% &7Indicatore danni giocatori", "%{settings.%{_p}%.custom.damageindicator.mobs.marker}% &7Indicatore danni mob", "{@interactable} &7Messaggi in/out", "&f" and "{@manage}"
+        set slot 22 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche da ricevere", "&7durante la tua avventura all'interno", "&7della Disagio SMP.", "&f", "&7Include:", "{@interactable} &7Notifiche generali", "{@interactable} &7Notifiche di servizio", "&f" and "{@manage}"
+        set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{settings.%{_p}%.privacy.playersinfo.other_to_self.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "&f" and "{@manage}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        #set slot 41 of {_gui} to writable book named "&eWiki dell'SMP" with lore "&7Vuoi saperne di più su una determinata", "&7funzionalità presente nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa, basta cercare!", "&f" and "{@info_wiki}"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 5 rows named "Impostazioni"
+        set slot 20 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "&f", "&7Include:", "%{settings.%{_p}%.custom.glasspanes.marker}% &7Sfondo GUI", "%{settings.%{_p}%.custom.joinmessage.marker}% &7Messaggio di bentornato", "%{scoreboard.%{_p}%.marker}% &7Scoreboard", "%{settings.%{_p}%.custom.playersinfo.self_to_other.marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{settings.%{_p}%.custom.damageindicator.players.marker}% &7Indicatore danni giocatori", "%{settings.%{_p}%.custom.damageindicator.mobs.marker}% &7Indicatore danni mob", "{@interactable} &7Messaggi in/out", "&f" and "{@manage}"
+        set slot 22 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche da ricevere", "&7durante la tua avventura all'interno", "&7della Disagio SMP.", "&f", "&7Include:", "{@interactable} &7Notifiche generali", "{@interactable} &7Notifiche di servizio", "&f" and "{@manage}"
+        set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{settings.%{_p}%.privacy.playersinfo.other_to_self.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "&f" and "{@manage}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        #set slot 41 of {_gui} to writable book named "&eWiki dell'SMP" with lore "&7Vuoi saperne di più su una determinata", "&7funzionalità presente nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa, basta cercare!", "&f" and "{@info_wiki}"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43 or 44:
+                cancel event
+            else if index of event-slot is 20:
+                if click type is left mouse button:
+                    cancel event
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 24:
+                if click type is left mouse button:
+                    cancel event
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 39:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event

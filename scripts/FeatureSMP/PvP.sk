@@ -1,6 +1,20 @@
+options:
+    fight: &a● &a&lPvP abilitato &a●
+    no_fight: &c● &c&lPvP disabilitato &c●
+
+    fight_broadcast: &8[&2🗡&8] &aPvP globale abilitato!
+    no_fight_broadcast: &8[&4🗡&8] &cPvP globale disabilitato!
+
+    fight_message: &c&lPrepara le armi. &cÈ il momento di combattere!
+    no_fight_message: &a&lRiponi le armi. &aNon dovrai più combattere!
+
+    no_pvp: &8[&4🗡&8] &cIl PvP è disabilitato!
+
 on load:
+    if {pvp} is not set:
+        set {pvp} to "{@no_fight}"
     if {pvp_status} is not set:
-        set {pvp_status} to "&c● &c&lPvP disabilitato &c●"
+        set {pvp_status} to "{@no_fight}"
         
 command /pvp:
     permission: pvp.toggle
@@ -8,23 +22,29 @@ command /pvp:
     executable by: player, console
     description: Attiva o disattiva il PvP nel server.
     trigger:
-        if {pvp} is true:
-            delete {pvp}
-            set {pvp_status} to "&c● &c&lPvP disabilitato &c●"
-            broadcast "&8[&4🗡&8] &cPvP globale disabilitato!"
-            send action bar "&a&lRiponi le armi. &aNon dovrai più combattere!" to all players
+        if {pvp} is "{@fight}":
+            set {pvp} to "{@no_fight}"
+            set {pvp_status} to "{@no_fight}"
+            broadcast "{@no_fight_broadcast}"
+            send action bar "{@no_fight_message}" to all players
             stop
-        else:
-            set {pvp} to true
-            set {pvp_status} to "&a● &a&lPvP abilitato &a●"
-            broadcast "&8[&2🗡&8] &aPvP globale abilitato!"
-            send action bar "&c&lPrepara le armi. &cÈ il momento di combattere!" to all players
+        else if {pvp} is "{@no_fight}":
+            set {pvp} to "{@fight}"
+            set {pvp_status} to "{@fight}"
+            broadcast "{@fight_broadcast}"
+            send action bar "{@fight_message}" to all players
             stop
 
 on damage:
     if attacker is a player:
         if victim is a player:
-            if {pvp} is not set:
+            if {pvp} is "{@no_fight}":
                 if damage cause is not fall:
                     cancel event
-                    send "&8[&4🗡&8] &cIl PvP è disabilitato!" to attacker
+                    send "{@no_pvp}" to attacker
+
+on projectile collide:
+    if event-entity is a player:
+        if {pvp} is "{@no_fight}":
+            send "{@no_pvp}" to shooter of event-projectile
+            cancel event

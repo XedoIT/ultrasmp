@@ -8,7 +8,7 @@ options:
     check_sound: entity.player.levelup
 
 function openAXRmain(p: player):
-    if {settings.%{_p}%.glasspanes} is true:
+    if {settings.%{_p}%.custom.glasspanes} is true:
         set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Menu principale"
         set slot 0, 1, 7, 8, 9, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
         set slot 19, 20, 21, 22, 23, 24, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"

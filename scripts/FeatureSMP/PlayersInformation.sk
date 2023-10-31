@@ -1,0 +1,112 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    glinted: {HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}
+    emoji_template: {display:{Name:""{\""text\"":\""Emoticon Smile\""}""},SkullOwner:{Id:[I;2002063258,-175029939,-2024958054,1439521797],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmQ2ZDVmZDUxMmEzNDdjOGM4Y2JhYjRjYzlhZjNlNTMyNDlkOGQyMWQ1N2Y0YWE1ZTIxZGE5MzgxZGFlNmYifX19""}]}}}
+    no_flags: {HideFlags:255}
+
+    male: &9Maschio
+    female: &dFemmina
+
+on right click on player:
+    if tool of player is air:
+        if {settings.%player%.custom.playersinfo.self_to_other} is true:
+            if {settings.%event-entity%.privacy.playersinfo.other_to_self} is false:
+                PlayersInformation(player,event-entity)
+            else:
+                send "{@prefix} &cNon puoi consultare il profilo di &6%event-entity% &cperché ha disattivato l'opzione nelle sue impostazioni di privacy!" to player
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+        else:
+            send "{@prefix} &cNon puoi consultare il profilo di &6%event-entity% &cperché hai disattivato l'opzione nelle tue impostazioni!" to player
+            send "{@prefix} &cPer riattivarla vai su ""&fImpostazioni > Personalizzazione > Profilo giocatori&c""." to player
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+
+function PlayersInformation(p: player, e: entity):
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set metadata tag "PlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "Profilo di %{_e}%"
+        set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "PlayersInformationGUI" of {_p} to black stained glass pane named "&r"
+        set slot 10, 12, 13, 14, 22, 23, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of metadata tag "PlayersInformationGUI" of {_p} to gray stained glass pane named "&r"
+        if {settings.%{_e}%.user.genre} is "{@male}":
+            set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&9%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{stats.%{_e}%.reported_bugs}%", " &6★ Feedback inviati&7: &f%{stats.%{_e}%.sent_feedback}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
+        else if {settings.%{_e}%.user.genre} is "{@female}":
+            set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&d%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{stats.%{_e}%.reported_bugs}%", " &6★ Feedback inviati&7: &f%{stats.%{_e}%.sent_feedback}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
+        if slot 39 of {_e}'s inventory is air:
+            set slot 11 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_e}% &7non sta" and "&7indossando nessun elmetto."
+        else:
+            set slot 11 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s helmet
+        if slot 38 of {_e}'s inventory is air:
+            set slot 20 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot corazza" with lore "&6%{_e}% &7non sta" and "&7indossando nessuna corazza."
+        else:
+            set slot 20 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s chestplate
+        if slot 37 of {_e}'s inventory is air:
+            set slot 29 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot gambiere" with lore "&6%{_e}% &7non sta" and "&7indossando gambiere."
+        else:
+            set slot 29 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s leggings
+        if slot 36 of {_e}'s inventory is air:
+            set slot 38 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot stivali" with lore "&6%{_e}% &7non sta" and "&7indossando stivali."
+        else:
+            set slot 38 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s boots
+        if slot 40 of {_e}'s inventory is air:
+            set slot 19 of metadata tag "PlayersInformationGUI" of {_p} to magenta stained glass pane named "&dMano secondaria" with lore "&6%{_e}% &7non ha" and "&7oggetti nella seconda mano."
+        else:
+            set slot 19 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s off hand item
+        if {_e}'s tool is air:
+            set slot 21 of metadata tag "PlayersInformationGUI" of {_p} to lime stained glass pane named "&aMano principale" with lore "&6%{_e}% &7non ha" and "&7nulla in mano."
+        else:
+            set slot 21 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s held item
+        set slot 15 of metadata tag "PlayersInformationGUI" of {_p} to writable book named "&bInformazioni generali" with lore " &9✎ Nome&7: &f%{_e}%", " &6✎ Soprannome&7: &f%{nick.%{_e}%}%", " &a✧ Sesso&7: &f%{settings.%{_e}%.user.genre}%", " &e₪ Inventario&7: &f%placeholder "player_empty_slots" from {_e}%/35 slot liberi", " &b🌅 Bioma&7: &f%placeholder "player_biome_capitalized" from {_e}%", " &3ℹ Ping&7: &f%{_e}'s ping% ms", " &d✦ Fama&7: &f%{fame.%{_e}%}%", " &a✪ Reputazione&7: &f%{fame.%{_e}%.rank}%", " &2☘ Fortuna&7: &f+%placeholder "aureliumskills_luck" from {_e}%", " &c❣ &cIncremento salute&7: &f+%placeholder "aureliumskills_health" from {_e}%" and " &9✿ Saggezza&7: &f+%placeholder "aureliumskills_luck" from {_e}%"
+        set slot 16 of metadata tag "PlayersInformationGUI" of {_p} to diamond sword with nbt compound from "{@no_flags}" named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%{stats.%{_e}%.kills}%", " &c☠ Morti&7: &f%{stats.%{_e}%.deaths}%", " &6🗡 Danni inflitti&7: &f%{stats.%{_e}%.damage_inflicted}%", " &6☄ Danni subiti&7: &f%{stats.%{_e}%.damage_suffered}%", " &e&l⚡ &eSerie di uccisioni&7: &f%{stats.%{_e}%.killstreak}%", " &4➽ Forza&7: &f+%placeholder "aureliumskills_strength" from {_e}%", " &6❥ Rigenerazione&7: &f+%placeholder "aureliumskills_regeneration" from {_e}%" and " &5✦ Resistenza&7: &f+%placeholder "aureliumskills_toughness" from {_e}%"
+        set slot 24 of metadata tag "PlayersInformationGUI" of {_p} to iron pickaxe with nbt compound from "{@no_flags}" named "&aStatistiche minerarie" with lore " &c⛏ Blocchi distrutti&7: &f%{stats.%{_e}%.broken_blocks}%" and " &b🔨 Blocchi piazzati&7: &f%{stats.%{_e}%.placed_blocks}%"
+        set slot 25 of metadata tag "PlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_e}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_e}%.last_obtained}%"
+        set slot 33 of metadata tag "PlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_e}%}%"
+        set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        open metadata tag "PlayersInformationGUI" of {_p} to {_p}
+    else:
+        set metadata tag "PlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "Profilo di %{_e}%"
+        if {settings.%{_e}%.user.genre} is "{@male}":
+            set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&9%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{stats.%{_e}%.reported_bugs}%", " &6★ Feedback inviati&7: &f%{stats.%{_e}%.sent_feedback}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
+        else if {settings.%{_e}%.user.genre} is "{@female}":
+            set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&d%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{stats.%{_e}%.reported_bugs}%", " &6★ Feedback inviati&7: &f%{stats.%{_e}%.sent_feedback}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
+        if slot 39 of {_e}'s inventory is air:
+            set slot 11 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_e}% &7non sta" and "&7indossando nessun elmetto."
+        else:
+            set slot 11 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s helmet
+        if slot 38 of {_e}'s inventory is air:
+            set slot 20 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot corazza" with lore "&6%{_e}% &7non sta" and "&7indossando nessuna corazza."
+        else:
+            set slot 20 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s chestplate
+        if slot 37 of {_e}'s inventory is air:
+            set slot 29 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot gambiere" with lore "&6%{_e}% &7non sta" and "&7indossando gambiere."
+        else:
+            set slot 29 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s leggings
+        if slot 36 of {_e}'s inventory is air:
+            set slot 38 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot stivali" with lore "&6%{_e}% &7non sta" and "&7indossando stivali."
+        else:
+            set slot 38 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s boots
+        if slot 40 of {_e}'s inventory is air:
+            set slot 19 of metadata tag "PlayersInformationGUI" of {_p} to magenta stained glass pane named "&dMano secondaria" with lore "&6%{_e}% &7non ha" and "&7oggetti nella seconda mano."
+        else:
+            set slot 19 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s off hand item
+        if {_e}'s tool is air:
+            set slot 21 of metadata tag "PlayersInformationGUI" of {_p} to lime stained glass pane named "&aMano principale" with lore "&6%{_e}% &7non ha" and "&7nulla in mano."
+        else:
+            set slot 21 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s held item
+        set slot 15 of metadata tag "PlayersInformationGUI" of {_p} to writable book named "&bInformazioni generali" with lore " &9✎ Nome&7: &f%{_e}%", " &6✎ Soprannome&7: &f%{nick.%{_e}%}%", " &a✧ Sesso&7: &f%{settings.%{_e}%.user.genre}%", " &e₪ Inventario&7: &f%placeholder "player_empty_slots" from {_e}%/35 slot liberi", " &b🌅 Bioma&7: &f%placeholder "player_biome_capitalized" from {_e}%", " &3ℹ Ping&7: &f%{_e}'s ping% ms", " &d✦ Fama&7: &f%{fame.%{_e}%}%", " &a✪ Reputazione&7: &f%{fame.%{_e}%.rank}%", " &2☘ Fortuna&7: &f+%placeholder "aureliumskills_luck" from {_e}%", " &c❣ &cIncremento salute&7: &f+%placeholder "aureliumskills_health" from {_e}%" and " &9✿ Saggezza&7: &f+%placeholder "aureliumskills_luck" from {_e}%"
+        set slot 16 of metadata tag "PlayersInformationGUI" of {_p} to diamond sword with nbt compound from "{@no_flags}" named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%{stats.%{_e}%.kills}%", " &c☠ Morti&7: &f%{stats.%{_e}%.deaths}%", " &6🗡 Danni inflitti&7: &f%{stats.%{_e}%.damage_inflicted}%", " &6☄ Danni subiti&7: &f%{stats.%{_e}%.damage_suffered}%", " &e&l⚡ &eSerie di uccisioni&7: &f%{stats.%{_e}%.killstreak}%", " &4➽ Forza&7: &f+%placeholder "aureliumskills_strength" from {_e}%", " &6❥ Rigenerazione&7: &f+%placeholder "aureliumskills_regeneration" from {_e}%" and " &5✦ Resistenza&7: &f+%placeholder "aureliumskills_toughness" from {_e}%"
+        set slot 24 of metadata tag "PlayersInformationGUI" of {_p} to iron pickaxe with nbt compound from "{@no_flags}" named "&aStatistiche minerarie" with lore " &c⛏ Blocchi distrutti&7: &f%{stats.%{_e}%.broken_blocks}%" and " &b🔨 Blocchi piazzati&7: &f%{stats.%{_e}%.placed_blocks}%"
+        set slot 25 of metadata tag "PlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_e}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_e}%.last_obtained}%"
+        set slot 33 of metadata tag "PlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_e}%}%"
+        set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        open metadata tag "PlayersInformationGUI" of {_p} to {_p}
+
+on inventory click:
+    if event-inventory is (metadata tag "PlayersInformationGUI" of player):
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
+                cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event

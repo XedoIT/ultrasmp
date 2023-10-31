@@ -1,20 +1,27 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
 on join:
     if {stats.%player%.kills}, {stats.%player%.deaths}, {stats.%player%.killstreak}, {stats.%player%.damage_inflicted} and {stats.%player%.damage_suffered} is not set:
         set {stats.%player%.kills}, {stats.%player%.deaths}, {stats.%player%.killstreak}, {stats.%player%.damage_inflicted} and {stats.%player%.damage_suffered} to 0
     if {stats.%player%.broken_blocks} and {stats.%player%.placed_blocks} is not set:
         set {stats.%player%.broken_blocks} and {stats.%player%.placed_blocks} to 0
+    if {stats.%player%.reported_bugs} and {stats.%player%.sent_feedback} is not set:
+        set {stats.%player%.reported_bugs} and {stats.%player%.sent_feedback} to 0
 
 # DANNI INFLITTI E DANNI SUBITI
 on damage:
     if attacker is a player:
         if victim is a player:
-            DamageInflicted(damage,attacker)
-            DamageSuffered(damage,victim)
+            if {god.%victim%} is not set:
+                DamageInflicted(damage,attacker)
+                DamageSuffered(damage,victim)
         else:
             DamageInflicted(damage,attacker)
     else:
         if victim is a player:
-            DamageSuffered(damage,victim)
+            if {god.%victim%} is not set:
+                DamageSuffered(damage,victim)
 
 
 function DamageInflicted(i: number, p: player):
@@ -35,29 +42,78 @@ on death:
             add 1 to {stats.%victim%.deaths}
             add 1 to {stats.%attacker%.killstreak}
             if {stats.%victim%.killstreak} != 0:
-                if {settings.%victim%.genre.male} is true:
+                if {settings.%victim%.user.genre} is "&9Maschio":
                     wait 2 ticks
                     send "" to victim
                     send "&4&k00 &cSei morto con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
                     send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                    set {stats.%victim%.killstreak} to 0
                     send "" to victim
-                if {settings.%victim%.genre.female} is true:
+                    set {stats.%victim%.killstreak} to 0
+                else if {settings.%victim%.user.genre} is "&dFemmina":
                     wait 2 ticks
                     send "" to victim
                     send "&4&k00 &cSei morta con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
                     send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                    set {stats.%victim%.killstreak} to 0
                     send "" to victim
+                    set {stats.%victim%.killstreak} to 0
+        else:
+            add 1 to {stats.%victim%.deaths}
+            if {stats.%victim%.killstreak} != 0:
+                if {settings.%victim%.user.genre} is "&9Maschio":
+                    wait 2 ticks
+                    send "" to victim
+                    send "&4&k00 &cSei morto con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
+                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                    send "" to victim
+                    set {stats.%victim%.killstreak} to 0
+                else if {settings.%victim%.user.genre} is "&dFemmina":
+                    wait 2 ticks
+                    send "" to victim
+                    send "&4&k00 &cSei morta con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
+                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                    send "" to victim
+                    set {stats.%victim%.killstreak} to 0
 
 # BLOCCHI DISTRUTTI E BLOCCHI PIAZZATI
-on break:
-    if player's gamemode is survival or adventure:
-        if {blocks::%player%::*} doesn't contain event-location:
-            add 1 to {stats.%player%.broken_blocks}
-
 on place:
     if player's gamemode is survival or adventure:
-        if {blocks::%player%::*} is not set:
-            add event-location to {blocks::%player%::*}
+        if {blocks.%player%::*} doesn't contain location of event-block:
             add 1 to {stats.%player%.placed_blocks}
+
+on break:
+    if player's gamemode is survival or adventure:
+        if {blocks.%player%::*} is not set:
+            add location of event-block to {blocks.%player%::*}
+            add 1 to {stats.%player%.broken_blocks}
+        else if {blocks.%player%::*} doesn't contain location of event-block:
+            add 1 to {stats.%player%.broken_blocks}
+            add location of event-block to {blocks.%player%::*}
+
+
+# ZONA DEBUG
+command /resetblocks:
+    trigger:
+        delete {blocks.%player%::*}
+        delete {stats.%player%.placed_blocks}
+        delete {stats.%player%.broken_blocks}
+        set {stats.%player%.placed_blocks} to 0
+        set {stats.%player%.broken_blocks} to 0
+
+command /resetinfdamage:
+    trigger:
+        delete {stats.%player%.damage_inflicted}
+        set {stats.%player%.damage_inflicted} to 0
+
+command /resetsufdamage:
+    trigger:
+        delete {stats.%player%.damage_suffered}
+        set {stats.%player%.damage_suffered} to 0
+
+command /resetstats:
+    trigger:
+        delete {stats.%player%.kills}
+        delete {stats.%player%.killstreak}
+        delete {stats.%player%.deaths}
+        set {stats.%player%.kills} to 0
+        set {stats.%player%.killstreak} to 0
+        set {stats.%player%.deaths} to 0

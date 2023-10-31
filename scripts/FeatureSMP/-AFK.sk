@@ -28,9 +28,9 @@ on arm swing:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
         stop
 
@@ -39,9 +39,9 @@ on sneak toggle:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
         stop
 
@@ -50,9 +50,9 @@ on chat:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
         stop
 
@@ -62,9 +62,9 @@ on command:
             delete {afk.%player%}
             delete {afk.%player%.info}
             set {afk.%player%.status} to "&cNo"
-            if {settings.%player%.genre.male} is true:
+            if {settings.%player%.user.genre} is "&9Maschio":
                 broadcast "&9%player% &7è tornato. Che bello!"
-            else if {settings.%player%.genre.female} is true:
+            else if {settings.%player%.user.genre} is "&dFemmina":
                 broadcast "&d%player% &7è tornata. Che bello!"
             stop
 
@@ -73,9 +73,9 @@ on inventory click:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
         stop
 
@@ -84,18 +84,18 @@ on inventory open:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
     wait {@time} {@time_period}
     if {afk.%player%} is not true:
         set {afk.%player%} to true
         set {afk.%player%.info} to true
         set {afk.%player%.status} to "&aSì"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è andato a prendersi una pausa."
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è andata a prendersi una pausa."
         stop
 
@@ -104,9 +104,9 @@ on inventory close:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
         stop
 
@@ -115,15 +115,15 @@ on player move:
         delete {afk.%player%}
         delete {afk.%player%.info}
         set {afk.%player%.status} to "&cNo"
-        if {settings.%player%.genre.male} is true:
+        if {settings.%player%.user.genre} is "&9Maschio":
             broadcast "&9%player% &7è tornato. Che bello!"
-        else if {settings.%player%.genre.female} is true:
+        else if {settings.%player%.user.genre} is "&dFemmina":
             broadcast "&d%player% &7è tornata. Che bello!"
         stop
 
 every 10 ticks:
     loop all players:
-        if {afk::%loop-player%} is true:
+        if {afk.%loop-player%} is true:
             send action bar "&c&lSei AFK! &6Per tornare a giocare, muoviti o scrivi in chat." to loop-player
             
 command /afk [<offline player>]:
@@ -137,18 +137,18 @@ command /afk [<offline player>]:
                     delete {afk.%player%}
                     delete {afk.%player%.info}
                     set {afk.%player%.status} to "&cNo"
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         broadcast "&9%player% &7è tornato. Che bello!"
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         broadcast "&d%player% &7è tornata. Che bello!"
                     stop
                 else:
                     set {afk.%player%} to true
                     set {afk.%player%.info} to true
                     set {afk.%player%.status} to "&aSì"
-                    if {settings.%player%.genre.male} is true:
+                    if {settings.%player%.user.genre} is "&9Maschio":
                         broadcast "&9%player% &7è andato a prendersi una pausa."
-                    else if {settings.%player%.genre.female} is true:
+                    else if {settings.%player%.user.genre} is "&dFemmina":
                         broadcast "&d%player% &7è andata a prendersi una pausa."
                     stop
             else:
@@ -157,18 +157,18 @@ command /afk [<offline player>]:
                         delete {afk.%arg-1%}
                         delete {afk.%arg-1%.info}
                         set {afk.%arg-1%.status} to "&cNo"
-                        if {settings.%arg-1%.genre.male} is true:
+                        if {settings.%arg-1%.user.genre} is "&9Maschio":
                             broadcast "&9%arg-1% &7è tornato. Che bello!"
-                        else if {settings.%arg-1%.genre.female} is true:
+                        else if {settings.%arg-1%.user.genre} is "&dFemmina":
                             broadcast "&d%arg-1% &7è tornata. Che bello!"
                         stop
                     else:
                         set {afk.%arg-1%} to true
                         set {afk.%arg-1%.info} to true
                         set {afk.%arg-1%.status} to "&aSì"
-                        if {settings.%arg-1%.genre.male} is true:
+                        if {settings.%arg-1%.user.genre} is "&9Maschio":
                             broadcast "&9%arg-1% &7è andato a prendersi una pausa."
-                        else if {settings.%arg-1%.genre.female} is true:
+                        else if {settings.%arg-1%.user.genre} is "&dFemmina":
                             broadcast "&d%arg-1% &7è andata a prendersi una pausa."
                         stop
         else:
@@ -180,17 +180,17 @@ command /afk [<offline player>]:
                     delete {afk.%arg-1%}
                     delete {afk.%arg-1%.info}
                     set {afk.%arg-1%.status} to "&cNo"
-                    if {settings.%arg-1%.genre.male} is true:
+                    if {settings.%arg-1%.user.genre} is "&9Maschio":
                         broadcast "&9%arg-1% &7è tornato. Che bello!"
-                    else if {settings.%arg-1%.genre.female} is true:
+                    else if {settings.%arg-1%.user.genre} is "&dFemmina":
                         broadcast "&d%arg-1% &7è tornata. Che bello!"
                     stop
                 else:
                     set {afk.%arg-1%} to true
                     set {afk.%arg-1%.info} to true
                     set {afk.%arg-1%.status} to "&aSì"
-                    if {settings.%arg-1%.genre.male} is true:
+                    if {settings.%arg-1%.user.genre} is "&9Maschio":
                         broadcast "&9%arg-1% &7è andato a prendersi una pausa."
-                    else if {settings.%arg-1%.genre.female} is true:
+                    else if {settings.%arg-1%.user.genre} is "&dFemmina":
                         broadcast "&d%arg-1% &7è andata a prendersi una pausa."
                     stop

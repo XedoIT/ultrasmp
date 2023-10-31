@@ -1,0 +1,88 @@
+options:
+# GENERALI
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    
+    no_flags: {HideFlags:255}
+
+    no: &c✖
+    yes: &a✔
+
+# MESSAGGI IMPOSTAZIONI DI PRIVACY
+  # ATTIVA/DISATTIVA
+    turn_on: &eClicca per attivare.
+    turn_off: &eClicca per disattivare.
+
+  # PROFILO GIOCATORE
+    playersinfo_on: &aDa adesso gli altri giocatori potranno consultare il tuo profilo.
+    playersinfo_off: &cDa adesso gli altri giocatori non potranno più consultare il tuo profilo.
+
+on join:
+    if {settings.%player%.privacy.playersinfo.other_to_self} is not set:
+        set {settings.%player%.privacy.playersinfo.other_to_self} to false
+    if {settings.%player%.privacy.playersinfo.other_to_self.marker} is not set:
+        set {settings.%player%.privacy.playersinfo.other_to_self.marker} to "{@yes}"
+
+function TogglePlayersInformationToSelf(p: player):
+    if {settings.%{_p}%.privacy.playersinfo.other_to_self} is false:
+        set {settings.%{_p}%.privacy.playersinfo.other_to_self} to true
+        set {settings.%{_p}%.privacy.playersinfo.other_to_self.marker} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@playersinfo_off}" to {_p}
+    else:
+        set {settings.%{_p}%.privacy.playersinfo.other_to_self} to false
+        set {settings.%{_p}%.privacy.playersinfo.other_to_self.marker} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "{@prefix} {@playersinfo_on}" to {_p}
+
+
+function openPrivacyPlayerSettingsGUI(p: player):
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set {_gui} to a new chest inventory with 4 rows named "Impostazioni: &9Privacy"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 32, 33, 34 and 35 of {_gui} to black stained glass pane named "&f"
+        set slot 10, 11, 12, 14, 15, 16, 19, 20, 21, 23, 24 and 25 of {_gui} to gray stained glass pane named "&f"
+        set slot 13 of {_gui} to {_p}'s head named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "&f", "&4&lATTENZIONE!", "&cSe, mentre un giocatore sta consultando", "&cil tuo profilo, modifichi questa opzione,", "&cle modifiche saranno applicate una", "&cvolta che un altro giocatore proverà" and "&ca consultare il tuo profilo."
+        set slot 30 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        if {settings.%{_p}%.privacy.playersinfo.other_to_self} is false:
+            set slot 22 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+        else:
+            set slot 22 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 4 rows named "Impostazioni: &9Privacy"
+        set slot 13 of {_gui} to {_p}'s head named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "&f", "&4&lATTENZIONE!", "&cSe, mentre un giocatore sta consultando", "&cil tuo profilo, modifichi questa opzione,", "&cle modifiche saranno applicate una", "&cvolta che un altro giocatore proverà" and "&ca consultare il tuo profilo."
+        set slot 30 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        if {settings.%{_p}%.privacy.playersinfo.other_to_self} is false:
+            set slot 22 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+        else:
+            set slot 22 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Privacy":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 32, 33, 34 or 35:
+                cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersInformationToSelf(player)
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 30:
+                if click type is left mouse button:
+                    cancel event
+                    openPlayerSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 31:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
