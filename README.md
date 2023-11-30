@@ -1,5 +1,8 @@
-#  Disagio SMP: 73% completato
-  Di seguito troverai il changelog della Disagio SMP fin dal primo giorno di sviluppo!
+#  Disagio SMP: 78% completato
+  Di seguito troverai il link alla Wiki dell'SMP e il changelog della Disagio SMP fin dal primo giorno di sviluppo!
+
+### - WIKI DELLA DISAGIO SMP -
+   https://disagio-smp.gitbook.io/disagiosmp
   
 ### - GENNAIO 2022 -
 - Creazione server e configurazione primi plugin
