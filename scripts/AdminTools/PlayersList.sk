@@ -2,9 +2,7 @@ options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
     
 command /list:
-    permission: list.use
-    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
-    aliases: /online
+    #aliases: /online
     executable by: player, console
     trigger:
         set {MaxOnlinePlayers} to max player count

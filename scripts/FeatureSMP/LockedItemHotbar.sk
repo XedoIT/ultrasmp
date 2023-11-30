@@ -4,6 +4,7 @@ on join:
 on right click:
     if item is nether star named "&eProfilo SMP &7(Click destro)":
         openProfileGui(player)
+        play sound "ui.button.click" with volume 0.2 at player for player
 
 on inventory click:
     if type of event-inventory is player inventory:

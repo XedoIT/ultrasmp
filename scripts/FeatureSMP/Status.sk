@@ -1,0 +1,92 @@
+options:
+    prefix: &4[&e&lSTATUS&4]
+    status: &cNessuno stato impostato.
+    
+    male: &9Maschio
+    female: &dFemmina
+
+on join:
+    if {status.%player%} is not set:
+        set {status.%player%} to "{@status}"
+
+command /status [<text>] [<text>]: #NUOVO PARAMETRO: "SETTEMP" E AGGIUNTA DI UN ULTERIORE PARAMETRO (ARG-3) PER SPECIFICARE IL TEMPO DI SCADENZA DELLO STATO (IN ARRIVO...)
+    aliases: /stato
+    permission: status.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    description: Imposta uno stato personale
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if {status.%player%} is not "{@status}":
+                    send "{@prefix} &fIl tuo stato attuale: &7%{status.%player%}%"
+                    stop
+                else:
+                    send "{@prefix} &cNon hai ancora uno stato."
+                    send "{@prefix} &cImpostalo con &6/status set <stato>&c."
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+            else if arg-1 is "set":
+                if arg-2 is not set:
+                    send "{@prefix} &cComando incompleto."
+                    send "{@prefix} &cUtilizzo: &6/status set <stato>"
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+                else:
+                    if {status.%player%} is not "{@status}":
+                        send "{@prefix} &aHai aggiornato il tuo stato."
+                        set {status.%player%.old} to {status.%player%}
+                        delete {status.%player%}
+                    else:
+                        send "{@prefix} &aHai impostato il tuo stato."
+                    set {status.%player%} to arg-2
+                    send "{@prefix} &7%{status.%player%}%"
+                    play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                    stop
+            else if arg-1 is "delete":
+                if arg-2 is not set:
+                    if {status.%player%} is not "{@status}":
+                        if {settings.%player%.user.genre} is "{@male}":
+                            send formatted "{@prefix} &cSei sicuro di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
+                            play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                            set {status.%player%.confirm} to true
+                            stop
+                        if {settings.%player%.user.genre} is "{@female}":
+                            send formatted "{@prefix} &cSei sicura di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
+                            play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                            set {status.%player%.confirm} to true
+                            stop
+                    else:
+                        send "{@prefix} &cNon puoi eliminare il tuo stato se prima non ne imposti uno!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                else:
+                    send "{@prefix} &cQuesto comando non necessita di ulteriori parametri."
+                    stop
+            else if arg-1 is not "set" or "delete":
+                send "{@prefix} &cComando sconosciuto."
+                send "{@prefix} &cUtilizzo: &6/status set <stato>"
+                send "{@prefix} &cUtilizzo: &6/status delete"
+                stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+on tab complete of "/status" or "stato":
+    set tab completions for position 1 to "set" and "delete"
+    if tab arg-1 is "set":
+        set tab completions for position 2 to "[<stato>]"
+        
+on chat:
+    if {status.%player%.confirm} is true:
+        cancel event
+        if message is "si", "sì", "yes", "s" or "y":
+            delete {status.%player%}
+            set {status.%player%} to "{@status}"
+            send "{@prefix} &aStato eliminato con successo." to player
+            play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+            delete {status.%player%.confirm}
+        else:
+            send "{@prefix} &aRicevuto." to player
+            play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+            delete {status.%player%.confirm}

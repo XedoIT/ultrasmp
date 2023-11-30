@@ -1,0 +1,18 @@
+on skript load:
+    send "&9Il contatore dell'attività ha iniziato a monitorare la durata della sessione del server." to console
+
+on skript stop:
+    log "[UPTIME] Il server è stato chiuso dopo %placeholder "server_uptime"% di attività." to "uptime.log"
+    send "&cÈ stato salvato un file "".log"" con il resoconto della sessione del server." to console
+    send "&6Per consultarlo, vai a ""<root>\plugins\Skript\logs\uptime.log""." to console
+
+command /uptime:
+    description: "Visualizza il tempo di attività del server."
+    trigger:
+        send "&aIl server è stato avviato &b%placeholder "server_uptime"% &afa."
+        stop
+
+every 10 ticks:
+    loop all players:
+        if {uptimeac.%loop-player%} is true:
+            send action bar "&b%placeholder "server_uptime"% &adi attività" to loop-player

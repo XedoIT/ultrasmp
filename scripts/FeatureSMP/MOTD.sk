@@ -1,0 +1,12 @@
+on server list ping:
+    hide all players from the server list
+    if {maintenance} is true:
+        set motd to "        &e&lDISAGIO SMP &c[%minecraft version%] &7- &4&lINDEV &b(73%%)%newline%           &4&k0 &6&lMANUTENZIONE IN CORSO! &4&k0"
+        set fake max players count to 1
+        #cancel event
+    else:
+        set motd to "        &e&lDISAGIO SMP &c[%minecraft version%] &7- &4&lINDEV &b(73%%)%newline%             &b● &a&lPREPARATIVI BETA TEST &b●"
+        #set the fake max players count to (number of all players + 1)
+
+#command /motd [<integer>] [<text>]:
+# COMANDO CHE PERMETTE LA CREAZIONE E IL SALVATAGGIO DI RIGHE PER IL MOTD MOSTRATO NELLA LISTA DEI SERVER

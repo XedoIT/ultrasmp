@@ -1,0 +1,113 @@
+on join:
+    if {fame.%player%.effect} is not set:
+        set {fame.%player%.effect} to "&7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno."
+
+every 59 ticks:
+    loop all players:
+        if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-5}:
+            set {fame.%loop-player%.effect} to "&f- &8Sfortuna%nl%&f- &eDebolezza II%nl%&f- &6Affaticamento II%nl%&f- &cLentezza II"
+            apply unluck without any particles to loop-player for 3 seconds
+            apply weakness 2 without any particles to loop-player for 3 seconds
+            apply mining fatigue 2 without any particles to loop-player for 3 seconds
+            apply slowness 2 without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-4}:
+            set {fame.%loop-player%.effect} to "&f- &8Sfortuna%nl%&f- &eDebolezza II%nl%&f- &6Affaticamento%nl%&f- &cLentezza"
+            apply unluck without any particles to loop-player for 3 seconds
+            apply weakness 2 without any particles to loop-player for 3 seconds
+            apply mining fatigue without any particles to loop-player for 3 seconds
+            apply slowness without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-3}:
+            set {fame.%loop-player%.effect} to "&f- &8Sfortuna%nl%&f- &eDebolezza%nl%&f- &6Affaticamento"
+            apply unluck without any particles to loop-player for 3 seconds
+            apply weakness without any particles to loop-player for 3 seconds
+            apply mining fatigue without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-2}:
+            set {fame.%loop-player%.effect} to "&f- &8Forza II%nl%&f- &eDebolezza"
+            apply strength 2 without any particles to loop-player for 3 seconds
+            apply weakness without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-1}:
+            set {fame.%loop-player%.effect} to "&f- &8Forza II"
+            apply strength 2 without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment0}:
+            set {fame.%loop-player%.effect} to "&7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno."
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment1_1}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna"
+            apply luck without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment1_2}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment2_1}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment2_2}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment3_1}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance 2 without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment3_2}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance 2 without any particles to loop-player for 3 seconds
+            apply regeneration without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment4_1}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione II"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance 2 without any particles to loop-player for 3 seconds
+            apply regeneration 2 without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment4_2}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione II%nl%&f- &bVelocità"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance 2 without any particles to loop-player for 3 seconds
+            apply regeneration 2 without any particles to loop-player for 3 seconds
+            apply speed without any particles to loop-player for 3 seconds
+                
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment5_1}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione II%nl%&f- &bVelocità II"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance 2 without any particles to loop-player for 3 seconds
+            apply regeneration 2 without any particles to loop-player for 3 seconds
+            apply speed 2 without any particles to loop-player for 3 seconds
+            
+        else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment5_2}:
+            set {fame.%loop-player%.effect} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione III%nl%&f- &bVelocità II"
+            apply luck without any particles to loop-player for 3 seconds
+            apply haste 2 without any particles to loop-player for 3 seconds
+            apply resistance 2 without any particles to loop-player for 3 seconds
+            apply regeneration 3 without any particles to loop-player for 3 seconds
+            apply speed 2 without any particles to loop-player for 3 seconds
+            
+every 15 minutes:
+    loop all players:
+        if loop-player is online:
+            if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-5}:
+                apply blindness without any particles to loop-player for 31 seconds
+            
+every 40 minutes:
+    loop all players:
+        if loop-player is online:
+            if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment5_2}:
+                apply hero of the village without any particles to loop-player for 15 minutes

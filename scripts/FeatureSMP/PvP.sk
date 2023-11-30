@@ -44,7 +44,10 @@ on damage:
                     send "{@no_pvp}" to attacker
 
 on projectile collide:
-    if event-entity is a player:
-        if {pvp} is "{@no_fight}":
-            send "{@no_pvp}" to shooter of event-projectile
-            cancel event
+    if shooter of event-projectile is a player:
+        if event-entity is a player:
+            if {pvp} is "{@no_fight}":
+                send "{@no_pvp}" to shooter of event-projectile
+                cancel event
+
+# RENDERE LE NOTIFICHE DEL PVP PERSONALIZZABILI DAL MENU DELLE NOTIFICHE TRAMITE LE IMPOSTAZIONI DEL GIOCATORE

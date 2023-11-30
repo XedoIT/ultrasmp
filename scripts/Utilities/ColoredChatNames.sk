@@ -1,6 +1,3 @@
-#--------------------------------------------#
-#         COLORI CHAT PERSONALIZZATI         #
-#--------------------------------------------#
 on chat:
     if player's uuid is "cd1db3e8-73ee-488f-9367-73224ca93ef3": #(_Xedo_ - Francesco)
         if {nick.%player%} is player:
@@ -44,7 +41,7 @@ on chat:
         else:
             set chat format to "*&5%{nick.%player%}% &d&l>&r [message]"
 
-    #else if player's uuid is "UUID DI GABRY": #(NICK DI GABRY - Gabriele [Bedrock?])
+    #else if player's uuid is "UUID DI GABRY": #(NICK DI GABRY - Gabriele)
         #if {nick.%player%} is player:
             #set chat format to "&1[player] &9&l>&r [message]"
         #else:
@@ -67,45 +64,3 @@ on chat:
             set chat format to "&d[player] &d&l>&r [message]"
         else:
             set chat format to "*&d%{nick.%player%}% &d&l>&r [message]"
-
-#--------------------------------------------#
-#                  VITA MOB                  #
-#--------------------------------------------#
-on right click on allay, axolotl, bat, bee, blaze, cat, cave spider, chicken, cod, cow, creeper, dolphin, drowned, elder guardian, ender dragon, enderman, endermite, evoker, fox, frog, ghast, giant, glow squid, goat, guardian, hoglin, husk, illusioner, iron golem, magma cube, mooshroom, ocelot, panda, parrot, phantom, pig, piglin, piglin brute, pillager, polar bear, pufferfish, rabbit, ravager, salmon, sheep, shulker, silverfish, skeleton, slime, snow golem, spider, squid, stray, tadpole, tropical fish, turtle, vex, villager, vindicator, wandering trader, warden, witch, wither, wither skeleton, wolf, zoglin, zombie or zombified piglin:
-    send action bar "&fVita: &c%health of entity%/%max health of entity% ❤" to player
-    
-on right click on donkey, horse, llama, mule, skeleton horse, strider, trader llama or zombie horse:
-    if player is sneaking:
-        send action bar "&fVita: &c%health of entity%/%max health of entity% ❤" to player
-        
-on right click on zombie villager:
-    send "&cQuesto villager è infetto! Curalo utilizzando una pozione di debolezza e una mela d'oro!" to player
-
-#--------------------------------------------#
-#         BANCO DA LAVORO CON COMANDO        #
-#--------------------------------------------#
-command /crafting:
-    aliases: /fabbricazione
-    description: "Utile per dei crafting al volo."
-    executable by: player, console
-    trigger:
-        if sender is player:
-            open crafting table inventory for player
-            stop
-        else:
-            send "&cSolo i giocatori possono eseguire questo comando!"
-            stop
-
-#--------------------------------------------#
-#              TPR CON BUSSOLA               #
-#--------------------------------------------#
-on right click:
-    if event-item is compass named "&cTPR rapido &7(Click destro)" with lore "&7Teletrasportati in un punto", "&7a caso nel mondo con un" and "&7semplice click.":
-        execute player command "/tpr"
-
-command /tprcompass:
-    description: "Una bussola che ti teletrasporta? Ok!" 
-    trigger:
-        give 1 compass named "&cTPR rapido &7(Click destro)" with lore "&7Teletrasportati in un punto", "&7a caso nel mondo con un" and "&7semplice click." to player
-        play sound "entity.item.pickup" with volume 1 and pitch 2 at player for player
-        stop

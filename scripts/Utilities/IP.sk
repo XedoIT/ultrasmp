@@ -1,82 +1,78 @@
 options:
     prefix: &e[&6&lIP&e]
-    ip: 95.250.101.15
+    ip: - #localhost
+    port: - #24367
 
-command /checkip [<text>] [<offline player>]:
-    aliases: /ip
+command /ip [<text>] [<offline player>]:
+    permission: ip.admin
+    permission message: {@prefix} &cComando sconosciuto.
     description: Visualizza l'IP del server o di un giocatore.
     executable by: player, console
     trigger:
         if sender is player:
             if arg-1 is not set:
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to player
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7."
                     stop
+
             else if arg-1 is "server":
                 if arg-2 is not set:
-                    if player doesn't have permission "ip.admin":
-                        send "{@prefix} &cComando sconosciuto." to player
-                        stop
-                    else:
-                        send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to player
-                        stop
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7."
+                    stop
                 else:
-                    if player doesn't have permission "ip.admin":
-                        send "{@prefix} &cComando sconosciuto." to player
-                        stop
-                    else:
-                        send "{@prefix} &cPer il comando richiesto non sono richiesti ulteriori parametri." to player
-                        stop
+                    send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+
             else if arg-1 is "player":
                 if arg-2 is not set:
-                    if player doesn't have permission "ip.admin":
-                        send "{@prefix} &cComando sconosciuto." to player
-                        stop
-                    else:
-                        send "{@prefix} &cSpecifica il giocatore di cui vuoi controllare l'IP." to player
-                        stop
+                    send "{@prefix} &cSpecifica il nome di un giocatore."
+                    stop
                 else if arg-2 is online:
-                    if player doesn't have permission "ip.admin":
-                        send "{@prefix} &cComando sconosciuto." to player
-                        stop
-                    else:
-                        send "{@prefix} &7L'IP di &6%arg-2% &7è &c%arg-2's ip%&7." to player
-                        stop
+                    send "{@prefix} &7L'IP di &6%arg-2% &7è &c%arg-2's ip%&7."
+                    stop
                 else if arg-2 is offline:
-                    if player doesn't have permission "ip.admin":
-                        send "{@prefix} &cComando sconosciuto." to player
-                        stop
-                    else:
-                        send "{@prefix} &c%arg-2% &6non è online!" to player
-                        stop
+                    send "{@prefix} &6%arg-2% &cè offline."
+                    stop
+
             else if arg-1 is not "server" or "player":
-                send "{@prefix} &cComando sconosciuto." to player
+                send "{@prefix} &cComando sconosciuto."
+                send "{@prefix} &cUtilizzo: &6/ip server"
+                send "{@prefix} &cUtilizzo: &6/ip player <&egiocatore&6>"
                 stop
         else:
             if arg-1 is not set:
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to console
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7." to console
                     stop
+
             else if arg-1 is "server":
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&c24367&7." to console
+                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7." to console
                     stop
                 else:
-                    send "{@prefix} &cPer il comando richiesto non sono richiesti ulteriori parametri." to console
+                    send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi." to console
                     stop
+
             else if arg-1 is "player":
                 if arg-2 is not set:
-                    send "{@prefix} &cSpecifica il giocatore di cui vuoi controllare l'IP." to console
+                    send "{@prefix} &cSpecifica il nome di un giocatore." to console
                     stop
                 else if arg-2 is online:
                     send "{@prefix} &7L'IP di &6%arg-2% &7è &c%arg-2's ip%&7." to console
                     stop
                 else if arg-2 is offline:
-                    send "{@prefix} &c%arg-2% &6non è online!" to console
+                    send "{@prefix} &6%arg-2% &cè offline." to console
                     stop
+
             else if arg-1 is not "server" or "player":
                 send "{@prefix} &cComando sconosciuto." to console
+                send "{@prefix} &cUtilizzo: &6/ip server" to console
+                send "{@prefix} &cUtilizzo: &6/ip player <&egiocatore&6>" to console
                 stop
+
+on tab complete of "/ip":
+    if player has permission "ip.admin":
+        set tab completions for position 1 to "server" and "player"
 
 command /myip:
     description: Visualizza l'IP del giocatore che esegue il comando.

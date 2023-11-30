@@ -1,5 +1,5 @@
 options:
-    prefix: &e[&9&lAB&e]
+    prefix: &e[&9&lActionBar&e]
     
 command /actionbar [<text>]:
     description: Attiva o disattiva la visualizzazione di una determinata action bar.
@@ -31,27 +31,5 @@ command /actionbar [<text>]:
             else:
                 send "{@prefix} &cNon hai i permessi per farlo!"
 
-        else if arg-1 is "god":
-            if player has permission "god.actionbar":
-                if {god.%player%.ab} is not set:
-                    set {god.%player%.ab} to true
-                    send "{@prefix} &aAction bar attivata per &6Godmode&a."
-                    stop
-                else if {god.%player%.ab} is true:
-                    delete {god.%player%.ab}
-                    send "{@prefix} &cAction bar disattivata per &6Godmode&a."
-                    stop
-
-        else if arg-1 is "fly":
-            if player has permission "fly.actionbar":
-                if {fly.%player%.ab} is not set:
-                    set {fly.%player%.ab} to true
-                    send "{@prefix} &aAction bar attivata per &6Flymode&a."
-                    stop
-                else if {fly.%player%.ab} is true:
-                    delete {fly.%player%.ab}
-                    send "{@prefix} &cAction bar disattivata per &6Flymode&a."
-                    stop
-
 on tab complete of "/actionbar" or "/ab":
-    set tab completions for position 1 to "maintenance", "uptime", "god" and "fly"
+    set tab completions for position 1 to "maintenance" and "uptime"

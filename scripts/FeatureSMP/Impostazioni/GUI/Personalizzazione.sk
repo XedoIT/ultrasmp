@@ -95,7 +95,7 @@ function ScoreboardManagement(p: player):
         send "{@prefix} {@sb_off}" to {_p}
 
 # INFORMAZIONI GIOCATORI
-function TogglePlayersInformationToOther(p: player):
+function TogglePlayersInformationToOthers(p: player):
     if {settings.%{_p}%.custom.playersinfo.self_to_other} is false:
         set {settings.%{_p}%.custom.playersinfo.self_to_other} to true
         set {settings.%{_p}%.custom.playersinfo.self_to_other.marker} to "{@yes}"
@@ -216,7 +216,7 @@ function openCustomPlayerSettingsGUI(p: player):
 on inventory click:
     if name of event-inventory is "Impostazioni: &9Personalizzazione":
         if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37, 39, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52 or 53:
+            if index of event-slot is not 19, 21, 23, 25, 33, 38, 40, 48 or 49:
                 cancel event
             else if index of event-slot is 19:
                 if click type is left mouse button:
@@ -242,7 +242,7 @@ on inventory click:
             else if index of event-slot is 25:
                 if click type is left mouse button:
                     cancel event
-                    TogglePlayersInformationToOther(player)
+                    TogglePlayersInformationToOthers(player)
                     openCustomPlayerSettingsGUI(player)
                 else:
                     cancel event

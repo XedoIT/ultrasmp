@@ -149,7 +149,7 @@ on load:
     register new shapeless recipe for 2 iron ingot using shears with id "shears_to_iron_ingot" in group "iron_tool"
 
 
-# VARIO
+# CRAFTING PERSONALIZZATI
   # MELA D'ORO INCANTATA
     register new shaped recipe for 1 enchanted golden apple using gold block, gold block, gold block, gold block, golden apple, gold block, gold block, gold block and gold block with id "enchanted_golden_apple" in group "miscellanous"
   # TOTEM DELL'IMMORTALITÀ

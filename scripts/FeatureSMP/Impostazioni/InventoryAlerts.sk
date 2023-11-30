@@ -1,0 +1,78 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+on join:
+    wait 5 seconds
+    if gamemode of player is survival or adventure:
+        if player's inventory hasn't enough space for 1 saddle:
+            if {settings.%player%.notify.generic.inventory} is true:
+                send title "" with subtitle "&cInventario pieno!" to player for 5 seconds
+                send "" to player
+                send "{@prefix} &4&lNOTIFICA GENERALE" to player
+                send "" to player
+                send formatted "&c&lIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6&n/trash<reset> &7per svuotarlo." to player
+                send "" to player
+                send "&ePuoi disattivare questa notifica nelle &fImpostazioni &epresso il tuo &7Profilo &7&lSMP&e." to player
+                send "" to player
+                play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+
+on break:
+    chance of 1%:
+        if gamemode of player is survival or adventure:
+            if player's inventory hasn't enough space for 1 of event-block:
+                if {settings.%player%.notify.generic.inventory} is true:
+                    send title "" with subtitle "&cInventario pieno!" to player for 5 seconds
+                    send "" to player
+                    send "{@prefix} &4&lNOTIFICA GENERALE" to player
+                    send "" to player
+                    send formatted "&c&lIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6&n/trash<reset> &7per svuotarlo." to player
+                    send "" to player
+                    send "&ePuoi disattivare questa notifica nelle &fImpostazioni &epresso il tuo &7Profilo &7&lSMP&e." to player
+                    send "" to player
+                    play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+
+on inventory close:
+    chance of 1%:
+        if gamemode of player is survival or adventure:
+            if player's inventory hasn't enough space for 1 saddle:
+                if {settings.%player%.notify.generic.inventory} is true:
+                    send title "" with subtitle "&cInventario pieno!" to player for 5 seconds
+                    send "" to player
+                    send "{@prefix} &4&lNOTIFICA GENERALE" to player
+                    send "" to player
+                    send formatted "&c&lIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6&n/trash<reset> &7per svuotarlo." to player
+                    send "" to player
+                    send "&ePuoi disattivare questa notifica nelle &fImpostazioni &epresso il tuo &7Profilo &7&lSMP&e." to player
+                    send "" to player
+                    play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+
+on pickup:
+    chance of 1%:
+        if gamemode of player is survival or adventure:
+            if player's inventory hasn't enough space for 1 saddle:
+                if {settings.%player%.notify.generic.inventory} is true:
+                    send title "" with subtitle "&cInventario pieno!" to player for 5 seconds
+                    send "" to player
+                    send "{@prefix} &4&lNOTIFICA GENERALE" to player
+                    send "" to player
+                    send formatted "&c&lIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6&n/trash<reset> &7per svuotarlo." to player
+                    send "" to player
+                    send "&ePuoi disattivare questa notifica nelle &fImpostazioni &epresso il tuo &7Profilo &7&lSMP&e." to player
+                    send "" to player
+                    play sound "block.chest.open" with volume 1 and pitch 2 at player for player
+
+every minute:
+    loop all players:
+        if gamemode of loop-player is survival or adventure:
+            wait 1 tick
+            if loop-player's inventory hasn't enough space for 1 saddle:
+                if {settings.%loop-player%.notify.generic.inventory} is true:
+                    send title "" with subtitle "&cInventario pieno!" to loop-player for 5 seconds
+                    send "" to loop-player
+                    send "{@prefix} &4&lNOTIFICA GENERALE" to loop-player
+                    send "" to loop-player
+                    send formatted "&c&lIl tuo inventario è pieno! &7Utilizza <tooltip:Clicca qui per aprire rapidamente%nl%il cestino><cmd:/trash>&6&n/trash<reset> &7per svuotarlo." to loop-player
+                    send "" to loop-player
+                    send "&ePuoi disattivare questa notifica nelle &fImpostazioni &epresso il tuo &7Profilo &7&lSMP&e." to loop-player
+                    send "" to loop-player
+                    play sound "block.chest.open" with volume 1 and pitch 2 at loop-player for loop-player

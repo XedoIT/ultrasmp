@@ -24,6 +24,9 @@ options:
 # GIOCATORE OFFLINE
     send "{@prefix} &6%player% &cè offline."
 
+# NESSUN PARAMETRO AGGIUNTIVO
+    send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+
 # SEPARATORI CATEGORIE/SEZIONE
     # [nome categoria/sezione]
 

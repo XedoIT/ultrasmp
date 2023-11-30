@@ -1,0 +1,6 @@
+at 19:00:
+    loop all players:
+        if loop-player's world is "smp":
+            if {settings.%loop-player%.notifications_title} is true:
+            send title "&4&lÈ notte!" with subtitle "&cI mob saranno più forti. Fai attenzione!" to loop-player for 5 seconds
+            play sound "entity.wolf.howl" with volume 1 at loop-player for loop-playe

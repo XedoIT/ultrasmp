@@ -41,6 +41,10 @@ options:
     ymin: 70
     ymax: 160
 
+  # SESSO GIOCATORE
+    male: &9Maschio
+    female: &dFemmina
+
 on load:
   # CONTATORE MEDAGLIE E ULTIMA MEDAGLIA OTTENUTA
     if {medals.%player%} is not set:
@@ -231,11 +235,11 @@ on inventory click:
             if index of event-slot is 3:
                 cancel event
                 if slot 3 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "&9Maschio":
+                    if {settings.%player%.user.genre} is "{@male}":
                         set slot 3 of event-inventory to {@forestboss_axe_male_smithing}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "&dFemmina":
+                    else if {settings.%player%.user.genre} is "{@female}":
                         set slot 3 of event-inventory to {@forestboss_axe_female_smithing}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
@@ -273,11 +277,11 @@ on inventory click:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "&9Maschio":
+                    if {settings.%player%.user.genre} is "{@male}":
                         set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "&dFemmina":
+                    else if {settings.%player%.user.genre} is "{@female}":
                         set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
@@ -285,11 +289,11 @@ on inventory click:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "&9Maschio":
+                    if {settings.%player%.user.genre} is "{@male}":
                         set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "&dFemmina":
+                    else if {settings.%player%.user.genre} is "{@female}":
                         set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
@@ -297,11 +301,11 @@ on inventory click:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "&9Maschio":
+                    if {settings.%player%.user.genre} is "{@male}":
                         set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "&dFemmina":
+                    else if {settings.%player%.user.genre} is "{@female}":
                         set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
@@ -309,11 +313,11 @@ on inventory click:
             if index of event-slot is 2:
                 cancel event
                 if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "&9Maschio":
+                    if {settings.%player%.user.genre} is "{@male}":
                         set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "&dFemmina":
+                    else if {settings.%player%.user.genre} is "{@female}":
                         set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                         #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
@@ -337,7 +341,7 @@ on anvil prepare:
 
 # PARTE FUNZIONALE
 # MINING
-on mine of coal ore, deepslate coal ore, iron ore, deepslate iron ore, raw iron block, copper ore, deepslate copper ore, raw copper block, gold ore, deepslate gold ore, raw gold block, redstone ore, deepslate redstone ore, lapis ore, deepslate lapis ore, emerald ore, deepslate emerald ore, diamond ore, deepslate diamond ore, nether quartz ore, nether gold ore, ancient debris, gilded blackstone, amethyst block, small amethyst bud, medium amethyst bud, large amethyst bud or amethyst cluster:
+on mine of any ore:
     if tool of player is not {@mining_pickaxe}:
         if {medals.%player%.mining.count} < 49999:
             if gamemode of player is survival or adventure:
@@ -351,7 +355,7 @@ on mine of coal ore, deepslate coal ore, iron ore, deepslate iron ore, raw iron 
                     set {medals.%player%.last_obtained} to "&aEstrazione"
                     set {medals.%player%.mining.can_use_pickaxe} to true
                     add 1 to {medals.%player%}
-                    add 350 to {fame.%player%}
+                    add 350 to {fame::%player%}
                     give 1 {@mining_pickaxe} to player
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                     send "&6&m----------------------------------------" to player
@@ -383,7 +387,7 @@ on death:
                 set {medals.%attacker%.mobkiller.when_get} to now
                 set {medals.%attacker%.last_obtained} to "&aMobicida"
                 add 1 to {medals.%attacker%}
-                add 200 to {fame.%attacker%}
+                add 200 to {fame::%attacker%}
                 apply strength 5 without any particles to attacker for 2 minutes
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at attacker for attacker
                 send "&6&m----------------------------------------" to attacker
@@ -507,7 +511,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                     set {medals.%player%.last_obtained} to "&aFalegname"
                     set {medals.%player%.carpenter.can_use_axe} to true
                     add 1 to {medals.%player%}
-                    add 350 to {fame.%player%}
+                    add 350 to {fame::%player%}
                     give 1 {@carpenter_axe} to player
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                     send "&6&m----------------------------------------" to player
@@ -537,8 +541,10 @@ on break:
                 set {medals.%player%.building.when_get} to now
                 set {medals.%player%.last_obtained} to "&aCostruzione"
                 add 1 to {medals.%player%}
-                add 500 to {fame.%player%}
+                add 500 to {fame::%player%}
                 execute console command "/lp user %player% permission settemp fly.use true 6h"
+                execute console command "/lp user %player% permission settemp fly.keep true 6h"
+                execute console command "/lp user %player% permission settemp command.fly true 6h"
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                 send "&6&m----------------------------------------" to player
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lCostruzione" to player
@@ -638,10 +644,10 @@ on place:
                 set {medals.%player%.farmer} to "{@get}"
                 set {medals.%player%.farmer.when_get} to now
                 add 1 to {medals.%player%}
-                add 150 to {fame.%player%}
+                add 150 to {fame::%player%}
                 apply hero of the village without any particles to player for 2 hours
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-                if {settings.%player%.user.genre} is "&9Maschio":
+                if {settings.%player%.user.genre} is "{@male}":
                     set {medals.%player%.last_obtained} to "&aContadino"
                     send "&6&m----------------------------------------" to player
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to player
@@ -650,7 +656,7 @@ on place:
                     send "  &a+150 fama" to player
                     send "  &b+2 ore di &2Eroe del villaggio" to player
                     send "&6&m----------------------------------------" to player
-                else if {settings.%player%.user.genre} is "&dFemmina":
+                else if {settings.%player%.user.genre} is "{@female}":
                     set {medals.%player%.last_obtained} to "&aContadina"
                     send "&6&m----------------------------------------" to player
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to player
@@ -696,7 +702,7 @@ on fish:
                     set {medals.%player%.fishing.when_get} to now
                     set {medals.%player%.last_obtained} to "&aPesca"
                     add 1 to {medals.%player%}
-                    add 50 to {fame.%player%}
+                    add 50 to {fame::%player%}
                     apply water breathing without any particles to player for 3 hours
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                     send "&6&m----------------------------------------" to player
@@ -769,7 +775,7 @@ on tame:
                 add 150 to {fame.%tamer%}
                 apply regeneration without any particles to tamer for 1 hour
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at tamer for tamer
-                if {settings.%tamer%.user.genre} is "&9Maschio":
+                if {settings.%tamer%.user.genre} is "{@male}":
                     set {medals.%player%.last_obtained} to "&aAddestratore"
                     send "&6&m----------------------------------------" to tamer
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to tamer
@@ -778,7 +784,7 @@ on tame:
                     send "  &a+150 fama" to tamer
                     send "  &b+1 ora di &6Rigenerazione" to tamer
                     send "&6&m----------------------------------------" to tamer
-                else if {settings.%player%.user.genre} is "&dFemmina":
+                else if {settings.%player%.user.genre} is "{@female}":
                     set {medals.%player%.last_obtained} to "&aAddestratrice"
                     send "&6&m----------------------------------------" to tamer
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to tamer
@@ -798,9 +804,9 @@ on chat:
             set {medals.%player%.chatter} to "{@get}"
             set {medals.%player%.chatter.when_get} to now
             add 1 to {medals.%player%}
-            add 400 to {fame.%player%}
+            add 400 to {fame::%player%}
             play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-            if {settings.%player%.user.genre} is "&9Maschio":
+            if {settings.%player%.user.genre} is "{@male}":
                 send "&6&m----------------------------------------" to player
                 set {medals.%player%.last_obtained} to "&aChiacchierone"
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to player
@@ -808,7 +814,7 @@ on chat:
                 send " &9Ricompense sbloccate:" to player
                 send "  &a+400 fama" to player
                 send "&6&m----------------------------------------" to player
-            else if {settings.%player%.user.genre} is "&dFemmina":
+            else if {settings.%player%.user.genre} is "{@female}":
                 send "&6&m----------------------------------------" to player
                 set {medals.%player%.last_obtained} to "&aChiacchierona"
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierona" to player
@@ -831,7 +837,7 @@ on death of player:
                     set {medals.%attacker%.murderer.when_get} to now
                     set {medals.%attacker%.last_obtained} to "&aOmicida"
                     add 1 to {medals.%attacker%}
-                    add 500 to {fame.%attacker%}
+                    add 500 to {fame::%attacker%}
                     apply strength 3 without any particles to attacker for 4 hours
                     apply speed 1 without any particles to attacker for 1 hour
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at attacker for attacker
@@ -901,9 +907,9 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                     set {medals.%player%.forestboss.when_get} to now
                     set {medals.%player%.forestboss.can_use_axe} to true
                     add 1 to {medals.%player%}
-                    add 400 to {fame.%player%}
+                    add 400 to {fame::%player%}
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-                    if {settings.%player%.user.genre} is "&9Maschio":
+                    if {settings.%player%.user.genre} is "{@male}":
                         give 1 {@forestboss_axe_male} to player
                         set {medals.%player%.last_obtained} to "&aRe della Foresta"
                         send "&6&m----------------------------------------" to player
@@ -913,7 +919,7 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                         send "  &a+400 fama" to player
                         send "  &bHai sbloccato il &5TreeKinetor" to player
                         send "&6&m----------------------------------------" to player
-                    else if {settings.%player%.user.genre} is "&dFemmina":
+                    else if {settings.%player%.user.genre} is "{@female}":
                         set {medals.%player%.last_obtained} to "&aRegina della Foresta"
                         give 1 {@forestboss_axe_female} to player
                         send "&6&m----------------------------------------" to player
@@ -947,7 +953,7 @@ on pickup:
                         set {medals.%player%.skylover.when_get} to now
                         set {medals.%player%.last_obtained} to "&aAmante dei Cieli"
                         add 1 to {medals.%player%}
-                        add 800 to {fame.%player%}
+                        add 800 to {fame::%player%}
                         apply slow falling without any particles to player for 6 hours
                         play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
                         send "&6&m----------------------------------------" to player
@@ -970,9 +976,9 @@ on death of wither:
                 if {medals.%attacker%.netherboss} is "{@not_get}":
                     set {medals.%attacker%.netherboss} to "{@get}"
                     set {medals.%attacker%.netherboss.when_get} to now
-                    add 800 to {fame.%attacker%}
+                    add 800 to {fame::%attacker%}
                     apply fire resistance without any particles to attacker for 6 hours
-                    if {settings.%attacker%.user.genre} is "&9Maschio":
+                    if {settings.%attacker%.user.genre} is "{@male}":
                         set {medals.%attacker%.last_obtained} to "&aRe degli Inferi"
                         give 1 {@netherboss_male} to attacker
                         send "&6&m----------------------------------------" to attacker
@@ -983,7 +989,7 @@ on death of wither:
                         send "  &b+6 ore di &6Resistenza al fuoco" to attacker
                         send "  &bHai ottenuto un disco musicale: &cPigstep" to attacker
                         send "&6&m----------------------------------------" to attacker
-                    else if {settings.%attacker%.user.genre} is "&dFemmina":
+                    else if {settings.%attacker%.user.genre} is "{@female}":
                         set {medals.%attacker%.last_obtained} to "&aRegina degli Inferi"
                         give 1 {@netherboss_female} to attacker
                         send "&6&m----------------------------------------" to attacker
@@ -1007,8 +1013,8 @@ on death of ender dragon:
                 if {medals.%attacker%.dragontrainer} is "{@not_get}":
                     set {medals.%attacker%.dragontrainer} to "{@get}"
                     set {medals.%attacker%.dragontrainer.when_get} to now
-                    add 1000 to {fame.%attacker%}
-                    if {settings.%attacker%.user.genre} is "&9Maschio":
+                    add 1000 to {fame::%attacker%}
+                    if {settings.%attacker%.user.genre} is "{@male}":
                         give 1 {@dragontrainer_male} to attacker
                         set {medals.%attacker%.last_obtained} to "&aDomatore di Draghi"
                         send "&6&m----------------------------------------" to attacker
@@ -1018,7 +1024,7 @@ on death of ender dragon:
                         send "  &a+1000 fama" to attacker
                         send "  &bHai ottenuto un &dUovo di drago" to attacker
                         send "&6&m----------------------------------------" to attacker
-                    else if {settings.%attacker%.user.genre} is "&dFemmina":
+                    else if {settings.%attacker%.user.genre} is "{@female}":
                         give 1 {@dragontrainer_female} to attacker
                         set {medals.%attacker%.last_obtained} to "&aDomatrice di Draghi"
                         send "&6&m----------------------------------------" to attacker
@@ -1041,12 +1047,12 @@ on death of warden:
                 if {medals.%attacker%.wardenboss} is "{@not_get}":
                     set {medals.%attacker%.wardenboss} to "{@get}"
                     set {medals.%attacker%.wardenboss.when_get} to now
-                    add 1200 to {fame.%attacker%}
+                    add 1200 to {fame::%attacker%}
                     apply strength 5 without any particles to attacker for 24 hours
                     apply resistance 5 without any particles to attacker for 24 hours
                     apply regeneration 5 without any particles to attacker for 24 hours
                     apply night vision without any particles to attacker for 24 hours
-                    if {settings.%attacker%.user.genre} is "&9Maschio":
+                    if {settings.%attacker%.user.genre} is "{@male}":
                         set {medals.%attacker%.last_obtained} to "&aDevastatore di Sorveglianti"
                         send "&6&m----------------------------------------" to attacker
                         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to attacker
@@ -1058,7 +1064,7 @@ on death of warden:
                         send "  &b+24 ore di &6Rigenerazione V" to attacker
                         send "  &b+24 ore di &aVisione notturna" to attacker
                         send "&6&m----------------------------------------" to attacker
-                    else if {settings.%attacker%.user.genre} is "&dFemmina":
+                    else if {settings.%attacker%.user.genre} is "{@female}":
                         set {medals.%attacker%.last_obtained} to "&aDevastatrice di Sorveglianti"
                         send "&6&m----------------------------------------" to attacker
                         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to attacker

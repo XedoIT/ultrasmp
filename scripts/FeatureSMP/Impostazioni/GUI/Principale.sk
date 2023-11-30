@@ -25,7 +25,6 @@ function openPlayerSettingsGui(p: player):
         set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{settings.%{_p}%.privacy.playersinfo.other_to_self.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "&f" and "{@manage}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
         set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
-        #set slot 41 of {_gui} to writable book named "&eWiki dell'SMP" with lore "&7Vuoi saperne di più su una determinata", "&7funzionalità presente nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa, basta cercare!", "&f" and "{@info_wiki}"
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 5 rows named "Impostazioni"
@@ -34,13 +33,12 @@ function openPlayerSettingsGui(p: player):
         set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{settings.%{_p}%.privacy.playersinfo.other_to_self.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "&f" and "{@manage}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
         set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
-        #set slot 41 of {_gui} to writable book named "&eWiki dell'SMP" with lore "&7Vuoi saperne di più su una determinata", "&7funzionalità presente nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa, basta cercare!", "&f" and "{@info_wiki}"
         open {_gui} to {_p}
 
 on inventory click:
     if name of event-inventory is "Impostazioni":
         if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43 or 44:
+            if index of event-slot is not 20, 22, 24, 39 or 40:
                 cancel event
             else if index of event-slot is 20:
                 if click type is left mouse button:

@@ -1,0 +1,24 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    damage: 100
+    damage2: 100
+
+on command "/kill":
+    if sender is player:
+        if player has permission "minecraft.command.kill":
+            cancel event
+            #execute player command "/damage %arg-1% {@damage} generic_kill"
+            #wait 10 ticks
+            #subtract {@damage2} from {suffdamage::%arg-1%}
+            #subtract 170141173319264430000000000000000000000 from {stats.%arg-1%.damage_suffered}
+            send "{@prefix} &cQuesto comando è temporaneamente disabilitato!"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+    else:
+        cancel event
+        #execute player command "/damage %arg-1% {@damage} generic_kill"
+        #wait 10 ticks
+        #subtract {@damage2} from {suffdamage::%arg-1%}
+        #subtract 170141173319264430000000000000000000000 from {stats.%arg-1%.damage_suffered}
+        send "{@prefix} &cQuesto comando è temporaneamente disabilitato!"
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player

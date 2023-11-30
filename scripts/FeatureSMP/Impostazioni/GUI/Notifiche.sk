@@ -200,9 +200,9 @@ function openCustomServiceAlertsGui(p: player):
         set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche di servizio"
         set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&f"
         set slot 10, 12, 14, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&f"
-        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima del riavvio,", " &612 ore &cprima del riavvio,", " &66 ore &cprima del riavvio,", " &62 ore &cprima del riavvio,", " &630 minuti &cprima del riavvio," and " &610 minuti &cprima del riavvio."
+        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
         set slot 13 of {_gui} to paper named "&eProblemi prestazionali" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati" and "&7e/o crash improvvisi."
-        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima della chiusura,", " &612 ore &cprima della chiusura,", " &66 ore &cprima della chiusura,", " &62 ore &cprima della chiusura,", " &630 minuti &cprima della chiusura," and " &610 minuti &cprima della chiusura."
+        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
         if {settings.%{_p}%.notify.service.schres} is true:
             set slot 20 of {_gui} to lime dye named "&aRiavvii del server programmati" with lore "{@turn_off}"
         else:
@@ -220,9 +220,9 @@ function openCustomServiceAlertsGui(p: player):
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche di servizio"
-        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima del riavvio,", " &612 ore &cprima del riavvio,", " &66 ore &cprima del riavvio,", " &62 ore &cprima del riavvio,", " &630 minuti &cprima del riavvio," and " &610 minuti &cprima del riavvio."
+        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
         set slot 13 of {_gui} to paper named "&eProblemi prestazionali" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati" and "&7e/o crash improvvisi."
-        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima della chiusura,", " &612 ore &cprima della chiusura,", " &66 ore &cprima della chiusura,", " &62 ore &cprima della chiusura,", " &630 minuti &cprima della chiusura," and " &610 minuti &cprima della chiusura."
+        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
         if {settings.%{_p}%.notify.service.schres} is true:
             set slot 20 of {_gui} to lime dye named "&aRiavvii del server programmati" with lore "{@turn_off}"
         else:
@@ -242,7 +242,7 @@ function openCustomServiceAlertsGui(p: player):
 on inventory click:
     if name of event-inventory is "Impostazioni: &9Notifiche":
         if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43 or 44:
+            if index of event-slot is not 20, 24, 39 or 40:
                 cancel event
             else if index of event-slot is 20:
                 if click type is left mouse button:
@@ -270,7 +270,7 @@ on inventory click:
                     cancel event
     else if name of event-inventory is "&9Notifiche&r: &1Notifiche generali":
         if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43 or 44:
+            if index of event-slot is not 21, 23, 39 or 40:
                 cancel event
             else if index of event-slot is 21:
                 if click type is left mouse button:
@@ -312,7 +312,7 @@ on inventory click:
                     cancel event
     else if name of event-inventory is "&9Notifiche&r: &1Notifiche di servizio":
         if type of event-inventory is chest inventory:
-            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43 or 44:
+            if index of event-slot is not 20, 22, 24, 39 or 40:
                 cancel event
             else if index of event-slot is 20:
                 if click type is left mouse button:

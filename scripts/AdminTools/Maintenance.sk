@@ -3,45 +3,18 @@ options:
     prefix2: &8[&4&lDEBUG&8]
 
     default_reason: &eCorrezione di bug.
+    no_maintenance: &7-
+
+    kick_message: &c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%
+
 
 every tick:
     loop all players:
-        if {maintenance} is set:
-            if {maintenance.reason} is set:
-                if loop-player doesn't have permission "maintenance.kick.bypass":
-                    kick loop-player due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%"
-            else:
-                if loop-player doesn't have permission "maintenance.kick.bypass":
-                    kick loop-player due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord."
+        CheckMaintenanceOnTick(loop-player)
 
 on join:
-    if {maintenance} is set:
-        if {maintenance.reason} is set:
-            if player has permission "maintenance.kick.bypass":
-                send ""
-                send "{@prefix1} &6La manutenzione è ancora &aattivata&6."
-                send "{@prefix1} &7Motivo: &e%{maintenance.reason}%"
-                send ""
-                stop
-            else:
-                kick player due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%"
-                stop
-        else:
-            if player has permission "maintenance.kick.bypass":
-                send ""
-                send "{@prefix1} &6La manutenzione è ancora &aattivata&6."
-                send "{@prefix1} &7Motivo: {@default_reason}"
-                send ""
-                stop
-            else:
-                kick player due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord."
-                stop
+    CheckMaintenanceOnJoin(player)
 
-every 10 ticks:
-    loop all players:
-        if {maintenance} is set:
-            if {maintenance.ab} is true:
-                send action bar "&c&l---&7&l{ &6Manutenzione: &a&lATTIVATA &7&l}&c&l---" to loop-player
                 
 command /maintenance [<text>]:
     description: Attiva la manutenzione del server ed espelle tutti i giocatori che non hanno i permessi.
@@ -52,7 +25,7 @@ command /maintenance [<text>]:
     trigger:
         if sender is player:
             if arg-1 is not set:
-                serverMaintenanceNoReasonP(player)
+                ToggleMaintenancePlayer_NoReason(player)
                 stop
 
             else if arg-1 is "status" or "info":
@@ -78,11 +51,11 @@ command /maintenance [<text>]:
                         
             else if arg-1 is not "status" or "info":
                 set {maintenance.reason} to arg-1
-                serverMaintenanceP(player)
+                ToggleMaintenancePlayer(player)
                 stop
         else:
             if arg-1 is not set:
-                serverMaintenanceNoReasonC(console)
+                ToggleMaintenanceConsole_NoReason(console)
                 stop
                         
             else if arg-1 is "status" or "info":
@@ -104,7 +77,7 @@ command /maintenance [<text>]:
 
             else if arg-1 is not "status" or "info":
                 set {maintenance.reason} to arg-1
-                serverMaintenanceC(console)
+                ToggleMaintenanceConsole(console)
                 stop
 
 command /maintenancekick [<offline player>]:
@@ -112,33 +85,58 @@ command /maintenancekick [<offline player>]:
     permission message: {@prefix1} &cComando sconosciuto.
     executable by: player, console
     trigger:
-        if sender is player:
-            if arg-1 is not set:
-                send "{@prefix1} &cSpecifica il nome di un giocatore!"
+        if arg-1 is not set:
+            if {maintenance} is not set:
+                send "{@prefix1} &cLa manutenzione non è attiva!"
                 stop
             else:
-                if arg-1 is offline:
-                    send "{@prefix1} &c&a%arg-1% &6non è online!"
-                    stop
-                else:
-                    kick arg-1 due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%"
-                    stop
+                send "{@prefix1} &cSpecifica il nome di un giocatore!"
+                stop
         else:
-            if arg-1 is not set:
-                send "{@prefix1} &cSpecifica il nome di un giocatore!"
-                stop
-            else:
-                if arg-1 is offline:
-                    send "{@prefix1} &c&a%arg-1% &6non è online!"
+            if arg-1 is offline:
+                if {maintenance} is not set:
+                    send "{@prefix1} &cLa manutenzione non è attiva!"
                     stop
                 else:
-                    kick arg-1 due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%"
+                    send "{@prefix1} &6%arg-1% &cè offline."
                     stop
-            
-# -------------------------------------------- #
-#                  FUNZIONI                    #
-# -------------------------------------------- #
-function serverMaintenanceP(p: player):
+            else:
+                if {maintenance} is not set:
+                    send "{@prefix1} &cLa manutenzione non è attiva!"
+                    stop
+                else:
+                    kick arg-1 due to "{@kick_message}"
+                    stop
+
+
+function CheckMaintenanceOnTick(p: player):
+    if {maintenance} is set:
+        if {maintenance.reason} is set:
+            if {_p} doesn't have permission "maintenance.kick.bypass":
+                kick {_p} due to "{@kick_message}"
+        else:
+            if {_p} doesn't have permission "maintenance.kick.bypass":
+                kick {_p} due to "{@kick_message}"
+
+function CheckMaintenanceOnJoin(p: player):
+    if {maintenance} is set:
+        if {maintenance.reason} is set:
+            if {_p} has permission "maintenance.kick.bypass":
+                send "" to {_p}
+                send "{@prefix1} &6La manutenzione è ancora &aattivata&6." to {_p}
+                send "{@prefix1} &7Motivo: &e%{maintenance.reason}%" to {_p}
+                send "" to {_p}
+            else:
+                kick {_p} due to "{@kick_message}"
+        else:
+            if {_p} has permission "maintenance.kick.bypass":
+                send "" to {_p}
+                send "{@prefix1} &6La manutenzione è ancora &aattivata&6." to {_p}
+                send "{@prefix1} &7Motivo: {@default_reason}" to {_p}
+                send "" to {_p}
+            else:
+                kick {_p} due to "{@kick_message}"
+function ToggleMaintenancePlayer(p: player):
     if {_p} has permission "maintenance.bypass":
         if {maintenance} is not set:
             set {maintenance} to true
@@ -156,9 +154,9 @@ function serverMaintenanceP(p: player):
             broadcast "&a&lI giocatori possono rientrare nel server."
             stop
     else:
-        kick {_p} due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%"
+        kick {_p} due to "{@kick_message}"
 
-function serverMaintenanceC(s: sender):
+function ToggleMaintenanceConsole(s: sender):
     if {maintenance} is not set:
         set {maintenance} to true
         broadcast ""
@@ -175,10 +173,11 @@ function serverMaintenanceC(s: sender):
         broadcast "&a&lI giocatori possono rientrare nel server."
         stop
 
-function serverMaintenanceNoReasonP(p: player):
+function ToggleMaintenancePlayer_NoReason(p: player):
     if {_p} has permission "maintenance.bypass":
         if {maintenance} is not set:
             set {maintenance} to true
+            set {maintenance.reason} to "{@default_reason}"
             broadcast ""
             broadcast "{@prefix2} &6Manutenzione &aattivata &6da &e%{_p}%&6."
             broadcast "{@prefix2} &cMotivo: {@default_reason}"
@@ -187,17 +186,19 @@ function serverMaintenanceNoReasonP(p: player):
             stop
         else if {maintenance} is true:
             delete {maintenance}
+            set {maintenance.reason} to "{@no_maintenance}"
             broadcast ""
             broadcast "{@prefix2} &6Manutenzione &cdisattivata &6da &e%{_p}%&6."
             broadcast ""
             broadcast "&a&lI giocatori possono rientrare nel server."
             stop
     else:
-        kick {_p} due to "&c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord."
+        kick {_p} due to "{@kick_message}"
 
-function serverMaintenanceNoReasonC(s: sender):
+function ToggleMaintenanceConsole_NoReason(s: sender):
     if {maintenance} is not set:
         set {maintenance} to true
+        set {maintenance.reason} to "{@default_reason}"
         broadcast ""
         broadcast "{@prefix2} &6Manutenzione &aattivata &6dalla console."
         broadcast "{@prefix2} &cMotivo: {@default_reason}"
@@ -206,8 +207,17 @@ function serverMaintenanceNoReasonC(s: sender):
         stop
     else if {maintenance} is true:
         delete {maintenance}
+        set {maintenance.reason} to "{@no_maintenance}"
         broadcast ""
         broadcast "{@prefix2} &6Manutenzione &cdisattivata &6dalla console."
         broadcast ""
         broadcast "&a&lI giocatori possono rientrare nel server."
         stop
+
+
+
+every 10 ticks:
+    loop all players:
+        if {maintenance} is set:
+            if {maintenance.ab} is true:
+                send action bar "&c&l---&7&l{ &6Manutenzione: &a&lATTIVATA &7&l}&c&l---" to loop-player

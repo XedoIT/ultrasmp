@@ -8,7 +8,7 @@ on join:
     if player has played before:
         if {settings.%player%.custom.joinmessage} is true:
             if {settings.%player%.user.genre} is "{@male}":
-                wait 18 ticks
+                wait 20 ticks
                 send "" to player
                 send " &bBentornato nella Disagio SMP, &9%player%&b!" to player
                 if {players.online} = 1:
@@ -19,7 +19,6 @@ on join:
                     send  " &6Al momento ci sono altri &e%({players.online} - 1)% giocatori &6insieme a te." to player
                 send "" to player
                 send " &7La temperatura esterna è di &a%placeholder "rs_air_temperature" from player%°C&7." to player
-                send " &7Il tuo ping è di &e%player's ping% ms&7."
                 if {scoreboard.%player%} is false:
                     send "" to player
                     send formatted "&4&k0 <tooltip:&eClicca per riattivarla.><cmd:/sb>&c&lSCOREBOARD DISATTIVATA&r&c. &6Ecco a te alcune informazioni utili. &4&k0" to player
@@ -27,8 +26,8 @@ on join:
                     send "  &7Sei rientrato nel bioma &b%placeholder "player_biome_capitalized" from player% &7alle coordinate &a%placeholder "player_x" from player% %placeholder "player_y" from player% %placeholder "player_z" from player%&7." to player
                     send "  &7La tua temperatura è di &e%placeholder "rs_temperature" from player%&7." to player
                 send "" to player
-            else:
-                wait 18 ticks
+            else if {settings.%player%.user.genre} is "{@female}":
+                wait 20 ticks
                 send "" to player
                 send " &dBentornata nella Disagio SMP, &5%player%&d!" to player
                 send "" to player
@@ -39,7 +38,6 @@ on join:
                 else if {players.online} > 2:
                     send  " &6Al momento ci sono altri &e%({players.online} - 1)% giocatori &6insieme a te." to player
                 send " &7La temperatura esterna è di &a%placeholder "rs_air_temperature" from player%°C&7." to player
-                send " &7Il tuo ping è di &e%player's ping% ms&7."
                 if {scoreboard.%player%} is false:
                     send "" to player
                     send formatted "&4&k0 <tooltip:&eClicca per riattivarla.><cmd:/sb>&c&lSCOREBOARD DISATTIVATA&r&c. &6Ecco a te alcune informazioni utili. &4&k0" to player

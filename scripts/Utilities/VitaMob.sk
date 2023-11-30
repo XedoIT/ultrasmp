@@ -1,0 +1,9 @@
+on right click on allay, axolotl, bat, bee, blaze, cat, cave spider, chicken, cod, cow, creeper, dolphin, drowned, elder guardian, ender dragon, enderman, endermite, evoker, fox, frog, ghast, giant, glow squid, goat, guardian, hoglin, husk, illusioner, iron golem, magma cube, mooshroom, ocelot, panda, parrot, phantom, pig, piglin, piglin brute, pillager, polar bear, pufferfish, rabbit, ravager, salmon, sheep, shulker, silverfish, skeleton, slime, snow golem, spider, squid, stray, tadpole, tropical fish, turtle, vex, villager, vindicator, wandering trader, warden, witch, wither, wither skeleton, wolf, zoglin, zombie or zombified piglin:
+    send action bar "&fVita: &c%health of entity%/%max health of entity% ❤" to player
+    
+on right click on donkey, horse, llama, mule, skeleton horse, strider, trader llama or zombie horse:
+    if player is sneaking:
+        send action bar "&fVita: &c%health of entity%/%max health of entity% ❤" to player
+        
+on right click on zombie villager:
+    send "&cQuesto villager è infetto! Curalo utilizzando una pozione di debolezza e una mela d'oro!" to player

@@ -1,0 +1,30 @@
+options:
+    prefix: &8[&2&lPING&8]
+
+command /ping [<offline player>]:
+    description: Visualizza il ping dei giocatori.
+    usage: {@prefix} &cUtilizzo: &6/ping [&egiocatore&6]
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &aIl tuo ping è &e%player's ping% &ems"
+                stop
+            else if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &c%arg-1% &6non è online!"
+                    stop
+                else:
+                    send "{@prefix} &aIl ping di &b%arg-1% &aè &e%arg-1's ping% &ems"
+                    stop
+        else:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di un giocatore!"
+                stop
+            else if arg-1 is set:
+                if arg-1 is offline:
+                    send "{@prefix} &c%arg-1% &6non è online!"
+                    stop
+                else:
+                    send "{@prefix} &aIl ping di &b%arg-1% &aè &e%arg-1's ping% &ems"
+                    stop

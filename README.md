@@ -153,3 +153,28 @@
 - Introdotti i giorni abbreviati nella scoreboard.
 - Introdotto il tasto "Indietro" nella GUI del cestino.
 - Modificate le variabili inerenti alle Impostazioni dei giocatori.
+
+### - NOVEMBRE 2023 -
+- Rivisitati e ottimizzati tutti gli script, corretti svariati problemi.
+- Ridistribuzione dei file della Fama e Reputazione. Cambiato il termine "punti" con "fama" ove fosse necessario, adattando e correggendo le relative parole annesse (i.e. "punti totali" è diventato "Fama totale").
+- Introdotta la classifica dei giocatori con più Fama.
+- Ottimizzato e alleggerito il sistema delle reputazioni.
+- Modificati i permessi di alcuni script.
+- Migliorato il sistema di FlyMode e GodMode.
+- Ottimizzato il sistema delle Gamemode.
+- Rivisto il sistema di informazioni giocatore con 4 nuove GUI (2 online e 2 offline) [ADMIN].
+- Da adesso, i comandi "/tell" e "/kill" (temporaneamente) non saranno più disponibili.
+- Rivisitato il sistema delle medaglie con ottimizzazioni alla GUI e al comando principale.
+- Introdotto il tasto "Indietro" nella GUI delle medaglie.
+- Rivisto il comando "/ping": da adesso tutti potranno vedere il ping altrui con la sintassi "/ping <giocatore>".
+- Rivisitato il comando "/wiki".
+- Separati diversi script che precedentemente facevano parte di un unico file, seppur diversi tra loro.
+- Rimosso il comando "/orario".
+- Modificate le variabili delle statistiche.
+- Modificato il messaggio di espulsione per la chiusura o il riavvio del server.
+- Da adesso il server saprà determinare meglio se un giocatore è maschio o femmina.
+- Ottimizzato lo script "Healer" [ADMIN].
+- Ottimizzato il sistema di manutenzione del server.
+- Rivisitata e migliorata la modalità Hardcore.
+- Le funzionalità non disponibili durante il beta test saranno segnalate dal messaggio "Questa funzionalità è in fase di sviluppo e sarà disponibile all'apertura ufficiale del server.".
+- Da adesso, segnalare bug e inviare feedback farà guadagnare Fama, ma è richiesto un tempo di attesa tra l'esecuzione di un comando e un altro.

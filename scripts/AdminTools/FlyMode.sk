@@ -4,107 +4,151 @@ options:
     prefix_error: &7[&c&lFly&7]
     warn: &6[&c&l!&6]
 
-on load:
-    if {fly.%player%.status} is not set:
-        set {fly.%player%.status} to "&cNo"
+    on: &aSì
+    off: &cNo
+    
+    male: &9Maschio
+    female: &dFemmina
 
 on join:
-    if {fly.%player%} is true:
-        if player has permission "fly.keep":
-            if player's gamemode is survival or adventure:
-                set player's flight mode to true
-                set {fly.%player%} to true
-                set {fly.%player%.status} to "&aSì"
-                set {fly.%player%.ab} to true
-                wait 3 seconds
-                send "{@prefix_enabled} Puoi ancora volare!" to player
-        else:
-            if {fly.%player%} is true:
-                delete {fly.%player%}
-                set {fly.%player%.status} to "&cNo"
-                delete {fly.%player%.ab}
-                set player's flight mode to false
-                wait 3 seconds
-                send "{@warn} &7Prima di uscire dal server, potevi volare. Adesso non puoi più. {@warn}" to player
-                stop
-    else:
-        set {fly.%player%.status} to "&cNo"
-        delete {fly.%player%.ab}
-        stop
-    
-every 10 ticks:
-    loop all players:    
-        if {fly.%loop-player%.ab} is true:
-            if gamemode of loop-player is not creative or spectator:
-                if loop-player is not flying:
-                    send action bar "&a&lA TERRA &7| &bVelocità del passo: &e%walkspeed of loop-player%" to loop-player
-                else:
-                    send action bar "&c&lIN VOLO &7| &aVelocità di volo: &6%flyspeed of loop-player%" to loop-player
-                                
+    CheckFlyOnLogin(player)
+
+on death of player:
+    CheckFlyOnDeath(victim)
+
+on player world change:
+    CheckFlyOnWorldChange(player)
+
 command /fly [<offline player>]:
     description: "Perché camminare quando puoi volare?"
     permission: fly.use
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    executable by: player, console
     trigger:
         if sender is player:
             if arg-1 is not set:
-                if {fly.%player%} is true:
-                    set player's flight mode to false
-                    delete {fly.%player%}
-                    set {fly.%player%.status} to "&cNo"
-                    delete {fly.%player%.ab}
-                    send "{@prefix_disabled} &cVolo disabilitato." to player
-                    stop
-                else:
-                    set player's flight mode to true
-                    set {fly.%player%} to true
-                    set {fly.%player%.status} to "&aSì"
-                    set {fly.%player%.ab} to true
-                    send "{@prefix_enabled} &aVolo abilitato." to player
-                    stop
+                ToggleFlySelf(player)
                     
             else if arg-1 is offline:
-                send "{@prefix_error} &c%arg-1% non è online!" to player
+                send "{@prefix_error} &6%arg-1% &cè offline." to player
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                 stop
             else:
-                if {fly.%arg-1%} is true:
-                    set arg-1's flight mode to false
-                    delete {fly.%arg-1%}
-                    set {fly.%arg-1%.status} to "&cNo"
-                    delete {fly.%arg-1%.ab}
-                    send "{@prefix_disabled} &cHai tolto le ali a &6%arg-1%&c." to player
-                    send "{@prefix_disabled} &6%player% &cti ha tolto le ali. Da adesso non potrai più volare!" to arg-1
-                    stop
-                else:
-                    set arg-1's flight mode to true
-                    set {fly.%arg-1%} to true
-                    set {fly.%arg-1%.status} to "&aSì"
-                    set {fly.%arg-1%.ab} to true
-                    send "{@prefix_enabled} &aHai donato un paio d'ali a &e%arg-1%&a." to player
-                    send "{@prefix_enabled} &e%player% &ati ha donato un paio di ali. Adesso puoi volare!" to arg-1
-                    stop
+                ToggleFlyOthersPlayer(player,arg-1)
         else:
             if arg-1 is not set:
                 send "{@prefix_error} &cSolo i giocatori possono eseguire questo comando."
                 stop
                     
             else if arg-1 is offline:
-                send "{@prefix_error} &c%arg-1% non è online!" to console
+                send "{@prefix_error} &6%arg-1% &cè offline." to console
                 stop
             else:
-                if {fly.%arg-1%} is true:
-                    set arg-1's flight mode to false
-                    delete {fly.%arg-1%}
-                    set {fly.%arg-1%.status} to "&cNo"
-                    delete {fly.%arg-1%.ab}
-                    send "{@prefix_disabled} &cHai tolto le ali a &6%arg-1%&c." to console
-                    send "{@prefix_disabled} &cLa &6console &cti ha tolto le ali. Da adesso non potrai più volare!" to arg-1
-                    stop
+                ToggleFlyOthersConsole(arg-1)
+
+
+function CheckFlyOnLogin(p: player):
+    if {_p} has permission "fly.keep":
+        if {_p}'s gamemode is survival or adventure:
+            if {fly.%{_p}%} is "{@on}":
+                set {_p}'s flight mode to true
+                set {fly.%{_p}%} to "{@on}"
+                wait 3 seconds
+                send "{@prefix_enabled} Puoi ancora volare!" to {_p}
+    else:
+        if {fly.%{_p}%} is "{@on}":
+            set {_p}'s flight mode to false
+            set {fly.%{_p}%} to "{@off}"
+            wait 3 seconds
+            send "{@warn} &7Prima di uscire dal server potevi volare. Adesso non puoi più. {@warn}" to {_p}
+
+function ToggleFlySelf(p: player):
+    if {_p} has permission "fly.use":
+        if {fly.%{_p}%} is "{@on}":
+            set {_p}'s flight mode to false
+            set {fly.%{_p}%} to "{@off}"
+            send "{@prefix_disabled} &cVolo disabilitato." to {_p}
+            stop
+        else:
+            set {_p}'s flight mode to true
+            set {fly.%{_p}%} to "{@on}"
+            send "{@prefix_enabled} &aVolo abilitato." to {_p}
+            stop
+    else:
+        send "&4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto." to {_p}
+        stop
+
+function ToggleFlyOthersPlayer(p1: player, p2: player):
+    if {_p1} has permission "fly.use.other":
+        if {fly.%{_p2}%} is "{@on}":
+            set {_p2}'s flight mode to false
+            set {fly.%{_p2}%} to "{@off}"
+            send "{@prefix_disabled} &cHai tolto le ali a &6%{_p2}%&c." to {_p1}
+            send "{@prefix_disabled} &6%{_p1}% &cti ha tolto le ali. Da adesso non potrai più volare!" to {_p2}
+            stop
+        else:
+            set {_p2}'s flight mode to true
+            set {fly.%{_p2}%} to "{@on}"
+            send "{@prefix_enabled} &aHai donato un paio d'ali a &e%{_p2}%&a." to {_p1}
+            send "{@prefix_enabled} &e%{_p1}% &ati ha donato un paio di ali. Adesso puoi volare!" to {_p2}
+            stop
+    else:
+        send "{@prefix_error} &cNon hai i permesso per farlo!" to {_p1}
+        stop
+        
+function ToggleFlyOthersConsole(p: player):
+    if {fly.%{_p}%} is "{@on}":
+        set {_p}'s flight mode to false
+        set {fly.%{_p}%} to "{@off}"
+        send "{@prefix_disabled} &cHai tolto le ali a &6%{_p}%&c." to console
+        send "{@prefix_disabled} &cLa &6console &cti ha tolto le ali. Da adesso non potrai più volare!" to {_p}
+        stop
+    else:
+        set {_p}'s flight mode to true
+        set {fly.%{_p}%} to "{@on}"
+        send "{@prefix_enabled} &aHai donato un paio d'ali a &e%{_p}%&a." to console
+        send "{@prefix_enabled} &aLa &econsole &ati ha donato un paio di ali. Adesso puoi volare!" to {_p}
+        stop
+
+function CheckFlyOnDeath(p: player):
+    if {_p} has permission "fly.keep":
+        if {fly.%{_p}%} is "{@on}":
+            set {_p}'s flight mode to false
+            set {fly.%{_p}%} to "{@off}"
+            if {settings.%{_p}%.user.genre} is "{@male}":
+                send "" to {_p}
+                send "{@warn} &cSei morto con il volo abilitato! &cNon puoi più volare. {@warn}" to {_p}
+                send "" to {_p}
+            if {settings.%{_p}%.user.genre} is "{@female}":
+                send "" to {_p}
+                send "{@warn} &cSei morta con il volo abilitato! &cNon puoi più volare. {@warn}" to {_p}
+                send "" to {_p}
+
+function CheckFlyOnWorldChange(p: player):
+    if {_p} has permission "fly.keep":
+        if {fly.%{_p}%} is "{@on}":
+            set {_p}'s flight mode to true
+            set {fly.%{_p}%} to "{@on}"
+    else:
+        if {fly.%{_p}%} is "{@on}":
+            set {_p}'s flight mode to false
+            set {fly.%{_p}%} to "{@off}"
+            wait 1 second
+            send "{@warn} &cHai cambiato mondo con il volo abilitato! Non puoi più volare. {@warn}" to {_p}
+
+function ToggleNoFlyGM(p: player):
+    set {_p}'s flight mode to false
+    set {fly.%{_p}%} to "{@off}"
+
+function ToggleFlyGM(p: player):
+    set {_p}'s flight mode to true
+    set {fly.%{_p}%} to "{@on}"
+
+every 10 ticks:
+    loop all players:    
+        if {ab.%loop-player%.fly} is true:
+            if gamemode of loop-player is not creative or spectator:
+                if loop-player is not flying:
+                    send action bar "&a&lA TERRA &7| &bVelocità del passo: &e%walkspeed of loop-player%" to loop-player
                 else:
-                    set arg-1's flight mode to true
-                    set {fly.%arg-1%} to true
-                    set {fly.%arg-1%.status} to "&aSì"
-                    set {fly.%arg-1%.ab} to true
-                    send "{@prefix_enabled} &aHai donato un paio d'ali a &e%arg-1%&a." to console
-                    send "{@prefix_enabled} &aLa &econsole &ati ha donato un paio di ali. Adesso puoi volare!" to arg-1
-                    stop
+                    send action bar "&c&lIN VOLO &7| &aVelocità di volo: &6%flyspeed of loop-player%" to loop-player

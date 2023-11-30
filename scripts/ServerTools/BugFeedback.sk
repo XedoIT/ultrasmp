@@ -1,5 +1,14 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+    bugprefix: &8[&4&lBUG&8]
+    feedbackprefix: &e[&6&lFEEDBACK&e]
+    
+    confirm_sound: block.note_block.pling
+
 command /bug [<text>]:
     description: Segnala e gestisci i bug segnalati dai giocatori.
+    cooldown: 30 seconds
+    cooldown message: {@prefix} &cPuoi segnalare un bug ogni &630 secondi&c!
     executable by: player, console
     trigger:
         if sender is player:
@@ -8,12 +17,24 @@ command /bug [<text>]:
                 stop
             else:
                 log "[BUG] %player% ha segnalato un bug: ""%arg-1%""" to "bug.log"
-                send "&a&lBug segnalato correttamente!"
-                add 1 to {stats.%player%.reported_bugs}
-                add 15 to {fame.%player%}
-                send "&6+15 fama! (Bug segnalato)"
-                send "&b&l[&4&lBUG&b&l] &3&l>>> &e%player% ha segnalato un bug: ""&9%arg-1%&e"" &3&l<<< &b&l[&4&lBUG&b&l]" to console
+                send ""
+                send "{@prefix} &a&lBug segnalato correttamente! &aSarà elaborato al più presto."
+                send "{@prefix} &bLe tue segnalazioni sono importanti per il server. Continua così!"
+                send ""
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                add 1 to {reported_bugs::%player%}
+                add 15 to {fame::%player%}
+                send "&6+15 Fama! (Bug segnalato)"
+                send "" to console
+                send "&7&m-------------------------&r {@bugprefix} &7&m-------------------------" to console
+                send "&b&l|&c&l Nuova segnalazione:" to console
+                send "" to console
+                send "&b&l|&9&l >> &7Inviata da: &e%player%" to console
+                send "&b&l|&9&l >> &7Segnalazione: &6%arg-1%" to console
+                send "&7&m---------------------------------------------------------" to console
+                send "" to console
                 send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log" to console
+                send "" to console
                 stop
                 
         else:
@@ -22,12 +43,14 @@ command /bug [<text>]:
                 stop
             else:
                 log "[BUG] La console ha segnalato un bug: ""%arg-1%""" to "bug.log"
-                send "&a&lBug segnalato correttamente!"
+                send ""
+                send "{@prefix} &a&lBug segnalato correttamente!"
+                send ""
                 send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log"
                 stop
 
 
-#every 45 minutes:
+#every 75 minutes:
     #loop all players:
         #send "&c&lHai trovato qualche bug?" to loop-player
         #send "&c&lSegnalalo con &6/bug &c&lper far sì che venga risolto al più presto." to loop-player
@@ -39,6 +62,8 @@ on tab complete of "/bug":
 
 command /feedback [<text>]:
     description: Aiuta nello sviluppo del server dando consigli ai developer.
+    cooldown: 2 minutes
+    cooldown message: {@prefix} &cPuoi inviare i feedback ogni &62 minuti&c!
     executable by: player, console
     trigger:
         if sender is player:
@@ -47,12 +72,24 @@ command /feedback [<text>]:
                 stop
             else:
                 log "[FEEDBACK] %player% ha scritto: ""%arg-1%""" to "feedback.log"
-                send "&a&lAbbiamo trasmesso la tua opinione al server. Grazie mille per l'aiuto!"
-                add 1 to {stats.%player%.sent_feedback}
-                add 25 to {fame.%player%}
-                send "&6+25 fama! (Feedback inviato)"
-                send "&b&l[&4&lFEEDBACK&b&l] &3&l>>> &e%player% ha scritto: ""&9%arg-1%&e"" &3&l<<< &b&l[&4&lFEEDBACK&b&l]" to console
-                send "&ePuoi trovare i le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
+                send ""
+                send "{@prefix} &a&lHo trasmesso la tua opinione al server. Grazie mille per il supporto!"
+                send "{@prefix} &bLa tua opinione e il tuo supporto sono importanti per il server. Continua così!"
+                send ""
+                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                add 1 to {feedback_sent::%player%}
+                add 25 to {fame::%player%}
+                send "&6+25 Fama! (Feedback inviato)"
+                send "" to console
+                send "&7&m----------------------&r {@feedbackprefix} &7&m----------------------" to console
+                send "&b&l|&c&l Nuovo feedback:" to console
+                send "" to console
+                send "&b&l|&9&l >> &7Inviato da: &e%player%" to console
+                send "&b&l|&9&l >> &7Feedback: &6%arg-1%" to console
+                send "&7&m--------------------------------------------------------" to console
+                send "" to console
+                send "&ePuoi trovare le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
+                send "" to console
                 stop
                 
         else:
@@ -61,14 +98,16 @@ command /feedback [<text>]:
                 stop
             else:
                 log "[FEEDBACK] La console ha scritto: ""%arg-1%""" to "feedback.log"
-                send "&a&lAbbiamo trasmesso la tua opinione al server. Grazie mille per l'aiuto!"
+                send ""
+                send "{@prefix} &a&lFeedback inviato correttamente!"
+                send ""
                 send "&ePuoi trovare i le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
                 stop
 
-#every 50 minutes:
+#every 90 minutes:
     #loop all players:
-        #send "&c&lVuoi suggerire qualche modifica?" to loop-player
-        #send "&c&lUtilizza &6/feedback &c&lper comunicarla a Xedo e, magari, renderla effettiva." to loop-player
+        #send "&c&lVuoi suggerire qualche modifica o semplicemente valutare il server?" to loop-player
+        #send "&c&lUtilizza &6/feedback &c&lper comunicarlo a Xedo." to loop-player
         #play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
 
 on tab complete of "/feedback":

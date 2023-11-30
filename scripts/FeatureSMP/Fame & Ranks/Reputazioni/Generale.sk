@@ -1,0 +1,707 @@
+# Script per il sistema delle reputazioni ed effetti dati dalle reputazioni #
+#
+# REPUTAZIONI
+# - ranks.check.self
+# - ranks.check.other
+# - ranks.effect.self
+# - ranks.effect.other
+# - ranks.list
+# - ranks.admin.help
+# - ranks.help
+# - ranks.reload
+# - ranks.commands
+# - ranks.*
+#
+options:
+    prefix: &8[&b&lRANK&8]
+    error: &8[&4&lRANK&8]
+    
+    no_perm: &4[&6&lS&e&lM&6&lP&4]
+
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+    what_sound: entity.villager.trader
+
+    no_effect: &7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno.
+    no_effect_self: &7Non hai nessun effetto perché sei neutrale&7. Cambia reputazione per ottenerne uno.
+    no_effect_other: &c%arg-2% &7non ha nessun effetto perché è neutrale&7.
+    
+    male: &9Maschio
+    female: &dFemmina
+
+every second:
+    loop all players:
+        if {fame.%loop-player%.rank.alignment-5}, {fame.%loop-player%.rank.alignment-4}, {fame.%loop-player%.rank.alignment-3}, {fame.%loop-player%.rank.alignment-2}, {fame.%loop-player%.rank.alignment-1}, {fame.%loop-player%.rank.alignment0}, {fame.%loop-player%.rank.alignment1_1}, {fame.%loop-player%.rank.alignment1_2}, {fame.%loop-player%.rank.alignment2_1}, {fame.%loop-player%.rank.alignment2_2}, {fame.%loop-player%.rank.alignment3_1}, {fame.%loop-player%.rank.alignment3_2}, {fame.%loop-player%.rank.alignment4_1}, {fame.%loop-player%.rank.alignment4_2}, {fame.%loop-player%.rank.alignment5_1} and {fame.%loop-player%.rank.alignment5_2} is not set:
+            if {settings.%loop-player%.user.genre} is "{@male}":
+                set {fame.%loop-player%.rank.alignment-5} to "&4&lMalvagio"
+                set {fame.%loop-player%.rank.alignment-4} to "&c&lPessimo"
+                set {fame.%loop-player%.rank.alignment-1} to "&8&lAggressivo"
+                set {fame.%loop-player%.rank.alignment2_1} to "&2&lBuono"
+                set {fame.%loop-player%.rank.alignment2_2} to "&2&lBuono&e⁺"
+                set {fame.%loop-player%.rank.alignment3_1} to "&3&lPuro"
+                set {fame.%loop-player%.rank.alignment3_2} to "&3&lPuro&e⁺"
+                set {fame.%loop-player%.rank.alignment5_1} to "&b&lSupremo"
+                set {fame.%loop-player%.rank.alignment5_2} to "&b&lSupremo&e⁺"
+            else if {settings.%loop-player%.user.genre} is "{@female}":
+                set {fame.%loop-player%.rank.alignment-5} to "&4&lMalvagia"
+                set {fame.%loop-player%.rank.alignment-4} to "&c&lPessima"
+                set {fame.%loop-player%.rank.alignment-1} to "&8&lAggressiva"
+                set {fame.%loop-player%.rank.alignment2_1} to "&2&lBuona"
+                set {fame.%loop-player%.rank.alignment2_2} to "&2&lBuona&e⁺"
+                set {fame.%loop-player%.rank.alignment3_1} to "&3&lPura"
+                set {fame.%loop-player%.rank.alignment3_2} to "&3&lPura&e⁺"
+                set {fame.%loop-player%.rank.alignment5_1} to "&b&lSuprema"
+                set {fame.%loop-player%.rank.alignment5_2} to "&b&lSuprema&e⁺"
+            set {fame.%loop-player%.rank.alignment-3} to "&6&lVile"
+            set {fame.%loop-player%.rank.alignment-2} to "&e&lSpregevole"
+            set {fame.%loop-player%.rank.alignment0} to "&7&lNeutrale"
+            set {fame.%loop-player%.rank.alignment1_1} to "&a&lGentile"
+            set {fame.%loop-player%.rank.alignment1_2} to "&a&lGentile&e⁺"
+            set {fame.%loop-player%.rank.alignment4_1} to "&9&lMigliore"
+            set {fame.%loop-player%.rank.alignment4_2} to "&9&lMigliore&e⁺"
+
+on join:
+    if {fame.%player%.rank} is not set:
+        set {fame.%player%.rank} to "&7&lNeutrale"
+    if {fame.%player%.rankprefix} is not set:
+        set {fame.%player%.rankprefix} to "&8[&7&lN&8]"
+
+command /rank [<text>] [<offline player>] [<text>]:
+    aliases: /alignment, /reputazione
+    description: Gestisci la reputazione di un giocatore.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if player has permission "ranks.check.self":
+                    send "{@prefix} &fAl momento sei %{fame.%player%.rank}%&f." to player
+                    send "{@prefix} &bGioca e ottieni Fama per cambiare la tua reputazione." to player
+                    stop
+                else:
+                    send "{@no_perm} &cComando sconosciuto."
+                    stop
+            
+            else if arg-1 is "check":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.check.other":
+                            send "{@prefix} &cComando incompleto."
+                            send "{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                            stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                else:
+                    if arg-3 is not set:
+                        if player has permission "ranks.check.other":
+                            if {fame.%arg-2%.rank} is set:
+                                send "{@prefix} &c%arg-2% &fal momento è %{fame.%arg-2%.rank}%"
+                            else:
+                                send "{@error} &6%arg-2% &cnon possiede ancora nessun ruolo!"
+                                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                                stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                    else:
+                        if player has permission "ranks.check.other":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                    
+            else if arg-1 is "effect":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.effect.self":
+                            if {fame.%player%.effect} != "{@no_effect}":
+                                send "&7&m---------&r {@prefix} &7&m---------"
+                                send "&fI tuoi effetti attivi:"
+                                send "%{fame.%player%.effect}%"
+                                send "&7&m-------------------------"
+                                stop
+                            else:
+                                send "&7&m---------------&r {@prefix} &7&m---------------"
+                                send "%{fame.%player%.effect}%"
+                                send "&7&m-------------------------------------"
+                                stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                if arg-2 has played before:
+                    if arg-3 is not set:
+                        if player has permission "ranks.effect.other":
+                            if {fame.%arg-2%.effect} != "{@no_effect}":
+                                send "&7&m-------------&r {@prefix} &7&m-------------"
+                                send "&fGli effetti attivi di &c%arg-2%&f:"
+                                send "%{fame.%arg-2%.effect}%"
+                                send "&7&m---------------------------------"
+                                stop
+                            else:
+                                send "&7&m------------&r {@prefix} &7&m------------"
+                                send "{@no_effect_other}"
+                                send "&7&m------------------------------"
+                                stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                    else:
+                        if player has permission "ranks.effect.other":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                            stop
+                else:
+                    if arg-3 is not set:
+                        if player has permission "ranks.effect.other":
+                            send "{@prefix} &6%arg-2% &cnon ha ancora giocato in questo server!"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                            stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                        stop
+
+            else if arg-1 is "list":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.list":
+                            send "&7&m---------&r {@prefix} &7&m---------"
+                            send "&fReputazioni disponibili:"
+                            send "1. %{fame.%player%.rank.alignment-5}% &f- <ttp:&4Da -50.000 Fama in giù>&9[&3?&9]"
+                            send "2. %{fame.%player%.rank.alignment-4}% &f- <ttp:&cDa -49.999 Fama a -30.000 Fama>&9[&3?&9]"
+                            send "3. %{fame.%player%.rank.alignment-3}% &f- <ttp:&6Da -29.999 Fama a -10.000 Fama>&9[&3?&9]"
+                            send "4. %{fame.%player%.rank.alignment-2}% &f- <ttp:&eDa -9.999 Fama a -7.500 Fama>&9[&3?&9]"
+                            send "5. %{fame.%player%.rank.alignment-1}% &f- <ttp:&8Da -7.499 Fama a -5.500 Fama>&9[&3?&9]"
+                            send "6. %{fame.%player%.rank.alignment0}% &f- <ttp:&7Da -5.499 Fama a 5.499 Fama>&9[&3?&9]"
+                            send "7. %{fame.%player%.rank.alignment1_1}% &f- <ttp:&aDa 5.500 Fama a 9.999 Fama>&9[&3?&9]"
+                            send "8. %{fame.%player%.rank.alignment1_2}% &f- <ttp:&aDa 10.000 Fama a 49.999 Fama>&9[&3?&9]"
+                            send "9. %{fame.%player%.rank.alignment2_1}% &f- <ttp:&2Da 50.000 Fama a 74.999 Fama>&9[&3?&9]"
+                            send "10. %{fame.%player%.rank.alignment2_2}% &f- <ttp:&2Da 75.000 Fama a 99.999 Fama>&9[&3?&9]"
+                            send "11. %{fame.%player%.rank.alignment3_1}% &f- <ttp:&3Da 100.000 Fama a 124.999 Fama>&9[&3?&9]"
+                            send "12. %{fame.%player%.rank.alignment3_2}% &f- <ttp:&3Da 125.000 Fama a 199.999 Fama>&9[&3?&9]"
+                            send "13. %{fame.%player%.rank.alignment4_1}% &f- <ttp:&9Da 200.000 Fama a 249.999 Fama>&9[&3?&9]"
+                            send "14. %{fame.%player%.rank.alignment4_2}% &f- <ttp:&9Da 250.000 Fama a 499.999 Fama>&9[&3?&9]"
+                            send "15. %{fame.%player%.rank.alignment5_1}% &f- <ttp:&bDa 500.000 Fama 999.999 Fama>&9[&3?&9]"
+                            send "16. %{fame.%player%.rank.alignment5_2}% &f- <ttp:&bDa 1.000.000 Fama in su>&9[&3?&9]"
+                            send "&7&m-------------------------"
+                            stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                else:
+                    if player has permission "ranks.list":
+                        send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "{@no_perm} &cComando sconosciuto."
+                        stop
+            
+            else if arg-1 is "help":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.admin.help":
+                            send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                            send ""
+                            send "&7Comandi che puoi eseguire:"
+                            send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione."
+                            send "&c- &7/rank &acheck <giocatore> &7&o- Controlla la reputazione di un giocatore."
+                            send "&c- &7/rank &aeffect [giocatore] &7&o- Controlla i tuoi effetti attivi o quelli di un altro giocatore."
+                            send "&c- &7/rank &alist &7&o- Mostra l'elenco di tutte le reputazioni disponibili."
+                            send "&c- &7/rank &ahelp &7&o- Mostra questa lista."
+                            send "&c- &7/rank &areload &7&o- Ricarica lo script."
+                            send ""
+                            send "&e> &7&m--------------------------------&r &e<"
+                            stop
+                        else:
+                            send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                            send ""
+                            send "&7Comandi che puoi eseguire:"
+                            send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione."
+                            send "&c- &7/rank &aeffect &7&o- Visualizza i tuoi effetti attivi."
+                            send "&c- &7/rank &alist &7&o- Mostra l'elenco di tutte le reputazioni disponibili."
+                            send "&c- &7/rank &ahelp &7&o- Mostra questa lista."
+                            send ""
+                            send "&e> &7&m--------------------------------&r &e<"
+                            stop
+                else:
+                    if player has permission "ranks.help":
+                        send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "{@no_perm} &cComando sconosciuto."
+                        stop
+
+            else if arg-1 is "reload":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.reload":
+                            send "{@prefix} &3Ricarico il config..."
+                            wait 5 ticks
+                            execute console command "/skript reload %script%"
+                            send "{@prefix} &aConfig ricaricato! &cControlla la console per controllare se ci sono errori."
+                            stop
+                        else:
+                            send "{@no_perm} &cComando sconosciuto."
+                            stop
+                else:
+                    if player has permission "ranks.reload":
+                        send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "{@no_perm} &cComando sconosciuto."
+                        stop
+
+            else if arg-1 is not "check", "effect", "list", "help" or "reload":
+                if player has permission "ranks.commands":
+                    send "{@error} &cComando sconosciuto."
+                    send "{@error} &cUtilizzo: &6/rank"
+                    send "{@error} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                    send "{@error} &cUtilizzo: &6/rank effect [&egiocatore&6]"
+                    send "{@error} &cUtilizzo: &6/rank list"
+                    send "{@error} &cUtilizzo: &6/rank help"
+                    send "{@error} &cUtilizzo: &6/rank reload"
+                    stop
+                else:
+                    send "{@error} &cComando sconosciuto."
+                    send "{@error} &cUtilizzo: &6/rank"
+                    send "{@error} &cUtilizzo: &6/rank effect"
+                    send "{@error} &cUtilizzo: &6/rank list"
+                    send "{@error} &cUtilizzo: &6/rank help"
+                    stop
+
+        else:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@error} &cSolo i giocatori possono eseguire questo comando."
+                        stop
+            
+            else if arg-1 is "check":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@prefix} &cComando incompleto."
+                        send "{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                        stop
+                else:
+                    if arg-3 is not set:
+                        if {fame.%arg-2%.rank} is set:
+                            send "{@prefix} &c%arg-2% &fal momento è %{fame.%arg-2%.rank}%"
+                            stop
+                        else:
+                            send "{@error} &6%arg-2% &cnon possiede ancora nessun ruolo!"
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+            
+            else if arg-1 is "effect":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@error} &cSolo i giocatori possono eseguire questo comando."
+                        stop
+                if arg-2 has played before:
+                    if arg-3 is not set:
+                        if {fame.%arg-2%.effect} != "{@no_effect}":
+                            send "&7&m-------------&r {@prefix} &7&m-------------"
+                            send "&fGli effetti attivi di &c%arg-2%&f:"
+                            send "%{fame.%arg-2%.effect}%"
+                            send "&7&m---------------------------------"
+                            stop
+                        else:
+                            send "&7&m------------&r {@prefix} &7&m------------"
+                            send "{@no_effect_other}"
+                            send "&7&m------------------------------"
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                        stop
+                else:
+                    if arg-3 is not set:
+                        send "{@prefix} &6%arg-2% &cnon ha ancora giocato in questo server!"
+                        stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                        stop
+
+            else if arg-1 is "list":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "&7&m------------------&r {@prefix} &7&m------------------"
+                        send "&fReputazioni disponibili:"
+                        send "1. &4&lMalvagio &r- &7&o(Da -50.000 fama in giù)"
+                        send "2. &c&lPessimo &r- &7&o(Da -49.999 fama a -30.000 fama)"
+                        send "3. &6&lVile &r- &7&o(Da -29.999 fama a -10.000 fama)"
+                        send "4. &e&lSpregevole &r- &7&o(Da -9.999 fama a -7.500 fama)"
+                        send "5. &8&lAggressivo &r- &7&o(Da -7.499 fama a -5.500 fama)"
+                        send "6. &7&lNeutrale &r- &7&o(Da -5.499 fama a 5.499 fama)"
+                        send "7. &a&lGentile &r- &7&o(Da 5.500 fama a 9.999 fama)"
+                        send "8. &a&lGentile&e⁺ &r- &7&o(Da 10.000 fama a 49.999 fama)"
+                        send "9. &2&lBuono &r- &7&o(Da 50.000 fama a 74.999 fama)"
+                        send "10. &2&lBuono&e⁺ &r- &7&o(Da 75.000 fama a 99.999 fama)"
+                        send "11. &3&lPuro &r- &7&o(Da 100.000 fama a 124.999 fama)"
+                        send "12. &3&lPuro&e⁺ &r- &7&o(Da 125.000 fama a 199.999 fama)"
+                        send "13. &9&lMigliore &r- &7&o(Da 200.000 fama a 249.999 fama)"
+                        send "14. &9&lMigliore&e⁺ &r- &7&o(Da 250.000 fama a 499.999 fama)"
+                        send "15. &b&lSupremo &r- &7&o(Da 500.000 fama 999.999 fama)"
+                        send "16. &b&lSupremo&e⁺ &r- &7&o(Da 1.000.000 fama in su)"
+                        send "&7&m-------------------------------------------"
+                        stop
+                else:
+                    send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+            
+            else if arg-1 is "help":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                        send ""
+                        send "&7Comandi che puoi eseguire:"
+                        send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione."
+                        send "&c- &7/rank &acheck <giocatore> &7&o- Controlla la reputazione di un giocatore."
+                        send "&c- &7/rank &aeffect <giocatore> &7&o- Controlla gli effetti attivi di un giocatore."
+                        send "&c- &7/rank &alist &7&o- Mostra l'elenco di tutte le reputazioni disponibili."
+                        send "&c- &7/rank &ahelp &7&o- Mostra questa lista."
+                        send "&c- &7/rank &areload &7&o- Ricarica lo script."
+                        send ""
+                        send "&e> &7&m--------------------------------&r &e<"
+                        stop
+                else:
+                    send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+
+            else if arg-1 is "reload":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@prefix} &3Ricarico il config..."
+                        wait 5 ticks
+                        execute console command "/skript reload %script%"
+                        send "{@prefix} &aConfig ricaricato!"
+                        stop
+                else:
+                    send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+
+            else if arg-1 is not "check", "effect", "list", "help" or "reload":
+                send "{@error} &cComando sconosciuto."
+                send "{@error} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                send "{@error} &cUtilizzo: &6/rank effect <&egiocatore&6>"
+                send "{@error} &cUtilizzo: &6/rank list"
+                send "{@error} &cUtilizzo: &6/rank help"
+                send "{@error} &cUtilizzo: &6/rank reload"
+                stop
+
+on tab complete of "/rank", "/alignment" or "/reputazione":
+    if player has permission "ranks.commands":
+        set tab completions for position 1 to "check", "effect", "list", "help" and "reload"
+    else:
+        set tab completions for position 1 to "effect", "list" and "help"
+
+every tick:
+    loop all players:
+        if {fame.%loop-player%.rank} is set:
+            if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-5}: #(MALVAGIO/A)
+                if {fame::%loop-player%} > -50000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-4}
+                    set {fame.%loop-player%.rankprefix} to "&4[&c&lP&4]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-4}: #(PESSIMO/A)
+                if {fame::%loop-player%} < -49999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-5}
+                    set {fame.%loop-player%.rankprefix} to "&c[&4&lM&c]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+
+                else if {fame::%loop-player%} > -29999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-3}
+                    set {fame.%loop-player%.rankprefix} to "&e[&6&lV&e]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+            
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-3}: #(VILE)
+                if {fame::%loop-player%} < -29999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-4}
+                    set {fame.%loop-player%.rankprefix} to "&4[&c&lP&4]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > -9999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-2}
+                    set {fame.%loop-player%.rankprefix} to "&6[&e&lS&6]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+            
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-2}: #(SPREGEVOLE)
+                if {fame::%loop-player%} < -9999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-3}
+                    set {fame.%loop-player%.rankprefix} to "&e[&6&lV&e]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > -7499:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-1}
+                    set {fame.%loop-player%.rankprefix} to "&7[&8&lA&7]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+        
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment-1}: #(AGGRESSIVO)
+                if {fame::%loop-player%} < -7499:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-2}
+                    set {fame.%loop-player%.rankprefix} to "&6[&e&lS&6]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > -5500:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment0}
+                    set {fame.%loop-player%.rankprefix} to "&8[&7&lN&8]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment0}: #(NEUTRALE)
+                if {fame::%loop-player%} < -5499:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-1}
+                    set {fame.%loop-player%.rankprefix} to "&7[&8&lA&7]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 5499:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_1}
+                    set {fame.%loop-player%.rankprefix} to "&2[&a&lG&2]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment1_1}: #(GENTILE)
+                if {fame::%loop-player%} < 5500:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment0}
+                    set {fame.%loop-player%.rankprefix} to "&8[&7&lN&8]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 9999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_2}
+                    set {fame.%loop-player%.rankprefix} to "&2[&a&lG&e⁺&2]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment1_2}: #(GENTILE+)
+                if {fame::%loop-player%} < 10000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_1}
+                    set {fame.%loop-player%.rankprefix} to "&2[&a&lG&2]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 49999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_1}
+                    set {fame.%loop-player%.rankprefix} to "&a[&2&lB&a]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment2_1}: #(BUONO/A)
+                if {fame::%loop-player%} < 50000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_2}
+                    set {fame.%loop-player%.rankprefix} to "&2[&a&lG&e⁺&2]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 74999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_2}
+                    set {fame.%loop-player%.rankprefix} to "&a[&2&lB&e⁺&a]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment2_2}: #(BUONO/A+)
+                if {fame::%loop-player%} < 75000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_1}
+                    set {fame.%loop-player%.rankprefix} to "&a[&2&lB&a]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 99999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_1}
+                    set {fame.%loop-player%.rankprefix} to "&f[&3&lP&f]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment3_1}: #(PURO/A)
+                if {fame::%loop-player%} < 100000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_2}
+                    set {fame.%loop-player%.rankprefix} to "&a[&2&lB&e⁺&a]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 124999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_2}
+                    set {fame.%loop-player%.rankprefix} to "&f[&3&lP&e⁺&f]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment3_2}: #(PURO/A+)
+                if {fame::%loop-player%} < 125000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_1}
+                    set {fame.%loop-player%.rankprefix} to "&f[&3&lP&f]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 199999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_1}
+                    set {fame.%loop-player%.rankprefix} to "&b[&9&lM&b]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment4_1}: #(MIGLIORE)
+                if {fame::%loop-player%} < 200000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_2}
+                    set {fame.%loop-player%.rankprefix} to "&f[&3&lP&e⁺&f]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 249999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_2}
+                    set {fame.%loop-player%.rankprefix} to "&b[&9&lM&e⁺&b]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment4_2}: #(MIGLIORE+)
+                if {fame::%loop-player%} < 250000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_1}
+                    set {fame.%loop-player%.rankprefix} to "&b[&9&lM&b]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 499999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment5_1}
+                    set {fame.%loop-player%.rankprefix} to "&9[&b&lS&9]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment5_1}: #(SUPREMO/A)
+                if {fame::%loop-player%} < 500000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_2}
+                    set {fame.%loop-player%.rankprefix} to "&b[&9&lM&e⁺&b]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                else if {fame::%loop-player%} > 999999:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment5_2}
+                    set {fame.%loop-player%.rankprefix} to "&9[&b&lS&e⁺&9]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    
+            else if {fame.%loop-player%.rank} is {fame.%loop-player%.rank.alignment5_2}: #(SUPREMO/A+)
+                if {fame::%loop-player%} < 1000000:
+                    set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment5_1}
+                    set {fame.%loop-player%.rankprefix} to "&9[&b&lS&9]"
+                    if {settings.%loop-player%.user.genre} is "{@male}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                        broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
+                        stop

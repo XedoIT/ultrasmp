@@ -24,6 +24,9 @@ options:
     fight: &a● &a&lPvP abilitato &a●
     no_fight: &c● &c&lPvP disabilitato &c●
     
+    on: &aSì
+    off: &cNo
+    
 
 function DamageIndicatorPlayers(e: location, i: number, p: player):
     if {settings.%{_p}%.custom.damageindicator.players} is true:
@@ -83,18 +86,20 @@ function DamageIndicatorMobs(e: location, i: number, p: player):
 on damage:
     if victim is not a player:
         if attacker is a player:
-            DamageIndicatorMobs((location of victim),damage,attacker)
+            if {difficulty.info.hardcore_death::%attacker%} is not set:
+                DamageIndicatorMobs((location of victim),damage,attacker)
     else:
         if {pvp} is "{@fight}":
-            if {god.%victim%} is not set:
-                DamageIndicatorPlayers((location of victim),damage,attacker)
-                if damage cause is projectile:
-                    if gamemode of victim is survival or adventure:
-                        if tool of attacker is a bow or a crossbow:
-                            if victim is not attacker:
-                                wait 1 tick
-                                send "&8[&6🏹&8] &c%victim% &aha &c%placeholder "aureliumskills_hp" from victim% ❤" to attacker
-                        else:
-                            if victim is not attacker:
-                                wait 1 tick
-                                send "&8[&b🔱&8] &c%victim% &aha &c%placeholder "aureliumskills_hp" from victim% ❤" to attacker
+            if {god.%victim%} is "{@off}":
+                if {difficulty.info.hardcore_death::%attacker%} is not set:
+                    DamageIndicatorPlayers((location of victim),damage,attacker)
+                    if damage cause is projectile:
+                        if gamemode of victim is survival or adventure:
+                            if tool of attacker is a bow or a crossbow:
+                                if victim is not attacker:
+                                    wait 1 tick
+                                    send "&8[&6🏹&8] &c%victim% &aha &c%placeholder "aureliumskills_hp" from victim% ❤" to attacker
+                            else:
+                                if victim is not attacker:
+                                    wait 1 tick
+                                    send "&8[&b🔱&8] &c%victim% &aha &c%placeholder "aureliumskills_hp" from victim% ❤" to attacker

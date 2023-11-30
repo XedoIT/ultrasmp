@@ -1,13 +1,19 @@
 # MESSAGGI DI INGRESSO E USCITA DAL SERVER #
 
 options:
+  # SESSI GIOCATORI
+    male: &9Maschio
+    female: &dFemmina
+
   # INFORMAZIONI PACCHETTO DI MESSAGGI
     selected: &aSELEZIONATO!
     available: &eClick sinistro per selezionare.
     preview: &eClick destro per vedere l'anteprima.
+
   # SUONI
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport
+    
   # PACCHETTI DI MESSAGGI
     # PAGINA 1 (21)
     none: &cNessuno
@@ -851,3 +857,28 @@ on inventory click:
                     send "&cIn futuro verranno aggiunte altre pagine!"
                 else:
                     cancel event
+
+
+command /nopagesatmoment:
+    executable by: player, console
+    trigger:
+        if sender is player:
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cPer ora è tutto."
+            wait 1 second
+            send "&cIn futuro verranno aggiunte altre pagine!"
+            stop
+        else:
+            send "&cSolo i giocatori possono eseguire questo comando!"
+            stop
+
+command /nopages:
+    executable by: player, console
+    trigger:
+        if sender is player:
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for the player
+            send "&cNon ci sono altre pagine da visualizzare!"
+            stop
+        else:
+            send "&cSolo i giocatori possono eseguire questo comando!"
+            stop

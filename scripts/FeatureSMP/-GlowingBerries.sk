@@ -1,0 +1,7 @@
+on eating glow berries:
+    loop all players:
+        if loop-player has not potion glowing:
+            apply glowing without any particles to loop-player for 4 seconds
+            send "&aSei luminescente per 3 secondi perché hai mangiato una bacca luminosa!"
+            wait 4 seconds
+            send "&cNon sei più luminescente."

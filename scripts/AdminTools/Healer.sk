@@ -5,59 +5,168 @@ options:
 
     confirm_sound: entity.player.levelup
     error_sound: entity.enderman.teleport
+    
+    male: &9Maschio
+    female: &dFemmina
 
 command /heal [<offline player>]:
-    permission: heal.use
-    permission message: {@hide_prefix} &cComando sconosciuto.
-    description: Cura e sazia i giocatori.
+    description: Cura i giocatori.
     executable by: player, console
     trigger:
         if sender is player:
             if arg-1 is set:
                 if arg-1 is online:
-                    set {player_hp} to placeholder "aureliumskills_hp" from arg-1
-                    set {player_hp_max} to placeholder "aureliumskills_hp_max" from arg-1
-                    if {player_hp} != {player_hp_max}:
-                        heal arg-1
-                        feed arg-1
-                        send "{@prefix} &aHai curato e saziato &b%arg-1%&a." to player
-                        send "{@prefix} &b%player% &ati ha curato e saziato." to arg-1
-                        play sound "{@confirm_sound}" with volume 1 and pitch 1 at arg-1 for the arg-1
-                        stop
-                    else:
-                        send "{@error_prefix} &6%arg-1% &cha già la vita al massimo!" to player
-                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
-                        stop
+                    HealOthersPlayer(player,arg-1)
                 else:
-                    send "{@prefix} &6%arg-1% &cnon è online."
+                    send "{@prefix} &6%arg-1% &cè offline."
                     stop
             else:
-                set {player_hp} to placeholder "aureliumskills_hp" from player
-                set {player_hp_max} to placeholder "aureliumskills_hp_max" from player
-                if {player_hp} != {player_hp_max}:
-                    heal player
-                    feed player
-                    send "{@prefix} &aTi sei curato e saziato."
-                    play sound "{@confirm_sound}" with volume 1 and pitch 1 at player for the player
-                    stop
+                HealSelf(player)
         else:
             if arg-1 is set:
                 if arg-1 is online:
-                    set {player_hp} to placeholder "aureliumskills_hp" from arg-1
-                    set {player_hp_max} to placeholder "aureliumskills_hp_max" from arg-1
-                    if {player_hp} != {player_hp_max}:
-                        heal arg-1
-                        feed arg-1
-                        send "{@prefix} &aHai curato e saziato &b%arg-1%&a." to console
-                        send "{@prefix} &aLa &bconsole &ati ha curato e saziato." to arg-1
-                        play sound "{@confirm_sound}" with volume 1 and pitch 1 at arg-1 for the arg-1
-                        stop
-                    else:
-                        send "{@error_prefix} &6%arg-1% &cha già la vita al massimo!" to console
-                        stop
+                    HealOthersConsole(arg-1)
                 else:
-                    send "{@prefix} &6%arg-1% &cnon è online."
+                    send "{@prefix} &6%arg-1% &cè offline."
                     stop
             else:
                 send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
                 stop
+
+function HealSelf(p: player):
+    if {_p} has permission "heal.use":
+        set {_player_hp} to placeholder "aureliumskills_hp" from {_p}
+        set {_player_hp_max} to placeholder "aureliumskills_hp_max" from {_p}
+        if {_player_hp} != {_player_hp_max}:
+            heal {_p}
+            if {settings.%{_p}%.user.genre} is "{@male}":
+                send "{@prefix} &aTi sei curato." to {_p}
+            else if {settings.%{_p}%.user.genre} is "{@female}":
+                send "{@prefix} &aTi sei curata." to {_p}
+            play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
+            wait 1 tick
+            stop
+        else:
+            send "{@error_prefix} &cSei già in salute!" to {_p}
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
+            stop
+    else:
+        send "{@hide_prefix} &cComando sconosciuto." to {_p}
+
+function HealOthersPlayer(p1: player, p2: player):
+    if {_p1} has permission "heal.use.other":
+        set {_player_hp} to placeholder "aureliumskills_hp" from {_p2}
+        set {_player_hp_max} to placeholder "aureliumskills_hp_max" from {_p2}
+        if {_player_hp} != {_player_hp_max}:
+            heal {_p2}
+            send "{@prefix} &aHai curato &b%{_p2}%&a." to {_p1}
+            if {settings.%{_p2}%.user.genre} is "{@male}":
+                send "{@prefix} &b%{_p1}% &ati ha curato." to {_p2}
+            else if {settings.%{_p2}%.user.genre} is "{@female}":
+                send "{@prefix} &b%{_p1}% &ati ha curata." to {_p2}
+            play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p2} for {_p2}
+            stop
+        else:
+            send "{@error_prefix} &6%{_p2}% &cè già in salute!" to {_p1}
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_p1} for {_p1}
+            stop
+    else:
+        send "{@error_prefix} &cNon hai i permessi per farlo!" to {_p1}
+
+function HealOthersConsole(p: player):
+    set {_player_hp} to placeholder "aureliumskills_hp" from {_p}
+    set {_player_hp_max} to placeholder "aureliumskills_hp_max" from {_p}
+    if {_player_hp} != {_player_hp_max}:
+        heal {_p}
+        send "{@prefix} &aHai curato &b%{_p}%&a." to console
+        if {settings.%{_p}%.user.genre} is "{@male}":
+            send "{@prefix} &aLa &bconsole &ati ha curato." to {_p}
+        else if {settings.%{_p}%.user.genre} is "{@female}":
+            send "{@prefix} &aLa &bconsole &ati ha curata." to {_p}
+        play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
+        stop
+    else:
+        send "{@error_prefix} &6%{_p}% &cè già in salute!" to console
+        stop
+
+command /feed [<offline player>]:
+    description: Sazia i giocatori.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is set:
+                if arg-1 is online:
+                    FeedOthersPlayer(player,arg-1)
+                else:
+                    send "{@prefix} &6%arg-1% &cè offline."
+                    stop
+            else:
+                FeedSelf(player)
+        else:
+            if arg-1 is set:
+                if arg-1 is online:
+                    FeedOthersConsole(arg-1)
+                else:
+                    send "{@prefix} &6%arg-1% &cè offline."
+                    stop
+            else:
+                send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+                stop
+
+function FeedSelf(p: player):
+    if {_p} has permission "feed.use":
+        if {_p}'s food level < 10:
+            set {_p}'s food level to 10
+            if {settings.%{_p}%.user.genre} is "{@male}":
+                send "{@prefix} &aTi sei saziato." to {_p}
+            else if {settings.%{_p}%.user.genre} is "{@female}":
+                send "{@prefix} &aTi sei saziata." to {_p}
+            play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
+            stop
+        else:
+            if {settings.%{_p}%.user.genre} is "{@male}":
+                send "{@error_prefix} &cSei già sazio!" to {_p}
+            if {settings.%{_p}%.user.genre} is "{@female}":
+                send "{@error_prefix} &cSei già sazia!" to {_p}
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
+            stop
+    else:
+        send "{@error_prefix} &cNon hai i permessi per farlo!" to {_p}
+
+function FeedOthersPlayer(p1: player, p2: player):
+    if {_p1} has permission "feed.use.other":
+        if {_p2}'s food level < 10:
+            set {_p2}'s food level to 10
+            send "{@prefix} &aHai saziato &b%{_p2}%&a." to {_p1}
+            if {settings.%{_p2}%.user.genre} is "{@male}":
+                send "{@prefix} &b%{_p1}% &ati ha saziato." to {_p2}
+            else if {settings.%{_p2}%.user.genre} is "{@female}":
+                send "{@prefix} &b%{_p1}% &ati ha saziata." to {_p2}
+            play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p2} for {_p2}
+            stop
+        else:
+            if {settings.%{_p2}%.user.genre} is "{@male}":
+                send "{@error_prefix} &6%{_p2}% &cè già sazio!" to {_p1}
+            if {settings.%{_p2}%.user.genre} is "{@female}":
+                send "{@error_prefix} &6%{_p2}% &cè già sazia!" to {_p1}
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_p1} for {_p1}
+            stop
+    else:
+        send "{@error_prefix} &cNon hai i permessi per farlo!" to {_p1}
+
+function FeedOthersConsole(p: player):
+    if {_p}'s food level < 10:
+        set {_p}'s food level to 10
+        send "{@prefix} &aHai saziato &b%{_p}%&a." to console
+        if {settings.%{_p}%.user.genre} is "{@male}":
+            send "{@prefix} &aLa &bconsole &ati ha saziato." to {_p}
+        else if {settings.%{_p}%.user.genre} is "{@female}":
+            send "{@prefix} &aLa &bconsole &ati ha saziata." to {_p}
+        play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
+        stop
+    else:
+        if {settings.%{_p}%.user.genre} is "{@male}":
+            send "{@error_prefix} &6%{_p}% &cè già sazio!" to console
+        if {settings.%{_p}%.user.genre} is "{@female}":
+            send "{@error_prefix} &6%{_p}% &cè già sazia!" to console
+        stop

@@ -1,0 +1,49 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+command /uuid [<text>]:
+    aliases: /player
+    permission: uuid.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is set:
+                set {_p} to arg-1 parsed as offline player
+                set {_mcnames} to text from "https://api.mojang.com/users/profiles/minecraft/%arg-1%"
+                if {_mcnames} contains "id" and "name":
+                    send ""
+                    send "&e&lINFO GIOCATORE"
+                    send ""
+                    send "&6Giocatore&f: &c%{_p}%"
+                    send formatted "&6UUID&f: <ttp:Clicca per visualizzare il%nl%profilo di %{_p}%><url:https://it.namemc.com/profile/%{_p}'s uuid%>&c%{_p}'s uuid%&f"
+                    log "[UUID] %player% ha cercato l'UUID di %{_p}% (%{_p}'s uuid%)" to "UUID.log"
+                    send ""
+                    delete {_mcnames}
+                    stop
+                else:
+                    send "{@prefix} &cQuel giocatore non esiste."
+                    stop
+            else:
+                send "{@prefix} &cSpecifica un giocatore per visualizzarne l'UUID!"
+                stop
+        else:
+            if arg-1 is set:
+                set {_p} to arg-1 parsed as offline player
+                set {_mcnames} to text from "https://api.mojang.com/users/profiles/minecraft/%arg-1%"
+                if {_mcnames} contains "id" and "name":
+                    send ""
+                    send "&e&lINFO GIOCATORE"
+                    send ""
+                    send "&6Giocatore&f: &c%{_p}%"
+                    send "&6UUID&f: &c%{_p}'s uuid%&f"
+                    log "[UUID] La console ha cercato l'UUID di %{_p}% (%{_p}'s uuid%)" to "UUID.log"
+                    send ""
+                    delete {_mcnames}
+                    stop
+                else:
+                    send "{@prefix} &cQuel giocatore non esiste."
+                    stop
+            else:
+                send "{@prefix} &cSpecifica un giocatore per visualizzarne l'UUID!"
+                stop

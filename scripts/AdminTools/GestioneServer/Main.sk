@@ -16,11 +16,8 @@ on chat:
             execute console command "/save-all"
             wait 1 second
             send "{@prefix} &aSalvataggio dei dati completato."
-            wait 1 second
-            if {settings.%player%.user.genre} is "&9Maschio":
-                kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lsei stato espulso&6&l."
-            else if {settings.%player%.user.genre} is "&dFemmina":
-                kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lsei stata espulsa&6&l."
+            wait 1 seconds
+            kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l."
             wait 3 seconds
             execute console command "/minecraft:stop"
         else if message is "no" or "n":
@@ -45,12 +42,9 @@ on chat:
             wait 1 second
             send "{@prefix} &aSalvataggio dei dati completato."
             wait 1 second
-            if {settings.%player%.user.genre} is "&9Maschio":
-                kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà riavviata a momenti,%nl%&6&lpertanto, &c&lsei stato espulso&6&l.%nl%%nl%&eAttendi qualche istante prima di rientrare."
-            else if {settings.%player%.user.genre} is "&dFemmina":
-                kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà riavviata a momenti,%nl%&6&lpertanto, &c&lsei stata espulsa&6&l.%nl%%nl%&eAttendi qualche istante prima di rientrare."
+            kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà riavviata a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l.%nl%%nl%&eAttendi qualche istante prima di rientrare."
             wait 3 seconds
-            execute console command "/minecraft:restart"
+            execute console command "/spigot:restart"
         else if message is "no" or "n":
             send "{@prefix} &7Riavvio del server &cannullato&7."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player

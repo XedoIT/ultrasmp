@@ -1,0 +1,575 @@
+options:
+    prefix: &8[&e&lMEDAGLIE&8]
+    error_prefix: &8[&4&lMEDAGLIE&8]
+    prefix_hide: &4[&6&lS&e&lM&6&lP&4]
+
+  # OGGETTI MEDAGLIE
+    mining_pickaxe: diamond pickaxe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5MineKinetor" with lore "&dI minerali che scaverai finiranno", "&ddirettamente nel tuo inventario.", "&f", "&aIndistruttibilità", " &2Quest'oggetto non può rompersi mai!", "&f", "&bTelecinesi", " &9Raccoglierai istantaneamente i drop", " &9degli oggetti che distruggerai.", "&f", "&f", " &6● &2Ottenuto con &eEstrazione", "&f" and "&cOggetto non incantabile o modificabile"
+    carpenter_axe: diamond axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor Plus" with lore "&dTutti i blocchi di legno che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", " &2Quest'oggetto non può rompersi mai!", "&f", "&bTelecinesi", " &9Raccoglierai istantaneamente i drop", " &9degli oggetti che distruggerai.", "&f", "&f", " &6● &2Ottenuto con &eFalegname", "&f" and "&cOggetto non incantabile o modificabile"
+    forestboss_axe_male: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", " &2Quest'oggetto non può rompersi mai!", "&f", "&bTelecinesi", " &9Raccoglierai istantaneamente i drop", " &9degli oggetti che distruggerai.", "&f", "&f", " &6● &2Ottenuto con &eRe della Foresta", "&f" and "&cOggetto non incantabile o modificabile"
+    forestboss_axe_female: iron axe with nbt compound from "{HideFlags:255,Unbreakable:1b,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&5TreeKinetor" with lore "&dTutti i blocchi di legno grezzo che scaverai", "&dfiniranno direttamente nel tuo inventario.", "&f", "&aIndistruttibilità", " &2Quest'oggetto non può rompersi mai!", "&f", "&bTelecinesi", " &9Raccoglierai istantaneamente i drop", " &9degli oggetti che distruggerai.", "&f", "&f", " &6● &2Ottenuto con &eRegina della Foresta", "&f" and "&cOggetto non incantabile o modificabile"
+
+    netherboss_male: music disc pigstep named "&bDisco musicale" with lore "&f", "&7Il disco musicale più ascoltato dalla", "&7popolazione del sottosopra.", "&f", " &6● &2Ottenuto con &eRe degli Inferi", "&f" and "&9Copia personale di &b%{_p}%"
+    netherboss_female: music disc pigstep named "&bDisco musicale" with lore "&f", "&7Il disco musicale più ascoltato dalla", "&7popolazione del sottosopra.", "&f", " &6● &2Ottenuto con &eRegina degli Inferi", "&f" and "&5Copia personale di &d%{_p}%"
+
+    dragontrainer_male: dragon egg named "&dUovo di drago" with lore "&7Le leggende narrano che questo sia", "&7l'ultimo uovo di drago rimasto in", "&7circolazione.", "&f", " &6● &2Ottenuto con &eDomatore di Draghi", "&f" and "&9Quest'uovo appartiene a &b%{_p}%"
+    dragontrainer_female: dragon egg named "&dUovo di drago" with lore "&7Le leggende narrano che questo sia", "&7l'ultimo uovo di drago rimasto in", "&7circolazione.", "&f", " &6● &2Ottenuto con &eDomatrice di Draghi", "&f" and "&5Quest'uovo appartiene a &d%{_p}%"
+    
+  # PARAMETRI ESISTENTI
+    arg_medals: "mining", "mobkiller", "carpenter", "building", "farmer", "fishing", "taming", "chatter", "murderer", "suicide", "forestboss", "skylover", "netherboss", "dragontrainer", "wardenboss" or "all"
+    tab_arg_medals: "mining", "mobkiller", "carpenter", "building", "farmer", "fishing", "taming", "chatter", "murderer", "suicide", "forestboss", "skylover", "netherboss", "dragontrainer", "wardenboss" and "all"
+
+  # SUONI  
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    medals_sound: entity.player.levelup
+  
+  # FRASI STATO MEDAGLIE
+    get: &aQuesta medaglia l'hai ottenuta.
+    not_get: &cQuesta medaglia non l'hai ancora ottenuta.
+
+  # INDICATORI DI COMPLETAMENTO MEDAGLIA "TAMING"
+    done: &a✓
+    not_done: &c❌
+
+  # SESSO GIOCATORE
+    male: &9Maschio
+    female: &dFemmina
+
+# MEDAGLIE: "GRANT"
+function MedalsGrant_Mining(p: player):
+    set {medals.%{_p}%.mining} to "{@get}"
+    set {medals.%{_p}%.mining.count} to 50000
+    set {medals.%{_p}%.mining.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aEstrazione"
+    add 1 to {medals.%{_p}%}
+    add 350 to {fame::%{_p}%}
+    set {medals.%{_p}%.mining.can_use_pickaxe} to true
+    give 1 {@mining_pickaxe} to {_p}
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Mobkiller(p: player):
+    set {medals.%{_p}%.mobkiller} to "{@get}"
+    set {medals.%{_p}%.mobkiller.count} to 5000
+    set {medals.%{_p}%.mobkiller.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aMobicida"
+    add 1 to {medals.%{_p}%}
+    add 200 to {fame::%{_p}%}
+    apply strength 5 without any particles to {_p} for 2 minutes
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Carpenter(p: player):
+    set {medals.%{_p}%.carpenter} to "{@get}"
+    set {medals.%{_p}%.carpenter.total_logs} to 50000
+    set {medals.%{_p}%.carpenter.oak} to 5000
+    set {medals.%{_p}%.carpenter.birch} to 5000
+    set {medals.%{_p}%.carpenter.dark_oak} to 5000
+    set {medals.%{_p}%.carpenter.spruce} to 5000
+    set {medals.%{_p}%.carpenter.acacia} to 5000
+    set {medals.%{_p}%.carpenter.jungle} to 5000
+    set {medals.%{_p}%.carpenter.mangrove} to 5000
+    set {medals.%{_p}%.carpenter.cherry} to 5000
+    set {medals.%{_p}%.carpenter.crimson} to 5000
+    set {medals.%{_p}%.carpenter.warped} to 5000
+    set {medals.%{_p}%.carpenter.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aFalegname"
+    set {medals.%{_p}%.carpenter.can_use_axe} to true
+    add 1 to {medals.%{_p}%}
+    add 350 to {fame::%{_p}%}
+    give 1 {@carpenter_axe} to {_p}
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Building(p: player):
+    set {medals.%{_p}%.building} to "{@get}"
+    set {medals.%{_p}%.building.totalblocks} to 10000000
+    set {medals.%{_p}%.building.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aCostruzione"
+    add 1 to {medals.%{_p}%}
+    add 500 to {fame::%{_p}%}
+    execute console command "/lp user %{_p}% permission settemp fly.use true 6h"
+    execute console command "/lp user %{_p}% permission settemp fly.keep true 6h"
+    execute console command "/lp user %{_p}% permission settemp command.fly true 6h"
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+    
+function MedalsGrant_Farmer(p: player):
+    set {medals.%{_p}%.farmer} to "{@get}"
+    set {medals.%{_p}%.farmer.total_seeds} to 8000
+    set {medals.%{_p}%.farmer.wheat} to 1000
+    set {medals.%{_p}%.farmer.beetroot} to 1000
+    set {medals.%{_p}%.farmer.potato} to 1000
+    set {medals.%{_p}%.farmer.carrot} to 1000
+    set {medals.%{_p}%.farmer.pumpkin} to 1000
+    set {medals.%{_p}%.farmer.melon} to 1000
+    set {medals.%{_p}%.farmer.cocoa} to 1000
+    set {medals.%{_p}%.farmer.nether_wart} to 1000
+    set {medals.%{_p}%.farmer.when_get} to now
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aContadino"
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aContadina"
+    add 1 to {medals.%{_p}%}
+    add 150 to {fame::%{_p}%}
+    apply hero of the village without any particles to {_p} for 2 hours
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Fishing(p: player):
+    set {medals.%{_p}%.fishing} to "{@get}"
+    set {medals.%{_p}%.fishing.cod} to true
+    set {medals.%{_p}%.fishing.salmon} to true
+    set {medals.%{_p}%.fishing.pufferfish} to true
+    set {medals.%{_p}%.fishing.tropical} to true
+    set {medals.%{_p}%.fishing.total_fish} to 4
+    set {medals.%{_p}%.fishing.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aPesca"
+    add 1 to {medals.%{_p}%}
+    add 50 to {fame::%{_p}%}
+    apply water breathing without any particles to {_p} for 3 hours
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Taming(p: player):
+    set {medals.%{_p}%.taming} to "{@get}"
+    set {medals.%{_p}%.taming.wolf} to "{@done}"
+    set {medals.%{_p}%.taming.cat} to "{@done}"
+    set {medals.%{_p}%.taming.parrot} to "{@done}"
+    set {medals.%{_p}%.taming.llama} to "{@done}"
+    set {medals.%{_p}%.taming.horse} to "{@done}"
+    set {medals.%{_p}%.taming.mule} to "{@done}"
+    set {medals.%{_p}%.taming.donkey} to "{@done}"
+    set {medals.%{_p}%.taming.count} to 7
+    set {medals.%{_p}%.taming.when_get} to now
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aAddestratore"
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aAddestratrice"
+    add 1 to {medals.%{_p}%}
+    add 150 to {fame::%{_p}%}
+    apply regeneration without any particles to {_p} for 1 hour
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Chatter(p: player):
+    set {medals.%{_p}%.chatter} to "{@get}"
+    set {medals.%{_p}%.chatter.messages} to 100000
+    set {medals.%{_p}%.chatter.when_get} to now
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aChiacchierone"
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aChiacchierona"
+    add 1 to {medals.%{_p}%}
+    add 400 to {fame::%{_p}%}
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Murderer(p: player):
+    set {medals.%{_p}%.murderer} to "{@get}"
+    set {medals.%{_p}%.murderer.kills} to 100
+    set {medals.%{_p}%.murderer.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aOmicida"
+    add 1 to {medals.%{_p}%}
+    add 500 to {fame::%{_p}%}
+    apply strength 3 without any particles to {_p} for 4 hours
+    apply speed 1 without any particles to {_p} for 1 hours
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Suicide(p: player):
+    set {medals.%{_p}%.suicide} to "{@get}"
+    set {medals.%{_p}%.suicide.deaths} to 200
+    set {medals.%{_p}%.suicide.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aSuicida"
+    add 1 to {medals.%{_p}%}
+    add 500 to {fame::%{_p}%}
+    execute console command "/lp user %{_p}% permission set at.member.back"
+    wait 1 tick
+    execute console command "/lp user %{_p}% permission set at.member.back.death"
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Forestboss(p: player):
+    set {medals.%{_p}%.forestboss} to "{@get}"
+    set {medals.%{_p}%.forestboss.total_logs} to 6000
+    set {medals.%{_p}%.forestboss.oak} to 3000
+    set {medals.%{_p}%.forestboss.birch} to 3000
+    set {medals.%{_p}%.forestboss.when_get} to now
+    set {medals.%{_p}%.forestboss.can_use_axe} to true
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aRe della Foresta"
+        give 1 {@forestboss_axe_male} to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aRegina della Foresta"
+        give 1 {@forestboss_axe_female} to {_p}
+    add 1 to {medals.%{_p}%}
+    add 400 to {fame::%{_p}%}
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Skylover(p: player):
+    set {medals.%{_p}%.skylover} to "{@get}"
+    set {medals.%{_p}%.skylover.count} to 50
+    set {medals.%{_p}%.skylover.when_get} to now
+    set {medals.%{_p}%.last_obtained} to "&aAmante dei Cieli"
+    add 1 to {medals.%{_p}%}
+    add 800 to {fame::%{_p}%}
+    apply slow falling without any particles to {_p} for 6 hours
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Netherboss(p: player):
+    set {medals.%{_p}%.netherboss} to "{@get}"
+    set {medals.%{_p}%.netherboss.count} to 50
+    set {medals.%{_p}%.netherboss.when_get} to now
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aRe degli Inferi"
+        give 1 {@netherboss_male} to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aRegina degli Inferi"
+        give 1 {@netherboss_female} to {_p}
+    add 1 to {medals.%{_p}%}
+    add 800 to {fame::%{_p}%}
+    apply fire resistance without any particles to {_p} for 6 hours
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Dragontrainer(p: player):
+    set {medals.%{_p}%.dragontrainer} to "{@get}"
+    set {medals.%{_p}%.dragontrainer.count} to 50
+    set {medals.%{_p}%.dragontrainer.when_get} to now
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aDomatore di Draghi"
+        give 1 {@dragontrainer_male} to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aDomatrice di Draghi"
+        give 1 {@dragontrainer_female} to {_p}
+    add 1 to {medals.%{_p}%}
+    add 1000 to {fame::%{_p}%}
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+function MedalsGrant_Wardenboss(p: player):
+    set {medals.%{_p}%.wardenboss} to "{@get}"
+    set {medals.%{_p}%.wardenboss.count} to 10
+    set {medals.%{_p}%.wardenboss.when_get} to now
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        set {medals.%{_p}%.last_obtained} to "&aDevastatore di Sorveglianti"
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        set {medals.%{_p}%.last_obtained} to "&aDevastatrice di Sorveglianti"
+    add 1 to {medals.%{_p}%}
+    add 1200 to {fame::%{_p}%}
+    apply strength 5 without any particles to {_p} for 24 hours
+    apply resistance 5 without any particles to {_p} for 24 hours
+    apply regeneration 5 without any particles to {_p} for 24 hours
+    apply night vision without any particles to {_p} for 24 hours
+    play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
+
+# MESSAGGI MEDAGLIE: "GRANT" 
+function MedalMining_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lEstrazione" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &b+350 fama" to {_p}
+    send "  &aHai sbloccato il &5MineKinetor" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalMobkiller_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lMobicida" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+200 fama" to {_p}
+    send "  &b+2 minuti di &4Forza V" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalCarpenter_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lFalegname" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+350 fama" to {_p}
+    send "  &bHai sbloccato il &5TreeKinetor Plus" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalBuilding_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lCostruzione" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+500 fama" to {_p}
+    send "  &bPuoi utilizzare il comando &e/fly &bper &66 ore" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalFarmer_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+150 fama" to {_p}
+    send "  &b+2 ore di &2Eroe del villaggio" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+
+function MedalFishing_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lPesca" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+50 fama" to {_p}
+    send "  &b+3 ore di &2Respirazione acquatica" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalTaming_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+150 fama" to {_p}
+    send "  &b+1 ora di &6Rigenerazione" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalChatter_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierona" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+400 fama" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalMurderer_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lOmicida" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+500 fama" to {_p}
+    send "  &b+4 ore di &4Forza III" to {_p}
+    send "  &b+1 ora di &2Velocità I" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalSuicide_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lSuicida" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+500 fama" to {_p}
+    send "  &aHai sbloccato il comando &e/back" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalForestboss_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe della Foresta" to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina della Foresta" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+400 fama" to {_p}
+    send "  &bHai sbloccato il &5TreeKinetor" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalSkylover_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAmante dei Cieli" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+800 fama" to {_p}
+    send "  &b+6 ore di &eCaduta lenta" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalNetherboss_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe degli Inferi" to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina degli Inferi" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+800 fama" to {_p}
+    send "  &b+6 ore di &6Resistenza al fuoco" to {_p}
+    send "  &bHai ottenuto un disco musicale: &cPigstep" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalDragontrainer_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatore di Draghi" to {_p}
+    else if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatrice di Draghi" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+1000 fama" to {_p}
+    send "  &bHai ottenuto un &dUovo di drago" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+function MedalWardenboss_Message(p: player):
+    send "&6&m----------------------------------------" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@male}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to {_p}
+    if {settings.%{_p}%.user.genre} is "{@female}":
+        send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to {_p}
+    send "&f" to {_p}
+    send " &9Ricompense sbloccate:" to {_p}
+    send "  &a+1200 fama" to {_p}
+    send "  &b+24 ore di &4Forza V" to {_p}
+    send "  &b+24 ore di &9Resistenza V" to {_p}
+    send "  &b+24 ore di &6Rigenerazione V" to {_p}
+    send "  &b+24 ore di &aVisione notturna" to {_p}
+    send "&6&m----------------------------------------" to {_p}
+
+# MEDAGLIE: "REVOKE"
+function MedalsRevoke_Mining(p: player):
+    set {medals.%{_p}%.mining} to "{@not_get}"
+    set {medals.%{_p}%.mining.count} to 0
+    delete {medals.%{_p}%.mining.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 350 from {fame::%{_p}%}
+    delete {medals.%{_p}%.mining.can_use_pickaxe}
+
+function MedalsRevoke_Mobkiller(p: player):
+    set {medals.%{_p}%.mobkiller} to "{@not_get}"
+    set {medals.%{_p}%.mobkiller.count} to 0
+    delete {medals.%{_p}%.mobkiller.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 200 from {fame::%{_p}%}
+
+function MedalsRevoke_Carpenter(p: player):
+    set {medals.%{_p}%.carpenter} to "{@not_get}"
+    set {medals.%{_p}%.carpenter.total_logs} to 0
+    set {medals.%{_p}%.carpenter.oak} to 0
+    set {medals.%{_p}%.carpenter.birch} to 0
+    set {medals.%{_p}%.carpenter.dark_oak} to 0
+    set {medals.%{_p}%.carpenter.spruce} to 0
+    set {medals.%{_p}%.carpenter.acacia} to 0
+    set {medals.%{_p}%.carpenter.jungle} to 0
+    set {medals.%{_p}%.carpenter.mangrove} to 0
+    set {medals.%{_p}%.carpenter.cherry} to 0
+    set {medals.%{_p}%.carpenter.crimson} to 0
+    set {medals.%{_p}%.carpenter.warped} to 0
+    delete {medals.%{_p}%.carpenter.when_get}
+    delete {medals.%{_p}%.carpenter.can_use_axe}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 350 from {fame::%{_p}%}
+    
+function MedalsRevoke_Building(p: player):
+    set {medals.%{_p}%.building} to "{@not_get}"
+    delete {medals.%{_p}%.building.when_get} 
+    set {medals.%{_p}%.building.totalblocks} to 0
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 500 from {fame::%{_p}%}
+    execute console command "/lp user %{_p}% permission unsettemp fly.use"
+    execute console command "/lp user %{_p}% permission unsettemp fly.keep"
+
+function MedalsRevoke_Farmer(p: player):
+    set {medals.%{_p}%.farmer} to "{@not_get}"
+    set {medals.%{_p}%.farmer.total_seeds} to 0
+    set {medals.%{_p}%.farmer.wheat} to 0
+    set {medals.%{_p}%.farmer.beetroot} to 0
+    set {medals.%{_p}%.farmer.potato} to 0
+    set {medals.%{_p}%.farmer.carrot} to 0
+    set {medals.%{_p}%.farmer.pumpkin} to 0
+    set {medals.%{_p}%.farmer.melon} to 0
+    set {medals.%{_p}%.farmer.cocoa} to 0
+    set {medals.%{_p}%.farmer.nether_wart} to 0
+    delete {medals.%{_p}%.farmer.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 150 from {fame::%{_p}%}
+
+function MedalsRevoke_Fishing(p: player):
+    delete {medals.%{_p}%.fishing.cod}
+    delete {medals.%{_p}%.fishing.salmon}
+    delete {medals.%{_p}%.fishing.pufferfish}
+    delete {medals.%{_p}%.fishing.tropical}
+    set {medals.%{_p}%.fishing.total_fish} to 0
+    set {medals.%{_p}%.fishing} to "{@not_get}"
+    delete {medals.%{_p}%.fishing.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 50 from {fame::%{_p}%}
+
+function MedalsRevoke_Taming(p: player):
+    set {medals.%{_p}%.taming.wolf} to "{@not_done}"
+    set {medals.%{_p}%.taming.cat} to "{@not_done}"
+    set {medals.%{_p}%.taming.parrot} to "{@not_done}"
+    set {medals.%{_p}%.taming.llama} to "{@not_done}"
+    set {medals.%{_p}%.taming.horse} to "{@not_done}"
+    set {medals.%{_p}%.taming.mule} to "{@not_done}"
+    set {medals.%{_p}%.taming.donkey} to "{@not_done}"
+    set {medals.%{_p}%.taming.count} to 0
+    set {medals.%{_p}%.taming} to "{@not_get}"
+    delete {medals.%{_p}%.taming.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 150 from {fame::%{_p}%}
+
+function MedalsRevoke_Chatter(p: player):
+    set {medals.%{_p}%.chatter.messages} to 0
+    set {medals.%{_p}%.chatter} to "{@not_get}"
+    delete {medals.%{_p}%.chatter.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 400 from {fame::%{_p}%}
+
+function MedalsRevoke_Murderer(p: player):
+    set {medals.%{_p}%.murderer.kills} to 0
+    set {medals.%{_p}%.murderer} to "{@not_get}"
+    delete {medals.%{_p}%.murderer.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 500 from {fame::%{_p}%}
+
+function MedalsRevoke_Suicide(p: player):
+    set {medals.%{_p}%.suicide.deaths} to 0
+    set {medals.%{_p}%.suicide} to "{@not_get}"
+    delete {medals.%{_p}%.suicide.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 500 from {fame::%{_p}%}
+    execute console command "/lp user %{_p}% permission unset at.member.back"
+    execute console command "/lp user %{_p}% permission unset at.member.back.death"
+
+function MedalsRevoke_Forestboss(p: player):
+    set {medals.%{_p}%.forestboss.total_logs} to 0
+    set {medals.%{_p}%.forestboss.oak} to 0
+    set {medals.%{_p}%.forestboss.birch} to 0
+    set {medals.%{_p}%.forestboss} to "{@not_get}"
+    delete {medals.%{_p}%.forestboss.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    delete {medals.%{_p}%.forestboss.can_use_axe}
+    subtract 1 from {medals.%{_p}%}
+    subtract 400 from {fame::%{_p}%}
+
+function MedalsRevoke_Skylover(p: player):
+    set {medals.%{_p}%.skylover.count} to 0
+    set {medals.%{_p}%.skylover} to "{@not_get}"
+    delete {medals.%{_p}%.skylover.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 800 from {fame::%{_p}%}
+
+function MedalsRevoke_Netherboss(p: player):
+    set {medals.%{_p}%.netherboss.count} to 0
+    set {medals.%{_p}%.netherboss} to "{@not_get}"
+    delete {medals.%{_p}%.netherboss.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 800 from {fame::%{_p}%}
+
+function MedalsRevoke_Dragontrainer(p: player):
+    set {medals.%{_p}%.dragontrainer.count} to 0
+    set {medals.%{_p}%.dragontrainer} to "{@not_get}"
+    delete {medals.%{_p}%.dragontrainer.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 1000 from {fame::%{_p}%}
+
+function MedalsRevoke_Wardenboss(p: player):
+    set {medals.%{_p}%.wardenboss.count} to 0
+    set {medals.%{_p}%.wardenboss} to "{@not_get}"
+    delete {medals.%{_p}%.wardenboss.when_get}
+    set {medals.%{_p}%.last_obtained} to "&7-"
+    subtract 1 from {medals.%{_p}%}
+    subtract 1200 from {fame::%{_p}%}

@@ -1,0 +1,90 @@
+# Script created by Slaim36
+# www.slaim36.com
+# PlayerTrash
+
+options:
+	OnlineModeServer: true
+	#If the server is Premium/ Online Mode, leave true. Default = true
+    
+	ClearTrashlOnClose: false
+	#Clear the trash on close. Default = false
+    
+	GUIName: &0&lYour Trash.
+	#The name of the Trash GUI. Default = &0&lYour Trash
+    
+	OpenGUIMessage: &a&lYou opened &0&lYour Trash.
+	#A chat message when open Trash GUI. If don't want, leave blank. Default = &a&lYou opened &0&lYour Trash
+    
+	ClearTrashCommand: true
+	#Use the command to clear the trash (/cleartrash). Default = true
+    
+	DisabedClearTrashCommandMessage: &4Sorry, this command is disabled.
+	#If the command to clear the trash is disabled, shows a message in the chat. Default = &4Sorry, this command is disabled
+    
+	ClearedTrashMessage: &a&lYour Trash was cleared.
+	#If the command to clear the trash is enabled and the player cleared his/her trash, shows a message in te chat. Default = &a&lYour trash was cleared
+	
+	NoPermissionMessage: &4You don't have permission for this.
+	#If the player don't have permission for a command, shows this message. Default = &4You don't have permission for this.
+	
+	NotFoundPlayer: &4That player doesn't exists or don't have a trash.
+	#When an admin open other trash and that trash don't exists or that player don't exists, shows this message. Default = &4That player doesn't exists or don't have a trash.
+    
+    
+    
+command /chest:
+	trigger:
+		if player has permission "playertrash.opentrash":
+			if {@OnlineModeServer} = true:
+				if {ClearTrashOnClose} = true:
+					set {gui::trash::%player's UUID%} to a new chest inventory with 6 row with name "{@GUIName}"
+					send "{@OpenGUIMessage}" to player
+					open {gui::trash::%player's UUID%} to player
+				else:
+					if {gui::trash::%player's UUID%} is not set:
+						set {gui::trash::%player's UUID%} to a new chest inventory with 6 row with name "{@GUIName}"
+						send "{@OpenGUIMessage}" to player
+						open {gui::trash::%player's UUID%} to player
+					else:
+						send "{@OpenGUIMessage}" to player
+						open {gui::trash::%player's UUID%} to player
+			else:
+				if {ClearTrashOnClose} = true:
+					set {gui::trash::%player%} to a new chest inventory with 6 row with name "{@GUIName}"
+					send "{@OpenGUIMessage}" to player
+					open {gui::trash::%player%} to player
+				else:
+					if {gui::trash::%player%} is not set:
+						set {gui::trash::%player%} to a new chest inventory with 6 row with name "{@GUIName}"
+						send "{@OpenGUIMessage}" to player
+						open {gui::trash::%player%} to player
+					else:
+						send "{@OpenGUIMessage}" to player
+						open {gui::trash::%player%} to player
+		else:
+			send "{@NoPermissionMessage}"
+                    
+command /clearchest:
+	trigger:
+		if player has permission "playertrash.cleartrash":
+			if {@ClearTrashCommand} = true:
+				if {@OnlineModeServer} = true:
+					delete {gui::trash::%player's UUID%}
+					send "{@ClearedTrashMessage}"
+				else:
+					delete {gui::trash::%player%}
+					send "{@ClearedTrashMessage}"
+			else:
+				send "{@DisabedClearTrashCommandMessage}"
+		else:
+			send "{@NoPermissionMessage}"
+			
+command /openchest <string>:
+	trigger:
+		if player has permission "playertrash.opentrash.others":
+			if {gui::trash::%arg-1%} is set:
+				open {gui::trash::%arg-1%} to player
+			else:
+				send "{@NotFoundPlayer}"
+		else:
+			send "{@NoPermissionMessage}"

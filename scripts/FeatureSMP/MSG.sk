@@ -1,12 +1,15 @@
 options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    male: &9Maschio
+    female: &dFemmina
     
 on command "/tell":
     cancel event
-    send "{@prefix} &cNon lo sai? Questo comando in questo server è obsoleto!"
+    send "{@prefix} &cNon lo sai? Questo comando in questo server è disattivato!"
+    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
     wait 30 ticks
     send "{@prefix} &cUtilizza &6/msg <&egiocatore&6> <&emessaggio&6> &cper inviare messaggi privati."
-    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
 
 command /msg [<offline player>] [<text>]:
     aliases: /r
@@ -44,10 +47,10 @@ command /msg [<offline player>] [<text>]:
                 stop
                 
             else if arg-1 is player:
-                if {settings.%player%.user.genre} is "&9Maschio":
+                if {settings.%player%.user.genre} is "{@male}":
                     send "&cChe senso ha scrivere a te stesso?"
                     stop
-                else if {settings.%player%.user.genre} is "&dFemmina":
+                else if {settings.%player%.user.genre} is "{@female}":
                     send "&cChe senso ha scrivere a te stessa?"
                     stop
                 

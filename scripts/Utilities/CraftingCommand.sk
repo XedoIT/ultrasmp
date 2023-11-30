@@ -1,0 +1,11 @@
+command /crafting:
+    aliases: /fabbricazione
+    description: "Utile per dei crafting al volo."
+    executable by: player, console
+    trigger:
+        if sender is player:
+            open crafting table inventory for player
+            stop
+        else:
+            send "&cSolo i giocatori possono eseguire questo comando!"
+            stop

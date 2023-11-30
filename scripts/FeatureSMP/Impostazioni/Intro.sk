@@ -8,7 +8,6 @@ options:
     
     glinted: {HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}
 
-
 on join:
     if {settings.%player%.user.genre} is not set:
         GenrePrompt(player)
@@ -24,10 +23,10 @@ function GenrePrompt(p: player):
     if {settings.%{_p}%.user.genre} is not set:
         set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
         set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
-    if {settings.%{_p}%.user.genre} is "&9Maschio":
+    if {settings.%{_p}%.user.genre} is "{@male}":
         set slot 20 of {_gui} to light blue stained glass pane with nbt compound from "{@glinted}" named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@selected}"
         set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
-    else if {settings.%{_p}%.user.genre} is "&dFemmina":
+    else if {settings.%{_p}%.user.genre} is "{@female}":
         set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
         set slot 24 of {_gui} to pink stained glass pane with nbt compound from "{@glinted}" named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@selected}"
     open {_gui} to {_p}
@@ -38,7 +37,7 @@ function GenreSelectMale(p: player):
         set {settings.%{_p}%.genre.male} to "{@selected}"
         set {settings.%{_p}%.genre.female} to "{@select}"
         set {settings.%{_p}%.user.genre} to "{@male}"
-        send "{@prefix} &9Da ora tutti i tuoi messaggi saranno rivolti al maschile!" to {_p}
+        send "{@prefix} &9Da adesso tutti i tuoi messaggi saranno rivolti al maschile!" to {_p}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
     else if {settings.%{_p}%.user.genre} is "{@male}":
         send "{@prefix} &cSei già identificato come un maschio!" to {_p}
@@ -49,7 +48,7 @@ function GenreSelectFemale(p: player):
         set {settings.%{_p}%.genre.male} to "{@select}"
         set {settings.%{_p}%.genre.female} to "{@selected}"
         set {settings.%{_p}%.user.genre} to "{@female}"
-        send "{@prefix} &dDa ora tutti i tuoi messaggi saranno rivolti al femminile!" to {_p}
+        send "{@prefix} &dDa adesso tutti i tuoi messaggi saranno rivolti al femminile!" to {_p}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
     else if {settings.%{_p}%.user.genre} is "{@female}":
         send "{@prefix} &cSei già identificata come una femmina!" to {_p}

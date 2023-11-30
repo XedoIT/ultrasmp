@@ -1,119 +1,132 @@
 options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
+    
+    on: &aSì
+    off: &cNo
+    
+    male: &9Maschio
+    female: &dFemmina
 
 on join:
-    if {stats.%player%.kills}, {stats.%player%.deaths}, {stats.%player%.killstreak}, {stats.%player%.damage_inflicted} and {stats.%player%.damage_suffered} is not set:
-        set {stats.%player%.kills}, {stats.%player%.deaths}, {stats.%player%.killstreak}, {stats.%player%.damage_inflicted} and {stats.%player%.damage_suffered} to 0
-    if {stats.%player%.broken_blocks} and {stats.%player%.placed_blocks} is not set:
-        set {stats.%player%.broken_blocks} and {stats.%player%.placed_blocks} to 0
-    if {stats.%player%.reported_bugs} and {stats.%player%.sent_feedback} is not set:
-        set {stats.%player%.reported_bugs} and {stats.%player%.sent_feedback} to 0
+    if {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} is not set:
+        set {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} to 0
+    if {broken_blocks::%player%} and {placed_blocks::%player%} is not set:
+        set {broken_blocks::%player%} and {placed_blocks::%player%} to 0
+    if {reported_bugs::%player%} and {feedback_sent::%player%} is not set:
+        set {reported_bugs::%player%} and {feedback_sent::%player%} to 0
+    add 1 to {joins::%player%}
+
+on quit:
+    add 1 to {quits::%player%}
 
 # DANNI INFLITTI E DANNI SUBITI
 on damage:
     if attacker is a player:
         if victim is a player:
-            if {god.%victim%} is not set:
-                DamageInflicted(damage,attacker)
-                DamageSuffered(damage,victim)
+            if {god.%victim%} is "{@off}":
+                if {difficulty.info.hardcore_death::%victim%} and {difficulty.info.hardcore_death::%attacker%} is not set:
+                    DamageInflicted(damage,attacker)
+                    DamageSuffered(damage,victim)
         else:
-            DamageInflicted(damage,attacker)
+            if {difficulty.info.hardcore_death::%attacker%} is not set:
+                DamageInflicted(damage,attacker)
     else:
         if victim is a player:
-            if {god.%victim%} is not set:
-                DamageSuffered(damage,victim)
+            if {god.%victim%} is "{@off}":
+                if {difficulty.info.hardcore_death::%victim%} is not set:
+                    DamageSuffered(damage,victim)
 
 
 function DamageInflicted(i: number, p: player):
-    add {_i} to {stats.%{_p}%.damage_inflicted}
+    add {_i} to {infldamage::%{_p}%}
 
 function DamageSuffered(i: number, p: player):
-    add {_i} to {stats.%{_p}%.damage_suffered}
+    add {_i} to {suffdamage::%{_p}%}
 
 # UCCISIONI, MORTI E SERIE DI UCCISIONI
 on death:
     if victim is not a player:
         if attacker is a player:
-            add 1 to {stats.%attacker%.kills}
-            add 1 to {stats.%attacker%.killstreak}
+            add 1 to {kills::%attacker%}
+            add 1 to {killstreak::%attacker%}
     else:
         if attacker is a player:
-            add 1 to {stats.%attacker%.kills}
-            add 1 to {stats.%victim%.deaths}
-            add 1 to {stats.%attacker%.killstreak}
-            if {stats.%victim%.killstreak} != 0:
-                if {settings.%victim%.user.genre} is "&9Maschio":
-                    wait 2 ticks
-                    send "" to victim
-                    send "&4&k00 &cSei morto con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
-                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                    send "" to victim
-                    set {stats.%victim%.killstreak} to 0
-                else if {settings.%victim%.user.genre} is "&dFemmina":
-                    wait 2 ticks
-                    send "" to victim
-                    send "&4&k00 &cSei morta con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
-                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                    send "" to victim
-                    set {stats.%victim%.killstreak} to 0
+            add 1 to {kills::%attacker%}
+            add 1 to {deaths::%victim%}
+            add 1 to {killstreak::%attacker%}
+            if {killstreak::%victim%} != 0:
+                wait 2 ticks
+                send "" to victim
+                if {settings.%victim%.user.genre} is "{@male}":
+                    send "&4&k00 &cSei morto con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
+                else if {settings.%victim%.user.genre} is "{@female}":
+                    send "&4&k00 &cSei morta con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
+                send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                send "" to victim
+                if {killstreak::%victim%} > {killstreak_max.%victim%}:
+                    set {killstreak_max_old.%victim%} to {killstreak_max.%victim%}
+                    set {killstreak_max.%victim%} to {killstreak::%victim%}
+                    send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%{killstreak_max_old.%victim%}%➜&b&l%{killstreak_max.%victim%}%&f) &e&k0&6&k0" to victim
+                delete {killstreak_max_old.%victim%}
+                set {killstreak::%victim%} to 0
         else:
-            add 1 to {stats.%victim%.deaths}
-            if {stats.%victim%.killstreak} != 0:
-                if {settings.%victim%.user.genre} is "&9Maschio":
-                    wait 2 ticks
-                    send "" to victim
-                    send "&4&k00 &cSei morto con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
-                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                    send "" to victim
-                    set {stats.%victim%.killstreak} to 0
-                else if {settings.%victim%.user.genre} is "&dFemmina":
-                    wait 2 ticks
-                    send "" to victim
-                    send "&4&k00 &cSei morta con &e%{stats.%victim%.killstreak}% uccisioni&c! &4&k00" to victim
-                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                    send "" to victim
-                    set {stats.%victim%.killstreak} to 0
+            add 1 to {deaths::%victim%}
+            if {killstreak::%victim%} != 0:
+                wait 2 ticks
+                send "" to victim
+                if {settings.%victim%.user.genre} is "{@male}":
+                    send "&4&k00 &cSei morto con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
+                else if {settings.%victim%.user.genre} is "{@female}":
+                    send "&4&k00 &cSei morta con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
+                send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                send "" to victim
+                if {killstreak::%victim%} > {killstreak_max.%victim%}:
+                    set {killstreak_max_old.%victim%} to {killstreak_max.%victim%}
+                    set {killstreak_max.%victim%} to {killstreak::%victim%}
+                    send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%{killstreak_max_old.%victim%}%➜&b&l%{killstreak_max.%victim%}%&f) &e&k0&6&k0" to victim
+                delete {killstreak_max_old.%victim%}
+                set {killstreak::%victim%} to 0
 
 # BLOCCHI DISTRUTTI E BLOCCHI PIAZZATI
 on place:
     if player's gamemode is survival or adventure:
         if {blocks.%player%::*} doesn't contain location of event-block:
-            add 1 to {stats.%player%.placed_blocks}
+            add 1 to {placed_blocks::%player%}
 
 on break:
     if player's gamemode is survival or adventure:
         if {blocks.%player%::*} is not set:
             add location of event-block to {blocks.%player%::*}
-            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {broken_blocks::%player%}
+            add 1 to {blocks_count.%player%}
         else if {blocks.%player%::*} doesn't contain location of event-block:
-            add 1 to {stats.%player%.broken_blocks}
+            add 1 to {broken_blocks::%player%}
+            add 1 to {blocks_count.%player%}
             add location of event-block to {blocks.%player%::*}
+  # SISTEMA AUTO ALLEGGERIMENTO VARIABILE
+    if {blocks_count.%player%} = 10000:
+        delete {blocks.%player%::*}
 
 
 # ZONA DEBUG
 command /resetblocks:
     trigger:
         delete {blocks.%player%::*}
-        delete {stats.%player%.placed_blocks}
-        delete {stats.%player%.broken_blocks}
-        set {stats.%player%.placed_blocks} to 0
-        set {stats.%player%.broken_blocks} to 0
+        set {placed_blocks::%player%} to 0
+        set {broken_blocks::%player%} to 0
+        set {blocks_count.%player%} to 0
 
 command /resetinfdamage:
     trigger:
-        delete {stats.%player%.damage_inflicted}
-        set {stats.%player%.damage_inflicted} to 0
+        set {infldamage::%player%} to 0
 
 command /resetsufdamage:
     trigger:
-        delete {stats.%player%.damage_suffered}
-        set {stats.%player%.damage_suffered} to 0
+        set {suffdamage::%player%} to 0
 
 command /resetstats:
     trigger:
-        delete {stats.%player%.kills}
-        delete {stats.%player%.killstreak}
-        delete {stats.%player%.deaths}
-        set {stats.%player%.kills} to 0
-        set {stats.%player%.killstreak} to 0
-        set {stats.%player%.deaths} to 0
+        set {kills::%player%} to 0
+        set {killstreak::%player%} to 0
+        set {killstreak_max.%player%} to 0
+        set {deaths::%player%} to 0

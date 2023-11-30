@@ -1,0 +1,1257 @@
+options:
+    overworld: smp
+    nether: smp_nether
+    end: smp_the_end
+
+          # ----- MONDO: SMP ----- #
+#---------- MOB KILL PASSIVI E NEUTRALI ----------#     
+on death of chicken, cow, pig, rabbit or sheep:
+    set {_fame} to random number between 0.1 and 0.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of frog or tadpole:
+    set {_fame} to random number between 0.5 and 1.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of axolotl, cod, dolphin, glow squid, puffer fish, salmon, squid, tropical fish or turtle:
+    set {_fame} to random number between 0.5 and 2
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of donkey, horse, mule, skeleton horse, llama, trader llama, goat, panda or polar bear:
+    set {_fame} to random number between 0.5 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of bee, cat, parrot, fox or wolf:
+    set {_fame} to random number between 0.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of villager, wandering trader, iron golem or allay:
+    set {_fame} to random number between 0.5 and 4
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    remove ({_fame}*1) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame}*1.5) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame}*2) from {fame::%attacker%}
+                    send action bar "&4&lMOB KILL &c-%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop    
+#---------- MOB KILL OSTILI ----------#
+on death of drowned, husk, zombie or zombified piglin: 
+    set {_fame} to random number between 0.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of zombie villager:
+    set {_fame} to random number between 0.5 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of zoglin:
+    set {_fame} to random number between 1 and 4
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of phantom:
+    set {_fame} to random number between 1 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of skeleton or stray:
+    set {_fame} to random number between 1.5 and 3.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*3.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of wither skeleton:
+    set {_fame} to random number between 2 and 4
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*3.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of cave spider or spider:
+    set {_fame} to random number between 1.5 and 3.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of endermite or silverfish:
+    set {_fame} to random number between 1 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of creeper:
+    set {_fame} to random number between 1.5 and 4.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of slime:
+    set {_fame} to random number between 0.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of pillager, vindicator or witch:
+    set {_fame} to random number between 2.5 and 5.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of evoker:
+    set {_fame} to random number between 3 and 6
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of vex:
+    set {_fame} to random number between 3 and 6
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of ravager:
+    set {_fame} to random number between 5 and 10
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of elder guardian or guardian:
+    set {_fame} to random number between 3 and 7
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of blaze or magma cube:
+    set {_fame} to random number between 1.5 and 3.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of ghast:
+    set {_fame} to random number between 1.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*7) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*3.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of piglin, piglin brute or hoglin:
+    set {_fame} to random number between 0.5 and 2
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of enderman or shulker:
+    set {_fame} to random number between 2 and 4.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*3.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*3.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of warden:
+    set {_fame} to random number between 150 and 300
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of wither:
+    set {_fame} to random number between 50 and 75
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*7) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*8) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*3) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*4.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*6.5) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+on death of ender dragon:
+    set {_fame} to random number between 20 and 40
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*8) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+
+# ----- SPECIALI ----- #
+on death of illusioner:
+    set {_fame} to random number between 2 and 5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "{@overworld}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@nether}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+            else if world is "{@end}":
+                if difficulty is easy:
+                    add ({_fame}*1) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame}*2) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame}*4) to {fame::%attacker%}
+                    send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
+                    stop

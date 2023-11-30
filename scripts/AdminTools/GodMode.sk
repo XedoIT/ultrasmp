@@ -4,110 +4,116 @@ options:
     prefix_error: &7[&c&lGod&7]
     warn: &6[&c&l!&6]
 
-on load:
-    if {god.%player%.status} is not set:
-        set {god.%player%.status} to "&cNo"
+    on: &aSì
+    off: &cNo
+
+on join:
+    if {god.%player%} is not "{@off}":
+        set {god.%player%} to "{@off}"
         
 on join:
-    if {god.%player%} is true:
-        if player has permission "god.keep":
-            set {god.%player%} to true
-            set {god.%player%.status} to "&aSì"
-            set {god.%player%.ab} to true
-            wait 3 seconds
-            send "{@prefix_enabled} Sei ancora in modalità Dio!" to player
-            stop
-        else:
-            if {god.%player%} is true:
-                delete {god.%player%}
-                set {god.%player%.status} to "&cNo"
-                delete {god.%player%.ab}
-                wait 3 seconds
-                send "{@warn} &7Prima di uscire dal server, eri immortale. Adesso non lo sei più. {@warn}" to player
-                stop
-    else:
-        set {god.%player%.status} to "&cNo"
-        delete {god.%player%.ab}
-        stop
-        
-on damage:
-    victim is a player
-    if {god.%victim%} is true:
-        cancel event
+    CheckGodOnLogin(player)
             
 on food level change:
-    if {god.%player%} is true:
+    if {god.%player%} is "{@on}":
         cancel event
 
-every 10 ticks:
-    loop all players:
-        if {god.%loop-player%.ab} is true:
-            send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player
-            
 command /god [<offline player>]:
-    description: "Potranno scalfirti ma non potranno ferirti!"
-    permission: god.use
+    description: "I pericoli per te non sono più un problema!"
+    permission: command.god
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    executable by: player, console
     trigger:
         if sender is player:
             if arg-1 is not set:
-                if {god.%player%} is true:
-                    delete {god.%player%}
-                    set {god.%player%.status} to "&cNo"
-                    delete {god.%player%.ab}
-                    send "{@prefix_disabled} &cModalità Dio disattivata." to player
-                    stop
-                else:
-                    set {god.%player%} to true
-                    set {god.%player%.status} to "&aSì"
-                    set {god.%player%.ab} to true
-                    heal player
-                    feed player
-                    send "{@prefix_enabled} &aModalità Dio attivata." to player
-                    stop
+                ToggleGodSelf(player)
                     
             else if arg-1 is offline:
-                send "&7[&e&lG&7] &c%arg-1% non è online!" to player
+                send "{@prefix_error} &6%arg-1% &cè offline." to player
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                 stop
             else:
-                if {god.%arg-1%} is true:
-                    delete {god.%arg-1%}
-                    set {god.%arg-1%.status} to "&cNo"
-                    delete {god.%arg-1%.ab}
-                    send "{@prefix_disabled} &cHai tolto l'immortalità &6%arg-1%&c." to player
-                    send "{@prefix_disabled} &6%player% &cti ha tolto l'immortalità." to arg-1
-                    stop
-                else:
-                    set {god.%arg-1%} to true
-                    set {god.%arg-1%.status} to "&aSì"
-                    set {god.%arg-1%.ab} to true
-                    heal arg-1
-                    feed arg-1
-                    send "{@prefix_enabled} &aHai reso &e%arg-1% &aimmortale." to player
-                    send "{@prefix_enabled} &e%player% &ati ha reso immortale." to arg-1
-                    stop
+                ToggleGodOthersPlayer(player,arg-1)
         else:
             if arg-1 is not set:
-                send "&7[&e&lG&7] &cSolo i giocatori possono eseguire questo comando."
+                send "{@prefix_error} &cSolo i giocatori possono eseguire questo comando."
                 stop
                 
             else if arg-1 is offline:
-                send "&7[&e&lG&7] &c%arg-1% non è online!"
+                send "{@prefix_error} &6%arg-1% &cè offline."
                 stop
             else:
-                if {god.%arg-1%} is true:
-                    delete {god.%arg-1%}
-                    set {god.%arg-1%.status} to "&cNo"
-                    delete {god.%arg-1%.ab}
-                    send "{@prefix_disabled} &cHai tolto l'immortalità &6%arg-1%&c." to console
-                    send "{@prefix_disabled} &cLa &6console &cti ha dato l'immortalità." to arg-1
-                    stop
-                else:
-                    set {god.%arg-1%} to true
-                    set {god.%arg-1%.status} to "&aSì"
-                    set {god.%arg-1%.ab} to true
-                    heal arg-1
-                    feed arg-1
-                    send "{@prefix_enabled} &aHai reso &e%arg-1% &aimmortale." to console
-                    send "{@prefix_enabled} &aLa &econsole &ati ha dato l'immortalità." to arg-1
-                    stop
+                ToggleGodOthersConsole(arg-1)
+
+
+function CheckGodOnLogin(p: player):
+    if {_p} has permission "god.keep":
+        if {god.%{_p}%} is "{@on}":
+            make {_p} invulnerable
+            set {god.%{_p}%} to "{@on}"
+            wait 3 seconds
+            send "{@prefix_enabled} Sei ancora immortale!" to {_p}
+    else:
+        if {god.%{_p}%} is "{@on}":
+            make {_p} vulnerable
+            set {god.%{_p}%} to "{@off}"
+            wait 3 seconds
+            send "{@warn} &7Prima di uscire dal server eri immortale. Adesso non lo sei più. {@warn}" to {_p}
+
+function ToggleGodSelf(p: player):
+    if {_p} has permission "god.use":
+        if {god.%{_p}%} is "{@on}":
+            make {_p} vulnerable
+            set {god.%{_p}%} to "{@off}"
+            send "{@prefix_disabled} &cModalità Dio disattivata! &6I mob potranno ferirti." to {_p}
+            stop
+        else:
+            make {_p} invulnerable
+            set {god.%{_p}%} to "{@on}"
+            heal {_p}
+            feed {_p}
+            send "{@prefix_enabled} &aModalità Dio attivata! &bI mob ti ignoreranno." to {_p}
+            stop
+    else:
+        send "&4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto." to {_p}
+
+function ToggleGodOthersPlayer(p1: player, p2: player):
+    if {_p1} has permission "god.use.other":
+        if {god.%{_p2}%} is "{@on}":
+            make {_p2} vulnerable
+            set {god.%{_p2}%} to "{@off}"
+            send "{@prefix_disabled} &cHai tolto l'immortalità a &6%{_p2}%&c." to {_p1}
+            send "{@prefix_disabled} &6%{_p1}% &cti ha tolto l'immortalità! &6I mob potranno ferirti." to {_p2}
+            stop
+        else:
+            make {_p2} invulnerable
+            set {god.%{_p2}%} to "{@on}"
+            heal {_p2}
+            feed {_p2}
+            send "{@prefix_enabled} &aHai reso &e%{_p2}% &aimmortale." to {_p1}
+            send "{@prefix_enabled} &e%{_p1}% &ati ha reso immortale! &bI mob ti ignoreranno." to {_p2}
+            stop
+    else:
+        send "{@prefix_error} &cNon hai i permesso per farlo!" to {_p1}
+        stop
+
+function ToggleGodOthersConsole(p: player):
+    if {god.%{_p}%} is "{@on}":
+        make {_p} vulnerable
+        set {god.%{_p}%} to "{@off}"
+        send "{@prefix_disabled} &cHai tolto l'immortalità a &6%{_p}%&c." to console
+        send "{@prefix_disabled} &cLa &6console &cti ha tolto l'immortalità! &6I mob potranno ferirti." to {_p}
+        stop
+    else:
+        make {_p} invulnerable
+        set {god.%{_p}%} to "{@on}"
+        heal {_p}
+        feed {_p}
+        send "{@prefix_enabled} &aHai reso &e%{_p}% &aimmortale." to console
+        send "{@prefix_enabled} &aLa &econsole &ati ha dato l'immortalità! &bI mob ti ignoreranno." to {_p}
+        stop
+
+every 10 ticks:
+    loop all players:
+        if {ab.%loop-player%.god} is true:
+            send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player

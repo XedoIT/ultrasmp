@@ -130,18 +130,18 @@ command /top [<offline player>]:
                     loop 320 times:
                         if y-coord of {_loc} is y-coord of location at player:
                             send "{@top_prefix} &cSei già in cima!"
-                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                             stop
                         if block at {_loc} is solid:
                             teleport player to block above {_loc}
-                            play sound "{@error_sound}" with volume 1 at player for the player
+                            play sound "{@error_sound}" with volume 1 at player for player
                             send "{@top_prefix} &aTi ho portato in cima."
                             stop
                         else:
                             remove 1 from y-coord of {_loc}
                 else:
                     send "{@top_prefix} &cQuesta funzione è disabilitata se sei in volo."
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                     stop
             else if arg-1 is player:
                 send "{@top_prefix} &cUtilizzo: &6/top" to player
@@ -156,12 +156,12 @@ command /top [<offline player>]:
                     loop 320 times:
                         if y-coord of {_loc} is y-coord of location at arg-1:
                             send "{@top_prefix} &c%arg-1% è già in cima!" to player
-                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                             stop
                         if block at {_loc} is solid:
                             teleport arg-1 to block above {_loc}
-                            play sound "{@error_sound}" with volume 1 at arg-1 for the arg-1
-                            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for the player
+                            play sound "{@error_sound}" with volume 1 at arg-1 for arg-1
+                            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
                             send "{@top_prefix} &aHo portato &e%arg-1% &ain cima." to player
                             send "{@top_prefix} &e%player% &ati ha portato in cima." to arg-1
                             stop
@@ -169,7 +169,7 @@ command /top [<offline player>]:
                             remove 1 from y-coord of {_loc}
                 else:
                     send "{@top_prefix} &cQuesta funzione è disabilitata se %arg-1% è in volo."
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                     stop
         else:
             if arg-1 is not set:
@@ -188,7 +188,7 @@ command /top [<offline player>]:
                             stop
                         if block at {_loc} is solid:
                             teleport arg-1 to block above {_loc}
-                            play sound "{@error_sound}" with volume 1 at arg-1 for the arg-1
+                            play sound "{@error_sound}" with volume 1 at arg-1 for arg-1
                             send "{@top_prefix} &aHo portato &e%arg-1% &ain cima." to console
                             send "{@top_prefix} &aLa &econsole &ati ha portato in cima." to arg-1
                             stop
@@ -196,5 +196,5 @@ command /top [<offline player>]:
                             remove 1 from y-coord of {_loc}
                 else:
                     send "{@top_prefix} &cQuesta funzione è disabilitata se %arg-1% è in volo." to console
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                     stop

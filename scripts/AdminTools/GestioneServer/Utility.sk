@@ -4,20 +4,30 @@ options:
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport
     check_sound: entity.player.levelup
+    
+    male: &9Maschio
+    female: &dFemmina
+    
+    on: &aSì
+    off: &cNo
+
+    fight: &a● &a&lPvP abilitato &a●
+    no_fight: &c● &c&lPvP disabilitato &c●
+
+
+on join:
+    if {difficulty.info.hardcore_death.%player%.marker} is not set:
+        set {difficulty.info.hardcore_death.%player%.marker} to ""
 
 on chat:
     if {sm.%player%.gms} is true:
         cancel event
         set {_p} to message parsed as offline player
         if gamemode of {_p} is not survival:
-            set gamemode of {_p} to survival
-            set {gm.%{_p}%.status} to "&fSopravvivenza"
-            set {_p}'s flight mode to false
-            delete {fly.%{_p}%}
-            set {fly.%{_p}%.status} to "&cNo"
-            delete {fly.%{_p}%.ab}
-            send "{@prefix} &7Modalità di gioco impostata a &9Sopravvivenza &7per &6%{_p}%&7."
-            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &9Sopravvivenza&7." to {_p}
+            SetSurvivalGamemode({_p})
+            ToggleNoFlyGM({_p})
+            send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%{_p}%&a."
+            send "{@prefix} &aSei in modalità &csopravvivenza&a." to {_p}
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
             delete {sm.%player%.gms}
@@ -31,13 +41,10 @@ on chat:
         cancel event
         set {_p} to message parsed as offline player
         if gamemode of {_p} is not creative:
-            set gamemode of {_p} to creative
-            set {gm.%{_p}%.status} to "&fCreativa"
-            set {_p}'s flight mode to true
-            set {fly.%{_p}%} to true
-            set {fly.%{_p}%.status} to "&aSì"
-            send "{@prefix} &7Modalità di gioco impostata a &aCreativa &7per &6%{_p}%&7."
-            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &aCreativa&7." to {_p}
+            SetCreativeGamemode({_p})
+            ToggleFlyGM({_p})
+            send "{@prefix} &aModalità &ccreativa &aimpostata per &e%{_p}%&a."
+            send "{@prefix} &aSei in modalità &ccreativa&a." to {_p}
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
             delete {sm.%player%.gmc}
@@ -51,14 +58,10 @@ on chat:
         cancel event
         set {_p} to message parsed as offline player
         if gamemode of {_p} is not adventure:
-            set gamemode of {_p} to adventure
-            set {gm.%{_p}%.status} to "&fAvventura"
-            set {_p}'s flight mode to false
-            delete {fly.%{_p}%}
-            set {fly.%{_p}%.status} to "&cNo"
-            delete {fly.%{_p}%.ab}
-            send "{@prefix} &7Modalità di gioco impostata a &2Avventura &7per &6%{_p}%&7."
-            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &2Avventura&7." to {_p}
+            SetAdventureGamemode({_p})
+            ToggleNoFlyGM({_p})
+            send "{@prefix} &aModalità &cavventura &aimpostata per &e%{_p}%&a."
+            send "{@prefix} &aSei in modalità &cavventura&a." to {_p}
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
             delete {sm.%player%.gma}
@@ -72,11 +75,10 @@ on chat:
         cancel event
         set {_p} to message parsed as offline player
         if gamemode of {_p} is not spectator:
-            set gamemode of {_p} to spectator
-            set {gm.%{_p}%.status} to "&fSpettatore"
-            set {fly.%{_p}%.status} to "&aSì"
-            send "{@prefix} &7Modalità di gioco impostata a &bSpettatore &7per &6%{_p}%&7."
-            send "{@prefix} &6%player% &7ha impostato la tua modalità di gioco in &bSpettatore&7." to {_p}
+            SetSpectatorGamemode({_p})
+            ToggleFlyGM({_p})
+            send "{@prefix} &aModalità &cspettatore &aimpostata per &e%{_p}%&a."
+            send "{@prefix} &aSei in modalità &cspettatore&a." to {_p}
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
             play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
             delete {sm.%player%.gmsp}
@@ -89,36 +91,78 @@ on chat:
 
 on death of player:
     if {difficulty.hardcore_mode} is true:
-        if {hardcore_teleport} is true:
-            if {settings.%victim%.user.genre} is "&9Maschio":
-                set gamemode of victim to spectator
-                set death message to "&4%victim% &cè morto. Non potrà giocare più finché la difficoltà sarà impostata su &4&lHardcore&c."
-                set {death_location} to victim's position
-                send "{@prefix} &4&lSei morto! &cAttendi la modifica della difficoltà per tornare in vita." to victim
-            else if {settings.%victim%.user.genre} is "&dFemmina":
-                set gamemode of victim to spectator
-                set death message to "&4%victim% &cè morta. Non potrà giocare più finché la difficoltà sarà impostata su &4&lHardcore&c."
-                set {death_location} to victim's position
-                send "{@prefix} &4&lSei morta! &cAttendi la modifica della difficoltà per tornare in vita." to victim
-            
-every tick:
+        set {difficulty.info.hardcore_death::%victim%} to true
+        make victim invulnerable
+        set {god.%victim%} to "{@on}"
+        execute console command "/lp user %victim% parent set death"
+        apply infinite potion of night vision without any particles to victim
+        if {settings.%victim%.user.genre} is "{@male}":
+            set death message to "&c%victim% è diventato un fantasma!"
+            #send "{@prefix} &4&lSei morto! &cTornerai in vita quando la modalità Hardcore sarà disattivata." to victim
+        else if {settings.%victim%.user.genre} is "{@female}":
+            set death message to "&c%victim% è diventata un fantasma!"
+            #send "{@prefix} &4&lSei morta! &cTornerai in vita quando la modalità Hardcore sarà disattivata." to victim
+
+every second:
+    loop all players:
+        if {difficulty.hardcore_mode} is true:
+            if {difficulty.info.hardcore_death::%loop-player%} is true:
+                apply infinite potion of glowing without any particles to loop-player
+                apply infinite potion of night vision without any particles to loop-player
+                set {difficulty.info.hardcore_death.%loop-player%.marker} to "&4☠"
+                if loop-player's flight mode is false:
+                    set loop-player's flight mode to true
+                if {fly.%loop-player%} is "{@off}":
+                    set {fly.%loop-player%} to "{@on}"
+                send action bar "&cSei un fantasma! &6La tua esperienza di gioco non è più la stessa." to loop-player
+
+on break:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+        send "{@prefix} &cNon puoi distruggere blocchi finché sei un fantasma."
+on place:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+        send "{@prefix} &cNon puoi piazzare blocchi finché sei un fantasma."
+on command:
+    if command is not "home", "back", "msg" or "r":
+        if {difficulty.info.hardcore_death::%player%} is true:
+            cancel event
+            send "{@prefix} &cNon puoi eseguire questo comando finché sei un fantasma."
+            send "{@prefix} &6%player% &cha provato ad eseguire il comando &7/%command% &cmentre era un fantasma." to console
+on damage:
+    if attacker is a player:
+        if {difficulty.info.hardcore_death::%attacker%} is true:
+            cancel event
+            send "{@prefix} &cNon puoi ferire nessuno finché sei un fantasma." to attacker
+on food level change:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+on drop:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+        send "{@prefix} &cNon puoi buttare oggetti per terra finché sei un fantasma." to player
+on pickup:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+
+every second:
     loop all players:
         if {difficulty.hardcore_mode} is not set:
-            if {hardcore_teleport} is true:
-                if {settings.%loop-player%.user.genre} is "&9Maschio":
-                    if gamemode of loop-player is spectator:
-                        teleport loop-player to {death_location}
-                        set gamemode of loop-player to survival
-                        send "{@prefix} &7Ti ho portato al tuo punto di morte." to loop-player
-                        send "&4[&c&lTP-DEATH&4] &7Ho teletrasportato &c%loop-player% &7al punto in cui è morto in difficoltà &4&lHardcore&7." to console
-                        play sound "{@error_sound}" with volume 1 at loop-player for loop-player
-                else if {settings.%loop-player%.user.genre} is "&dFemmina":
-                    if gamemode of loop-player is spectator:
-                        teleport loop-player to {death_location}
-                        set gamemode of loop-player to survival
-                        send "{@prefix} &7Ti ho portata al tuo punto di morte." to loop-player
-                        send "&4[&c&lTP-DEATH&4] &7Ho teletrasportato &c%loop-player% &7al punto in cui è morta in difficoltà &4&lHardcore&7." to console
-                        play sound "{@error_sound}" with volume 1 at loop-player for loop-player
+            if {difficulty.info.hardcore_death::%loop-player%} is true:
+                delete {difficulty.info.hardcore_death::%loop-player%}
+                remove glowing from loop-player
+                set {difficulty.info.hardcore_death.%loop-player%.marker} to ""
+                make loop-player vulnerable
+                set {god.%loop-player%} to "{@off}"
+                execute console command "/lp user %loop-player% parent set default"
+                set loop-player's flight mode to false
+                set {fly.%loop-player%} to "{@off}"
+                remove night vision from loop-player
+                if {settings.%loop-player%.user.genre} is "{@male}":
+                    send "{@prefix} &bSei tornato in vita! Puoi riprendere la tua avventura normalmente." to loop-player
+                else if {settings.%loop-player%.user.genre} is "{@female}":
+                    send "{@prefix} &dSei tornata in vita! Puoi riprendere la tua avventura normalmente." to loop-player
 
 function openServerUtility(p: player):
     if {settings.%{_p}%.custom.glasspanes} is true:
@@ -168,164 +212,210 @@ function openServerUtility(p: player):
 
 on inventory click:
     if name of event-inventory is "Utilità Server":
-        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
-            cancel event
-        else if index of event-slot is 11:
-            cancel event
-            if difficulty of all worlds is not peaceful:
-                set difficulty of all worlds to peaceful
-                set {difficulty.info} to "&fPacifica"
-                set {difficulty.peaceful} to "&aSELEZIONATO!"
-                set {difficulty.easy} to "&eClicca per selezionare."
-                set {difficulty.normal} to "&eClicca per selezionare."
-                set {difficulty.hard} to "&eClicca per selezionare."
-                set {difficulty.hardcore} to "&eClicca per selezionare."
-                delete {difficulty.hardcore_mode}
-                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
-                send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
-                delete {hardcore_teleport}
-                openServerUtility(player)
-            else:
-                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
-                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-        else if index of event-slot is 12:
-            cancel event
-            if difficulty of all worlds is not easy:
-                set difficulty of all worlds to easy
-                set {difficulty.info} to "&aFacile"
-                set {difficulty.peaceful} to "&eClicca per selezionare."
-                set {difficulty.easy} to "&aSELEZIONATO!"
-                set {difficulty.normal} to "&eClicca per selezionare."
-                set {difficulty.hard} to "&eClicca per selezionare."
-                set {difficulty.hardcore} to "&eClicca per selezionare."
-                delete {difficulty.hardcore_mode}
-                delete {hardcore_teleport}
-                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
-                send "{@prefix} &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!" to all players
-                openServerUtility(player)
-            else:
-                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
-                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-        else if index of event-slot is 13:
-            cancel event
-            if difficulty of all worlds is not normal:
-                set difficulty of all worlds to normal
-                set {difficulty.info} to "&eNormale"
-                set {difficulty.peaceful} to "&eClicca per selezionare."
-                set {difficulty.easy} to "&eClicca per selezionare."
-                set {difficulty.normal} to "&aSELEZIONATO!"
-                set {difficulty.hard} to "&eClicca per selezionare."
-                set {difficulty.hardcore} to "&eClicca per selezionare."
-                delete {difficulty.hardcore_mode}
-                delete {hardcore_teleport}
-                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
-                send "{@prefix} &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!" to all players
-                openServerUtility(player)
-            else:
-                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
-                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-        else if index of event-slot is 14:
-            cancel event
-            if difficulty of all worlds is not hard:
-                set difficulty of all worlds to hard
-                set {difficulty.info} to "&6&lDifficile"
-                set {difficulty.peaceful} to "&eClicca per selezionare."
-                set {difficulty.easy} to "&eClicca per selezionare."
-                set {difficulty.normal} to "&eClicca per selezionare."
-                set {difficulty.hard} to "&aSELEZIONATO!"
-                set {difficulty.hardcore} to "&eClicca per selezionare."
-                delete {difficulty.hardcore_mode}
-                delete {hardcore_teleport}
-                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
-                send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
-                openServerUtility(player)
-            else:
-                if {difficulty.hardcore_mode} is true:
-                    set difficulty of all worlds to hard
-                    set {difficulty.info} to "&6&lDifficile"
-                    set {difficulty.peaceful} to "&eClicca per selezionare."
-                    set {difficulty.easy} to "&eClicca per selezionare."
-                    set {difficulty.normal} to "&eClicca per selezionare."
-                    set {difficulty.hard} to "&aSELEZIONATO!"
-                    set {difficulty.hardcore} to "&eClicca per selezionare."
-                    delete {difficulty.hardcore_mode}
-                    delete {hardcore_teleport}
-                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                    broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
-                    send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
-                    openServerUtility(player)
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
+                cancel event
+            else if index of event-slot is 11:
+                if click type is left mouse button:
+                    cancel event
+                    if difficulty of all worlds is not peaceful:
+                        set difficulty of all worlds to peaceful
+                        set {difficulty.info} to "&fPacifica"
+                        set {difficulty.peaceful} to "&aSELEZIONATO!"
+                        set {difficulty.easy} to "&eClicca per selezionare."
+                        set {difficulty.normal} to "&eClicca per selezionare."
+                        set {difficulty.hard} to "&eClicca per selezionare."
+                        set {difficulty.hardcore} to "&eClicca per selezionare."
+                        delete {difficulty.hardcore_mode}
+                        play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "{@prefix} &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
+                        openServerUtility(player)
+                    else:
+                        send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                 else:
-                    send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
-                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-        else if index of event-slot is 15:
-            cancel event
-            if {difficulty.hardcore_mode} is true:
-                send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
-                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
-            else:
-                set difficulty of all worlds to hard
-                set {difficulty.info} to "&4&lHardcore"
-                set {difficulty.peaceful} to "&eClicca per selezionare."
-                set {difficulty.easy} to "&eClicca per selezionare."
-                set {difficulty.normal} to "&eClicca per selezionare."
-                set {difficulty.hard} to "&eClicca per selezionare."
-                set {difficulty.hardcore} to "&aSELEZIONATO!"
-                set {difficulty.hardcore_mode} to true
-                set {hardcore_teleport} to true
-                play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-                broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
-                send "{@prefix} &cSe muori... &4&lhai perso!" to all players
-                send all players title "&c&k&l0 &4&lHARDCORE MODE &c&k&l0" with subtitle "&cSe muori... &4&lhai perso!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
-                play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
-                openServerUtility(player)
-        else if index of event-slot is 20:
-            cancel event
-            set time of the world "smp" to 06:00
-            send "{@prefix} &7Ora di gioco impostata alle &e06:00&7."
-        else if index of event-slot is 21:
-            cancel event
-            set time of the world "smp" to 09:00
-            send "{@prefix} &7Ora di gioco impostata alle &609:00&7."
-        else if index of event-slot is 22:
-            cancel event
-            set time of the world "smp" to 12:00
-            send "{@prefix} &7Ora di gioco impostata alle &c12:00&7."
-        else if index of event-slot is 23:
-            cancel event
-            set time of the world "smp" to 18:30
-            send "{@prefix} &7Ora di gioco impostata alle &618:30&7."
-        else if index of event-slot is 24:
-            cancel event
-            set time of the world "smp" to 00:00
-            send "{@prefix} &7Ora di gioco impostata alle &900:00&7."
-        else if index of event-slot is 38:
-            cancel event
-            close player's inventory
-            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &9Sopravvivenza&7."
-            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-            set {sm.%player%.gms} to true
-        else if index of event-slot is 39:
-            cancel event
-            close player's inventory
-            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &aCreativa&7."
-            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-            set {sm.%player%.gmc} to true
-        else if index of event-slot is 41:
-            cancel event
-            close player's inventory
-            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &2Avventura&7."
-            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-            set {sm.%player%.gma} to true
-        else if index of event-slot is 42:
-            cancel event
-            close player's inventory
-            send "{@prefix} &7Specifica il giocatore del quale vorresti cambiare la modalità di gioco in &bSpettatore&7."
-            play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-            set {sm.%player%.gmsp} to true
-        else if index of event-slot is 49:
-            cancel event
-            openServerManagement(player)
+                    cancel event
+            else if index of event-slot is 12:
+                if click type is left mouse button:
+                    cancel event
+                    if difficulty of all worlds is not easy:
+                        set difficulty of all worlds to easy
+                        set {difficulty.info} to "&aFacile"
+                        set {difficulty.peaceful} to "&eClicca per selezionare."
+                        set {difficulty.easy} to "&aSELEZIONATO!"
+                        set {difficulty.normal} to "&eClicca per selezionare."
+                        set {difficulty.hard} to "&eClicca per selezionare."
+                        set {difficulty.hardcore} to "&eClicca per selezionare."
+                        delete {difficulty.hardcore_mode}
+                        play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "{@prefix} &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!" to all players
+                        openServerUtility(player)
+                    else:
+                        send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 13:
+                if click type is left mouse button:
+                    cancel event
+                    if difficulty of all worlds is not normal:
+                        set difficulty of all worlds to normal
+                        set {difficulty.info} to "&eNormale"
+                        set {difficulty.peaceful} to "&eClicca per selezionare."
+                        set {difficulty.easy} to "&eClicca per selezionare."
+                        set {difficulty.normal} to "&aSELEZIONATO!"
+                        set {difficulty.hard} to "&eClicca per selezionare."
+                        set {difficulty.hardcore} to "&eClicca per selezionare."
+                        delete {difficulty.hardcore_mode}
+                        play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "{@prefix} &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!" to all players
+                        openServerUtility(player)
+                    else:
+                        send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 14:
+                if click type is left mouse button:
+                    cancel event
+                    if difficulty of all worlds is not hard:
+                        set difficulty of all worlds to hard
+                        set {difficulty.info} to "&6&lDifficile"
+                        set {difficulty.peaceful} to "&eClicca per selezionare."
+                        set {difficulty.easy} to "&eClicca per selezionare."
+                        set {difficulty.normal} to "&eClicca per selezionare."
+                        set {difficulty.hard} to "&aSELEZIONATO!"
+                        set {difficulty.hardcore} to "&eClicca per selezionare."
+                        delete {difficulty.hardcore_mode}
+                        play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                        openServerUtility(player)
+                    else:
+                        if {difficulty.hardcore_mode} is true:
+                            set difficulty of all worlds to hard
+                            set {difficulty.info} to "&6&lDifficile"
+                            set {difficulty.peaceful} to "&eClicca per selezionare."
+                            set {difficulty.easy} to "&eClicca per selezionare."
+                            set {difficulty.normal} to "&eClicca per selezionare."
+                            set {difficulty.hard} to "&aSELEZIONATO!"
+                            set {difficulty.hardcore} to "&eClicca per selezionare."
+                            delete {difficulty.hardcore_mode}
+                            play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                            broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                            send "{@prefix} &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                            openServerUtility(player)
+                        else:
+                            send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 15:
+                if click type is left mouse button:
+                    cancel event
+                    if {difficulty.hardcore_mode} is true:
+                        send "{@prefix} &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                    else:
+                        set difficulty of all worlds to hard
+                        set {difficulty.info} to "&4&lHardcore"
+                        set {difficulty.peaceful} to "&eClicca per selezionare."
+                        set {difficulty.easy} to "&eClicca per selezionare."
+                        set {difficulty.normal} to "&eClicca per selezionare."
+                        set {difficulty.hard} to "&eClicca per selezionare."
+                        set {difficulty.hardcore} to "&aSELEZIONATO!"
+                        set {difficulty.hardcore_mode} to true
+                        play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        broadcast "{@prefix} &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "{@prefix} &cSe muori... &4&lhai perso!" to all players
+                        send all players title "&c&k&l0 &4&lHARDCORE MODE &c&k&l0" with subtitle "&cSe muori... &4&lhai perso!" for 5 seconds with 0.5 seconds fade in and 0.5 seconds fade out
+                        play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
+                        openServerUtility(player)
+                else:
+                    cancel event
+            else if index of event-slot is 20:
+                if click type is left mouse button:
+                    cancel event
+                    set time of the world "smp" to 06:00
+                    send "{@prefix} &7Ora di gioco impostata alle &e06:00&7."
+                else:
+                    cancel event
+            else if index of event-slot is 21:
+                if click type is left mouse button:
+                    cancel event
+                    set time of the world "smp" to 09:00
+                    send "{@prefix} &7Ora di gioco impostata alle &609:00&7."
+                else:
+                    cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    set time of the world "smp" to 12:00
+                    send "{@prefix} &7Ora di gioco impostata alle &c12:00&7."
+                else:
+                    cancel event
+            else if index of event-slot is 23:
+                if click type is left mouse button:
+                    cancel event
+                    set time of the world "smp" to 18:30
+                    send "{@prefix} &7Ora di gioco impostata alle &618:30&7."
+                else:
+                    cancel event
+            else if index of event-slot is 24:
+                if click type is left mouse button:
+                    cancel event
+                    set time of the world "smp" to 00:00
+                    send "{@prefix} &7Ora di gioco impostata alle &900:00&7."
+                else:
+                    cancel event
+            else if index of event-slot is 38:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                    send "{@prefix} &7Chi vuoi mettere in &fsopravvivenza&7?"
+                    play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+                    set {sm.%player%.gms} to true
+                else:
+                    cancel event
+            else if index of event-slot is 39:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                    send "{@prefix} &7Chi vuoi mettere in &fcreativa&7?"
+                    play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+                    set {sm.%player%.gmc} to true
+                else:
+                    cancel event
+            else if index of event-slot is 41:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                    send "{@prefix} &7Chi vuoi mettere in &favventura&7?"
+                    play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+                    set {sm.%player%.gma} to true
+                else:
+                    cancel event
+            else if index of event-slot is 42:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                    send "{@prefix} &7Chi vuoi mettere in &fspettatore&7?"
+                    play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
+                    set {sm.%player%.gmsp} to true
+                else:
+                    cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    openServerManagement(player)
+                else:
+                    cancel event
+
+
+# DEBUG
+command /vulnerable:
+    trigger:
+        make player vulnerable

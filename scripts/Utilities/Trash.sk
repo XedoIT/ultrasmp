@@ -39,4 +39,4 @@ on inventory click:
 on inventory close:
     if name of event-inventory is "Cestino":
         play sound "block.iron_door.close" with volume 1 and pitch 0 at player for player
-        #send action bar "&4&k0 &cCestino svuotato! &4&k0" to player
+        send action bar "&4&k0 &cCestino svuotato! &4&k0" to player

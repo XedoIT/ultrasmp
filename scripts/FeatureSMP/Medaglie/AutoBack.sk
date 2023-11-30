@@ -1,0 +1,14 @@
+options:
+    get: &aQuesta medaglia l'hai ottenuta.
+    not_get: &cQuesta medaglia non l'hai ancora ottenuta.
+
+on bed enter:
+    if {bed_entry.%player%} is true:
+        set {bed_entry.%player%} to true
+
+on bed leave:
+    if {bed_entry.%player%} is true:
+        if {medals.%player%.suicide} is "{@get}":
+            wait 1 second
+            execute player command "/back"
+            delete {bed_entry.%player%}

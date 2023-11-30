@@ -6,11 +6,10 @@ command /skull [<offline player>]:
     description: Ottieni in modo facile la testa di qualsiasi giocatore che abbia Minecraft Premium.
     permission: skull.use
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
-    usage: &cUtilizzo: &6/skull &e<giocatore>
     executable by: player, console
     trigger:
         if sender is player:
-            if player has enough space for 1 stone:
+            if player has enough space for 1 player head:
                 if arg-1 is not set:
                     send "{@error_prefix} &cSpecifica un giocatore da cui ottenere la testa!"
                     stop

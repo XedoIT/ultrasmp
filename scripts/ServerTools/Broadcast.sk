@@ -1,7 +1,7 @@
 command /broadcast [<text>]:
 	aliases: /annuncio
 	permission: broadcast.use
-	permission message: &4[&6&lS&e&lM&6&lP&4] &cNon puoi fare annunci!
+	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Annuncia qualcosa nel server.
 	trigger:
 		if arg-1 is not set:

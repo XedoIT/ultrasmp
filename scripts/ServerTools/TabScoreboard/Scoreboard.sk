@@ -41,7 +41,7 @@ every second:
         if weather in "{@overworld}" is thunder:
             set {weather.%loop-player%} to "%{weather.%loop-player%.thunder}%"
 
-every second:
+every tick:
     loop all players:
         set {_weekday} to placeholder "rs_weekday_{@overworld}" from loop-player
         if {_weekday} is "Lunedì":
@@ -135,7 +135,7 @@ every tick:
         else:
             clear scoreboard of loop-player
 
-every hours: # AVVISO SCOREBOARD DISATTIVATA
+every hour: # AVVISO SCOREBOARD DISATTIVATA
     loop all players:
         if {scoreboard.%loop-player%} is false:
             if {settings.%loop-player%.notify.generic.scoreboard} is true:
@@ -146,7 +146,7 @@ every hours: # AVVISO SCOREBOARD DISATTIVATA
                 send "{@prefix} &6Attivala con <ttp:&fClicca qui per attivare la scoreboard><cmd:/sb>&e&n/sb<reset> &6per avere tutte le informazioni di cui hai bisogno a vista d'occhio." to loop-player
                 send "" to loop-player
                 send "" to loop-player
-                send "{@prefix} &ePuoi disattivare questa notifica in &fImpostazioni &epresso &7Profilo &7&lSMP&e." to loop-player
+                send "{@prefix} &ePuoi disattivare questa notifica in &fImpostazioni &epresso il &7Profilo &7&lSMP&e." to loop-player
                 send "" to loop-player
                 play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
 
