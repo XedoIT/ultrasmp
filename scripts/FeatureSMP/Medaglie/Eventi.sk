@@ -41,10 +41,6 @@ options:
     ymin: 70
     ymax: 160
 
-  # SESSO GIOCATORE
-    male: &9Maschio
-    female: &dFemmina
-
 on load:
   # CONTATORE MEDAGLIE E ULTIMA MEDAGLIA OTTENUTA
     if {medals.%player%} is not set:
@@ -215,130 +211,6 @@ on join:
     if {medals.%player%.wardenboss.count} is not set:
         set {medals.%player%.wardenboss.count} to 0
 
-on inventory click:
-    if type of event-inventory is smithing inventory:
-        if slot 1 of event-inventory is {@mining_pickaxe}:
-            if index of event-slot is 3:
-                cancel event
-                if slot 3 of event-inventory is not air:
-                    set slot 3 of event-inventory to {@mining_pickaxe_smithing}
-                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 1 of event-inventory is {@carpenter_axe}:
-            if index of event-slot is 3:
-                cancel event
-                if slot 3 of event-inventory is not air:
-                    set slot 3 of event-inventory to {@carpenter_axe_smithing}
-                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 1 of event-inventory is {@forestboss_axe_male} and {@forestboss_axe_female}:
-            if index of event-slot is 3:
-                cancel event
-                if slot 3 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "{@male}":
-                        set slot 3 of event-inventory to {@forestboss_axe_male_smithing}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "{@female}":
-                        set slot 3 of event-inventory to {@forestboss_axe_female_smithing}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-
-    else if type of event-inventory is grindstone inventory:
-        if slot 0 of event-inventory is {@mining_pickaxe}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to {@mining_pickaxe_grindstone}
-                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 1 of event-inventory is {@mining_pickaxe}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to {@mining_pickaxe_grindstone}
-                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        if slot 0 of event-inventory is {@carpenter_axe}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to {@carpenter_axe_grindstone}
-                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 1 of event-inventory is {@carpenter_axe}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    set slot 2 of event-inventory to {@carpenter_axe_grindstone}
-                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        if slot 0 of event-inventory is {@forestboss_axe_male}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "{@male}":
-                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "{@female}":
-                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 1 of event-inventory is {@forestboss_axe_male}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "{@male}":
-                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "{@female}":
-                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        if slot 0 of event-inventory is {@forestboss_axe_female}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "{@male}":
-                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "{@female}":
-                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-        else if slot 1 of event-inventory is {@forestboss_axe_female}:
-            if index of event-slot is 2:
-                cancel event
-                if slot 2 of event-inventory is not air:
-                    if {settings.%player%.user.genre} is "{@male}":
-                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-                    else if {settings.%player%.user.genre} is "{@female}":
-                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
-                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
-
-on anvil prepare:
-    if slot 0 of event-inventory is {@mining_pickaxe}:
-        set {_i} to air
-        set event-slot to {_i}
-
-    else if slot 0 of event-inventory is {@carpenter_axe}:
-        set {_i} to air
-        set event-slot to {_i}
-
-    else if slot 0 of event-inventory is {@forestboss_axe_male}:
-        set {_i} to air
-        set event-slot to {_i}
-        
-    else if slot 0 of event-inventory is {@forestboss_axe_female}:
-        set {_i} to air
-        set event-slot to {_i}
-
 # PARTE FUNZIONALE
 # MINING
 on mine of any ore:
@@ -410,7 +282,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.oak} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.oak}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di quercia&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di quercia&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is birch log:
                 if {medals.%player%.carpenter.birch} < 4999:
@@ -420,7 +292,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.birch} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.birch}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di betulla&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di betulla&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is dark oak log:
                 if {medals.%player%.carpenter.dark_oak} < 4999:
@@ -430,7 +302,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.dark_oak} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.dark_oak}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di quercia scura&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di quercia scura&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is spruce log:
                 if {medals.%player%.carpenter.spruce} < 4999:
@@ -440,7 +312,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.spruce} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.spruce}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di abete&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di abete&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is acacia log:
                 if {medals.%player%.carpenter.acacia} < 4999:
@@ -450,7 +322,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.acacia} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.acacia}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di acacia&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di acacia&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is jungle log:
                 if {medals.%player%.carpenter.jungle} < 4999:
@@ -460,7 +332,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.jungle} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.jungle}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco della giungla &7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco della giungla &7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is mangrove log:
                 if {medals.%player%.carpenter.mangrove} < 4999:
@@ -470,7 +342,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.mangrove} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.mangrove}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di mangrovia&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di mangrovia&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is cherry log:
                 if {medals.%player%.carpenter.cherry} < 4999:
@@ -480,7 +352,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.cherry} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.cherry}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di ciliegio&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &btronco di ciliegio&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is crimson stem:
                 if {medals.%player%.carpenter.crimson} < 4999:
@@ -490,7 +362,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.crimson} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.crimson}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &bgambo cremisi&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &bgambo cremisi&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
             else if event-block is warped stem:
                 if {medals.%player%.carpenter.warped} < 4999:
@@ -500,7 +372,7 @@ on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, str
                 else if {medals.%player%.carpenter.warped} = 4999:
                     add 1 to {medals.%player%.carpenter.total_logs}
                     add 1 to {medals.%player%.carpenter.warped}
-                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &bgambo distorto&7."
+                    send "{@prefix} &aCongratulazioni! &7Hai raccolto &65000 &7blocchi di &bgambo distorto&7." to player
                     play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         else if {medals.%player%.carpenter.total_logs} = 49999:
             if gamemode of player is survival or adventure:
@@ -564,7 +436,7 @@ on place:
                     add 1 to {medals.%player%.farmer.wheat}
             else if {medals.%player%.farmer.wheat} = 999:
                 add 1 to {medals.%player%.farmer.wheat}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2grano&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2grano&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is beetroot seeds:
@@ -574,7 +446,7 @@ on place:
                     add 1 to {medals.%player%.farmer.beetroot}
             else if {medals.%player%.farmer.beetroot} = 999:
                 add 1 to {medals.%player%.farmer.beetroot}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2barbabietola&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2barbabietola&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is potato:
@@ -584,7 +456,7 @@ on place:
                     add 1 to {medals.%player%.farmer.potato}
             else if {medals.%player%.farmer.potato} = 999:
                 add 1 to {medals.%player%.farmer.potato}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &2patate&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &2patate&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is carrot:
@@ -594,7 +466,7 @@ on place:
                     add 1 to {medals.%player%.farmer.carrot}
             else if {medals.%player%.farmer.carrot} = 999:
                 add 1 to {medals.%player%.farmer.carrot}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &2carote&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &2carote&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is pumpkin seeds:
@@ -604,7 +476,7 @@ on place:
                     add 1 to {medals.%player%.farmer.pumpkin}
             else if {medals.%player%.farmer.pumpkin} = 999:
                 add 1 to {medals.%player%.farmer.pumpkin}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2zucca&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2zucca&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is melon seeds:
@@ -614,7 +486,7 @@ on place:
                     add 1 to {medals.%player%.farmer.melon}
             else if {medals.%player%.farmer.melon} = 999:
                 add 1 to {medals.%player%.farmer.melon}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2anguria&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7semi di &2anguria&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is cocoa beans:
@@ -624,7 +496,7 @@ on place:
                     add 1 to {medals.%player%.farmer.cocoa}
             else if {medals.%player%.farmer.cocoa} = 999:
                 add 1 to {medals.%player%.farmer.cocoa}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7fave di &2cacao&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &7fave di &2cacao&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
         if tool of player is nether wart:
@@ -634,7 +506,7 @@ on place:
                     add 1 to {medals.%player%.farmer.nether_wart}
             else if {medals.%player%.farmer.nether_wart} = 999:
                 add 1 to {medals.%player%.farmer.nether_wart}
-                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &cverruche del Nether&7."
+                send "{@prefix} &aCongratulazioni! &7Hai piantato &61000 &cverruche del Nether&7." to player
                 play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
 
     else if {medals.%player%.farmer.total_seeds} = 7999:
@@ -647,7 +519,7 @@ on place:
                 add 150 to {fame::%player%}
                 apply hero of the village without any particles to player for 2 hours
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-                if {settings.%player%.user.genre} is "{@male}":
+                if {settings.%player%.user.genre} is "%{male}%":
                     set {medals.%player%.last_obtained} to "&aContadino"
                     send "&6&m----------------------------------------" to player
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to player
@@ -656,7 +528,7 @@ on place:
                     send "  &a+150 fama" to player
                     send "  &b+2 ore di &2Eroe del villaggio" to player
                     send "&6&m----------------------------------------" to player
-                else if {settings.%player%.user.genre} is "{@female}":
+                else if {settings.%player%.user.genre} is "%{female}%":
                     set {medals.%player%.last_obtained} to "&aContadina"
                     send "&6&m----------------------------------------" to player
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to player
@@ -775,7 +647,7 @@ on tame:
                 add 150 to {fame.%tamer%}
                 apply regeneration without any particles to tamer for 1 hour
                 play sound "{@medals_sound}" with volume 5 and pitch 2 at tamer for tamer
-                if {settings.%tamer%.user.genre} is "{@male}":
+                if {settings.%tamer%.user.genre} is "%{male}%":
                     set {medals.%player%.last_obtained} to "&aAddestratore"
                     send "&6&m----------------------------------------" to tamer
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to tamer
@@ -784,7 +656,7 @@ on tame:
                     send "  &a+150 fama" to tamer
                     send "  &b+1 ora di &6Rigenerazione" to tamer
                     send "&6&m----------------------------------------" to tamer
-                else if {settings.%player%.user.genre} is "{@female}":
+                else if {settings.%player%.user.genre} is "%{female}%":
                     set {medals.%player%.last_obtained} to "&aAddestratrice"
                     send "&6&m----------------------------------------" to tamer
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to tamer
@@ -806,7 +678,7 @@ on chat:
             add 1 to {medals.%player%}
             add 400 to {fame::%player%}
             play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-            if {settings.%player%.user.genre} is "{@male}":
+            if {settings.%player%.user.genre} is "%{male}%":
                 send "&6&m----------------------------------------" to player
                 set {medals.%player%.last_obtained} to "&aChiacchierone"
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to player
@@ -814,7 +686,7 @@ on chat:
                 send " &9Ricompense sbloccate:" to player
                 send "  &a+400 fama" to player
                 send "&6&m----------------------------------------" to player
-            else if {settings.%player%.user.genre} is "{@female}":
+            else if {settings.%player%.user.genre} is "%{female}%":
                 send "&6&m----------------------------------------" to player
                 set {medals.%player%.last_obtained} to "&aChiacchierona"
                 send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierona" to player
@@ -865,8 +737,8 @@ on death of player:
                     set {medals.%victim%.last_obtained} to "&aSuicida"
                     add 1 to {medals.%victim%}
                     add 500 to {fame.%victim%}
-                    execute console command "/lp user %victim% permission set at.member.back"
-                    execute console command "/lp user %victim% permission set at.member.back.death"
+                    execute console command "/lp user %victim% permission set et.member.back"
+                    execute console command "/lp user %victim% permission set et.member.back.death"
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at victim for victim
                     send "&6&m----------------------------------------" to victim
                     send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lSuicida" to victim
@@ -888,7 +760,7 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                             add 1 to {medals.%player%.forestboss.oak}
                     else if {medals.%player%.forestboss.oak} = 2999:
                         add 1 to {medals.%player%.forestboss.oak}
-                        send "{@prefix} &aCongratulazioni! &7Hai raccolto &63000 &7blocchi di &btronco di quercia&7."
+                        send "{@prefix} &aCongratulazioni! &7Hai raccolto &63000 &7blocchi di &btronco di quercia&7." to player
                         play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
                 else if event-block is birch log:
                     if {medals.%player%.forestboss.birch} < 2999:
@@ -897,7 +769,7 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                             add 1 to {medals.%player%.forestboss.birch}
                     else if {medals.%player%.forestboss.birch} = 2999:
                         add 1 to {medals.%player%.forestboss.birch}
-                        send "{@prefix} &aCongratulazioni! &7Hai raccolto &63000 &7blocchi di &btronco di betulla&7."
+                        send "{@prefix} &aCongratulazioni! &7Hai raccolto &63000 &7blocchi di &btronco di betulla&7." to player
                         play sound "{@medals_sound}" with volume 1 and pitch 2 at player for player
         else if {medals.%player%.forestboss.total_logs} = 5999:
             if gamemode of player is survival or adventure:
@@ -909,7 +781,7 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                     add 1 to {medals.%player%}
                     add 400 to {fame::%player%}
                     play sound "{@medals_sound}" with volume 5 and pitch 2 at player for player
-                    if {settings.%player%.user.genre} is "{@male}":
+                    if {settings.%player%.user.genre} is "%{male}%":
                         give 1 {@forestboss_axe_male} to player
                         set {medals.%player%.last_obtained} to "&aRe della Foresta"
                         send "&6&m----------------------------------------" to player
@@ -919,7 +791,7 @@ on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log
                         send "  &a+400 fama" to player
                         send "  &bHai sbloccato il &5TreeKinetor" to player
                         send "&6&m----------------------------------------" to player
-                    else if {settings.%player%.user.genre} is "{@female}":
+                    else if {settings.%player%.user.genre} is "%{female}%":
                         set {medals.%player%.last_obtained} to "&aRegina della Foresta"
                         give 1 {@forestboss_axe_female} to player
                         send "&6&m----------------------------------------" to player
@@ -978,7 +850,7 @@ on death of wither:
                     set {medals.%attacker%.netherboss.when_get} to now
                     add 800 to {fame::%attacker%}
                     apply fire resistance without any particles to attacker for 6 hours
-                    if {settings.%attacker%.user.genre} is "{@male}":
+                    if {settings.%attacker%.user.genre} is "%{male}%":
                         set {medals.%attacker%.last_obtained} to "&aRe degli Inferi"
                         give 1 {@netherboss_male} to attacker
                         send "&6&m----------------------------------------" to attacker
@@ -989,7 +861,7 @@ on death of wither:
                         send "  &b+6 ore di &6Resistenza al fuoco" to attacker
                         send "  &bHai ottenuto un disco musicale: &cPigstep" to attacker
                         send "&6&m----------------------------------------" to attacker
-                    else if {settings.%attacker%.user.genre} is "{@female}":
+                    else if {settings.%attacker%.user.genre} is "%{female}%":
                         set {medals.%attacker%.last_obtained} to "&aRegina degli Inferi"
                         give 1 {@netherboss_female} to attacker
                         send "&6&m----------------------------------------" to attacker
@@ -1014,7 +886,7 @@ on death of ender dragon:
                     set {medals.%attacker%.dragontrainer} to "{@get}"
                     set {medals.%attacker%.dragontrainer.when_get} to now
                     add 1000 to {fame::%attacker%}
-                    if {settings.%attacker%.user.genre} is "{@male}":
+                    if {settings.%attacker%.user.genre} is "%{male}%":
                         give 1 {@dragontrainer_male} to attacker
                         set {medals.%attacker%.last_obtained} to "&aDomatore di Draghi"
                         send "&6&m----------------------------------------" to attacker
@@ -1024,7 +896,7 @@ on death of ender dragon:
                         send "  &a+1000 fama" to attacker
                         send "  &bHai ottenuto un &dUovo di drago" to attacker
                         send "&6&m----------------------------------------" to attacker
-                    else if {settings.%attacker%.user.genre} is "{@female}":
+                    else if {settings.%attacker%.user.genre} is "%{female}%":
                         give 1 {@dragontrainer_female} to attacker
                         set {medals.%attacker%.last_obtained} to "&aDomatrice di Draghi"
                         send "&6&m----------------------------------------" to attacker
@@ -1052,7 +924,7 @@ on death of warden:
                     apply resistance 5 without any particles to attacker for 24 hours
                     apply regeneration 5 without any particles to attacker for 24 hours
                     apply night vision without any particles to attacker for 24 hours
-                    if {settings.%attacker%.user.genre} is "{@male}":
+                    if {settings.%attacker%.user.genre} is "%{male}%":
                         set {medals.%attacker%.last_obtained} to "&aDevastatore di Sorveglianti"
                         send "&6&m----------------------------------------" to attacker
                         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to attacker
@@ -1064,7 +936,7 @@ on death of warden:
                         send "  &b+24 ore di &6Rigenerazione V" to attacker
                         send "  &b+24 ore di &aVisione notturna" to attacker
                         send "&6&m----------------------------------------" to attacker
-                    else if {settings.%attacker%.user.genre} is "{@female}":
+                    else if {settings.%attacker%.user.genre} is "%{female}%":
                         set {medals.%attacker%.last_obtained} to "&aDevastatrice di Sorveglianti"
                         send "&6&m----------------------------------------" to attacker
                         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to attacker

@@ -1,9 +1,9 @@
 on break of reinforced deepslate:
     if gamemode of player is survival or adventure:
         if player's tool is not a netherite pickaxe:
-            send "&cDavvero hai perso tutto questo tempo per scavare uno stupido blocco?!"
+            send "&cDavvero hai perso tutto questo tempo per scavare uno stupido blocco?!" to player
             wait 3 seconds
-            send "&6La prossima volta usa un piccone di netherite. Sono sicuro che riuscirai ad ottenerlo!"
+            send "&6La prossima volta usa un piccone di netherite. Sono sicuro che riuscirai ad ottenerlo!" to player
         else:
             chance of 30%:
                 drop 1 reinforced deepslate at event-block

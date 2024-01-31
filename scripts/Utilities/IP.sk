@@ -1,7 +1,5 @@
 options:
     prefix: &e[&6&lIP&e]
-    ip: - #localhost
-    port: - #24367
 
 command /ip [<text>] [<offline player>]:
     permission: ip.admin
@@ -12,12 +10,12 @@ command /ip [<text>] [<offline player>]:
         if sender is player:
             if arg-1 is not set:
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7."
+                    send "{@prefix} &7L'IP del server è &c%{server_ip}%&7:&c%{server_port}%&7."
                     stop
 
             else if arg-1 is "server":
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7."
+                    send "{@prefix} &7L'IP del server è &c%{server_ip}%&7:&c%{server_port}%&7."
                     stop
                 else:
                     send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
@@ -42,12 +40,12 @@ command /ip [<text>] [<offline player>]:
         else:
             if arg-1 is not set:
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7." to console
+                    send "{@prefix} &7L'IP del server è &c%{server_ip}%&7:&c%{server_port}%&7." to console
                     stop
 
             else if arg-1 is "server":
                 if arg-2 is not set:
-                    send "{@prefix} &7L'IP del server è &c{@ip}&7:&{@port}&7." to console
+                    send "{@prefix} &7L'IP del server è &c%{server_ip}%&7:&c%{server_port}%&7." to console
                     stop
                 else:
                     send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi." to console
@@ -82,5 +80,5 @@ command /myip:
             send "{@prefix} &7Il tuo IP è &c%player's ip%&7." to player
             stop
         else:
-            send "{@prefix} &7L'IP del server è &c{@ip}:24367" to console
+            send "{@prefix} &7L'IP del server è &c%{server_ip}%:%{server_port}%" to console
             stop

@@ -3,9 +3,6 @@ options:
     
     on: &aSì
     off: &cNo
-    
-    male: &9Maschio
-    female: &dFemmina
 
 on join:
     if {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} is not set:
@@ -57,9 +54,9 @@ on death:
             if {killstreak::%victim%} != 0:
                 wait 2 ticks
                 send "" to victim
-                if {settings.%victim%.user.genre} is "{@male}":
+                if {settings.%victim%.user.genre} is "%{male}%":
                     send "&4&k00 &cSei morto con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
-                else if {settings.%victim%.user.genre} is "{@female}":
+                else if {settings.%victim%.user.genre} is "%{female}%":
                     send "&4&k00 &cSei morta con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
                 send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
                 send "" to victim
@@ -74,9 +71,9 @@ on death:
             if {killstreak::%victim%} != 0:
                 wait 2 ticks
                 send "" to victim
-                if {settings.%victim%.user.genre} is "{@male}":
+                if {settings.%victim%.user.genre} is "%{male}%":
                     send "&4&k00 &cSei morto con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
-                else if {settings.%victim%.user.genre} is "{@female}":
+                else if {settings.%victim%.user.genre} is "%{female}%":
                     send "&4&k00 &cSei morta con &e%{killstreak::%victim%}% uccisioni&c! &4&k00" to victim
                 send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
                 send "" to victim
@@ -90,41 +87,36 @@ on death:
 # BLOCCHI DISTRUTTI E BLOCCHI PIAZZATI
 on place:
     if player's gamemode is survival or adventure:
-        if {blocks.%player%::*} doesn't contain location of event-block:
-            add 1 to {placed_blocks::%player%}
+        add 1 to {placed_blocks::%player%}
 
 on break:
     if player's gamemode is survival or adventure:
-        if {blocks.%player%::*} is not set:
-            add location of event-block to {blocks.%player%::*}
-            add 1 to {broken_blocks::%player%}
-            add 1 to {blocks_count.%player%}
-        else if {blocks.%player%::*} doesn't contain location of event-block:
-            add 1 to {broken_blocks::%player%}
-            add 1 to {blocks_count.%player%}
-            add location of event-block to {blocks.%player%::*}
-  # SISTEMA AUTO ALLEGGERIMENTO VARIABILE
-    if {blocks_count.%player%} = 10000:
-        delete {blocks.%player%::*}
+        add 1 to {broken_blocks::%player%}
 
 
 # ZONA DEBUG
 command /resetblocks:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
-        delete {blocks.%player%::*}
         set {placed_blocks::%player%} to 0
         set {broken_blocks::%player%} to 0
-        set {blocks_count.%player%} to 0
 
 command /resetinfdamage:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
         set {infldamage::%player%} to 0
 
 command /resetsufdamage:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
         set {suffdamage::%player%} to 0
 
 command /resetstats:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
         set {kills::%player%} to 0
         set {killstreak::%player%} to 0

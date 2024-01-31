@@ -36,10 +36,6 @@ options:
   # MARKER
     no: &c✖
     yes: &a✔
-  
-  # SESSO GIOCATORE
-    male: &9Maschio
-    female: &dFemmina
 
 on join:
   # TUTTE LE NOTIFICHE 
@@ -145,14 +141,14 @@ function openAlertsGui(p: player):
         set slot 20 of {_gui} to redstone torch named "&eNotifiche generali" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che impattano sulla tua", "&7esperienza di gioco nell'SMP.", "&f", "&7Include:", "%{settings.%{_p}%.notify.generic.inventory.marker}% &7Inventario pieno", "%{settings.%{_p}%.notify.generic.scoreboard.marker}% &7Scoreboard disattivata", "&f" and "{@manage}"
         set slot 24 of {_gui} to repeater named "&eNotifiche di servizio" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che ti informano sulle", "&7condizioni tecniche del server.", "&f", "&7Include:", "%{settings.%{_p}%.notify.service.schres.marker}% &7Riavvii del server programmati", "%{settings.%{_p}%.notify.service.lagtrouble.marker}% &7Problemi prestazionali", "%{settings.%{_p}%.notify.service.schstop.marker}% &7Chiusure del server programmate", "&f" and "{@manage}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 5 rows named "Impostazioni: &9Notifiche"
         set slot 20 of {_gui} to redstone torch named "&eNotifiche generali" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che impattano sulla tua", "&7esperienza di gioco nell'SMP.", "&f", "&7Include:", "%{settings.%{_p}%.notify.generic.inventory.marker}% &7Inventario pieno", "%{settings.%{_p}%.notify.generic.scoreboard.marker}% &7Scoreboard disattivata", "&f" and "{@manage}"
         set slot 24 of {_gui} to repeater named "&eNotifiche di servizio" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che ti informano sulle", "&7condizioni tecniche del server.", "&f", "&7Include:", "%{settings.%{_p}%.notify.service.schres.marker}% &7Riavvii del server programmati", "%{settings.%{_p}%.notify.service.lagtrouble.marker}% &7Problemi prestazionali", "%{settings.%{_p}%.notify.service.schstop.marker}% &7Chiusure del server programmate", "&f" and "{@manage}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open {_gui} to {_p}
 
 function openCustomAlertsGui(p: player):
@@ -160,9 +156,9 @@ function openCustomAlertsGui(p: player):
         set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche generali"
         set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&f"
         set slot 10, 11, 13, 15, 16, 19, 20, 22, 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&f"
-        if {settings.%{_p}%.user.genre} is "{@male}":
+        if {settings.%{_p}%.user.genre} is "%{male}%":
             set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisato con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
-        else if {settings.%{_p}%.user.genre} is "{@female}":
+        else if {settings.%{_p}%.user.genre} is "%{female}%":
             set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisata con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
         set slot 14 of {_gui} to writable book named "&eScoreboard" with lore "&7Se la tua scoreboard è disattivata," and "&7ti ricorderò di attivarla ogni ora."
         if {settings.%{_p}%.notify.generic.inventory} is true:
@@ -174,13 +170,13 @@ function openCustomAlertsGui(p: player):
         else:
             set slot 23 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche generali"
-        if {settings.%{_p}%.user.genre} is "{@male}":
+        if {settings.%{_p}%.user.genre} is "%{male}%":
             set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisato con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
-        else if {settings.%{_p}%.user.genre} is "{@female}":
+        else if {settings.%{_p}%.user.genre} is "%{female}%":
             set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisata con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
         set slot 14 of {_gui} to writable book named "&eScoreboard" with lore "&7Se la tua scoreboard è disattivata," and "&7ti ricorderò di attivarla ogni ora."
         if {settings.%{_p}%.notify.generic.inventory} is true:
@@ -192,7 +188,7 @@ function openCustomAlertsGui(p: player):
         else:
             set slot 23 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open {_gui} to {_p}
 
 function openCustomServiceAlertsGui(p: player):
@@ -200,9 +196,9 @@ function openCustomServiceAlertsGui(p: player):
         set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche di servizio"
         set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&f"
         set slot 10, 12, 14, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&f"
-        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
-        set slot 13 of {_gui} to paper named "&eProblemi prestazionali" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati" and "&7e/o crash improvvisi."
-        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
+        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati &c[BETA]" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 13 of {_gui} to paper named "&eProblemi prestazionali &c[BETA]" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati", "&7e/o crash improvvisi.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate &c[BETA]" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
         if {settings.%{_p}%.notify.service.schres} is true:
             set slot 20 of {_gui} to lime dye named "&aRiavvii del server programmati" with lore "{@turn_off}"
         else:
@@ -216,13 +212,13 @@ function openCustomServiceAlertsGui(p: player):
         else:
             set slot 24 of {_gui} to gray dye named "&cChiusure del server programmate" with lore "{@turn_on}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche di servizio"
-        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
-        set slot 13 of {_gui} to paper named "&eProblemi prestazionali" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati" and "&7e/o crash improvvisi."
-        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima," and " &610 minuti &cprima."
+        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati &c[BETA]" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 13 of {_gui} to paper named "&eProblemi prestazionali &c[BETA]" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati", "&7e/o crash improvvisi.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate &c[BETA]" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
         if {settings.%{_p}%.notify.service.schres} is true:
             set slot 20 of {_gui} to lime dye named "&aRiavvii del server programmati" with lore "{@turn_off}"
         else:
@@ -236,7 +232,7 @@ function openCustomServiceAlertsGui(p: player):
         else:
             set slot 24 of {_gui} to gray dye named "&cChiusure del server programmate" with lore "{@turn_on}"
         set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open {_gui} to {_p}
 
 on inventory click:

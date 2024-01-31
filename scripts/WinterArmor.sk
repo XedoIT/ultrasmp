@@ -1,0 +1,54 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+ # I MONDI NEL SERVER
+    overworld: smp
+    nether: smp_nether
+    end: smp_the_end
+
+    fall: &x&f&b&a&6&0&0A&x&e&c&9&7&0&0u&x&d&d&8&8&0&0t&x&c&e&7&a&0&0u&x&b&e&6&b&0&0n&x&a&f&5&c&0&0n&x&a&0&4&d&0&0o
+    winter: &x&0&0&b&0&f&bI&x&2&1&b&3&f&2n&x&4&1&b&6&e&8v&x&6&2&b&a&d&fe&x&8&2&b&d&d&6r&x&a&3&c&0&c&cn&x&c&3&c&3&c&3o
+    spring: &x&0&4&f&b&2&bP&x&0&4&f&2&4&6r&x&0&3&e&9&6&0i&x&0&3&e&0&7&bm&x&0&2&d&7&9&5a&x&0&2&c&e&b&0v&x&0&1&c&5&c&ae&x&0&1&b&c&e&5r&x&0&0&b&3&f&fa&a
+    summer: &x&f&b&e&2&0&0E&x&f&c&c&7&0&0s&x&f&d&a&c&0&0t&x&f&d&9&2&0&0a&x&f&e&7&7&0&0t&x&f&f&5&c&0&0e
+
+command /winterkit:
+    executable by: player, console
+    trigger:
+        if sender is player:
+            set {_rs_season} to placeholder "rs_season_{@overworld}" from player
+            if {_rs_season} is not "{@winter}":
+                send "{@prefix} &cPuoi utilizzare questo comando soltanto in inverno!"
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                stop
+            else:
+                if player's inventory has enough space for 4 diamond sword:
+                    if {winterkit.%player%} is not set:
+                        give 1 leather helmet with nbt compound from "{display:{Name:'{""text"":""Cappello pesante"",""color"":""aqua"",""bold"":true}',Lore:['{""text"":""Indistruttibile"",""color"":""green"",""italic"":false}','{""text"":"""",""color"":""white"",""bold"":true}','{""text"":""Un ottimo modo per iniziare"",""color"":""gray"",""italic"":true}','{""text"":""l\'SMP al calduccio."",""color"":""gray"",""italic"":true}']},HideFlags:5,Unbreakable:1b,Enchantments:[{}]}" to player
+                        give 1 leather chestplate with nbt compound from "{display:{Name:'{""text"":""Giacca pesante"",""color"":""aqua"",""bold"":true}',Lore:['{""text"":""Indistruttibile"",""color"":""green"",""italic"":false}','{""text"":"""",""color"":""white"",""bold"":true}','{""text"":""Un ottimo modo per iniziare"",""color"":""gray"",""italic"":true}','{""text"":""l\'SMP al calduccio."",""color"":""gray"",""italic"":true}']},HideFlags:5,Unbreakable:1b,Enchantments:[{}]}" to player
+                        give 1 leather leggings with nbt compound from "{display:{Name:'{""text"":""Pantaloni pesanti"",""color"":""aqua"",""bold"":true}',Lore:['{""text"":""Indistruttibile"",""color"":""green"",""italic"":false}','{""text"":"""",""color"":""white"",""bold"":true}','{""text"":""Un ottimo modo per iniziare"",""color"":""gray"",""italic"":true}','{""text"":""l\'SMP al calduccio."",""color"":""gray"",""italic"":true}']},HideFlags:5,Unbreakable:1b,Enchantments:[{}]}" to player
+                        give 1 leather boots with nbt compound from "{display:{Name:'{""text"":""Scarponi pesanti"",""color"":""aqua"",""bold"":true}',Lore:['{""text"":""Indistruttibile"",""color"":""green"",""italic"":false}','{""text"":"""",""color"":""white"",""bold"":true}','{""text"":""Un ottimo modo per iniziare"",""color"":""gray"",""italic"":true}','{""text"":""l\'SMP al calduccio."",""color"":""gray"",""italic"":true}']},HideFlags:5,Unbreakable:1b,Enchantments:[{}]}" to player
+                        send "{@prefix} &aCon questo set di armatura sarai al sicuro dal freddo dell'inverno!"
+                        send "{@prefix} &6Fai attenzione a dove lo metti, non puoi richiederne un altro."
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        set {winterkit.%player%} to true
+                        stop
+                    else:
+                        send "{@prefix} &cHai già ottenuto questo set di armatura!"
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                else:
+                    send "{@prefix} &cPer questo kit sono richiesti almeno &64 slot liberi &cnel tuo inventario!"
+                    send "{@prefix} &cFai spazio e riprova."
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando!"
+            stop
+
+
+# ZONA DEBUG
+command /resetwinterkit:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    trigger:
+        delete {winterkit.%player%}

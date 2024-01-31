@@ -5,9 +5,6 @@ options:
     error_sound: entity.enderman.teleport
     check_sound: entity.player.levelup
     
-    male: &9Maschio
-    female: &dFemmina
-    
     on: &aSì
     off: &cNo
 
@@ -96,10 +93,10 @@ on death of player:
         set {god.%victim%} to "{@on}"
         execute console command "/lp user %victim% parent set death"
         apply infinite potion of night vision without any particles to victim
-        if {settings.%victim%.user.genre} is "{@male}":
+        if {settings.%victim%.user.genre} is "%{male}%":
             set death message to "&c%victim% è diventato un fantasma!"
             #send "{@prefix} &4&lSei morto! &cTornerai in vita quando la modalità Hardcore sarà disattivata." to victim
-        else if {settings.%victim%.user.genre} is "{@female}":
+        else if {settings.%victim%.user.genre} is "%{female}%":
             set death message to "&c%victim% è diventata un fantasma!"
             #send "{@prefix} &4&lSei morta! &cTornerai in vita quando la modalità Hardcore sarà disattivata." to victim
 
@@ -119,11 +116,11 @@ every second:
 on break:
     if {difficulty.info.hardcore_death::%player%} is true:
         cancel event
-        send "{@prefix} &cNon puoi distruggere blocchi finché sei un fantasma."
+        send "{@prefix} &cNon puoi distruggere blocchi finché sei un fantasma." to player
 on place:
     if {difficulty.info.hardcore_death::%player%} is true:
         cancel event
-        send "{@prefix} &cNon puoi piazzare blocchi finché sei un fantasma."
+        send "{@prefix} &cNon puoi piazzare blocchi finché sei un fantasma." to player
 on command:
     if command is not "home", "back", "msg" or "r":
         if {difficulty.info.hardcore_death::%player%} is true:
@@ -159,9 +156,9 @@ every second:
                 set loop-player's flight mode to false
                 set {fly.%loop-player%} to "{@off}"
                 remove night vision from loop-player
-                if {settings.%loop-player%.user.genre} is "{@male}":
+                if {settings.%loop-player%.user.genre} is "%{male}%":
                     send "{@prefix} &bSei tornato in vita! Puoi riprendere la tua avventura normalmente." to loop-player
-                else if {settings.%loop-player%.user.genre} is "{@female}":
+                else if {settings.%loop-player%.user.genre} is "%{female}%":
                     send "{@prefix} &dSei tornata in vita! Puoi riprendere la tua avventura normalmente." to loop-player
 
 function openServerUtility(p: player):

@@ -28,7 +28,7 @@ command /stop:
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
         loop all players:
-            kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&lDisagio SMP &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l."
+            kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&l%{server.name}% &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l."
             wait 3 seconds
             execute console command "/minecraft:stop"
 

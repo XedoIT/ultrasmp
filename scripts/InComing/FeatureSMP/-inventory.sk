@@ -1,0 +1,176 @@
+#                                 Multi Inventory Storage [SKRIPT] for Spigot.MC 
+#                          If you have problems please contact me on discord: _thread (v2.0)
+
+options:
+#use UTF-8
+#main options:
+
+	PERMISSION: inv.admin
+	COMMAND: inv
+	PREFIX: &7&l→
+
+#language options:
+
+	not-PERMISSION: &cYou do not have permission to use this command!
+	opened-inv: &eOpened inventory
+	not-found-inv: &cNo inventory items for this player were found!
+	clear-inv: &eSaved items have been deleted
+	inv-gui-delete-name: &cDelete the items on this page!
+	inv-gui-next-name: &eNext &6&l→
+	inv-gui-back-name: &6&l← &eBack
+	all-inv-delete: &eAll inventories deleted! &8[&7Total:&a %{_g}%&8]
+	no-inv-added: &cNo inventory has been added yet!
+	not-found-page: &cPage &4&l%{_x}%&c not found!
+	enter-player-name: &cPlease enter a player name!
+	de-enderchest: &a%offline player arg 1%'s&e ender chest deleted!
+
+#------------------------------------------------------------------------------------------------------------------
+
+	INV-MAXIMUM-SAVE: 15     #Please enter only numbers here
+
+#Each time the player dies, if the number (INV-MAXIMUM-SAVE) you set exceeds the limit, 
+#it will start to be deleted from the beginning (1, 2, 3, 4...) and inventory records will continue to be taken. 
+#[WARNING] Ideally choose between 15-25. 
+#This way the use of variables is reduced. ^3^
+
+#------------------------------------------------------------------------------------------------------------------
+
+COMMAND {@COMMAND} [<text>] [<offline player>]:
+	trigger:
+		if player has PERMISSION "{@PERMISSION}":
+			if arg 1 is "enderchest":
+				if offline player arg is set:
+					open the offline player arg 1's ender chest to the player
+				else:
+					send "{@PREFIX} {@enter-player-name}"
+				stop
+			if arg 1 is "de-enderchest":
+				if offline player arg is set:
+					clear offline player arg 1's ender chest
+					send "{@PREFIX} {@de-enderchest}"
+				else:
+					send "{@PREFIX} {@enter-player-name}"
+				stop
+			if arg 1 is "delete":
+				if {inv::sahipleri::*} is set:
+					set {_g} to size of {inv::sahipleri::*}
+					delete {inv::*}
+					send "{@PREFIX} {@all-inv-delete}"
+				else:
+					send "{@PREFIX} {@no-inv-added}"
+				stop
+			if arg 1 is set:
+				if arg 1 is not "enderchest" or "de-enderchest" or "delete":
+					set {_x} to arg 1
+					if {inv::time::%arg 1%::%{inv::page::%arg 1%}%} is set:
+						set {inv::%player%::mainer} to {_x}
+						set {inv::%player%::page::manager} to 1
+						main_menu(player, "%{_x}%", "%{inv::%player%::page::manager}%")
+						send "{@PREFIX} {@opened-inv} &a%{_x}%!"
+					else:
+						send "{@PREFIX} {@not-found-inv}"
+					stop
+			if arg 1 is not set:
+				send "&8&l------------------------------------%nl%"
+				set {_g} to size of {inv::sahipleri::*}
+				send "{@PREFIX} &aThere are &6&l%{_g}%&a inventory saved!"
+				send "{@PREFIX} &e/{@COMMAND} &8(&bplayer&8)"
+				send "{@PREFIX} &e/{@COMMAND} delete &8(&aall&8|&bplayer&8)"
+				send "{@PREFIX} &e/{@COMMAND} enderchest&8&l | &ede-enderchest &8(&bplayer&8) %nl%"
+				send "&8&l------------------------------------"
+				stop
+		else:
+			send "{@PREFIX} {@not-PERMISSION}"
+		stop
+death of player:
+	save_inv(victim)
+function save_inv(p: player):
+	if {inv::page::%{_p}%} is not set:
+		set {inv::page::%{_p}%} to 1
+	else:
+		add 1 to {inv::page::%{_p}%}
+	set {inv::%{_p}%::%{inv::page::%{_p}%}%::*} to items in {_p}'s inventory
+	set {inv::time::%{_p}%::%{inv::page::%{_p}%}%} to now
+	if {inv::sahipleri::*} doesn't contain {_p}'s name:
+		add {_p} to {inv::sahipleri::*}
+	set {_index} to {@INV-MAXIMUM-SAVE}
+	if {inv::page::%{_p}%} >= {_index}:
+		delete({_p}, "%{_p}%", "1", "page")
+function main_menu(p: player, x: text, t: text):
+	wait 1 ticks
+	set metadata tag "main_menu" of {_p} to chest inventory with 6 rows named "&8%{_x}%&0 |&8 %{inv::time::%{_x}%::%{_t}%}% &0|&8 ##%{_t}%&8/%{inv::page::%{_x}%}%"
+	set slot 46, 47, 48, 50, 51 and 52 of metadata tag "main_menu" of {_p} to black stained glass pane named "&e"
+	set {_index} to {@INV-MAXIMUM-SAVE}
+	set slot 49 of metadata tag "main_menu" of {_p} to red stained glass pane of sharpness 1 named "{@inv-gui-delete-name}"
+	if {inv::page::%{_x}%} = {inv::%{_p}%::page::manager}:
+		set slot 53 of metadata tag "main_menu" of {_p} to black stained glass pane named "&e"
+	else:
+		set slot 53 of metadata tag "main_menu" of {_p} to light green stained glass pane named "{@inv-gui-next-name}"
+	if {inv::%{_p}%::page::manager} >= 2:
+		set slot 45 of metadata tag "main_menu" of {_p} to light green stained glass pane named "{@inv-gui-back-name}"
+	else:
+		set slot 45 of metadata tag "main_menu" of {_p} to black stained glass pane named "&e"
+		set slot 47 of metadata tag "main_menu" of {_p} to lava bucket named "&cDelete all pages"
+		set slot 51 of metadata tag "main_menu" of {_p} to ender chest named "&dOpen player's ender chest" with lore "" and "&eLeft click to open the player's" and  "&eender chest, right click to delete" and "&eit!"	
+	open (metadata tag "main_menu" of {_p}) to {_p}
+	set {_index} to 0
+	loop {inv::%{_x}%::%{_t}%::*}:
+		add 1 to {_index}
+		set slot {_index} -1 of metadata tag "main_menu" of {_p} to loop-value-1
+function delete(p: player, x: text, t: text, s: text):
+	if {_s} is "page":
+		delete {inv::%{_x}%::%{_t}%::*}
+		delete {inv::time::%{_x}%::%{inv::%{_t}%::page::manager}%}
+		loop {@INV-MAXIMUM-SAVE} times:
+			if {inv::%{_x}%::%loop-value%::*} is not set:
+				if {inv::%{_x}%::%loop-value +1%::*} is set:
+					set {inv::%{_x}%::%loop-value%::*} to {inv::%{_x}%::%loop-value +1%::*}
+					delete {inv::%{_x}%::%loop-value +1%::*}
+		remove 1 from {inv::page::%{_p}%}
+	else if {_s} is "all":
+		delete {inv::%{_x}%::*}
+		delete {inv::time::%{_x}%::*}
+		delete {inv::page::%{_x}%}
+		remove {_x} from {inv::sahipleri::*}
+		send "{@PREFIX} {@clear-inv}!" to {_p}
+inventory click:
+	if event-inventory = (metadata tag "main_menu" of player):
+		if index of event-slot is 51:
+			cancel event
+			if event-click type is left mouse button:
+				execute player command "{@COMMAND} enderchest %{inv::%player%::mainer}%"
+			else if event-click type is right mouse button:
+				close player's inventory
+				execute player command "{@COMMAND} de-enderchest %{inv::%player%::mainer}%"
+				stop
+		if event-item is lava bucket:
+			cancel event
+			close player's inventory
+			delete(player, "%{inv::%player%::mainer}%", "0", "all")
+		if name of event-item is "&e":
+			cancel event
+		if index of event-slot is 53:
+			cancel event
+			if event-slot is light green stained glass pane:
+				add 1 to {inv::%player%::page::manager}
+				if {inv::%{inv::%player%::mainer}%::%{inv::%player%::page::manager}%::*} is set:
+					main_menu(player, "%{inv::%player%::mainer}%", "%{inv::%player%::page::manager}%")
+				else:
+					remove 1 from {inv::%player%::page::manager}
+		if index of event-slot is 45:
+			cancel event
+			if event-slot is light green stained glass pane:
+				remove 1 from {inv::%player%::page::manager}
+				if {inv::%{inv::%player%::mainer}%::%{inv::%player%::page::manager}%::*} is set:
+					main_menu(player, "%{inv::%player%::mainer}%", "%{inv::%player%::page::manager}%")
+				else:
+					add 1 to {inv::%player%::page::manager}
+		if index of event-slot is 49:
+			cancel event
+			send "{@PREFIX} {@clear-inv} &8[&7Total: &a%size of {inv::%{inv::%player%::mainer}%::%{inv::%player%::page::manager}%::*}%&8]"
+			delete(player, "%{inv::%player%::mainer}%", "%{inv::%player%::page::manager}%", "page")
+			close inventory of player
+		stop
+quit:
+	if {inv::%player%::mainer} is set:
+		delete {inv::%player%::mainer}

@@ -1,0 +1,394 @@
+# VERSIONE 1.0.2 
+# NOVITÀ v1.0.2: MODIFICA NOME DEL SISTEMA E DELLE VARIABILI
+#
+# PERMESSI
+#
+# et.member.sethome
+# et.member.delhome
+# et.member.movehome
+# et.member.setmainhome
+# et.member.home
+# et.member.homes
+# et.member.homeinfo
+# et.member.homehelp
+# et.admin.homes
+# et.admin.homeinfo # NON ANCORA USATO
+# debug.commands
+#
+options:
+    prefix: &4[&6&lH&e&lO&6&lM&e&lE&6&lS&4]
+    no_perm_prefix: &4[&6&lS&e&lM&6&lP&4]
+
+variables:
+    {et.homes::%player%} = 0
+    #{et.homes_limit::%player%} = 3
+
+every second:
+    loop all players:
+        if loop-player's bed exists:
+            if {et.homes_name::%loop-player%::*} doesn't contain "bed":
+                set {et.homes_loc::%loop-player%::bed} to loop-player's bed location
+                add "bed" to {et.homes_name::%loop-player%::*}
+                add 1 to {et.homes::%loop-player%}
+                set {et.homes_whenset::%loop-player%::bed} to now
+        else:
+            if {et.homes_name::%loop-player%::*} contains "bed":
+                delete {et.homes_loc::%loop-player%::bed}
+                remove "bed" from {et.homes_name::%loop-player%::*}
+                subtract 1 from {et.homes::%loop-player%}
+                delete {et.homes_whenset::%loop-player%::bed}
+
+on bed leave:
+    if player's bed location is not {et.homes_loc::%player%::bed}:
+        set {et.homes_loc::%player%::bed} to player's bed location
+
+command /sethome [<text>]:
+    permission: et.member.sethome
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/sethome <&ecasa&6>&c.
+    description: Crea una casa alla tua posizione.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica un nome per questa casa!"
+                stop
+            else:
+                if arg-1 is not "bed":
+                    if {et.homes_name::%player%::*} doesn't contain arg-1:
+                        set {et.homes_loc::%player%::%arg-1%} to player's location
+                        add arg-1 to {et.homes_name::%player%::*}
+                        add 1 to {et.homes::%player%}
+                        set {et.homes_whenset::%player%::%arg-1%} to now
+                        send "{@prefix} &cHai creato la casa &6%arg-1%&c!"
+                        stop
+                    else:
+                        send "{@prefix} &cHai già una casa con quel nome!"
+                        stop
+                else:
+                    if {et.homes_name::%player%::*} doesn't contain arg-1:
+                        send "{@prefix} &cNon puoi usare il nome ""&6bed&c"" dato che verrà utilizzato non appena imposterai il tuo spawn su un letto!"
+                        stop
+                    else:
+                        send "{@prefix} &cHai già una casa con quel nome!"
+                        stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /delhome [<text>]:
+    permission: et.member.delhome
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/delhome <&ecasa&6>&c.
+    description: Elimina una delle tue case.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di una casa!"
+                stop
+            else:
+                if arg-1 is not "bed":
+                    if {et.homes_name::%player%::*} contains arg-1:
+                        delete {et.homes_loc::%player%::%arg-1%}
+                        remove arg-1 from {et.homes_name::%player%::*}
+                        subtract 1 from {et.homes::%player%}
+                        delete {et.homes_whenset::%player%::%arg-1%}
+                        if arg-1 is {et.homes_main_name.%player%}:
+                            delete {et.homes_main_name.%player%}
+                            delete {et.homes_main_loc.%player%}
+                        send "{@prefix} &cHai eliminato la casa &6%arg-1%&c."
+                        stop
+                    else:
+                        send "{@prefix} &cNon hai nessuna casa con quel nome!"
+                        stop
+                else:
+                    send "{@prefix} &cNon puoi eliminare la posizione del tuo letto!"
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /home [<text>]:
+    permission: et.member.home
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/home [&ecasa&6]&c.
+    description: Vai in una delle tue case.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if {et.homes::%player%} != 0:
+                    if {et.homes_loc::%player%::bed} is set:
+                        if {et.homes_main_loc.%player%} is not set:
+                            teleport player to {et.homes_loc::%player%::bed}
+                            if {settings.%player%.user.genre} is "%{male}%":
+                                send "{@prefix} &6Ti ho portato al tuo letto."
+                                stop
+                            else if {settings.%player%.user.genre} is "%{female}%":
+                                send "{@prefix} &6Ti ho portata al tuo letto."
+                                stop
+                        else:
+                            teleport player to {et.homes_main_loc.%player%}
+                            if {settings.%player%.user.genre} is "%{male}%":
+                                send "{@prefix} &6Ti ho portato alla tua casa principale &c%{et.homes_main_name.%player%}%&6."
+                                stop
+                            else if {settings.%player%.user.genre} is "%{female}%":
+                                send "{@prefix} &6Ti ho portata alla tua casa principale &c%{et.homes_main_name.%player%}%&6."
+                                stop
+                    else:
+                        send "{@prefix} &cSpecifica il nome di una casa!"
+                        stop
+                else:
+                    send "{@prefix} &cNon hai nessuna casa. Creane una con <suggest command:/sethome >&6&n/sethome<reset> &6<&ecasa&6>&c."
+                    stop
+            else:
+                if arg-1 is not "bed":
+                    if {et.homes_name::%player%::*} contains arg-1:
+                        teleport player to {et.homes_loc::%player%::%arg-1%}
+                        if {settings.%player%.user.genre} is "%{male}%":
+                            send "{@prefix} &6Ti ho portato alla casa &c%arg-1%&6."
+                            stop
+                        else if {settings.%player%.user.genre} is "%{female}%":
+                            send "{@prefix} &6Ti ho portata alla casa &c%arg-1%&6."
+                            stop
+                    else:
+                        send "{@prefix} &cNon hai nessuna casa con quel nome!"
+                        stop
+                else:
+                    teleport player to {et.homes_loc::%player%::bed}
+                    if {settings.%player%.user.genre} is "%{male}%":
+                        send "{@prefix} &6Ti ho portato al tuo letto."
+                        stop
+                    else if {settings.%player%.user.genre} is "%{female}%":
+                        send "{@prefix} &6Ti ho portata al tuo letto."
+                        stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /movehome [<text>]:
+    permission: et.member.movehome
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/movehome <&ecasa&6>&c.
+    description: Sposta una delle tue case alla tua posizione.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di una casa!"
+                stop
+            else:
+                if arg-1 is not "bed":
+                    if {et.homes_name::%player%::*} contains arg-1:
+                        if player's location is {et.homes_loc::%player%::%arg-1%}:
+                            send "{@prefix} &cLa tua posizione coincide con quella della casa che stai cercando di spostare!"
+                        else:
+                            set {et.homes_loc::%player%::%arg-1%} to player's location
+                            send "{@prefix} &cLa casa &6%arg-1% &cè stata spostata alla tua posizione."
+                            stop
+                    else:
+                        send "{@prefix} &cNon hai nessuna casa con quel nome!"
+                        stop
+                else:
+                    send "{@prefix} &cNon puoi spostare la posizione del tuo letto!"
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /setmainhome [<text>]:
+    permission: et.member.setmainhome
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/setmainhome <&ecasa&6>&c.
+    description: Imposta come principale una delle tue case.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di una casa!"
+                stop
+            else:
+                if arg-1 is not "bed":
+                    if {et.homes_name::%player%::*} contains arg-1:
+                        if arg-1 is not {et.homes_main_name.%player%}:
+                            set {et.homes_main_name.%player%} to arg-1
+                            set {et.homes_main_loc.%player%} to {et.homes_loc::%player%::%arg-1%}
+                            send "{@prefix} &6Hai impostato come principale la casa &c%arg-1%&6."
+                            stop
+                        else:
+                            send "{@prefix} &cLa casa &6%arg-1% &cè già la tua casa principale!"
+                            stop
+                    else:
+                        send "{@prefix} &cNon hai nessuna casa con quel nome!"
+                        stop
+                else:
+                    send "{@prefix} &cNon puoi impostare il tuo letto come casa principale!"
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /homes [<offline player>]:
+    permission: et.member.homes
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/homes&c.
+    description: Mostra tutte le tue case.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if {et.homes::%player%} = 0:
+                    send "{@prefix} &cNon hai nessuna casa. Creane una con <suggest command:/sethome >&6&n/sethome<reset>&6 <&ecasa&6>&c."
+                    stop
+                else if {et.homes::%player%} = 1:
+                    send "{@prefix} &e%{et.homes::%player%}% &6casa totale: &f%{et.homes_name::%player%::*}%"
+                    stop
+                else if {et.homes::%player%} > 1:
+                    send "{@prefix} &e%{et.homes::%player%}% &6case totali: &f%{et.homes_name::%player%::*}%"
+                    stop
+            else:
+                if player has permission "et.admin.homes":
+                    if {et.homes::%arg-1%} is set:
+                        if {et.homes::%arg-1%} = 0:
+                            send "{@prefix} &6%arg-1% &cnon ha nessuna casa."
+                            stop
+                        else if {et.homes::%arg-1%} = 1:
+                            send "{@prefix} &c%arg-1% &6ha &e%{et.homes::%arg-1%}% &6casa totale: &f%{et.homes_name::%arg-1%::*}%"
+                            stop
+                        else if {et.homes::%arg-1%} > 1:
+                            send "{@prefix} &c%arg-1% &6ha &e%{et.homes::%arg-1%}% &6case totali: &f%{et.homes_name::%arg-1%::*}%"
+                            stop
+                    else:
+                        send "{@prefix} &6%arg-1% &cnon ha nessuna casa."
+                        stop
+                else:
+                    if {et.homes::%player%} = 0:
+                        send "{@prefix} &cNon hai nessuna casa. Creane una con &6/sethome <&ecasa&6>&c."
+                        stop
+                    else if {et.homes::%player%} = 1:
+                        send "{@prefix} &e%{et.homes::%player%}% &6casa totale: &f%{et.homes_name::%player%::*}%"
+                        stop
+                    else if {et.homes::%player%} > 1:
+                        send "{@prefix} &e%{et.homes::%player%}% &6case totali: &f%{et.homes_name::%player%::*}%"
+                        stop
+        else:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di un giocatore!"
+                stop
+            else:
+                if {et.homes::%arg-1%} is set:
+                    if {et.homes::%arg-1%} = 0:
+                        send "{@prefix} &6%arg-1% &cnon ha nessuna casa."
+                        stop
+                    else if {et.homes::%arg-1%} = 1:
+                        send "{@prefix} &c%arg-1% &6ha &e%{et.homes::%arg-1%}% &6casa totale: &f%{et.homes_name::%arg-1%::*}%"
+                        stop
+                    else if {et.homes::%arg-1%} > 1:
+                        send "{@prefix} &c%arg-1% &6ha &e%{et.homes::%arg-1%}% &6case totali: &f%{et.homes_name::%arg-1%::*}%"
+                        stop
+                else:
+                    send "{@prefix} &6%arg-1% &cnon ha nessuna casa."
+                    stop
+
+command /homeinfo [<text>]:
+    permission: et.member.homeinfo
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/homeinfo [&ecasa&6]&c.
+    description: Mostra le informazioni di una o più case.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di una casa!"
+                stop
+            else:
+                if arg-1 is not "bed":
+                    if {et.homes_name::%player%::*} contains arg-1:
+                        send "&6----------- &c&lINFO CASA &6-----------"
+                        send " &fNome: &c%arg-1%"
+                        send " &fPosizione: &e%{et.homes_loc::%player%::%arg-1%}%"
+                        send " &fData creazione: &3%{et.homes_whenset::%player%::%arg-1%}%"
+                        if arg-1 is {et.homes_main_name.%player%}:
+                            send " &fPrincipale: &aSì"
+                        else:
+                            send " &fPrincipale: &cNo"
+                        send "&6---------------------------------"
+                        stop
+                    else:
+                        send "{@prefix} &cNon hai nessuna casa con quel nome!"
+                        stop
+                else:
+                    if player's bed exists:
+                        send "&6----------- &c&lINFO CASA &6-----------"
+                        send " &fNome: &c%arg-1% (&7AUTOMATICA&c)"
+                        send " &fPosizione: &e%player's bed location%"
+                        send " &fData creazione: &3%{et.homes_whenset::%player%::bed}%"
+                        if {et.homes_main_name.%player%} is not set:
+                            send " &fPrincipale: &aSì"
+                        else:
+                            send " &fPrincipale: &cNo"
+                        send "&6---------------------------------"
+                        stop
+                    else:
+                        send "{@prefix} &cNon hai ancora un letto!"
+                        stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+                    
+command /homehelp:
+    permission: et.member.homehelp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: &cComando o parametro sconosciuto. Utilizza &6/homehelp&c.
+    description: Mostra le informazioni di una o più case.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            send "&cLISTA COMANDI PER LE CASE"
+            send " &f- &6/sethome <&ecasa&6> &f- &7Crea una casa."
+            send " &f- &6/delhome <&ecasa&6> &f- &7Elimina una casa."
+            send " &f- &6/movehome <&ecasa&6> &f- &7Sposta una casa alla tua posizione."
+            send " &f- &6/setmainhome <&ecasa&6> &f- &7Imposta come principale una delle tue case."
+            send " &f- &6/home <&ecasa&6> &f- &7Vai in una delle tue case."
+            send " &f- &6/homes &f- &7Mostra tutte le tue case."
+            send " &f- &6/homeinfo <&ecasa&6> &f- &7Mostra le informazioni di una casa."
+            send " &f- &6/homehelp &f- &7Mostra questa lista."
+            stop
+        else:
+            send "&cLISTA COMANDI PER LE CASE"
+            send " &f- &6/homes <&egiocatore&6> &f- &7Mostra tutte le case di un giocatore."
+            #send " &f- &6/homeinfo <&ecasa&6> &f- &7Mostra le informazioni di una casa."
+            send " &f- &6/homehelp &f- &7Mostra questa lista."
+            stop
+
+on tab complete of "/home", "/delhome", "/movehome", "setmainhome" or "/homeinfo":
+    set tab completions for position 1 to {et.homes_name::%player%::*}
+
+on tab complete of "/homes":
+    if player doesn't have permission "et.admin.homes":
+        set tab completions for position 1 to ""
+
+# ZONA DEBUG
+command /resetallhomes [<offline player>]:
+    permission: debug.commands
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    trigger:
+        if arg-1 is not set:
+            delete {et.homes_loc::%player%::*}
+            delete {et.homes_name::%player%::*}
+            delete {et.homes_whenset::%player%::*}
+            delete {et.homes_main_loc.%player%}
+            delete {et.homes_main_name.%player%}
+            set {et.homes::%player%} to 0
+            send "&e&l[Debug] &fTutte le tue case e i relativi dati sono stati eliminati."
+            stop
+        else:
+            delete {et.homes_loc::%arg-1%::*}
+            delete {et.homes_name::%arg-1%::*}
+            delete {et.homes_whenset::%arg-1%::*}
+            delete {et.homes_main_loc.%arg-1%}
+            delete {et.homes_main_name.%arg-1%}
+            set {et.homes::%arg-1%} to 0
+            send "&e&l[Debug] &fTutte le case e i relativi dati di %arg-1% sono stati eliminati."
+            stop

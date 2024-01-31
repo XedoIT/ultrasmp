@@ -4,6 +4,8 @@ on right click:
 
 command /tprcompass:
     description: "Una bussola che ti teletrasporta? Ok!" 
+    permission: tprcompass.use
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
         give 1 compass named "&cTPR rapido &7(Click destro)" with lore "&7Teletrasportati in un punto", "&7a caso nel mondo con un" and "&7semplice click." to player
         play sound "entity.item.pickup" with volume 1 and pitch 2 at player for player

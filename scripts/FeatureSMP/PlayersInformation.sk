@@ -5,9 +5,6 @@ options:
     emoji_template: {display:{Name:""{\""text\"":\""Emoticon Smile\""}""},SkullOwner:{Id:[I;2002063258,-175029939,-2024958054,1439521797],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmQ2ZDVmZDUxMmEzNDdjOGM4Y2JhYjRjYzlhZjNlNTMyNDlkOGQyMWQ1N2Y0YWE1ZTIxZGE5MzgxZGFlNmYifX19""}]}}}
     no_flags: {HideFlags:255}
 
-    male: &9Maschio
-    female: &dFemmina
-
 on right click on player:
     if tool of player is air:
         if {settings.%player%.custom.playersinfo.self_to_other} is true:
@@ -27,9 +24,9 @@ function PlayersInformation(p: player, e: entity):
         set metadata tag "PlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "Profilo di %{_e}%"
         set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "PlayersInformationGUI" of {_p} to black stained glass pane named "&r"
         set slot 10, 12, 13, 14, 22, 23, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of metadata tag "PlayersInformationGUI" of {_p} to gray stained glass pane named "&r"
-        if {settings.%{_e}%.user.genre} is "{@male}":
+        if {settings.%{_e}%.user.genre} is "%{male}%":
             set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&9%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_e}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_e}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
-        else if {settings.%{_e}%.user.genre} is "{@female}":
+        else if {settings.%{_e}%.user.genre} is "%{female}%":
             set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&d%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_e}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_e}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
         if slot 39 of {_e}'s inventory is air:
             set slot 11 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_e}% &7non sta" and "&7indossando nessun elmetto."
@@ -60,13 +57,13 @@ function PlayersInformation(p: player, e: entity):
         set slot 24 of metadata tag "PlayersInformationGUI" of {_p} to iron pickaxe with nbt compound from "{@no_flags}" named "&aStatistiche minerarie" with lore " &c⛏ Blocchi distrutti&7: &f%{broken_blocks::%{_e}%}%" and " &b🔨 Blocchi piazzati&7: &f%{placed_blocks::%{_e}%}%"
         set slot 25 of metadata tag "PlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_e}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_e}%.last_obtained}%"
         set slot 33 of metadata tag "PlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_e}%}%"
-        set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "PlayersInformationGUI" of {_p} to {_p}
     else:
         set metadata tag "PlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "Profilo di %{_e}%"
-        if {settings.%{_e}%.user.genre} is "{@male}":
+        if {settings.%{_e}%.user.genre} is "%{male}%":
             set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&9%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_e}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_e}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
-        else if {settings.%{_e}%.user.genre} is "{@female}":
+        else if {settings.%{_e}%.user.genre} is "%{female}%":
             set slot 4 of metadata tag "PlayersInformationGUI" of {_p} to {_e}'s head named "&d%{_e}%" with lore "&7""%{status.%{_e}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_e}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_e}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_e}% livelli (&a%placeholder "player_current_exp" from {_e}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_e}%.first_login}%"
         if slot 39 of {_e}'s inventory is air:
             set slot 11 of metadata tag "PlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_e}% &7non sta" and "&7indossando nessun elmetto."
@@ -97,7 +94,7 @@ function PlayersInformation(p: player, e: entity):
         set slot 24 of metadata tag "PlayersInformationGUI" of {_p} to iron pickaxe with nbt compound from "{@no_flags}" named "&aStatistiche minerarie" with lore " &c⛏ Blocchi distrutti&7: &f%{broken_blocks::%{_e}%}%" and " &b🔨 Blocchi piazzati&7: &f%{placed_blocks::%{_e}%}%"
         set slot 25 of metadata tag "PlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_e}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_e}%.last_obtained}%"
         set slot 33 of metadata tag "PlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_e}%}%"
-        set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "PlayersInformationGUI" of {_p} to {_p}
 
 on inventory click:

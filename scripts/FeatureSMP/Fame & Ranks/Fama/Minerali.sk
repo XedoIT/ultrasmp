@@ -13,7 +13,7 @@ on mine of copper ore or deepslate copper ore:
     add {_fame} to {fame::%player%}
     send action bar "&5&lRAME &d+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
     stop    
-on mine of gold ore or deepslate gold ore:
+on mine of gold ore, deepslate gold ore or nether gold ore:
     set {_fame} to random number between 1.5 and 3
     add {_fame} to {fame::%player%}
     send action bar "&e&lORO &6+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
@@ -37,7 +37,12 @@ on mine of diamond ore or deepslate diamond ore:
     set {_fame} to random number between 8 and 16
     add {_fame} to {fame::%player%}
     send action bar "&b&lDIAMANTE &9+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
-    stop    
+    stop 
+on mine of nether quartz ore:
+    set {_fame} to random number between 2 and 3
+    add {_fame} to {fame::%player%}
+    send action bar "&f&lQUARZO &7+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    stop
 on mine of ancient debris:
     set {_fame} to random number between 40 and 80
     add {_fame} to {fame::%player%}

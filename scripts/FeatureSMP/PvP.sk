@@ -13,8 +13,8 @@ options:
 on load:
     if {pvp} is not set:
         set {pvp} to "{@no_fight}"
-    if {pvp_status} is not set:
-        set {pvp_status} to "{@no_fight}"
+    if {pvp} is not set:
+        set {pvp} to "{@no_fight}"
         
 command /pvp:
     permission: pvp.toggle
@@ -24,13 +24,13 @@ command /pvp:
     trigger:
         if {pvp} is "{@fight}":
             set {pvp} to "{@no_fight}"
-            set {pvp_status} to "{@no_fight}"
+            set {pvp} to "{@no_fight}"
             broadcast "{@no_fight_broadcast}"
             send action bar "{@no_fight_message}" to all players
             stop
         else if {pvp} is "{@no_fight}":
             set {pvp} to "{@fight}"
-            set {pvp_status} to "{@fight}"
+            set {pvp} to "{@fight}"
             broadcast "{@fight_broadcast}"
             send action bar "{@fight_message}" to all players
             stop

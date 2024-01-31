@@ -8,7 +8,7 @@ options:
 
 function openAXRnotifications(p: player):
    if {settings.%{_p}%.custom.glasspanes} is true:
-      if {axr.alerts} is not set:
+      if {axr.system.alerts} is not set:
          send "{@prefix} &cQuesta pagina non è disponibile se gli avvisi minerali sono disattivati." to {_p}
          send "{@prefix} &cVai su ""&dGestione minerali&c"" e clicca su ""&bAvvisi minerali&c"" per attivarli." to {_p}
          play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
@@ -21,9 +21,9 @@ function openAXRnotifications(p: player):
             set slot 12 of {_gui} to orange stained glass pane named "&r"
             set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
             set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{axr.offline_orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.autoalerts_info}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr::worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.system.alerts.info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.system.autoalerts}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr.worlds.enabled::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
             set slot 29 of {_gui} to writable book named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche", "&7riguardo i rilevamenti da parte del sistema", "&7per i giocatori che, durante la tua assenza,", "&7sono stati colti ad utilizzare l'Xray.", "&f", "&3Attualmente sono &cdisattivati&3.", "&f" and "&eClicca per attivarli."
             set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
             set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
@@ -38,9 +38,9 @@ function openAXRnotifications(p: player):
             set slot 12 of {_gui} to orange stained glass pane named "&r"
             set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
             set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{axr.offline_orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.autoalerts_info}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr::worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.system.alerts.info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.system.autoalerts}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr.worlds.enabled::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
             set slot 29 of {_gui} to writable book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche riguardo i", "&7rilevamenti da parte del sistema per i giocatori che,", "&7durante la tua assenza, sono stati colti ad utilizzare", "&7l'Xray.", "&f", "&3Attualmente sono &aattivati&3.", "&f", "&eClicca per disattivarli.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi offline, non riceverai più notifiche", "&csui rilevamenti che l'Anti-Xray effettua per i giocatori" and "&cche potrebbero star utilizzando l'Xray in tua assenza."
             set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
             set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
@@ -48,7 +48,7 @@ function openAXRnotifications(p: player):
             set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
             open {_gui} to {_p}
    else:
-      if {axr.alerts} is not set:
+      if {axr.system.alerts} is not set:
          send "{@prefix} &cQuesta pagina non è disponibile se gli avvisi minerali sono disattivati." to {_p}
          send "{@prefix} &cVai su ""&dGestione minerali&c"" e clicca su ""&bAvvisi minerali&c"" per attivarli." to {_p}
          play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
@@ -59,9 +59,9 @@ function openAXRnotifications(p: player):
             set slot 12 of {_gui} to orange stained glass pane named "&r"
             set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
             set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{axr.offline_orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.autoalerts_info}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr::worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.system.alerts.info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.system.autoalerts}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr.worlds.enabled::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
             set slot 29 of {_gui} to writable book named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche", "&7riguardo i rilevamenti da parte del sistema", "&7per i giocatori che, durante la tua assenza,", "&7sono stati colti ad utilizzare l'Xray.", "&f", "&3Attualmente sono &cdisattivati&3.", "&f" and "&eClicca per attivarli."
             set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
             set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
@@ -74,9 +74,9 @@ function openAXRnotifications(p: player):
             set slot 12 of {_gui} to orange stained glass pane named "&r"
             set slot 2 of {_gui} to oak sign named "&fMenu principale" with lore "&7Torna al menu principale dell'Anti-Xray."
             set slot 3 of {_gui} to book named "&e&l> &6&lNotifiche &e&l<" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{axr.offline_orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.autoalerts_info}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
-            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr::worlds::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+            set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.system.alerts.info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.system.autoalerts}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
+            set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr.worlds.enabled::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
             set slot 29 of {_gui} to writable book with nbt compound from "{HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}" named "&6Avvisi offline" with lore "&7Attiva o disattiva la ricezione delle notifiche riguardo i", "&7rilevamenti da parte del sistema per i giocatori che,", "&7durante la tua assenza, sono stati colti ad utilizzare", "&7l'Xray.", "&f", "&3Attualmente sono &aattivati&3.", "&f", "&eClicca per disattivarli.", "&f", "&4&lATTENZIONE!", "&cDisattivando gli avvisi offline, non riceverai più notifiche", "&csui rilevamenti che l'Anti-Xray effettua per i giocatori" and "&cche potrebbero star utilizzando l'Xray in tua assenza."
             set slot 30 of {_gui} to book named "&6Giocatori sospetti" with lore "&7Controlla la lista dei giocatori che secondo", "&7il sistema stavano utilizzando l'Xray durante" and "&7la tua assenza."
             set slot 32 of {_gui} to compass named "&cControlla giocatori offline" with lore "&7Visualizza quanti minerali ha scavato" and "&7un giocatore durante la tua assenza."
@@ -173,11 +173,11 @@ on inventory click:
             send "{@prefix} &cClicca su ""&6Avvisi offline&c"" per attivarli."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
          else:
-            if {checkofflineplayer.latest} isn't set:
+            if {axr.check.latest_offline_player} isn't set:
                close player's inventory
                send "{@prefix} &cSpecifica il nome del giocatore che vuoi controllare."
                play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-               set {axr_offlinelookup.%player%} to true
+               set {axr.check.offline_player.%player%} to true
             else:
                send "{@prefix} &cQualcun altro sta controllando i minerali di un giocatore."
                send "{@prefix} &cAttendi qualche istante prima di poter utilizzare questo comando."
@@ -192,7 +192,7 @@ on inventory click:
             close player's inventory
             send "{@prefix} &cSpecifica il nome del giocatore di cui vuoi azzerare i dati offline."
             play sound "{@check_sound}" with volume 1 and pitch 2 at player for player
-            set {axr_offlineclearall.%player%} to true
+            set {axr.clear.offline_player.%player%} to true
       else if index of event-slot is 49:
          cancel event
          openServerManagement(player)
@@ -204,98 +204,98 @@ on inventory click:
          openAXRnotifications(player)
       else if index of event-slot is 6:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_iron_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_iron_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_copper_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_copper_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_gold_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_gold_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_lapis_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_lapis_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_redstone_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_redstone_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_emerald_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_emerald_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_diamond_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_diamond_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_nether_quartz_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_nether_gold_ore} to 0
-         set {axr::%{checkofflineplayer.latest}%::offline_ancient_debris} to 0
-         send "{@prefix} &aHo azzerato il contatore di &b%{checkofflineplayer.latest}%&a."
+         set {axr::%{axr.check.latest_offline_player}%::offline_iron_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_iron_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_copper_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_copper_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_gold_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_gold_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_lapis_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_lapis_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_redstone_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_redstone_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_emerald_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_emerald_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_diamond_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_diamond_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_nether_quartz_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_nether_gold_ore} to 0
+         set {axr::%{axr.check.latest_offline_player}%::offline_ancient_debris} to 0
+         send "{@prefix} &aHo azzerato il contatore di &b%{axr.check.latest_offline_player}%&a."
          play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 19:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_iron_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_iron_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 20:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_copper_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_copper_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 21:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_gold_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_gold_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 22:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_redstone_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_redstone_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 23:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_lapis_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_lapis_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 24:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_emerald_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_emerald_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 25:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_diamond_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_diamond_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 28:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_iron_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_iron_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 29:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_copper_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_copper_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 30:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_gold_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_gold_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 31:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_redstone_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_redstone_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 32:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_lapis_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_lapis_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 33:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_emerald_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_emerald_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 34:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_deepslate_diamond_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_deepslate_diamond_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 39:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_nether_quartz_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_nether_quartz_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 40:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_nether_gold_ore} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_nether_gold_ore} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 41:
          cancel event
-         set {axr::%{checkofflineplayer.latest}%::offline_ancient_debris} to 0
-         openAXRofflineores(player, {checkofflineplayer.latest})
+         set {axr::%{axr.check.latest_offline_player}%::offline_ancient_debris} to 0
+         openAXRofflineores(player, {axr.check.latest_offline_player})
       else if index of event-slot is 49:
          cancel event
          openServerManagement(player)
 
 on inventory close:
    if event-inventory is (metadata tag "PlayerOfflineCounterGUI" of player):
-      delete {checkofflineplayer.latest}
+      delete {axr.check.latest_offline_player}

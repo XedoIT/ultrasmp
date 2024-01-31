@@ -32,10 +32,6 @@ options:
     done: &a✓
     not_done: &c❌
 
-  # SESSO GIOCATORE
-    male: &9Maschio
-    female: &dFemmina
-
 # MEDAGLIE: "GRANT"
 function MedalsGrant_Mining(p: player):
     set {medals.%{_p}%.mining} to "{@get}"
@@ -103,9 +99,9 @@ function MedalsGrant_Farmer(p: player):
     set {medals.%{_p}%.farmer.cocoa} to 1000
     set {medals.%{_p}%.farmer.nether_wart} to 1000
     set {medals.%{_p}%.farmer.when_get} to now
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aContadino"
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aContadina"
     add 1 to {medals.%{_p}%}
     add 150 to {fame::%{_p}%}
@@ -137,9 +133,9 @@ function MedalsGrant_Taming(p: player):
     set {medals.%{_p}%.taming.donkey} to "{@done}"
     set {medals.%{_p}%.taming.count} to 7
     set {medals.%{_p}%.taming.when_get} to now
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aAddestratore"
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aAddestratrice"
     add 1 to {medals.%{_p}%}
     add 150 to {fame::%{_p}%}
@@ -150,9 +146,9 @@ function MedalsGrant_Chatter(p: player):
     set {medals.%{_p}%.chatter} to "{@get}"
     set {medals.%{_p}%.chatter.messages} to 100000
     set {medals.%{_p}%.chatter.when_get} to now
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aChiacchierone"
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aChiacchierona"
     add 1 to {medals.%{_p}%}
     add 400 to {fame::%{_p}%}
@@ -176,9 +172,9 @@ function MedalsGrant_Suicide(p: player):
     set {medals.%{_p}%.last_obtained} to "&aSuicida"
     add 1 to {medals.%{_p}%}
     add 500 to {fame::%{_p}%}
-    execute console command "/lp user %{_p}% permission set at.member.back"
+    execute console command "/lp user %{_p}% permission set et.member.back"
     wait 1 tick
-    execute console command "/lp user %{_p}% permission set at.member.back.death"
+    execute console command "/lp user %{_p}% permission set et.member.back.death"
     play sound "{@medals_sound}" with volume 5 and pitch 2 at {_p} for {_p}
 
 function MedalsGrant_Forestboss(p: player):
@@ -188,10 +184,10 @@ function MedalsGrant_Forestboss(p: player):
     set {medals.%{_p}%.forestboss.birch} to 3000
     set {medals.%{_p}%.forestboss.when_get} to now
     set {medals.%{_p}%.forestboss.can_use_axe} to true
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aRe della Foresta"
         give 1 {@forestboss_axe_male} to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aRegina della Foresta"
         give 1 {@forestboss_axe_female} to {_p}
     add 1 to {medals.%{_p}%}
@@ -212,10 +208,10 @@ function MedalsGrant_Netherboss(p: player):
     set {medals.%{_p}%.netherboss} to "{@get}"
     set {medals.%{_p}%.netherboss.count} to 50
     set {medals.%{_p}%.netherboss.when_get} to now
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aRe degli Inferi"
         give 1 {@netherboss_male} to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aRegina degli Inferi"
         give 1 {@netherboss_female} to {_p}
     add 1 to {medals.%{_p}%}
@@ -227,10 +223,10 @@ function MedalsGrant_Dragontrainer(p: player):
     set {medals.%{_p}%.dragontrainer} to "{@get}"
     set {medals.%{_p}%.dragontrainer.count} to 50
     set {medals.%{_p}%.dragontrainer.when_get} to now
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aDomatore di Draghi"
         give 1 {@dragontrainer_male} to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aDomatrice di Draghi"
         give 1 {@dragontrainer_female} to {_p}
     add 1 to {medals.%{_p}%}
@@ -241,9 +237,9 @@ function MedalsGrant_Wardenboss(p: player):
     set {medals.%{_p}%.wardenboss} to "{@get}"
     set {medals.%{_p}%.wardenboss.count} to 10
     set {medals.%{_p}%.wardenboss.when_get} to now
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set {medals.%{_p}%.last_obtained} to "&aDevastatore di Sorveglianti"
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set {medals.%{_p}%.last_obtained} to "&aDevastatrice di Sorveglianti"
     add 1 to {medals.%{_p}%}
     add 1200 to {fame::%{_p}%}
@@ -292,9 +288,9 @@ function MedalBuilding_Message(p: player):
 
 function MedalFarmer_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadino" to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lContadina" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -314,9 +310,9 @@ function MedalFishing_Message(p: player):
 
 function MedalTaming_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratore" to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lAddestratrice" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -326,9 +322,9 @@ function MedalTaming_Message(p: player):
 
 function MedalChatter_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierone" to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lChiacchierona" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -356,9 +352,9 @@ function MedalSuicide_Message(p: player):
 
 function MedalForestboss_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe della Foresta" to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina della Foresta" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -377,9 +373,9 @@ function MedalSkylover_Message(p: player):
 
 function MedalNetherboss_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRe degli Inferi" to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lRegina degli Inferi" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -390,9 +386,9 @@ function MedalNetherboss_Message(p: player):
 
 function MedalDragontrainer_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatore di Draghi" to {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDomatrice di Draghi" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -402,9 +398,9 @@ function MedalDragontrainer_Message(p: player):
 
 function MedalWardenboss_Message(p: player):
     send "&6&m----------------------------------------" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatore di Sorveglianti" to {_p}
-    if {settings.%{_p}%.user.genre} is "{@female}":
+    if {settings.%{_p}%.user.genre} is "%{female}%":
         send " &b&k0 &eMedaglia ottenuta! &b&k0  &a&lDevastatrice di Sorveglianti" to {_p}
     send "&f" to {_p}
     send " &9Ricompense sbloccate:" to {_p}
@@ -528,8 +524,8 @@ function MedalsRevoke_Suicide(p: player):
     set {medals.%{_p}%.last_obtained} to "&7-"
     subtract 1 from {medals.%{_p}%}
     subtract 500 from {fame::%{_p}%}
-    execute console command "/lp user %{_p}% permission unset at.member.back"
-    execute console command "/lp user %{_p}% permission unset at.member.back.death"
+    execute console command "/lp user %{_p}% permission unset et.member.back"
+    execute console command "/lp user %{_p}% permission unset et.member.back.death"
 
 function MedalsRevoke_Forestboss(p: player):
     set {medals.%{_p}%.forestboss.total_logs} to 0

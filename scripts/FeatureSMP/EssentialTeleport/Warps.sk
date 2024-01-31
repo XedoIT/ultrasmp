@@ -1,0 +1,506 @@
+# VERSIONE 1.0.2
+# NOVITÀ v1.0.2: MODIFICA NOME DEL SISTEMA E DELLE VARIABILI
+#
+# PERMESSI
+#
+# et.member.warp
+# et.member.warps
+# et.member.warpinfo
+# et.member.warphelp
+# et.admin.setwarp
+# et.admin.setlockwarp
+# et.admin.delwarp
+# et.admin.dellockwarp
+# et.admin.movewarp
+# et.admin.movelockwarp
+# et.admin.lockwarp
+# et.admin.unlockwarp
+# et.admin.warpinfo
+# debug.commands
+#
+options:
+    prefix: &4[&6&lW&e&lA&6&lR&e&lP&6&lS&4]
+    no_perm_prefix: &4[&6&lS&e&lM&6&lP&4]
+
+variables:
+    {et.warps_total} = 0
+    {et.warps_free} = 0
+    {et.warps_lock} = 0
+
+command /setwarp [<text>]:
+    permission: et.admin.setwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/setwarp <&ewarp&6>&c.
+    description: Crea un warp non protetto alla tua posizione.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica un nome per questo warp!"
+                stop
+            else:
+                if {et.warps_name::*} doesn't contain arg-1:
+                    set {et.warps_loc::%arg-1%} to player's location
+                    set {et.warps_owner::%arg-1%} to player's name
+                    add arg-1 to {et.warps_name::*}
+                    add 1 to {et.warps_total}
+                    add 1 to {et.warps_free}
+                    set {et.warps_whenset::%arg-1%} to now
+                    send "{@prefix} &cHai creato il warp &6%arg-1%&c."
+                    stop
+                else:
+                    send "{@prefix} &cEsiste già un warp con quel nome!"
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /setlockwarp [<text>] [<text>]:
+    permission: et.admin.setlockwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/setlockwarp <&ewarp&6> <&epassword&6>&c.
+    description: Crea un warp protetto da password alla tua posizione.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica un nome per questo warp!"
+                stop
+            else:
+                if {et.warps_name::*} doesn't contain arg-1:
+                    if arg-2 is not set:
+                        send "{@prefix} &cScegli una password per questo warp!"
+                        stop
+                    else:
+                        set {et.warps_loc::%arg-1%} to player's location
+                        set {et.warps_owner::%arg-1%} to player's name
+                        add arg-1 to {et.warps_name::*}
+                        set {et.warps_lock::%arg-1%} to arg-2
+                        add 1 to {et.warps_total}
+                        add 1 to {et.warps_lock}
+                        set {et.warps_whenset::%arg-1%} to now
+                        send "{@prefix} &cHai creato il warp &6%arg-1% &ccon password &e%arg-2%&c."
+                        stop
+                else:
+                    send "{@prefix} &cEsiste già un warp con quel nome!"
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /delwarp [<text>]:
+    permission: et.admin.delwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/delwarp <&ewarp&6>&c.
+    description: Elimina un warp non protetto.
+    executable by: player, console
+    trigger:
+        if arg-1 is not set:
+            send "{@prefix} &cSpecifica il nome di un warp!"
+            stop
+        else:
+            if {et.warps_name::*} contains arg-1:
+                if {et.warps_lock::%arg-1%} is not set:
+                    delete {et.warps_loc::%arg-1%}
+                    remove arg-1 from {et.warps_name::*}
+                    subtract 1 from {et.warps_total}
+                    subtract 1 from {et.warps_free}
+                    send "{@prefix} &cHai eliminato il warp &6%arg-1%&c."
+                    stop
+                else:
+                    send "{@prefix} &cPuoi eliminare soltanto i warp non protetti!"
+                    send "{@prefix} &cPer eliminare i warp protetti utilizza <ttp:&fClicca qui per eseguire rapidamente il comando><suggest command:/dellockwarp >&6&n/dellockwarp<reset>&c."
+                    stop
+            else:
+                send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                stop
+
+command /dellockwarp [<text>] [<text>]:
+    permission: et.admin.dellockwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/dellockwarp <&ewarp&6> <&epassword&6>&c.
+    description: Elimina un warp protetto da password.
+    executable by: player, console
+    trigger:
+        if arg-1 is not set:
+            send "{@prefix} &cSpecifica il nome di un warp!"
+            stop
+        else:
+            if {et.warps_name::*} contains arg-1:
+                if arg-2 is not set:
+                    if {et.warps_lock::%arg-1%} is set:
+                        send "{@prefix} &cInserisci la password del warp!"
+                        stop
+                    else:
+                        send "{@prefix} &cPuoi eliminare soltanto i warp protetti!"
+                        send "{@prefix} &cPer eliminare i warp non protetti utilizza <ttp:&fClicca qui per eseguire rapidamente il comando><suggest command:/delwarp >&6&n/delwarp<reset>&c."
+                        stop
+                else:
+                    if {et.warps_name::*} contains arg-1:
+                        if {et.warps_lock::%arg-1%} is set:
+                            if arg-2 is {et.warps_lock::%arg-1%}:
+                                delete {et.warps_loc::%arg-1%}
+                                delete {et.warps_lock::%arg-1%}
+                                delete {et.warps_owner::%arg-1%}
+                                remove arg-1 from {et.warps_name::*}
+                                subtract 1 from {et.warps_total}
+                                subtract 1 from {et.warps_lock}
+                                send "{@prefix} &cHai eliminato il warp protetto &6%arg-1%&c."
+                                stop
+                            else:
+                                send "{@prefix} &cPassword non corretta! Riprova."
+                                stop
+                        else:
+                            send "{@prefix} &cPuoi eliminare soltanto i warp protetti!"
+                            send "{@prefix} &cPer eliminare i warp non protetti utilizza <ttp:&fClicca qui per eseguire rapidamente il comando><suggest command:/delwarp >&6&n/delwarp<reset>&c."
+                            stop
+            else:
+                send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                stop
+
+command /movewarp [<text>]:
+    permission: et.admin.movewarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/movewarp <&ewarp&6>&c.
+    description: Sposta un warp non protetto alla tua posizione.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di un warp!"
+                stop
+            else:
+                if {et.warps_name::*} contains arg-1:
+                    if {et.warps_lock::%arg-1%} is not set:
+                        if player's location is {et.warps_loc::%arg-1%}:
+                            send "{@prefix} &cLa tua posizione coincide con quella del warp che stai cercando di spostare!"
+                            stop
+                        else:
+                            set {et.warps_loc::%arg-1%} to player's location
+                            send "{@prefix} &cIl warp &6%arg-1% &cè stato spostato alla tua posizione."
+                            stop
+                    else:
+                        send "{@prefix} &cPuoi spostare soltanto i warp non protetti!"
+                        send "{@prefix} &cPer spostare i warp protetti utilizza <ttp:&fClicca qui per eseguire rapidamente il comando><suggest command:/movelockwarp >&6&n/movelockwarp<reset>&c."
+                        stop
+                else:
+                    send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                    stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /movelockwarp [<text>] [<text>]:
+    permission: et.admin.movelockwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/movelockwarp <&ewarp&6> <&epassword&6>&c.
+    description: Sposta un warp protetto da password alla tua posizione.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di un warp!"
+                stop
+            else:
+                if arg-2 is not set:
+                    if {et.warps_lock::%arg-1%} is set:
+                        send "{@prefix} &cInserisci la password del warp!"
+                        stop
+                    else:
+                        send "{@prefix} &cPuoi spostare soltanto i warp protetti!"
+                        send "{@prefix} &cPer spostare i warp non protetti utilizza <ttp:&fClicca qui per eseguire rapidamente il comando><suggest command:/movewarp >&6&n/movewarp<reset>&c."
+                        stop
+                else:
+                    if {et.warps_name::*} contains arg-1:
+                        if {et.warps_lock::%arg-1%} is set:
+                            if arg-2 is {et.warps_lock::%arg-1%}:
+                                if player's location is {et.warps_loc::%arg-1%}:
+                                    send "{@prefix} &cLa tua posizione coincide con quella del warp che stai cercando di spostare!"
+                                    stop
+                                else:
+                                    set {et.warps_loc::%arg-1%} to player's location
+                                    send "{@prefix} &cIl warp &6%arg-1% &cè stato spostato alla tua posizione."
+                                    stop
+                            else:
+                                send "{@prefix} &cPassword non corretta! Riprova."
+                                stop
+                        else:
+                            send "{@prefix} &cPuoi spostare soltanto i warp protetti!"
+                            send "{@prefix} &cPer spostare i warp non protetti utilizza <ttp:&fClicca qui per eseguire rapidamente il comando><suggest command:/movewarp >&6&n/movewarp<reset>&c."
+                            stop
+                    else:
+                        send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                        stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /lockwarp [<text>] [<text>]:
+    permission: et.admin.lockwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/lockwarp <&ewarp&6> <&epassword&6>&c.
+    description: Blocca un warp non protetto con una password.
+    executable by: player, console
+    trigger:
+        if arg-1 is not set:
+            send "{@prefix} &cSpecifica il nome di un warp!"
+            stop
+        else:
+            if {et.warps_name::*} contains arg-1:
+                if {et.warps_lock::%arg-1%} is not set:
+                    if arg-2 is not set:
+                        send "{@prefix} &cScegli una password con cui bloccare questo warp!"
+                        stop
+                    else:
+                        set {et.warps_lock::%arg-1%} to arg-2
+                        subtract 1 from {et.warps_free}
+                        add 1 to {et.warps_lock}
+                        send "{@prefix} &cHai protetto il warp &6%arg-1% &ccon la password &6%arg-2%&c."
+                        stop
+                else:
+                    send "{@prefix} &cIl warp &6%arg-1% &cè già protetto!"
+                    stop
+            else:
+                send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                stop
+
+command /unlockwarp [<text>] [<text>]:
+    permission: et.admin.unlockwarp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/unlockwarp <&ewarp&6> <&epassword&6>&c.
+    description: Sblocca un warp protetto e rendilo non protetto.
+    executable by: player, console
+    trigger:
+        if arg-1 is not set:
+            send "{@prefix} &cSpecifica il nome di un warp!"
+            stop
+        else:
+            if {et.warps_name::*} contains arg-1:
+                if {et.warps_lock::%arg-1%} is set:
+                    if arg-2 is not set:
+                        send "{@prefix} &cInserisci la password del warp &6%arg-1% &cper sbloccarlo!"
+                        stop
+                    if arg-2 is not {et.warps_lock::%arg-1%}:
+                        send "{@prefix} &cPassword non corretta! Riprova."
+                        stop
+                    else:
+                        delete {et.warps_lock::%arg-1%}
+                        subtract 1 from {et.warps_lock}
+                        add 1 to {et.warps_free}
+                        send "{@prefix} &cHai sbloccato il warp &6%arg-1%&c. Da adesso non è richiesta nessuna password per usarlo."
+                        stop
+                else:
+                    send "{@prefix} &cIl warp &6%arg-1% &cnon è protetto!"
+                    stop
+            else:
+                send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                stop
+
+command /warp [<text>] [<text>]:
+    permission: et.member.warp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/warp <&ewarp&6> [&epassword&6]&c.
+    description: Vai in un warp.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "{@prefix} &cSpecifica il nome di un warp!"
+                stop
+            else:
+                if {et.warps_name::*} contains arg-1:
+                    if arg-2 is not set:
+                        if {et.warps_lock::%arg-1%} is not set:
+                            teleport player to {et.warps_loc::%arg-1%}
+                            if {settings.%player%.user.genre} is "%{male}%":
+                                send "{@prefix} &6Ti ho portato al warp &c%arg-1%&6."
+                                stop
+                            else if {settings.%player%.user.genre} is "%{female}%":
+                                send "{@prefix} &6Ti ho portata al warp &c%arg-1%&6."
+                                stop
+                        else:
+                            send "{@prefix} &cIl warp &6%arg-1% &cè protetto da una password! Inseriscila per usarlo."
+                            stop
+                    else:
+                        if {et.warps_lock::%arg-1%} is not set:
+                            teleport player to {et.warps_loc::%arg-1%}
+                            if {settings.%player%.user.genre} is "%{male}%":
+                                send "{@prefix} &6Il warp &c%arg-1% &6non è protetto, quindi ti ci ho portato senza problemi."
+                                stop
+                            if {settings.%player%.user.genre} is "%{female}%":
+                                send "{@prefix} &6Il warp &c%arg-1% &6non è protetto, quindi ti ci ho portata senza problemi."
+                                stop
+                        else:
+                            if arg-2 is not {et.warps_lock::%arg-1%}:
+                                send "{@prefix} &cPassword del warp non corretta! &cRiprova."
+                                stop
+                            else:
+                                teleport player to {et.warps_loc::%arg-1%}
+                                if {settings.%player%.user.genre} is "%{male}%":
+                                    send "{@prefix} &aPassword del warp corretta! &6Ti ho portato al warp &c%arg-1%&6."
+                                    stop
+                                if {settings.%player%.user.genre} is "%{female}%":
+                                    send "{@prefix} &aPassword del warp corretta! &6Ti ho portata al warp &c%arg-1%&6."
+                                    stop
+                else:
+                    send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                    stop       
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /warps:
+    permission: et.member.warps
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/warps&c.
+    description: Mostra tutti i warp del server.
+    executable by: player, console
+    trigger:
+        if {et.warps_total} = 0:
+            send "{@prefix} &cNon sono stati creati warp (per ora)."
+            stop
+        else if {et.warps_total} = 1:
+            send "{@prefix} &e%{et.warps_total}% &6warp disponibile: &f%{et.warps_name::*}%&6."
+            stop
+        else if {et.warps_total} > 1:
+            send "{@prefix} &e%{et.warps_total}% &6warp disponibili: &f%{et.warps_name::*}%&6."
+            stop
+
+command /warpinfo [<text>]:
+    permission: et.member.warpinfo
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/warpinfo [&ewarp&6]&c.
+    description: Mostra le informazioni di uno o più warp.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if player has permission "et.admin.warpinfo":
+                    send "&6----------- &c&lINFO WARP &6-----------"
+                    send " &fWarp totali: &e%{et.warps_total}% &f(&7%{et.warps_name::*}%&f)"
+                    send ""
+                    send " &fWarp non protetti: &a%{et.warps_free}%"
+                    send " &fWarp protetti: &c%{et.warps_lock}%"
+                    send "&6---------------------------------"
+                    stop
+                else:
+                    send "{@prefix} &cSpecifica il nome di un warp!"
+                    stop
+            else:
+                if {et.warps_name::*} doesn't contain arg-1:
+                    send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                    stop
+                else:
+                    if player has permission "et.admin.warpinfo":
+                        send "&6----------- &c&lINFO WARP &6-----------"
+                        send " &fCreato da: &6%{et.warps_owner::%arg-1%}%"
+                        send " &fNome: &c%arg-1%"
+                        send " &fPosizione: &e%{et.warps_loc::%arg-1%}%"
+                        send " &fData creazione: &3%{et.warps_whenset::%arg-1%}%"
+                        if {et.warps_lock::%arg-1%} is not set:
+                            send " &fProtetto: &cNo"
+                            send " &fPassword: &b-"
+                        else:
+                            send " &fProtetto: &aSì"
+                            send " &fPassword: &b%{et.warps_lock::%arg-1%}%"
+                        send "&6---------------------------------"
+                        stop
+                    else:
+                        if player is {et.warps_owner::%arg-1%}:
+                            send "&6----------- &c&lINFO WARP &6-----------"
+                            send " &fCreato da: &6%{et.warps_owner::%arg-1%}%"
+                            send " &fNome: &c%arg-1%"
+                            send " &fPosizione: &e%{et.warps_loc::%arg-1%}%"
+                            send " &fData creazione: &3%{et.warps_whenset::%arg-1%}%"
+                            if {et.warps_lock::%arg-1%} is not set:
+                                send " &fProtetto: &cNo"
+                                send " &fPassword: &b-"
+                            else:
+                                send " &fProtetto: &aSì"
+                                send " &fPassword: &b%{et.warps_lock::%arg-1%}%"
+                            send "&6---------------------------------"
+                        else:
+                            send "{@prefix} &cSoltanto chi ha creato questo warp può visualizzarne le informazioni!"
+                            stop
+        else:
+            if arg-1 is not set:
+                send "&6----------- &c&lINFO WARP &6-----------"
+                send " &fWarp totali: &e%{et.warps_total}% &f(&7%{et.warps_name::*}%&f)"
+                send ""
+                send " &fWarp non protetti: &a%{et.warps_free}%"
+                send " &fWarp protetti: &c%{et.warps_lock}%"
+                send "&6---------------------------------"
+                stop
+            else:
+                if {et.warps_name::*} doesn't contain arg-1:
+                    send "{@prefix} &cNon esiste nessun warp con quel nome!"
+                    stop
+                else:
+                    send "&6----------- &c&lINFO WARP &6-----------"
+                    send " &fCreato da: &6%{et.warps_owner::%arg-1%}%"
+                    send " &fNome: &c%arg-1%"
+                    send " &fPosizione: &e%{et.warps_loc::%arg-1%}%"
+                    send " &fData creazione: &3%{et.warps_whenset::%arg-1%}%"
+                    if {et.warps_lock::%arg-1%} is not set:
+                        send " &fProtetto: &cNo"
+                        send " &fPassword: &b-"
+                    else:
+                        send " &fProtetto: &aSì"
+                        send " &fPassword: &b%{et.warps_lock::%arg-1%}%"
+                    send "&6---------------------------------"
+                    stop
+
+command /warphelp:
+    permission: et.member.warphelp
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/warphelp&c.
+    description: Mostra la lista di tutti i comandi disponibili per i warp.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            send "&cLISTA COMANDI PER I WARP"
+            send " &f- &6/setwarp <&ewarp&6> &f- &7Crea un warp non protetto."
+            send " &f- &6/setlockwarp <&ewarp&6> <&epassword&6> &f- &7Crea un warp protetto da password."
+            send " &f- &6/delwarp <&ewarp&6> &f- &7Elimina un warp non protetto."
+            send " &f- &6/dellockwarp <&ewarp&6> <&epassword&6> &f- &7Elimina un warp protetto da password."
+            send " &f- &6/movewarp <&ewarp&6> &f- &7Sposta un warp non protetto alla tua posizione."
+            send " &f- &6/movelockwarp <&ewarp&6> <&epassword&6> &f- &7Sposta un warp protetto alla tua posizione."
+            send " &f- &6/lockwarp <&ewarp&6> <&epassword&6> &f- &7Blocca un warp non protetto con una password."
+            send " &f- &6/unlockwarp <&ewarp&6> <&epassword&6> &f- &7Sblocca un warp protetto e rendilo non protetto."
+            send " &f- &6/warp <&ewarp&6> [&epassword&6] &f- &7Vai in un warp."
+            send " &f- &6/warps &f- &7Mostra tutti i warp del server."
+            send " &f- &6/warpinfo <&ewarp&6> &f- &7Mostra le informazioni di un determinato warp."
+            send " &f- &6/warphelp &f- &7Mostra questa lista."
+            stop
+        else:
+            send "&cLISTA COMANDI PER I WARP"
+            send " &f- &6/delwarp <&ewarp&6> &f- &7Elimina un warp non protetto."
+            send " &f- &6/dellockwarp <&ewarp&6> <&epassword&6> &f- &7Elimina un warp protetto da password."
+            send " &f- &6/lockwarp <&ewarp&6> <&epassword&6> &f- &7Blocca un warp non protetto con una password."
+            send " &f- &6/unlockwarp <&ewarp&6> <&epassword&6> &f- &7Sblocca un warp protetto e rendilo non protetto."
+            send " &f- &6/warps &f- &7Mostra tutti i warp del server."
+            send " &f- &6/warpinfo <&ewarp&6> &f- &7Mostra le informazioni di un determinato warp."
+            send " &f- &6/warphelp &f- &7Mostra questa lista."
+            stop
+
+on tab complete of "/warp", "/delwarp", "/dellockwarp", "/movewarp", "/movelockwarp", "lockwarp", "unlockwarp" or "/warpinfo":
+    set tab completions for position 1 to {et.warps_name::*}
+
+on tab complete of "/setlockwarp", "/dellockwarp", "/movelockwarp", "/lockwarp" or "/unlockwarp":
+    set tab completions for position 2 to "[<password>]"
+
+# ZONA DEBUG
+command /resetallwarps:
+    permission: debug.commands
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    trigger:
+        delete {et.warps_loc::*}
+        delete {et.warps_lock::*}
+        delete {et.warps_name::*}
+        delete {et.warps_owner::*}
+        delete {et.warps_whenset::*}
+        set {et.warps_total} to 0
+        set {et.warps_free} to 0
+        set {et.warps_lock} to 0
+        send "&e&l[Debug] &fTutti i warp e i relativi dati sono stati eliminati."
+        stop

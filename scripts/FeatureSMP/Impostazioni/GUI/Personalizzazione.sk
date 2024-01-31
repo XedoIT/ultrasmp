@@ -7,9 +7,6 @@ options:
     scoreboard_on: entity.player.levelup
     scoreboard_off: block.beacon.deactivate
     
-    male: &9Maschio
-    female: &dFemmina
-    
     no_flags: {HideFlags:255}
 
     no: &c✖
@@ -145,10 +142,10 @@ function openCustomPlayerSettingsGUI(p: player):
         set slot 16 of {_gui} to {_p}'s head named "&aProfilo giocatori" with lore "&7Consulta il profilo degli altri", "&7giocatori e fai competere le", "&7tue statistiche con le loro.", "&f", "&4&lATTENZIONE!", "&cAlcuni giocatori potrebbero", "&cimpedirti di consultare il", "&cproprio profilo a causa di", "&cun'impostazione per la privacy.", "&f", "&cPer saperne di più, vai su" and "&c""&fImpostazioni > &6Privacy&c""."
         set slot 29 of {_gui} to player head named "&aIndicatore danni giocatori" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un giocatore.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
         set slot 31 of {_gui} to zombie head named "&aIndicatore danni mob" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un mob.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
-        set slot 33 of {_gui} to oak sign named "&aMessaggi in/out" with lore "&7Seleziona uno tra tanti pacchetti", "&7di messaggi di ingresso e uscita" and "&7dal server e sfoggialo con orgoglio."
+        set slot 33 of {_gui} to oak sign named "&aMessaggi in/out" with lore "&7Seleziona uno tra tanti pacchetti", "&7di messaggi di ingresso e uscita", "&7dal server e sfoggialo con orgoglio.", "&f", "&c&oQuesta funzionalità è già attiva ma la", "&c&orelativa GUI ancora non è completa." and "&c&oPertanto, non può essere aperta."
         set slot 42 of {_gui} to paper named "&aMessaggi in/out" with lore "&eIn uso: %{logmsg.%{_p}%.info}%"
         set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
-        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         if {settings.%{_p}%.custom.glasspanes} is true:
             set slot 19 of {_gui} to lime dye named "&aSfondo GUI" with lore "{@turn_off}"
         else:
@@ -182,10 +179,10 @@ function openCustomPlayerSettingsGUI(p: player):
         set slot 16 of {_gui} to {_p}'s head named "&aProfilo giocatori" with lore "&7Consulta il profilo degli altri", "&7giocatori e fai competere le", "&7tue statistiche con le loro.", "&f", "&4&lATTENZIONE!", "&cAlcuni giocatori potrebbero", "&cimpedirti di consultare il", "&cproprio profilo a causa di", "&cun'impostazione per la privacy.", "&f", "&cPer saperne di più, vai su" and "&c""&fImpostazioni > &6Privacy&c""."
         set slot 29 of {_gui} to player head named "&aIndicatore danni giocatori" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un giocatore.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
         set slot 31 of {_gui} to zombie head named "&aIndicatore danni mob" with lore "&7Verrà mostrato un ammontare di", "&7danni inflitti ad un mob.", "&f", "&4&lATTENZIONE!", "&cSe questa opzione è disattivata", "&cnon verrà mostrato l'ammontare", "&cdi danni inflitti &c&lda parte tua&c,", "&cma verrà mostrato solo quello", "&cdei giocatori che, invece, hanno" and "&cattivato questa opzione."
-        set slot 33 of {_gui} to oak sign named "&aMessaggi in/out" with lore "&7Seleziona uno tra tanti pacchetti", "&7di messaggi di ingresso e uscita" and "&7dal server e sfoggialo con orgoglio."
+        set slot 33 of {_gui} to oak sign named "&aMessaggi in/out" with lore "&7Seleziona uno tra tanti pacchetti", "&7di messaggi di ingresso e uscita", "&7dal server e sfoggialo con orgoglio.", "&f", "&c&oQuesta funzionalità è già attiva ma la", "&c&orelativa GUI ancora non è completa." and "&c&oPertanto, non può essere aperta."
         set slot 42 of {_gui} to paper named "&aMessaggi in/out" with lore "&eIn uso: %{logmsg.%{_p}%.info}%"
         set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
-        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         if {settings.%{_p}%.custom.glasspanes} is true:
             set slot 19 of {_gui} to lime dye named "&aSfondo GUI" with lore "{@turn_off}"
         else:
@@ -263,7 +260,9 @@ on inventory click:
             else if index of event-slot is 33:
                 if click type is left mouse button:
                     cancel event
-                    openLogMessagesGui_1(player)
+                    send "{@prefix} &cQuesta GUI non è ancora disponibile! Riprova più tardi."
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                    #openLogMessagesGui_1(player)
                 else:
                     cancel event
             else if index of event-slot is 48:

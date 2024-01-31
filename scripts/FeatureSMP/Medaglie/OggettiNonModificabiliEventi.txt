@@ -1,0 +1,119 @@
+on inventory click:
+    if type of event-inventory is smithing inventory:
+        if slot 1 of event-inventory is {@mining_pickaxe}:
+            if index of event-slot is 3:
+                cancel event
+                if slot 3 of event-inventory is not air:
+                    set slot 3 of event-inventory to {@mining_pickaxe_smithing}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@carpenter_axe}:
+            if index of event-slot is 3:
+                cancel event
+                if slot 3 of event-inventory is not air:
+                    set slot 3 of event-inventory to {@carpenter_axe_smithing}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@forestboss_axe_male} and {@forestboss_axe_female}:
+            if index of event-slot is 3:
+                cancel event
+                if slot 3 of event-inventory is not air:
+                    if {settings.%player%.user.genre} is "%{male}%":
+                        set slot 3 of event-inventory to {@forestboss_axe_male_smithing}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.user.genre} is "%{female}%":
+                        set slot 3 of event-inventory to {@forestboss_axe_female_smithing}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+
+    else if type of event-inventory is grindstone inventory:
+        if slot 0 of event-inventory is {@mining_pickaxe}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    set slot 2 of event-inventory to {@mining_pickaxe_grindstone}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@mining_pickaxe}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    set slot 2 of event-inventory to {@mining_pickaxe_grindstone}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        if slot 0 of event-inventory is {@carpenter_axe}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    set slot 2 of event-inventory to {@carpenter_axe_grindstone}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@carpenter_axe}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    set slot 2 of event-inventory to {@carpenter_axe_grindstone}
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        if slot 0 of event-inventory is {@forestboss_axe_male}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.user.genre} is "%{male}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.user.genre} is "%{female}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@forestboss_axe_male}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.user.genre} is "%{male}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.user.genre} is "%{female}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        if slot 0 of event-inventory is {@forestboss_axe_female}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.user.genre} is "%{male}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.user.genre} is "%{female}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+        else if slot 1 of event-inventory is {@forestboss_axe_female}:
+            if index of event-slot is 2:
+                cancel event
+                if slot 2 of event-inventory is not air:
+                    if {settings.%player%.user.genre} is "%{male}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_male_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+                    else if {settings.%player%.user.genre} is "%{female}%":
+                        set slot 2 of event-inventory to {@forestboss_axe_female_grindstone}
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        #send "&cNon puoi modificare quest'oggetto se l'hai ottenuto come ricompensa da una medaglia!"
+
+on anvil prepare:
+    if event-item is {@mining_pickaxe}:
+        send "{@error_prefix} &cNon puoi modificare un oggetto ottenuto da una medaglia!" to player
+
+    else if event-item is {@carpenter_axe}:
+        send "{@error_prefix} &cNon puoi modificare un oggetto ottenuto da una medaglia!" to player
+
+    else if event-item is {@forestboss_axe_male}:
+        send "{@error_prefix} &cNon puoi modificare un oggetto ottenuto da una medaglia!" to player
+        
+    else if event-item is {@forestboss_axe_female}:
+        send "{@error_prefix} &cNon puoi modificare un oggetto ottenuto da una medaglia!" to player

@@ -1,0 +1,14 @@
+#
+# QUI SI TROVANO TUTTE LE VARIABILI GLOBALI PRESENTI NELLA ULTRA SMP.
+#
+
+variables:
+# GENERALI
+    {server.name} = "Ultra SMP"
+    {server.name.CAPS} = "ULTRA SMP"
+    {server_ip} = "-"
+    {server_port} = "-"
+
+# SESSO GIOCATORI
+    {male} = "&9Maschio"
+    {female} = "&dFemmina"

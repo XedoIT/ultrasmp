@@ -3,9 +3,6 @@ options:
 
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport
-    
-    male: &9Maschio
-    female: &dFemmina
 
     more_info: &eClicca per esplorare.
     wiki_link: &eClicca per visitare la Wiki dell'SMP.
@@ -13,38 +10,38 @@ options:
 
 function openMainWikiGUI(p: player):
     if {settings.%{_p}%.custom.glasspanes} is true:
-        if {settings.%{_p}%.user.genre} is "{@male}":
+        if {settings.%{_p}%.user.genre} is "%{male}%":
             set {_gui} to a new chest inventory with 6 rows named "Wiki dell'SMP [BETA]"
             set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
             set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
             set slot 4 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@gui_config}"#with lore "&7Clicca sulle seguenti categorie", "&7per scoprire i vari argomenti", "&7ed essere reindirizzato nella" and "&7loro rispettiva pagina."
             set slot 22 of {_gui} to paper named "&cWiki in creazione!" with lore "&7Questa GUI è in fase di creazione,", "&7pertanto dovrai aspettare prima", "&7di poterla utilizzare.", "&f" and "{@wiki_link}"
             set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
             open {_gui} to {_p}
-        else if {settings.%{_p}%.user.genre} is "{@female}":
+        else if {settings.%{_p}%.user.genre} is "%{female}%":
             set {_gui} to a new chest inventory with 6 rows named "Wiki dell'SMP [BETA]"
             set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
             set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&f"
             set slot 4 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@gui_config}"#with lore "&7Clicca sulle seguenti categorie", "&7per scoprire i vari argomenti", "&7ed essere reindirizzata nella" and "&7loro rispettiva pagina."
             set slot 22 of {_gui} to paper named "&cWiki in creazione!" with lore "&7Questa GUI è in fase di creazione,", "&7pertanto dovrai aspettare prima", "&7di poterla utilizzare.", "&f" and "{@wiki_link}"
             set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
             open {_gui} to {_p}
     else:
-        if {settings.%{_p}%.user.genre} is "{@male}":
+        if {settings.%{_p}%.user.genre} is "%{male}%":
             set {_gui} to a new chest inventory with 6 rows named "Wiki dell'SMP [BETA]"
             set slot 4 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@gui_config}"#with lore "&7Clicca sulle seguenti categorie", "&7per scoprire i vari argomenti", "&7ed essere reindirizzato nella" and "&7loro rispettiva pagina."
             set slot 22 of {_gui} to paper named "&cWiki in creazione!" with lore "&7Questa GUI è in fase di creazione,", "&7pertanto dovrai aspettare prima", "&7di poterla utilizzare.", "&f" and "{@wiki_link}"
             set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
             open {_gui} to {_p}
-        else if {settings.%{_p}%.user.genre} is "{@female}":
+        else if {settings.%{_p}%.user.genre} is "%{female}%":
             set {_gui} to a new chest inventory with 6 rows named "Wiki dell'SMP [BETA]"
             set slot 4 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@gui_config}"#with lore "&7Clicca sulle seguenti categorie", "&7per scoprire i vari argomenti", "&7ed essere reindirizzata nella" and "&7loro rispettiva pagina."
             set slot 22 of {_gui} to paper named "&cWiki in creazione!" with lore "&7Questa GUI è in fase di creazione,", "&7pertanto dovrai aspettare prima", "&7di poterla utilizzare.", "&f" and "{@wiki_link}"
             set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
             open {_gui} to {_p}
 
 on inventory click:

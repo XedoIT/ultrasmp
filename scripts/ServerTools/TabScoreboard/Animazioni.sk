@@ -2,362 +2,345 @@
 # TESTI ANIMATI PER TAB E SCOREBOARD
 #
 
-every 14 seconds: # DisagioSMP
-    loop all players:
-        if {animation.%loop-player%.DisagioSMP.status} is not set:
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&6&lD&e&lISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lD&6&lI&e&lSAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDI&6&lS&e&lAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDIS&6&lA&e&lGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISA&6&lG&e&lIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAG&6&lI&e&lO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGI&6&lO &e&lSMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO &6&lS&e&lMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO S&6&lM&e&lP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SM&6&lP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&f&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            set {animation.%loop-player%.DisagioSMP} to "&e&lDISAGIO SMP"
-            wait 10 ticks
-            delete {animation.%loop-player%.DisagioSMP.status}
+every 14 seconds: # UltraSMP
+    if {animation.UltraSMP.status} is not set:
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&6&lU&e&lLTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lU&6&lL&e&lTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lUL&6&lT&e&lRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULT&6&lR&e&lA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTR&6&lA &e&lSMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA&6&l S&e&lMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA S&6&lM&e&lP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SM&6&lP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&f&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        set {animation.UltraSMP} to "&e&lULTRA SMP"
+        wait 10 ticks
+        delete {animation.UltraSMP.status}
 every 198 ticks: # Benvenuto/Benvenuta
     loop all players:
-        if {settings.%loop-player%.user.genre} is "&9Maschio":
-            if {animation.%loop-player%.Benvenuto.status} is not set:
-                set {animation.%loop-player%.Benvenuto} to "&6&lB_"
+        if {settings.%loop-player%.user.genre} is "%{male}%":
+            if {animation.Benvenuto.status} is not set:
+                set {animation.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lB_"
+                set {animation.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBe_"
+                set {animation.Benvenuto} to "&6&lBe_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBen_"
+                set {animation.Benvenuto} to "&6&lBen_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenv_"
+                set {animation.Benvenuto} to "&6&lBenv_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenve_"
+                set {animation.Benvenuto} to "&6&lBenve_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenven_"
+                set {animation.Benvenuto} to "&6&lBenven_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenu_"
+                set {animation.Benvenuto} to "&6&lBenvenu_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenut_"
+                set {animation.Benvenuto} to "&6&lBenvenut_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenuto_"
+                set {animation.Benvenuto} to "&6&lBenvenuto_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenuto_"
+                set {animation.Benvenuto} to "&6&lBenvenuto_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenuto_"
+                set {animation.Benvenuto} to "&6&lBenvenuto_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenuto_"
+                set {animation.Benvenuto} to "&6&lBenvenuto_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenut_"
+                set {animation.Benvenuto} to "&6&lBenvenut_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenvenu_"
+                set {animation.Benvenuto} to "&6&lBenvenu_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenven_"
+                set {animation.Benvenuto} to "&6&lBenven_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenve_"
+                set {animation.Benvenuto} to "&6&lBenve_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBenv_"
+                set {animation.Benvenuto} to "&6&lBenv_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBen_"
+                set {animation.Benvenuto} to "&6&lBen_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lBe_"
+                set {animation.Benvenuto} to "&6&lBe_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lB_"
+                set {animation.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuto} to "&6&lB_"
+                set {animation.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
-                delete {animation.%loop-player%.Benvenuto.status}
-        else if {settings.%loop-player%.user.genre} is "&dFemmina":
-            if {animation.%loop-player%.Benvenuta.status} is not set:
-                set {animation.%loop-player%.Benvenuta} to "&6&lB_"
+                delete {animation.Benvenuto.status}
+        else if {settings.%loop-player%.user.genre} is "%{female}%":
+            if {animation.Benvenuta.status} is not set:
+                set {animation.Benvenuta} to "&6&lB_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lB_"
+                set {animation.Benvenuta} to "&6&lB_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBe_"
+                set {animation.Benvenuta} to "&6&lBe_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBen_"
+                set {animation.Benvenuta} to "&6&lBen_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenv_"
+                set {animation.Benvenuta} to "&6&lBenv_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenve_"
+                set {animation.Benvenuta} to "&6&lBenve_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenven_"
+                set {animation.Benvenuta} to "&6&lBenven_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenu_"
+                set {animation.Benvenuta} to "&6&lBenvenu_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenut_"
+                set {animation.Benvenuta} to "&6&lBenvenut_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenuta_"
+                set {animation.Benvenuta} to "&6&lBenvenuta_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenuta_"
+                set {animation.Benvenuta} to "&6&lBenvenuta_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenuta_"
+                set {animation.Benvenuta} to "&6&lBenvenuta_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenuta_"
+                set {animation.Benvenuta} to "&6&lBenvenuta_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenut_"
+                set {animation.Benvenuta} to "&6&lBenvenut_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenvenu_"
+                set {animation.Benvenuta} to "&6&lBenvenu_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenven_"
+                set {animation.Benvenuta} to "&6&lBenven_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenve_"
+                set {animation.Benvenuta} to "&6&lBenve_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBenv_"
+                set {animation.Benvenuta} to "&6&lBenv_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBen_"
+                set {animation.Benvenuta} to "&6&lBen_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lBe_"
+                set {animation.Benvenuta} to "&6&lBe_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lB_"
+                set {animation.Benvenuta} to "&6&lB_"
                 wait 9 ticks 
-                set {animation.%loop-player%.Benvenuta} to "&6&lB_"
+                set {animation.Benvenuta} to "&6&lB_"
                 wait 9 ticks 
-                delete {animation.%loop-player%.Benvenuta.status}
+                delete {animation.Benvenuta.status}
 
 every 145 ticks: # OverWorld
     loop all players:
-        if {animation.%loop-player%.OverWorld.status} is not set:
-            set {animation.%loop-player%.OverWorld} to "&b-&a--------------"
+        if {animation.OverWorld.status} is not set:
+            set {animation.OverWorld} to "&b-&a--------------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-&b-&a-------------"
+            set {animation.OverWorld} to "&a-&b-&a-------------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a--&b-&a------------"
+            set {animation.OverWorld} to "&a--&b-&a------------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a---&b-&a-----------"
+            set {animation.OverWorld} to "&a---&b-&a-----------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a----&b-&a----------"
+            set {animation.OverWorld} to "&a----&b-&a----------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-----&b-&a---------"
+            set {animation.OverWorld} to "&a-----&b-&a---------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a------&b-&a--------"
+            set {animation.OverWorld} to "&a------&b-&a--------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-------&b-&a-------"
+            set {animation.OverWorld} to "&a-------&b-&a-------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a--------&b-&a------"
+            set {animation.OverWorld} to "&a--------&b-&a------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a---------&b-&a-----"
+            set {animation.OverWorld} to "&a---------&b-&a-----"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a----------&b-&a----"
+            set {animation.OverWorld} to "&a----------&b-&a----"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-----------&b-&a---"
+            set {animation.OverWorld} to "&a-----------&b-&a---"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a------------&b-&a--"
+            set {animation.OverWorld} to "&a------------&b-&a--"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-------------&b-&a-"
+            set {animation.OverWorld} to "&a-------------&b-&a-"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a--------------&b-"
+            set {animation.OverWorld} to "&a--------------&b-"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-------------&b-&a-"
+            set {animation.OverWorld} to "&a-------------&b-&a-"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a------------&b-&a--"
+            set {animation.OverWorld} to "&a------------&b-&a--"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-----------&b-&a---"
+            set {animation.OverWorld} to "&a-----------&b-&a---"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a----------&b-&a----"
+            set {animation.OverWorld} to "&a----------&b-&a----"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a---------&b-&a-----"
+            set {animation.OverWorld} to "&a---------&b-&a-----"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a--------&b-&a------"
+            set {animation.OverWorld} to "&a--------&b-&a------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-------&b-&a-------"
+            set {animation.OverWorld} to "&a-------&b-&a-------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a------&b-&a--------"
+            set {animation.OverWorld} to "&a------&b-&a--------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-----&b-&a---------"
+            set {animation.OverWorld} to "&a-----&b-&a---------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a----&b-&a----------"
+            set {animation.OverWorld} to "&a----&b-&a----------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a---&b-&a-----------"
+            set {animation.OverWorld} to "&a---&b-&a-----------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a--&b-&a------------"
+            set {animation.OverWorld} to "&a--&b-&a------------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&a-&b-&a-------------"
+            set {animation.OverWorld} to "&a-&b-&a-------------"
             wait 5 ticks
-            set {animation.%loop-player%.OverWorld} to "&b-&a--------------"
+            set {animation.OverWorld} to "&b-&a--------------"
             wait 5 ticks
-            delete {animation.%loop-player%.OverWorld.status}
+            delete {animation.OverWorld.status}
 
 every 145 ticks: # Nether
     loop all players:
-        if {animation.%loop-player%.Nether.status} is not set:
-            set {animation.%loop-player%.Nether} to "&c-&5--------------"
+        if {animation.Nether.status} is not set:
+            set {animation.Nether} to "&c-&5--------------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-&c-&5-------------"
+            set {animation.Nether} to "&5-&c-&5-------------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5--&c-&5------------"
+            set {animation.Nether} to "&5--&c-&5------------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5---&c-&5-----------"
+            set {animation.Nether} to "&5---&c-&5-----------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5----&c-&5----------"
+            set {animation.Nether} to "&5----&c-&5----------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-----&c-&5---------"
+            set {animation.Nether} to "&5-----&c-&5---------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5------&c-&5--------"
+            set {animation.Nether} to "&5------&c-&5--------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-------&c-&5-------"
+            set {animation.Nether} to "&5-------&c-&5-------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5--------&c-&5------"
+            set {animation.Nether} to "&5--------&c-&5------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5---------&c-&5-----"
+            set {animation.Nether} to "&5---------&c-&5-----"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5----------&c-&5----"
+            set {animation.Nether} to "&5----------&c-&5----"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-----------&c-&5---"
+            set {animation.Nether} to "&5-----------&c-&5---"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5------------&c-&5--"
+            set {animation.Nether} to "&5------------&c-&5--"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-------------&c-&5-"
+            set {animation.Nether} to "&5-------------&c-&5-"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5--------------&c-"
+            set {animation.Nether} to "&5--------------&c-"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-------------&c-&5-"
+            set {animation.Nether} to "&5-------------&c-&5-"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5------------&c-&5--"
+            set {animation.Nether} to "&5------------&c-&5--"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-----------&c-&5---"
+            set {animation.Nether} to "&5-----------&c-&5---"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5----------&c-&5----"
+            set {animation.Nether} to "&5----------&c-&5----"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5---------&c-&5-----"
+            set {animation.Nether} to "&5---------&c-&5-----"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5--------&c-&5------"
+            set {animation.Nether} to "&5--------&c-&5------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-------&c-&5-------"
+            set {animation.Nether} to "&5-------&c-&5-------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5------&c-&5--------"
+            set {animation.Nether} to "&5------&c-&5--------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-----&c-&5---------"
+            set {animation.Nether} to "&5-----&c-&5---------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5----&c-&5----------"
+            set {animation.Nether} to "&5----&c-&5----------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5---&c-&5-----------"
+            set {animation.Nether} to "&5---&c-&5-----------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5--&c-&5------------"
+            set {animation.Nether} to "&5--&c-&5------------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&5-&c-&5-------------"
+            set {animation.Nether} to "&5-&c-&5-------------"
             wait 5 ticks
-            set {animation.%loop-player%.Nether} to "&c-&5--------------"
+            set {animation.Nether} to "&c-&5--------------"
             wait 5 ticks
-            delete {animation.%loop-player%.Nether.status}
+            delete {animation.Nether.status}
 
 every 145 ticks: # End
     loop all players:
-        if {animation.%loop-player%.End.status} is not set:
-            set {animation.%loop-player%.End} to "&5-&d--------------"
+        if {animation.End.status} is not set:
+            set {animation.End} to "&5-&d--------------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-&5-&d-------------"
+            set {animation.End} to "&d-&5-&d-------------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d--&5-&d------------"
+            set {animation.End} to "&d--&5-&d------------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d---&5-&d-----------"
+            set {animation.End} to "&d---&5-&d-----------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d----&5-&d----------"
+            set {animation.End} to "&d----&5-&d----------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-----&5-&d---------"
+            set {animation.End} to "&d-----&5-&d---------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d------&5-&d--------"
+            set {animation.End} to "&d------&5-&d--------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-------&5-&d-------"
+            set {animation.End} to "&d-------&5-&d-------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d--------&5-&d------"
+            set {animation.End} to "&d--------&5-&d------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d---------&5-&d-----"
+            set {animation.End} to "&d---------&5-&d-----"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d----------&5-&d----"
+            set {animation.End} to "&d----------&5-&d----"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-----------&5-&d---"
+            set {animation.End} to "&d-----------&5-&d---"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d------------&5-&d--"
+            set {animation.End} to "&d------------&5-&d--"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-------------&5-&d-"
+            set {animation.End} to "&d-------------&5-&d-"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d--------------&5-"
+            set {animation.End} to "&d--------------&5-"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-------------&5-&d-"
+            set {animation.End} to "&d-------------&5-&d-"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d------------&5-&d--"
+            set {animation.End} to "&d------------&5-&d--"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-----------&5-&d---"
+            set {animation.End} to "&d-----------&5-&d---"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d----------&5-&d----"
+            set {animation.End} to "&d----------&5-&d----"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d---------&5-&d-----"
+            set {animation.End} to "&d---------&5-&d-----"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d--------&5-&d------"
+            set {animation.End} to "&d--------&5-&d------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-------&5-&d-------"
+            set {animation.End} to "&d-------&5-&d-------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d------&5-&d--------"
+            set {animation.End} to "&d------&5-&d--------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-----&5-&d---------"
+            set {animation.End} to "&d-----&5-&d---------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d----&5-&d----------"
+            set {animation.End} to "&d----&5-&d----------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d---&5-&d-----------"
+            set {animation.End} to "&d---&5-&d-----------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d--&5-&d------------"
+            set {animation.End} to "&d--&5-&d------------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&d-&5-&d-------------"
+            set {animation.End} to "&d-&5-&d-------------"
             wait 5 ticks
-            set {animation.%loop-player%.End} to "&5-&d--------------"
+            set {animation.End} to "&5-&d--------------"
             wait 5 ticks
-            delete {animation.%loop-player%.End.status}
-
-on quit:
-    if {animation.%player%.DisagioSMP.status} is set:
-        delete {animation.%player%.DisagioSMP.status}
-    else if {animation.%player%.Benvenuto.status} is set:
-        delete {animation.%player%.Benvenuto.status}
-    else if {animation.%player%.Benvenuta.status} is set:
-        delete {animation.%player%.Benvenuta.status}
-    else if {animation.%player%.OverWorld.status} is set:
-        delete {animation.%player%.OverWorld.status}
-    else if {animation.%player%.Nether.status} is set:
-        delete {animation.%player%.Nether.status}
-    else if {animation.%player%.End.status} is set:
-        delete {animation.%player%.End.status}
+            delete {animation.End.status}
