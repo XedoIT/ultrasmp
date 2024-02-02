@@ -1,0 +1,85 @@
+#Better Death Vanilla - v1.0b - Created & Developed By Andr3wOntilt
+
+#Starting Script !!! WARNING !!! -> Edit this file only if you know what are you doing
+variables:
+    {betterdeath::%player%} = true
+
+options:
+	ASCII-Symbol-Heart: ♥
+
+on death of player:
+    loop all players:
+        if {betterdeath::%loop-player%} is true:
+            #Projectiles
+            if attacker is a player:
+                if projectile is set:
+                    set the death message to "&a%victim% &7was shoot by &c%attacker%&7! &8[&c%attacker's health%{@ASCII-Symbol-Heart}&8]"
+            #Mob
+            if attacker is not a player:
+                if attacker is set:
+                    set the death message to "&a%victim% &7killed by &c%attacker%&7! &8[&c%attacker's health%{@ASCII-Symbol-Heart}&8]"               
+            #Magic
+            if damage was caused by potion:
+                set the death message to "&a%victim% &7killed by magic."
+        else:
+            send "&6&l[&c&lBetter Death &a&lVanilla&6&l]&f I'm currently disabled, remember that for your custom death messages to appear you need to do -> /bd on" to console
+
+command /bd [<text>] [<offline player>] [<offline player>]:
+    permission: betterdeath.admin
+    permission message: &cYou do not have permission to do this command, Silly.
+    trigger:
+        if arg-1 is not set:
+            send "&6&l[&c&lBetter Death &a&lVanilla&6&l]&f /bd [reload/help/on/off]" to player
+        else:
+            if arg-1 is "help":
+                send "&1&l-----------------&6[&eHELP&6]&1&l-----------------"
+                send "&f&l-> &6/bd reload&f&l - &6Reload."
+                send "&f&l-> &6/bd on/off&f&l - &6Death messages On/Off."
+                send "&f&l-> &6/bd fakedeath&f&l - &6Sends a fake Death Message."
+                send "&1&l---------------------------------------"
+                stop trigger
+
+            else if arg-1 is "reload":
+                send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &f&l-> &e&lReloading..." to player
+                make console execute "sk reload better_death.sk"
+                send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &f&l-> &a&lReloaded!" to player
+                stop trigger
+
+            else if arg-1 is "off":
+                if {betterdeath::%player%} is true:
+                    set {betterdeath::%player%} to false
+                    send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &cDeath messages have been disabled." to player
+                    stop trigger
+                else:
+                    send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &cDeath messages are already disabled." to player
+                    stop trigger
+
+            else if arg-1 is "on":
+                if {betterdeath::%player%} is false:
+                    set {betterdeath::%player%} to true
+                    send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &aDeath messages have been enabled." to player
+                    stop trigger
+                else:
+                    send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &aDeath messages are already enabled." to player
+                    stop trigger
+
+            else if arg-1 is "fakedeath":
+                if arg-2 is not set:
+                    send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c/bd fakedeath [name 1] [name 2]"
+                    stop trigger
+                else:
+                    if arg-2 is online:
+                        if arg-3 is online:
+                            broadcast "&c%arg-3% &fdid not want to live in the same place as &c%arg-2%&f!"
+                            stop trigger
+                        else:
+                            send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c%arg-3% it's not online"
+                            stop trigger
+                    else:
+                        send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c%arg-2% it's not online"
+                        stop trigger
+
+                        if arg-3 is not set:
+                            send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c/bd fakedeath [nome vittima] [nome Attaccante]"
+                            stop trigger
+#End Script
