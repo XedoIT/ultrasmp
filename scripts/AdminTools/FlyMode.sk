@@ -6,12 +6,11 @@ options:
 
     on: &aSì
     off: &cNo
-    
-    male: &9Maschio
-    female: &dFemmina
 
 on join:
     CheckFlyOnLogin(player)
+    if {fly.%player%} is not "{@off}":
+        set {fly.%player%} to "{@off}"
 
 on death of player:
     CheckFlyOnDeath(victim)
@@ -115,11 +114,11 @@ function CheckFlyOnDeath(p: player):
         if {fly.%{_p}%} is "{@on}":
             set {_p}'s flight mode to false
             set {fly.%{_p}%} to "{@off}"
-            if {settings.%{_p}%.user.genre} is "{@male}":
+            if {settings.%{_p}%.user.genre} is "%{male}%":
                 send "" to {_p}
                 send "{@warn} &cSei morto con il volo abilitato! &cNon puoi più volare. {@warn}" to {_p}
                 send "" to {_p}
-            if {settings.%{_p}%.user.genre} is "{@female}":
+            if {settings.%{_p}%.user.genre} is "%{female}%":
                 send "" to {_p}
                 send "{@warn} &cSei morta con il volo abilitato! &cNon puoi più volare. {@warn}" to {_p}
                 send "" to {_p}

@@ -31,60 +31,60 @@ every second:
             set {_weather} to placeholder "rs_season_{@overworld}" from loop-player
             if time in "{@overworld}" is between 6:00 and 19:00:
                 if {_weather} is not "{@winter}" or "{@fall}":
-                    set {weather.%loop-player%} to "&e☀"
+                    set {rs_weather} to "&e☀"
                 else:
-                    set {weather.%loop-player%} to "&7☁"
+                    set {rs_weather} to "&7☁"
             else:
-                set {weather.%loop-player%} to "&9☽"
+                set {rs_weather} to "&9☽"
         if weather in "{@overworld}" is rain:
-            set {weather.%loop-player%} to "%{weather.%loop-player%.rain}%"
+            set {rs_weather} to "%{rs_weather.rain}%"
         if weather in "{@overworld}" is thunder:
-            set {weather.%loop-player%} to "%{weather.%loop-player%.thunder}%"
+            set {rs_weather} to "%{rs_weather.thunder}%"
 
 every tick:
     loop all players:
         set {_weekday} to placeholder "rs_weekday_{@overworld}" from loop-player
         if {_weekday} is "Lunedì":
-            set {week.%loop-player%.day} to "Lun"
+            set {week.day} to "Lun"
         else if {_weekday} is "Martedì":
-            set {week.%loop-player%.day} to "Mar"
+            set {week.day} to "Mar"
         else if {_weekday} is "Mercoledì":
-            set {week.%loop-player%.day} to "Mer"
+            set {week.day} to "Mer"
         else if {_weekday} is "Giovedì":
-            set {week.%loop-player%.day} to "Gio"
+            set {week.day} to "Gio"
         else if {_weekday} is "Venerdì":
-            set {week.%loop-player%.day} to "Ven"
+            set {week.day} to "Ven"
         else if {_weekday} is "Sabato":
-            set {week.%loop-player%.day} to "Sab"
+            set {week.day} to "Sab"
         else if {_weekday} is "Domenica":
-            set {week.%loop-player%.day} to "Dom"
+            set {week.day} to "Dom"
 
 every 5 seconds:
     loop all players:
         set {_weather_rain} to placeholder "rs_season_{@overworld}" from loop-player
         if {_weather_rain} is not "{@winter}":
-            set {weather.%loop-player%.rain} to "&b🌧"
+            set {rs_weather.rain} to "&b🌧"
             wait 2 seconds
-            set {weather.%loop-player%.rain} to "&3🌧"
+            set {rs_weather.rain} to "&3🌧"
         else:
-            set {weather.%loop-player%.rain} to "&b❄"
+            set {rs_weather.rain} to "&b❄"
             wait 2 seconds
-            set {weather.%loop-player%.rain} to "&3❄"
+            set {rs_weather.rain} to "&3❄"
 
 every 5 seconds:
     loop all players:
         set {_weather_thunder} to placeholder "rs_season_{@overworld}" from loop-player
-        set {weather.%loop-player%.thunder} to "&7⛈"
+        set {rs_weather.thunder} to "&7⛈"
         wait 2 seconds
-        set {weather.%loop-player%.thunder} to "&8⛈"
+        set {rs_weather.thunder} to "&8⛈"
 
 every tick:
     loop all players:
         if {scoreboard.%loop-player%} is true:
             if world of loop-player is "{@overworld}":
-                set title of loop-player's scoreboard to {animation.%loop-player%.DisagioSMP}
+                set title of loop-player's scoreboard to {animation.UltraSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
-                set line 2 of loop-player's scoreboard to "&fStagione %{weather.%loop-player%}%"
+                set line 2 of loop-player's scoreboard to "&fStagione %{rs_weather}%"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&b%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma"
@@ -97,11 +97,11 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%{week.%loop-player%.day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &b%placeholder "rs_time_smp" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%{week.day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &b%placeholder "rs_time_smp" from loop-player%"
             else if world of loop-player is "{@nether}":
-                set title of loop-player's scoreboard to {animation.%loop-player%.DisagioSMP}
+                set title of loop-player's scoreboard to {animation.UltraSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season_{@overworld}" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
-                set line 2 of loop-player's scoreboard to "&fStagione %{weather.%loop-player%}%"
+                set line 2 of loop-player's scoreboard to "&fStagione %{rs_weather}%"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&c%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma"
@@ -114,11 +114,11 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%{week.%loop-player%.day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &6%placeholder "rs_time_smp" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%{week.day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &6%placeholder "rs_time_smp" from loop-player%"
             else if world of loop-player is "{@end}":
-                set title of loop-player's scoreboard to {animation.%loop-player%.DisagioSMP}
+                set title of loop-player's scoreboard to {animation.UltraSMP}
                 set line 1 of loop-player's scoreboard to "%placeholder "rs_season_{@overworld}" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
-                set line 2 of loop-player's scoreboard to "&fStagione %{weather.%loop-player%}%"
+                set line 2 of loop-player's scoreboard to "&fStagione %{rs_weather}%"
                 set line 3 of loop-player's scoreboard to ""
                 set line 4 of loop-player's scoreboard to "&5%placeholder "player_biome_capitalized" from loop-player%"
                 set line 5 of loop-player's scoreboard to "&fBioma"
@@ -131,7 +131,7 @@ every tick:
                 set line 12 of loop-player's scoreboard to ""
                 set line 13 of loop-player's scoreboard to "&fVita: &c%placeholder "aureliumskills_hp" from loop-player%/%placeholder "aureliumskills_hp_max" from loop-player% ❤"
                 set line 14 of loop-player's scoreboard to ""
-                set line 15 of loop-player's scoreboard to "&7%{week.%loop-player%.day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &5%placeholder "rs_time_smp" from loop-player%"
+                set line 15 of loop-player's scoreboard to "&7%{week.day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &5%placeholder "rs_time_smp" from loop-player%"
         else:
             clear scoreboard of loop-player
 

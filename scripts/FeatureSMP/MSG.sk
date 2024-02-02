@@ -1,8 +1,5 @@
 options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
-
-    male: &9Maschio
-    female: &dFemmina
     
 on command "/tell":
     cancel event
@@ -10,8 +7,9 @@ on command "/tell":
     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
     wait 30 ticks
     send "{@prefix} &cUtilizza &6/msg <&egiocatore&6> <&emessaggio&6> &cper inviare messaggi privati."
-
-command /msg [<offline player>] [<text>]:
+    
+# CREAZIONE DI UNA VARIABILE CHE CONTIENE UN MESSAGGIO PRIVATO ALLA VOLTA DI UN GIOCATORE E DIVISIONE DEL COMANDO /r CON L'ELIMINAZIONE DELLA VARIABILE CREATA IN PRECEDENZA
+command /msg [<offline player>] [<text>]: 
     aliases: /r
     description: "Ti piacciono i messaggi privati?"
     executable by: player, console
@@ -47,10 +45,10 @@ command /msg [<offline player>] [<text>]:
                 stop
                 
             else if arg-1 is player:
-                if {settings.%player%.user.genre} is "{@male}":
+                if {settings.%player%.user.genre} is "%{male}%":
                     send "&cChe senso ha scrivere a te stesso?"
                     stop
-                else if {settings.%player%.user.genre} is "{@female}":
+                else if {settings.%player%.user.genre} is "%{female}%":
                     send "&cChe senso ha scrivere a te stessa?"
                     stop
                 

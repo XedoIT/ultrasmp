@@ -1,9 +1,6 @@
 options:
     prefix: &4[&e&lSTATUS&4]
     status: &cNessuno stato impostato.
-    
-    male: &9Maschio
-    female: &dFemmina
 
 on join:
     if {status.%player%} is not set:
@@ -46,12 +43,12 @@ command /status [<text>] [<text>]: #NUOVO PARAMETRO: "SETTEMP" E AGGIUNTA DI UN 
             else if arg-1 is "delete":
                 if arg-2 is not set:
                     if {status.%player%} is not "{@status}":
-                        if {settings.%player%.user.genre} is "{@male}":
+                        if {settings.%player%.user.genre} is "%{male}%":
                             send formatted "{@prefix} &cSei sicuro di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
                             play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
                             set {status.%player%.confirm} to true
                             stop
-                        if {settings.%player%.user.genre} is "{@female}":
+                        if {settings.%player%.user.genre} is "%{female}%":
                             send formatted "{@prefix} &cSei sicura di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
                             play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
                             set {status.%player%.confirm} to true

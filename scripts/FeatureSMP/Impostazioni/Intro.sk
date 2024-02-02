@@ -2,15 +2,14 @@ options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
     select: &eClicca per selezionare!
     selected: &aSELEZIONATO!
-
-    male: &9Maschio
-    female: &dFemmina
     
     glinted: {HideFlags:1,Enchantments:[{id:""minecraft:unbreaking"",lvl:1s}]}
 
 on join:
     if {settings.%player%.user.genre} is not set:
         GenrePrompt(player)
+        make player invulnerable
+        send "{@prefix} &c&lDurante la selezione del sesso, sei invulnerabile e i mostri ti ignoreranno!"
 
 function GenrePrompt(p: player):
     if {settings.%{_p}%.user.genre} is not set:
@@ -23,34 +22,34 @@ function GenrePrompt(p: player):
     if {settings.%{_p}%.user.genre} is not set:
         set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
         set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
-    if {settings.%{_p}%.user.genre} is "{@male}":
+    if {settings.%{_p}%.user.genre} is "%{male}%":
         set slot 20 of {_gui} to light blue stained glass pane with nbt compound from "{@glinted}" named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@selected}"
         set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
         set slot 24 of {_gui} to pink stained glass pane with nbt compound from "{@glinted}" named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@selected}"
     open {_gui} to {_p}
     
     
 function GenreSelectMale(p: player):
-    if {settings.%{_p}%.user.genre} is not "{@male}":
+    if {settings.%{_p}%.user.genre} is not "%{male}%":
         set {settings.%{_p}%.genre.male} to "{@selected}"
         set {settings.%{_p}%.genre.female} to "{@select}"
-        set {settings.%{_p}%.user.genre} to "{@male}"
+        set {settings.%{_p}%.user.genre} to "%{male}%"
         send "{@prefix} &9Da adesso tutti i tuoi messaggi saranno rivolti al maschile!" to {_p}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-    else if {settings.%{_p}%.user.genre} is "{@male}":
+    else if {settings.%{_p}%.user.genre} is "%{male}%":
         send "{@prefix} &cSei già identificato come un maschio!" to {_p}
         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at {_p} for {_p}
 
 function GenreSelectFemale(p: player):
-    if {settings.%{_p}%.user.genre} is not "{@female}":
+    if {settings.%{_p}%.user.genre} is not "%{female}%":
         set {settings.%{_p}%.genre.male} to "{@select}"
         set {settings.%{_p}%.genre.female} to "{@selected}"
-        set {settings.%{_p}%.user.genre} to "{@female}"
+        set {settings.%{_p}%.user.genre} to "%{female}%"
         send "{@prefix} &dDa adesso tutti i tuoi messaggi saranno rivolti al femminile!" to {_p}
         play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
-    else if {settings.%{_p}%.user.genre} is "{@female}":
+    else if {settings.%{_p}%.user.genre} is "%{female}%":
         send "{@prefix} &cSei già identificata come una femmina!" to {_p}
         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at {_p} for {_p}
 
@@ -86,9 +85,12 @@ on inventory click:
         else if index of event-slot is 40:
             cancel event
             close player's inventory
+            make player vulnerable
             send ""
             send "{@prefix} &aBuon divertimento nell'SMP, &b%player%&a!"
             send "{@prefix} &aL'avventura ti aspetta!"
+            send ""
+            send "{@prefix} &c&lAdesso sei vulnerabile e i mostri possono attaccarti!"
             send ""
             play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
             delete {settings.%player%.genre.male}
@@ -105,6 +107,8 @@ on inventory close:
 
 # ZONA DEBUG
 command /resetgenre:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     trigger:
         delete {settings.%player%.user.genre}
         delete {settings.%player%.genre.male}

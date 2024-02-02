@@ -1,16 +1,13 @@
 options:
     prefix: &4[&6&lS&e&lM&6&lP&4]
-    
-    male: &9Maschio
-    female: &dFemmina
 
 on join:
     if player has played before:
         if {settings.%player%.custom.joinmessage} is true:
-            if {settings.%player%.user.genre} is "{@male}":
+            if {settings.%player%.user.genre} is "%{male}%":
                 wait 20 ticks
                 send "" to player
-                send " &bBentornato nella Disagio SMP, &9%player%&b!" to player
+                send " &bBentornato nella %{server.name}%, &9%player%&b!" to player
                 if {players.online} = 1:
                     send " &6Al momento ci sei solo tu nel server." to player
                 else if {players.online} = 2:
@@ -26,10 +23,10 @@ on join:
                     send "  &7Sei rientrato nel bioma &b%placeholder "player_biome_capitalized" from player% &7alle coordinate &a%placeholder "player_x" from player% %placeholder "player_y" from player% %placeholder "player_z" from player%&7." to player
                     send "  &7La tua temperatura è di &e%placeholder "rs_temperature" from player%&7." to player
                 send "" to player
-            else if {settings.%player%.user.genre} is "{@female}":
+            else if {settings.%player%.user.genre} is "%{female}%":
                 wait 20 ticks
                 send "" to player
-                send " &dBentornata nella Disagio SMP, &5%player%&d!" to player
+                send " &dBentornata nella %{server.name}%, &5%player%&d!" to player
                 send "" to player
                 if {players.online} = 1:
                     send " &6Al momento ci sei solo tu nel server." to player

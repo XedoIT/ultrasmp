@@ -14,9 +14,6 @@ options:
 
     total_medals: 15
     
-    male: &9Maschio
-    female: &dFemmina
-    
 command /whois [<offline player>]:
     aliases: /playerinfo
     permission: whois.use
@@ -188,7 +185,7 @@ function OnlineWhoIsGUI(p: player, arg: player):
         set slot 15 of metadata tag "OnlineWhoIsGUI" of {_p} to book named "&6Tempo di gioco" with lore " &cTotale&7: &f%{playtime.%{_arg}%.total_days}% giorni, %{playtime.%{_arg}%.total_hours}% ore, %{playtime.%{_arg}%.total_minutes}% minuti e %{playtime.%{_arg}%.total_seconds}% secondi", " &aSessione&7: &f%{playtime.%{_arg}%.days}% giorni, &f%{playtime.%{_arg}%.hours}% ore, &f%{playtime.%{_arg}%.minutes}% minuti e &f%{playtime.%{_arg}%.seconds}% secondi", "", " &eAccessi effettuati&7: &f%{joins::%{_arg}%}%", " &eUscite effettuate&7: &f%{quits::%{_arg}%}%", "&f" and " &7Prima volta nel server&7: &f%{playtime.%{_arg}%.first_login}%"
         set slot 21 of metadata tag "OnlineWhoIsGUI" of {_p} to {gm.%{_arg}%.marker} named "&eInformazioni di gioco" with lore " &aModalità di gioco&7: %{gm.%{_arg}%}%"
         set slot 23 of metadata tag "OnlineWhoIsGUI" of {_p} to writable book named "&cConnettività" with lore " &eIndirizzo IP&7: &f/%{_player_ip}%" and " &6Ping&7: &f%{_arg}'s ping% ms"
-        set slot 40 of metadata tag "OnlineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of metadata tag "OnlineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OnlineWhoIsGUI" of {_p} to {_p}
     else:
         set metadata tag "OnlineWhoIsGUI" of {_p} to a new chest inventory with 5 rows named "&2| &rWhoIs: %{_arg}%"
@@ -199,7 +196,7 @@ function OnlineWhoIsGUI(p: player, arg: player):
         set slot 15 of metadata tag "OnlineWhoIsGUI" of {_p} to book named "&6Tempo di gioco" with lore " &cTotale&7: &f%{playtime.%{_arg}%.total_days}% giorni, %{playtime.%{_arg}%.total_hours}% ore, %{playtime.%{_arg}%.total_minutes}% minuti e %{playtime.%{_arg}%.total_seconds}% secondi", " &aSessione&7: &f%{playtime.%{_arg}%.days}% giorni, &f%{playtime.%{_arg}%.hours}% ore, &f%{playtime.%{_arg}%.minutes}% minuti e &f%{playtime.%{_arg}%.seconds}% secondi", "", " &eAccessi effettuati&7: &f%{joins::%{_arg}%}%", " &eUscite effettuate&7: &f%{quits::%{_arg}%}%", "&f" and " &7Prima volta nel server&7: &f%{playtime.%{_arg}%.first_login}%"
         set slot 21 of metadata tag "OnlineWhoIsGUI" of {_p} to {gm.%{_arg}%.marker} named "&eInformazioni di gioco" with lore " &aModalità di gioco&7: %{gm.%{_arg}%}%"
         set slot 23 of metadata tag "OnlineWhoIsGUI" of {_p} to writable book named "&cConnettività" with lore " &eIndirizzo IP&7: &f/%{_player_ip}%" and " &6Ping&7: &f%{_arg}'s ping% ms"
-        set slot 40 of metadata tag "OnlineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 40 of metadata tag "OnlineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OnlineWhoIsGUI" of {_p} to {_p}
 
 function OfflineWhoIsGUI(p: player, arg: offline player):
@@ -222,7 +219,7 @@ function OfflineWhoIsGUI(p: player, arg: offline player):
         set slot 13 of metadata tag "OfflineWhoIsGUI" of {_p} to redstone torch named "&3Condizioni giocatore" with lore " &6OP&7: %{_player_op}%", " &6Volo&7: %{fly.%{_arg}%}%" and " &6Immortale&7: %{god.%{_arg}%}%"
         set slot 14 of metadata tag "OfflineWhoIsGUI" of {_p} to {world.%{_arg}%.marker} named "&6Posizione" with lore " &fMondo&7: %{world.%{_arg}%}%", " &fCoordinate&7: &a%{position.%{_arg}%.x}% %{position.%{_arg}%.y}% %{position.%{_arg}%.z}%", " &fBioma&7: &b%{position.%{_arg}%.biome}%", "&f" and "{@click_teleport}"
         set slot 15 of metadata tag "OfflineWhoIsGUI" of {_p} to book named "&6Tempo di gioco" with lore " &cTotale&7: &f%{playtime.%{_arg}%.total_days}% giorni, %{playtime.%{_arg}%.total_hours}% ore, %{playtime.%{_arg}%.total_minutes}% minuti e %{playtime.%{_arg}%.total_seconds}% secondi", "", " &eAccessi effettuati&7: &f%{joins::%{_arg}%}%", " &eUscite effettuate&7: &f%{quits::%{_arg}%}%", "&f" and " &7Prima volta nel server&7: &f%{playtime.%{_arg}%.first_login}%"
-        set slot 31 of metadata tag "OfflineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 31 of metadata tag "OfflineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OfflineWhoIsGUI" of {_p} to {_p}
     else:
         set metadata tag "OfflineWhoIsGUI" of {_p} to a new chest inventory with 4 rows named "&4| &rWhoIs: %{_arg}%"
@@ -231,7 +228,7 @@ function OfflineWhoIsGUI(p: player, arg: offline player):
         set slot 13 of metadata tag "OfflineWhoIsGUI" of {_p} to redstone torch named "&3Condizioni giocatore" with lore " &6OP&7: %{_player_op}%", " &6Volo&7: %{fly.%{_arg}%}%" and " &6Immortale&7: %{god.%{_arg}%}%"
         set slot 14 of metadata tag "OfflineWhoIsGUI" of {_p} to {world.%{_arg}%.marker} named "&6Posizione" with lore " &fMondo&7: %{world.%{_arg}%}%", " &fCoordinate&7: &a%{position.%{_arg}%.x}% %{position.%{_arg}%.y}% %{position.%{_arg}%.z}%", " &fBioma&7: &b%{position.%{_arg}%.biome}%", "&f" and "{@click_teleport}"
         set slot 15 of metadata tag "OfflineWhoIsGUI" of {_p} to book named "&6Tempo di gioco" with lore " &cTotale&7: &f%{playtime.%{_arg}%.total_days}% giorni, %{playtime.%{_arg}%.total_hours}% ore, %{playtime.%{_arg}%.total_minutes}% minuti e %{playtime.%{_arg}%.total_seconds}% secondi", "", " &eAccessi effettuati&7: &f%{joins::%{_arg}%}%", " &eUscite effettuate&7: &f%{quits::%{_arg}%}%", "&f" and " &7Prima volta nel server&7: &f%{playtime.%{_arg}%.first_login}%"
-        set slot 31 of metadata tag "OfflineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 31 of metadata tag "OfflineWhoIsGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OfflineWhoIsGUI" of {_p} to {_p}
 
 function OnlinePlayersInformationGUI(p: player, arg: player):
@@ -239,9 +236,9 @@ function OnlinePlayersInformationGUI(p: player, arg: player):
         set metadata tag "OnlinePlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "&2| &rProfilo di %{_arg}%"
         set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "OnlinePlayersInformationGUI" of {_p} to black stained glass pane named "&r"
         set slot 10, 12, 13, 14, 22, 23, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of metadata tag "OnlinePlayersInformationGUI" of {_p} to gray stained glass pane named "&r"
-        if {settings.%{_arg}%.user.genre} is "{@male}":
+        if {settings.%{_arg}%.user.genre} is "%{male}%":
             set slot 4 of metadata tag "OnlinePlayersInformationGUI" of {_p} to {_arg}'s head named "&9%{_arg}%" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_arg}% livelli (&a%placeholder "player_current_exp" from {_arg}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
-        else if {settings.%{_arg}%.user.genre} is "{@female}":
+        else if {settings.%{_arg}%.user.genre} is "%{female}%":
             set slot 4 of metadata tag "OnlinePlayersInformationGUI" of {_p} to {_arg}'s head named "&d%{_arg}%" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_arg}% livelli (&a%placeholder "player_current_exp" from {_arg}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
         if slot 39 of {_arg}'s inventory is air:
             set slot 11 of metadata tag "OnlinePlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_arg}% &7non sta" and "&7indossando nessun elmetto."
@@ -273,13 +270,13 @@ function OnlinePlayersInformationGUI(p: player, arg: player):
         set slot 25 of metadata tag "OnlinePlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_arg}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_arg}%.last_obtained}%"
         set slot 33 of metadata tag "OnlinePlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_arg}%}%"
         set slot 48 of metadata tag "OnlinePlayersInformationGUI" of {_p} to arrow named "&aIndietro" with lore "&7Torna a WhoIs: %{_arg}%"
-        set slot 49 of metadata tag "OnlinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of metadata tag "OnlinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OnlinePlayersInformationGUI" of {_p} to {_p}
     else:
         set metadata tag "OnlinePlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "&2| &rProfilo di %{_arg}%"
-        if {settings.%{_arg}%.user.genre} is "{@male}":
+        if {settings.%{_arg}%.user.genre} is "%{male}%":
             set slot 4 of metadata tag "OnlinePlayersInformationGUI" of {_p} to {_arg}'s head named "&9%{_arg}%" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_arg}% livelli (&a%placeholder "player_current_exp" from {_arg}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
-        else if {settings.%{_arg}%.user.genre} is "{@female}":
+        else if {settings.%{_arg}%.user.genre} is "%{female}%":
             set slot 4 of metadata tag "OnlinePlayersInformationGUI" of {_p} to {_arg}'s head named "&d%{_arg}%" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%placeholder "player_level" from {_arg}% livelli (&a%placeholder "player_current_exp" from {_arg}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
         if slot 39 of {_arg}'s inventory is air:
             set slot 11 of metadata tag "OnlinePlayersInformationGUI" of {_p} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_arg}% &7non sta" and "&7indossando nessun elmetto."
@@ -311,7 +308,7 @@ function OnlinePlayersInformationGUI(p: player, arg: player):
         set slot 25 of metadata tag "OnlinePlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_arg}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_arg}%.last_obtained}%"
         set slot 33 of metadata tag "OnlinePlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_arg}%}%"
         set slot 48 of metadata tag "OnlinePlayersInformationGUI" of {_p} to arrow named "&aIndietro" with lore "&7Torna a WhoIs: %{_arg}%"
-        set slot 49 of metadata tag "OnlinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of metadata tag "OnlinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OnlinePlayersInformationGUI" of {_p} to {_p}
 
 function OfflinePlayersInformationGUI(p: player, arg: offline player):
@@ -319,9 +316,9 @@ function OfflinePlayersInformationGUI(p: player, arg: offline player):
         set metadata tag "OfflinePlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "&4| &rProfilo di %{_arg}%"
         set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of metadata tag "OfflinePlayersInformationGUI" of {_p} to black stained glass pane named "&r"
         set slot 10, 12, 13, 14, 22, 23, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of metadata tag "OfflinePlayersInformationGUI" of {_p} to gray stained glass pane named "&r"
-        if {settings.%{_arg}%.user.genre} is "{@male}":
+        if {settings.%{_arg}%.user.genre} is "%{male}%":
             set slot 4 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {_arg}'s head named "&9%{_arg}% &4[OFFLINE]" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%{offline.%{_arg}%.xp_level}% livelli (&a%{offline.%{_arg}%.xp}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
-        else if {settings.%{_arg}%.user.genre} is "{@female}":
+        else if {settings.%{_arg}%.user.genre} is "%{female}%":
             set slot 4 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {_arg}'s head named "&d%{_arg}% &4[OFFLINE]" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%{offline.%{_arg}%.xp_level}% livelli (&a%{offline.%{_arg}%.xp}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
         set slot 11 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {equip.%{_arg}%.helmet}
         set slot 20 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {equip.%{_arg}%.chestplate}
@@ -335,13 +332,13 @@ function OfflinePlayersInformationGUI(p: player, arg: offline player):
         set slot 25 of metadata tag "OfflinePlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_arg}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_arg}%.last_obtained}%"
         set slot 33 of metadata tag "OfflinePlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_arg}%}%"
         set slot 48 of metadata tag "OfflinePlayersInformationGUI" of {_p} to arrow named "&aIndietro" with lore "&7Torna a WhoIs: %{_arg}%"
-        set slot 49 of metadata tag "OfflinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of metadata tag "OfflinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OfflinePlayersInformationGUI" of {_p} to {_p}
     else:
         set metadata tag "OfflinePlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "&4| &rProfilo di %{_arg}%"
-        if {settings.%{_arg}%.user.genre} is "{@male}":
+        if {settings.%{_arg}%.user.genre} is "%{male}%":
             set slot 4 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {_arg}'s head named "&9%{_arg}% &4[OFFLINE]" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%{offline.%{_arg}%.xp_level}% livelli (&a%{offline.%{_arg}%.xp}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
-        else if {settings.%{_arg}%.user.genre} is "{@female}":
+        else if {settings.%{_arg}%.user.genre} is "%{female}%":
             set slot 4 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {_arg}'s head named "&d%{_arg}% &4[OFFLINE]" with lore "&7""%{status.%{_arg}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_arg}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_arg}%}%", "&f", " &a❉ EXP&7: &2%{offline.%{_arg}%.xp_level}% livelli (&a%{offline.%{_arg}%.xp}% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_arg}%.first_login}%"
         set slot 11 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {equip.%{_arg}%.helmet}
         set slot 20 of metadata tag "OfflinePlayersInformationGUI" of {_p} to {equip.%{_arg}%.chestplate}
@@ -355,7 +352,7 @@ function OfflinePlayersInformationGUI(p: player, arg: offline player):
         set slot 25 of metadata tag "OfflinePlayersInformationGUI" of {_p} to sunflower with nbt compound from "{@glinted}" named "&eMedaglie" with lore " &6۞ Ottenute&7: &f%{medals.%{_arg}%}%" and " &e✪ Ultima ottenuta&7: &f%{medals.%{_arg}%.last_obtained}%"
         set slot 33 of metadata tag "OfflinePlayersInformationGUI" of {_p} to player head with nbt compound from "{@emoji_template}" named "&eEmoji" with lore " &b☺ Sbloccate&7: &f%{emojis.%{_arg}%}%"
         set slot 48 of metadata tag "OfflinePlayersInformationGUI" of {_p} to arrow named "&aIndietro" with lore "&7Torna a WhoIs: %{_arg}%"
-        set slot 49 of metadata tag "OfflinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 49 of metadata tag "OfflinePlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         open metadata tag "OfflinePlayersInformationGUI" of {_p} to {_p}
         
 on inventory click:

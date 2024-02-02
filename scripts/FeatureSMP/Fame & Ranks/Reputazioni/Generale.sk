@@ -26,14 +26,11 @@ options:
     no_effect: &7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno.
     no_effect_self: &7Non hai nessun effetto perché sei neutrale&7. Cambia reputazione per ottenerne uno.
     no_effect_other: &c%arg-2% &7non ha nessun effetto perché è neutrale&7.
-    
-    male: &9Maschio
-    female: &dFemmina
 
 every second:
     loop all players:
-        if {fame.%loop-player%.rank.alignment-5}, {fame.%loop-player%.rank.alignment-4}, {fame.%loop-player%.rank.alignment-3}, {fame.%loop-player%.rank.alignment-2}, {fame.%loop-player%.rank.alignment-1}, {fame.%loop-player%.rank.alignment0}, {fame.%loop-player%.rank.alignment1_1}, {fame.%loop-player%.rank.alignment1_2}, {fame.%loop-player%.rank.alignment2_1}, {fame.%loop-player%.rank.alignment2_2}, {fame.%loop-player%.rank.alignment3_1}, {fame.%loop-player%.rank.alignment3_2}, {fame.%loop-player%.rank.alignment4_1}, {fame.%loop-player%.rank.alignment4_2}, {fame.%loop-player%.rank.alignment5_1} and {fame.%loop-player%.rank.alignment5_2} is not set:
-            if {settings.%loop-player%.user.genre} is "{@male}":
+        if {fame.%loop-player%.rank.alignment-5}, {fame.%loop-player%.rank.alignment-4}, {fame.%loop-player%.rank.alignment-3}, {fame.%loop-player%.rank.alignment-2}, {fame.%loop-player%.rank.alignment-1}, {fame.%loop-player%.rank.alignment0}, {fame.%loop-player%.rank.alignment1_1}, {fame.%loop-player%.rank.alignment1_2}, {fame.%loop-player%.rank.alignment2_1}, {fame.%loop-player%.rank.alignment2_2}, {fame.%loop-player%.rank.alignment3_1}, {fame.%loop-player%.rank.alignment3_2}, {fame.%loop-player%.rank.alignment4_1}, {fame.%loop-player%.rank.alignment4_2}, {fame.%loop-player%.rank.alignment5_1} or {fame.%loop-player%.rank.alignment5_2} is not set:
+            if {settings.%loop-player%.user.genre} is "%{male}%":
                 set {fame.%loop-player%.rank.alignment-5} to "&4&lMalvagio"
                 set {fame.%loop-player%.rank.alignment-4} to "&c&lPessimo"
                 set {fame.%loop-player%.rank.alignment-1} to "&8&lAggressivo"
@@ -43,7 +40,7 @@ every second:
                 set {fame.%loop-player%.rank.alignment3_2} to "&3&lPuro&e⁺"
                 set {fame.%loop-player%.rank.alignment5_1} to "&b&lSupremo"
                 set {fame.%loop-player%.rank.alignment5_2} to "&b&lSupremo&e⁺"
-            else if {settings.%loop-player%.user.genre} is "{@female}":
+            else if {settings.%loop-player%.user.genre} is "%{female}%":
                 set {fame.%loop-player%.rank.alignment-5} to "&4&lMalvagia"
                 set {fame.%loop-player%.rank.alignment-4} to "&c&lPessima"
                 set {fame.%loop-player%.rank.alignment-1} to "&8&lAggressiva"
@@ -406,10 +403,10 @@ every tick:
                 if {fame::%loop-player%} > -50000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-4}
                     set {fame.%loop-player%.rankprefix} to "&4[&c&lP&4]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -417,20 +414,20 @@ every tick:
                 if {fame::%loop-player%} < -49999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-5}
                     set {fame.%loop-player%.rankprefix} to "&c[&4&lM&c]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
 
                 else if {fame::%loop-player%} > -29999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-3}
                     set {fame.%loop-player%.rankprefix} to "&e[&6&lV&e]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
             
@@ -438,19 +435,19 @@ every tick:
                 if {fame::%loop-player%} < -29999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-4}
                     set {fame.%loop-player%.rankprefix} to "&4[&c&lP&4]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > -9999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-2}
                     set {fame.%loop-player%.rankprefix} to "&6[&e&lS&6]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
             
@@ -458,19 +455,19 @@ every tick:
                 if {fame::%loop-player%} < -9999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-3}
                     set {fame.%loop-player%.rankprefix} to "&e[&6&lV&e]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > -7499:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-1}
                     set {fame.%loop-player%.rankprefix} to "&7[&8&lA&7]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
         
@@ -478,19 +475,19 @@ every tick:
                 if {fame::%loop-player%} < -7499:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-2}
                     set {fame.%loop-player%.rankprefix} to "&6[&e&lS&6]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > -5500:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment0}
                     set {fame.%loop-player%.rankprefix} to "&8[&7&lN&8]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -498,19 +495,19 @@ every tick:
                 if {fame::%loop-player%} < -5499:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment-1}
                     set {fame.%loop-player%.rankprefix} to "&7[&8&lA&7]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 5499:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_1}
                     set {fame.%loop-player%.rankprefix} to "&2[&a&lG&2]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 
@@ -518,19 +515,19 @@ every tick:
                 if {fame::%loop-player%} < 5500:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment0}
                     set {fame.%loop-player%.rankprefix} to "&8[&7&lN&8]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 9999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_2}
                     set {fame.%loop-player%.rankprefix} to "&2[&a&lG&e⁺&2]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -538,19 +535,19 @@ every tick:
                 if {fame::%loop-player%} < 10000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_1}
                     set {fame.%loop-player%.rankprefix} to "&2[&a&lG&2]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 49999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_1}
                     set {fame.%loop-player%.rankprefix} to "&a[&2&lB&a]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -558,19 +555,19 @@ every tick:
                 if {fame::%loop-player%} < 50000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment1_2}
                     set {fame.%loop-player%.rankprefix} to "&2[&a&lG&e⁺&2]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 74999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_2}
                     set {fame.%loop-player%.rankprefix} to "&a[&2&lB&e⁺&a]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -578,19 +575,19 @@ every tick:
                 if {fame::%loop-player%} < 75000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_1}
                     set {fame.%loop-player%.rankprefix} to "&a[&2&lB&a]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 99999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_1}
                     set {fame.%loop-player%.rankprefix} to "&f[&3&lP&f]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -598,19 +595,19 @@ every tick:
                 if {fame::%loop-player%} < 100000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment2_2}
                     set {fame.%loop-player%.rankprefix} to "&a[&2&lB&e⁺&a]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 124999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_2}
                     set {fame.%loop-player%.rankprefix} to "&f[&3&lP&e⁺&f]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -619,19 +616,19 @@ every tick:
                 if {fame::%loop-player%} < 125000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_1}
                     set {fame.%loop-player%.rankprefix} to "&f[&3&lP&f]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 199999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_1}
                     set {fame.%loop-player%.rankprefix} to "&b[&9&lM&b]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -639,19 +636,19 @@ every tick:
                 if {fame::%loop-player%} < 200000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment3_2}
                     set {fame.%loop-player%.rankprefix} to "&f[&3&lP&e⁺&f]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 249999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_2}
                     set {fame.%loop-player%.rankprefix} to "&b[&9&lM&e⁺&b]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -659,19 +656,19 @@ every tick:
                 if {fame::%loop-player%} < 250000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_1}
                     set {fame.%loop-player%.rankprefix} to "&b[&9&lM&b]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 499999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment5_1}
                     set {fame.%loop-player%.rankprefix} to "&9[&b&lS&9]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 
@@ -679,19 +676,19 @@ every tick:
                 if {fame::%loop-player%} < 500000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment4_2}
                     set {fame.%loop-player%.rankprefix} to "&b[&9&lM&e⁺&b]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                 else if {fame::%loop-player%} > 999999:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment5_2}
                     set {fame.%loop-player%.rankprefix} to "&9[&b&lS&e⁺&9]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop
                     
@@ -699,9 +696,9 @@ every tick:
                 if {fame::%loop-player%} < 1000000:
                     set {fame.%loop-player%.rank} to {fame.%loop-player%.rank.alignment5_1}
                     set {fame.%loop-player%.rankprefix} to "&9[&b&lS&9]"
-                    if {settings.%loop-player%.user.genre} is "{@male}":
+                    if {settings.%loop-player%.user.genre} is "%{male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventato %{fame.%loop-player%.rank}%&f!"
                         stop
-                    else if {settings.%loop-player%.user.genre} is "{@female}":
+                    else if {settings.%loop-player%.user.genre} is "%{female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> &c%loop-player% &fè diventata %{fame.%loop-player%.rank}%&f!"
                         stop

@@ -45,7 +45,7 @@ function openPrivacyPlayerSettingsGUI(p: player):
         set slot 10, 11, 12, 14, 15, 16, 19, 20, 21, 23, 24 and 25 of {_gui} to gray stained glass pane named "&f"
         set slot 13 of {_gui} to {_p}'s head named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "&f", "&4&lATTENZIONE!", "&cSe, mentre un giocatore sta consultando", "&cil tuo profilo, modifichi questa opzione,", "&cle modifiche saranno applicate una", "&cvolta che un altro giocatore proverà" and "&ca consultare il tuo profilo."
         set slot 30 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
-        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         if {settings.%{_p}%.privacy.playersinfo.other_to_self} is false:
             set slot 22 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
         else:
@@ -55,7 +55,7 @@ function openPrivacyPlayerSettingsGUI(p: player):
         set {_gui} to a new chest inventory with 4 rows named "Impostazioni: &9Privacy"
         set slot 13 of {_gui} to {_p}'s head named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "&f", "&4&lATTENZIONE!", "&cSe, mentre un giocatore sta consultando", "&cil tuo profilo, modifichi questa opzione,", "&cle modifiche saranno applicate una", "&cvolta che un altro giocatore proverà" and "&ca consultare il tuo profilo."
         set slot 30 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
-        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla Disagio SMP"
+        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
         if {settings.%{_p}%.privacy.playersinfo.other_to_self} is false:
             set slot 22 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
         else:

@@ -1,0 +1,29 @@
+on join: # WINTER KIT (1/1/24)
+    if {winterkit.%player%.introduction} is not set:
+        wait 2 seconds
+        send "&aHey &b%player%&a!"
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+        wait 2 seconds
+        send "&aÈ stata introdotta una nuova funzionalità!"
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+        wait 2 seconds
+        send formatted "&aTi aiuta molto in inverno e puoi usarla utilizzando <ttp:&6Puoi cliccare anche qui!><cmd:/winterkit>&e&n/winterkit<reset>&a."
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+        wait 2 seconds
+        send "&aRicorda, però, che puoi utilizzare questo comando &b&lsoltanto in inverno &ae &b&lsoltanto una volta&a!"
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+        wait 2 seconds
+        send "&aQuindi fai attenzione!"
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+        wait 2 seconds
+        send "&aOk, l'introduzione è finita. Buon divertimento nella &e%{server.name}%&a!"
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+        set {winterkit.%player%.introduction} to true
+
+
+# ZONA DEBUG
+command /resetwinterkitintro:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    trigger:
+        delete {winterkit.%player%.introduction}

@@ -7,11 +7,11 @@ command /list:
     trigger:
         set {MaxOnlinePlayers} to max player count
         if {players.online} > 1:
-            send "{@prefix} &7Al momento ci sono &c%{players.online}%&7/&c%{MaxOnlinePlayers}% &7all'interno della &eDisagio SMP&7."
+            send "{@prefix} &7Al momento ci sono &c%{players.online}%&7/&c%{MaxOnlinePlayers}% &7all'interno della &e%{server.name}%&7."
             stop
         else if {players.online} = 1:
-            send "{@prefix} &7Al momento c'è &c%{players.online}%&7/&c%{MaxOnlinePlayers}% &7all'interno della &eDisagio SMP&7."
+            send "{@prefix} &7Al momento c'è &c%{players.online}%&7/&c%{MaxOnlinePlayers}% &7all'interno della &e%{server.name}%&7."
             stop
         if {players.online} = 0:
-            send "{@prefix} &7Al momento non ci sono giocatori &7all'interno della &eDisagio SMP&7."
+            send "{@prefix} &7Al momento non ci sono giocatori &7all'interno della &e%{server.name}%&7."
             stop
