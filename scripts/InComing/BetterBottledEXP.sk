@@ -1,0 +1,49 @@
+# BetterBottledEXP -> VERSIONE 1.0
+
+# -------------- >>> PERMESSI <<< --------------#
+# bbexp.member.use
+#-----------------------------------------------#
+options:
+    prefix: &8&l[&2&lXP&8&l]
+    no_perm_prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    main_command: riscatta
+
+on right click:
+    if player is holding a experience bottle named "&6&l&kkkk&6&l Esperienza in bottiglia &6&l&kkkk":
+        cancel event
+        send "{@prefix} &aHai ottenuto &2&l{num.xp}!" to player
+        remove experience bottle named "&6&l&kkkk&6&l Esperienza in bottiglia &6&l&kkkk" from player
+
+command /{@main_command} [<text>] [<text>]:
+    permission: bbexp.member.use
+    permission message: {@no_perm_prefix} &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "&1&l]&9&l---------------------------------------&1&l[" to player
+                send " &l-> &6/{@main_command} &2store &f- &aRiempi un ampolla con la tua XP."
+                send " &l-> &6/{@main_command} &2give &f- &aDai la tua XP ad un'altro giocatore." # - Probabilmente da eliminare - #
+                send " &l-> &6/{@main_command} &2get &f- &aScambia la tua XP in Bottiglie vanilla." # - Probabilmente da eliminare - #
+                send "&1&l]&9&l---------------------------------------&1&l[" to player
+                stop
+            else:
+                if arg-1 is "store":
+                    if arg-2 contains "L":
+                        give experience bottle named "&6&l&kkkk&6&l Esperienza in bottiglia &6&l&kkkk" with lore "&6&lXP&f&l: &e&l%arg-2%" to player
+                        send "{@prefix} &aEcco la tua Bottiglia con &2&l%arg-2% &adella tua XP." to player
+                    else if arg-2 doesn't contain "L" or "max" or "MAX":
+                        give experience bottle named "&6&l&kkkk&6&l Esperienza in bottiglia &6&l&kkkk" with lore "&6&lXP&f&l: &e&l%arg-2%" to player
+                        send "{@prefix} &aEcco la tua Bottiglia con &2&l%arg-2% &adella tua XP." to player
+                    if arg-2 is "max":
+                        give experience bottle named "&6&l&kkkk&6&l Esperienza in bottiglia &6&l&kkkk" with lore "&6&lXP&f&l: &e&lmax" to player
+                        send "{@prefix} &aEcco la tua Bottiglia con tutta la tua XP!" to player
+                if arg-1 is "give" or "send":
+                    send "r" to player
+                if arg-1 is "get":
+                    send "rr" to player
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando." to console
+            stop
+#End Script
