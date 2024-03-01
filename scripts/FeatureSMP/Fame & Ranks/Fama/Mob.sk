@@ -3,7 +3,6 @@ options:
     nether: smp_nether
     end: smp_the_end
 
-          # ----- MONDO: SMP ----- #
 #---------- MOB KILL PASSIVI E NEUTRALI ----------#     
 on death of chicken, cow, pig, rabbit or sheep:
     set {_fame} to random number between 0.1 and 0.5
@@ -1255,3 +1254,6 @@ on death of illusioner:
                     add ({_fame}*4) to {fame::%attacker%}
                     send action bar "&2&lMOB KILL &a+%{_fame}% Fama &6(%{fame::%attacker%}% totale)" to attacker
                     stop
+
+#on death of player:
+    # AGGIUNGERE CONDIZIONI "LIVELLO SMP", "REPUTAZIONE" E "FAMA"

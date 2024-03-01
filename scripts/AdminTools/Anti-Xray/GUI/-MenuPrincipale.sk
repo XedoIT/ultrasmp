@@ -1,0 +1,106 @@
+options:
+ # GENERALI
+    prefix: &6[&e&lAnti-Xray&6]
+    version: 1.0
+ # SUONI
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+function openAXRmain(p: player):
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Menu principale"
+        set slot 0, 1, 7, 8, 9, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
+        set slot 19, 20, 21, 22, 23, 24, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
+        set slot 2 of {_gui} to oak sign named "&8&l> &f&lMenu principale &8&l<" with lore "&7Torna al menu principale dell'Anti-Xray."
+        set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{axr.offline_orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
+        set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.system.alerts.info}%", "&f" and "&eClicca per gestire i servizi."
+        set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.system.autoalerts}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
+        set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr.worlds.enabled::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+        set slot 9, 10, 12, 13, 14, 15, 16 and 17 of {_gui} to light gray stained glass pane named "&r"
+        set slot 11 of {_gui} to white stained glass pane named "&r"
+        set slot 30 of {_gui} to book named "&cInformazioni sull'Anti-Xray" with lore " &aVersione: &e{@version}", " &bIdeato e sviluppato da &6_Xedo_", " &3Basato sull'Anti-Xray di &9SoulStriker", "&f", "&eClicca per consultare il manuale" and "&ed'utilizzo dell'Anti-Xray."
+        set slot 32 of {_gui} to paper named "&fStato servizi" with lore " &6● &7Avvisi offline&f: %{axr.offline_orealerts_info}%", " &d● &7Avvisi minerali&f: %{axr.system.alerts.info}%", " &e● &7Contatore minerali&f: %{axr.counter_info}%", " &e● &7Riconosc. automatico&f: %{axr.system.autoalerts}%" and " &e● &7Notifiche in console&f: %{axr.consolenotify_info}%"
+        set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 6 rows named "Anti-Xray: &9Menu principale"
+        set slot 2 of {_gui} to oak sign named "&8&l> &f&lMenu principale &8&l<" with lore "&7Torna al menu principale dell'Anti-Xray."
+        set slot 3 of {_gui} to book named "&6Notifiche" with lore "&7Gestisci le notifiche degli avvisi dei giocatori,", "&7compresi quelli di quando non eri online sul", "&7server.", "&f", "&3Stato servizi:", " &bAvvisi offline: %{axr.offline_orealerts_info}%", "&f" and "&eClicca per gestire i servizi."
+        set slot 4 of {_gui} to diamond named "&dGestione minerali" with lore "&7Attiva o disattiva gli avvisi dei minerali e", "&7gestisci i minerali scavati di un giocatore.", "&f", "&3Stato servizi:", " &bAvvisi minerali: %{axr.system.alerts.info}%", "&f" and "&eClicca per gestire i servizi."
+        set slot 5 of {_gui} to redstone torch named "&eImpostazioni" with lore "&7Gestisci le impostazioni degli avvisi sui", "&7minerali e modifica il tempo minimo per", "&7la rottura tra un minerale e un altro.", "&f", "&3Stato servizi:", " &bContatore minerali: %{axr.counter_info}%", " &bRiconoscimento automatico: %{axr.system.autoalerts}%", " &bNotifiche in console: %{axr.consolenotify_info}%", "&f" and "&eClicca per gestire i servizi."
+        set slot 6 of {_gui} to grass block named "&aMondi" with lore "&7Gestisci i mondi per cui l'Anti-Xray debba", "&7tenere sotto controllo i giocatori.", "&f", "&3Mondi abilitati:", " &b%{axr.worlds.enabled::*}%", "&f", and "&eClicca per vedere i mondi disponibili."
+        set slot 9, 10, 12, 13, 14, 15, 16 and 17 of {_gui} to light gray stained glass pane named "&r"
+        set slot 11 of {_gui} to white stained glass pane named "&r"
+        set slot 30 of {_gui} to book named "&cInformazioni sull'Anti-Xray" with lore " &aVersione: &e{@version}", " &bIdeato e sviluppato da &6_Xedo_", " &3Basato sull'Anti-Xray di &9SoulStriker", "&f", "&eClicca per consultare il manuale" and "&ed'utilizzo dell'Anti-Xray."
+        set slot 32 of {_gui} to paper named "&fStato servizi" with lore " &6● &7Avvisi offline&f: %{axr.offline_orealerts_info}%", " &d● &7Avvisi minerali&f: %{axr.system.alerts.info}%", " &e● &7Contatore minerali&f: %{axr.counter_info}%", " &e● &7Riconosc. automatico&f: %{axr.system.autoalerts}%" and " &e● &7Notifiche in console&f: %{axr.consolenotify_info}%"
+        set slot 49 of {_gui} to comparator named "&aIndietro" with lore "&7Torna a Gestione Server"
+        open {_gui} to {_p}
+function openAXRmainguide(p: player):
+    set {_l} to a written book
+    set {_p1} to text component of "Questo sistema di Anti-Xray è stato ideato, creato e sviluppato da &9_Xedo_ &rprendendo spunto dalla versione di &5SoulStriker&r.%nl%%nl%&rNelle prossime pagine ti illustrerò le basi del funzionamento di questo Anti-Xray.%nl%%nl%&2&lBuona lettura!"
+    set {_p2} to text component of "&6&lCos'è l'Anti-Xray?&r%nl%L'Anti-Xray è un sistema che impedisce ai giocatori di utilizzare l'Xray per trovare con più facilità i minerali punendoli rendendo più complicata la loro esperienza di gioco.%nl%%nl%Volta pagina per affrontare la prima scheda."
+    set {_p3} to text component of "&7&lMenu Principale%nl%&rQui è dove tutto inizia. In alto si trovano le 4 schede fondamentali di questo sistema: &6Notifiche&r, &dGestione minerali&r, &6Impostazioni &re &aMondi&r.%nl%Ognuna di queste schede svolge un importante ruolo all'interno dell'Anti-Xray. Vediamoli uno ad uno."
+    set {_p4} to text component of "&6&lNotifiche%nl%&rQui puoi gestire le notifiche degli avvisi che il sistema manderebbe nel caso in cui trovasse dei giocatori con probabile Xray. Il tutto verrà segnato in una ""lista"" che sarà visibile ogni volta che un admin entrerà nel server e tramite l'apposito pulsante"
+    set {_p5} to text component of """&6Giocatori sospetti&r"".%nl%%nl%&c&oÈ doveroso specificare che sicuramente si verificheranno dei falsi positivi con questo sistema di Anti-Xray ma farà sicuramente il suo lavoro se impostato correttamente."
+    set {_p6} to text component of "&d&lGestione minerali%nl%&rQui potrai gestire la ricezione degli avvisi per quanto riguarda i minerali scavati dai giocatori, controllarne i minerali scavati e azzerarne il contatore.%nl%%nl%&4&lNOTA BENE!%nl%&cNon puoi controllare i minerali di un giocatore se un altro"
+    set {_p7} to text component of "&cadmin ne sta controllando un altro.%nl%%nl%&4&lATTENZIONE!%nl%&cSe non attivi questa funzione, gli &6avvisi offline&c, il &6riconoscimento automatico &ce le &9notifiche in console &cnon funzioneranno!"
+    set {_p8} to text component of "&6&lImpostazioni%nl%&rQuesto è il cuore dell'Anti-Xray: qui è dove permetterai al sistema di funzionare come si deve, se impostato in modo giusto.%nl%Se sei ancora alle prime armi, ti consiglio di lasciare tutto com'è e di attivare soltanto il &6riconoscimento automatico &re, se vuoi,"
+    set {_p9} to text component of "le &9notifiche in console&r, il quale ti consente di ricevere gli avvisi direttamente nella console.%nl%Un'altra opzione che puoi attivare è il &6contatore minerali&r, che ti permette, tramite la scheda ""&dGestione minerali&r"", di controllare la quantità dei minerali scavati di un"
+    set {_p10} to text component of "giocatore e, ovviamente, gestirli, anche singolarmente.%nl%Se, invece, sai cosa stai facendo e vuoi personalizzare i valori, puoi iniziare dal timer, il quale serve per segnalare i giocatori che scavano una quantità di minerali superiore rispetto al tempo prestabilito"
+    set {_p11} to text component of "(per esempio, se il minerale di ferro massimo che può essere scavato è impostato a &610 blocchi &rper un lasso di tempo di &220 secondi &re il giocatore ne scaverà &c11&r, verrà subito segnalato [&3aggiunto alla lista di cui parlavamo prima&r] e tutti gli admin saranno notificati con un"
+    set {_p12} to text component of "messaggio in chat).%nl%Puoi anche personalizzare singolarmente i valori predefiniti dei minerali (sia dell'&9Overworld &rche del &6Nether&r) cliccando su ""&2Overworld&r"" o ""&cNether&r"", scegliendo il tipo di configurazione desiderata (&3manuale &ro &3automatica&r).%nl%Puoi sempre impostare"
+    set {_p13} to text component of "i valori predefiniti cliccando su ""&cRipristina predefiniti&r"" su ogni scheda."
+    set {_p14} to text component of "&a&lMondi%nl%&rIn questa scheda puoi gestire i mondi su cui l'Anti-Xray dovrà dedicare particolare attenzione.%nl%Quando aggiungi un mondo, l'Anti-Xray inizierà automaticamente a monitorare tutte le attività dei giocatori.%nl%&cFai attenzione quando rimuovi un mondo,"
+    set {_p15} to text component of "&cdato che, una volta rimosso, l'Anti-Xray non sarà più in grado di controllare le attività dei giocatori, permettendo loro di abusare dell'Xray.%nl%&rInfine, in questa scheda puoi consultare tranquillamente tutti i mondi che puoi aggiungere al sistema e quelli già aggiunti."
+    set {_p16} to text component of "&9&lComplimenti!%nl%&3Hai letto tutta la guida!%nl%%nl%%nl%&2&lTORNA ALL'ANTI-XRAY"
+    set hover event of {_p16} to hover event showing "Clicca qui per tornare al menu%nl%principale dell'Anti-Xray"
+    set click event of {_p16} to click event to run command "/axr"
+    set page 1 of book {_l} to {_p1}
+    set page 2 of book {_l} to {_p2}
+    set page 3 of book {_l} to {_p3}
+    set page 4 of book {_l} to {_p4}
+    set page 5 of book {_l} to {_p5}
+    set page 6 of book {_l} to {_p6}
+    set page 7 of book {_l} to {_p7}
+    set page 8 of book {_l} to {_p8}
+    set page 9 of book {_l} to {_p9}
+    set page 10 of book {_l} to {_p10}
+    set page 11 of book {_l} to {_p11}
+    set page 12 of book {_l} to {_p12}
+    set page 13 of book {_l} to {_p13}
+    set page 14 of book {_l} to {_p14}
+    set page 15 of book {_l} to {_p15}
+    set page 16 of book {_l} to {_p16}
+    set book author of {_l} to "%{server.name}%"
+    set book title of {_l} to "Guida dell'Anti-Xray"
+    open book {_l} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Anti-Xray: &9Menu principale":
+        if index of event-slot is 0, 1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52 or 53:
+            cancel event
+        else if index of event-slot is 2:
+            cancel event
+            send "{@prefix} &cSei già su ""&fMenu principale&c""!"
+            play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+        else if index of event-slot is 3:
+            cancel event
+            openAXRnotifications(player)
+        else if index of event-slot is 4:
+            cancel event
+            openAXRminerals(player)
+        else if index of event-slot is 5:
+            cancel event
+            openAXRsettings(player)
+        else if index of event-slot is 6:  
+            cancel event
+            openAXRworlds(player)
+        else if index of event-slot is 30:
+            cancel event
+            close player's inventory
+            play sound "entity.villager.work_librarian" with volume 1 at player for player
+            openAXRmainguide(player)
+        else if index of event-slot is 49:
+            cancel event
+            openServerManagement(player)

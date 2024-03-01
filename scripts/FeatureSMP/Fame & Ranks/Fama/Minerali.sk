@@ -1,50 +1,81 @@
+options:
+    prefix: &4[&6&lS&e&lM&6&lP&4]
+
+    coal_message: &8&lCARBONE &7+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    iron_message: &f&lFERRO &7+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    copper_message: &5&lRAME &d+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    gold_message: &e&lORO &6+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    redstone_message: &4&lREDSTONE &c+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    lapis_message: &1&lLAPIS &9+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    emerald_message: &2&lSMERALDO &a+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    diamond_message: &b&lDIAMANTE &9+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    quartz_message: &f&lQUARZO &7+%{_fame}% Fama &3(%{fame::%player%}% totale)
+    debris_message: "<##964b00>&lNETHERITE &7+%{_fame}% Fama &3(%{fame::%player%}% totale)"
+
 on mine of coal ore or deepslate coal ore:
     set {_fame} to random number between 0.5 and 1
     add {_fame} to {fame::%player%}
-    send action bar "&0&lCARBONE &8+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@coal_message}" to player
     stop    
 on mine of iron ore or deepslate iron ore:
     set {_fame} to random number between 1 and 2
     add {_fame} to {fame::%player%}
-    send action bar "&f&lFERRO &7+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@iron_message}" to player
     stop    
 on mine of copper ore or deepslate copper ore:
     set {_fame} to random number between 1.25 and 2
     add {_fame} to {fame::%player%}
-    send action bar "&5&lRAME &d+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@copper_message}" to player
     stop    
 on mine of gold ore, deepslate gold ore or nether gold ore:
     set {_fame} to random number between 1.5 and 3
     add {_fame} to {fame::%player%}
-    send action bar "&e&lORO &6+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@gold_message}" to player
     stop
 on mine of redstone ore or deepslate redstone ore:
     set {_fame} to random number between 1.75 and 3.25
     add {_fame} to {fame::%player%}
-    send action bar "&4&lREDSTONE &c+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@redstone_message}" to player
     stop    
 on mine of lapis ore or deepslate lapis ore:
     set {_fame} to random number between 2 and 3.5
     add {_fame} to {fame::%player%}
-    send action bar "&1&lLAPIS &9+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@lapis_message}" to player
     stop
 on mine of emerald ore or deepslate emerald ore:
     set {_fame} to random number between 10 and 20
     add {_fame} to {fame::%player%}
-    send action bar "&2&lSMERALDO &a+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@emerald_message}" to player
     stop    
 on mine of diamond ore or deepslate diamond ore:
     set {_fame} to random number between 8 and 16
     add {_fame} to {fame::%player%}
-    send action bar "&b&lDIAMANTE &9+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@diamond_message}" to player
     stop 
 on mine of nether quartz ore:
     set {_fame} to random number between 2 and 3
     add {_fame} to {fame::%player%}
-    send action bar "&f&lQUARZO &7+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar "{@quartz_message}" to player
     stop
 on mine of ancient debris:
     set {_fame} to random number between 40 and 80
     add {_fame} to {fame::%player%}
-    send action bar "&f&lNETHERITE &7+%{_fame}% Fama &3(%{fame::%player%}% totale)" to player
+    send action bar {@debris_message} to player
     stop
+
+# ZONA DEBUG
+command /sendorecolors:
+    permission: debug.commands
+    permission message: {@prefix} &cComando sconosciuto.
+    trigger:
+        send "&8&lCARBONE &7+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&f&lFERRO &7+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&5&lRAME &d+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&e&lORO &6+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&4&lREDSTONE &c+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&1&lLAPIS &9+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&2&lSMERALDO &a+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&b&lDIAMANTE &9+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "&f&lQUARZO &7+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        send "<##964b00>&lNETHERITE &7+{Fama} Fama &3(%{fame::%player%}% totale)" to player
+        stop

@@ -1,0 +1,95 @@
+# DA RIVEDERE DOPO L'APERTURA UFFICIALE DEL SERVER O DOPO AVER TERMINATO LA WIKI DEL SERVER!!!
+# NON AVVIARE SENZA AVER CONTROLLATO L'INTERO SCRIPT!!!
+options:
+    prefix: &8[&4🗡&8]
+    hide_prefix: &4[&6&lS&e&lM&6&lP&4]
+    cooldown: 10
+
+    fight: &a● &a&lPvP abilitato &a●
+
+on join:
+    if {combat.%player%.cooldown} != 0:
+        set {combat.%player%.cooldown} to 0
+    if {combat.%player%} is set:
+        delete {combat.%player%}
+
+on damage:
+    if {pvp} is "{@fight}":
+        attacker is a player
+        victim is a player
+        CombatLogSys(victim)
+        CombatLogSys(attacker)
+        if {combat.%attacker%.last} is not victim:
+            set {combat.%attacker%.last} to victim
+        
+
+function CombatLogSys(p: player):
+    if {combat.%{_p}%} is not set:
+        set {combat.%{_p}%} to true
+        set {combat.%{_p}%.cooldown} to {@cooldown}
+
+        while {combat.%{_p}%.cooldown} != 0:
+            subtract 1 from {combat.%{_p}%.cooldown}
+            send action bar "&c&lIN COMBATTIMENTO CON &6&l%{combat.%{_p}%.last}%&c&l!" to {_p}
+            
+            if {combat.%{_p}%.cooldown} = 0:
+                delete {combat.%{_p}%}
+            wait 1 second
+    else:
+        set {combat.%{_p}%.cooldown} to {@cooldown}
+        
+on quit:
+    if {combat.%player%} is true:
+        set {combat.%player%.quit} to true
+        strike lightning effect at player
+        kill player
+        if {settings.%player%.user.genre} is "%{male}%":
+            set quit message to "{@prefix} &6%player% &cè morto uscendo dal server perché era in combattimento con &e%{combat.%player%.last}%&c."
+        else if {settings.%player%.user.genre} is "%{female}%":
+            set quit message to "{@prefix} &6%player% &cè morta uscendo dal server perché era in combattimento con &e%{combat.%player%.last}%&c."
+        delete {combat.%player%}
+        delete {combat.%player%.last}
+        set {combat.%player%.cooldown} to 0
+
+on death of player:
+    if {combat.%victim%} is true:
+        if {combat.%player%.quit} to true
+            set death message to ""
+        else:
+            if {settings.%player%.user.genre} is "%{male}%":
+                set quit message to "{@prefix} &6%player% &cè morto uscendo dal server perché era in combattimento con &e%{combat.%player%.last}%&c."
+            else if {settings.%player%.user.genre} is "%{female}%":
+                set quit message to "{@prefix} &6%player% &cè morta uscendo dal server perché era in combattimento con &e%{combat.%player%.last}%&c."
+        delete {combat.%victim%}
+        delete {combat.%attacker%.last}
+        set {combat.%victim%.cooldown} to 0
+    
+command /combatlog [<offline player>]:
+    permission: combatlog.member.use
+    permission message: {@hide_prefix} &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if {combat.%player%} is not set:
+                    send "{@prefix} &7Attualmente non sei in combattimento."
+                    stop
+                else:
+                    if {combat.%player%.cooldown} > 1:
+                        send "{@prefix} &7Sei in combattimento con &c%{combat.%player%.last}% &7per altri &6%{combat.%player%.cooldown}% secondi&7."
+                        stop
+                    else if {combat.%player%.cooldown} = 1:
+                        send "{@prefix} &7Sei in combattimento con &c%{combat.%player%.last}% &7per &6un altro secondo&7."
+                        stop
+            else:
+                if player has permission "combatlog.admin.use":
+                    if {combat.%arg-1%} is not set:
+                        send "{@prefix} &7Attualmente %arg-1% non è in combattimento."
+                        stop
+                    else:
+                        if {combat.cooldown.%arg-1%} > 1:
+                            send "{@prefix} &7%arg-1% è in combattimento con &c%{combat.%arg-1%.last}% &7per altri &6%{combat.cooldown.%arg-1%}% secondi&7."
+                            stop
+                        else if {combat.cooldown.%arg-1%} = 1:
+                            send "{@prefix} &7%arg-1% è in combattimento con &c%{combat.%arg-1%.last}% &7per &6un altro secondo&7."
+                            stop

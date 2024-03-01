@@ -4,6 +4,8 @@ options:
     on: &aSì
     off: &cNo
 
+    fight: &a● &a&lPvP abilitato &a●
+
 on join:
     if {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} is not set:
         set {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} to 0
@@ -20,10 +22,11 @@ on quit:
 on damage:
     if attacker is a player:
         if victim is a player:
-            if {god.%victim%} is "{@off}":
-                if {difficulty.info.hardcore_death::%victim%} and {difficulty.info.hardcore_death::%attacker%} is not set:
-                    DamageInflicted(damage,attacker)
-                    DamageSuffered(damage,victim)
+            if {pvp} is "{@fight}":
+                if {god.%victim%} is "{@off}":
+                    if {difficulty.info.hardcore_death::%victim%} and {difficulty.info.hardcore_death::%attacker%} is not set:
+                        DamageInflicted(damage,attacker)
+                        DamageSuffered(damage,victim)
         else:
             if {difficulty.info.hardcore_death::%attacker%} is not set:
                 DamageInflicted(damage,attacker)

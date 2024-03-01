@@ -1,0 +1,6 @@
+command /unbreakeabletoggle:
+    permission: debug.commands
+    permission message: No.
+    trigger:
+        if player's tool isn't unbreakable:
+            set player's tool to unbreakable tool

@@ -1,0 +1,132 @@
+options:
+    stats_info: &eClicca per controllare nel dettaglio.
+    nopage: &cQuesta pagina non è ancora disponibile! Riprova più tardi.
+    nopagebeta: &cQuesta funzionalità è ancora in fase di sviluppo e sarà disponibile all'apertura ufficiale del server.
+    error_sound: entity.enderman.teleport
+
+function openMainAchievementsGui(p: player):
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34 and 35 of {_gui} to gray stained glass pane named "&r"
+        set slot 36, 37, 38, 39, 40, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
+        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione" with lore "&c&oIn arrivo..."
+        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati" with lore "&c&oIn arrivo..."
+        set slot 13 of {_gui} to grass block named "&fBlocchi naturali" with lore "&c&oIn arrivo..."
+        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali" with lore "&c&oIn arrivo..."
+        set slot 15 of {_gui} to iron ingot named "&fMinerali" with lore "&c&oIn arrivo..."
+        set slot 20 of {_gui} to golden apple named "&fCibo" with lore "&c&oIn arrivo..."
+        set slot 21 of {_gui} to redstone named "&fRedstone" with lore "&c&oIn arrivo..."
+        set slot 22 of {_gui} to red dye named "&fColoranti" with lore "&c&oIn arrivo..."
+        set slot 23 of {_gui} to ender eye named "&fUtilità" with lore "&c&oIn arrivo..."
+        set slot 24 of {_gui} to rotten flesh named "&fMob" with lore "&c&oIn arrivo..."
+        set slot 40 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
+        set slot 11 of {_gui} to brick block named "&fBlocchi da costruzione" with lore "&c&oIn arrivo..."
+        set slot 12 of {_gui} to cyan wool named "&fBlocchi colorati" with lore "&c&oIn arrivo..."
+        set slot 13 of {_gui} to grass block named "&fBlocchi naturali" with lore "&c&oIn arrivo..."
+        set slot 14 of {_gui} to oak sign named "&fBlocchi funzionali" with lore "&c&oIn arrivo..."
+        set slot 15 of {_gui} to iron ingot named "&fMinerali" with lore "&c&oIn arrivo..."
+        set slot 20 of {_gui} to golden apple named "&fCibo" with lore "&c&oIn arrivo..."
+        set slot 21 of {_gui} to redstone named "&fRedstone" with lore "&c&oIn arrivo..."
+        set slot 22 of {_gui} to red dye named "&fColoranti" with lore "&c&oIn arrivo..."
+        set slot 23 of {_gui} to ender eye named "&fUtilità" with lore "&c&oIn arrivo..."
+        set slot 24 of {_gui} to rotten flesh named "&fMob" with lore "&c&oIn arrivo..."
+        set slot 40 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        open {_gui} to {_p}
+        
+on inventory click:
+    if name of event-inventory is "Obiettivi SMP":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43 or 44:
+                if click type is left mouse button:
+                    cancel event
+                else:
+                    cancel event
+            else if index of event-slot is 11:
+                if click type is left mouse button:
+                    cancel event
+                    #openBuildAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 12:
+                if click type is left mouse button:
+                    cancel event
+                    #openColorAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 13:
+                if click type is left mouse button:
+                    cancel event
+                    #openNatureAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 14:
+                if click type is left mouse button:
+                    cancel event
+                    #openFunctionAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 15:
+                if click type is left mouse button:
+                    cancel event
+                    #openMineralsAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 20:
+                if click type is left mouse button:
+                    cancel event
+                    #openFoodAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 21:
+                if click type is left mouse button:
+                    cancel event
+                    #openRedstoneAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    #openDyesAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 23:
+                if click type is left mouse button:
+                    cancel event
+                    #openUtilsAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 24:
+                if click type is left mouse button:
+                    cancel event
+                    #openMobsAchievementsGui(player)
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for the player
+                    send "{@nopagebeta}"
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
