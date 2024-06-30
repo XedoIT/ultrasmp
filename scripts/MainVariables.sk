@@ -1,14 +1,30 @@
-#
 # QUI SI TROVANO TUTTE LE VARIABILI GLOBALI PRESENTI NELLA ULTRA SMP.
-#
+
+options:
+    version: "&4&lBETA &7v0.17"
+
+on load:
+    set {server.version} to {@version}
+
 
 variables:
-# GENERALI
+# NOME SERVER
     {server.name} = "Ultra SMP"
-    {server.name.CAPS} = "ULTRA SMP"
-    {server_ip} = "-"
-    {server_port} = "-"
+    {server.name_CAPS} = "ULTRA SMP"
+
+# IP SERVER
+    {server.ip.named} = "ultrasmp.org"
+    {server.ip} = "-"
+    {server.port} = "24368"
+
+# PREFISSI
+    {server.prefix.main} = "&4[&6&lS&e&lM&6&lP&4]"
 
 # SESSO GIOCATORI
-    {male} = "&9Maschio"
-    {female} = "&dFemmina"
+    {server.genre.male} = "&9Maschio"
+    {server.genre.female} = "&dFemmina"
+
+# MONDI
+    {server.world.overworld} = "smp"
+    {server.world.nether} = "smp_nether"
+    {server.world.end} = "smp_the_end"

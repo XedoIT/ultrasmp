@@ -1,0 +1,112 @@
+options:
+    freeze_sound: play sound "entity.player.hurt_freeze" with volume 1 and pitch 0
+    unfreeze_sound: play sound "entity.ghast.shoot" with volume 1 and pitch 0
+
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+command /freeze [<offline player>]:
+    permission: freeze.use
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if arg-1 isn't set:
+            send "%{server.prefix.main}% &cSpecifica il nome di un giocatore."
+            stop
+        else:
+            if arg-1 is online:
+                if {freeze.%arg-1%} is true:
+                    if {settings.%arg-1%.user.genre} is "%{server.genre.male}%":
+                        send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzato."
+                        {@error_sound} at player for player
+                        stop
+                    else if {settings.%arg-1%.user.genre} is "%{server.genre.female}%":
+                        send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzata."
+                        {@error_sound} at player for player
+                        stop
+                else:
+                    set {freeze.%arg-1%} to true
+                    send "%{server.prefix.main}% &cHai immobilizzato &6%arg-1%&c."
+                    {@confirm_sound} at player for player
+                    {@freeze_sound} at arg-1 for arg-1
+                    if sender is player:
+                        if {settings.%arg-1%.user.genre} is "%{server.genre.male}%":
+                            send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzato!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &6%player% &cti ha immobilizzato." to arg-1
+                        else if {settings.%arg-1%.user.genre} is "%{server.genre.female}%":
+                            send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzata!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &6%player% &cti ha immobilizzata." to arg-1
+                    else:
+                        if {settings.%arg-1%.user.genre} is "%{server.genre.male}%":
+                            send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzato!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzato." to arg-1
+                        else if {settings.%arg-1%.user.genre} is "%{server.genre.female}%":
+                            send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzato!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzata." to arg-1
+                    stop
+            else:
+                send "%{server.prefix.main}% &6%arg-1% &cè offline."
+                stop
+                
+command /unfreeze [<offline player>]:
+    permission: freeze.use
+    permission message: Comando sconosciuto.
+    trigger:
+        if arg-1 isn't set:
+            send "%{server.prefix.main}% &cSpecifica il nome di un giocatore."
+            stop
+        else:
+            if arg-1 is online:
+                if {freeze.%arg-1%} isn't set:
+                    if {settings.%arg-1%.user.genre} is "%{server.genre.male}%":
+                        send "%{server.prefix.main}% &b%arg-1% &anon è immobilizzato."
+                        {@error_sound} at player for player
+                        stop
+                    else if {settings.%arg-1%.user.genre} is "%{server.genre.female}%":
+                        send "%{server.prefix.main}% &b%arg-1% &anon è immobilizzata."
+                        {@error_sound} at player for player
+                        stop
+                else:
+                    delete {freeze.%arg-1%}
+                    send "%{server.prefix.main}% &aHai liberato &b%arg-1%&a."
+                    {@confirm_sound} at player for player
+                    {@unfreeze_sound} at arg-1 for arg-1
+                    if sender is player:
+                        if {settings.%arg-1%.user.genre} is "%{server.genre.male}%":
+                            send title "&a&lVIA LIBERA!" with subtitle "&b%player% &ati ha liberato!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &b%player% &ati ha liberato." to arg-1
+                        else if {settings.%arg-1%.user.genre} is "%{server.genre.female}%":
+                            send title "&a&lVIA LIBERA!" with subtitle "&b%player% &ati ha liberato!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &b%player% &ati ha liberata." to arg-1
+                    else:
+                        if {settings.%arg-1%.user.genre} is "%{server.genre.male}%":
+                            send title "&a&lVIA LIBERA!" with subtitle "&aLa &bconsole &ati ha liberato!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &aLa &bconsole &ati ha liberato." to arg-1
+                        else if {settings.%arg-1%.user.genre} is "%{server.genre.female}%":
+                            send title "&a&lVIA LIBERA!" with subtitle "&aLa &bconsole &ati ha liberata!" to arg-1 for 5 seconds
+                            #send "%{server.prefix.main}% &aLa &bconsole &ati ha liberata." to arg-1
+                    stop
+
+on player move:
+    if {freeze.%player%} is true:
+        cancel event
+        if {settings.%player%.user.genre} is "%{server.genre.male}%":
+            send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
+        if {settings.%player%.user.genre} is "%{server.genre.female}%":
+            send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
+
+on arm swing:
+    if {freeze.%player%} is true:
+        cancel event
+        if {settings.%player%.user.genre} is "%{server.genre.male}%":
+            send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
+        if {settings.%player%.user.genre} is "%{server.genre.female}%":
+            send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
+
+on sneak toggle:
+    if {freeze.%player%} is true:
+        cancel event
+        if {settings.%player%.user.genre} is "%{server.genre.male}%":
+            send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
+        if {settings.%player%.user.genre} is "%{server.genre.female}%":
+            send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player

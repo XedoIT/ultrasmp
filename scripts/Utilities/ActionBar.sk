@@ -1,35 +1,107 @@
 options:
     prefix: &e[&9&lActionBar&e]
+    hide_prefix: &4[&6&lS&e&lM&6&lP&4]
     
-command /actionbar [<text>]:
+command /actionbar [<text>] [<text>]:
     description: Attiva o disattiva la visualizzazione di una determinata action bar.
     aliases: /ab
     trigger:
         if arg-1 is "manutenzione" or "maintenance":
-            if player has permission "maintenance.actionbar":
-                if {maintenance.ab} is not set:
-                    set {maintenance.ab} to true
-                    send "{@prefix} &aAction bar attivata per &6Manutenzione&a."
-                    stop
-                else if {maintenance.ab} is true:
-                    delete {maintenance.ab}
-                    send "{@prefix} &cAction bar disattivata per &6Manutenzione&a."
+            if arg-2 isn't set:
+                if player has permission "actionbar.maintenance":
+                    if {actionbar.maintenance.%player%} is true:
+                        delete {actionbar.maintenance.%player%}
+                        send "{@prefix} &cDa adesso non vedrai più se la manutenzione è attiva."
+                        stop
+                    else:
+                        set {actionbar.maintenance.%player%} to true
+                        send "{@prefix} &aDa adesso potrai sapere se la manutenzione è attiva."
+                        stop
+                else:
+                    send "%{server.prefix.main}% &cComando sconosciuto."
                     stop
             else:
-                send "{@prefix} &cNon hai i permessi per farlo!"
+                if player has permission "actionbar.maintenance":
+                    send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
 
         else if arg-1 is "uptime":
-            if player has permission "uptime.actionbar":
-                if {uptimeac.%player%} is not set:
-                    set {uptimeac.%player%} to true
-                    send "{@prefix} &aAction bar attivata per &6Uptime&a."
-                    stop
-                else if {uptimeac.%player%} is true:
-                    delete {uptimeac.%player%}
-                    send "{@prefix} &cAction bar disattivata per &6Uptime&a."
+            if arg-2 isn't set:
+                if player has permission "actionbar.uptime":
+                    if {actionbar.uptime.%player%} is true:
+                        delete {actionbar.uptime.%player%}
+                        send "{@prefix} &cDa adesso non vedrai più il tempo di attività del server."
+                        stop
+                    else:
+                        set {actionbar.uptime.%player%} to true
+                        send "{@prefix} &aDa adesso vedrai il tempo di attività del server."
+                        stop
+                else:
+                    send "%{server.prefix.main}% &cComando sconosciuto."
                     stop
             else:
-                send "{@prefix} &cNon hai i permessi per farlo!"
+                if player has permission "actionbar.uptime":
+                    send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+
+        else if arg-1 is "playtime" or "pt":
+            if arg-2 isn't set:
+                if player has permission "actionbar.playtime":
+                    if {actionbar.playtime.session.%player%}, {actionbar.playtime.total.%player%} or {actionbar.playtime.both.%player%} is set:
+                        delete {actionbar.playtime.session.%player%}
+                        delete {actionbar.playtime.total.%player%}
+                        delete {actionbar.playtime.both.%player%}
+                        send "{@prefix} &cTempo di gioco in tempo reale disattivato. Utilizza &6/playtime &esession &6o &etotal &6per controllarlo manualmente."
+                        stop
+                    else:
+                        send "{@prefix} &cSpecifica il tipo di actionbar che vuoi visualizzare!"
+                        stop
+                else:
+                    send "%{server.prefix.main}% &cComando sconosciuto."
+                    stop
+
+            if arg-2 is "session":
+                if player has permission "actionbar.playtime":
+                    if {actionbar.playtime.session.%player%} is not set:
+                        set {actionbar.playtime.session.%player%} to true
+                        delete {actionbar.playtime.total.%player%}
+                        delete {actionbar.playtime.both.%player%}
+                        send "{@prefix} &aDa adesso vedrai il tuo tempo di gioco in tempo reale."
+                        stop
+                    else:
+                        delete {actionbar.playtime.session.%player%}
+                        send "{@prefix} &cTempo di gioco in tempo reale disattivato. Utilizza &6/playtime &esession &6per controllarlo manualmente."
+                        stop
+            else if arg-2 is "total":
+                if player has permission "actionbar.playtime":
+                    if {actionbar.playtime.total.%player%} is not set:
+                        set {actionbar.playtime.total.%player%} to true
+                        delete {actionbar.playtime.session.%player%}
+                        delete {actionbar.playtime.both.%player%}
+                        send "{@prefix} &aDa adesso vedrai il tuo tempo di gioco totale in tempo reale."
+                        stop
+                    else:
+                        delete {actionbar.playtime.total.%player%}
+                        send "{@prefix} &cTempo di gioco totale in tempo reale disattivato. Utilizza &6/playtime &etotal &6per controllarlo manualmente."
+                        stop
+            else if arg-2 is "both":
+                if player has permission "actionbar.playtime":
+                    if {actionbar.playtime.both.%player%} is not set:
+                        set {actionbar.playtime.both.%player%} to true
+                        delete {actionbar.playtime.total.%player%}
+                        delete {actionbar.playtime.session.%player%}
+                        send "{@prefix} &aDa adesso vedrai i tuoi tempi di gioco in tempo reale."
+                        stop
+                    else:
+                        delete {actionbar.playtime.both.%player%}
+                        send "{@prefix} &cTempi di gioco in tempo reale disattivati. Utilizza &6/playtime &esession &6o &etotal &6per controllarli manualmente."
+                        stop
+
 
 on tab complete of "/actionbar" or "/ab":
-    set tab completions for position 1 to "maintenance" and "uptime"
+    if player has permission "debug.commands":
+        set tab completions for position 1 to "maintenance", "uptime" and "playtime"
+        if tab arg-1 is "playtime" or "pt":
+            set tab completions for position 2 to "session", "total" and "both"
+    else:
+        set tab completions for position 1 to "playtime"

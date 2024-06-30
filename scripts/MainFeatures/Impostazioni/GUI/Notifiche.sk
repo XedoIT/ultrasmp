@@ -1,0 +1,336 @@
+options:
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    
+# MESSAGGI NOTIFICHE
+  # GENERALI
+    generic_on: &aHai attivato tutte le notifiche generali.
+    generic_off: &cHai disattivato tutte le notifiche generali.
+
+    inventory_on: &aDa adesso ti avviserò ogni volta che avrai l'inventario pieno.
+    inventory_off: &cDa adesso non ti avviserò più se dovessi avere l'inventario pieno.
+
+    scoreboard_on: &aDa adesso ti ricorderò ti attivare la scoreboard.
+    scoreboard_off: &cDa adesso non ti ricorderò più di attivare la scoreboard.
+
+  # DI SERVIZIO
+    service_on: &aHai attivato tutte le notifiche di servizio.
+    service_off: &cHai disattivato tutte le notifiche di servizio.
+
+    schres_on: &aDa adesso ti avviserò se ci saranno dei riavvii programmati.
+    schres_off: &cDa adesso non ti avviserò più se ci saranno dei riavvii programmati.
+
+    lagtrouble_on: &aDa adesso ti avviserò se il server sta subendo dei cali prestazionali.
+    lagtrouble_off: &cDa adesso non ti avviserò più se il server sta subendo dei cali prestazionali.
+
+    schstop_on: &aDa adesso ti avviserò se ci saranno delle chiusure programmate.
+    schstop_off: &cDa adesso non ti avviserò più se ci saranno delle chiusure programmate.
+
+  # ATTIVA/DISATTIVA E GESTIONE
+    turn_on: &eClicca per attivarle.
+    turn_off: &eClicca per disattivarle.
+
+    manage: &eClicca per gestirle.
+
+  # MARKER
+    no: &c✖
+    yes: &a✔
+
+# YAML
+    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+    
+    file: "settings-%{_p}'s uuid%"
+
+    gui_background: yaml value "personalization.gui_background.enabled"
+
+    full_inventory: yaml value "notify.generic.full_inventory.enabled"
+    no_scoreboard: yaml value "notify.generic.no_scoreboard.enabled"
+    scheduled_restarts: yaml value "notify.service.scheduled_restarts.enabled"
+    lag_issues: yaml value "notify.service.lag_issues.enabled"
+    scheduled_stops: yaml value "notify.service.scheduled_stops.enabled"
+    full_inventory_marker: yaml value "notify.generic.full_inventory.marker"
+    no_scoreboard_marker: yaml value "notify.generic.no_scoreboard.marker"
+    scheduled_restarts_marker: yaml value "notify.service.scheduled_restarts.marker"
+    lag_issues_marker: yaml value "notify.service.lag_issues.marker"
+    scheduled_stops_marker: yaml value "notify.service.scheduled_stops.marker"
+
+# NOTIFICHE PER INVENTARIO PIENO - GENERALI
+function ToggleInventoryAlerts(p: player):
+    if {@full_inventory} in {@file} is false:
+        set {@full_inventory} in {@file} to true
+        set {@full_inventory_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@inventory_on}" to {_p}
+        save yaml {@file}
+    else:
+        set {@full_inventory} in {@file} to false
+        set {@full_inventory_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@inventory_off}" to {_p}
+        save yaml {@file}
+
+# NOTIFICHE PER SCOREBOARD DISATTIVATA - GENERALI
+function ToggleScoreboardAlerts(p: player):
+    if {@no_scoreboard} in {@file} is false:
+        set {@no_scoreboard} in {@file} to true
+        set {@no_scoreboard_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@scoreboard_on}" to {_p}
+        save yaml {@file}
+    else:
+        set {@no_scoreboard} in {@file} to false
+        set {@no_scoreboard_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@scoreboard_off}" to {_p}
+        save yaml {@file}
+
+
+# NOTIFICHE PER RIAVVII DEL SERVER PROGRAMMATI - DI SERVIZIO
+function ToggleScheduleRestartsAlerts(p: player):
+    if {@scheduled_restarts} in {@file} is false:
+        set {@scheduled_restarts} in {@file} to true
+        set {@scheduled_restarts_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@schres_on}" to {_p}
+        save yaml {@file}
+    else:
+        set {@scheduled_restarts} in {@file} to false
+        set {@scheduled_restarts_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@schres_off}" to {_p}
+        save yaml {@file}
+
+# NOTIFICHE PER PROBLEMI PRESTAZIONALI - DI SERVIZIO
+function ToggleLagTroublesAlerts(p: player):
+    if {@lag_issues} in {@file} is false:
+        set {@lag_issues} in {@file} to true
+        set {@lag_issues_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@lagtrouble_on}" to {_p}
+        save yaml {@file}
+    else:
+        set {@lag_issues} in {@file} to false
+        set {@lag_issues_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@lagtrouble_off}" to {_p}
+        save yaml {@file}
+
+# NOTIFICHE PER CHIUSURE DEL SERVER PROGRAMMATE - DI SERVIZIO
+function ToggleScheduleStopsAlerts(p: player):
+    if {@scheduled_stops} in {@file} is false:
+        set {@scheduled_stops} in {@file} to true
+        set {@scheduled_stops_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@schstop_on}" to {_p}
+        save yaml {@file}
+    else:
+        set {@scheduled_stops} in {@file} to false
+        set {@scheduled_stops_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@schstop_off}" to {_p}
+        save yaml {@file}
+
+
+function openAlertsGui(p: player):
+    set {_full_inventory} to {@full_inventory_marker} in {@file}
+    set {_no_scoreboard} to {@no_scoreboard_marker} in {@file}
+    set {_scheduled_restarts} to {@scheduled_restarts_marker} in {@file}
+    set {_lag_issues} to {@lag_issues_marker} in {@file}
+    set {_scheduled_stops} to {@scheduled_stops_marker} in {@file}
+    if {@gui_glass_pane} is true:
+        set {_gui} to a new chest inventory with 5 rows named "Impostazioni: &9Notifiche"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 21, 22, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
+        set slot 20 of {_gui} to redstone torch named "&eNotifiche generali" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che impattano sulla tua", "&7esperienza di gioco nell'SMP.", "&f", "&7Include:", "%{_full_inventory}% &7Inventario pieno", "%{_no_scoreboard}% &7Scoreboard disattivata", "&f" and "{@manage}"
+        set slot 24 of {_gui} to repeater named "&eNotifiche di servizio" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che ti informano sulle", "&7condizioni tecniche del server.", "&f", "&7Include:", "%{_scheduled_restarts}% &7Riavvii del server programmati", "%{_lag_issues}% &7Problemi prestazionali", "%{_scheduled_stops}% &7Chiusure del server programmate", "&f" and "{@manage}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 5 rows named "Impostazioni: &9Notifiche"
+        set slot 20 of {_gui} to redstone torch named "&eNotifiche generali" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che impattano sulla tua", "&7esperienza di gioco nell'SMP.", "&f", "&7Include:", "%{_full_inventory}% &7Inventario pieno", "%{_no_scoreboard}% &7Scoreboard disattivata", "&f" and "{@manage}"
+        set slot 24 of {_gui} to repeater named "&eNotifiche di servizio" with lore "&7Queste notifiche riguardano tutte le", "&7notifiche che ti informano sulle", "&7condizioni tecniche del server.", "&f", "&7Include:", "%{_scheduled_restarts}% &7Riavvii del server programmati", "%{_lag_issues}% &7Problemi prestazionali", "%{_scheduled_stops}% &7Chiusure del server programmate", "&f" and "{@manage}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
+
+function openCustomAlertsGui(p: player):
+    if {@gui_glass_pane} is true:
+        set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche generali"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&f"
+        set slot 10, 11, 13, 15, 16, 19, 20, 22, 24, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&f"
+        if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+            set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisato con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
+        else if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+            set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisata con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
+        set slot 14 of {_gui} to writable book named "&eScoreboard" with lore "&7Se la tua scoreboard è disattivata," and "&7ti ricorderò di attivarla ogni ora."
+        if {@full_inventory} in {@file} is true:
+            set slot 21 of {_gui} to lime dye named "&aInventario pieno" with lore "{@turn_off}"
+        else:
+            set slot 21 of {_gui} to gray dye named "&cInventario pieno" with lore "{@turn_on}"
+        if {@no_scoreboard} in {@file} is true:
+            set slot 23 of {_gui} to lime dye named "&aScoreboard" with lore "{@turn_off}"
+        else:
+            set slot 23 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche generali"
+        if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+            set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisato con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
+        else if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+            set slot 12 of {_gui} to chest named "&eInventario pieno" with lore "&7Verrai avvisata con un messaggio", "&7in chat e sullo schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "&f", "&4&lRICORDA!", "&cTi avviserò ogni minuto se il tuo" and "&cinventario sarà ancora pieno."
+        set slot 14 of {_gui} to writable book named "&eScoreboard" with lore "&7Se la tua scoreboard è disattivata," and "&7ti ricorderò di attivarla ogni ora."
+        if {@full_inventory} in {@file} is true:
+            set slot 21 of {_gui} to lime dye named "&aInventario pieno" with lore "{@turn_off}"
+        else:
+            set slot 21 of {_gui} to gray dye named "&cInventario pieno" with lore "{@turn_on}"
+        if {@no_scoreboard} in {@file} is true:
+            set slot 23 of {_gui} to lime dye named "&aScoreboard" with lore "{@turn_off}"
+        else:
+            set slot 23 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
+
+function openCustomServiceAlertsGui(p: player):
+    if {@gui_glass_pane} is true:
+        set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche di servizio"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&f"
+        set slot 10, 12, 14, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&f"
+        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati &c[BETA]" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 13 of {_gui} to paper named "&eProblemi prestazionali &c[BETA]" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati", "&7e/o crash improvvisi.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate &c[BETA]" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        if {@scheduled_restarts} in {@file} is true:
+            set slot 20 of {_gui} to lime dye named "&aRiavvii del server programmati" with lore "{@turn_off}"
+        else:
+            set slot 20 of {_gui} to gray dye named "&cRiavvii del server programmati" with lore "{@turn_on}"
+        if {@lag_issues} in {@file} is true:
+            set slot 22 of {_gui} to lime dye named "&aProblemi prestazionali" with lore "{@turn_off}"
+        else:
+            set slot 22 of {_gui} to gray dye named "&cProblemi prestazionali" with lore "{@turn_on}"
+        if {@scheduled_stops} in {@file} is true:
+            set slot 24 of {_gui} to lime dye named "&aChiusure del server programmate" with lore "{@turn_off}"
+        else:
+            set slot 24 of {_gui} to gray dye named "&cChiusure del server programmate" with lore "{@turn_on}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 5 rows named "&9Notifiche&r: &1Notifiche di servizio"
+        set slot 11 of {_gui} to diamond block named "&eRiavvii del server programmati &c[BETA]" with lore "&7Quando verrà programmato un riavvio", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista al riavvio", "&7effettivo del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò del riavvio:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 13 of {_gui} to paper named "&eProblemi prestazionali &c[BETA]" with lore "&7Se il server dovesse subire importanti", "&7cali prestazionali, ti avviserò mettendoti", "&7in guardia di eventuali perdite di dati", "&7e/o crash improvvisi.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        set slot 15 of {_gui} to redstone block named "&eChiusure del server programmate &c[BETA]" with lore "&7Quando verrà programmata una chiusura", "&7del server, te lo ricorderò in modo da", "&7non trovarti alla sprovvista alla chiusura", "&7effettiva del server.", "&f", "&4&lRICORDA!", "&cTi ricorderò della chiusura:", " &61 giorno &cprima,", " &612 ore &cprima,", " &66 ore &cprima,", " &62 ore &cprima,", " &630 minuti &cprima,", " &610 minuti &cprima.", "&f", "&c&oQuesta funzionalità potrebbe non" and "&c&ofunzionare come previsto."
+        if {@scheduled_restarts} in {@file} is true:
+            set slot 20 of {_gui} to lime dye named "&aRiavvii del server programmati" with lore "{@turn_off}"
+        else:
+            set slot 20 of {_gui} to gray dye named "&cRiavvii del server programmati" with lore "{@turn_on}"
+        if {@lag_issues} in {@file} is true:
+            set slot 22 of {_gui} to lime dye named "&aProblemi prestazionali" with lore "{@turn_off}"
+        else:
+            set slot 22 of {_gui} to gray dye named "&cProblemi prestazionali" with lore "{@turn_on}"
+        if {@scheduled_stops} in {@file} is true:
+            set slot 24 of {_gui} to lime dye named "&aChiusure del server programmate" with lore "{@turn_off}"
+        else:
+            set slot 24 of {_gui} to gray dye named "&cChiusure del server programmate" with lore "{@turn_on}"
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni: &9Notifiche"
+        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Notifiche":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 20, 24, 39 or 40:
+                cancel event
+            else if index of event-slot is 20:
+                if click type is left mouse button:
+                    cancel event
+                    openCustomAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 24:
+                if click type is left mouse button:
+                    cancel event
+                    openCustomServiceAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 39:
+                if click type is left mouse button:
+                    cancel event
+                    openPlayerSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+    else if name of event-inventory is "&9Notifiche&r: &1Notifiche generali":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 21, 23, 39 or 40:
+                cancel event
+            else if index of event-slot is 21:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleInventoryAlerts(player)
+                    openCustomAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 23:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleScoreboardAlerts(player)
+                    openCustomAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 39:
+                if click type is left mouse button:
+                    cancel event
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+    else if name of event-inventory is "&9Notifiche&r: &1Notifiche di servizio":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 20, 22, 24, 39 or 40:
+                cancel event
+            else if index of event-slot is 20:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleScheduleRestartsAlerts(player)
+                    openCustomServiceAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleLagTroublesAlerts(player)
+                    openCustomServiceAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 24:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleScheduleStopsAlerts(player)
+                    openCustomServiceAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 39:
+                if click type is left mouse button:
+                    cancel event
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 40:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event

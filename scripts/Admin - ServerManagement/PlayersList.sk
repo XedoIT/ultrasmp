@@ -1,0 +1,35 @@
+command /list:
+    executable by: player, console
+    trigger:
+        set {_OnlinePlayers} to size of all players
+        set {_MaxOnlinePlayers} to max player count
+        if {_OnlinePlayers} > 1:
+            send "%{server.prefix.main}% &7Al momento ci sono &c%{_OnlinePlayers}% giocatori &7su &c%{_MaxOnlinePlayers}% &7all'interno della &e%{server.name}%&7."
+            send " &6Giocatori: &f%{players.online::*}%"
+            stop
+        else if {_OnlinePlayers} = 1:
+            send "%{server.prefix.main}% &7Al momento c'è &c1 giocatore &7su &c%{_MaxOnlinePlayers}% &7all'interno della &e%{server.name}%&7."
+            send " &6Giocatore: &f%{players.online::*}%"
+            stop
+        if {_OnlinePlayers} = 0:
+            send "%{server.prefix.main}% &7Al momento non ci sono giocatori &7all'interno della &e%{server.name}%&7."
+            stop
+
+on join:
+    set {_OnlinePlayers} to size of all players
+    add player to {players.online::*}
+    if {players::*} doesn't contain player's uuid:
+        add player to {players::*}
+
+on quit:
+    set {_OnlinePlayers} to size of all players
+    remove player from {players.online::*}
+    if {_OnlinePlayers} = 1:
+        delete {players.online::*}
+
+# ZONA DEBUG
+command /resetplayers:
+    permission: debug.commands
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    trigger:
+        delete {players::*}

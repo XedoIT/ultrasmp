@@ -1,0 +1,128 @@
+options:
+# GENERALI
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    
+    no_flags: "{hide_additional_tooltip:{}}"
+
+    no: &c✖
+    yes: &a✔
+
+# MESSAGGI IMPOSTAZIONI DI PRIVACY
+  # ATTIVA/DISATTIVA
+    turn_on: &eClicca per attivare.
+    turn_off: &eClicca per disattivare.
+
+  # PROFILO GIOCATORE
+    playersinfo_on: &aDa adesso gli altri giocatori potranno consultare il tuo profilo.
+    playersinfo_off: &cDa adesso gli altri giocatori non potranno più consultare il tuo profilo.
+
+  # RICHIESTE DI TELETRASPORTO
+    tp_requests_on: &aDa adesso gli altri giocatori potranno inviarti richieste di teletrasporto (&e/tpa &ae &e/tpahere&a).
+    tp_requests_off: &cDa adesso gli altri giocatori non potranno più inviarti richieste di teletrasporto (&6/tpa &ce &6/tpahere&c).
+
+# YAML
+    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+
+    file: "settings-%{_p}'s uuid%"
+
+    gui_background: yaml value "personalization.gui_background.enabled"
+
+    can_others_view_self_profile: yaml value "privacy.can_others_view_self_profile.enabled"
+    can_receive_others_tp_requests: yaml value "privacy.can_receive_others_tp_requests.enabled"
+    can_others_view_self_profile_marker: yaml value "privacy.can_others_view_self_profile.marker"
+    can_receive_others_tp_requests_marker: yaml value "privacy.can_receive_others_tp_requests.marker"
+
+function TogglePlayersInformationToSelf(p: player):
+    if {@can_others_view_self_profile} in {@file} is true:
+        set {@can_others_view_self_profile} in {@file} to false
+        set {@can_others_view_self_profile_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@playersinfo_off}" to {_p}
+        save yaml {@file}
+    else:
+        set {@can_others_view_self_profile} in {@file} to true
+        set {@can_others_view_self_profile_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@playersinfo_on}" to {_p}
+        save yaml {@file}
+
+function ToggleTPRequestsToSelf(p: player):
+    if {@can_receive_others_tp_requests} in {@file} is true:
+        set {@can_receive_others_tp_requests} in {@file} to false
+        set {@can_receive_others_tp_requests_marker} in {@file} to "{@no}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@tp_requests_off}" to {_p}
+        save yaml {@file}
+    else:
+        set {@can_receive_others_tp_requests} in {@file} to true
+        set {@can_receive_others_tp_requests_marker} in {@file} to "{@yes}"
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+        send "%{server.prefix.main}% {@tp_requests_on}" to {_p}
+        save yaml {@file}
+
+function openPrivacyPlayerSettingsGUI(p: player):
+    if {@gui_glass_pane} is true:
+        set {_gui} to a new chest inventory with 4 rows named "Impostazioni: &9Privacy"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 28, 29, 32, 33, 34 and 35 of {_gui} to black stained glass pane named "&f"
+        set slot 10, 11, 13, 15, 16, 19, 20, 22, 24 and 25 of {_gui} to gray stained glass pane named "&f"
+        set slot 12 of {_gui} to {_p}'s head named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "&f", "&4&lATTENZIONE!", "&cSe, mentre un giocatore sta consultando", "&cil tuo profilo, modifichi questa opzione,", "&cle modifiche saranno applicate una", "&cvolta che un altro giocatore proverà" and "&ca consultare il tuo profilo."
+        set slot 14 of {_gui} to compass named "&6Richieste di teletrasporto" with lore "&7Consenti agli altri giocatori di inviarti", "&7richieste di teletrasporto, ricevute" and "&7principalmente da &6/tpa &7e &6/tpahere&7."
+        set slot 30 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        if {@can_others_view_self_profile} in {@file} is true:
+            set slot 21 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+        else:
+            set slot 21 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+        if {@can_receive_others_tp_requests} in {@file} is true:
+            set slot 23 of {_gui} to lime dye named "&aRichieste di teletrasporto" with lore "{@turn_off}"
+        else:
+            set slot 23 of {_gui} to gray dye named "&cRichieste di teletrasporto" with lore "{@turn_on}"
+        open {_gui} to {_p}
+    else:
+        set {_gui} to a new chest inventory with 4 rows named "Impostazioni: &9Privacy"
+        set slot 12 of {_gui} to {_p}'s head named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "&f", "&4&lATTENZIONE!", "&cSe, mentre un giocatore sta consultando", "&cil tuo profilo, modifichi questa opzione,", "&cle modifiche saranno applicate una", "&cvolta che un altro giocatore proverà" and "&ca consultare il tuo profilo."
+        set slot 14 of {_gui} to compass named "&6Richieste di teletrasporto" with lore "&7Consenti agli altri giocatori di inviarti", "&7richieste di teletrasporto, ricevute" and "&7principalmente da &6/tpa &7e &6/tpahere&7."
+        set slot 30 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Impostazioni"
+        set slot 31 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        if {@can_others_view_self_profile} in {@file} is true:
+            set slot 21 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+        else:
+            set slot 21 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+        if {@can_receive_others_tp_requests} in {@file} is true:
+            set slot 23 of {_gui} to lime dye named "&aRichieste di teletrasporto" with lore "{@turn_off}"
+        else:
+            set slot 23 of {_gui} to gray dye named "&cRichieste di teletrasporto" with lore "{@turn_on}"
+        open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Privacy":
+        if type of event-inventory is chest inventory:
+            if index of event-slot isn't 21, 23, 30 or 31:
+                cancel event
+            else if index of event-slot is 21:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersInformationToSelf(player)
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 23:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleTPRequestsToSelf(player)
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 30:
+                if click type is left mouse button:
+                    cancel event
+                    openPlayerSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 31:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event

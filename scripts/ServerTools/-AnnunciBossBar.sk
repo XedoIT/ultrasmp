@@ -1,0 +1,26 @@
+options:
+    prefix_error: &7[&c&lFly&7]
+
+on join:
+    if {event.flymode.remain_time} > 1:
+        create bossbar titled "&c&lEvento: &aVolo abilitato (&b/fly&a) per &e%{event.flymode.remain_time}% giorni&a!" and id "event.flymode.%player%" for player with progress 100 with colors blue
+    else if {event.flymode.remain_time} = 1:
+        create bossbar titled "&c&lEvento: &aVolo abilitato (&b/fly&a) per &eun altro giorno&a!" and id "event.flymode.%player%" for player with progress 100 with colors blue
+
+on load:
+    wait 6 hours
+    if {event.flymode.remain_time} != 0:
+        subtract 1 from {event.flymode.remain_time}
+
+every second:
+    loop all players:
+        if {event.flymode.remain_time} = 0:
+            send "{@prefix_error} &cTempo per il volo scaduto! Da adesso non potrai più eseguire il comando &6/fly&c." to loop-player
+            send "" to loop-player
+            send "%{server.prefix.main}% &aSpero che questo evento ti sia piaciuto e che te lo sia goduto." to loop-player
+            send "%{server.prefix.main}% &bBuona continuazione nell'&e%{server.name}%&b!" to loop-player
+            play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
+            send "{@prefix_error} &cEvento ""&6/fly&c"" terminato." to console
+            remove bossbar "event.flymode.%loop-player%"
+            delete {event.flymode.remain_time}
+            execute console command "/skript disable %script%"

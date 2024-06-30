@@ -1,0 +1,5 @@
+on enderman pickup:
+    cancel event
+
+on enderman place:
+    cancel event

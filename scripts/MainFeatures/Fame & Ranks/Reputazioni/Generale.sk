@@ -1,0 +1,856 @@
+# Script per il sistema delle reputazioni ed effetti dati dalle reputazioni #
+#
+# REPUTAZIONI
+# - ranks.check.self
+# - ranks.check.other
+# - ranks.effect.self
+# - ranks.effect.other
+# - ranks.list
+# - ranks.admin.help
+# - ranks.help
+# - ranks.reload
+# - ranks.commands
+# - ranks.*
+#
+
+options:
+    prefix: &8[&b&lRANK&8]
+    error: &8[&4&lRANK&8]
+    warning: &6[&c&l!&6]
+
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+    levelup_sound: play sound "entity.player.levelup" with volume 1 and pitch 2
+    what_sound: play sound "entity.villager.trader" with volume 1
+
+    no_effect: &7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno.
+    no_effect_self: &7Non hai nessun effetto perché sei neutrale&7. Cambia reputazione per ottenerne uno.
+    no_effect_other: &c%arg-2% &7non ha nessun effetto perché è neutrale&7.
+
+  # ANNUNCI CAMBIO REPUTAZIONE
+    new_rank: &c%loop-player% &fè diventato %{rank.%loop-player%}%&f!
+    new_rank_female: &c%loop-player% &fè diventata %{rank.%loop-player%}%&f!
+
+  # LISTA REPUTAZIONI (NOME INTERO)
+    rank_-5: &4&lPerfido&r
+    rank_-5_female: &4&lPerfida&r
+    rank_-4: &c&lMalvagio&r
+    rank_-4_female: &c&lMalvagia&r
+    rank_-3: &6&lVile&r
+    rank_-2: &e&lSpregevole&r
+    rank_-1: &8&lAggressivo&r
+    rank_-1_female: &8&lAggressiva&r
+    rank_0: &7&lNeutrale&r
+    rank_1: &a&lPerbene&r
+    rank_2: &a&lGentile&r
+    rank_3: &2&lAffidabile&r
+    rank_4: &2&lAltruista&r
+    rank_5: &3&lAffabile&r
+    rank_6: &3&lPuro&r
+    rank_6_female: &3&lPura&r
+    rank_7: &9&lMigliore&r
+    rank_8: &9&lSpeciale&r
+    rank_9: &b&lStrepitoso&r
+    rank_9_female: &b&lStrepitosa&r
+    rank_10: &b&lStupendo&r
+    rank_10_female: &b&lStupenda&r
+    rank_11: &6&n&lNerd&r
+
+  # LISTA REPUTAZIONI (PREFISSO RANK)
+    tabpfx_rank_-5: &c[&4&lP&c]&r
+    tabpfx_rank_-4: &4[&c&lM&4]&r
+    tabpfx_rank_-3: &e[&6&lV&e]&r
+    tabpfx_rank_-2: &6[&e&lS&6]&r
+    tabpfx_rank_-1: &7[&8&lA&7]&r
+    tabpfx_rank_0: &8[&7&lN&8]&r
+    tabpfx_rank_1: &2[&a&lP&2]&r
+    tabpfx_rank_2: &2[&a&lG&2]&r
+    tabpfx_rank_3: &a[&2&lA&a]&r
+    tabpfx_rank_4: &a[&2&lA&a]&r
+    tabpfx_rank_5: &b[&3&lA&b]&r
+    tabpfx_rank_6: &b[&3&lP&b]&r
+    tabpfx_rank_7: &3[&9&lM&3]&r
+    tabpfx_rank_8: &3[&9&lS&3]&r
+    tabpfx_rank_9: &9[&b&lS&9]&r
+    tabpfx_rank_10: &9[&b&lS&9]&r
+    tabpfx_rank_11: &4{&c[&6&n&lN&e&c]&4}&r
+
+  # FAMA MASSIMA PER REPUTAZIONE
+    max_rank_-5: -1000
+    chat_max_rank_-5: -1.000 Fama
+    max_rank_-4: -750
+    chat_max_rank_-4: -750 Fama
+    max_rank_-3: -500
+    chat_max_rank_-3: -500 Fama
+    max_rank_-2: -250
+    chat_max_rank_-2: -250 Fama
+    max_rank_-1: -100
+    chat_max_rank_-1: -100 Fama
+    max_rank_0: 7499.99
+    chat_max_rank_0: 7.499,99 Fama
+    max_rank_1: 14999.99
+    chat_max_rank_1: 14.999,99 Fama
+    max_rank_2: 74999.99
+    chat_max_rank_2: 74.999,99 Fama
+    max_rank_3: 124999.99
+    chat_max_rank_3: 124.999,99 Fama
+    max_rank_4: 199999.99
+    chat_max_rank_4: 199.999,99 Fama
+    max_rank_5: 299999.99
+    chat_max_rank_5: 299.999,99 Fama
+    max_rank_6: 424999.99
+    chat_max_rank_6: 424.999,99 Fama
+    max_rank_7: 599999.99
+    chat_max_rank_7: 599.999,99 Fama
+    max_rank_8: 749999.99
+    chat_max_rank_8: 749.999,99 Fama
+    max_rank_9: 999999.99
+    chat_max_rank_9: 999.999,99 Fama
+    max_rank_10: 9999999.99
+    chat_max_rank_10: 9.999.999,99 Fama
+
+  # FAMA MINIMA PER REPUTAZIONE
+    min_rank_-4: -999.99
+    chat_min_rank_-4: -999,99 Fama
+    min_rank_-3: -749.99
+    chat_min_rank_-3: -749,99 Fama
+    min_rank_-2: -499.99
+    chat_min_rank_-2: -499,99 Fama
+    min_rank_-1: -249.99
+    chat_min_rank_-1: -249,99 Fama
+    min_rank_0: -99.99
+    chat_min_rank_0: -99,99 Fama
+    min_rank_1: 7500
+    chat_min_rank_1: 7.500 Fama
+    min_rank_2: 15000
+    chat_min_rank_2: 15.000 Fama
+    min_rank_3: 75000
+    chat_min_rank_3: 75.000 Fama
+    min_rank_4: 125000
+    chat_min_rank_4: 125.000 Fama
+    min_rank_5: 200000
+    chat_min_rank_5: 200.000 Fama
+    min_rank_6: 300000
+    chat_min_rank_6: 300.000 Fama
+    min_rank_7: 425000
+    chat_min_rank_7: 425.000 Fama
+    min_rank_8: 600000
+    chat_min_rank_8: 600.000 Fama
+    min_rank_9: 750000
+    chat_min_rank_9: 750.000 Fama
+    min_rank_10: 1000000
+    chat_min_rank_10: 1.000.000 Fama
+    min_rank_11: 10000000
+    chat_min_rank_11: 10.000.000 Fama
+    
+every second:
+    loop all players:
+        if {rank.alignment.-5.%loop-player%}, {rank.alignment.-4.%loop-player%}, {rank.alignment.-3.%loop-player%}, {rank.alignment.-2.%loop-player%}, {rank.alignment.-1.%loop-player%}, {rank.alignment.0.%loop-player%}, {rank.alignment.1.%loop-player%}, {rank.alignment.2.%loop-player%}, {rank.alignment.3.%loop-player%}, {rank.alignment.4.%loop-player%}, {rank.alignment.5.%loop-player%}, {rank.alignment.6.%loop-player%}, {rank.alignment.7.%loop-player%}, {rank.alignment.8.%loop-player%}, {rank.alignment.9.%loop-player%}, {rank.alignment.10.%loop-player%} or {rank.alignment.11.%loop-player%} isn't set:
+            if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                set {rank.alignment.-5.%loop-player%} to "{@rank_-5}"
+                set {rank.alignment.-4.%loop-player%} to "{@rank_-4}"
+                set {rank.alignment.-1.%loop-player%} to "{@rank_-1}"
+                set {rank.alignment.6.%loop-player%} to "{@rank_6}"
+                set {rank.alignment.9.%loop-player%} to "{@rank_9}"
+                set {rank.alignment.10.%loop-player%} to "{@rank_10}"
+            else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                set {rank.alignment.-5.%loop-player%} to "{@rank_-5_female}"
+                set {rank.alignment.-4.%loop-player%} to "{@rank_-4_female}"
+                set {rank.alignment.-1.%loop-player%} to "{@rank_-1_female}"
+                set {rank.alignment.6.%loop-player%} to "{@rank_6_female}"
+                set {rank.alignment.9.%loop-player%} to "{@rank_9_female}"
+                set {rank.alignment.10.%loop-player%} to "{@rank_10_female}"
+            set {rank.alignment.-3.%loop-player%} to "{@rank_-3}"
+            set {rank.alignment.-2.%loop-player%} to "{@rank_-2}"
+            set {rank.alignment.0.%loop-player%} to "{@rank_0}"
+            set {rank.alignment.1.%loop-player%} to "{@rank_1}"
+            set {rank.alignment.2.%loop-player%} to "{@rank_2}"
+            set {rank.alignment.3.%loop-player%} to "{@rank_3}"
+            set {rank.alignment.4.%loop-player%} to "{@rank_4}"
+            set {rank.alignment.5.%loop-player%} to "{@rank_5}"
+            set {rank.alignment.7.%loop-player%} to "{@rank_7}"
+            set {rank.alignment.8.%loop-player%} to "{@rank_8}"
+            set {rank.alignment.11.%loop-player%} to "{@rank_11}"
+
+on join:
+    wait 5 ticks
+    if {rank.%player%} isn't set:
+        set {rank.%player%} to "{@rank_0}"
+    if {rank.prefix.%player%} isn't set:
+        set {rank.prefix.%player%} to "{@tabpfx_rank_0}"
+
+command /rank [<text>] [<offline player>] [<text>]:
+    aliases: /reputazione
+    description: Gestisci la reputazione di un giocatore.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                if player has permission "ranks.check.self":
+                    send "{@prefix} &fAl momento sei %{rank.%player%}%&f." to player
+                    send "{@prefix} &bGioca e ottieni Fama per cambiare la tua reputazione." to player
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cComando sconosciuto."
+                    stop
+            
+            else if arg-1 is "check":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.check.other":
+                            send "{@prefix} &cComando incompleto."
+                            send "{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                            stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                else:
+                    if arg-3 is not set:
+                        if player has permission "ranks.check.other":
+                            if {rank.%arg-2%} is set:
+                                send "{@prefix} &c%arg-2% &fal momento è %{rank.%arg-2%}%"
+                            else:
+                                send "{@error} &6%arg-2% &cnon possiede ancora nessun ruolo!"
+                                {@error_sound} at player for player
+                                stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                    else:
+                        if player has permission "ranks.check.other":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                            stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                    
+            else if arg-1 is "effect":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.effect.self":
+                            if {rank.effect.%player%} != "{@no_effect}":
+                                send "&7&m---------&r {@prefix} &7&m---------"
+                                send "&fI tuoi effetti attivi:"
+                                send "%{rank.effect.%player%}%"
+                                send "&7&m-------------------------"
+                                stop
+                            else:
+                                send "&7&m---------------&r {@prefix} &7&m---------------"
+                                send "%{rank.effect.%player%}%"
+                                send "&7&m-------------------------------------"
+                                stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                if arg-2 has played before:
+                    if arg-3 is not set:
+                        if player has permission "ranks.effect.other":
+                            if {rank.effect.%arg-2%} != "{@no_effect}":
+                                send "&7&m-------------&r {@prefix} &7&m-------------"
+                                send "&fGli effetti attivi di &c%arg-2% &f(%{rank.%arg-2%}%&f)&f:"
+                                send "%{rank.effect.%arg-2%}%"
+                                send "&7&m---------------------------------"
+                                stop
+                            else:
+                                send "&7&m------------&r {@prefix} &7&m------------"
+                                send "{@no_effect_other}"
+                                send "&7&m------------------------------"
+                                stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                    else:
+                        if player has permission "ranks.effect.other":
+                            send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                            stop
+                else:
+                    if arg-3 is not set:
+                        if player has permission "ranks.effect.other":
+                            send "{@prefix} &6%arg-2% &cnon ha ancora giocato in questo server!"
+                            {@error_sound} at player for player
+                            stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                        stop
+
+            else if arg-1 is "list":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.list":
+                            send "&7&m---------&r {@prefix} &7&m---------"
+                            send "&fReputazioni disponibili:"
+                            send "1. %{rank.alignment.-5.%player%}% &f- <ttp:&4Da {@chat_max_rank_-5} in giù>&9[&3?&9]"
+                            send "2. %{rank.alignment.-4.%player%}% &f- <ttp:&cDa {@chat_min_rank_-4} a {@chat_max_rank_-4}>&9[&3?&9]"
+                            send "3. %{rank.alignment.-3.%player%}% &f- <ttp:&6Da {@chat_min_rank_-3} a {@chat_max_rank_-3}>&9[&3?&9]"
+                            send "4. %{rank.alignment.-2.%player%}% &f- <ttp:&eDa {@chat_min_rank_-2} a {@chat_max_rank_-2}>&9[&3?&9]"
+                            send "5. %{rank.alignment.-1.%player%}% &f- <ttp:&8Da {@chat_min_rank_-1} a {@chat_max_rank_-1}>&9[&3?&9]"
+                            send "6. %{rank.alignment.0.%player%}% &f- <ttp:&7Da {@chat_min_rank_0} a {@chat_max_rank_0}>&9[&3?&9]"
+                            send "7. %{rank.alignment.1.%player%}% &f- <ttp:&aDa {@chat_min_rank_1} a {@chat_max_rank_1}>&9[&3?&9]"
+                            send "8. %{rank.alignment.2.%player%}% &f- <ttp:&aDa {@chat_min_rank_2} a {@chat_max_rank_2}>&9[&3?&9]"
+                            send "9. %{rank.alignment.3.%player%}% &f- <ttp:&2Da {@chat_min_rank_3} a {@chat_max_rank_3}>&9[&3?&9]"
+                            send "10. %{rank.alignment.4.%player%}% &f- <ttp:&2Da {@chat_min_rank_4} a {@chat_max_rank_4}>&9[&3?&9]"
+                            send "11. %{rank.alignment.5.%player%}% &f- <ttp:&3Da {@chat_min_rank_5} a {@chat_max_rank_5}>&9[&3?&9]"
+                            send "12. %{rank.alignment.6.%player%}% &f- <ttp:&3Da {@chat_min_rank_6} a {@chat_max_rank_6}>&9[&3?&9]"
+                            send "13. %{rank.alignment.7.%player%}% &f- <ttp:&9Da {@chat_min_rank_7} a {@chat_max_rank_7}>&9[&3?&9]"
+                            send "14. %{rank.alignment.8.%player%}% &f- <ttp:&9Da {@chat_min_rank_8} a {@chat_max_rank_8}>&9[&3?&9]"
+                            send "15. %{rank.alignment.9.%player%}% &f- <ttp:&bDa {@chat_min_rank_9} a {@chat_max_rank_9} Fama>&9[&3?&9]"
+                            send "16. %{rank.alignment.10.%player%}% &f- <ttp:&bDa {@chat_min_rank_10} a {@chat_max_rank_10}>&9[&3?&9]"
+                            send "17. %{rank.alignment.11.%player%}% &f- <ttp:&6Da {@chat_min_rank_11} in su>&9[&3?&9]"
+                            send "&7&m-------------------------"
+                            stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                else:
+                    if player has permission "ranks.list":
+                        send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "%{server.prefix.main}% &cComando sconosciuto."
+                        stop
+            
+            else if arg-1 is "help":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.admin.help":
+                            send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                            send ""
+                            send "&7Comandi che puoi eseguire:"
+                            send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione."
+                            send "&c- &7/rank &acheck <giocatore> &7&o- Controlla la reputazione di un giocatore."
+                            send "&c- &7/rank &aeffect [giocatore] &7&o- Controlla i tuoi effetti attivi o quelli di un altro giocatore."
+                            send "&c- &7/rank &alist &7&o- Mostra l'elenco di tutte le reputazioni disponibili."
+                            send "&c- &7/rank &ahelp &7&o- Mostra questa lista."
+                            send "&c- &7/rank &areload &7&o- Ricarica lo script."
+                            send ""
+                            send "&e> &7&m--------------------------------&r &e<"
+                            stop
+                        else:
+                            send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                            send ""
+                            send "&7Comandi che puoi eseguire:"
+                            send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione."
+                            send "&c- &7/rank &aeffect &7&o- Visualizza i tuoi effetti attivi."
+                            send "&c- &7/rank &alist &7&o- Mostra l'elenco di tutte le reputazioni disponibili."
+                            send "&c- &7/rank &ahelp &7&o- Mostra questa lista."
+                            send ""
+                            send "&e> &7&m--------------------------------&r &e<"
+                            stop
+                else:
+                    if player has permission "ranks.help":
+                        send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "%{server.prefix.main}% &cComando sconosciuto."
+                        stop
+
+            else if arg-1 is "reload":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        if player has permission "ranks.reload":
+                            send "{@prefix} &3Ricarico il config..."
+                            wait 5 ticks
+                            execute console command "/skript reload %script%"
+                            send "{@prefix} &aConfig ricaricato! &cControlla la console per controllare se ci sono errori."
+                            stop
+                        else:
+                            send "%{server.prefix.main}% &cComando sconosciuto."
+                            stop
+                else:
+                    if player has permission "ranks.reload":
+                        send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+                    else:
+                        send "%{server.prefix.main}% &cComando sconosciuto."
+                        stop
+
+            else if arg-1 is not "check", "effect", "list", "help" or "reload":
+                if player has permission "ranks.commands":
+                    send "{@error} &cComando sconosciuto."
+                    send "{@error} &cUtilizzo: &6/rank"
+                    send "{@error} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                    send "{@error} &cUtilizzo: &6/rank effect [&egiocatore&6]"
+                    send "{@error} &cUtilizzo: &6/rank list"
+                    send "{@error} &cUtilizzo: &6/rank help"
+                    send "{@error} &cUtilizzo: &6/rank reload"
+                    stop
+                else:
+                    send "{@error} &cComando sconosciuto."
+                    send "{@error} &cUtilizzo: &6/rank"
+                    send "{@error} &cUtilizzo: &6/rank effect"
+                    send "{@error} &cUtilizzo: &6/rank list"
+                    send "{@error} &cUtilizzo: &6/rank help"
+                    stop
+
+        else:
+            if arg-1 is not set:
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@error} &cSolo i giocatori possono eseguire questo comando."
+                        stop
+            
+            else if arg-1 is "check":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@prefix} &cComando incompleto."
+                        send "{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                        stop
+                else:
+                    if arg-3 is not set:
+                        if {rank.%arg-2%} is set:
+                            send "{@prefix} &c%arg-2% &fal momento è %{rank.%arg-2%}%"
+                            stop
+                        else:
+                            send "{@error} &6%arg-2% &cnon possiede ancora nessun ruolo!"
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+                        stop
+            
+            else if arg-1 is "effect":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@error} &cSolo i giocatori possono eseguire questo comando."
+                        stop
+                if arg-2 has played before:
+                    if arg-3 is not set:
+                        if {rank.effect.%arg-2%} != "{@no_effect}":
+                            send "&7&m-------------&r {@prefix} &7&m-------------"
+                            send "&fGli effetti attivi di &c%arg-2% &f(%{rank.%arg-2%}%&f)&f:"
+                            send "%{rank.effect.%arg-2%}%"
+                            send "&7&m---------------------------------"
+                            stop
+                        else:
+                            send "&7&m------------&r {@prefix} &7&m------------"
+                            send "{@no_effect_other}"
+                            send "&7&m------------------------------"
+                            stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                        stop
+                else:
+                    if arg-3 is not set:
+                        send "{@prefix} &6%arg-2% &cnon ha ancora giocato in questo server!"
+                        stop
+                    else:
+                        send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
+                        stop
+
+            else if arg-1 is "list":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "&7&m------------------&r {@prefix} &7&m------------------"
+                        send "&fReputazioni disponibili:"
+                        send "1. {@rank_-5} &r- &7&o(Da {@chat_max_rank_-5} in giù)"
+                        send "2. {@rank_-4} &r- &7&o(Da {@chat_min_rank_-4} a {@chat_max_rank_-4})"
+                        send "3. {@rank_-3} &r- &7&o(Da {@chat_min_rank_-3} a {@chat_max_rank_-3})"
+                        send "4. {@rank_-2} &r- &7&o(Da {@chat_min_rank_-2} a {@chat_max_rank_-2})"
+                        send "5. {@rank_-1} &r- &7&o(Da {@chat_min_rank_-1} a {@chat_max_rank_-1})"
+                        send "6. {@rank_0} &r- &7&o(Da {@chat_min_rank_0} a {@chat_max_rank_0})"
+                        send "7. {@rank_1} &r- &7&o(Da {@chat_min_rank_1} a {@chat_max_rank_1})"
+                        send "8. {@rank_2} &r- &7&o(Da {@chat_min_rank_2} a {@chat_max_rank_2})"
+                        send "9. {@rank_3} &r- &7&o(Da {@chat_min_rank_3} a {@chat_max_rank_3})"
+                        send "10. {@rank_4} &r- &7&o(Da {@chat_min_rank_4} a {@chat_max_rank_4})"
+                        send "11. {@rank_5} &r- &7&o(Da {@chat_min_rank_5} a {@chat_max_rank_5})"
+                        send "12. {@rank_6} &r- &7&o(Da {@chat_min_rank_6} a {@chat_max_rank_6})"
+                        send "13. {@rank_7} &r- &7&o(Da {@chat_min_rank_7} a {@chat_max_rank_7})"
+                        send "14. {@rank_8} &r- &7&o(Da {@chat_min_rank_8} a {@chat_max_rank_8})"
+                        send "15. {@rank_9} &r- &7&o(Da {@chat_min_rank_9} a {@chat_max_rank_9})"
+                        send "16. {@rank_10} &r- &7&o(Da {@chat_min_rank_10} a {@chat_max_rank_10})"
+                        send "17. {@rank_11} &r- &7&o(Da {@chat_min_rank_11} in su)"
+                        send "&7&m-------------------------------------------"
+                        stop
+                else:
+                    send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+            
+            else if arg-1 is "help":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                        send ""
+                        send "&7Comandi che puoi eseguire:"
+                        send "&c- &a/rank &7&o- Visualizza la tua attuale reputazione."
+                        send "&c- &7/rank &acheck <giocatore> &7&o- Controlla la reputazione di un giocatore."
+                        send "&c- &7/rank &aeffect <giocatore> &7&o- Controlla gli effetti attivi di un giocatore."
+                        send "&c- &7/rank &alist &7&o- Mostra l'elenco di tutte le reputazioni disponibili."
+                        send "&c- &7/rank &ahelp &7&o- Mostra questa lista."
+                        send "&c- &7/rank &areload &7&o- Ricarica lo script."
+                        send ""
+                        send "&e> &7&m--------------------------------&r &e<"
+                        stop
+                else:
+                    send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+
+            else if arg-1 is "reload":
+                if arg-2 is not set:
+                    if arg-3 is not set:
+                        send "{@prefix} &3Ricarico il config..."
+                        wait 5 ticks
+                        execute console command "/skript reload %script%"
+                        send "{@prefix} &aConfig ricaricato!"
+                        stop
+                else:
+                    send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
+                    stop
+
+            else if arg-1 is not "check", "effect", "list", "help" or "reload":
+                send "{@error} &cComando sconosciuto."
+                send "{@error} &cUtilizzo: &6/rank check <&egiocatore&6>"
+                send "{@error} &cUtilizzo: &6/rank effect <&egiocatore&6>"
+                send "{@error} &cUtilizzo: &6/rank list"
+                send "{@error} &cUtilizzo: &6/rank help"
+                send "{@error} &cUtilizzo: &6/rank reload"
+                stop
+
+on tab complete of "/rank" or "/reputazione":
+    if player has permission "ranks.commands":
+        set tab completions for position 1 to "check", "effect", "list", "help" and "reload"
+        if tab arg-1 is "check" or "effect":
+            set tab completions for position 2 to {players::*}
+    else:
+        set tab completions for position 1 to "effect", "list" and "help"
+
+every 3 ticks:
+    loop all players:
+        if {rank.%loop-player%} is set:
+            if {rank.%loop-player%} is {rank.alignment.-5.%loop-player%}:
+                if {fame::%loop-player%} > {@max_rank_-5}:
+                    set {rank.%loop-player%} to {rank.alignment.-4.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-4}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+            else if {rank.%loop-player%} is {rank.alignment.-4.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_-4}:
+                    set {rank.%loop-player%} to {rank.alignment.-5.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-5}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@min_rank_-3}:
+                    set {rank.%loop-player%} to {rank.alignment.-3.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-3}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+            else if {rank.%loop-player%} is {rank.alignment.-3.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_-3}:
+                    set {rank.%loop-player%} to {rank.alignment.-4.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-4}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@min_rank_-2}:
+                    set {rank.%loop-player%} to {rank.alignment.-2.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-2}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+            
+            else if {rank.%loop-player%} is {rank.alignment.-2.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_-2}:
+                    set {rank.%loop-player%} to {rank.alignment.-3.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-3}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@min_rank_-1}:
+                    set {rank.%loop-player%} to {rank.alignment.-1.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-1}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+            else if {rank.%loop-player%} is {rank.alignment.-1.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_-1}:
+                    set {rank.%loop-player%} to {rank.alignment.-2.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-2}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_-1}:
+                    set {rank.%loop-player%} to {rank.alignment.0.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_0}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.0.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_0}:
+                    set {rank.%loop-player%} to {rank.alignment.-1.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_-1}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+                else if {fame::%loop-player%} > {@max_rank_0}:
+                    set {rank.%loop-player%} to {rank.alignment.1.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_1}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                
+            else if {rank.%loop-player%} is {rank.alignment.1.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_1}:
+                    set {rank.%loop-player%} to {rank.alignment.0.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_0}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_1}:
+                    set {rank.%loop-player%} to {rank.alignment.2.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_2}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.2.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_2}:
+                    set {rank.%loop-player%} to {rank.alignment.1.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_1}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_2}:
+                    set {rank.%loop-player%} to {rank.alignment.3.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_3}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.3.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_3}:
+                    set {rank.%loop-player%} to {rank.alignment.2.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_2}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_3}:
+                    set {rank.%loop-player%} to {rank.alignment.4.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_4}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.4.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_4}:
+                    set {rank.%loop-player%} to {rank.alignment.3.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_3}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_4}:
+                    set {rank.%loop-player%} to {rank.alignment.5.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_5}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.5.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_5}:
+                    set {rank.%loop-player%} to {rank.alignment.4.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_4}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_5}:
+                    set {rank.%loop-player%} to {rank.alignment.6.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_6}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.6.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_6}:
+                    set {rank.%loop-player%} to {rank.alignment.5.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_5}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_6}:
+                    set {rank.%loop-player%} to {rank.alignment.7.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_7}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.7.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_7}:
+                    set {rank.%loop-player%} to {rank.alignment.6.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_6}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_7}:
+                    set {rank.%loop-player%} to {rank.alignment.8.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_8}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.8.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_8}:
+                    set {rank.%loop-player%} to {rank.alignment.7.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_7}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_8}:
+                    set {rank.%loop-player%} to {rank.alignment.9.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_9}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                
+            else if {rank.%loop-player%} is {rank.alignment.9.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_9}:
+                    set {rank.%loop-player%} to {rank.alignment.8.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_8}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_9}:
+                    set {rank.%loop-player%} to {rank.alignment.10.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_10}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    
+            else if {rank.%loop-player%} is {rank.alignment.10.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_10}:
+                    set {rank.%loop-player%} to {rank.alignment.9.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_9}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+                else if {fame::%loop-player%} > {@max_rank_10}:
+                    set {rank.%loop-player%} to {rank.alignment.11.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_11}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+
+            else if {rank.%loop-player%} is {rank.alignment.11.%loop-player%}:
+                if {fame::%loop-player%} < {@min_rank_11}:
+                    set {rank.%loop-player%} to {rank.alignment.10.%loop-player%}
+                    set {rank.prefix.%loop-player%} to "{@tabpfx_rank_10}"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop

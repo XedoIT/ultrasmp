@@ -1,5 +1,4 @@
 command /cestino:
-    aliases: /trash
     description: "Utile per la spazzatura nel tuo inventario."
     executable by: player, console
     trigger:

@@ -4,14 +4,14 @@
 on chat:
     if {difficulty.info.hardcore_death::%player%} is not set:
         if {nick.%player%} is player:
-            set chat format to "&7[&cBETA&7] &f[player] &7&l>&r [message]"
+            set chat format to "%{rank.prefix.%player%}% &f[player] &7&l>&r [message]"
         else:
-            set chat format to "&7[&cBETA&7] &r*&f%{nick.%player%}% &7&l>&r [message]"
+            set chat format to "%{rank.prefix.%player%}% &r*&f%{nick.%player%}% &7&l>&r [message]"
     else:
         if {nick.%player%} is player:
-            set chat format to "&7[&cBETA&7] %{difficulty.info.hardcore_death.%player%.marker}% &7&o[player] &f&l>&c [message]"
+            set chat format to "%{rank.prefix.%player%}% %{difficulty.info.hardcore_death.%player%.marker}% &7&o[player] &f&l>&c [message]"
         else:
-            set chat format to "&7[&cBETA&7] %{difficulty.info.hardcore_death.%player%.marker}% &7&o*%{nick.%player%}% &f&l>&c [message]"
+            set chat format to "%{rank.prefix.%player%}% %{difficulty.info.hardcore_death.%player%.marker}% &7&o*%{nick.%player%}% &f&l>&c [message]"
     #if player's uuid is "cd1db3e8-73ee-488f-9367-73224ca93ef3": #(_Xedo_ - Francesco)
         #if {nick.%player%} is player:
             #set chat format to "&b[player] &9&l>&r [message]"

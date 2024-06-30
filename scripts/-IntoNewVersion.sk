@@ -1,0 +1,44 @@
+on join:
+    wait 10 ticks
+    if {news.newmc.%player%} isn't set:
+        play sound "entity.player.levelup" with volume 1 and pitch 0 at player for player
+        send title "&e&lUltra SMP %minecraft version%" with subtitle "&aLeggi la chat per più info!" to player for 5 seconds
+        wait 10 ticks
+        send ""
+        send "&a&lLa %{server.name}% è stata aggiornata alla &81.20.4➜&b&l%minecraft version%&a&l!"
+        send "&bIl mondo e i tuoi dati sono rimasti intatti ma, con l'aggiornamento, alcune funzionalità sono state disabilitate."
+        send "&4&lIMPORTANTE! &cVista la probabilità di aggiornamenti futuri per sistemare le funzionalità ""difettose"", anche le prestazioni del server ne risentiranno, pertanto potrebbero esserci dei problemi prestazionali generali."
+        send ""
+        send "&eEcco a te un recap di cos'è cambiato:"
+        send " &6Funzionalità che &4&l&nNON è disponibile&6:"
+        send "  &c- &6/tpr&c: &cper evitare problemi di generazione del mondo e di prestazioni del server."
+        send ""
+        send " &aNovità della %minecraft version% (aggiunte nella 1.20.5):"
+        send "  &b- Aggiunto &fl'armadillo&b: lo puoi trovare nella mesa e nella savana."
+        send "  &b- Aggiunta &fl'armatura per il lupo&b, craftabile con le &fscaglie dell'armadillo&b."
+        send "  &b- Aggiunte &f8 nuove varianti di lupi&b, per un totale di &f9 varianti&b."
+        send "  &b- Aggiunti &f4 nuovi avanzamenti&b."
+        send "  &b- Aggiunte novità tecniche che, se vuoi, puoi approfondire meglio <link:https://www.minecraft.net/en-us/article/minecraft-java-edition-1-20-5>&e&nqui&b."
+        send ""
+        set {news.newmc.%player%} to true
+
+# ZONA DEBUG
+options:
+    debug_prefix: &8[&4&lDEBUG&8]
+
+command /resetnewsmc [<offline player>]:
+    permission: debug.commands
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    trigger:
+        if arg-1 isn't set:
+            delete {news.newmc.%player%}
+            send "{@debug_prefix} &aLa prossima volta che rientrerai, leggerai il messaggio di aggiornamento del server."
+            stop
+        else:
+            if arg-1 isn't player:
+                delete {news.newmc.%arg-1%}
+                send "{@debug_prefix} &aLa prossima volta che &e%arg-1% &arientrerà, leggerà il messaggio di aggiornamento del server."
+                stop
+            else:
+                send "{@debug_prefix} &cPer indicare il tuo personaggio è sufficiente eseguire il comando senza parametri."
+                stop

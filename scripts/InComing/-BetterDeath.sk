@@ -28,7 +28,7 @@ command /bd [<text>] [<offline player>] [<offline player>]:
     permission: betterdeath.admin
     permission message: &cYou do not have permission to do this command, Silly.
     trigger:
-        if arg-1 is not set:
+        if arg-1 isn't set:
             send "&6&l[&c&lBetter Death &a&lVanilla&6&l]&f /bd [reload/help/on/off]" to player
         else:
             if arg-1 is "help":
@@ -64,7 +64,7 @@ command /bd [<text>] [<offline player>] [<offline player>]:
                     stop trigger
 
             else if arg-1 is "fakedeath":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c/bd fakedeath [name 1] [name 2]"
                     stop trigger
                 else:
@@ -79,7 +79,7 @@ command /bd [<text>] [<offline player>] [<offline player>]:
                         send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c%arg-2% it's not online"
                         stop trigger
 
-                        if arg-3 is not set:
+                        if arg-3 isn't set:
                             send "&6&l[&c&lBetter Death &a&lVanilla&6&l] &c/bd fakedeath [nome vittima] [nome Attaccante]"
                             stop trigger
 #End Script

@@ -1,0 +1,118 @@
+options:
+    dir: plugins/Dati Giocatori/Generali
+    file: data-%player's uuid%
+    file_lp: data-%loop-player's uuid%
+
+on join:
+    set {_player_hp} to placeholder "auraskills_hp" from player
+    set {_player_hp_max} to placeholder "auraskills_hp_max" from player
+    set {_player_xp} to placeholder "player_current_exp" from player
+    set {_player_xp_level} to placeholder "player_level" from player
+    set {_player_x} to placeholder "player_x" from player
+    set {_player_y} to placeholder "player_y" from player
+    set {_player_z} to placeholder "player_z" from player
+    set {_player_biome} to placeholder "player_biome_capitalized" from player
+    set {_player_ip} to placeholder "player_ip" from player
+    set {_player_op} to placeholder "player_is_op" from player
+    set {_player_strength} to placeholder "auraskills_strength" from player
+    set {_player_health} to placeholder "auraskills_health" from player
+    set {_player_regeneration} to placeholder "auraskills_regeneration" from player
+    set {_player_luck} to placeholder "auraskills_luck" from player
+    set {_player_wisdom} to placeholder "auraskills_wisdom" from player
+    set {_player_toughness} to placeholder "auraskills_toughness" from player
+    set {_player_crit_chance} to placeholder "auraskills_crit_chance" from player
+    set {_player_crit_damage} to placeholder "auraskills_crit_damage" from player
+    set {_player_speed} to placeholder "auraskills_speed" from player
+    load yaml "{@dir}/%player's uuid%.yml" as "{@file}"
+    set yaml value "player_info.player.name" in "{@file}" to player's name
+    set yaml value "player_info.player.uuid" in "{@file}" to player's uuid
+    set yaml value "player_info.player.status" in "{@file}" to uncolored {status.%player%}
+    set yaml value "player_info.player.gamemode.info" in "{@file}" to uncolored {gm.%player%}
+    set yaml value "player_info.player.gamemode.id" in "{@file}" to {gm.marker.%player%}
+    set yaml value "player_info.player.xp.levels" in "{@file}" to regex({_player_xp_level})
+    set yaml value "player_info.player.xp.points" in "{@file}" to regex({_player_xp})
+    set yaml value "player_info.player.flyspeed" in "{@file}" to player's flyspeed
+    set yaml value "player_info.player.walkspeed" in "{@file}" to player's walkspeed
+    set yaml value "player_info.player.op" in "{@file}" to uncolored {_player_op}
+    set yaml value "player_info.player.god" in "{@file}" to uncolored {god.%player%}
+    set yaml value "player_info.player.fly" in "{@file}" to uncolored {fly.%player%}
+    set yaml value "player_info.energy.health" in "{@file}" to "%regex({_player_hp})%/%regex({_player_hp_max})%"
+    set yaml value "player_info.energy.saturation" in "{@file}" to "%regex(player's food level)%/10"
+    set yaml value "player_info.position.dimension.name" in "{@file}" to uncolored {whois.world.%player%}
+    set yaml value "player_info.position.dimension.id" in "{@file}" to {whois.world.marker.%player%}
+    set yaml value "player_info.position.coordinates" in "{@file}" to "%{_player_x}% %{_player_y}% %{_player_z}%"
+    set yaml value "player_info.position.biome" in "{@file}" to {_player_biome}
+    set yaml value "player_info.playtime.session.days" in "{@file}" to {playtime.actual_session.days.%player%}
+    set yaml value "player_info.playtime.session.hours" in "{@file}" to {playtime.actual_session.hours.%player%}
+    set yaml value "player_info.playtime.session.minutes" in "{@file}" to {playtime.actual_session.minutes.%player%}
+    set yaml value "player_info.playtime.session.seconds" in "{@file}" to {playtime.actual_session.seconds.%player%}
+    set yaml value "player_info.playtime.total.days" in "{@file}" to {playtime.total.days.%player%}
+    set yaml value "player_info.playtime.total.hours" in "{@file}" to {playtime.total.hours.%player%}
+    set yaml value "player_info.playtime.total.minutes" in "{@file}" to {playtime.total.minutes.%player%}
+    set yaml value "player_info.playtime.total.seconds" in "{@file}" to {playtime.total.seconds.%player%}
+    set yaml value "player_info.playtime.sessions" in "{@file}" to {playtime.sessions.%player%}
+    set yaml value "player_info.playtime.first_join" in "{@file}" to {playtime.first_login.%player%}
+    set yaml value "player_info.connectivity.ip_address" in "{@file}" to {_player_ip}
+    set yaml value "player_info.connectivity.ping" in "{@file}" to player's ping
+    set yaml value "player_profile.skills.strength" in "{@file}" to "+%regex({_player_strength})%"
+    set yaml value "player_profile.skills.health" in "{@file}" to "+%regex({_player_health})%"
+    set yaml value "player_profile.skills.regeneration" in "{@file}" to "+%regex({_player_regeneration})%"
+    set yaml value "player_profile.skills.luck" in "{@file}" to "+%regex({_player_luck})%"
+    set yaml value "player_profile.skills.wisdom" in "{@file}" to "+%regex({_player_wisdom})%"
+    set yaml value "player_profile.skills.toughness" in "{@file}" to "+%regex({_player_toughness})%"
+    set yaml value "player_profile.skills.crit_chance" in "{@file}" to "+%regex({_player_crit_chance})%%%"
+    set yaml value "player_profile.skills.crit_damage" in "{@file}" to "+%regex({_player_crit_damage})%%%"
+    set yaml value "player_profile.skills.speed" in "{@file}" to "+%regex({_player_speed})%"
+    set yaml value "player_profile.support.reported_bugs" in "{@file}" to regex({reported_bugs::%player%})
+    set yaml value "player_profile.support.feedback_sent" in "{@file}" to regex({feedback_sent::%player%})
+    set yaml value "player_profile.progress.fama" in "{@file}" to regex({fame::%player%})
+    set yaml value "player_profile.progress.rank" in "{@file}" to uncolored {rank.%player%}
+    set yaml value "player_profile.progress.medals.count" in "{@file}" to "%{medals.%player%}%/15"
+    set yaml value "player_profile.progress.medals.last_obtained" in "{@file}" to uncolored {medals.%player%.last_obtained}
+    set yaml value "player_profile.progress.bloody_stats.kills" in "{@file}" to regex({kills::%player%})
+    set yaml value "player_profile.progress.bloody_stats.deaths" in "{@file}" to regex({deaths::%player%})
+    set yaml value "player_profile.progress.bloody_stats.kd_ratio" in "{@file}" to regex({kills::%player%}/{deaths::%player%})
+    set yaml value "player_profile.progress.bloody_stats.damage.inflicted" in "{@file}" to regex({infldamage::%player%})
+    set yaml value "player_profile.progress.bloody_stats.damage.suffered" in "{@file}" to regex({suffdamage::%player%})
+    set yaml value "player_profile.progress.bloody_stats.killstreak" in "{@file}" to "%regex({killstreak::%player%})%/%regex({killstreak_max.%player%})%"
+    set yaml value "player_profile.progress.mining_stats.broken_blocks" in "{@file}" to regex({broken_blocks::%player%})
+    set yaml value "player_profile.progress.mining_stats.placed_blocks" in "{@file}" to regex({placed_blocks::%player%})
+    save yaml "{@file}"
+
+on quit:
+    save yaml "{@file}"
+    unload yaml "{@file}"
+
+every 5 minutes:
+    loop all players:
+        if loop-player is online:
+            save yaml "{@file_lp}"
+
+command /clearOldData:
+    trigger:
+        set {_n} to 0 # lets create a counter
+        loop all offline players:
+            # here we are going to load each offline player's data, and check the difference between now and last-login
+            # if grater than 100 days, we will delete their data
+            # else we will just unload it and move onto the next
+            load yaml "{@dir}/%uuid of loop-offline player%.yml" as "off-%uuid of loop-offline player%"
+            set {_t} to yaml value "last-login" from "off-%uuid of loop-offline player%"
+            if difference between now and {_t} > 50 days:
+                delete yaml "off-%uuid of loop-offline player%"
+                # lets just let the console know we're deleting this
+                send "Deleting data for %loop-offline player%" to console
+                # We will add 1 to {_n} so we know how many player data's we cleared
+                add 1 to {_n}
+            else:
+                unload yaml "off-%uuid of loop-offline player%"
+            wait 1 tick
+        # Now we tell the console how many data's we cleared
+        send "Removed player data for %{_n}% inactive player(s)" to console
+
+#every 5 minutes:
+    #loop all loaded yaml:
+        #save loop-value
+        # We add a small wait between each player data to prevent
+        # a massive amount of lag if a lot of players are online
+        # Adjust to suit your server's needs
+        #wait 2 ticks

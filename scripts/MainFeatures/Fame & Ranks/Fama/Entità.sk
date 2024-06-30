@@ -1,0 +1,1570 @@
+#---------- MOB KILL PASSIVI E NEUTRALI ----------#     
+on death of chicken, cow, pig, rabbit or sheep:
+    if victim is chicken:
+        set {_victim} to "GALLINA"
+    if victim is cow:
+        set {_victim} to "MUCCA"
+    if victim is pig:
+        set {_victim} to "MAIALE"
+    if victim is rabbit:
+        set {_victim} to "CONIGLIO"
+    if victim is sheep:
+        set {_victim} to "PECORA" 
+    set {_fame} to random number between 0.1 and 0.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of frog or tadpole:
+    if victim is frog:
+        set {_victim} to "RANA"
+    if victim is tadpole:
+        set {_victim} to "GIRINO"
+    set {_fame} to random number between 0.5 and 1.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of axolotl, cod, salmon, puffer fish, tropical fish, dolphin, squid, glow squid or turtle:
+    if victim is axolotl:
+        set {_victim} to "AXOLOTL"
+    if victim is cod:
+        set {_victim} to "MERLUZZO"
+    if victim is salmon:
+        set {_victim} to "SALMONE"
+    if victim is puffer fish:
+        set {_victim} to "PESCE PALLA"
+    if victim is tropical fish:
+        set {_victim} to "PESCE TROPICALE"
+    if victim is dolphin:
+        set {_victim} to "DELFINO"
+    if victim is squid:
+        set {_victim} to "CALAMARO"
+    if victim is glow squid:
+        set {_victim} to "CALAMARO LUMINESCENTE"
+    if victim is turtle:
+        set {_victim} to "TARTARUGA"
+    set {_fame} to random number between 0.5 and 2
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of horse, donkey, mule, skeleton horse, llama, trader llama, goat, panda or polar bear:
+    if victim is horse:
+        set {_victim} to "CAVALLO"
+    if victim is donkey:
+        set {_victim} to "ASINO"
+    if victim is mule:
+        set {_victim} to "MULO"
+    if victim is skeleton horse:
+        set {_victim} to "CAVALLO SCHELETRO"
+    if victim is llama:
+        set {_victim} to "LAMA"
+    if victim is trader llama:
+        set {_victim} to "LAMA DEL MERCANTE"
+    if victim is goat:
+        set {_victim} to "CAPRA"
+    if victim is panda:
+        set {_victim} to "PANDA"
+    if victim is polar bear:
+        set {_victim} to "ORSO POLARE"
+    set {_fame} to random number between 0.5 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of bee, parrot, wolf, cat or fox:
+    if victim is bee:
+        set {_victim} to "APE"
+    if victim is parrot:
+        set {_victim} to "PAPPAGALLO"
+    if victim is wolf:
+        set {_victim} to "LUPO"
+    if victim is cat:
+        set {_victim} to "GATTO"
+    if victim is fox:
+        set {_victim} to "VOLPE"
+    set {_fame} to random number between 0.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of villager, wandering trader, iron golem or allay:
+    if victim is villager:
+        set {_victim} to "VILLICO"
+    if victim is wandering trader:
+        set {_victim} to "MERCANTE AMBULANTE"
+    if victim is iron golem:  
+        set {_victim} to "GOLEM DI FERRO"
+    if victim is allay:
+        set {_victim} to "ALLEVIANTE"
+    set {_fame} to random number between 0.5 and 4
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of bat:
+    if victim is bat:
+        set {_victim} to "PIPISTRELLO"
+    set {_fame} to random number between 0.1 and 0.3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.25) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.25) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.25) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of strider:
+    if victim is strider:
+        set {_victim} to "STRIDER"
+    set {_fame} to random number between 0.5 and 1
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 2.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 3) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    remove ({_fame} * 1) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    remove ({_fame} * 1.5) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    remove ({_fame} * 2) from {fame::%attacker%}
+                    send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+#---------- MOB KILL OSTILI ----------#
+on death of zombie, husk, drowned or zombified piglin:
+    if victim is zombie:
+        set {_victim} to "ZOMBI"
+    if victim is husk:
+        set {_victim} to "ZOMBI SECCO"
+    if victim is zombified piglin:
+        set {_victim} to "PIGLIN ZOMBIFICATO"
+    if victim is drowned:
+        set {_victim} to "ANNEGATO"
+    set {_fame} to random number between 0.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of zombie villager:
+    if victim is zombie villager:
+        set {_victim} to "VILLICO ZOMBI"
+    set {_fame} to random number between 0.5 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of zoglin:
+    if victim is zoglin:
+        set {_victim} to "ZOGLIN"
+    set {_fame} to random number between 1 and 4
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of phantom:
+    if victim is phantom:
+        set {_victim} to "PHANTOM"
+    set {_fame} to random number between 1 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of skeleton or stray:
+    if victim is skeleton:
+        set {_victim} to "SCHELETRO"
+    if victim is stray:
+        set {_victim} to "ERRANTE"
+    set {_fame} to random number between 1.5 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of wither skeleton:
+    if victim is wither skeleton:
+        set {_victim} to "SCHELETRO WITHER"
+    set {_fame} to random number between 2 and 4
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 3.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of spider or cave spider:
+    if victim is spider:
+        set {_victim} to "RAGNO"
+    if victim is cave spider:
+        set {_victim} to "RAGNO DELLE CAVERNE"
+    set {_fame} to random number between 1.5 and 3.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of silverfish or endermite:
+    if victim is silverfish:
+        set {_victim} to "PESCIOLINO D'ARGENTO"
+    if victim is endermite:
+        set {_victim} to "ENDERMITE"
+    set {_fame} to random number between 1 and 2.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of creeper:
+    if victim is creeper:
+        set {_victim} to "CREEPER"
+    set {_fame} to random number between 1.5 and 4.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of slime:
+    if victim is slime:
+        set {_victim} to "SLIME"
+    set {_fame} to random number between 0.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of pillager, vindicator or witch:
+    if victim is pillager:
+        set {_victim} to "PREDONE"
+    if victim is vindicator:
+        set {_victim} to "VENDICATORE"
+    if victim is witch:
+        set {_victim} to "STREGA"
+    set {_fame} to random number between 2.5 and 5.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of evoker:
+    if victim is evoker:
+        set {_victim} to "EVOCATORE"
+    set {_fame} to random number between 3 and 6
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of vex:
+    if victim is vex:
+        set {_victim} to "VESSANTE"
+    set {_fame} to random number between 2 and 5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of ravager:
+    if victim is ravager:
+        set {_victim} to "DEVASTATORE"
+    set {_fame} to random number between 5 and 10
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of guardian or elder guardian:
+    if victim is guardian:
+        set {_victim} to "GUARDIANO"
+    if victim is elder guardian:
+        set {_victim} to "GUARDIANO ANTICO"
+    set {_fame} to random number between 3 and 7
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of blaze or magma cube:
+    if victim is blaze:
+        set {_victim} to "BLAZE"
+    if victim is magma cube:
+        set {_victim} to "CUBO DI MAGMA"
+    set {_fame} to random number between 1.5 and 3.5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of ghast:
+    if victim is ghast:
+        set {_victim} to "GHAST"
+    set {_fame} to random number between 1.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 7) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 3.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of piglin, piglin brute or hoglin:
+    if victim is piglin:
+        set {_victim} to "PIGLIN"
+    if victim is piglin brute:
+        set {_victim} to "PIGLIN BRUTO"
+    if victim is hoglin:
+        set {_victim} to "HOGLIN"
+    set {_fame} to random number between 0.5 and 2
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of enderman or shulker:
+    if victim is enderman:
+        set {_victim} to "ENDERMAN"
+    if victim is shulker:
+        set {_victim} to "SHULKER"
+    set {_fame} to random number between 1.5 and 3
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 3.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 3.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of warden:
+    if victim is warden:
+        set {_victim} to "SORVEGLIANTE"
+    set {_fame} to random number between 50 and 75
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of wither:
+    if victim is wither:
+        set {_victim} to "WITHER"
+    set {_fame} to random number between 35 and 45
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 7) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 8) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 3) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 4.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 6.5) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+on death of ender dragon:
+    if victim is ender dragon:
+        set {_victim} to "DRAGO DELL'END"
+    set {_fame} to random number between 40 and 80
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 8) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+
+# ----- SPECIALI ----- #
+on death of illusioner:
+    if victim is illusioner:
+        set {_victim} to "ILLUSORE"
+    set {_fame} to random number between 2 and 5
+    if attacker is a player:
+        if gamemode of attacker is survival or adventure:
+            if world is "%{server.world.overworld}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.nether}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+            else if world is "%{server.world.end}%":
+                if difficulty is easy:
+                    add ({_fame} * 1) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is normal:
+                    add ({_fame} * 2) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+                else if difficulty is hard:
+                    add ({_fame} * 4) to {fame::%attacker%}
+                    send action bar "&2☠ &2&l%{_victim}% &a+%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                    stop
+
+on death of player:
+    if attacker is a player:
+        if victim is a player:
+            set {_victim} to "GIOCATORE"
+            set {_fame} to random number between 20 and 40
+            if gamemode of attacker is survival or adventure:
+                if world is "%{server.world.overworld}%":
+                    if difficulty is easy:
+                        subtract ({_fame} * 2) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                    else if difficulty is normal:
+                        subtract ({_fame} * 3) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                    else if difficulty is hard:
+                        subtract ({_fame} * 5) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                else if world is "%{server.world.nether}%":
+                    if difficulty is easy:
+                        subtract ({_fame} * 2) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                    else if difficulty is normal:
+                        subtract ({_fame} * 3) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                    else if difficulty is hard:
+                        subtract ({_fame} * 5) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                else if world is "%{server.world.end}%":
+                    if difficulty is easy:
+                        subtract ({_fame} * 2) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                    else if difficulty is normal:
+                        subtract ({_fame} * 3) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+                    else if difficulty is hard:
+                        subtract ({_fame} * 5) from {fame::%attacker%}
+                        send action bar "&4☠ &4&l%{_victim}% &c-%regex({_fame})% Fama &6(%regex({fame::%attacker%})% totale)" to attacker
+                        stop
+    else:
+        if victim is a player:
+            set {_fame} to random number between 15 and 20
+            if gamemode of victim is survival or adventure:
+                if world is "%{server.world.overworld}%":
+                    if difficulty is easy:
+                        subtract ({_fame} * 1) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                    else if difficulty is normal:
+                        subtract ({_fame} * 2) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                    else if difficulty is hard:
+                        subtract ({_fame} * 3) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                else if world is "%{server.world.nether}%":
+                    if difficulty is easy:
+                        subtract ({_fame} * 2) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                    else if difficulty is normal:
+                        subtract ({_fame} * 3) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                    else if difficulty is hard:
+                        subtract ({_fame} * 4) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                else if world is "%{server.world.end}%":
+                    if difficulty is easy:
+                        subtract ({_fame} * 2) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                    else if difficulty is normal:
+                        subtract ({_fame} * 4) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop
+                    else if difficulty is hard:
+                        subtract ({_fame} * 5) from {fame::%victim%}
+                        send action bar "&4☠ &4&lMORTE &c-%regex({_fame})% Fama &6(%{fame::%victim%}% totale)" to victim
+                        stop

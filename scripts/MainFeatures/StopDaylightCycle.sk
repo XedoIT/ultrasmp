@@ -1,0 +1,20 @@
+#on join:
+    #if size of all players = 1:
+        #wait 5 ticks
+        #execute console command "/rs pausetime smp"
+        #send "&aHo rilevato un giocatore nel server, adesso il tempo del mondo andrà avanti." to console
+
+#on quit:
+    #if size of all players = 1:
+        #wait 5 ticks
+        #execute console command "/rs pausetime smp"
+        #send "&cNon ho rilevato giocatori nel server, pertanto ho bloccato il tempo del mondo." to console
+
+command /stop:
+    permission: minecraft.command.stop
+    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        kick all players due to "&c--- %{server.prefix.main}% &c---%nl%%nl%%nl%&6&lLa &e&l%{server.name}% &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l."
+        wait 3 seconds
+        stop server

@@ -1,0 +1,54 @@
+function WarpsGUI(p: player):
+    #if {settings::%{_p}%::glasspanes} is true:
+    if {et.warps_total} > 28:
+        set {et.warps_gui.1} to a new chest inventory with 6 rows named "Warp della %{server.name}%"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 51, 52 and 53 of {et.warps_gui.1} to black stained glass pane named "&f"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {et.warps_gui.1} to gray stained glass pane named "&f"
+        set {_warpslot} to 10
+        loop {et.warps_name::*}:
+            set slot {_warpslot} of {et.warps_gui.1} to paper named "&c%loop-value%" with lore " &7Creato da: &6%{et.warps_owner::%loop-value%}%", " &7Data creazione: &3%{et.warps_whenset::%loop-value%}%", " &7Dimensione: %{et.warps_dimension::%loop-value%}%", "&f" and "&eClicca qui per teletrasportarti!"
+            if {_warpslot} = 16, 25 or 34:
+                add 3 to {_warpslot}
+            else if {_warpslot} != 43:
+                add 1 to {_warpslot}
+            if {_warpslot} > 43:   
+                send "{@prefix} &cSono stati creati troppi warp! Eliminane qualcuno per salvare questo warp." to {_p}
+        set slot 49 of {et.warps_gui.1} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        if {et.warps_total} > 28:
+            set slot 50 of {et.warps_gui.1} to arrow named "&aPagina successiva"
+        else:
+            set slot 50 of {et.warps_gui.1} to black stained glass pane named "&f"
+        open {et.warps_gui.1} to {_p}
+    else:
+        set {et.warps.gui} to a new chest inventory with 6 rows named "Warp della %{server.name}%"
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 51, 52 and 53 of {et.warps.gui} to black stained glass pane named "&f"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {et.warps.gui} to gray stained glass pane named "&f"
+        set {_warpslot} to 10
+        loop {et.warps_name::*}:
+            set slot {_warpslot} of {et.warps.gui} to paper named "&c%loop-value%" with lore " &7Creato da: &6%{et.warps_owner::%loop-value%}%", " &7Data creazione: &3%{et.warps_whenset::%loop-value%}%", " &7Dimensione: %{et.warps_dimension::%loop-value%}%", "&f" and "&eClicca qui per teletrasportarti!"
+            if {_warpslot} = 16, 25 or 34:
+                add 3 to {_warpslot}
+            else if {_warpslot} != 43:
+                add 1 to {_warpslot}
+            if {_warpslot} > 43:   
+                send "{@prefix} &cSono stati creati troppi warp! Eliminane qualcuno per salvare questo warp." to {_p}
+        set slot 49 of {et.warps.gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        if {et.warps_total} > 28:
+            set slot 50 of {et.warps.gui} to arrow named "&aPagina successiva"
+        else:
+            set slot 50 of {et.warps.gui} to black stained glass pane named "&f"
+        open {et.warps.gui} to {_p}
+        
+on inventory click:
+    if name of event-inventory is "Warp della %{server.name}%":
+        if type of event-inventory is chest inventory:
+            if {et.warps_total} > 28:
+                if index of event-slot is not 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43 or 49:
+                    cancel event
+
+on inventory close:
+    if name of event-inventory is "Warp della %{server.name}%":
+        if {et.warps_total} > 28:
+            delete {et.warps_gui.1}
+        else if {et.warps_total} <= 28:
+            delete {et.warps_gui}

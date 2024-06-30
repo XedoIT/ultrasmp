@@ -1,0 +1,138 @@
+# EFFETTI DATI DALLE REPUTAZIONI
+#
+# PERFIDO: Sfortuna, Debolezza 2, Affaticamento 2, Lentezza 2 (OGNI 30 MINUTI: Cecità - 30 secondi)
+# MALVAGIO: Sfortuna, Debolezza 2, Affaticamento, Lentezza
+# VILE: Sfortuna, Debolezza, Affaticamento
+# SPREGEVOLE: Forza 2, Debolezza
+# AGGRESSIVO: Forza 2
+# NEUTRALE: -
+# PERBENE: Fortuna
+# GENTILE: Fortuna, Sollecitudine
+# AFFIDABILE: Fortuna, Sollecitudine 2
+# ALTRUISTA: Fortuna, Sollecitudine 2, Resistenza
+# AFFABILE: Fortuna, Sollecitudine 2, Resistenza 2
+# PURO: Fortuna, Sollecitudine 2, Resistenza 2, Rigenerazione
+# MIGLIORE: Fortuna, Sollecitudine 2, Resistenza 2, Rigenerazione 2
+# SPECIALE: Fortuna, Sollecitudine 2, Resistenza 2, Rigenerazione 2, Velocità
+# STREPITOSO: Fortuna, Sollecitudine 2, Resistenza 2, Rigenerazione 2, Velocità 2
+# STUPENDO: Fortuna, Sollecitudine 2, Resistenza 2, Rigenerazione 3, Velocità 2 (OGNI ORA: Eroe del villaggio - 15 minuti)
+
+# ELIMINAZIONE VARIABILI CAUSA RANK UPDATE v2.0
+on join:
+    if {fame.%player%.effect} is set:
+        set {rank.effect.%player%} to {fame.%player%.effect}
+        delete {fame.%player%.effect}
+
+on join:
+    if {rank.effect.%player%} isn't set:
+        set {rank.effect.%player%} to "&7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno."
+
+every 59 ticks:
+    loop all players:
+        if {rank.%loop-player%} is {rank.alignment.-5.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &8Sfortuna%nl%&f- &eDebolezza II%nl%&f- &6Affaticamento II%nl%&f- &cLentezza II"
+            apply unluck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply weakness 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply mining fatigue 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply slowness 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.-4.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &8Sfortuna%nl%&f- &eDebolezza II%nl%&f- &6Affaticamento%nl%&f- &cLentezza"
+            apply unluck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply weakness 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply mining fatigue without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply slowness without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.-3.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &8Sfortuna%nl%&f- &eDebolezza%nl%&f- &6Affaticamento"
+            apply unluck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply weakness without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply mining fatigue without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.-2.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &8Forza II%nl%&f- &eDebolezza"
+            apply strength 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply weakness without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.-1.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &8Forza II"
+            apply strength 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.0.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno."
+                
+        else if {rank.%loop-player%} is {rank.alignment.1.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.2.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.3.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.4.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.5.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.6.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply regeneration without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.7.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione II"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply regeneration 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.8.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione II%nl%&f- &bVelocità"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply regeneration 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply speed without particles whilst hiding potion icon to loop-player for 3 seconds
+                
+        else if {rank.%loop-player%} is {rank.alignment.9.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione II%nl%&f- &bVelocità II"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply regeneration 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply speed 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            
+        else if {rank.%loop-player%} is {rank.alignment.10.%loop-player%}:
+            set {rank.effect.%loop-player%} to "&f- &aFortuna%nl%&f- &2Sollecitudine II%nl%&f- &3Resistenza II%nl%&f- &9Rigenerazione III%nl%&f- &bVelocità II"
+            apply luck without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply haste 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply resistance 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply regeneration 3 without particles whilst hiding potion icon to loop-player for 3 seconds
+            apply speed 2 without particles whilst hiding potion icon to loop-player for 3 seconds
+            
+every 30 minutes:
+    loop all players:
+        if loop-player is online:
+            if {rank.%loop-player%} is {rank.alignment.-5.%loop-player%}:
+                apply blindness without particles to loop-player for 31 seconds
+            
+every hour:
+    loop all players:
+        if loop-player is online:
+            if {rank.%loop-player%} is {rank.alignment.10.%loop-player%}:
+                apply hero of the village without particles to loop-player for 15 minutes

@@ -1,0 +1,274 @@
+options:
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+
+    easy: "&aAvventuriero"
+    normal: "&eVeterano"
+    hard: "&cIncubo"
+    extreme: "&4Tormento"
+
+on load:
+    if {difficulty.info} is not set:
+        set {difficulty.info} to {@easy}
+    if {difficulty.peaceful} is not set:
+        set {difficulty.peaceful} to "&eClicca per selezionare."
+    if {difficulty.easy} is not set:
+        set {difficulty.easy} to "&aSELEZIONATO!"
+    if {difficulty.normal} is not set:
+        set {difficulty.normal} to "&eClicca per selezionare."
+    if {difficulty.hard} is not set:
+        set {difficulty.hard} to "&eClicca per selezionare."
+    if {difficulty.hardcore} is not set:
+        set {difficulty.hardcore} to "&eClicca per selezionare."
+
+on join:
+    if {difficulty.hardcore_mode} is true:
+        wait 1 second
+        send ""
+        send "&c&k&l0 &cDurante la tua assenza l'%{server.name}% è stata impostata su &4&lHardcore&c! &c&k&l0" to player
+        send "&c&k&l0 &cOgni tua mossa sbagliata sarà fatale. &c&k&l0" to player
+        send ""
+        play sound "entity.wither.spawn" with volume 1 and pitch 0 at player for player
+
+command /difficulty [<text>]:
+    description: Modifica la difficoltà del server.
+    permission: minecraft.command.difficulty
+    permission message: %{server.prefix.main}% &cNon hai i permessi per farlo!
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                send "%{server.prefix.main}% &fAttualmente il server è in %{difficulty.info}%&f."
+                send "%{server.prefix.main}% &6Puoi modificare la difficoltà con &c/difficulty peaceful&6, &ceasy&6, &cnormal&6, &chard &6o &chardcore&6."
+                stop
+            else if arg-1 is "peaceful":
+                if difficulty of all worlds is not peaceful:
+                    set difficulty of all worlds to peaceful
+                    set {difficulty.info} to "&fPacifica"
+                    set {difficulty.peaceful} to "&aSELEZIONATO!"
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                    stop
+            else if arg-1 is "easy":
+                if difficulty of all worlds is not easy:
+                    set difficulty of all worlds to easy
+                    set {difficulty.info} to {@easy}
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&aSELEZIONATO!"
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &aI mostri saranno deboli, ma non sottovalutarli, sapranno comunque come ferirti!" to all players
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                    stop
+            else if arg-1 is "normal":
+                if difficulty of all worlds is not normal:
+                    set difficulty of all worlds to normal
+                    set {difficulty.info} to {@normal}
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&aSELEZIONATO!"
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!" to all players
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                    stop
+            else if arg-1 is "hard":
+                if difficulty of all worlds is not hard:
+                    set difficulty of all worlds to hard
+                    set {difficulty.info} to {@hard}
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&aSELEZIONATO!"
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                    stop
+                else:
+                    if {difficulty.hardcore_mode} is true:
+                        set difficulty of all worlds to hard
+                        set {difficulty.info} to {@hard}
+                        set {difficulty.peaceful} to "&eClicca per selezionare."
+                        set {difficulty.easy} to "&eClicca per selezionare."
+                        set {difficulty.normal} to "&eClicca per selezionare."
+                        set {difficulty.hard} to "&aSELEZIONATO!"
+                        set {difficulty.hardcore} to "&eClicca per selezionare."
+                        delete {difficulty.hardcore_mode}
+                        play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                        broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "%{server.prefix.main}% &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                        stop
+                    else:
+                        send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                        play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                        stop
+            else if arg-1 is "hardcore":
+                if {difficulty.hardcore_mode} is true:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                    stop
+                else:
+                    set difficulty of all worlds to hard
+                    set {difficulty.info} to "&4&lHardcore"
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&aSELEZIONATO!"
+                    set {difficulty.hardcore_mode} to true
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &cL'%{server.name}% è stata impostata su &4&lHardcore&c!" to all players
+                    send "%{server.prefix.main}% &cCiò significa che non puoi permetterti di morire, altrimenti... lascio a te scoprirlo." to all players
+                    send all players title "&c☠ &4&lHARDCORE MODE &c☠" with subtitle "&cOgni tua mossa sbagliata sarà fatale!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
+                    play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
+                    stop
+            else if arg-1 is not "peaceful", "easy", "normal", "hard" or "hardcore":
+                send "%{server.prefix.main}% &cComando sconosciuto."
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty peaceful"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty easy"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty normal"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hard"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hardcore"
+                stop
+        else:
+            if arg-1 is not set:
+                send "%{server.prefix.main}% &cComando incompleto."
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty peaceful"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty easy"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty normal"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hard"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hardcore"
+                stop
+            else if arg-1 is "peaceful":
+                if difficulty of all worlds is not peaceful:
+                    set difficulty of all worlds to peaceful
+                    set {difficulty.info} to "&fPacifica"
+                    set {difficulty.peaceful} to "&aSELEZIONATO!"
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &fGoditi la tranquillità e gioca senza pensieri (e pericoli)." to all players
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    stop
+            else if arg-1 is "easy":
+                if difficulty of all worlds is not easy:
+                    set difficulty of all worlds to easy
+                    set {difficulty.info} to {@easy}
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&aSELEZIONATO!"
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!" to all players
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    stop
+            else if arg-1 is "normal":
+                if difficulty of all worlds is not normal:
+                    set difficulty of all worlds to normal
+                    set {difficulty.info} to {@normal}
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&aSELEZIONATO!"
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!" to all players
+                    stop
+                else:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    stop
+            else if arg-1 is "hard":
+                if difficulty of all worlds is not hard:
+                    set difficulty of all worlds to hard
+                    set {difficulty.info} to {@hard}
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&aSELEZIONATO!"
+                    set {difficulty.hardcore} to "&eClicca per selezionare."
+                    delete {difficulty.hardcore_mode}
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                    stop
+                else:
+                    if {difficulty.hardcore_mode} is true:
+                        set difficulty of all worlds to hard
+                        set {difficulty.info} to {@hard}
+                        set {difficulty.peaceful} to "&eClicca per selezionare."
+                        set {difficulty.easy} to "&eClicca per selezionare."
+                        set {difficulty.normal} to "&eClicca per selezionare."
+                        set {difficulty.hard} to "&aSELEZIONATO!"
+                        set {difficulty.hardcore} to "&eClicca per selezionare."
+                        delete {difficulty.hardcore_mode}
+                        broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                        send "%{server.prefix.main}% &6Quando la difficoltà aumenta le cose si fanno più serie! Tieni gli occhi aperti sui pericoli (e sulla tua vita!)" to all players
+                        stop
+                    else:
+                        send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                        stop
+            else if arg-1 is "hardcore":
+                if {difficulty.hardcore_mode} is true:
+                    send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
+                    stop
+                else:
+                    set difficulty of all worlds to hard
+                    set {difficulty.info} to "&4&lHardcore"
+                    set {difficulty.peaceful} to "&eClicca per selezionare."
+                    set {difficulty.easy} to "&eClicca per selezionare."
+                    set {difficulty.normal} to "&eClicca per selezionare."
+                    set {difficulty.hard} to "&eClicca per selezionare."
+                    set {difficulty.hardcore} to "&aSELEZIONATO!"
+                    set {difficulty.hardcore_mode} to true
+                    broadcast "%{server.prefix.main}% &7La difficoltà dell'SMP è stata impostata su %{difficulty.info}%&7."
+                    send "%{server.prefix.main}% &cL'%{server.name}% è stata impostata su &4&lHardcore&c!" to all players
+                    send "%{server.prefix.main}% &cCiò significa che non puoi permetterti di morire, altrimenti... lascio a te scoprirlo." to all players
+                    send all players title "&c☠ &4&lHARDCORE MODE &c☠" with subtitle "&cOgni tua mossa sbagliata sarà fatale!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
+                    play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
+                    stop
+            else if arg-1 is not "peaceful", "easy", "normal", "hard" or "hardcore":
+                send "%{server.prefix.main}% &cComando sconosciuto."
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty peaceful"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty easy"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty normal"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hard"
+                send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hardcore"
+                stop
+
+on tab complete of "/difficulty":
+    set tab completions for position 1 to "peaceful", "easy", "normal", "hard" and "hardcore"

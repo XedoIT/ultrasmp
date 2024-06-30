@@ -1,0 +1,144 @@
+options:
+    gold_nugget_title: "&ePepita d'oro"
+    gold_nugget_lore_1: "&7Raccolto con l'evento"
+    gold_nugget_lore_2: "&e&lFebbre dell'Oro"
+
+    start_sound_1: play sound "entity.arrow.hit_player" with volume 1 and pitch 0
+    start_sound_2: play sound "entity.arrow.hit_player" with volume 1 and pitch 1
+    start_sound_3: play sound "entity.arrow.hit_player" with volume 1 and pitch 2
+    stop_sound: play sound "entity.piglin.admiring_item" with volume 1 and pitch 0
+    hit_sound: play sound "block.amethyst_block.step" with volume 1000 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+    event_duration: 30 #minuti
+
+    on: "&aL'evento ""&e&lFebbre dell'Oro&a"" è iniziato!"
+    off: "&cL'evento ""&e&lFebbre dell'Oro&c"" è terminato!"
+    in_progress: "&aÈ in corso l'evento ""&e&lFebbre dell'Oro&a""!"
+
+    cant_drop: &cNon puoi droppare quest'oggetto se l'evento &e&lFebbre dell'Oro &cnon è attivo!
+
+    bossbar_title: &e&lFebbre dell'Oro! &f- &aDanneggia i mob per ottenere oro!
+
+    title: &e&lFebbre dell'Oro
+    subtitle_start: &aI mob danneggiati rilasceranno oro per
+    subtitle_stop: &cEvento terminato.
+
+command /goldrush:
+    permission: event.goldrush
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if {event.goldrush} isn't true:
+                set {event.goldrush} to true
+                send {@on} to all players
+                send "" to all players
+                send "&6&lFEBBRE DELL'ORO &f- &6&lISTRUZIONI" to all players
+                send " &ePer i prossimi {@event_duration} minuti, danneggiare i mob conferirà pepite d'oro." to all players
+                send " &eDanneggiane il più possibile per guadagnarne più di tutti!" to all players
+                send " &ePuoi controllare il tempo rimanente dalla bossbar in alto." to all players
+                send "" to all players
+                send " &4&lIMPORTANTE! &cDurante l'evento, i mob uccisi non rilasceranno oggetti!" to all players
+                send "" to all players
+                if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                    send " &eBuona fortuna, cercatore d'oro!"
+                else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                    send " &eBuona fortuna, cercatrice d'oro!"
+                send ""
+                send title "{@title}" with subtitle "{@subtitle_start} {@event_duration} minuti." to all players for 5 seconds
+                create bossbar titled "{@bossbar_title}" and id "event.goldrush.bossbar.%player%" for all players with progress 100 with colors yellow
+                set {event.goldrush.bossbar_value} to value of bossbar "event.goldrush.bossbar.%player%"
+                set {event.goldrush.seconds} to ( {@event_duration} * 60)
+                {@start_sound_1} at player for player
+                wait 10 ticks
+                {@start_sound_2} at player for player
+                wait 10 ticks
+                {@start_sound_3} at player for player
+                stop
+            else:
+                delete {event.goldrush}
+                loop all players:
+                    remove bossbar "event.goldrush.bossbar.%loop-player%"
+                delete {event.goldrush.bossbar_value}
+                delete {event.goldrush.gold_quantity}
+                delete {event.goldrush.seconds}
+                send title "{@title}" with subtitle "{@subtitle_stop}" to all players for 5 seconds
+                send {@off} to all players
+                {@stop_sound} at player for player
+                stop
+        else:
+            send "%{server.prefix.main}% &cSolo i giocatori possono eseguire questo comando."
+            stop
+
+command /goldrushgold [<offline player>]:
+    permission: event.goldrush
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if arg-1 isn't set:
+            send "%{server.prefix.main}% &cSpecifica il nome di un giocatore."
+            stop
+        else if arg-1 has played before:
+            send "%{server.prefix.main}% &b%arg-1% &aha raccolto &e%{event.goldrush.gold::%arg-1%}% pepite d'oro&a."
+            stop
+        else:
+            send "%{server.prefix.main}% &cNon ho trovato dati per &6%arg-1%&c."
+            send "%{server.prefix.main}% &cProbabilmente non ha mai partecipato a quest'evento."
+            stop
+
+on damage:
+    if {event.goldrush} is true:
+        if victim isn't a player, a fireball, a boat, an armor stand or an item frame:
+            if attacker is a player:
+                set {event.goldrush.gold_quantity} to random integer between 1 and 2
+                drop {event.goldrush.gold_quantity} of gold nugget named {@gold_nugget_title} with lore "", {@gold_nugget_lore_1} and {@gold_nugget_lore_2} at victim's location
+                add {event.goldrush.gold_quantity} to {event.goldrush.gold::%attacker%}
+                {@hit_sound} at victim for attacker
+
+on join:
+    if {event.goldrush} is true:
+        send {in_progress} to player
+        if bossbar with id "event.goldrush.bossbar.%player%" isn't set:
+            create bossbar titled "{@bossbar_title}" and id "event.goldrush.bossbar.%player%" for player with progress {event.goldrush.bossbar_value} with colors yellow
+
+on quit:
+    if bossbar with id "event.goldrush.bossbar.%player%" is set:
+        remove bossbar "event.goldrush.bossbar.%player%"
+
+on death:
+    if {event.goldrush} is true:
+        if victim isn't a player, a fireball, a boat, an armor stand or an item frame:
+            if attacker is a player:
+                cancel drops
+
+on pickup:
+    if {event.goldrush} isn't true:
+        if event-item is gold nugget named {@gold_nugget_title} with lore "", {@gold_nugget_lore_1} and {@gold_nugget_lore_2}:
+            cancel event
+
+on drop:
+    if {event.goldrush} isn't true:
+        if event-item is gold nugget named {@gold_nugget_title} with lore "", {@gold_nugget_lore_1} and {@gold_nugget_lore_2}:
+            cancel event
+            send "%{server.prefix.main}% {@cant_drop}" to player
+            {@error_sound} at player for player
+
+every 18 seconds:
+    loop all players:
+        if {event.goldrush} is true:
+            remove 1 from {event.goldrush.bossbar_value}
+            set bossbar "event.goldrush.bossbar.%loop-player%" value to {event.goldrush.bossbar_value}
+
+every second:
+    loop all players:
+        if {event.goldrush} is true:
+            subtract 1 from {event.goldrush.seconds}
+            if {event.goldrush.seconds} = 0:
+                delete {event.goldrush}
+                remove bossbar "event.goldrush.bossbar.%loop-player%"
+                delete {event.goldrush.bossbar_value}
+                delete {event.goldrush.gold_quantity}
+                delete {event.goldrush.seconds}
+                send title "{@title}" with subtitle "{@subtitle_stop}" to loop-player for 5 seconds
+                send {@off} to all players
+                {@stop_sound} at loop-player for loop-player

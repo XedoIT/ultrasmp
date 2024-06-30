@@ -1,0 +1,48 @@
+# SCRIPT PER IL TEMPO DI ATTIVITÀ DEL SERVER. !!! NON RICARICARLO A SERVER ACCESO, SI AZZERANO I DATI !!!
+
+on skript load:
+    set {uptime.days} to 0
+    set {uptime.hours} to 0
+    set {uptime.minutes} to 0
+    set {uptime.seconds} to 0
+    set {uptime.time} to now
+    send "&9Il contatore dell'attività ha iniziato a monitorare la durata della sessione del server." to console
+
+on skript stop:
+    log "[UPTIME] Il server è stato chiuso dopo %{uptime.hours}% ore, %{uptime.minutes}% minuti e %{uptime.seconds}% secondi di attività." to "uptime.log"
+    send "&cÈ stato salvato un file "".log"" con il resoconto della sessione del server." to console
+    send "&6Per consultarlo, vai a ""/plugins/Skript/logs/uptime.log""." to console
+    delete {uptime.seconds}
+    delete {uptime.minutes}
+    delete {uptime.hours}
+    delete {uptime.days}
+    delete {uptime.time}
+
+command /uptime:
+    trigger:
+        send "&aIl server è online da &b%{uptime.days}% giorni&a, &b%{uptime.hours}% ore&a, &b%{uptime.minutes}% minuti &ae &b%{uptime.seconds}% secondi &a(&b%{uptime.time}%&a)."
+        stop
+
+every hour:
+    if {uptime.hours} = 23:
+        set {uptime.hours} to 0
+        add 1 to {uptime.days}
+
+every minute:
+    if {uptime.minutes} = 59:
+        set {uptime.minutes} to 0
+        if {uptime.hours} != 23:
+            add 1 to {uptime.hours}
+
+every second:	
+    if {uptime.seconds} < 59:
+        add 1 to {uptime.seconds}
+    else:
+        set {uptime.seconds} to 0
+        if {uptime.minutes} != 59:
+            add 1 to {uptime.minutes}
+
+every 10 ticks:
+    loop all players:
+        if {actionbar.uptime.%loop-player%} is true:
+            send action bar "&aTempo di attività server: &f%{uptime.days}%:%{uptime.hours}%:%{uptime.minutes}%:%{uptime.seconds}%" to loop-player

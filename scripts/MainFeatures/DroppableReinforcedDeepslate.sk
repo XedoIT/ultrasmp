@@ -1,0 +1,4 @@
+on break of reinforced deepslate:
+    if gamemode of player is survival or adventure:
+        if player's tool is a diamond pickaxe or a netherite pickaxe:
+            drop 1 reinforced deepslate at event-block

@@ -1,0 +1,5 @@
+on fish:
+    if fishing state is caught fish:
+        set {_fame} to random number between 0.25 and 1
+        add {_fame} to {fame::%player%}
+        send action bar "&2&lPESCA &a+%{_fame}% Fama &6(%{fame::%player%}% totale)" to player

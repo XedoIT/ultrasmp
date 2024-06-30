@@ -1,0 +1,65 @@
+on right click:
+    if player is holding a shear:
+        if event-block is mossy cobblestone:
+            if player's offhand is not air:
+                cancel event
+            set event-block to cobblestone
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy cobblestone stairs:
+            if player's offhand is not air:
+                cancel event
+            set event-block to cobblestone stairs
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy cobblestone slab:
+            if player's offhand is not air:
+                cancel event
+            set event-block to cobblestone slab
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy cobblestone wall:
+            if player's offhand is not air:
+                cancel event
+            set event-block to cobblestone wall
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy stone bricks:
+            if player's offhand is not air:
+                cancel event
+            set event-block to stone bricks
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy stone brick stairs:
+            if player's offhand is not air:
+                cancel event
+            set event-block to stone brick stairs
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy stone brick slab:
+            if player's offhand is not air:
+                cancel event
+            set event-block to stone brick slab
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is mossy stone brick wall:
+            if player's offhand is not air:
+                cancel event
+            set event-block to stone brick wall
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability
+        if event-block is infested mossy stone bricks:
+            if player's offhand is not air:
+                cancel event
+            set event-block to infested stone bricks
+            drop vine at event-block's position
+            play sound "entity.sheep.shear" with volume 1 to player
+            remove 1 from held item's durability

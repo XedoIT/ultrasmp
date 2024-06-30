@@ -1,0 +1,110 @@
+options:
+    coal_message: &8⛏ &8&lCARBONE &7+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    iron_message: &f⛏ &f&lFERRO &7+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    copper_message: &5⛏ &5&lRAME &d+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    gold_message: &e⛏ &e&lORO &6+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    redstone_message: &4⛏ &4&lREDSTONE &c+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    lapis_message: &1⛏ &9&lLAPIS &9+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    emerald_message: &2⛏ &2&lSMERALDO &a+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    diamond_message: &b⛏ &b&lDIAMANTE &9+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    amethyst_message: "<##9966cc>⛏ <##9966cc>&lAMETISTA &5+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)"
+    quartz_message: &f⛏ &f&lQUARZO &7+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)
+    debris_message: "<##964b00>⛏ <##964b00>&lNETHERITE &7+%regex({_fame})% Fama &3(%regex({fame::%player%})% totale)"
+
+on mine of coal ore or deepslate coal ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 0.25 and 1
+            add {_fame} to {fame::%player%}
+            send action bar "{@coal_message}" to player
+            stop
+on mine of iron ore or deepslate iron ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 1 and 2
+            add {_fame} to {fame::%player%}
+            send action bar "{@iron_message}" to player
+            stop
+on mine of copper ore or deepslate copper ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 1.25 and 2
+            add {_fame} to {fame::%player%}
+            send action bar "{@copper_message}" to player
+            stop
+on mine of gold ore, deepslate gold ore or nether gold ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 1.5 and 3
+            add {_fame} to {fame::%player%}
+            send action bar "{@gold_message}" to player
+            stop
+on mine of redstone ore or deepslate redstone ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 1.75 and 3.25
+            add {_fame} to {fame::%player%}
+            send action bar "{@redstone_message}" to player
+            stop
+on mine of lapis ore or deepslate lapis ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 1.5 and 3
+            add {_fame} to {fame::%player%}
+            send action bar "{@lapis_message}" to player
+            stop
+on mine of emerald ore or deepslate emerald ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 10 and 20
+            add {_fame} to {fame::%player%}
+            send action bar "{@emerald_message}" to player
+            stop
+on mine of diamond ore or deepslate diamond ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 8 and 16
+            add {_fame} to {fame::%player%}
+            send action bar "{@diamond_message}" to player
+            stop
+on mine amethyst cluster:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 1 and 3
+            add {_fame} to {fame::%player%}
+            send action bar {@amethyst_message} to player
+    stop
+on mine of nether quartz ore:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 2 and 3
+            add {_fame} to {fame::%player%}
+            send action bar "{@quartz_message}" to player
+            stop
+on mine of ancient debris:
+    if player's tool is a pickaxe:
+        if player's tool isn't enchanted with silk touch:
+            set {_fame} to random number between 40 and 80
+            add {_fame} to {fame::%player%}
+            send action bar {@debris_message} to player
+            #cancel drops
+            #drop 1 ancient debris named "Detriti antichi" at event-block's location
+            stop
+
+# ZONA DEBUG
+command /sendorecolors:
+    permission: debug.commands
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    trigger:
+        send "&8&lCARBONE &7+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&f&lFERRO &7+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&5&lRAME &d+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&e&lORO &6+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&4&lREDSTONE &c+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&1&lLAPIS &9+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&2&lSMERALDO &a+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&b&lDIAMANTE &9+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "<##9966cc>&lAMETISTA &5+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "&f&lQUARZO &7+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        send "<##964b00>&lNETHERITE &7+{Fama} Fama &3(%regex({fame::%player%})% totale)" to player
+        stop

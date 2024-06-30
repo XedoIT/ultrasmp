@@ -1,0 +1,63 @@
+on join:
+    if {enderchest.progress.%player%} isn't set:
+        set {enderchest.progress.%player%} to 1
+    if {enderchest.slots.%player%} isn't set:
+        set {enderchest.slots.%player%} to 9
+    if {enderchest.guirows.%player%} isn't set:
+        set {enderchest.guirows.%player%} to 1
+
+command /ender:
+    trigger:
+        endergui(player)
+        set {gui.enderchest.bypassprofile.%player%} to true
+        stop
+
+function endergui(p: player):
+    open chest inventory with {enderchest.guirows.%{_p}%} rows named "La tua Enderchest (%{enderchest.progress.%{_p}%}%/6)" to {_p}
+    play sound "block.ender_chest.open" with volume 1 at {_p} for {_p}
+    loop {enderchest.slots.%{_p}%} times:
+        set slot (loop-value - 1) of {_p}'s current inventory to {storage::enderchest::%loop-value%::%{_p}%}
+
+on inventory close:
+    if name of event-inventory contains "La tua Enderchest ":
+        set {_n} to name of event-inventory
+        replace all "La tua Enderchest " with "" in {_n}
+        loop {enderchest.slots.%player%} times:
+            set {storage::enderchest::%loop-value%::%player%} to slot (loop-value - 1) of player's current inventory
+        if {gui.enderchest.bypassprofile.%player%} is true:
+            wait 1 tick
+            delete {gui.enderchest.bypassprofile.%player%}
+        else:
+            wait 1 tick
+            openProfileGui(player)
+        play sound "block.ender_chest.close" with volume 1 at player for player
+        
+on right click on ender chest:
+    cancel event
+    if {enderchest.usable.%player%} isn't set:
+        send "%{server.prefix.main}% &cNon hai ancora sbloccato la tua enderchest!" to player
+        send "%{server.prefix.main}% &cContinua a giocare per sbloccarla." to player
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+    else:
+        set {gui.enderchest.bypassprofile.%player%} to true
+        endergui(player)
+
+command /resetendergui [<offline player>]:
+    trigger:
+        set {enderchest.%arg-1%.progress} to 1
+        set {enderchest.%arg-1%.slots} to 9
+        set {enderchest.%arg-1%.guirows} to 1
+
+every second:
+    loop all players:
+        #if {smp.level} != [LIVELLO DA STABILIRE]:
+        if loop-player has permission "ender.bypass":
+            if {enderchest.bypassperm.%loop-player%} isn't set:
+                set {enderchest.usable.%loop-player%} to true
+                set {enderchest.bypassperm.%loop-player%} to true
+                send "%{server.prefix.main}% &aDato che hai i poteri, puoi utilizzare la tua enderchest anche se non l'hai ancora sbloccata." to loop-player
+        else:
+            if {enderchest.bypassperm.%loop-player%} is true:
+                delete {enderchest.usable.%loop-player%}
+                delete {enderchest.bypassperm.%loop-player%}
+                send "%{server.prefix.main}% &cNon hai più i poteri, pertanto, se vuoi utilizzare la tua enderchest, dovrai sbloccarla." to loop-player

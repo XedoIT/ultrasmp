@@ -1,0 +1,227 @@
+options:
+    debug_prefix: &8[&4&lDEBUG&8]
+
+    default_reason: &eCorrezione di bug.
+
+    kick_message: &c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%
+
+
+every tick:
+    loop all players:
+        CheckMaintenanceOnTick(loop-player)
+
+on join:
+    CheckMaintenanceOnJoin(player)
+
+                
+command /maintenance [<text>]:
+    description: Attiva la manutenzione del server ed espelle tutti i giocatori che non hanno i permessi.
+    aliases: /manutenzione
+    permission: maintenance.use
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if arg-1 is not set:
+                ToggleMaintenancePlayer_NoReason(player)
+                stop
+
+            else if arg-1 is "status" or "info":
+                if {maintenance} is not set:
+                    if {maintenance.reason} isn't set:
+                        send ""
+                        send "{@debug_prefix} &cLa manutenzione è disattivata."
+                        send ""
+                        stop
+                else:
+                    if {maintenance.reason} is "{@default_reason}":
+                        send ""
+                        send "{@debug_prefix} &aLa manutenzione è attivata."
+                        send "{@debug_prefix} &cMotivo: {@default_reason}"
+                        send ""
+                        stop
+                    else:
+                        send ""
+                        send "{@debug_prefix} &aLa manutenzione è attivata."
+                        send "{@debug_prefix} &cMotivo: &e%{maintenance.reason}%"
+                        send ""
+                        stop
+                        
+            else if arg-1 is not "status" or "info":
+                ToggleMaintenancePlayer(player,arg-1)
+                stop
+        else:
+            if arg-1 is not set:
+                ToggleMaintenanceConsole_NoReason(console)
+                stop
+                        
+            else if arg-1 is "status" or "info":
+                if {maintenance} is not set:
+                    if {maintenance.reason} isn't set:
+                        send ""
+                        send "{@debug_prefix} &cLa manutenzione è disattivata."
+                        send ""
+                        stop
+                else:
+                    if {maintenance.reason} is "{@default_reason}":
+                        send ""
+                        send "{@debug_prefix} &aLa manutenzione è attivata."
+                        send "{@debug_prefix} &cMotivo: {@default_reason}"
+                        send ""
+                        stop
+                    else:
+                        send ""
+                        send "{@debug_prefix} &aLa manutenzione è attivata."
+                        send "{@debug_prefix} &cMotivo: &e%{maintenance.reason}%"
+                        send ""
+                        stop
+
+            else if arg-1 is not "status" or "info":
+                ToggleMaintenanceConsole(console,arg-1)
+                stop
+
+command /maintenancekick [<offline player>]:
+    permission: maintenance.kick
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if arg-1 is not set:
+            if {maintenance} is not set:
+                send "%{server.prefix.main}% &cLa manutenzione non è attiva!"
+                stop
+            else:
+                send "%{server.prefix.main}% &cSpecifica il nome di un giocatore!"
+                stop
+        else:
+            if arg-1 is offline:
+                if {maintenance} is not set:
+                    send "%{server.prefix.main}% &cLa manutenzione non è attiva!"
+                    stop
+                else:
+                    send "%{server.prefix.main}% &6%arg-1% &cè offline."
+                    stop
+            else:
+                if {maintenance} is not set:
+                    send "%{server.prefix.main}% &cLa manutenzione non è attiva!"
+                    stop
+                else:
+                    kick arg-1 due to "{@kick_message}"
+                    stop
+
+on tab complete of "/maintenance" or "/manutenzione":
+    set tab completions for position 1 to "info" and "status"
+
+function CheckMaintenanceOnTick(p: player):
+    if {maintenance} is set:
+        if {maintenance.reason} is set:
+            if {_p} doesn't have permission "maintenance.kick.bypass":
+                kick {_p} due to "{@kick_message}"
+        else:
+            if {_p} doesn't have permission "maintenance.kick.bypass":
+                kick {_p} due to "{@kick_message}"
+
+function CheckMaintenanceOnJoin(p: player):
+    if {maintenance} is set:
+        if {maintenance.reason} is set:
+            if {_p} has permission "maintenance.kick.bypass":
+                send "" to {_p}
+                send "%{server.prefix.main}% &6La manutenzione è ancora &aattivata&6." to {_p}
+                send "%{server.prefix.main}% &7Motivo: &e%{maintenance.reason}%" to {_p}
+                send "" to {_p}
+            else:
+                kick {_p} due to "{@kick_message}"
+        else:
+            if {_p} has permission "maintenance.kick.bypass":
+                send "" to {_p}
+                send "%{server.prefix.main}% &6La manutenzione è ancora &aattivata&6." to {_p}
+                send "%{server.prefix.main}% &7Motivo: {@default_reason}" to {_p}
+                send "" to {_p}
+            else:
+                kick {_p} due to "{@kick_message}"
+function ToggleMaintenancePlayer(p: player, r: text):
+    if {_p} has permission "maintenance.bypass":
+        if {maintenance} is not set:
+            set {maintenance} to true
+            set {maintenance.reason} to {_r}
+            broadcast ""
+            broadcast "{@debug_prefix} &6Manutenzione &aattivata &6da &e%{_p}%&6."
+            broadcast "{@debug_prefix} &cMotivo: &e%{maintenance.reason}%"
+            broadcast ""
+            broadcast "&c&lTutti i giocatori sono stati espulsi dal server."
+            stop
+        else if {maintenance} is true:
+            delete {maintenance}
+            delete {maintenance.reason}
+            broadcast ""
+            broadcast "{@debug_prefix} &6Manutenzione &cdisattivata &6da &e%{_p}%&6."
+            broadcast ""
+            broadcast "&a&lI giocatori possono rientrare nel server."
+            stop
+    else:
+        kick {_p} due to "{@kick_message}"
+
+function ToggleMaintenanceConsole(s: sender, r: text):
+    if {maintenance} is not set:
+        set {maintenance} to true
+        set {maintenance.reason} to {_r}
+        broadcast ""
+        broadcast "{@debug_prefix} &6Manutenzione &aattivata &6dalla console."
+        broadcast "{@debug_prefix} &cMotivo: &e%{maintenance.reason}%"
+        broadcast ""
+        broadcast "&c&lTutti i giocatori sono stati espulsi dal server."
+        stop
+    else if {maintenance} is true:
+        delete {maintenance}
+        delete {maintenance.reason}
+        broadcast ""
+        broadcast "{@debug_prefix} &6Manutenzione &cdisattivata &6dalla console."
+        broadcast ""
+        broadcast "&a&lI giocatori possono rientrare nel server."
+        stop
+
+function ToggleMaintenancePlayer_NoReason(p: player):
+    if {_p} has permission "maintenance.bypass":
+        if {maintenance} is not set:
+            set {maintenance} to true
+            set {maintenance.reason} to "{@default_reason}"
+            broadcast ""
+            broadcast "{@debug_prefix} &6Manutenzione &aattivata &6da &e%{_p}%&6."
+            broadcast "{@debug_prefix} &cMotivo: {@default_reason}"
+            broadcast ""
+            broadcast "&c&lTutti i giocatori sono stati espulsi dal server."
+            stop
+        else if {maintenance} is true:
+            delete {maintenance}
+            delete {maintenance.reason}
+            broadcast ""
+            broadcast "{@debug_prefix} &6Manutenzione &cdisattivata &6da &e%{_p}%&6."
+            broadcast ""
+            broadcast "&a&lI giocatori possono rientrare nel server."
+            stop
+    else:
+        kick {_p} due to "{@kick_message}"
+
+function ToggleMaintenanceConsole_NoReason(s: sender):
+    if {maintenance} is not set:
+        set {maintenance} to true
+        set {maintenance.reason} to "{@default_reason}"
+        broadcast ""
+        broadcast "{@debug_prefix} &6Manutenzione &aattivata &6dalla console."
+        broadcast "{@debug_prefix} &cMotivo: {@default_reason}"
+        broadcast ""
+        broadcast "&c&lTutti i giocatori sono stati espulsi dal server."
+        stop
+    else if {maintenance} is true:
+        delete {maintenance}
+        delete {maintenance.reason}
+        broadcast ""
+        broadcast "{@debug_prefix} &6Manutenzione &cdisattivata &6dalla console."
+        broadcast ""
+        broadcast "&a&lI giocatori possono rientrare nel server."
+        stop
+
+every 10 ticks:
+    loop all players:
+        if {maintenance} is set:
+            if {actionbar.maintenance.%loop-player%} is true:
+                send action bar "&c&l---&7&l{ &6Manutenzione: &a&lATTIVATA &7&l}&c&l---" to loop-player

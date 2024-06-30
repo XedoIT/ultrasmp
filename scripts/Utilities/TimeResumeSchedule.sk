@@ -1,0 +1,10 @@
+command /stopandresumetime:
+    permission: debug.stopandresumetime
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    trigger:
+        execute console command "/rs pausetime %{server.world.overworld}%"
+        send "&cTempo interrotto. Riprenderà ad andare avanti tra 6 ore (o quando il server sarà vuoto)." to console
+        wait 6 hours
+        execute console command "/rs pausetime %{server.world.overworld}%"
+        send "&aTempo ripreso." to console
+        stop

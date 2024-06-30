@@ -1,0 +1,66 @@
+command /calendario:
+    description: Che giorno è?
+    executable by: player, console
+    trigger:
+        if sender is player:
+            set {_rs.season.now} to placeholder "rs_season_smp"
+            set {_rs.weekday} to placeholder "rs_weekday_smp"
+            set {_rs.day} to placeholder "rs_day_smp"
+            set {_rs.year} to placeholder "rs_year_smp"
+            set {_rs.season.length} to placeholder "rs_days_until_next_season_smp"
+            set {_rs.season.next} to placeholder "rs_next_season_smp"
+            set {_rs.time} to placeholder "rs_time_smp"
+            set {_rs.temperature} to placeholder "rs_air_temperature" from player
+            send "&e&lCALENDARIO %{server.name.CAPS}%"
+            send "&f Data: &7%{_rs.weekday}%, %{_rs.day}% %{rs.month_name}% %{_rs.year}%"
+            send "&f Ora: &b%{_rs.time}%"
+            send "&f Stagione attuale: %{_rs.season.now}%"
+            if player's world is "%{server.world.overworld}%":
+                send "&f Temperatura esterna: &a%{_rs.temperature}%°C"
+            else:
+                send "&f Temperatura esterna dell'Overworld: &a%{_rs.temperature}%°C"
+            send "&f Giorni alla prossima stagione: &7%{_rs.season.length}% giorni &f(%{_rs.season.next}%&f)"
+            stop
+        else:
+            set {_rs.season.now} to placeholder "rs_season_smp"
+            set {_rs.weekday} to placeholder "rs_weekday_smp"
+            set {_rs.day} to placeholder "rs_day_smp"
+            set {_rs.year} to placeholder "rs_year_smp"
+            set {_rs.season.length} to placeholder "rs_days_until_next_season_smp"
+            set {_rs.season.next} to placeholder "rs_next_season_smp"
+            set {_rs.time} to placeholder "rs_time_smp"
+            send "&e&lCALENDARIO %{server.name.CAPS}%"
+            send "&f Data: &7%{_rs.weekday}%, %{_rs.day}% %{rs.month_name}% %{_rs.year}%"
+            send "&f Ora: &b%{_rs.time}%"
+            send "&f Stagione attuale: %{_rs.season.now}%"
+            send "&f Giorni alla prossima stagione: &7%{_rs.season.length}% giorni &f(%{_rs.season.next}%&f)"
+            stop
+
+
+
+every tick:
+    set {_rs.month} to placeholder "rs_month_asname_smp"
+    if {_rs.month} is "January":
+        set {rs.month_name} to "Gennaio"
+    else if {_rs.month} is "February":
+        set {rs.month_name} to "Febbraio"
+    else if {_rs.month} is "March":
+        set {rs.month_name} to "Marzo"
+    else if {_rs.month} is "April":
+        set {rs.month_name} to "Aprile"
+    else if {_rs.month} is "May":
+        set {rs.month_name} to "Maggio"
+    else if {_rs.month} is "June":
+        set {rs.month_name} to "Giugno"
+    else if {_rs.month} is "July":
+        set {rs.month_name} to "Luglio"
+    else if {_rs.month} is "August":
+        set {rs.month_name} to "Agosto"
+    else if {_rs.month} is "September":
+        set {rs.month_name} to "Settembre"
+    else if {_rs.month} is "October":
+        set {rs.month_name} to "Ottobre"
+    else if {_rs.month} is "November":
+        set {rs.month_name} to "Novembre"
+    else if {_rs.month} is "December":
+        set {rs.month_name} to "Dicembre"
