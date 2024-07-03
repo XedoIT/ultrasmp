@@ -1,8 +1,14 @@
-# L'Ultra SMP è in BETA!
+<h1 align="center">
+  <br>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://andrewontilt.github.io/ultrasmp/assets/icon.png" alt="UltraSMPico" width="100"></a>
+  <br>
+  Project: Ultra SMP
+  <br>
+</h1>
 
-Ciò vuol dire che le funzionalità presenti non sono definitive e che potrebbero venir eliminate e/o modificate.
-Verranno introdotti tutti gli Update col passare del tempo. Di seguito c'è la percentuale totale del prossimo Update in sviluppo e a fianco la percentuale totale di completamento dell'Ultra SMP.
+<h4 align="center">L'Ultra SMP è in BETA!</h4>
+<h5>Ciò vuol dire che le funzionalità presenti non sono definitive e che potrebbero venir eliminate e/o modificate.
+Verranno introdotti tutti gli Update col passare del tempo. Di seguito c'è la percentuale totale del prossimo Update in sviluppo e a fianco la percentuale totale di completamento dell'Ultra SMP.</h5>
 
-# Progress Update: 10% | Ultra SMP: 80% totale
-
-## Per visualizzare tutti i changelog visita: https://wiki.ultrasmp.org/disagiosmp/aggiornamenti-e-novita/changelog
+<h4 align="center">Progress Update: 10% | Ultra SMP: 80% totale</h4>
+<h4 align="center">Per visualizzare tutti i changelog clicca <a href="https://wiki.ultrasmp.org/disagiosmp/aggiornamenti-e-novita/changelog">QUI</a>.</h4>
