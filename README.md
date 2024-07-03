@@ -1,6 +1,5 @@
 <h1 align="center">
-  <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://andrewontilt.github.io/ultrasmp/assets/icon.png" alt="UltraSMPico" width="100"></a>
+  <a><img src="https://andrewontilt.github.io/ultrasmp/assets/icon.png" alt="UltraSMPico" width="100"></a>
   <br>
   Project: Ultra SMP
   <br>
