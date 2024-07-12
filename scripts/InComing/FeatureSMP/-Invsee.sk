@@ -1,0 +1,108 @@
+options:
+    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+
+function openPlayerInventory(p: player):
+    if {@gui_glass_pane} is true:
+        set slot 0, 5, 8, 9, 14 and 17 of {_gui} to gray stained glass pane named "&f"
+        set slot 10 of {_gui} to white stained glass pane
+        set slot 1 of {_gui} to {_p}'s helmet
+        set slot 2 of {_gui} to {_p}'s chestplate
+        set slot 3 of {_gui} to {_p}'s leggings
+        set slot 4 of {_gui} to {_p}'s boots
+        set slot 6 of {_gui} to {_p}'s off hand item
+        set slot 7 of {_gui} to {_p}'s held item
+        #set slot 18 of {_gui} to 
+        #open {_gui} to {_p}
+
+
+# Save a players inventory when they leave the server
+function saveInventoryPlayer(p: player):
+    delete {storage.inventory.%{_p}%::*}
+    set {_counter} to 18
+    loop 36 times:
+        add slot {_counter} of {_p}'s inventory to {storage.inventory.%{_p}%::*}
+        add 1 to {_counter}
+
+# Save the offline player's inventory after edits
+function saveInventoryOfflinePlayer(inv: inventory, p: offline player):
+    delete {storage.inventory.%{_p}%::*}
+    set {_counter} to 18
+    loop 36 times:
+        add slot {_counter} of {_inv} to {storage.inventory.%{_p}%::*}
+        add 1 to {_counter}
+
+# Retrieve the offline players inventory when they join
+function retrievePlayerInventory(inv: inventory, p: offline player):
+    set {_counter} to 19
+    loop 36 times:
+        set slot {_counter}-1 of {_inv} to {storage.inventory.%{_p}%::%{_counter}%}
+        add 1 to {_counter}
+
+# Join event for updating a players inventory and also checks to see if someone is editing their offline inventory
+on join:
+    size of {storage.inventory.%uuid of player%::*} is not 0
+    retrievePlayerInventory(player's inventory, player)
+    loop all players:
+        if metadata value "Invsee" of loop-player is "%player%":
+            set metadata value "CancelInvsee" of loop-player to "True"
+            send "&c%player% &7just logged in, your invsee has been updated." to loop-player
+            wait 10 ticks
+            close loop-player's inventory
+            open player's inventory to loop-player
+
+# Quit event for saving the players inventory and also checks to see if someone is editing their live inventory
+on quit:
+    saveInventoryPlayer(player)
+    loop all players:
+        if loop-player's current inventory is player's inventory:
+            set metadata value "CancelInvsee" of loop-player to "True"
+            send "&c%player% &7just logged out, your invsee has been updated." to loop-player
+            wait 10 ticks
+            close loop-player's inventory
+            make loop-player execute command "oi %player%"
+
+# Inventory close event for editing offline player inventories
+on inventory close:
+    metadata value "Invsee" of player is set
+    if metadata value "CancelInvsee" of player is not set:
+        set {_p} to metadata value "Invsee" of player
+        set {_p} to "%{_p}%" parsed as offline player
+        saveInventoryOfflinePlayer(player's current inventory, {_p})
+    delete metadata value "Invsee" of player
+    delete metadata value "CancelInvsee" of player
+
+# Main invsee command for players/offline players
+command /oi [<offline player>]:
+    aliases: invsee
+    permission: invsee.use
+    permission message: &cYou do not have permission to execute this command.
+    trigger:
+        if arg-1 is set:
+            if arg-1 is online:
+                open arg-1's inventory to player
+            else:
+                if arg-1 has played before:
+                    if size of {storage.inventory.%uuid of arg-1%::*} is not 0:
+                        set metadata value "Invsee" of player to "%arg-1%"
+                        set {_gui} to a new chest inventory with 6 rows named "Inventario di %arg-1%"
+                        set slot 1 of {_gui} to {whois.equip.helmet.%arg-1%}
+                        set slot 2 of {_gui} to {whois.equip.chestplate.%arg-1%}
+                        set slot 3 of {_gui} to {whois.equip.leggings.%arg-1%}
+                        set slot 4 of {_gui} to {whois.equip.boots.%arg-1%}
+                        set slot 6 of {_gui} to {whois.equip.offhand.%arg-1%}
+                        set slot 7 of {_gui} to {whois.equip.mainhand.%arg-1%}
+                        retrievePlayerInventory(player's current inventory, arg-1)
+                        open {_gui} to player
+                        while name of player's current inventory is "Inventario di %arg-1%":
+                            saveInventoryOfflinePlayer(player's current inventory, arg-1)
+                            wait 3 ticks
+                    else:
+                        send "&cThat player has played before, but they haven't joined since this script was added so there is no saved inventory data..."
+                else:
+                    send "&cThat player has not played before."
+        else:
+            send "&fView a player or offline player's inventory."
+            send "&f/invsee <player>"
+
+on tab complete of "/oi":
+    set tab completions for position 1 to {players::*}

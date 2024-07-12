@@ -25,7 +25,7 @@ command /god [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 ToggleGodSelf(player)
                     
             else if arg-1 is offline:
@@ -35,7 +35,7 @@ command /god [<offline player>]:
             else:
                 ToggleGodOthersPlayer(player,arg-1)
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix_error} &cSolo i giocatori possono eseguire questo comando."
                 stop
                 

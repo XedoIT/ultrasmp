@@ -62,7 +62,7 @@ command /actionbar [<text>] [<text>]:
 
             if arg-2 is "session":
                 if player has permission "actionbar.playtime":
-                    if {actionbar.playtime.session.%player%} is not set:
+                    if {actionbar.playtime.session.%player%} isn't set:
                         set {actionbar.playtime.session.%player%} to true
                         delete {actionbar.playtime.total.%player%}
                         delete {actionbar.playtime.both.%player%}
@@ -74,7 +74,7 @@ command /actionbar [<text>] [<text>]:
                         stop
             else if arg-2 is "total":
                 if player has permission "actionbar.playtime":
-                    if {actionbar.playtime.total.%player%} is not set:
+                    if {actionbar.playtime.total.%player%} isn't set:
                         set {actionbar.playtime.total.%player%} to true
                         delete {actionbar.playtime.session.%player%}
                         delete {actionbar.playtime.both.%player%}
@@ -86,7 +86,7 @@ command /actionbar [<text>] [<text>]:
                         stop
             else if arg-2 is "both":
                 if player has permission "actionbar.playtime":
-                    if {actionbar.playtime.both.%player%} is not set:
+                    if {actionbar.playtime.both.%player%} isn't set:
                         set {actionbar.playtime.both.%player%} to true
                         delete {actionbar.playtime.total.%player%}
                         delete {actionbar.playtime.session.%player%}

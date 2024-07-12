@@ -2,7 +2,7 @@
 # «
 
 on chat:
-    if {difficulty.info.hardcore_death::%player%} is not set:
+    if {difficulty.info.hardcore_death::%player%} isn't set:
         if {nick.%player%} is player:
             set chat format to "%{rank.prefix.%player%}% &f[player] &7&l>&r [message]"
         else:

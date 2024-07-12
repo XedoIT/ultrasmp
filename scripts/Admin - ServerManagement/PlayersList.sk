@@ -19,17 +19,10 @@ on join:
     set {_OnlinePlayers} to size of all players
     add player to {players.online::*}
     if {players::*} doesn't contain player's uuid:
-        add player to {players::*}
+        add player's name to {players::*}
 
 on quit:
     set {_OnlinePlayers} to size of all players
     remove player from {players.online::*}
     if {_OnlinePlayers} = 1:
         delete {players.online::*}
-
-# ZONA DEBUG
-command /resetplayers:
-    permission: debug.commands
-    permission message: %{server.prefix.main}% &cComando sconosciuto.
-    trigger:
-        delete {players::*}

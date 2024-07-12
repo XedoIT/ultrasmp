@@ -31,19 +31,19 @@ on join:
         
 on quit:
     if gamemode of player is survival:
-        if {gm.%player%} is not set:
+        if {gm.%player%} isn't set:
             set {gm.%player%} to "{@gm0}"
             set {gm.marker.%player%} to iron sword with nbt from {@no_flags}
     else if gamemode of player is creative:
-        if {gm.%player%} is not set:
+        if {gm.%player%} isn't set:
             set {gm.%player%} to "{@gm1}"
             set {gm.marker.%player%} to grass block
     else if gamemode of player is adventure:
-        if {gm.%player%} is not set:
+        if {gm.%player%} isn't set:
             set {gm.%player%} to "{@gm2}"
             set {gm.marker.%player%} to empty map
     else if gamemode of player is spectator:
-        if {gm.%player%} is not set:
+        if {gm.%player%} isn't set:
             set {gm.%player%} to "{@gm3}"
             set {gm.marker.%player%} to ender eye
 
@@ -54,8 +54,8 @@ command /gm [<text>] [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "{@prefix} &cComando incompleto."
                     send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> [&egiocatore&6]"
                     send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> [&egiocatore&6]"
@@ -64,7 +64,7 @@ command /gm [<text>] [<offline player>]:
                     stop
 
             else if arg-1 is "survival", "s" or "0":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     if gamemode of player is not survival:
                         SetSurvivalGamemode(player)
                         ToggleNoFlyGM(player)
@@ -92,7 +92,7 @@ command /gm [<text>] [<offline player>]:
                             stop
                         
             else if arg-1 is "creative", "c" or "1":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     if gamemode of player is not creative:
                         SetCreativeGamemode(player)
                         ToggleFlyGM(player)
@@ -120,7 +120,7 @@ command /gm [<text>] [<offline player>]:
                             stop
 
             else if arg-1 is "adventure", "a" or "2":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     if gamemode of player is not adventure:
                         SetAdventureGamemode(player)
                         ToggleNoFlyGM(player)
@@ -148,7 +148,7 @@ command /gm [<text>] [<offline player>]:
                             stop
 
             else if arg-1 is "spectator", "sp" or "3":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     if gamemode of player is not spectator:
                         SetSpectatorGamemode(player)
                         ToggleFlyGM(player)
@@ -184,8 +184,8 @@ command /gm [<text>] [<offline player>]:
                 stop
                 
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "{@prefix} &cComando sconosciuto."
                     send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> <&egiocatore&6>"
                     send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> <&egiocatore&6>"
@@ -194,7 +194,7 @@ command /gm [<text>] [<offline player>]:
                     stop
 
             else if arg-1 is "survival", "s" or "0":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
                     send "{@prefix} &cSpecifica il nome di un giocatore!"
                     stop
@@ -214,7 +214,7 @@ command /gm [<text>] [<offline player>]:
                             stop
 
             else if arg-1 is "creative", "c" or "1":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
                     send "{@prefix} &cSpecifica il nome di un giocatore!"
                     stop
@@ -234,7 +234,7 @@ command /gm [<text>] [<offline player>]:
                             stop
 
             else if arg-1 is "adventure", "a" or "2":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
                     send "{@prefix} &cSpecifica il nome di un giocatore!"
                     stop
@@ -254,7 +254,7 @@ command /gm [<text>] [<offline player>]:
                             stop
 
             else if arg-1 is "spectator", "sp" or "3":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco."
                     send "{@prefix} &cSpecifica il nome di un giocatore!"
                     stop

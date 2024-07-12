@@ -11,15 +11,15 @@ command /teleport [<offline player>] [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "{@prefix} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
                     stop
                 else:
                     send "{@prefix} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
                     stop
             else if arg-1 is player:
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     if {settings.%player%.user.genre} is "%{server.genre.male}%":
                         send "{@prefix} &cNon puoi teletrasportarti da te stesso!"
                         stop
@@ -45,7 +45,7 @@ command /teleport [<offline player>] [<offline player>]:
                 send "{@prefix} &c%arg-1% &6non è online!"
                 stop
             else if arg-1 is online:
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     if {settings.%player%.user.genre} is "%{server.genre.male}%":
                         teleport player at arg-1's location
                         send "{@prefix} &7Ti ho portato da &c%arg-1%&7."
@@ -62,8 +62,8 @@ command /teleport [<offline player>] [<offline player>]:
                     send "{@prefix} &7Hai portato &c%arg-1% &7da &c%arg-2%&7."
                     stop
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "{@prefix} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>"
                     stop
                 else:
@@ -73,7 +73,7 @@ command /teleport [<offline player>] [<offline player>]:
                 send "{@prefix} &c%arg-1% &6non è online!"
                 stop
             else if arg-1 is online:
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cDa chi vuoi portare %arg-1%?"
                     stop
                 if arg-2 = arg-1:

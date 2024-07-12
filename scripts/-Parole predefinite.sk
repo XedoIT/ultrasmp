@@ -4,9 +4,6 @@
 # Non abilitare questo script!
 
 options:
-# IL PREFIX PREDEFINITO
-    prefix: &4[&6&lS&e&lM&6&lP&4]
-
 # I PRINCIPALI SUONI
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport
@@ -19,21 +16,30 @@ options:
     permission: debug.commands
 
 # ERRORE UTILIZZO CONSOLE PREDEFINITO (da ignorare se in uno script è richiesta una funzionalità particolare, i.e. GamemodeCommands.sk)
-    send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+    send "%{server.prefix.main}% &cSolo i giocatori possono eseguire questo comando."
 
 # GIOCATORE OFFLINE
-    send "{@prefix} &6%player% &cè offline."
+    send "%{server.prefix.main}% &6%player% &cè offline."
 
 # NESSUN PARAMETRO AGGIUNTIVO
-    send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
+    send "%{server.prefix.main}% &cQuesto comando non richiede parametri aggiuntivi."
 
 # SEPARATORI CATEGORIE/SEZIONE
     # [nome categoria/sezione]
+
+# CONDIZIONE SFONDO GUI (if {@gui_glass_pane} is [...]:)
+    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+
+# CONDIZIONE SESSO GIOCATORE (if {@genre} in {@file} is [...]:)
+    genre: yaml value "genre"
+    file: "settings-%player's uuid%"
+
+
 
 
 
 # SISTEMA IMPEDIMENTO AVVIO SCRIPT
 on load:
-    send "{@prefix} &c&lÈ stato rilevato che lo script &6%script% &c&lè stato abilitato."
-    send "{@prefix} &cDisattivazione in corso..."
+    send "%{server.prefix.main}% &c&lÈ stato rilevato che lo script &6%script% &c&lè stato abilitato."
+    send "%{server.prefix.main}% &cDisattivazione in corso..."
     execute console command "/skript disable %script%"

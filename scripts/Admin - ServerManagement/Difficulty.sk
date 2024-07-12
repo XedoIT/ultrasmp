@@ -2,23 +2,18 @@ options:
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport
 
-    easy: "&aAvventuriero"
-    normal: "&eVeterano"
-    hard: "&cIncubo"
-    extreme: "&4Tormento"
-
 on load:
-    if {difficulty.info} is not set:
-        set {difficulty.info} to {@easy}
-    if {difficulty.peaceful} is not set:
+    if {difficulty.info} isn't set:
+        set {difficulty.info} to "&aFacile"
+    if {difficulty.peaceful} isn't set:
         set {difficulty.peaceful} to "&eClicca per selezionare."
-    if {difficulty.easy} is not set:
+    if {difficulty.easy} isn't set:
         set {difficulty.easy} to "&aSELEZIONATO!"
-    if {difficulty.normal} is not set:
+    if {difficulty.normal} isn't set:
         set {difficulty.normal} to "&eClicca per selezionare."
-    if {difficulty.hard} is not set:
+    if {difficulty.hard} isn't set:
         set {difficulty.hard} to "&eClicca per selezionare."
-    if {difficulty.hardcore} is not set:
+    if {difficulty.hardcore} isn't set:
         set {difficulty.hardcore} to "&eClicca per selezionare."
 
 on join:
@@ -37,7 +32,7 @@ command /difficulty [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "%{server.prefix.main}% &fAttualmente il server è in %{difficulty.info}%&f."
                 send "%{server.prefix.main}% &6Puoi modificare la difficoltà con &c/difficulty peaceful&6, &ceasy&6, &cnormal&6, &chard &6o &chardcore&6."
                 stop
@@ -62,7 +57,7 @@ command /difficulty [<text>]:
             else if arg-1 is "easy":
                 if difficulty of all worlds is not easy:
                     set difficulty of all worlds to easy
-                    set {difficulty.info} to {@easy}
+                    set {difficulty.info} to "&aFacile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
                     set {difficulty.easy} to "&aSELEZIONATO!"
                     set {difficulty.normal} to "&eClicca per selezionare."
@@ -80,7 +75,7 @@ command /difficulty [<text>]:
             else if arg-1 is "normal":
                 if difficulty of all worlds is not normal:
                     set difficulty of all worlds to normal
-                    set {difficulty.info} to {@normal}
+                    set {difficulty.info} to "&eNormale"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
                     set {difficulty.easy} to "&eClicca per selezionare."
                     set {difficulty.normal} to "&aSELEZIONATO!"
@@ -98,7 +93,7 @@ command /difficulty [<text>]:
             else if arg-1 is "hard":
                 if difficulty of all worlds is not hard:
                     set difficulty of all worlds to hard
-                    set {difficulty.info} to {@hard}
+                    set {difficulty.info} to "&6&lDifficile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
                     set {difficulty.easy} to "&eClicca per selezionare."
                     set {difficulty.normal} to "&eClicca per selezionare."
@@ -112,7 +107,7 @@ command /difficulty [<text>]:
                 else:
                     if {difficulty.hardcore_mode} is true:
                         set difficulty of all worlds to hard
-                        set {difficulty.info} to {@hard}
+                        set {difficulty.info} to "&6&lDifficile"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
                         set {difficulty.easy} to "&eClicca per selezionare."
                         set {difficulty.normal} to "&eClicca per selezionare."
@@ -157,7 +152,7 @@ command /difficulty [<text>]:
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hardcore"
                 stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "%{server.prefix.main}% &cComando incompleto."
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty peaceful"
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty easy"
@@ -184,7 +179,7 @@ command /difficulty [<text>]:
             else if arg-1 is "easy":
                 if difficulty of all worlds is not easy:
                     set difficulty of all worlds to easy
-                    set {difficulty.info} to {@easy}
+                    set {difficulty.info} to "&aFacile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
                     set {difficulty.easy} to "&aSELEZIONATO!"
                     set {difficulty.normal} to "&eClicca per selezionare."
@@ -200,7 +195,7 @@ command /difficulty [<text>]:
             else if arg-1 is "normal":
                 if difficulty of all worlds is not normal:
                     set difficulty of all worlds to normal
-                    set {difficulty.info} to {@normal}
+                    set {difficulty.info} to "&eNormale"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
                     set {difficulty.easy} to "&eClicca per selezionare."
                     set {difficulty.normal} to "&aSELEZIONATO!"
@@ -216,7 +211,7 @@ command /difficulty [<text>]:
             else if arg-1 is "hard":
                 if difficulty of all worlds is not hard:
                     set difficulty of all worlds to hard
-                    set {difficulty.info} to {@hard}
+                    set {difficulty.info} to "&6&lDifficile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
                     set {difficulty.easy} to "&eClicca per selezionare."
                     set {difficulty.normal} to "&eClicca per selezionare."
@@ -229,7 +224,7 @@ command /difficulty [<text>]:
                 else:
                     if {difficulty.hardcore_mode} is true:
                         set difficulty of all worlds to hard
-                        set {difficulty.info} to {@hard}
+                        set {difficulty.info} to "&6&lDifficile"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
                         set {difficulty.easy} to "&eClicca per selezionare."
                         set {difficulty.normal} to "&eClicca per selezionare."

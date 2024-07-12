@@ -22,12 +22,12 @@ command /maintenance [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 ToggleMaintenancePlayer_NoReason(player)
                 stop
 
             else if arg-1 is "status" or "info":
-                if {maintenance} is not set:
+                if {maintenance} isn't set:
                     if {maintenance.reason} isn't set:
                         send ""
                         send "{@debug_prefix} &cLa manutenzione è disattivata."
@@ -51,12 +51,12 @@ command /maintenance [<text>]:
                 ToggleMaintenancePlayer(player,arg-1)
                 stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 ToggleMaintenanceConsole_NoReason(console)
                 stop
                         
             else if arg-1 is "status" or "info":
-                if {maintenance} is not set:
+                if {maintenance} isn't set:
                     if {maintenance.reason} isn't set:
                         send ""
                         send "{@debug_prefix} &cLa manutenzione è disattivata."
@@ -85,8 +85,8 @@ command /maintenancekick [<offline player>]:
     permission message: %{server.prefix.main}% &cComando sconosciuto.
     executable by: player, console
     trigger:
-        if arg-1 is not set:
-            if {maintenance} is not set:
+        if arg-1 isn't set:
+            if {maintenance} isn't set:
                 send "%{server.prefix.main}% &cLa manutenzione non è attiva!"
                 stop
             else:
@@ -94,14 +94,14 @@ command /maintenancekick [<offline player>]:
                 stop
         else:
             if arg-1 is offline:
-                if {maintenance} is not set:
+                if {maintenance} isn't set:
                     send "%{server.prefix.main}% &cLa manutenzione non è attiva!"
                     stop
                 else:
                     send "%{server.prefix.main}% &6%arg-1% &cè offline."
                     stop
             else:
-                if {maintenance} is not set:
+                if {maintenance} isn't set:
                     send "%{server.prefix.main}% &cLa manutenzione non è attiva!"
                     stop
                 else:
@@ -140,7 +140,7 @@ function CheckMaintenanceOnJoin(p: player):
                 kick {_p} due to "{@kick_message}"
 function ToggleMaintenancePlayer(p: player, r: text):
     if {_p} has permission "maintenance.bypass":
-        if {maintenance} is not set:
+        if {maintenance} isn't set:
             set {maintenance} to true
             set {maintenance.reason} to {_r}
             broadcast ""
@@ -161,7 +161,7 @@ function ToggleMaintenancePlayer(p: player, r: text):
         kick {_p} due to "{@kick_message}"
 
 function ToggleMaintenanceConsole(s: sender, r: text):
-    if {maintenance} is not set:
+    if {maintenance} isn't set:
         set {maintenance} to true
         set {maintenance.reason} to {_r}
         broadcast ""
@@ -181,7 +181,7 @@ function ToggleMaintenanceConsole(s: sender, r: text):
 
 function ToggleMaintenancePlayer_NoReason(p: player):
     if {_p} has permission "maintenance.bypass":
-        if {maintenance} is not set:
+        if {maintenance} isn't set:
             set {maintenance} to true
             set {maintenance.reason} to "{@default_reason}"
             broadcast ""
@@ -202,7 +202,7 @@ function ToggleMaintenancePlayer_NoReason(p: player):
         kick {_p} due to "{@kick_message}"
 
 function ToggleMaintenanceConsole_NoReason(s: sender):
-    if {maintenance} is not set:
+    if {maintenance} isn't set:
         set {maintenance} to true
         set {maintenance.reason} to "{@default_reason}"
         broadcast ""

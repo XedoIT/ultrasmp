@@ -16,14 +16,14 @@ function endergui(p: player):
     open chest inventory with {enderchest.guirows.%{_p}%} rows named "La tua Enderchest (%{enderchest.progress.%{_p}%}%/6)" to {_p}
     play sound "block.ender_chest.open" with volume 1 at {_p} for {_p}
     loop {enderchest.slots.%{_p}%} times:
-        set slot (loop-value - 1) of {_p}'s current inventory to {storage::enderchest::%loop-value%::%{_p}%}
+        set slot (loop-value - 1) of {_p}'s current inventory to {storage.enderchest.%{_p}%::%loop-value%}
 
 on inventory close:
     if name of event-inventory contains "La tua Enderchest ":
         set {_n} to name of event-inventory
         replace all "La tua Enderchest " with "" in {_n}
         loop {enderchest.slots.%player%} times:
-            set {storage::enderchest::%loop-value%::%player%} to slot (loop-value - 1) of player's current inventory
+            set {storage.enderchest.%player%::%loop-value%} to slot (loop-value - 1) of player's current inventory
         if {gui.enderchest.bypassprofile.%player%} is true:
             wait 1 tick
             delete {gui.enderchest.bypassprofile.%player%}

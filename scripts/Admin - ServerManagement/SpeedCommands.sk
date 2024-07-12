@@ -3,8 +3,8 @@ command /flyspeed [<offline player>] [<integer>]:
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     description: Cambia la velocità di volo di un giocatore.
     trigger:
-        if arg-1 is not set:
-            if arg-2 is not set:
+        if arg-1 isn't set:
+            if arg-2 isn't set:
                 send "&cUtilizzo: &6/flyspeed &e<giocatore> <numero>"
                 stop
         else if arg-1 is offline:
@@ -12,7 +12,7 @@ command /flyspeed [<offline player>] [<integer>]:
             stop
             
         else if arg-1 is set:
-            if arg-2 is not set:
+            if arg-2 isn't set:
                 send "&6[&c&lFS&6] &cIndica un numero per la velocità di volo!"
                 stop
             else:
@@ -114,8 +114,8 @@ command /walkspeed [<offline player>] [<integer>]:
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     description: Cambia la velocità del passo di un giocatore.
     trigger:
-        if arg-1 is not set:
-            if arg-2 is not set:
+        if arg-1 isn't set:
+            if arg-2 isn't set:
                 send "&cUtilizzo: &6/walkspeed &e<giocatore> <numero>"
                 stop
         else if arg-1 is offline:
@@ -123,7 +123,7 @@ command /walkspeed [<offline player>] [<integer>]:
             stop
             
         else if arg-1 is set:
-            if arg-2 is not set:
+            if arg-2 isn't set:
                 send "&6[&c&lWS&6] &cIndica un numero per la velocità del passo!"
                 stop
             else:

@@ -8,13 +8,13 @@ command /ip [<text>] [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "{@prefix} &eL'IP del server è &a%{server.ip.named}%&e."
                     stop
 
             else if arg-1 is "server":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &eL'IP del server è &a%{server.ip.named}%&e."
                     stop
                 else:
@@ -22,7 +22,7 @@ command /ip [<text>] [<offline player>]:
                     stop
 
             else if arg-1 is "player":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cSpecifica il nome di un giocatore."
                     stop
                 else if arg-2 is online:
@@ -38,13 +38,13 @@ command /ip [<text>] [<offline player>]:
                 send "{@prefix} &cUtilizzo: &6/ip player <&egiocatore&6>"
                 stop
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "{@prefix} &eL'IP del server è &a%{server.ip.named}%&e." to console
                     stop
 
             else if arg-1 is "server":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &eL'IP del server è &a%{server.ip.named}%&e." to console
                     stop
                 else:
@@ -52,7 +52,7 @@ command /ip [<text>] [<offline player>]:
                     stop
 
             else if arg-1 is "player":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cSpecifica il nome di un giocatore." to console
                     stop
                 else if arg-2 is online:

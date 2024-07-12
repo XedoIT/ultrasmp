@@ -27,10 +27,6 @@ command /flytimer:
         else if {event.flymode.remain_time} = 1:
             send "{@warn} &aIl volo è abilitato per &eun altro giorno&a."
             stop
-        else if {event.flymode.remain_time} isn't set:
-            send "{@prefix_error} &cQuesto comando è disponibile soltanto se l'evento ""&aFlyMode&c"" è attivo."
-            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-            stop
 
 command /fly [<offline player>]:
     description: "Perché camminare quando puoi volare?"
@@ -39,7 +35,7 @@ command /fly [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 ToggleFlySelf(player)
                     
             else if arg-1 is offline:
@@ -49,7 +45,7 @@ command /fly [<offline player>]:
             else:
                 ToggleFlyOthersPlayer(player,arg-1)
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix_error} &cSolo i giocatori possono eseguire questo comando."
                 stop
                     

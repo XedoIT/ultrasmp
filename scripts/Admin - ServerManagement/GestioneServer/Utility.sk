@@ -9,13 +9,9 @@ options:
     fight: &a● &a&lPvP abilitato &a●
     no_fight: &c● &c&lPvP disabilitato &c●
 
-    easy: "&aAvventuriero"
-    normal: "&eVeterano"
-    hard: "&cIncubo"
-    extreme: "&4Tormento"
 
 on join:
-    if {difficulty.info.hardcore_death.%player%.marker} is not set:
+    if {difficulty.info.hardcore_death.%player%.marker} isn't set:
         set {difficulty.info.hardcore_death.%player%.marker} to ""
 
 on chat:
@@ -147,7 +143,7 @@ on pickup:
 
 every second:
     loop all players:
-        if {difficulty.hardcore_mode} is not set:
+        if {difficulty.hardcore_mode} isn't set:
             if {difficulty.info.hardcore_death::%loop-player%} is true:
                 delete {difficulty.info.hardcore_death::%loop-player%}
                 remove glowing from loop-player
@@ -170,9 +166,9 @@ function openServerUtility(p: player):
         set slot 40 of {_gui} to gray stained glass pane named "&r"
         set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
         set slot 11 of {_gui} to white concrete named "&fPacifica" with lore "&7Imposta la difficoltà del server", "&7su &f&lPacifica&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.peaceful}%"
-        set slot 12 of {_gui} to lime concrete named {@easy} with lore "&7Imposta la difficoltà del server", "&7su &a&lAvventuriero&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.easy}%"
-        set slot 13 of {_gui} to yellow concrete named {@normal} with lore "&7Imposta la difficoltà del server", "&7su &e&lVeterano&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.normal}%"
-        set slot 14 of {_gui} to orange concrete named {@hard} with lore "&7Imposta la difficoltà del server", "&7su &6&lIncubo&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.hard}%"
+        set slot 12 of {_gui} to lime concrete named "&aFacile" with lore "&7Imposta la difficoltà del server", "&7su &a&lFacile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.easy}%"
+        set slot 13 of {_gui} to yellow concrete named "&eNormale" with lore "&7Imposta la difficoltà del server", "&7su &e&lNormale&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.normal}%"
+        set slot 14 of {_gui} to orange concrete named "&6Difficile" with lore "&7Imposta la difficoltà del server", "&7su &6&lDifficile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.hard}%"
         set slot 15 of {_gui} to red concrete named "&cHardcore" with lore "&7Imposta la difficoltà del server", "&7su &c&lHardcore&7.", "&f", "&4&lATTENZIONE!", "&cQuesta difficoltà non permette di", "&crinascere alla morte!", "&4&lSelezionala a tuo rischio!", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.hardcore}%"
         set slot 19 and 25 of {_gui} to clock named "&bOra di gioco" with lore "&7Modifica l'ora di gioco dell'SMP."
         set slot 20 of {_gui} to yellow stained glass pane named "&eAlba" with lore "&7Imposta l'ora di gioco alle &c06:00"
@@ -191,9 +187,9 @@ function openServerUtility(p: player):
         set {_gui} to a new chest inventory with 6 rows named "Utilità Server"
         set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
         set slot 11 of {_gui} to white concrete named "&fPacifica" with lore "&7Imposta la difficoltà del server", "&7su &f&lPacifica&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.peaceful}%"
-        set slot 12 of {_gui} to lime concrete named {@easy} with lore "&7Imposta la difficoltà del server", "&7su &a&lAvventuriero&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.easy}%"
-        set slot 13 of {_gui} to yellow concrete named {@normal} with lore "&7Imposta la difficoltà del server", "&7su &e&lVeterano&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.normal}%"
-        set slot 14 of {_gui} to orange concrete named {@hard} with lore "&7Imposta la difficoltà del server", "&7su &6&lIncubo&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.hard}%"
+        set slot 12 of {_gui} to lime concrete named "&aFacile" with lore "&7Imposta la difficoltà del server", "&7su &a&lFacile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.easy}%"
+        set slot 13 of {_gui} to yellow concrete named "&eNormale" with lore "&7Imposta la difficoltà del server", "&7su &e&lNormale&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.normal}%"
+        set slot 14 of {_gui} to orange concrete named "&6Difficile" with lore "&7Imposta la difficoltà del server", "&7su &6&lDifficile&7.", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.hard}%"
         set slot 15 of {_gui} to red concrete named "&cHardcore" with lore "&7Imposta la difficoltà del server", "&7su &c&lHardcore&7.", "&f", "&4&lATTENZIONE!", "&cQuesta difficoltà non permette di", "&crinascere alla morte!", "&4&lSelezionala a tuo rischio!", "&f", "&3Attualmente l'SMP è in %{difficulty.info}%", "&f" and "%{difficulty.hardcore}%"
         set slot 19 and 25 of {_gui} to clock named "&bOra di gioco" with lore "&7Modifica l'ora di gioco dell'SMP."
         set slot 20 of {_gui} to yellow stained glass pane named "&eAlba" with lore "&7Imposta l'ora di gioco alle &c06:00"
@@ -240,7 +236,7 @@ on inventory click:
                     cancel event
                     if difficulty of all worlds is not easy:
                         set difficulty of all worlds to easy
-                        set {difficulty.info} to {@easy}
+                        set {difficulty.info} to "&aFacile"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
                         set {difficulty.easy} to "&aSELEZIONATO!"
                         set {difficulty.normal} to "&eClicca per selezionare."
@@ -261,7 +257,7 @@ on inventory click:
                     cancel event
                     if difficulty of all worlds is not normal:
                         set difficulty of all worlds to normal
-                        set {difficulty.info} to {@normal}
+                        set {difficulty.info} to "&eNormale"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
                         set {difficulty.easy} to "&eClicca per selezionare."
                         set {difficulty.normal} to "&aSELEZIONATO!"
@@ -282,7 +278,7 @@ on inventory click:
                     cancel event
                     if difficulty of all worlds is not hard:
                         set difficulty of all worlds to hard
-                        set {difficulty.info} to {@hard}
+                        set {difficulty.info} to "&6&lDifficile"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
                         set {difficulty.easy} to "&eClicca per selezionare."
                         set {difficulty.normal} to "&eClicca per selezionare."
@@ -296,7 +292,7 @@ on inventory click:
                     else:
                         if {difficulty.hardcore_mode} is true:
                             set difficulty of all worlds to hard
-                            set {difficulty.info} to {@hard}
+                            set {difficulty.info} to "&6&lDifficile"
                             set {difficulty.peaceful} to "&eClicca per selezionare."
                             set {difficulty.easy} to "&eClicca per selezionare."
                             set {difficulty.normal} to "&eClicca per selezionare."

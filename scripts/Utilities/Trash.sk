@@ -26,7 +26,7 @@ on inventory click:
                     openProfileGui(player)
                 else:
                     cancel event
-            else if index of event-slot is 46, 47, 48, 49, 50, 51 or 52:
+            else if index of event-slot isn't 45 or 53:
                 cancel event
             else if index of event-slot is 53:
                 if click type is left mouse button:

@@ -14,7 +14,7 @@ on join:
         send "  &c- &6/tpr&c: &cper evitare problemi di generazione del mondo e di prestazioni del server."
         send ""
         send " &aNovità della %minecraft version% (aggiunte nella 1.20.5):"
-        send "  &b- Aggiunto &fl'armadillo&b: lo puoi trovare nella mesa e nella savana."
+        send "  &b- Aggiunto &fl'armadillo&b: lo puoi trovare nella savana."
         send "  &b- Aggiunta &fl'armatura per il lupo&b, craftabile con le &fscaglie dell'armadillo&b."
         send "  &b- Aggiunte &f8 nuove varianti di lupi&b, per un totale di &f9 varianti&b."
         send "  &b- Aggiunti &f4 nuovi avanzamenti&b."

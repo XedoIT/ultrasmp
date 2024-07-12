@@ -1,7 +1,7 @@
 # QUI SI TROVANO TUTTE LE VARIABILI GLOBALI PRESENTI NELLA ULTRA SMP.
 
 options:
-    version: "&4&lBETA &7v0.17"
+    version: "&4&lBETA &7v0.16"
 
 on load:
     set {server.version} to {@version}
