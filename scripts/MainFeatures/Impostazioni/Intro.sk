@@ -7,62 +7,61 @@ options:
     confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
     error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
 
-    file: "settings-%player's uuid%"
-    file_p: "settings-%{_p}'s uuid%"
-    genre: yaml value "genre"
+    genre: yaml value "genre" in "settings-%player's uuid%"
+    genre_p: yaml value "genre" in "settings-%{_p}'s uuid%"
 
 on join:
     wait 1 tick
-    if {@genre} in {@file} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
+    if {@genre} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
         GenrePrompt(player)
         wait 1 tick
         make player invulnerable
         send "%{server.prefix.main}% &c&lDurante la selezione del sesso, sei invulnerabile e i mostri ti ignoreranno!"
 
 function GenrePrompt(p: player):
-    if {@genre} in {@file_p} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
-        set {_gui} to a new chest inventory with 5 rows named "Seleziona il tuo sesso!"
+    if {@genre_p} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
+        set {_gui} to a new chest inventory with 5 rows named "In cosa ti identifichi?"
         set slot 40 of {_gui} to bedrock named "&cGioca!" with lore "&7Non puoi chiudere questa GUI se" and "&7prima non scegli il tuo sesso."
     else:
         set {_gui} to a new chest inventory with 5 rows named "Confermi?"
         set slot 40 of {_gui} to grass block named "&aGioca!" with lore "&7Chiudi questa GUI e inizia" and "&7la tua avventura nell'SMP."
     set slot 4 of {_gui} to skull of {_p} named "&eIl tuo sesso" with lore "&7Clicca su uno dei pannelli per", "&7selezionare il tuo sesso,", "&7quindi clicca su ""&aGioca!&7"" &7per", "&7iniziare a giocare.", "&f", "&4&lATTENZIONE!", "&cUna volta confermato il sesso" and "&cnon potrai più cambiarlo."
-    if {@genre} in {@file_p} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
+    if {@genre_p} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
         set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
         set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
-    if {@genre} in {@file_p} is "%{server.genre.male}%":
+    if {@genre_p} is "%{server.genre.male}%":
         set slot 20 of {_gui} to light blue stained glass pane with nbt from {@glinted} named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@selected}"
         set slot 24 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@select}"
-    else if {@genre} in {@file_p} is "%{server.genre.female}%":
+    else if {@genre_p} is "%{server.genre.female}%":
         set slot 20 of {_gui} to light blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "&f" and "{@select}"
         set slot 24 of {_gui} to pink stained glass pane with nbt from {@glinted} named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "&f" and "{@selected}"
     open {_gui} to {_p}
     
     
 function GenreSelectMale(p: player):
-    if {@genre} in {@file_p} is not "%{server.genre.male}%":
+    if {@genre_p} isn't "%{server.genre.male}%":
         set {settings.%{_p}%.genre.male} to "{@selected}"
         set {settings.%{_p}%.genre.female} to "{@select}"
-        set {@genre} in {@file_p} to "%{server.genre.male}%"
+        set {@genre_p} to "%{server.genre.male}%"
         send "%{server.prefix.main}% &9Da adesso tutti i tuoi messaggi saranno rivolti al maschile!" to {_p}
         {@confirm_sound} at {_p} for {_p}
-    else if {@genre} in {@file_p} is "%{server.genre.male}%":
+    else if {@genre_p} is "%{server.genre.male}%":
         send "%{server.prefix.main}% &cSei già identificato come un maschio!" to {_p}
         {@error_sound} at {_p} for {_p}
 
 function GenreSelectFemale(p: player):
-    if {@genre} in {@file_p} is not "%{server.genre.female}%":
+    if {@genre_p} isn't "%{server.genre.female}%":
         set {settings.%{_p}%.genre.male} to "{@select}"
         set {settings.%{_p}%.genre.female} to "{@selected}"
-        set {@genre} in {@file_p} to "%{server.genre.female}%"
+        set {@genre_p} to "%{server.genre.female}%"
         send "%{server.prefix.main}% &dDa adesso tutti i tuoi messaggi saranno rivolti al femminile!" to {_p}
         {@confirm_sound} at {_p} for {_p}
-    else if {@genre} in {@file_p} is "%{server.genre.female}%":
+    else if {@genre_p} is "%{server.genre.female}%":
         send "%{server.prefix.main}% &cSei già identificata come una femmina!" to {_p}
         {@error_sound} at {_p} for {_p}
 
 on inventory click:
-    if name of event-inventory is "Seleziona il tuo sesso!":
+    if name of event-inventory is "In cosa ti identifichi?":
         if type of event-inventory is chest inventory:
             if index of event-slot isn't 20, 24 or 40:
                 cancel event
@@ -83,7 +82,7 @@ on inventory click:
             else if index of event-slot is 40:
                 if click type is left mouse button:
                     cancel event
-                    if {@genre} in {@file} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
+                    if {@genre} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
                         send "%{server.prefix.main}% &cDevi prima selezionare il tuo sesso!"
                         {@error_sound} at player for player
                 else:
@@ -125,8 +124,8 @@ on inventory click:
                 cancel event
 
 on inventory close:
-    if name of event-inventory is "Seleziona il tuo sesso!":
-        if {@genre} in {@file} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
+    if name of event-inventory is "In cosa ti identifichi?":
+        if {@genre} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
             wait 1 tick
             GenrePrompt(player)
             send "%{server.prefix.main}% &cDevi prima selezionare il tuo sesso!"

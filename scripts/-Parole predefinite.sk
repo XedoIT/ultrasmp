@@ -27,14 +27,11 @@ options:
 # SEPARATORI CATEGORIE/SEZIONE
     # [nome categoria/sezione]
 
-# CONDIZIONE SFONDO GUI (if {@gui_glass_pane} is [...]:)
-    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+# CONDIZIONE SFONDO GUI (if {@gui_background} is [...]:)
+    gui_background: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
 
-# CONDIZIONE SESSO GIOCATORE (if {@genre} in {@file} is [...]:)
-    genre: yaml value "genre"
-    file: "settings-%player's uuid%"
-
-
+# CONDIZIONE SESSO GIOCATORE (if {@genre} is [...]:)
+    genre: yaml value "genre" in "settings-%player's uuid%"
 
 
 

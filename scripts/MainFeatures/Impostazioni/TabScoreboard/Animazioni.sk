@@ -3,8 +3,7 @@
 #
 
 options:
-    genre: yaml value "genre"
-    file: "settings-%loop-player's uuid%"
+    genre: yaml value "genre" in "settings-%loop-player's uuid%"
     
 every 14 seconds: # UltraSMP
     if {animation.UltraSMP.status} isn't set:
@@ -66,7 +65,7 @@ every 14 seconds: # UltraSMP
         
 every 198 ticks: # Benvenuto/Benvenuta
     loop all players:
-        if {@genre} in {@file} is "%{server.genre.male}%":
+        if {@genre} is "%{server.genre.male}%":
             if {animation.Benvenuto.status} isn't set:
                 set {animation.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
@@ -113,7 +112,7 @@ every 198 ticks: # Benvenuto/Benvenuta
                 set {animation.Benvenuto} to "&6&lB_"
                 wait 9 ticks 
                 delete {animation.Benvenuto.status}
-        else if {@genre} in {@file} is "%{server.genre.female}%":
+        else if {@genre} is "%{server.genre.female}%":
             if {animation.Benvenuta.status} isn't set:
                 set {animation.Benvenuta} to "&6&lB_"
                 wait 9 ticks 

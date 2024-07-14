@@ -5,9 +5,16 @@ options:
     confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
     error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
 
-    genre: yaml value "genre"
-    file: "settings-%arg-1's uuid%"
-    file_p: "settings-%player's uuid%"
+
+    genre_arg: yaml value "genre" in "settings-%arg-1's uuid%"
+    genre_p: yaml value "genre" in "settings-%player's uuid%"
+
+    data: "data-%arg-1's uuid%"
+    freeze_arg: yaml value "player_info.player.freeze" in "data-%arg-1's uuid%"
+    freeze_p: yaml value "player_info.player.freeze" in "data-%player's uuid%"
+
+    on: Sì
+    off: No
 
 command /freeze [<offline player>]:
     permission: freeze.use
@@ -19,33 +26,34 @@ command /freeze [<offline player>]:
             stop
         else:
             if arg-1 is online:
-                if {freeze.%arg-1%} is true:
-                    if {@genre} in {@file} is "%{server.genre.male}%":
+                if {@freeze_arg} is "{@on}":
+                    if {@genre_arg} is "%{server.genre.male}%":
                         send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzato."
                         {@error_sound} at player for player
                         stop
-                    else if {@genre} in {@file} is "%{server.genre.female}%":
+                    else if {@genre_arg} is "%{server.genre.female}%":
                         send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzata."
                         {@error_sound} at player for player
                         stop
                 else:
-                    set {freeze.%arg-1%} to true
+                    set {@freeze_arg} to "{@on}"
+                    save yaml {@data}
                     send "%{server.prefix.main}% &cHai immobilizzato &6%arg-1%&c."
                     {@confirm_sound} at player for player
                     {@freeze_sound} at arg-1 for arg-1
                     if sender is player:
-                        if {@genre} in {@file} is "%{server.genre.male}%":
+                        if {@genre_arg} is "%{server.genre.male}%":
                             send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzato!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &6%player% &cti ha immobilizzato." to arg-1
-                        else if {@genre} in {@file} is "%{server.genre.female}%":
+                        else if {@genre_arg} is "%{server.genre.female}%":
                             send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzata!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &6%player% &cti ha immobilizzata." to arg-1
                     else:
-                        if {@genre} in {@file} is "%{server.genre.male}%":
+                        if {@genre_arg} is "%{server.genre.male}%":
                             send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzato!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzato." to arg-1
-                        else if {@genre} in {@file} is "%{server.genre.female}%":
-                            send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzato!" to arg-1 for 5 seconds
+                        else if {@genre_arg} is "%{server.genre.female}%":
+                            send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzata!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzata." to arg-1
                     stop
             else:
@@ -61,64 +69,65 @@ command /unfreeze [<offline player>]:
             stop
         else:
             if arg-1 is online:
-                if {freeze.%arg-1%} isn't set:
-                    if {@genre} in {@file} is "%{server.genre.male}%":
+                if {@freeze_arg} is "{@off}":
+                    if {@genre_arg} is "%{server.genre.male}%":
                         send "%{server.prefix.main}% &b%arg-1% &anon è immobilizzato."
                         {@error_sound} at player for player
                         stop
-                    else if {@genre} in {@file} is "%{server.genre.female}%":
+                    else if {@genre_arg} is "%{server.genre.female}%":
                         send "%{server.prefix.main}% &b%arg-1% &anon è immobilizzata."
                         {@error_sound} at player for player
                         stop
                 else:
-                    delete {freeze.%arg-1%}
+                    set {@freeze_arg} to "{@off}"
+                    save yaml {@data}
                     send "%{server.prefix.main}% &aHai liberato &b%arg-1%&a."
                     {@confirm_sound} at player for player
                     {@unfreeze_sound} at arg-1 for arg-1
                     if sender is player:
-                        if {@genre} in {@file} is "%{server.genre.male}%":
+                        if {@genre_arg} is "%{server.genre.male}%":
                             send title "&a&lVIA LIBERA!" with subtitle "&b%player% &ati ha liberato!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &b%player% &ati ha liberato." to arg-1
-                        else if {@genre} in {@file} is "%{server.genre.female}%":
+                        else if {@genre_arg} is "%{server.genre.female}%":
                             send title "&a&lVIA LIBERA!" with subtitle "&b%player% &ati ha liberato!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &b%player% &ati ha liberata." to arg-1
                     else:
-                        if {@genre} in {@file} is "%{server.genre.male}%":
+                        if {@genre_arg} is "%{server.genre.male}%":
                             send title "&a&lVIA LIBERA!" with subtitle "&aLa &bconsole &ati ha liberato!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &aLa &bconsole &ati ha liberato." to arg-1
-                        else if {@genre} in {@file} is "%{server.genre.female}%":
+                        else if {@genre_arg} is "%{server.genre.female}%":
                             send title "&a&lVIA LIBERA!" with subtitle "&aLa &bconsole &ati ha liberata!" to arg-1 for 5 seconds
                             #send "%{server.prefix.main}% &aLa &bconsole &ati ha liberata." to arg-1
                     stop
 
 on player move:
-    if {freeze.%player%} is true:
+    if {@freeze_p} is "{@on}":
         cancel event
-        if {@genre} in {@file_p} is "%{server.genre.male}%":
+        if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
-        if {@genre} in {@file_p} is "%{server.genre.female}%":
+        if {@genre_p} is "%{server.genre.female}%":
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on arm swing:
-    if {freeze.%player%} is true:
+    if {@freeze_p} is "{@on}":
         cancel event
-        if {@genre} in {@file_p} is "%{server.genre.male}%":
+        if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
-        if {@genre} in {@file_p} is "%{server.genre.female}%":
+        if {@genre_p} is "%{server.genre.female}%":
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on sneak toggle:
-    if {freeze.%player%} is true:
+    if {@freeze_p} is "{@on}":
         cancel event
-        if {@genre} in {@file_p} is "%{server.genre.male}%":
+        if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
-        if {@genre} in {@file_p} is "%{server.genre.female}%":
+        if {@genre_p} is "%{server.genre.female}%":
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on right click:
-    if {freeze.%player%} is true:
+    if {@freeze_p} is "{@on}":
         cancel event
-        if {@genre} in {@file_p} is "%{server.genre.male}%":
+        if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
-        if {@genre} in {@file_p} is "%{server.genre.female}%":
+        if {@genre_p} is "%{server.genre.female}%":
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player

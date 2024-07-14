@@ -1,8 +1,8 @@
 options:
-    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+    gui_background: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
 
 function openPlayerInventory(p: player):
-    if {@gui_glass_pane} is true:
+    if {@gui_background} is true:
         set slot 0, 5, 8, 9, 14 and 17 of {_gui} to gray stained glass pane named "&f"
         set slot 10 of {_gui} to white stained glass pane
         set slot 1 of {_gui} to {_p}'s helmet

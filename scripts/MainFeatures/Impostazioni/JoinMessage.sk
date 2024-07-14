@@ -1,14 +1,12 @@
 options:
-    file: "settings-%player's uuid%"
-
-    genre: yaml value "genre"
-    join_message: yaml value "personalization.join_message.enabled"
-    scoreboard: yaml value "personalization.scoreboard.enabled"
-
+    genre: yaml value "genre" in "settings-%player's uuid%"
+    join_message: yaml value "personalization.join_message.enabled" in "settings-%player's uuid%"
+    scoreboard: yaml value "personalization.scoreboard.enabled" in "settings-%player's uuid%"
 
 on join:
-    if player has played before:
-        if {@join_message} in {@file} is true:
+    if {players::*} contains player's uuid:
+        wait 3 ticks
+        if {@join_message} is true:
             set {_OnlinePlayers} to size of all players
             set {_air_temperature} to placeholder "rs_air_temperature" from player
             set {_temperature} to placeholder "rs_temperature" from player
@@ -24,11 +22,11 @@ on join:
             set {_player_y} to placeholder "player_y" from player
             set {_player_z} to placeholder "player_z" from player
             set {_player_biome} to placeholder "player_biome_capitalized" from player
-            if {@genre} in {@file} is "%{server.genre.male}%":
+            if {@genre} is "%{server.genre.male}%":
                 wait 20 ticks
                 send "" to player
                 send " &bBentornato nella %{server.name}%, &9%player%&b!" to player
-            else if {@genre} in {@file} is "%{server.genre.female}%":
+            else if {@genre} is "%{server.genre.female}%":
                 wait 20 ticks
                 send "" to player
                 send " &dBentornata nella %{server.name}%, &5%player%&d!" to player
@@ -41,13 +39,13 @@ on join:
                 send  " &6Al momento ci sono altri &e%({_OnlinePlayers} - 1)% giocatori &6insieme a te." to player
             send "" to player
             send " &7La temperatura esterna è di &a%{_air_temperature}%°C&7." to player
-            if {@scoreboard} in {@file} is false:
+            if {@scoreboard} is false:
                 send "" to player
                 send formatted "&4&k0 <tooltip:&eClicca per riattivarla.><cmd:/sb>&c&lSCOREBOARD DISATTIVATA&r&c. &6Ecco a te alcune informazioni utili. &4&k0" to player
                 send formatted "  &7È <tooltip:&fMancano &7%{_next_season_in}% giorni &falla prossima stagione: %{_next_season}%&f.>&f&n%{_weekday}% %{_day}%/%{_month}%/%{_year}%&r&7, è %{_season}%&7 e sono le &b%{_time}%&7." to player
-                if {@genre} in {@file} is "%{server.genre.male}%":
+                if {@genre} is "%{server.genre.male}%":
                     send "  &7Sei rientrato nel bioma &b%{_player_biome}% &7alle coordinate &a%{_player_x}% %{_player_y}% %{_player_z}%&7." to player
-                if {@genre} in {@file} is "%{server.genre.female}%":
+                if {@genre} is "%{server.genre.female}%":
                     send "  &7Sei rientrata nel bioma &b%{_player_biome}% &7alle coordinate &a%{_player_x}% %{_player_y}% %{_player_z}%&7." to player
                 send "  &7La tua temperatura è di &e%{_temperature}%&7." to player
             send "" to player

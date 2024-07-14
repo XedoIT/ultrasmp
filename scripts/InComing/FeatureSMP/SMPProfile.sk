@@ -13,9 +13,9 @@ options:
     no_available: &cQuesta funzionalità non è ancora disponibile.
     requires_progress_update: &6Disponibile con il &eProgress Update&6.
 
-    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
-    genre: yaml value "genre"
-    file: "settings-%{_p}'s uuid%"
+    gui_background: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+    genre: yaml value "genre" in "settings-%{_p}'s uuid%"
+    status: yaml value "player_info.player.status.new" in "data-%{_p}'s uuid%"
         
 command /profilo:
     aliases: /smp, /profile
@@ -31,7 +31,7 @@ command /profilo:
 
 function openProfileGui(p: player):
     set {_skills_power} to placeholder "auraskills_power" from {_p}
-    if {@gui_glass_pane} is true:
+    if {@gui_background} is true:
         if {_p} has permission "admin.manage.server":
             set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
             set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
@@ -120,15 +120,16 @@ function openPlayerProfileGUI(p: player):
     set {_player_crit_chance} to placeholder "auraskills_crit_chance" from {_p}
     set {_player_crit_damage} to placeholder "auraskills_crit_damage" from {_p}
     set {_player_speed} to placeholder "auraskills_speed" from {_p}
-    set {_genre} to {@genre} in {@file}
-    if {@gui_glass_pane} is true:
+    set {_genre} to {@genre}
+    set {_status} to {@status}
+    if {@gui_background} is true:
         set {_gui} to a new chest inventory with 6 rows named "Equipaggiamento e Statistiche"
         set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
         set slot 10, 12, 13, 14, 16, 22, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
-        if {@genre} in {@file} is "%{server.genre.male}%":
-            set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{status.%{_p}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
-        else if {@genre} in {@file} is "%{server.genre.female}%":
-            set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{status.%{_p}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
+        if {@genre} is "%{server.genre.male}%":
+            set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
+        else if {@genre} is "%{server.genre.female}%":
+            set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
         if slot 39 of {_p}'s inventory is air:
             set slot 11 of {_gui} to red stained glass pane named "&cSlot elmetto" with lore "&7Non stai indossando nessun elmetto." and "&7Indossane uno per visualizzarlo qui."
         else:
@@ -163,10 +164,10 @@ function openPlayerProfileGUI(p: player):
         open {_gui} to {_p}
     else:
         set {_gui} to a new chest inventory with 6 rows named "Equipaggiamento e Statistiche"
-        if {@genre} in {@file} is "%{server.genre.male}%":
-            set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{status.%{_p}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
-        else if {@genre} in {@file} is "%{server.genre.female}%":
-            set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{status.%{_p}%}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
+        if {@genre} is "%{server.genre.male}%":
+            set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
+        else if {@genre} is "%{server.genre.female}%":
+            set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
         if slot 39 of {_p}'s inventory is air:
             set slot 11 of {_gui} to red stained glass pane named "&cSlot elmetto" with lore "&7Non stai indossando nessun elmetto." and "&7Indossane uno per visualizzarlo qui."
         else:

@@ -1,22 +1,25 @@
 options:
     prefix: &4[&e&lSTATUS&4]
-    status: &cNessuno stato impostato.
+    default_status: &cNessuno stato impostato.
 
-on join:
-    if {status.%player%} is not set:
-        set {status.%player%} to "{@status}"
+    data: "data-%player's uuid%"
+    status: yaml value "player_info.player.status.new" in "data-%player's uuid%"
+    old_status: yaml value "player_info.player.status.old" in "data-%player's uuid%"
+
+    genre: yaml value "genre"
+    settings: "settings-%player's uuid%"
 
 command /status [<text>] [<text>]: #NUOVO PARAMETRO: "SETTEMP" E AGGIUNTA DI UN ULTERIORE PARAMETRO (ARG-3) PER SPECIFICARE IL TEMPO DI SCADENZA DELLO STATO (IN ARRIVO...)
-    aliases: /stato
     permission: status.use
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     description: Imposta uno stato personale
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if {status.%player%} is not "{@status}":
-                    send "{@prefix} &fIl tuo stato attuale: &7%{status.%player%}%"
+            if arg-1 isn't set:
+                if {@status} isn't "{@default_status}":
+                    set {_status} to yaml value "player_info.player.status.new" in "data-%player's uuid%"
+                    send "{@prefix} &fIl tuo stato attuale: &7%{_status}%"
                     stop
                 else:
                     send "{@prefix} &cNon hai ancora uno stato."
@@ -24,35 +27,41 @@ command /status [<text>] [<text>]: #NUOVO PARAMETRO: "SETTEMP" E AGGIUNTA DI UN 
                     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                     stop
             else if arg-1 is "set":
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "{@prefix} &cComando incompleto."
                     send "{@prefix} &cUtilizzo: &6/status set <stato>"
                     play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
                     stop
                 else:
-                    if {status.%player%} is not "{@status}":
+                    if {@status} isn't "{@default_status}":
+                        #set {_old_status} to yaml value "player_info.player.status.old" in "data-%player's uuid%"
+                        set {@old_status} to {@status}
+                        set {@status} to arg-2
+                        set {_status} to yaml value "player_info.player.status.new" in "data-%player's uuid%"
                         send "{@prefix} &aHai aggiornato il tuo stato."
-                        set {status.%player%.old} to {status.%player%}
-                        delete {status.%player%}
+                        send "{@prefix} &7%{_status}%"
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        save yaml {@data}
+                        stop
                     else:
+                        set {@status} to arg-2
+                        set {@old_status} to "{@default_status}"
                         send "{@prefix} &aHai impostato il tuo stato."
-                    set {status.%player%} to arg-2
-                    send "{@prefix} &7%{status.%player%}%"
-                    play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
-                    stop
+                        set {_status} to yaml value "player_info.player.status.new" in "data-%player's uuid%"
+                        send "{@prefix} &7%{_status}%"
+                        play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                        save yaml {@data}
+                        stop
             else if arg-1 is "delete":
-                if arg-2 is not set:
-                    if {status.%player%} is not "{@status}":
-                        if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                if arg-2 isn't set:
+                    if {@status} isn't "{@default_status}":
+                        if {@genre} in {@settings} is "%{server.genre.male}%":
                             send formatted "{@prefix} &cSei sicuro di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
-                            play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
-                            set {status.%player%.confirm} to true
-                            stop
-                        if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                        else if {@genre} in {@settings} is "%{server.genre.female}%":
                             send formatted "{@prefix} &cSei sicura di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
-                            play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
-                            set {status.%player%.confirm} to true
-                            stop
+                        play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                        set {status.%player%.confirm} to true
+                        stop
                     else:
                         send "{@prefix} &cNon puoi eliminare il tuo stato se prima non ne imposti uno!"
                         play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
@@ -60,7 +69,7 @@ command /status [<text>] [<text>]: #NUOVO PARAMETRO: "SETTEMP" E AGGIUNTA DI UN 
                 else:
                     send "{@prefix} &cQuesto comando non necessita di ulteriori parametri."
                     stop
-            else if arg-1 is not "set" or "delete":
+            else if arg-1 isn't "set" or "delete":
                 send "{@prefix} &cComando sconosciuto."
                 send "{@prefix} &cUtilizzo: &6/status set <stato>"
                 send "{@prefix} &cUtilizzo: &6/status delete"
@@ -69,7 +78,7 @@ command /status [<text>] [<text>]: #NUOVO PARAMETRO: "SETTEMP" E AGGIUNTA DI UN 
             send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
             stop
 
-on tab complete of "/status" or "stato":
+on tab complete of "/status":
     set tab completions for position 1 to "set" and "delete"
     if tab arg-1 is "set":
         set tab completions for position 2 to "[<stato>]"
@@ -78,12 +87,22 @@ on chat:
     if {status.%player%.confirm} is true:
         cancel event
         if message is "si", "sì", "yes", "s" or "y":
-            delete {status.%player%}
-            set {status.%player%} to "{@status}"
+            set {@old_status} to {@status}
+            set {@status} to "{@default_status}"
             send "{@prefix} &aStato eliminato con successo." to player
             play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
             delete {status.%player%.confirm}
-        else:
+            save yaml {@data}
+        else if message is "no" or "n":
             send "{@prefix} &aRicevuto." to player
             play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
             delete {status.%player%.confirm}
+        else:
+            send "{@prefix} &cNon capisco cosa intendi con &f%message%&c!"
+            if {@genre} in {@settings} is "%{server.genre.male}%":
+                send ""
+                send formatted "{@prefix} &cSei sicuro di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
+            if {@genre} in {@settings} is "%{server.genre.female}%":
+                send ""
+                send formatted "{@prefix} &cSei sicura di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player

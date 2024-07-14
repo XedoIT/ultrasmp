@@ -2,18 +2,16 @@ options:
     interactable: &e≡
     manage: &eClicca per gestirle.
 
-    file: "settings-%{_p}'s uuid%"
+    gui_background: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
 
-    gui_glass_pane: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
-
-    gui_background_marker: yaml value "personalization.gui_background.marker"
-    join_message_marker: yaml value "personalization.join_message.marker"
-    scoreboard_marker: yaml value "personalization.scoreboard.marker"
-    can_view_other_profiles_marker: yaml value "personalization.can_view_other_profiles.marker"
-    damage_indicator_players_marker: yaml value "personalization.damage_indicator.players.marker"
-    damage_indicator_mobs_marker: yaml value "personalization.damage_indicator.mobs.marker"
-    can_others_view_self_profile: yaml value "privacy.can_others_view_self_profile.marker"
-    can_receive_others_tp_requests: yaml value "privacy.can_receive_others_tp_requests.marker"
+    gui_background_marker: yaml value "personalization.gui_background.marker" in "settings-%{_p}'s uuid%"
+    join_message_marker: yaml value "personalization.join_message.marker" in "settings-%{_p}'s uuid%"
+    scoreboard_marker: yaml value "personalization.scoreboard.marker" in "settings-%{_p}'s uuid%"
+    can_view_other_profiles_marker: yaml value "personalization.can_view_other_profiles.marker" in "settings-%{_p}'s uuid%"
+    damage_indicator_players_marker: yaml value "personalization.damage_indicator.players.marker" in "settings-%{_p}'s uuid%"
+    damage_indicator_mobs_marker: yaml value "personalization.damage_indicator.mobs.marker" in "settings-%{_p}'s uuid%"
+    can_others_view_self_profile: yaml value "privacy.can_others_view_self_profile.marker" in "settings-%{_p}'s uuid%"
+    can_receive_others_tp_requests: yaml value "privacy.can_receive_others_tp_requests.marker" in "settings-%{_p}'s uuid%"
 
 command /settings:
     aliases: /impostazioni
@@ -28,32 +26,24 @@ command /settings:
             stop
 
 function openPlayerSettingsGui(p: player):
-    set {_gui_background.marker} to {@gui_background_marker} in {@file}
-    set {_join_message.marker} to {@join_message_marker} in {@file}
-    set {_scoreboard.marker} to {@scoreboard_marker} in {@file}
-    set {_can_view_other_profiles.marker} to {@can_view_other_profiles_marker} in {@file}
-    set {_damage_indicator_players.marker} to {@damage_indicator_players_marker} in {@file}
-    set {_damage_indicator_mobs.marker} to {@damage_indicator_mobs_marker} in {@file}
-    set {_can_others_view_self_profile.marker} to {@can_others_view_self_profile} in {@file}
-    set {_can_receive_others_tp_requests.marker} to {@can_receive_others_tp_requests} in {@file}
-    if {@gui_glass_pane} is true:
-        set {_gui} to a new chest inventory with 5 rows named "Impostazioni"
+    set {_gui_background.marker} to {@gui_background_marker}
+    set {_join_message.marker} to {@join_message_marker}
+    set {_scoreboard.marker} to {@scoreboard_marker}
+    set {_can_view_other_profiles.marker} to {@can_view_other_profiles_marker}
+    set {_damage_indicator_players.marker} to {@damage_indicator_players_marker}
+    set {_damage_indicator_mobs.marker} to {@damage_indicator_mobs_marker}
+    set {_can_others_view_self_profile.marker} to {@can_others_view_self_profile}
+    set {_can_receive_others_tp_requests.marker} to {@can_receive_others_tp_requests}
+    set {_gui} to a new chest inventory with 5 rows named "Impostazioni"
+    if {@gui_background} is true:
         set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
         set slot 10, 11, 12, 13, 14, 15, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
-        set slot 20 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "&f", "&7Include:", "%{_gui_background.marker}% &7Sfondo GUI", "%{_join_message.marker}% &7Messaggio di bentornato", "%{_scoreboard.marker}% &7Scoreboard", "%{_can_view_other_profiles.marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{_damage_indicator_players.marker}% &7Indicatore danni giocatori", "%{_damage_indicator_mobs.marker}% &7Indicatore danni mob", "{@interactable} &7Messaggi in/out", "&f" and "{@manage}"
-        set slot 22 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche da ricevere", "&7durante la tua avventura all'interno", "&7della %{server.name}%.", "&f", "&7Include:", "{@interactable} &7Notifiche generali", "{@interactable} &7Notifiche di servizio", "&f" and "{@manage}"
-        set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{_can_others_view_self_profile.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "%{_can_receive_others_tp_requests.marker}% &7Richieste teletrasporto", "&f" and "{@manage}"
-        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-        open {_gui} to {_p}
-    else:
-        set {_gui} to a new chest inventory with 5 rows named "Impostazioni"
-        set slot 20 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "&f", "&7Include:", "%{_gui_background.marker}% &7Sfondo GUI", "%{_join_message.marker}% &7Messaggio di bentornato", "%{_scoreboard.marker}% &7Scoreboard", "%{_can_view_other_profiles.marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{_damage_indicator_players.marker}% &7Indicatore danni giocatori", "%{_damage_indicator_mobs.marker}% &7Indicatore danni mob", "{@interactable} &7Messaggi in/out", "&f" and "{@manage}"
-        set slot 22 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche da ricevere", "&7durante la tua avventura all'interno", "&7della %{server.name}%.", "&f", "&7Include:", "{@interactable} &7Notifiche generali", "{@interactable} &7Notifiche di servizio", "&f" and "{@manage}"
-        set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{_can_others_view_self_profile.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "%{_can_receive_others_tp_requests.marker}% &7Richieste teletrasporto", "&f" and "{@manage}"
-        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-        open {_gui} to {_p}
+    set slot 20 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "&f", "&7Include:", "%{_gui_background.marker}% &7Sfondo GUI", "%{_join_message.marker}% &7Messaggio di bentornato", "%{_scoreboard.marker}% &7Scoreboard", "%{_can_view_other_profiles.marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{_damage_indicator_players.marker}% &7Indicatore danni giocatori", "%{_damage_indicator_mobs.marker}% &7Indicatore danni mob", "{@interactable} &7Messaggi in/out", "&f" and "{@manage}"
+    set slot 22 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche da ricevere", "&7durante la tua avventura all'interno", "&7della %{server.name}%.", "&f", "&7Include:", "{@interactable} &7Notifiche generali", "{@interactable} &7Notifiche di servizio", "&f" and "{@manage}"
+    set slot 24 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "&f", "&7Include:", "%{_can_others_view_self_profile.marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]", "%{_can_receive_others_tp_requests.marker}% &7Richieste teletrasporto", "&f" and "{@manage}"
+    set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+    open {_gui} to {_p}
 
 on inventory click:
     if name of event-inventory is "Impostazioni":
