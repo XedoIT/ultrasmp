@@ -36,7 +36,7 @@ on join:
 
 on join:
     if player has not played before:
-        if {playtime.first_login.%player%} is not set:
+        if {playtime.first_login.%player%} isn't set:
             set {playtime.first_login.%player%} to now
     if {playtime.sessions.%player%} isn't set:
         set {playtime.sessions.%player%} to 0
@@ -50,13 +50,13 @@ on join:
     delete {playtime.last_session.hours.%player%}
     delete {playtime.last_session.minutes.%player%}
     delete {playtime.last_session.seconds.%player%}
-    if {playtime.total.days.%player%} is not set:
+    if {playtime.total.days.%player%} isn't set:
         set {playtime.total.days.%player%} to 0
-    if {playtime.total.hours.%player%} is not set:
+    if {playtime.total.hours.%player%} isn't set:
         set {playtime.total.hours.%player%} to 0
-    if {playtime.total.minutes.%player%} is not set:
+    if {playtime.total.minutes.%player%} isn't set:
         set {playtime.total.minutes.%player%} to 0
-    if {playtime.total.seconds.%player%} is not set:
+    if {playtime.total.seconds.%player%} isn't set:
         set {playtime.total.seconds.%player%} to 0
 
 on quit:

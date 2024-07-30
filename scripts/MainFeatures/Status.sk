@@ -5,7 +5,6 @@ options:
     data: "data-%player's uuid%"
     status: yaml value "player_info.player.status.new" in "data-%player's uuid%"
     old_status: yaml value "player_info.player.status.old" in "data-%player's uuid%"
-
     genre: yaml value "genre"
     settings: "settings-%player's uuid%"
 

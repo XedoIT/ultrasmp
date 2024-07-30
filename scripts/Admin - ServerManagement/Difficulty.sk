@@ -37,7 +37,7 @@ command /difficulty [<text>]:
                 send "%{server.prefix.main}% &6Puoi modificare la difficoltà con &c/difficulty peaceful&6, &ceasy&6, &cnormal&6, &chard &6o &chardcore&6."
                 stop
             else if arg-1 is "peaceful":
-                if difficulty of all worlds is not peaceful:
+                if difficulty of all worlds isn't peaceful:
                     set difficulty of all worlds to peaceful
                     set {difficulty.info} to "&fPacifica"
                     set {difficulty.peaceful} to "&aSELEZIONATO!"
@@ -55,7 +55,7 @@ command /difficulty [<text>]:
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                     stop
             else if arg-1 is "easy":
-                if difficulty of all worlds is not easy:
+                if difficulty of all worlds isn't easy:
                     set difficulty of all worlds to easy
                     set {difficulty.info} to "&aFacile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -73,7 +73,7 @@ command /difficulty [<text>]:
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                     stop
             else if arg-1 is "normal":
-                if difficulty of all worlds is not normal:
+                if difficulty of all worlds isn't normal:
                     set difficulty of all worlds to normal
                     set {difficulty.info} to "&eNormale"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -91,7 +91,7 @@ command /difficulty [<text>]:
                     play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                     stop
             else if arg-1 is "hard":
-                if difficulty of all worlds is not hard:
+                if difficulty of all worlds isn't hard:
                     set difficulty of all worlds to hard
                     set {difficulty.info} to "&6&lDifficile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -143,7 +143,7 @@ command /difficulty [<text>]:
                     send all players title "&c☠ &4&lHARDCORE MODE &c☠" with subtitle "&cOgni tua mossa sbagliata sarà fatale!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
                     play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
                     stop
-            else if arg-1 is not "peaceful", "easy", "normal", "hard" or "hardcore":
+            else if arg-1 isn't "peaceful", "easy", "normal", "hard" or "hardcore":
                 send "%{server.prefix.main}% &cComando sconosciuto."
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty peaceful"
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty easy"
@@ -161,7 +161,7 @@ command /difficulty [<text>]:
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty hardcore"
                 stop
             else if arg-1 is "peaceful":
-                if difficulty of all worlds is not peaceful:
+                if difficulty of all worlds isn't peaceful:
                     set difficulty of all worlds to peaceful
                     set {difficulty.info} to "&fPacifica"
                     set {difficulty.peaceful} to "&aSELEZIONATO!"
@@ -177,7 +177,7 @@ command /difficulty [<text>]:
                     send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
                     stop
             else if arg-1 is "easy":
-                if difficulty of all worlds is not easy:
+                if difficulty of all worlds isn't easy:
                     set difficulty of all worlds to easy
                     set {difficulty.info} to "&aFacile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -193,7 +193,7 @@ command /difficulty [<text>]:
                     send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
                     stop
             else if arg-1 is "normal":
-                if difficulty of all worlds is not normal:
+                if difficulty of all worlds isn't normal:
                     set difficulty of all worlds to normal
                     set {difficulty.info} to "&eNormale"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -209,7 +209,7 @@ command /difficulty [<text>]:
                     send "%{server.prefix.main}% &cLa difficoltà del server è già impostata su %{difficulty.info}%&c!"
                     stop
             else if arg-1 is "hard":
-                if difficulty of all worlds is not hard:
+                if difficulty of all worlds isn't hard:
                     set difficulty of all worlds to hard
                     set {difficulty.info} to "&6&lDifficile"
                     set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -256,7 +256,7 @@ command /difficulty [<text>]:
                     send all players title "&c☠ &4&lHARDCORE MODE &c☠" with subtitle "&cOgni tua mossa sbagliata sarà fatale!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
                     play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
                     stop
-            else if arg-1 is not "peaceful", "easy", "normal", "hard" or "hardcore":
+            else if arg-1 isn't "peaceful", "easy", "normal", "hard" or "hardcore":
                 send "%{server.prefix.main}% &cComando sconosciuto."
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty peaceful"
                 send "%{server.prefix.main}% &cUtilizzo: &6/difficulty easy"

@@ -58,7 +58,7 @@ on chat:
         stop
 
 on command:
-    if command is not "afk" or "away":
+    if command isn't "afk" or "away":
         if {afk.%player%} is true:
             delete {afk.%player%}
             delete {afk.%player%.info}
@@ -90,7 +90,7 @@ on inventory open:
         else if {settings.%player%.user.genre} is "%{server.genre.female}%":
             broadcast "&d%player% &7è tornata. Che bello!"
     wait {@time} {@time_period}
-    if {afk.%player%} is not true:
+    if {afk.%player%} isn't true:
         set {afk.%player%} to true
         set {afk.%player%.info} to true
         set {afk.%player%.status} to "&aSì"
@@ -133,7 +133,7 @@ command /afk [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 if {afk.%player%} is true:
                     delete {afk.%player%}
                     delete {afk.%player%.info}
@@ -173,7 +173,7 @@ command /afk [<offline player>]:
                             broadcast "&d%arg-1% &7è andata a prendersi una pausa."
                         stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
                 stop
             else:

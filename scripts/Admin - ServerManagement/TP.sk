@@ -4,6 +4,9 @@ options:
     confirm_sound: block.note_block.pling
     error_sound: entity.enderman.teleport
 
+  # YML
+    genre: yaml value "genre" in "settings-%player's uuid%"
+
 command /teleport [<offline player>] [<offline player>]:
     permission: teleport.use
     permission message: {@prefix} &cComando sconosciuto.
@@ -20,25 +23,25 @@ command /teleport [<offline player>] [<offline player>]:
                     stop
             else if arg-1 is player:
                 if arg-2 isn't set:
-                    if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                    if {@genre} is "%{server.genre.male}%":
                         send "{@prefix} &cNon puoi teletrasportarti da te stesso!"
                         stop
-                    else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                    else if {@genre} is "%{server.genre.female}%":
                         send "{@prefix} &cNon puoi teletrasportarti da te stessa!"
                         stop
                 if arg-2 is player:
-                    if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                    if {@genre} is "%{server.genre.male}%":
                         send "{@prefix} &cNon puoi teletrasportare te stesso da te stesso!"
                         stop
-                    else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                    else if {@genre} is "%{server.genre.female}%":
                         send "{@prefix} &cNon puoi teletrasportare te stessa da te stessa!"
                         stop
-                else if arg-2 is not player:
-                    if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                else if arg-2 isn't player:
+                    if {@genre} is "%{server.genre.male}%":
                         teleport player at arg-2's location
                         send "{@prefix} &7Ti ho portato da &c%arg-2%&7."
                         stop
-                    else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                    else if {@genre} is "%{server.genre.female}%":
                         send "{@prefix} &7Ti ho portata da &c%arg-2%&7."
                         stop
             else if arg-1 is offline:
@@ -46,11 +49,11 @@ command /teleport [<offline player>] [<offline player>]:
                 stop
             else if arg-1 is online:
                 if arg-2 isn't set:
-                    if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                    if {@genre} is "%{server.genre.male}%":
                         teleport player at arg-1's location
                         send "{@prefix} &7Ti ho portato da &c%arg-1%&7."
                         stop
-                    else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                    else if {@genre} is "%{server.genre.female}%":
                         teleport player at arg-1's location
                         send "{@prefix} &7Ti ho portata da &c%arg-1%&7."
                         stop

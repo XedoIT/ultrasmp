@@ -23,7 +23,7 @@ on chat:
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
             delete {sm.%player%.stop_confirm}
             openServerManagement(player)
-        else if message is not "si", "sì", "yes", "s", "y", "no" or "n":
+        else if message isn't "si", "sì", "yes", "s", "y", "no" or "n":
             send "%{server.prefix.main}% &cNon capisco cosa intendi per &6%message%&c!"
             send "%{server.prefix.main}% &7Rispondi solo con &c""sì"" &7o &c""no""&7."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
@@ -48,7 +48,7 @@ on chat:
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
             delete {sm.%player%.restart_confirm}
             openServerManagement(player)
-        else if message is not "si", "sì", "yes", "s", "y", "no" or "n":
+        else if message isn't "si", "sì", "yes", "s", "y", "no" or "n":
             send "%{server.prefix.main}% &cNon capisco cosa intendi per &6%message%&c!"
             send "%{server.prefix.main}% &7Rispondi solo con &c""sì"" &7o &c""no""&7."
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player

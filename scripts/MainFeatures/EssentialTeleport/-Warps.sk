@@ -302,7 +302,7 @@ command /unlockwarp [<text>] [<text>]:
                     if arg-2 isn't set:
                         send "{@prefix} &cInserisci la password del warp &6%arg-1% &cper sbloccarlo!"
                         stop
-                    if arg-2 is not {et.warps_lock::%arg-1%}:
+                    if arg-2 isn't {et.warps_lock::%arg-1%}:
                         send "{@prefix} &cPassword non corretta! Riprova."
                         stop
                     else:
@@ -600,7 +600,7 @@ command /warp [<text>] [<text>]:
                                 send "{@prefix} &6Il warp &c%arg-1% &6non è protetto, quindi ti ci ho portata senza problemi."
                                 stop
                         else:
-                            if arg-2 is not {et.warps_lock::%arg-1%}:
+                            if arg-2 isn't {et.warps_lock::%arg-1%}:
                                 send "{@prefix} &cPassword del warp non corretta! &cRiprova."
                                 stop
                             else:

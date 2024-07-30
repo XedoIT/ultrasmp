@@ -40,7 +40,7 @@ function retrievePlayerInventory(inv: inventory, p: offline player):
 
 # Join event for updating a players inventory and also checks to see if someone is editing their offline inventory
 on join:
-    size of {storage.inventory.%uuid of player%::*} is not 0
+    size of {storage.inventory.%uuid of player%::*} isn't 0
     retrievePlayerInventory(player's inventory, player)
     loop all players:
         if metadata value "Invsee" of loop-player is "%player%":
@@ -64,7 +64,7 @@ on quit:
 # Inventory close event for editing offline player inventories
 on inventory close:
     metadata value "Invsee" of player is set
-    if metadata value "CancelInvsee" of player is not set:
+    if metadata value "CancelInvsee" of player isn't set:
         set {_p} to metadata value "Invsee" of player
         set {_p} to "%{_p}%" parsed as offline player
         saveInventoryOfflinePlayer(player's current inventory, {_p})
@@ -82,7 +82,7 @@ command /oi [<offline player>]:
                 open arg-1's inventory to player
             else:
                 if arg-1 has played before:
-                    if size of {storage.inventory.%uuid of arg-1%::*} is not 0:
+                    if size of {storage.inventory.%uuid of arg-1%::*} isn't 0:
                         set metadata value "Invsee" of player to "%arg-1%"
                         set {_gui} to a new chest inventory with 6 rows named "Inventario di %arg-1%"
                         set slot 1 of {_gui} to {whois.equip.helmet.%arg-1%}

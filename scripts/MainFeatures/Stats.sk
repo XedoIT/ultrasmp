@@ -5,11 +5,11 @@ options:
     fight: &a● &a&lPvP abilitato &a●
 
 on join:
-    if {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} is not set:
+    if {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} isn't set:
         set {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} to 0
-    if {broken_blocks::%player%} and {placed_blocks::%player%} is not set:
+    if {broken_blocks::%player%} and {placed_blocks::%player%} isn't set:
         set {broken_blocks::%player%} and {placed_blocks::%player%} to 0
-    if {reported_bugs::%player%} and {feedback_sent::%player%} is not set:
+    if {reported_bugs::%player%} and {feedback_sent::%player%} isn't set:
         set {reported_bugs::%player%} and {feedback_sent::%player%} to 0
 
 # DANNI INFLITTI E DANNI SUBITI
@@ -18,16 +18,16 @@ on damage:
         if victim is a player:
             if {pvp} is "{@fight}":
                 if {god.%victim%} is "{@off}":
-                    if {difficulty.info.hardcore_death::%victim%} and {difficulty.info.hardcore_death::%attacker%} is not set:
+                    if {difficulty.info.hardcore_death::%victim%} and {difficulty.info.hardcore_death::%attacker%} isn't set:
                         DamageInflicted(damage,attacker)
                         DamageSuffered(damage,victim)
         else if victim isn't a player, a fireball, a boat, an armor stand or an item frame:
-            if {difficulty.info.hardcore_death::%attacker%} is not set:
+            if {difficulty.info.hardcore_death::%attacker%} isn't set:
                 DamageInflicted(damage,attacker)
     else:
         if victim is a player:
             if {god.%victim%} is "{@off}":
-                if {difficulty.info.hardcore_death::%victim%} is not set:
+                if {difficulty.info.hardcore_death::%victim%} isn't set:
                     DamageSuffered(damage,victim)
 
 
@@ -39,7 +39,7 @@ function DamageSuffered(i: number, p: player):
 
 # UCCISIONI, MORTI E SERIE DI UCCISIONI
 on death:
-    if victim is not a player:
+    if victim isn't a player:
         if attacker is a player:
             add 1 to {kills::%attacker%}
             add 1 to {killstreak::%attacker%}

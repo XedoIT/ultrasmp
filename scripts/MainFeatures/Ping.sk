@@ -7,7 +7,7 @@ command /ping [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &aIl tuo ping è &e%player's ping% &ems"
                 stop
             else if arg-1 is set:
@@ -18,7 +18,7 @@ command /ping [<offline player>]:
                     send "{@prefix} &aIl ping di &b%arg-1% &aè &e%arg-1's ping% &ems"
                     stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else if arg-1 is set:

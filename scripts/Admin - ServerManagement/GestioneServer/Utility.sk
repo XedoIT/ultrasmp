@@ -18,7 +18,7 @@ on chat:
     if {sm.%player%.gms} is true:
         cancel event
         set {_p} to message parsed as offline player
-        if gamemode of {_p} is not survival:
+        if gamemode of {_p} isn't survival:
             SetSurvivalGamemode({_p})
             ToggleNoFlyGM({_p})
             send "%{server.prefix.main}% &aModalità &csopravvivenza &aimpostata per &e%{_p}%&a."
@@ -35,7 +35,7 @@ on chat:
     else if {sm.%player%.gmc} is true:
         cancel event
         set {_p} to message parsed as offline player
-        if gamemode of {_p} is not creative:
+        if gamemode of {_p} isn't creative:
             SetCreativeGamemode({_p})
             ToggleFlyGM({_p})
             send "%{server.prefix.main}% &aModalità &ccreativa &aimpostata per &e%{_p}%&a."
@@ -52,7 +52,7 @@ on chat:
     else if {sm.%player%.gma} is true:
         cancel event
         set {_p} to message parsed as offline player
-        if gamemode of {_p} is not adventure:
+        if gamemode of {_p} isn't adventure:
             SetAdventureGamemode({_p})
             ToggleNoFlyGM({_p})
             send "%{server.prefix.main}% &aModalità &cavventura &aimpostata per &e%{_p}%&a."
@@ -69,7 +69,7 @@ on chat:
     else if {sm.%player%.gmsp} is true:
         cancel event
         set {_p} to message parsed as offline player
-        if gamemode of {_p} is not spectator:
+        if gamemode of {_p} isn't spectator:
             SetSpectatorGamemode({_p})
             ToggleFlyGM({_p})
             send "%{server.prefix.main}% &aModalità &cspettatore &aimpostata per &e%{_p}%&a."
@@ -120,7 +120,7 @@ on place:
         cancel event
         send "%{server.prefix.main}% &cNon puoi piazzare blocchi finché sei un fantasma." to player
 on command:
-    if command is not "home", "back", "msg" or "r":
+    if command isn't "home", "back", "msg" or "r":
         if {difficulty.info.hardcore_death::%player%} is true:
             cancel event
             send "%{server.prefix.main}% &cNon puoi eseguire questo comando finché sei un fantasma."
@@ -213,7 +213,7 @@ on inventory click:
             else if index of event-slot is 11:
                 if click type is left mouse button:
                     cancel event
-                    if difficulty of all worlds is not peaceful:
+                    if difficulty of all worlds isn't peaceful:
                         set difficulty of all worlds to peaceful
                         set {difficulty.info} to "&fPacifica"
                         set {difficulty.peaceful} to "&aSELEZIONATO!"
@@ -234,7 +234,7 @@ on inventory click:
             else if index of event-slot is 12:
                 if click type is left mouse button:
                     cancel event
-                    if difficulty of all worlds is not easy:
+                    if difficulty of all worlds isn't easy:
                         set difficulty of all worlds to easy
                         set {difficulty.info} to "&aFacile"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -255,7 +255,7 @@ on inventory click:
             else if index of event-slot is 13:
                 if click type is left mouse button:
                     cancel event
-                    if difficulty of all worlds is not normal:
+                    if difficulty of all worlds isn't normal:
                         set difficulty of all worlds to normal
                         set {difficulty.info} to "&eNormale"
                         set {difficulty.peaceful} to "&eClicca per selezionare."
@@ -276,7 +276,7 @@ on inventory click:
             else if index of event-slot is 14:
                 if click type is left mouse button:
                     cancel event
-                    if difficulty of all worlds is not hard:
+                    if difficulty of all worlds isn't hard:
                         set difficulty of all worlds to hard
                         set {difficulty.info} to "&6&lDifficile"
                         set {difficulty.peaceful} to "&eClicca per selezionare."

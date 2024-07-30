@@ -6,35 +6,27 @@ options:
 
     glinted: "{enchantment_glint_override:true}"
 
+    data: "data-%player's uuid%"
+    gui_background: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
+    last_gui: yaml value "player_gui.last_opened_1" in "data-%player's uuid%"
+
 function openMainAchievementsGui(p: player):
-    if {settings.%{_p}%.custom.glasspanes} is true:
-        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
+    set {_last_gui} to yaml value "player_gui.last_opened_1" from "data-%{_p}'s uuid%"
+    set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
+    if {@gui_background} is true:
         set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 41, 42, 43 and 44 of {_gui} to black stained glass pane named "&r"
         set slot 10, 11, 12, 13, 14, 15, 16, 19, 21, 23, 25, 28, 29, 30, 31, 32, 33 and 34 of {_gui} to gray stained glass pane named "&r"
-        set slot 4 of {_gui} to diamond with nbt from {@glinted} named "&fObiettivi SMP" with lore "&7Completa gli obiettivi e le sfide nelle", "&7categorie qui sotto e sblocca", "&7cosmetici, funzionalità e vantaggi", "&7speciali che miglioreranno la tua" and "&7esperienza di gioco."
-        set slot 20 of {_gui} to paper named "&fObiettivi singoli" with lore "&7Completa..."
-        set slot 21 of {_gui} to book named "&fObiettivi a livelli" with lore "&7Boh..."
-        set slot 22 of {_gui} to writable book named "&fSfide" with lore "&cPericolo!"
-        set slot 24 of {_gui} to sunflower with nbt from {@glinted} named "&fMedaglie" with lore "&aMedaglie totali&7: &6%{medals.%{_p}%}%/{@total_medals}", "&f", "&7Una raccolta di tutte le sfide", "&7e gli eventi da te compiuti!", "&f", "{@more_info}"
-        if {gui.achievements.bypassprofile.%{_p}%} isn't set:
-            set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-        else:
-            set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a %{gui.last_opened.%{_p}%}%"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-        open {_gui} to {_p}
+    set slot 4 of {_gui} to diamond with nbt from {@glinted} named "&fObiettivi SMP" with lore "&7Completa gli obiettivi e le sfide nelle", "&7categorie qui sotto e sblocca", "&7cosmetici, funzionalità e vantaggi", "&7speciali che miglioreranno la tua" and "&7esperienza di gioco."
+    set slot 20 of {_gui} to paper named "&fObiettivi singoli" with lore "&7Completa..."
+    set slot 21 of {_gui} to book named "&fObiettivi a livelli" with lore "&7Boh..."
+    set slot 22 of {_gui} to writable book named "&fSfide" with lore "&cPericolo!"
+    set slot 24 of {_gui} to sunflower with nbt from {@glinted} named "&fMedaglie" with lore "&aMedaglie totali&7: &6%{medals.%{_p}%}%/{@total_medals}", "&f", "&7Una raccolta di tutte le sfide", "&7e gli eventi da te compiuti!", "&f", "{@more_info}"
+    if {gui.achievements.bypassprofile.%{_p}%} isn't set:
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
     else:
-        set {_gui} to a new chest inventory with 5 rows with name "Obiettivi SMP"
-        set slot 4 of {_gui} to diamond with nbt from {@glinted} named "&fObiettivi SMP" with lore "&7Completa gli obiettivi e le sfide nelle", "&7categorie qui sotto e sblocca", "&7cosmetici, funzionalità e vantaggi", "&7speciali che miglioreranno la tua" and "&7esperienza di gioco."
-        set slot 20 of {_gui} to paper named "&fObiettivi singoli" with lore "&7Completa..."
-        set slot 21 of {_gui} to book named "&fObiettivi a livelli" with lore "&7Boh..."
-        set slot 22 of {_gui} to writable book named "&fSfide" with lore "&cPericolo!"
-        set slot 24 of {_gui} to sunflower with nbt from {@glinted} named "&fMedaglie" with lore "&aMedaglie totali&7: &6%{medals.%{_p}%}%/{@total_medals}", "&f", "&7Una raccolta di tutte le sfide", "&7e gli eventi da te compiuti!", "&f", "{@more_info}"
-        if {gui.achievements.bypassprofile.%{_p}%} isn't set:
-            set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-        else:
-            set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a %{gui.last_opened.%{_p}%}%"
-        set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-        open {_gui} to {_p}
+        set slot 39 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a %{_last_gui}%"
+    set slot 40 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+    open {_gui} to {_p}
         
 on inventory click:
     if name of event-inventory is "Obiettivi SMP":
@@ -78,7 +70,8 @@ on inventory click:
                         openProfileGui(player)
                     else:
                         delete {gui.achievements.bypassprofile.%player%}
-                        delete {gui.last_opened.%player%}
+                        set {@last_gui} to "-"
+                        save yaml {@data}
                         openPlayerProfileGUI(player)
                 else:
                     cancel event

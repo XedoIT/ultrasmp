@@ -11,7 +11,7 @@ command /bug [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "&cUtilizzo: &6/bug <bug>"
                 stop
             else:
@@ -37,7 +37,7 @@ command /bug [<text>]:
                 stop
                 
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "&cQual è il bug che vuoi segnalare?"
                 stop
             else:
@@ -66,7 +66,7 @@ command /feedback [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "&cUtilizzo: &6/feedback <la tua opinione>"
                 stop
             else:
@@ -92,7 +92,7 @@ command /feedback [<text>]:
                 stop
                 
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "&cUtilizzo: &6/feedback <la tua opinione>"
                 stop
             else:

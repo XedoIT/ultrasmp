@@ -60,7 +60,7 @@ on inventory click:
             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
         else if index of event-slot is 29:
             cancel event
-            if {axr.worlds.all::*} is not "&7Nessun mondo disponibile.":
+            if {axr.worlds.all::*} isn't "&7Nessun mondo disponibile.":
                 close player's inventory
                 set {axr.world.add.%player%} to true
                 send "{@prefix} &aScrivi in chat il mondo che vuoi aggiungere!"
@@ -71,7 +71,7 @@ on inventory click:
                 play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
         else if index of event-slot is 30:
             cancel event
-            if {axr.worlds.enabled::*} is not "&7Nessun mondo abilitato.":
+            if {axr.worlds.enabled::*} isn't "&7Nessun mondo abilitato.":
                 close player's inventory
                 set {axr.world.remove.%player%} to true
                 send "{@prefix} &cScrivi in chat il mondo che vuoi rimuovere!"

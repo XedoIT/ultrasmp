@@ -10,42 +10,14 @@ options:
     
     no_flags: "{hide_additional_tooltip:{}}"
 
-# AGGIORNAMENTO VARIABILE
-on join:
-    if {gm.%player%.marker} is set:
-        delete {gm.%player%.marker}
+    data: "data-%{_p}'s uuid%"
+    gamemode: yaml value "player_info.player.gamemode.info" in "data-%{_p}'s uuid%"
+    gamemode_id: yaml value "player_info.player.gamemode.id" in "data-%{_p}'s uuid%"
 
-on join:
-    if gamemode of player is survival:
-        set {gm.%player%} to "{@gm0}"
-        set {gm.marker.%player%} to iron sword with nbt from {@no_flags}
-    else if gamemode of player is creative:
-        set {gm.%player%} to "{@gm1}"
-        set {gm.marker.%player%} to grass block
-    else if gamemode of player is adventure:
-        set {gm.%player%} to "{@gm2}"
-        set {gm.marker.%player%} to empty map
-    else if gamemode of player is spectator:
-        set {gm.%player%} to "{@gm3}"
-        set {gm.marker.%player%} to ender eye
-        
-on quit:
-    if gamemode of player is survival:
-        if {gm.%player%} isn't set:
-            set {gm.%player%} to "{@gm0}"
-            set {gm.marker.%player%} to iron sword with nbt from {@no_flags}
-    else if gamemode of player is creative:
-        if {gm.%player%} isn't set:
-            set {gm.%player%} to "{@gm1}"
-            set {gm.marker.%player%} to grass block
-    else if gamemode of player is adventure:
-        if {gm.%player%} isn't set:
-            set {gm.%player%} to "{@gm2}"
-            set {gm.marker.%player%} to empty map
-    else if gamemode of player is spectator:
-        if {gm.%player%} isn't set:
-            set {gm.%player%} to "{@gm3}"
-            set {gm.marker.%player%} to ender eye
+# SOPRAVVIVENZA: iron sword with nbt from {@no_flags}
+# CREATIVA: grass block
+# AVVENTURA: empty map
+# SPETTATORE: ender eye
 
 command /gm [<text>] [<offline player>]:
     permission: gm.use
@@ -65,7 +37,7 @@ command /gm [<text>] [<offline player>]:
 
             else if arg-1 is "survival", "s" or "0":
                 if arg-2 isn't set:
-                    if gamemode of player is not survival:
+                    if gamemode of player isn't survival:
                         SetSurvivalGamemode(player)
                         ToggleNoFlyGM(player)
                         send "{@prefix} &aSei in modalità &csopravvivenza&a."
@@ -80,7 +52,7 @@ command /gm [<text>] [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
                     else:
-                        if gamemode of arg-2 is not survival:
+                        if gamemode of arg-2 isn't survival:
                             SetSurvivalGamemode(arg-2)
                             ToggleNoFlyGM(arg-2)
                             send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to player
@@ -93,7 +65,7 @@ command /gm [<text>] [<offline player>]:
                         
             else if arg-1 is "creative", "c" or "1":
                 if arg-2 isn't set:
-                    if gamemode of player is not creative:
+                    if gamemode of player isn't creative:
                         SetCreativeGamemode(player)
                         ToggleFlyGM(player)
                         send "{@prefix} &aSei in modalità &ccreativa&a."
@@ -108,7 +80,7 @@ command /gm [<text>] [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
                     else:
-                        if gamemode of arg-2 is not creative:
+                        if gamemode of arg-2 isn't creative:
                             SetCreativeGamemode(arg-2)
                             ToggleFlyGM(arg-2)
                             send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to player
@@ -121,7 +93,7 @@ command /gm [<text>] [<offline player>]:
 
             else if arg-1 is "adventure", "a" or "2":
                 if arg-2 isn't set:
-                    if gamemode of player is not adventure:
+                    if gamemode of player isn't adventure:
                         SetAdventureGamemode(player)
                         ToggleNoFlyGM(player)
                         send "{@prefix} &aSei in modalità &cavventura&a."
@@ -136,7 +108,7 @@ command /gm [<text>] [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
                     else:
-                        if gamemode of arg-2 is not adventure:
+                        if gamemode of arg-2 isn't adventure:
                             SetAdventureGamemode(arg-2)
                             ToggleNoFlyGM(arg-2)
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
@@ -149,7 +121,7 @@ command /gm [<text>] [<offline player>]:
 
             else if arg-1 is "spectator", "sp" or "3":
                 if arg-2 isn't set:
-                    if gamemode of player is not spectator:
+                    if gamemode of player isn't spectator:
                         SetSpectatorGamemode(player)
                         ToggleFlyGM(player)
                         send "{@prefix} &aSei in modalità &cspettatore&a."
@@ -164,7 +136,7 @@ command /gm [<text>] [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
                     else:
-                        if gamemode of arg-2 is not spectator:
+                        if gamemode of arg-2 isn't spectator:
                             SetSpectatorGamemode(arg-2)
                             ToggleFlyGM(arg-2)
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to player
@@ -175,7 +147,7 @@ command /gm [<text>] [<offline player>]:
                             play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                             stop
 
-            else if arg-1 is not "survival", "s", "0", "creative", "c", "1", "adventure", "a", "2", "spectator", "sp" or "3":
+            else if arg-1 isn't "survival", "s", "0", "creative", "c", "1", "adventure", "a", "2", "spectator", "sp" or "3":
                 send "{@prefix} &cComando sconosciuto."
                 send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> [&egiocatore&6]"
                 send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> [&egiocatore&6]"
@@ -203,7 +175,7 @@ command /gm [<text>] [<offline player>]:
                         send "{@prefix} &6%arg-2% &cè offline."
                         stop
                     else:
-                        if gamemode of arg-2 is not survival:
+                        if gamemode of arg-2 isn't survival:
                             SetSurvivalGamemode(arg-2)
                             ToggleNoFlyGM(arg-2)
                             send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-2%&a." to console
@@ -223,7 +195,7 @@ command /gm [<text>] [<offline player>]:
                         send "{@prefix} &6%arg-2% &cè offline."
                         stop
                     else:
-                        if gamemode of arg-2 is not creative:
+                        if gamemode of arg-2 isn't creative:
                             SetCreativeGamemode(arg-2)
                             ToggleFlyGM(arg-2)
                             send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-2%&a." to console
@@ -243,7 +215,7 @@ command /gm [<text>] [<offline player>]:
                         send "{@prefix} &6%arg-2% &cè offline."
                         stop
                     else:
-                        if gamemode of arg-2 is not adventure:
+                        if gamemode of arg-2 isn't adventure:
                             SetAdventureGamemode(arg-2)
                             ToggleNoFlyGM(arg-2)
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
@@ -263,7 +235,7 @@ command /gm [<text>] [<offline player>]:
                         send "{@prefix} &6%arg-2% &cè offline."
                         stop
                     else:
-                        if gamemode of arg-2 is not spectator:
+                        if gamemode of arg-2 isn't spectator:
                             SetSpectatorGamemode(arg-2)
                             ToggleFlyGM(arg-2)
                             send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-2%&a." to console
@@ -273,7 +245,7 @@ command /gm [<text>] [<offline player>]:
                             send "{@prefix} &6%arg-2% &cè già in modalità &aspettatore&c!"
                             stop
 
-            else if arg-1 is not "survival", "s", "0", "creative", "c", "1", "adventure", "a", "2", "spectator", "sp" or "3":
+            else if arg-1 isn't "survival", "s", "0", "creative", "c", "1", "adventure", "a", "2", "spectator", "sp" or "3":
                 send "{@prefix} &cComando sconosciuto."
                 send "{@prefix} &cUtilizzo: &6/gm <&esurvival&6> <&egiocatore&6>"
                 send "{@prefix} &cUtilizzo: &6/gm <&ecreative&6> <&egiocatore&6>"
@@ -296,7 +268,7 @@ command /gms [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop 
                 else:
-                    if gamemode of arg-1 is not survival:
+                    if gamemode of arg-1 isn't survival:
                         SetSurvivalGamemode(arg-1)
                         ToggleNoFlyGM(arg-1)
                         send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to player
@@ -307,7 +279,7 @@ command /gms [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
             else:
-                if gamemode of player is not survival:
+                if gamemode of player isn't survival:
                     SetSurvivalGamemode(player)
                     ToggleNoFlyGM(player)
                     send "{@prefix} &aSei in modalità &csopravvivenza&a."
@@ -322,7 +294,7 @@ command /gms [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop
                 else:
-                    if gamemode of arg-1 is not survival:
+                    if gamemode of arg-1 isn't survival:
                         SetSurvivalGamemode(arg-1)
                         ToggleNoFlyGM(arg-1)
                         send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%arg-1%&a." to console
@@ -347,7 +319,7 @@ command /gmc [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop 
                 else:
-                    if gamemode of arg-1 is not creative:
+                    if gamemode of arg-1 isn't creative:
                         SetCreativeGamemode(arg-1)
                         ToggleFlyGM(arg-1)
                         send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to player
@@ -358,7 +330,7 @@ command /gmc [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
             else:
-                if gamemode of player is not creative:
+                if gamemode of player isn't creative:
                     SetCreativeGamemode(player)
                     ToggleFlyGM(player)
                     send "{@prefix} &aSei in modalità &ccreativa&a."
@@ -373,7 +345,7 @@ command /gmc [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop
                 else:
-                    if gamemode of arg-1 is not creative:
+                    if gamemode of arg-1 isn't creative:
                         SetCreativeGamemode(arg-1)
                         ToggleFlyGM(arg-1)
                         send "{@prefix} &aModalità &ccreativa &aimpostata per &e%arg-1%&a." to console
@@ -398,7 +370,7 @@ command /gma [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop 
                 else:
-                    if gamemode of arg-1 is not adventure:
+                    if gamemode of arg-1 isn't adventure:
                         SetAdventureGamemode(arg-1)
                         ToggleNoFlyGM(arg-1)
                         send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to player
@@ -409,7 +381,7 @@ command /gma [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
             else:
-                if gamemode of player is not adventure:
+                if gamemode of player isn't adventure:
                     SetAdventureGamemode(player)
                     ToggleNoFlyGM(player)
                     send "{@prefix} &aSei in modalità &cavventura&a."
@@ -424,7 +396,7 @@ command /gma [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop
                 else:
-                    if gamemode of arg-1 is not adventure:
+                    if gamemode of arg-1 isn't adventure:
                         SetAdventureGamemode(arg-1)
                         ToggleNoFlyGM(arg-1)
                         send "{@prefix} &aModalità &cavventura &aimpostata per &e%arg-1%&a." to console
@@ -449,7 +421,7 @@ command /gmsp [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop 
                 else:
-                    if gamemode of arg-1 is not spectator:
+                    if gamemode of arg-1 isn't spectator:
                         SetSpectatorGamemode(arg-1)
                         ToggleFlyGM(arg-1)
                         send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to player
@@ -460,7 +432,7 @@ command /gmsp [<offline player>]:
                         play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
                         stop
             else:
-                if gamemode of player is not spectator:
+                if gamemode of player isn't spectator:
                     SetSpectatorGamemode(player)
                     ToggleFlyGM(player)
                     send "{@prefix} &aSei in modalità &cspettatore&a."
@@ -475,7 +447,7 @@ command /gmsp [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop
                 else:
-                    if gamemode of arg-1 is not spectator:
+                    if gamemode of arg-1 isn't spectator:
                         SetSpectatorGamemode(arg-1)
                         ToggleFlyGM(arg-1)
                         send "{@prefix} &aModalità &cspettatore &aimpostata per &e%arg-1%&a." to console
@@ -490,20 +462,24 @@ command /gmsp [<offline player>]:
 
 function SetSurvivalGamemode(p: player):
     set {_p}'s gamemode to survival
-    set {gm.%{_p}%} to "{@gm0}"
-    set {gm.marker.%{_p}%} to iron sword with nbt from {@no_flags}
+    set {@gamemode} to "{@gm0}"
+    set {@gamemode_id} to iron sword with nbt from {@no_flags}
+    save yaml {@data}
 
 function SetCreativeGamemode(p: player):
     set {_p}'s gamemode to creative
-    set {gm.%{_p}%} to "{@gm1}"
-    set {gm.marker.%{_p}%} to grass block
+    set {@gamemode} to "{@gm1}"
+    set {@gamemode_id} to grass block
+    save yaml {@data}
 
 function SetAdventureGamemode(p: player):
     set {_p}'s gamemode to adventure
-    set {gm.%{_p}%} to "{@gm2}"
-    set {gm.marker.%{_p}%} to empty map
+    set {@gamemode} to "{@gm2}"
+    set {@gamemode_id} to empty map
+    save yaml {@data}
 
 function SetSpectatorGamemode(p: player):
     set {_p}'s gamemode to spectator
-    set {gm.%{_p}%} to "{@gm3}"
-    set {gm.marker.%{_p}%} to ender eye
+    set {@gamemode} to "{@gm3}"
+    set {@gamemode_id} to ender eye
+    save yaml {@data}

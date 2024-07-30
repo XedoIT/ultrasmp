@@ -5,6 +5,10 @@ options:
     confirm_sound: entity.player.levelup
     error_sound: entity.enderman.teleport
 
+  # YML
+    genre: yaml value "genre" in "settings-%{_p}'s uuid%"
+    genre_p2: yaml value "genre" in "settings-%{_p2}'s uuid%"
+
 command /heal [<offline player>]:
     description: Cura i giocatori.
     executable by: player, console
@@ -35,9 +39,9 @@ function HealSelf(p: player):
         set {_player_hp_max} to placeholder "auraskills_hp_max" from {_p}
         if {_player_hp} != {_player_hp_max}:
             heal {_p}
-            if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+            if {@genre} is "%{server.genre.male}%":
                 send "{@prefix} &aTi sei curato." to {_p}
-            else if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+            else if {@genre} is "%{server.genre.female}%":
                 send "{@prefix} &aTi sei curata." to {_p}
             play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
             wait 1 tick
@@ -56,9 +60,9 @@ function HealOthersPlayer(p1: player, p2: player):
         if {_player_hp} != {_player_hp_max}:
             heal {_p2}
             send "{@prefix} &aHai curato &b%{_p2}%&a." to {_p1}
-            if {settings.%{_p2}%.user.genre} is "%{server.genre.male}%":
+            if {@genre_p2} is "%{server.genre.male}%":
                 send "{@prefix} &b%{_p1}% &ati ha curato." to {_p2}
-            else if {settings.%{_p2}%.user.genre} is "%{server.genre.female}%":
+            else if {@genre_p2} is "%{server.genre.female}%":
                 send "{@prefix} &b%{_p1}% &ati ha curata." to {_p2}
             play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p2} for {_p2}
             stop
@@ -75,9 +79,9 @@ function HealOthersConsole(p: player):
     if {_player_hp} != {_player_hp_max}:
         heal {_p}
         send "{@prefix} &aHai curato &b%{_p}%&a." to console
-        if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+        if {@genre} is "%{server.genre.male}%":
             send "{@prefix} &aLa &bconsole &ati ha curato." to {_p}
-        else if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+        else if {@genre} is "%{server.genre.female}%":
             send "{@prefix} &aLa &bconsole &ati ha curata." to {_p}
         play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
         stop
@@ -113,16 +117,16 @@ function FeedSelf(p: player):
     if {_p} has permission "feed.use":
         if {_p}'s food level < 10:
             set {_p}'s food level to 10
-            if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+            if {@genre} is "%{server.genre.male}%":
                 send "{@prefix} &aTi sei saziato." to {_p}
-            else if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+            else if {@genre} is "%{server.genre.female}%":
                 send "{@prefix} &aTi sei saziata." to {_p}
             play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
             stop
         else:
-            if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+            if {@genre} is "%{server.genre.male}%":
                 send "{@error_prefix} &cSei già sazio!" to {_p}
-            if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+            if {@genre} is "%{server.genre.female}%":
                 send "{@error_prefix} &cSei già sazia!" to {_p}
             play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
             stop
@@ -134,16 +138,16 @@ function FeedOthersPlayer(p1: player, p2: player):
         if {_p2}'s food level < 10:
             set {_p2}'s food level to 10
             send "{@prefix} &aHai saziato &b%{_p2}%&a." to {_p1}
-            if {settings.%{_p2}%.user.genre} is "%{server.genre.male}%":
+            if {@genre_p2} is "%{server.genre.male}%":
                 send "{@prefix} &b%{_p1}% &ati ha saziato." to {_p2}
-            else if {settings.%{_p2}%.user.genre} is "%{server.genre.female}%":
+            else if {@genre_p2} is "%{server.genre.female}%":
                 send "{@prefix} &b%{_p1}% &ati ha saziata." to {_p2}
             play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p2} for {_p2}
             stop
         else:
-            if {settings.%{_p2}%.user.genre} is "%{server.genre.male}%":
+            if {@genre_p2} is "%{server.genre.male}%":
                 send "{@error_prefix} &6%{_p2}% &cè già sazio!" to {_p1}
-            if {settings.%{_p2}%.user.genre} is "%{server.genre.female}%":
+            if {@genre_p2} is "%{server.genre.female}%":
                 send "{@error_prefix} &6%{_p2}% &cè già sazia!" to {_p1}
             play sound "{@error_sound}" with volume 1 and pitch 0 at {_p1} for {_p1}
             stop
@@ -154,15 +158,15 @@ function FeedOthersConsole(p: player):
     if {_p}'s food level < 10:
         set {_p}'s food level to 10
         send "{@prefix} &aHai saziato &b%{_p}%&a." to console
-        if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+        if {@genre} is "%{server.genre.male}%":
             send "{@prefix} &aLa &bconsole &ati ha saziato." to {_p}
-        else if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+        else if {@genre} is "%{server.genre.female}%":
             send "{@prefix} &aLa &bconsole &ati ha saziata." to {_p}
         play sound "{@confirm_sound}" with volume 1 and pitch 1 at {_p} for {_p}
         stop
     else:
-        if {settings.%{_p}%.user.genre} is "%{server.genre.male}%":
+        if {@genre} is "%{server.genre.male}%":
             send "{@error_prefix} &6%{_p}% &cè già sazio!" to console
-        if {settings.%{_p}%.user.genre} is "%{server.genre.female}%":
+        if {@genre} is "%{server.genre.female}%":
             send "{@error_prefix} &6%{_p}% &cè già sazia!" to console
         stop

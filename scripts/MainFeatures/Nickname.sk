@@ -3,16 +3,16 @@ options:
 
 on join:
     #delete {nick_list::*} --> SOLO DEBUG
-    if {nick_list::*} is not set:
+    if {nick_list::*} isn't set:
         set {nick_list::*} to "&7Non ci sono soprannomi attivi."
-    if {nick.%player%} is not set:
+    if {nick.%player%} isn't set:
         set {nick.%player%} to name of player
         
 every second:
-    if {nick_list::*} is not set:
+    if {nick_list::*} isn't set:
         set {nick_list::*} to "&7Non ci sono soprannomi attivi."
     loop all players:
-        if {nick.%loop-player%} is not set:
+        if {nick.%loop-player%} isn't set:
             set {nick.%loop-player%} to name of loop-player
             set loop-player's tablist name to loop-player's name
 
@@ -22,9 +22,9 @@ command /nick [<text>] [<text>] [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if arg-2 is not set:
-                    if arg-3 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "nick.other":
                             send "{@prefix} &6Scegli il soprannome di un giocatore."
                             send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6> [&egiocatore&6]"
@@ -34,8 +34,8 @@ command /nick [<text>] [<text>] [<offline player>]:
                             send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6>"
                             stop
             else if arg-1 is "set":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "nick.set.other":
                             send "{@prefix} &cScegli un soprannome!"
                             send "{@prefix} &6Puoi anche impostarne uno per un altro giocatore con &c/nick set <&esoprannome&c> [&egiocatore&c]&6."
@@ -44,7 +44,7 @@ command /nick [<text>] [<text>] [<offline player>]:
                             send "{@prefix} &cScegli un soprannome!"
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "nick.set.other":
                             if {nick.%player%} is player:
                                 if {nick_list::*} is "&7Non ci sono soprannomi attivi.":
@@ -122,8 +122,8 @@ command /nick [<text>] [<text>] [<offline player>]:
                             send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6>"
                             stop
             else if arg-1 is "clear" or "remove":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "nick.clear.other":
                             if {nick.%player%} is player:
                                 send "{@prefix} &cNon hai nessun soprannome impostato!"
@@ -148,7 +148,7 @@ command /nick [<text>] [<text>] [<offline player>]:
                                 play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
                                 stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "nick.clear.other":
                             set {_arg2} to arg-2 parsed as offline player
                             if {_arg2} is offline:
@@ -178,8 +178,8 @@ command /nick [<text>] [<text>] [<offline player>]:
                             send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6>"
                             stop
             else if arg-1 is "list":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "nick.list":
                             loop {nick_list::*}:
                                 send "{@prefix} &6Soprannomi attivi: &e%{nick_list::*}%"
@@ -209,20 +209,20 @@ command /nick [<text>] [<text>] [<offline player>]:
                     send "{@prefix} &cUtilizzo: &6/nick clear"
                     stop
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
-                    if arg-3 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &6Scegli il soprannome di un giocatore."
                         send "{@prefix} &cUtilizzo: &6/nick <&eset &6| &eclear&6> <&esoprannome&6> <&egiocatore&6>"
                         stop
             else if arg-1 is "set":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/nick set <&esoprannome&6> <&egiocatore&6>&c."
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cSolo i giocatori possono gestire il proprio soprannome!"
                         stop
                     else:
@@ -247,12 +247,12 @@ command /nick [<text>] [<text>] [<offline player>]:
                             send "{@prefix} &6%arg-3% &cha già un soprannome! Rimuovilo prima di poterne impostare un altro."
                             stop
             else if arg-1 is "clear" or "remove":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cSolo i giocatori possono gestire il proprio soprannome!"
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         set {_arg2} to arg-2 parsed as offline player
                         if {nick.%{_arg2}%} is {_arg2}:
                             send "{@prefix} &6%{_arg2}% &cnon ha impostato nessun soprannome!"
@@ -267,8 +267,8 @@ command /nick [<text>] [<text>] [<offline player>]:
                         send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi."
                         stop
             else if arg-1 is "list":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         loop {nick_list::*}:
                             send "{@prefix} &6Soprannomi attivi: &e%{nick_list::*}%"
                             stop

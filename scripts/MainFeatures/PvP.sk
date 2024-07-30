@@ -11,9 +11,9 @@ options:
     no_pvp: &8[&4🗡&8] &cIl PvP è disabilitato!
 
 on load:
-    if {pvp} is not set:
+    if {pvp} isn't set:
         set {pvp} to "{@no_fight}"
-    if {pvp} is not set:
+    if {pvp} isn't set:
         set {pvp} to "{@no_fight}"
         
 command /pvp:
@@ -39,7 +39,7 @@ on damage:
     if attacker is a player:
         if victim is a player:
             if {pvp} is "{@no_fight}":
-                if damage cause is not fall:
+                if damage cause isn't fall:
                     cancel event
                     send "{@no_pvp}" to attacker
 

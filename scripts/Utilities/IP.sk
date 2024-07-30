@@ -32,7 +32,7 @@ command /ip [<text>] [<offline player>]:
                     send "{@prefix} &6%arg-2% &cè offline."
                     stop
 
-            else if arg-1 is not "server" or "player":
+            else if arg-1 isn't "server" or "player":
                 send "{@prefix} &cComando sconosciuto."
                 send "{@prefix} &cUtilizzo: &6/ip server"
                 send "{@prefix} &cUtilizzo: &6/ip player <&egiocatore&6>"
@@ -62,7 +62,7 @@ command /ip [<text>] [<offline player>]:
                     send "{@prefix} &6%arg-2% &cè offline." to console
                     stop
 
-            else if arg-1 is not "server" or "player":
+            else if arg-1 isn't "server" or "player":
                 send "{@prefix} &cComando sconosciuto." to console
                 send "{@prefix} &cUtilizzo: &6/ip server" to console
                 send "{@prefix} &cUtilizzo: &6/ip player <&egiocatore&6>" to console

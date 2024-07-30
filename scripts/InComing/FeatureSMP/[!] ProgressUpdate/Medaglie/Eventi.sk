@@ -160,7 +160,7 @@ command /provatitle:
 # MINING
 on mine of any ore:
     if gamemode of player is survival or adventure:
-        if tool of player is not {@mining_pickaxe}:
+        if tool of player isn't {@mining_pickaxe}:
             if {medals.%player%.mining.count} < 49999:
                 add 1 to {medals.%player%.mining.count}
             else if {medals.%player%.mining.count} = 49999:
@@ -201,7 +201,7 @@ on mine of any ore:
 
 # MOBKILLER
 on death:
-    victim is not a player
+    victim isn't a player
     attacker is a player
     if {medals.%attacker%.mobkiller.count} < 4999:
         if gamemode of attacker is survival or adventure:
@@ -227,7 +227,7 @@ on death:
 
 # CARPENTER
 on break of crafting table, chest, trapped chest, barrel, oak log, oak wood, stripped oak log, stripped oak wood, oak planks, oak stairs, oak slab, oak fence, oak fence gate, oak door, oak trapdoor, oak pressure plate, oak button, birch log, birch wood, stripped birch log, stripped birch wood, birch planks, birch stairs, birch slab, birch fence, birch fence gate, birch door, birch trapdoor, birch pressure plate, birch button, dark oak log, dark oak wood, stripped dark oak log, stripped dark oak wood, dark oak planks, dark oak stairs, dark oak slab, dark oak fence, dark oak fence gate, dark oak door, dark oak trapdoor, dark oak pressure plate, dark oak button, spruce log, spruce wood, stripped spruce log, stripped spruce wood, spruce planks, spruce stairs, spruce slab, spruce fence, spruce fence gate, spruce door, spruce trapdoor, spruce pressure plate, spruce button, acacia log, acacia wood, stripped acacia log, stripped acacia wood, acacia planks, acacia stairs, acacia slab, acacia fence, acacia fence gate, acacia door, acacia trapdoor, acacia pressure plate, acacia button, jungle log, jungle wood, stripped jungle log, stripped jungle wood, jungle planks, jungle stairs, jungle slab, jungle fence, jungle fence gate, jungle door, jungle trapdoor, jungle pressure plate, jungle button, mangrove log, mangrove wood, stripped mangrove log, stripped mangrove wood, mangrove planks, mangrove stairs, mangrove slab, mangrove fence, mangrove fence gate, mangrove door, mangrove trapdoor, mangrove pressure plate, mangrove button, crimson stem, crimson hyphae, stripped crimson stem, stripped crimson hyphae, crimson planks, crimson stairs, crimson slab, crimson fence, crimson fence gate, crimson door, crimson trapdoor, crimson pressure plate, crimson button, warped stem, warped hyphae, stripped warped stem, stripped warped hyphae, warped planks, warped stairs, warped slab, warped fence, warped fence gate, warped door, warped trapdoor, warped pressure plate, warped button, cherry log, cherry wood, stripped cherry log, stripped cherry wood, cherry planks, cherry stairs, cherry slab, cherry fence, cherry fence gate, cherry door, cherry trapdoor, cherry pressure plate or cherry button:
-    if tool of player is not {@carpenter_axe}:
+    if tool of player isn't {@carpenter_axe}:
         if {medals.%player%.carpenter.total_logs} < 49999:
             if event-block is oak log:
                 if {medals.%player%.carpenter.oak} < 4999:
@@ -595,7 +595,7 @@ on tame:
     else if {medals.%tamer%.taming.count} = 6:
         if gamemode of tamer is survival or adventure:
             add 1 to {medals.%tamer%.taming.count}
-            if {medals.%tamer%.taming} is not "{@not_get}":
+            if {medals.%tamer%.taming} isn't "{@not_get}":
                 set {medals.%tamer%.taming} to "{@get}"
                 add 1 to {medals.%tamer%}
                 set {medals.%tamer%.taming.when_get} to now
@@ -679,7 +679,7 @@ on death of player:
 
 # SUICIDE
 on death of player:
-    if attacker is not a player:
+    if attacker isn't a player:
         if {medals.%victim%.suicide.deaths} < 199:
             if gamemode of victim is survival or adventure:
                 add 1 to {medals.%victim%.suicide.deaths}
@@ -705,7 +705,7 @@ on death of player:
 
 # FORESTBOSS
 on break of oak log, birch log, dark oak log, spruce log, acacia log, jungle log, mangrove log, crimson stem, warped stem or cherry log:
-    if tool of player is not {@forestboss_axe_male} and {@forestboss_axe_female}:
+    if tool of player isn't {@forestboss_axe_male} and {@forestboss_axe_female}:
         if {medals.%player%.forestboss.total_logs} < 5999:
             if biome at player is forest:
                 if event-block is oak log:

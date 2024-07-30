@@ -43,7 +43,7 @@ on inventory click:
     if name of event-inventory is "Warp della %{server.name}%":
         if type of event-inventory is chest inventory:
             if {et.warps_total} > 28:
-                if index of event-slot is not 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43 or 49:
+                if index of event-slot isn't 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43 or 49:
                     cancel event
 
 on inventory close:

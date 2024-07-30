@@ -4,7 +4,7 @@ command /broadcast [<text>]:
 	permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
 	description: Annuncia qualcosa nel server.
 	trigger:
-		if arg-1 is not set:
+		if arg-1 isn't set:
 			send "&e[&6&lBROADCAST&e] &cCosa vuoi annunciare?" to sender
 			stop
 		else:

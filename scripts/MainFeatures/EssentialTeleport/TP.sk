@@ -90,7 +90,7 @@ command /back:
     executable by: player, console
     trigger:
         if sender is player:
-            if {et.last_loc.%player%} is not set:
+            if {et.last_loc.%player%} isn't set:
                 send "{@prefix} &cNon ho trovato una posizione in cui teletrasportarti!"
                 stop
             else:
@@ -113,12 +113,12 @@ command /tpa [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome del giocatore da cui vuoi andare!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         if {et.tp_requests_list::%arg-1%::*} doesn't contain player:
                             if {et.tphere_requests_list::%arg-1%::*} doesn't contain player:
                                 if {@can_receive_others_tp_requests_arg} is false:
@@ -176,12 +176,12 @@ command /tpahere [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         if {et.tphere_requests_list::%arg-1%::*} doesn't contain player:
                             if {et.tp_requests_list::%arg-1%::*} doesn't contain player:
                                 if {@can_receive_others_tp_requests_arg} is false:
@@ -247,12 +247,12 @@ command /tpaccept [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         if {et.tp_requests_list::%player%::*} doesn't contain arg-1:
                             if {et.tphere_requests_list::%player%::*} doesn't contain arg-1:
                                 send "{@prefix} &6%arg-1% &cnon ti ha inviato richieste di teletrasporto di recente."
@@ -304,12 +304,12 @@ command /tpdeny [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         if {et.tp_requests_list::%player%::*} doesn't contain arg-1:
                             if {et.tphere_requests_list::%player%::*} doesn't contain arg-1:
                                 send "{@prefix} &6%arg-1% &cnon ti ha inviato richieste di teletrasporto di recente."
@@ -358,12 +358,12 @@ command /tpcancel [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         if {et.tp_requests_list::%arg-1%::*} doesn't contain player:
                             if {et.tphere_requests_list::%arg-1%::*} doesn't contain player:
                                 send "{@prefix} &cNon hai inviato richieste di teletrasporto a &6%arg-1% &cdi recente."
@@ -412,12 +412,12 @@ command /tpignore [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         if {et.tp_requests_list::%player%::*} doesn't contain arg-1:
                             if {et.tphere_requests_list::%player%::*} doesn't contain arg-1:
                                 send "{@prefix} &6%arg-1% &cnon ti ha inviato richieste di teletrasporto di recente."
@@ -466,11 +466,11 @@ command /tpblock [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
-                if arg-1 is not player:
+                if arg-1 isn't player:
                     if {et.tp_requests_blacklist::%player%::*} doesn't contain arg-1:
                         add arg-1 to {et.tp_requests_blacklist::%player%::*}
                         if {et.tp_requests_list::%player%::*} doesn't contain arg-1:
@@ -511,11 +511,11 @@ command /tpunblock [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
-                if arg-1 is not player:
+                if arg-1 isn't player:
                     if {et.tp_requests_blacklist::%player%::*} contains arg-1:
                         remove arg-1 from {et.tp_requests_blacklist::%player%::*}
                         send "{@prefix} &6Da adesso &c%arg-1% &6potrà inviarti richieste di teletrasporto."
@@ -542,7 +542,7 @@ command /tptoggle [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 if {@can_receive_others_tp_requests_p} is false:
                     set {@can_receive_others_tp_requests_p} to true
                     set {@can_receive_others_tp_requests_marker_p} to "{@yes}"
@@ -590,7 +590,7 @@ command /tpinfo [<offline player>]:
     executable by: player, console
     trigger: 
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "&6----------- &c&lINFO TP &6-----------"
                 send " &fGiocatore: &b%player%"
                 send " &fRichieste di teletrasporto: &e%{et.tp_requests_totalcount::%player%}%"
@@ -643,7 +643,7 @@ command /tpinfo [<offline player>]:
                     send "&6-------------------------------"
                     stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
@@ -705,8 +705,8 @@ command /tprandom:
                     set {_location} to location at ({_x}, {_y}, {_z}) in world "%{server.world.overworld}%"
                     set {_block} to block at {_location}
                     set {_biome} to biome at {_location}
-                    if {_biome} is not {@biomeblacklist}:
-                        if block under {_block} is not {@blockblacklist}:
+                    if {_biome} isn't {@biomeblacklist}:
+                        if block under {_block} isn't {@blockblacklist}:
                             set {loc_before_tpr.%player%} to player's location
                             teleport player at {_location}
                             set {_loc} to location at player
@@ -739,12 +739,12 @@ command /tphere [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         teleport arg-1 to player's location
                         send "{@prefix} &6Hai portato &c%arg-1% &6da te." to player
                         if {@genre_arg} is "%{server.genre.male}%":
@@ -783,8 +783,8 @@ command /top [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if player is not flying:
+            if arg-1 isn't set:
+                if player isn't flying:
                     set {_loc} to location at player
                     set y-coord of {_loc} to 320
                     loop 320 times:
@@ -806,8 +806,8 @@ command /top [<offline player>]:
                     stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not player:
-                        if arg-1 is not flying:
+                    if arg-1 isn't player:
+                        if arg-1 isn't flying:
                             set {_loc} to location at arg-1
                             set y-coord of {_loc} to 320
                             loop 320 times:
@@ -839,12 +839,12 @@ command /top [<offline player>]:
                     send "{@prefix} &6%arg-1% &cè offline."
                     stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSolo i giocatori possono eseguire questo comando!"
                 stop
             else:
                 if arg-1 is online:
-                    if arg-1 is not flying:
+                    if arg-1 isn't flying:
                         set {_loc} to location at arg-1
                         set y-coord of {_loc} to 320
                         loop 320 times:
@@ -878,11 +878,11 @@ command /tpoffline [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
-                if arg-1 is not player:
+                if arg-1 isn't player:
                     if {et.last_online_loc.%arg-1%} is set:
                         teleport player to {et.last_online_loc.%arg-1%}
                         if {@genre_p} is "%{server.genre.male}%":
@@ -915,12 +915,12 @@ command /tpofflinehere [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
                 if arg-1 is offline:
-                    if arg-1 is not player:
+                    if arg-1 isn't player:
                         set {et.last_online_loc.%arg-1%} to player's location
                         send "{@prefix} &6Hai spostato l'ultima posizione conosciuta di &c%arg-1% &6alla tua posizione."
                         stop
@@ -1007,7 +1007,7 @@ command /resetalltpsettings [<offline player>]:
     permission: debug.commands
     permission message: %{server.prefix.main}% &cComando sconosciuto.
     trigger:
-        if arg-1 is not set:
+        if arg-1 isn't set:
             delete {et.tp.requests.list::%player%::*}
             delete {et.tphere.requests.list::%player%::*}
             set {@can_receive_others_tp_requests_p} to true

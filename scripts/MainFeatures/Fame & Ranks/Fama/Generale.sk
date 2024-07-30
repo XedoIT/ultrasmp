@@ -34,11 +34,11 @@ options:
     what_sound: entity.villager.trade
 
 on load:
-    if {fame.idle} is not set:
+    if {fame.idle} isn't set:
         set {fame.idle} to true
     
 on join:
-    if {fame::%player%} is not set:
+    if {fame::%player%} isn't set:
         set {fame::%player%} to 0
 
 every 5 hours:
@@ -158,9 +158,9 @@ command /fama [<text>] [<offline player>] [<number>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
-                if arg-2 is not set:
-                    if arg-3 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.check.self":
                             send "{@prefix} &6Hai accumulato &c%regex({fame::%player%})% Fama&6."
                             stop
@@ -169,8 +169,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
                     
             else if arg-1 is "check":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.check.other":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame check <&egiocatore&6>"
@@ -179,7 +179,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "fame.check.other":
                             if {fame::%arg-2%} is set:
                                 send "{@prefix} &c%arg-2% &6ha accumulato &e%regex({fame::%arg-2%})% Fama&6."
@@ -200,18 +200,18 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
             
             else if arg-1 is "top":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.top":
                             loop {fame::*}:
                                 add 1 to {_size}
-                                if {_low.to.high.list::%loop-value%} is not set:
+                                if {_low.to.high.list::%loop-value%} isn't set:
                                     set {_low.to.high.list::%loop-value%} to loop-index
                                 else:
                                     set {_n} to 0
                                     loop {_size} times:
                                         set {_n} to {_n}+1
-                                        {_low.to.high.list::%loop-value-1%.%{_n}%} is not set
+                                        {_low.to.high.list::%loop-value-1%.%{_n}%} isn't set
                                         set {_low.to.high.list::%loop-value-1%.%{_n}%} to loop-index
                                         stop loop
                             wait 1 tick
@@ -251,7 +251,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "fame.top":
                             send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
                             stop
@@ -267,10 +267,10 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
 
             else if arg-1 is "reset":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.reset.self":
-                            if {fame::%player%} is not 0:
+                            if {fame::%player%} isn't 0:
                                 set {fame::%player%} to 0 
                                 send "{@prefix} &6Hai azzerato la tua Fama."
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
@@ -283,9 +283,9 @@ command /fama [<text>] [<offline player>] [<number>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "fame.reset.other":
-                            if {fame::%arg-2%} is not 0:
+                            if {fame::%arg-2%} isn't 0:
                                 set {fame::%arg-2%} to 0
                                 send "{@prefix} &6Hai azzerato la Fama di &c%arg-2%&6." to player
                                 send "{@prefix} &c%player% &6ha azzerato la tua Fama." to arg-2
@@ -307,8 +307,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
                         
             else if arg-1 is "set":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.set":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame set <&egiocatore&6> <&enumero&6>"
@@ -317,7 +317,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "fame.set":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame set <&egiocatore&6> <&enumero&6>"
@@ -342,8 +342,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
                 
             else if arg-1 is "add":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.add":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame add <&egiocatore&6> <&enumero&6>"
@@ -352,7 +352,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "fame.add":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame add <&egiocatore&6> <&enumero&6>"
@@ -388,8 +388,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
                 
             else if arg-1 is "remove":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.remove":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame remove <&egiocatore&6> <&enumero&6>"
@@ -398,7 +398,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "fame.remove":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/fame remove <&egiocatore&6> <&enumero&6>"
@@ -434,10 +434,10 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
                     
             else if arg-1 is "idle":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.idle.toggle":
-                            if {fame.idle} is not set:
+                            if {fame.idle} isn't set:
                                 set {fame.idle} to true
                                 send "{@prefix} &7L'assegnazione automatica della Fama è stata &aattivata&7."
                                 play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
@@ -458,8 +458,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                         send "%{server.prefix.main}% &cComando sconosciuto."
                         stop
             else if arg-1 is "help":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.admin.help":
                             send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
                             send ""
@@ -497,8 +497,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
                 
             else if arg-1 is "info":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.info":
                             send "&a> &9&m------------&r {@prefix} &9&m------------&r &a<"
                             send ""
@@ -521,8 +521,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
             
             else if arg-1 is "reload":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "fame.reload":
                             send "{@prefix} &3Ricarico il config..."
                             wait 5 ticks
@@ -540,7 +540,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                         send "%{server.prefix.main}% &cComando sconosciuto."
                         stop
             
-            else if arg-1 is not "check", "top", "reset", "set", "add", "remove", "idle", "help", "info" or "reload":
+            else if arg-1 isn't "check", "top", "reset", "set", "add", "remove", "idle", "help", "info" or "reload":
                 if player has permission "fame.commands":
                     send "{@error} &cComando sconosciuto."
                     send "{@error} &cUtilizzo: &6/fame"
@@ -562,15 +562,15 @@ command /fama [<text>] [<offline player>] [<number>]:
                     send "{@error} &cUtilizzo: &6/fame help"
                     stop   
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
-                    if arg-3 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@error} &cSolo i giocatori possono eseguire questo comando."
                         stop
                     
             else if arg-1 is "check":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame check <&egiocatore&6>"
                         stop
@@ -583,17 +583,17 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
             
             else if arg-1 is "top":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         loop {fame::*}:
                             add 1 to {_size}
-                            if {_low.to.high.list::%loop-value%} is not set:
+                            if {_low.to.high.list::%loop-value%} isn't set:
                                 set {_low.to.high.list::%loop-value%} to loop-index
                             else:
                                 set {_n} to 0
                                 loop {_size} times:
                                     set {_n} to {_n}+1
-                                    {_low.to.high.list::%loop-value-1%.%{_n}%} is not set
+                                    {_low.to.high.list::%loop-value-1%.%{_n}%} isn't set
                                     set {_low.to.high.list::%loop-value-1%.%{_n}%} to loop-index
                                     stop loop
                         wait 1 tick
@@ -630,7 +630,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                                 send "&7&m----------------------------------------------"
                                 stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
                         stop
                     else:
@@ -638,13 +638,13 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
 
             else if arg-1 is "reset":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@error} &cSolo i giocatori possono eseguire questo comando."
                         stop
                 else:
-                    if arg-3 is not set:
-                        if {fame::%arg-2%} is not 0:
+                    if arg-3 isn't set:
+                        if {fame::%arg-2%} isn't 0:
                             set {fame::%arg-2%} to 0
                             send "{@prefix} &6Hai azzerato la Fama di &c%arg-2%&6." to console
                             send "{@prefix} &c%player% &6ha azzerato la tua Fama." to arg-2
@@ -657,13 +657,13 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
                     
             else if arg-1 is "set":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame set <&egiocatore&6> <&enumero&6>"
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame set <&egiocatore&6> <&enumero&6>"
                         stop
@@ -675,13 +675,13 @@ command /fama [<text>] [<offline player>] [<number>]:
                             stop
                 
             else if arg-1 is "add":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame add <&egiocatore&6> <&enumero&6>"
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame add <&egiocatore&6> <&enumero&6>"
                         stop
@@ -698,13 +698,13 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
                 
             else if arg-1 is "remove":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame remove <&egiocatore&6> <&enumero&6>"
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/fame remove <&egiocatore&6> <&enumero&6>"
                         stop
@@ -721,9 +721,9 @@ command /fama [<text>] [<offline player>] [<number>]:
                         stop
                     
             else if arg-1 is "idle":
-                if arg-2 is not set:
-                    if arg-3 is not set:
-                        if {fame.idle} is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
+                        if {fame.idle} isn't set:
                             set {fame.idle} to true
                             send "{@prefix} &7L'assegnazione automatica della Fama è stata &aattivata&7."
                             stop
@@ -735,8 +735,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                     send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
                     stop
             else if arg-1 is "help":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
                         send ""
                         send "&7Comandi che puoi eseguire:"
@@ -758,8 +758,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                     stop
                 
             else if arg-1 is "info":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "&a> &9&m------------&r {@prefix} &9&m------------&r &a<"
                         send ""
                         send " &7Info sullo script:"
@@ -774,8 +774,8 @@ command /fama [<text>] [<offline player>] [<number>]:
                     stop
             
             else if arg-1 is "reload":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &3Ricarico il config..."
                         wait 5 ticks
                         execute console command "/skript reload %script%"
@@ -785,7 +785,7 @@ command /fama [<text>] [<offline player>] [<number>]:
                     send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
                     stop
             
-            else if arg-1 is not "check", "reset", "set", "add", "remove", "idle", "help", "info" or "reload":
+            else if arg-1 isn't "check", "reset", "set", "add", "remove", "idle", "help", "info" or "reload":
                 send "{@error} &cComando sconosciuto."
                 send "{@error} &cUtilizzo: &6/fame check <&egiocatore&6>"
                 send "{@error} &cUtilizzo: &6/fame top"

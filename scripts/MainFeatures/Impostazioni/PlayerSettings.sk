@@ -1,7 +1,8 @@
 options:
     dir: plugins/Dati Giocatori/Impostazioni
-    settings: settings-%player's uuid%
+    settings: "settings-%player's uuid%"
     file_lp: settings-%loop-player's uuid%
+    genre: yaml value "genre" in "settings-%loop-player's uuid%"
 
     confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
 
@@ -9,45 +10,58 @@ options:
     yes: &a✔
 
 on join:
-    load yaml "{@dir}/%player's uuid%.yml" as "{@settings}"
-    if yaml "{@settings}" is empty:
-        set the comments at the top of "{@settings}" to "Utilizza ""true"" o ""false"" per le opzioni ""enabled""" and "e ""{@no}"" o ""{@yes}"" per le opzioni ""marker""."
-        set yaml value "genre" in "{@settings}" to "-"
-        set yaml value "personalization.gui_background.enabled" in "{@settings}" to false
-        set yaml value "personalization.gui_background.marker" in "{@settings}" to "{@no}"
-        set yaml value "personalization.join_message.enabled" in "{@settings}" to true
-        set yaml value "personalization.join_message.marker" in "{@settings}" to "{@yes}"
-        set yaml value "personalization.scoreboard.enabled" in "{@settings}" to true
-        set yaml value "personalization.scoreboard.marker" in "{@settings}" to "{@yes}"
-        set yaml value "personalization.can_view_other_profiles.enabled" in "{@settings}" to true
-        set yaml value "personalization.can_view_other_profiles.marker" in "{@settings}" to "{@yes}"
-        set yaml value "personalization.damage_indicator.players.enabled" in "{@settings}" to false
-        set yaml value "personalization.damage_indicator.players.marker" in "{@settings}" to "{@no}"
-        set yaml value "personalization.damage_indicator.mobs.enabled" in "{@settings}" to true
-        set yaml value "personalization.damage_indicator.mobs.marker" in "{@settings}" to "{@yes}"
-        set yaml value "notify.generic.full_inventory.enabled" in "{@settings}" to true
-        set yaml value "notify.generic.full_inventory.marker" in "{@settings}" to "{@yes}"
-        set yaml value "notify.generic.no_scoreboard.enabled" in "{@settings}" to true
-        set yaml value "notify.generic.no_scoreboard.marker" in "{@settings}" to "{@yes}"
-        set yaml value "notify.service.scheduled_restarts.enabled" in "{@settings}" to true
-        set yaml value "notify.service.scheduled_restarts.marker" in "{@settings}" to "{@yes}"
-        set yaml value "notify.service.lag_issues.enabled" in "{@settings}" to true
-        set yaml value "notify.service.lag_issues.marker" in "{@settings}" to "{@yes}"
-        set yaml value "notify.service.scheduled_stops.enabled" in "{@settings}" to true
-        set yaml value "notify.service.scheduled_stops.marker" in "{@settings}" to "{@yes}"
-        set yaml value "privacy.can_others_view_self_profile.enabled" in "{@settings}" to true
-        set yaml value "privacy.can_others_view_self_profile.marker" in "{@settings}" to "{@yes}"
-        set yaml value "privacy.can_receive_others_tp_requests.enabled" in "{@settings}" to true
-        set yaml value "privacy.can_receive_others_tp_requests.marker" in "{@settings}" to "{@yes}"
-        set yaml value "settings_alert_update" in "{@settings}" to "{@no}"
-        set the comments of yaml node "genre" from "{@settings}" to "Il sesso selezionato da %player's name% durante la selezione del", "sesso, al primo ingresso nel server.", "È sconsigliato modificarlo, dato che diverse variabili, per" and "funzionare, si basano proprio sul sesso dei giocatori."
-        set the comments of yaml node "personalization" from "{@settings}" to "Tutte le impostazioni che permettono a %player's name% di", "personalizzare al completo la sua esperienza di gioco."
-        set the comments of yaml node "notify" from "{@settings}" to "Tutte le impostazioni che riguardano le notifiche inerenti", "al gameplay (generic) o alle prestazioni del server (service)", "ricevute da %player's name%."
-        set the comments of yaml node "privacy" from "{@settings}" to "Tutte le impostazioni inerenti alla privacy di %player's name%."
-        set the comments of yaml node "settings_alert_update" from "{@settings}" to "Indica se %player's name% è al corrente degli ultimi aggiornamenti", "riguardanti le Impostazioni, così da non leggerne più" and "gli avvisi in chat all'ingresso nel server."
-        save yaml "{@settings}"
-    if yaml value "settings_alert_update" in "{@settings}" is "{@no}":
-        if yaml value "genre" in "{@settings}" isn't "%{server.genre.male}%" or "%{server.genre.female}%":
+    load yaml "{@dir}/%player's uuid%.yml" as {@settings}
+    if yaml {@settings} is empty:
+        set the comments at the top of {@settings} to "Utilizza ""true"" o ""false"" per le opzioni ""enabled""" and "e ""{@no}"" o ""{@yes}"" per le opzioni ""marker""."
+        set yaml value "genre" in {@settings} to "-"
+        set yaml value "personalization.gui_background.enabled" in {@settings} to false
+        set yaml value "personalization.gui_background.marker" in {@settings} to "{@no}"
+        set yaml value "personalization.join_message.enabled" in {@settings} to true
+        set yaml value "personalization.join_message.marker" in {@settings} to "{@yes}"
+        set yaml value "personalization.scoreboard.enabled" in {@settings} to true
+        set yaml value "personalization.scoreboard.marker" in {@settings} to "{@yes}"
+        set yaml value "personalization.can_view_other_profiles.enabled" in {@settings} to true
+        set yaml value "personalization.can_view_other_profiles.marker" in {@settings} to "{@yes}"
+        set yaml value "personalization.damage_indicator.players.enabled" in {@settings} to false
+        set yaml value "personalization.damage_indicator.players.marker" in {@settings} to "{@no}"
+        set yaml value "personalization.damage_indicator.mobs.enabled" in {@settings} to true
+        set yaml value "personalization.damage_indicator.mobs.marker" in {@settings} to "{@yes}"
+        set yaml value "notify.generic.full_inventory.enabled" in {@settings} to true
+        set yaml value "notify.generic.full_inventory.marker" in {@settings} to "{@yes}"
+        set yaml value "notify.generic.no_scoreboard.enabled" in {@settings} to true
+        set yaml value "notify.generic.no_scoreboard.marker" in {@settings} to "{@yes}"
+        set yaml value "notify.service.scheduled_restarts.enabled" in {@settings} to true
+        set yaml value "notify.service.scheduled_restarts.marker" in {@settings} to "{@yes}"
+        set yaml value "notify.service.lag_issues.enabled" in {@settings} to true
+        set yaml value "notify.service.lag_issues.marker" in {@settings} to "{@yes}"
+        set yaml value "notify.service.scheduled_stops.enabled" in {@settings} to true
+        set yaml value "notify.service.scheduled_stops.marker" in {@settings} to "{@yes}"
+        set yaml value "privacy.can_others_view_self_profile.enabled" in {@settings} to true
+        set yaml value "privacy.can_others_view_self_profile.marker" in {@settings} to "{@yes}"
+        set yaml value "privacy.can_receive_others_tp_requests.enabled" in {@settings} to true
+        set yaml value "privacy.can_receive_others_tp_requests.marker" in {@settings} to "{@yes}"
+        set yaml value "actionbar.flymode.enabled" in {@settings} to false
+        set yaml value "actionbar.flymode.marker" in {@settings} to "{@no}"
+        set yaml value "actionbar.godmode.enabled" in {@settings} to false
+        set yaml value "actionbar.godmode.marker" in {@settings} to "{@no}"
+        set yaml value "actionbar.maintenance.enabled" in {@settings} to false
+        set yaml value "actionbar.maintenance.marker" in {@settings} to "{@no}"
+        set yaml value "actionbar.playtime.session.enabled" in {@settings} to false
+        set yaml value "actionbar.playtime.session.marker" in {@settings} to "{@no}"
+        set yaml value "actionbar.playtime.total.enabled" in {@settings} to false
+        set yaml value "actionbar.playtime.total.marker" in {@settings} to "{@no}"
+        set yaml value "actionbar.playtime.both.enabled" in {@settings} to false
+        set yaml value "actionbar.playtime.both.marker" in {@settings} to "{@no}"
+        set yaml value "settings_alert_update" in {@settings} to "{@no}"
+        set the comments of yaml node "genre" from {@settings} to "Il sesso selezionato da %player's name% durante la selezione del", "sesso, al primo ingresso nel server.", "È sconsigliato modificarlo, dato che diverse variabili, per" and "funzionare, si basano proprio sul sesso dei giocatori."
+        set the comments of yaml node "personalization" from {@settings} to "Tutte le impostazioni che permettono a %player's name% di", "personalizzare al completo la sua esperienza di gioco."
+        set the comments of yaml node "notify" from {@settings} to "Tutte le impostazioni che riguardano le notifiche inerenti", "al gameplay (generic) o alle prestazioni del server (service)", "ricevute da %player's name%."
+        set the comments of yaml node "privacy" from {@settings} to "Tutte le impostazioni inerenti alla privacy di %player's name%."
+        set the comments of yaml node "actionbar" from {@settings} to "Se %player's name% visualizzerà le action bar delle" and "seguenti categorie."
+        set the comments of yaml node "settings_alert_update" from {@settings} to "Indica se %player's name% è al corrente degli ultimi aggiornamenti", "riguardanti le Impostazioni, così da non leggerne più" and "gli avvisi in chat all'ingresso nel server."
+        save yaml {@settings}
+    if yaml value "settings_alert_update" in {@settings} is "{@no}":
+        if yaml value "genre" in {@settings} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
             wait 2 seconds
             send "" to player
             send " &4&lATTENZIONE!"
@@ -58,7 +72,7 @@ on join:
 every 5 seconds:
     loop all players:
         if yaml value "settings_alert_update" in "{@file_lp}" is "{@no}":
-            if yaml value "genre" in "{@file_lp}" is "%{server.genre.male}%" or "%{server.genre.female}%":
+            if {@genre} is "%{server.genre.male}%" or "%{server.genre.female}%":
                 send "" to loop-player
                 send " &c&k0 &4&lNOTIFICA DI AGGIORNAMENTO &c&k0" to loop-player
                 send "  &cLe Impostazioni hanno subito delle modifiche a livello tecnico, quindi tutte le impostazioni personali sono state reimpostate." to loop-player
@@ -70,5 +84,5 @@ every 5 seconds:
                 save yaml "{@file_lp}"
             
 on quit:
-    save yaml "{@settings}"
-    unload yaml "{@settings}"
+    save yaml {@settings}
+    unload yaml {@settings}

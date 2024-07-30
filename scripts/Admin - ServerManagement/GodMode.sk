@@ -4,90 +4,101 @@ options:
     prefix_error: &7[&c&lGod&7]
     warn: &6[&c&l!&6]
 
-    on: &aSì
-    off: &cNo
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
 
-on join:
-    if {god.%player%} is not "{@off}":
-        set {god.%player%} to "{@off}"
-        
+  # YML
+    settings: "settings-%player's uuid%"
+    data: "data-%{_p}'s uuid%"
+    data_p2: "data-%{_p2}'s uuid%"
+    genre: yaml value "genre" in "settings-%{_p}'s uuid%"
+    god_player: yaml value "player_info.player.god" in "data-%player's uuid%"
+    god: yaml value "player_info.player.god" in "data-%{_p}'s uuid%"
+    god_p2: yaml value "player_info.player.god" in "data-%{_p2}'s uuid%"
+    god_ab: yaml value "actionbar.godmode.enabled" in "settings-%loop-player's uuid%"
+
 on join:
     CheckGodOnLogin(player)
             
 on food level change:
-    if {god.%player%} is "{@on}":
+    if {@god_player} is true:
         cancel event
 
 command /god [<offline player>]:
     description: "I pericoli per te non sono più un problema!"
     permission: command.god
-    permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
     executable by: player, console
     trigger:
         if sender is player:
             if arg-1 isn't set:
                 ToggleGodSelf(player)
-                    
-            else if arg-1 is offline:
-                send "{@prefix_error} &6%arg-1% &cè offline." to player
-                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
-                stop
             else:
-                ToggleGodOthersPlayer(player,arg-1)
+                if arg-1 is offline:
+                    send "{@prefix_error} &6%arg-1% &cè offline." to player
+                    {@error_sound} at player for player
+                    stop
+                else:
+                    ToggleGodOthersPlayer(player,arg-1)
         else:
             if arg-1 isn't set:
                 send "{@prefix_error} &cSolo i giocatori possono eseguire questo comando."
                 stop
-                
-            else if arg-1 is offline:
-                send "{@prefix_error} &6%arg-1% &cè offline."
-                stop
             else:
-                ToggleGodOthersConsole(arg-1)
+                if arg-1 is offline:
+                    send "{@prefix_error} &6%arg-1% &cè offline."
+                    stop
+                else:
+                    ToggleGodOthersConsole(arg-1)
 
 
 function CheckGodOnLogin(p: player):
-    if {_p} has permission "god.keep":
-        if {god.%{_p}%} is "{@on}":
-            make {_p} invulnerable
-            set {god.%{_p}%} to "{@on}"
-            wait 3 seconds
-            send "{@prefix_enabled} Sei ancora immortale!" to {_p}
-    else:
-        if {god.%{_p}%} is "{@on}":
+    if {@god} is true:
+        if {_p} doesn't have permission "god.keep" or "god.*":
             make {_p} vulnerable
-            set {god.%{_p}%} to "{@off}"
-            wait 3 seconds
+            set {@god} to false
+            save yaml {@data}
+            wait 2 seconds
+            send "" to {_p}
             send "{@warn} &7Prima di uscire dal server eri immortale. Adesso non lo sei più. {@warn}" to {_p}
+            send "" to {_p}
+        else:
+            wait 2 seconds
+            send "" to {_p}
+            send "{@prefix_enabled} &aSei ancora immortale!" to {_p}
+            send "" to {_p}
 
 function ToggleGodSelf(p: player):
-    if {_p} has permission "god.use":
-        if {god.%{_p}%} is "{@on}":
+    if {_p} has permission "god.use" or "god.*":
+        if {@god} is true:
             make {_p} vulnerable
-            set {god.%{_p}%} to "{@off}"
+            set {@god} to false
+            save yaml {@data}
             send "{@prefix_disabled} &cModalità Dio disattivata! &6I mob potranno ferirti." to {_p}
             stop
         else:
             make {_p} invulnerable
-            set {god.%{_p}%} to "{@on}"
+            set {@god} to true
+            save yaml {@data}
             heal {_p}
             feed {_p}
             send "{@prefix_enabled} &aModalità Dio attivata! &bI mob ti ignoreranno." to {_p}
             stop
     else:
-        send "&4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto." to {_p}
+        send "%{server.prefix.main}% &cComando sconosciuto." to {_p}
 
 function ToggleGodOthersPlayer(p1: player, p2: player):
-    if {_p1} has permission "god.use.other":
-        if {god.%{_p2}%} is "{@on}":
+    if {_p1} has permission "god.use.other" or "god.*":
+        if {@god_p2} is true:
             make {_p2} vulnerable
-            set {god.%{_p2}%} to "{@off}"
+            set {@god_p2} to false
+            save yaml {@data_p2}
             send "{@prefix_disabled} &cHai tolto l'immortalità a &6%{_p2}%&c." to {_p1}
             send "{@prefix_disabled} &6%{_p1}% &cti ha tolto l'immortalità! &6I mob potranno ferirti." to {_p2}
             stop
         else:
             make {_p2} invulnerable
-            set {god.%{_p2}%} to "{@on}"
+            set {@god_p2} to true
+            save yaml {@data_p2}
             heal {_p2}
             feed {_p2}
             send "{@prefix_enabled} &aHai reso &e%{_p2}% &aimmortale." to {_p1}
@@ -98,15 +109,17 @@ function ToggleGodOthersPlayer(p1: player, p2: player):
         stop
 
 function ToggleGodOthersConsole(p: player):
-    if {god.%{_p}%} is "{@on}":
+    if {@god} is true:
         make {_p} vulnerable
-        set {god.%{_p}%} to "{@off}"
+        set {@god} to false
+        save yaml {@data}
         send "{@prefix_disabled} &cHai tolto l'immortalità a &6%{_p}%&c." to console
         send "{@prefix_disabled} &cLa &6console &cti ha tolto l'immortalità! &6I mob potranno ferirti." to {_p}
         stop
     else:
         make {_p} invulnerable
-        set {god.%{_p}%} to "{@on}"
+        set {@god} to true
+        save yaml {@data}
         heal {_p}
         feed {_p}
         send "{@prefix_enabled} &aHai reso &e%{_p}% &aimmortale." to console
@@ -115,5 +128,6 @@ function ToggleGodOthersConsole(p: player):
 
 every 10 ticks:
     loop all players:
-        if {ab.%loop-player%.god} is true:
-            send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player
+        if {@god_ab} is true:
+            if gamemode of loop-player isn't creative or spectator:
+                send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player

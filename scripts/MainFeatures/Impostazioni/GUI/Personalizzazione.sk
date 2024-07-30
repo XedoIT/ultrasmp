@@ -188,7 +188,7 @@ function openCustomPlayerSettingsGUI(p: player):
 on inventory click:
     if name of event-inventory is "Impostazioni: &9Personalizzazione":
         if type of event-inventory is chest inventory:
-            if index of event-slot is not 19, 21, 23, 25, 33, 38, 40, 48 or 49:
+            if index of event-slot isn't 19, 21, 23, 25, 33, 38, 40, 48 or 49:
                 cancel event
             else if index of event-slot is 19:
                 if click type is left mouse button:

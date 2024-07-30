@@ -536,7 +536,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             send "{@error_prefix} &6%player% &cha cercato di usare il comando &e/medals %arg-1%&c." to console
                             stop
 
-                    else if arg-3 is not {@arg_medals}:
+                    else if arg-3 isn't {@arg_medals}:
                         if player has permission "medals.grant.use":
                             send "{@prefix} &cParametro sconosciuto."
                             send "{@prefix} &6Parametri disponibili: &emining&6, &emobkiller&6, &ecarpenter&6, &ebuilding&6, &efarmer&6, &efishing&6, &etaming&6, &echatter&6, &emurderer&6, &esuicide&6, &eforestboss&6, &eskylover&6, &enetherboss&6, &edragontrainer&6, &ewardenboss &6e &eall&6."
@@ -1048,7 +1048,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                             send "{@error_prefix} &6%player% &cha cercato di usare il comando &e/medals %arg-1%&c." to console
                             stop
 
-                    else if arg-3 is not {@arg_medals}:
+                    else if arg-3 isn't {@arg_medals}:
                         if player has permission "medals.revoke.use":
                             send "{@prefix} &cParametro sconosciuto."
                             send "{@prefix} &6Parametri disponibili: &emining&6, &emobkiller&6, &ecarpenter&6, &ebuilding&6, &efarmer&6, &efishing&6, &etaming&6, &echatter&6, &emurderer&6, &esuicide&6, &eforestboss&6, &eskylover&6, &enetherboss&6, &edragontrainer&6, &ewardenboss &6e &eall&6."
@@ -1065,7 +1065,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                         send "{@prefix_hide} &cComando sconosciuto."
                         send "{@error_prefix} &6%player% &cha cercato di usare il comando &e/medals %arg-1%&c." to console
                         stop
-            else if arg-1 is not "grant" or "revoke":
+            else if arg-1 isn't "grant" or "revoke":
                 if player has permission "medals.commands":
                     send "{@prefix} &cComando sconosciuto."
                     send formatted "{@prefix} &cUtilizzo: &6/medals grant <&egiocatore&6> <ttp:&amining%nl%mobkiller%nl%carpenter%nl%building%nl%farmer%nl%fishing%nl%taming%nl%chatter%nl%murderer%nl%suicide%nl%forestboss%nl%skylover%nl%netherboss%nl%dragontrainer%nl%wardenboss%nl%all><&emedaglia&6><reset>"
@@ -1637,7 +1637,7 @@ command /medals [<text>] [<offline player>] [<text>]:
                         execute console command "/medals grant %arg-2% wardenboss"
                         stop
 
-                    else if arg-3 is not "mining", "mobkiller", "carpenter", "building", "farmer", "fishing", "taming", "chatter", "murderer", "suicide", "forestboss", "skylover", "netherboss", "dragontrainer", "wardenboss" or "all":
+                    else if arg-3 isn't "mining", "mobkiller", "carpenter", "building", "farmer", "fishing", "taming", "chatter", "murderer", "suicide", "forestboss", "skylover", "netherboss", "dragontrainer", "wardenboss" or "all":
                         send "{@prefix} &cParametro sconosciuto."
                         send "{@prefix} &6Parametri disponibili: &emining&6, &emobkiller&6, &ecarpenter&6, &ebuilding&6, &efarmer&6, &efishing&6, &etaming&6, &echatter&6, &emurderer&6, &esuicide&6, &eforestboss&6, &eskylover&6, &enetherboss&6, &edragontrainer&6, &ewardenboss &6e &eall&6."
                         stop
@@ -2025,14 +2025,14 @@ command /medals [<text>] [<offline player>] [<text>]:
                         execute console command "/medals revoke %arg-2% wardenboss"
                         stop
 
-                    else if arg-3 is not "mining", "mobkiller", "carpenter", "building", "farmer", "fishing", "taming", "chatter", "murderer", "suicide", "forestboss", "skylover", "netherboss", "dragontrainer", "wardenboss" or "all":
+                    else if arg-3 isn't "mining", "mobkiller", "carpenter", "building", "farmer", "fishing", "taming", "chatter", "murderer", "suicide", "forestboss", "skylover", "netherboss", "dragontrainer", "wardenboss" or "all":
                         send "{@prefix} &cParametro sconosciuto."
                         send "{@prefix} &6Parametri disponibili: &emining&6, &emobkiller&6, &ecarpenter&6, &ebuilding&6, &efarmer&6, &efishing&6, &etaming&6, &echatter&6, &emurderer&6, &esuicide&6, &eforestboss&6, &eskylover&6, &enetherboss&6, &edragontrainer&6, &ewardenboss &6e &eall&6."
                         stop
                 else if arg-2 is offline:
                     send "{@prefix} &6%arg-2% &cè offline."
                     stop
-            else if arg-1 is not "grant" or "revoke":
+            else if arg-1 isn't "grant" or "revoke":
                 send "{@prefix} &cComando sconosciuto."
                 send formatted "{@prefix} &cUtilizzo: &6/medals grant <&egiocatore&6> <ttp:mining%nl%mobkiller%nl%carpenter%nl%building%nl%farmer%nl%fishing%nl%taming%nl%chatter%nl%murderer%nl%suicide%nl%forestboss%nl%skylover%nl%netherboss%nl%dragontrainer%nl%wardenboss%nl%all><&emedaglia&6><reset>"
                 send formatted "{@prefix} &cUtilizzo: &6/medals revoke <&egiocatore&6> <ttp:mining%nl%mobkiller%nl%carpenter%nl%building%nl%farmer%nl%fishing%nl%taming%nl%chatter%nl%murderer%nl%suicide%nl%forestboss%nl%skylover%nl%netherboss%nl%dragontrainer%nl%wardenboss%nl%all><&emedaglia&6><reset>"

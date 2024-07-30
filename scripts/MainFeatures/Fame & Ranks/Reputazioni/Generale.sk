@@ -185,7 +185,7 @@ command /rank [<text>] [<offline player>] [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 if player has permission "ranks.check.self":
                     send "{@prefix} &fAl momento sei %{rank.%player%}%&f." to player
                     send "{@prefix} &bGioca e ottieni Fama per cambiare la tua reputazione." to player
@@ -195,8 +195,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                     stop
             
             else if arg-1 is "check":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.check.other":
                             send "{@prefix} &cComando incompleto."
                             send "{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>"
@@ -205,7 +205,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.check.other":
                             if {rank.%arg-2%} is set:
                                 send "{@prefix} &c%arg-2% &fal momento è %{rank.%arg-2%}%"
@@ -225,8 +225,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                             stop
                     
             else if arg-1 is "effect":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.effect.self":
                             if {rank.effect.%player%} != "{@no_effect}":
                                 send "&7&m---------&r {@prefix} &7&m---------"
@@ -243,7 +243,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                             send "%{server.prefix.main}% &cComando sconosciuto."
                             stop
                 if arg-2 has played before:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.effect.other":
                             if {rank.effect.%arg-2%} != "{@no_effect}":
                                 send "&7&m-------------&r {@prefix} &7&m-------------"
@@ -264,7 +264,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                             send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
                             stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.effect.other":
                             send "{@prefix} &6%arg-2% &cnon ha ancora giocato in questo server!"
                             {@error_sound} at player for player
@@ -277,8 +277,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                         stop
 
             else if arg-1 is "list":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.list":
                             send "&7&m---------&r {@prefix} &7&m---------"
                             send "&fReputazioni disponibili:"
@@ -313,8 +313,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                         stop
             
             else if arg-1 is "help":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.admin.help":
                             send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
                             send ""
@@ -348,8 +348,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                         stop
 
             else if arg-1 is "reload":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         if player has permission "ranks.reload":
                             send "{@prefix} &3Ricarico il config..."
                             wait 5 ticks
@@ -367,7 +367,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                         send "%{server.prefix.main}% &cComando sconosciuto."
                         stop
 
-            else if arg-1 is not "check", "effect", "list", "help" or "reload":
+            else if arg-1 isn't "check", "effect", "list", "help" or "reload":
                 if player has permission "ranks.commands":
                     send "{@error} &cComando sconosciuto."
                     send "{@error} &cUtilizzo: &6/rank"
@@ -386,20 +386,20 @@ command /rank [<text>] [<offline player>] [<text>]:
                     stop
 
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
-                    if arg-3 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@error} &cSolo i giocatori possono eseguire questo comando."
                         stop
             
             else if arg-1 is "check":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &cComando incompleto."
                         send "{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>"
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if {rank.%arg-2%} is set:
                             send "{@prefix} &c%arg-2% &fal momento è %{rank.%arg-2%}%"
                             stop
@@ -411,12 +411,12 @@ command /rank [<text>] [<offline player>] [<text>]:
                         stop
             
             else if arg-1 is "effect":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@error} &cSolo i giocatori possono eseguire questo comando."
                         stop
                 if arg-2 has played before:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         if {rank.effect.%arg-2%} != "{@no_effect}":
                             send "&7&m-------------&r {@prefix} &7&m-------------"
                             send "&fGli effetti attivi di &c%arg-2% &f(%{rank.%arg-2%}%&f)&f:"
@@ -432,7 +432,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                         send "{@prefix} &cQuesto comando non richiede parametri aggiuntivi"
                         stop
                 else:
-                    if arg-3 is not set:
+                    if arg-3 isn't set:
                         send "{@prefix} &6%arg-2% &cnon ha ancora giocato in questo server!"
                         stop
                     else:
@@ -440,8 +440,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                         stop
 
             else if arg-1 is "list":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "&7&m------------------&r {@prefix} &7&m------------------"
                         send "&fReputazioni disponibili:"
                         send "1. {@rank_-5} &r- &7&o(Da {@chat_max_rank_-5} in giù)"
@@ -468,8 +468,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                     stop
             
             else if arg-1 is "help":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
                         send ""
                         send "&7Comandi che puoi eseguire:"
@@ -487,8 +487,8 @@ command /rank [<text>] [<offline player>] [<text>]:
                     stop
 
             else if arg-1 is "reload":
-                if arg-2 is not set:
-                    if arg-3 is not set:
+                if arg-2 isn't set:
+                    if arg-3 isn't set:
                         send "{@prefix} &3Ricarico il config..."
                         wait 5 ticks
                         execute console command "/skript reload %script%"
@@ -498,7 +498,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                     send "{@error} &cQuesto comando non richiede parametri aggiuntivi."
                     stop
 
-            else if arg-1 is not "check", "effect", "list", "help" or "reload":
+            else if arg-1 isn't "check", "effect", "list", "help" or "reload":
                 send "{@error} &cComando sconosciuto."
                 send "{@error} &cUtilizzo: &6/rank check <&egiocatore&6>"
                 send "{@error} &cUtilizzo: &6/rank effect <&egiocatore&6>"

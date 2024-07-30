@@ -27,7 +27,7 @@ every second:
         if weather in "%{server.world.overworld}%" is clear:
             set {_weather} to placeholder "rs_season_%{server.world.overworld}%" from loop-player
             if time in "%{server.world.overworld}%" is between 6:00 and 19:00:
-                if {_weather} is not "{@winter}" or "{@fall}":
+                if {_weather} isn't "{@winter}" or "{@fall}":
                     set {rs_weather} to "&e☀"
                 else:
                     set {rs_weather} to "&7☁"
@@ -61,7 +61,7 @@ every tick:
 every 5 seconds:
     loop all players:
         set {_weather_rain} to placeholder "rs_season_%{server.world.overworld}%" from loop-player
-        if {_weather_rain} is not "{@winter}":
+        if {_weather_rain} isn't "{@winter}":
             set {rs_weather.rain} to "&b🌧"
             wait 2 seconds
             set {rs_weather.rain} to "&3🌧"

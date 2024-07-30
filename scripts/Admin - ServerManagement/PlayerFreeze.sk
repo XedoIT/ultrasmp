@@ -12,10 +12,7 @@ options:
     data: "data-%arg-1's uuid%"
     freeze_arg: yaml value "player_info.player.freeze" in "data-%arg-1's uuid%"
     freeze_p: yaml value "player_info.player.freeze" in "data-%player's uuid%"
-
-    on: Sì
-    off: No
-
+    
 command /freeze [<offline player>]:
     permission: freeze.use
     permission message: %{server.prefix.main}% &cComando sconosciuto.
@@ -26,7 +23,7 @@ command /freeze [<offline player>]:
             stop
         else:
             if arg-1 is online:
-                if {@freeze_arg} is "{@on}":
+                if {@freeze_arg} is true:
                     if {@genre_arg} is "%{server.genre.male}%":
                         send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzato."
                         {@error_sound} at player for player
@@ -36,7 +33,7 @@ command /freeze [<offline player>]:
                         {@error_sound} at player for player
                         stop
                 else:
-                    set {@freeze_arg} to "{@on}"
+                    set {@freeze_arg} to true
                     save yaml {@data}
                     send "%{server.prefix.main}% &cHai immobilizzato &6%arg-1%&c."
                     {@confirm_sound} at player for player
@@ -69,7 +66,7 @@ command /unfreeze [<offline player>]:
             stop
         else:
             if arg-1 is online:
-                if {@freeze_arg} is "{@off}":
+                if {@freeze_arg} is false:
                     if {@genre_arg} is "%{server.genre.male}%":
                         send "%{server.prefix.main}% &b%arg-1% &anon è immobilizzato."
                         {@error_sound} at player for player
@@ -79,7 +76,7 @@ command /unfreeze [<offline player>]:
                         {@error_sound} at player for player
                         stop
                 else:
-                    set {@freeze_arg} to "{@off}"
+                    set {@freeze_arg} to false
                     save yaml {@data}
                     send "%{server.prefix.main}% &aHai liberato &b%arg-1%&a."
                     {@confirm_sound} at player for player
@@ -101,7 +98,7 @@ command /unfreeze [<offline player>]:
                     stop
 
 on player move:
-    if {@freeze_p} is "{@on}":
+    if {@freeze_p} is true:
         cancel event
         if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
@@ -109,7 +106,7 @@ on player move:
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on arm swing:
-    if {@freeze_p} is "{@on}":
+    if {@freeze_p} is true:
         cancel event
         if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
@@ -117,7 +114,7 @@ on arm swing:
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on sneak toggle:
-    if {@freeze_p} is "{@on}":
+    if {@freeze_p} is true:
         cancel event
         if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
@@ -125,7 +122,7 @@ on sneak toggle:
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on right click:
-    if {@freeze_p} is "{@on}":
+    if {@freeze_p} is true:
         cancel event
         if {@genre_p} is "%{server.genre.male}%":
             send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player

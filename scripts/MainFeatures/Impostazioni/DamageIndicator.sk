@@ -96,10 +96,10 @@ on damage:
                     if damage cause is projectile:
                         if gamemode of victim is survival or adventure:
                             if attacker's tool is a bow or a crossbow:
-                                if victim is not attacker:
+                                if victim isn't attacker:
                                     wait 1 tick
                                     send "&8[&6🏹&8] &c%victim% &aha &c%placeholder "auraskills_hp" from victim% ❤" to attacker
                             else if attacker's tool is trident:
-                                if victim is not attacker:
+                                if victim isn't attacker:
                                     wait 1 tick
                                     send "&8[&b🔱&8] &c%victim% &aha &c%placeholder "auraskills_hp" from victim% ❤" to attacker

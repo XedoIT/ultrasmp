@@ -19,7 +19,7 @@ on damage:
         victim is a player
         CombatLogSys(victim)
         CombatLogSys(attacker)
-        if {combat.%attacker%.last} is not victim:
+        if {combat.%attacker%.last} isn't victim:
             set {combat.%attacker%.last} to victim
         
 

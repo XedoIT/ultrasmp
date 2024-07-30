@@ -7,16 +7,22 @@ options:
     confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
     error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
 
+    data: "data-%player's uuid%"
     genre: yaml value "genre" in "settings-%player's uuid%"
     genre_p: yaml value "genre" in "settings-%{_p}'s uuid%"
+    god: yaml value "player_info.player.god" in "data-%player's uuid%"
 
 on join:
     wait 1 tick
     if {@genre} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
         GenrePrompt(player)
-        wait 1 tick
+        wait 1 second
+        set {@god} to true
         make player invulnerable
+        save yaml {@data}
+        send ""
         send "%{server.prefix.main}% &c&lDurante la selezione del sesso, sei invulnerabile e i mostri ti ignoreranno!"
+        send ""
 
 function GenrePrompt(p: player):
     if {@genre_p} isn't "%{server.genre.male}%" or "%{server.genre.female}%":
@@ -115,8 +121,10 @@ on inventory click:
                 play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
                 delete {settings.%player%.genre.male}
                 delete {settings.%player%.genre.female}
-                wait 1 ticks
+                wait 1 second
+                set {@god} to false
                 make player vulnerable
+                save yaml {@data}
                 send ""
                 send "%{server.prefix.main}% &c&lAdesso sei vulnerabile e i mostri possono attaccarti!"
                 send ""

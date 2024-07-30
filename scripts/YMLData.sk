@@ -32,19 +32,20 @@ on join:
         set {_player_speed} to placeholder "auraskills_speed" from player
         set yaml value "player_info.player.name" in {@data} to player's name
         set yaml value "player_info.player.uuid" in {@data} to player's uuid
+        set yaml value "player_info.player.nickname" in {@data} to player's name
         set yaml value "player_info.player.status.new" in {@data} to "{@status}"
         set yaml value "player_info.player.status.old" in {@data} to "-"
-        set yaml value "player_info.player.gamemode.info" in {@data} to uncolored {gm.%player%} #Sopravvivenza
-        set yaml value "player_info.player.gamemode.id" in {@data} to {gm.marker.%player%} #iron sword with nbt from {@no_flags}
+        set yaml value "player_info.player.gamemode.info" in {@data} to "Creativa" #"Sopravvivenza"
+        set yaml value "player_info.player.gamemode.id" in {@data} to grass block #iron sword with nbt from {@no_flags}
         set yaml value "player_info.player.xp.levels" in {@data} to regex({_player_xp_level})
         set yaml value "player_info.player.xp.points" in {@data} to regex({_player_xp})
         set yaml value "player_info.player.flyspeed" in {@data} to player's flyspeed
         set yaml value "player_info.player.walkspeed" in {@data} to player's walkspeed
         set yaml value "player_info.player.op" in {@data} to uncolored {_player_op}
-        set yaml value "player_info.player.god" in {@data} to uncolored {god.%player%} #"{@off}"
-        set yaml value "player_info.player.fly" in {@data} to uncolored {fly.%player%} #"{@off}"
-        set yaml value "player_info.player.freeze" in {@data} to "{@off}"
-        set yaml value "player_info.player.afk" in {@data} to "{@off}"
+        set yaml value "player_info.player.god" in {@data} to false
+        set yaml value "player_info.player.fly" in {@data} to false
+        set yaml value "player_info.player.freeze" in {@data} to false
+        set yaml value "player_info.player.afk" in {@data} to false
         set yaml value "player_info.energy.health" in {@data} to "%regex({_player_hp})%/%regex({_player_hp_max})%"
         set yaml value "player_info.energy.saturation" in {@data} to "%regex(player's food level)%/10"
         set yaml value "player_info.position.dimension.name" in {@data} to uncolored {whois.world.%player%}
@@ -86,6 +87,11 @@ on join:
         set yaml value "player_profile.progress.bloody_stats.killstreak" in {@data} to "%regex({killstreak::%player%})%/%regex({killstreak_max.%player%})%"
         set yaml value "player_profile.progress.mining_stats.broken_blocks" in {@data} to regex({broken_blocks::%player%})
         set yaml value "player_profile.progress.mining_stats.placed_blocks" in {@data} to regex({placed_blocks::%player%})
+        set yaml value "player_gui.last_opened_1" in {@data} to "-"
+        set yaml value "player_gui.last_opened_2" in {@data} to "-"
+        set yaml value "player_gui.last_opened_3" in {@data} to "-"
+        set yaml value "player_gui.last_opened_4" in {@data} to "-"
+        set yaml value "player_gui.last_opened_5" in {@data} to "-"
         save yaml {@data}
 
 on quit:

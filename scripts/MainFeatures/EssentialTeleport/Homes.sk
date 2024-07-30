@@ -38,7 +38,7 @@ every second:
                 delete {et.homes_whenset::%loop-player%::bed}
 
 on bed leave:
-    if player's bed location is not {et.homes_loc::%player%::bed}:
+    if player's bed location isn't {et.homes_loc::%player%::bed}:
         set {et.homes_loc::%player%::bed} to player's bed location
 
 command /sethome [<text>]:
@@ -49,11 +49,11 @@ command /sethome [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica un nome per questa casa!"
                 stop
             else:
-                if arg-1 is not "bed":
+                if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} doesn't contain arg-1:
                         set {et.homes_loc::%player%::%arg-1%} to player's location
                         add arg-1 to {et.homes_name::%player%::*}
@@ -83,11 +83,11 @@ command /delhome [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di una casa!"
                 stop
             else:
-                if arg-1 is not "bed":
+                if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} contains arg-1:
                         delete {et.homes_loc::%player%::%arg-1%}
                         remove arg-1 from {et.homes_name::%player%::*}
@@ -116,10 +116,10 @@ command /home [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 if {et.homes::%player%} != 0:
                     if {et.homes_loc::%player%::bed} is set:
-                        if {et.homes_main_loc.%player%} is not set:
+                        if {et.homes_main_loc.%player%} isn't set:
                             teleport player to {et.homes_loc::%player%::bed}
                             if {settings.%player%.user.genre} is "%{server.genre.male}%":
                                 send "{@prefix} &6Ti ho portato al tuo letto."
@@ -142,7 +142,7 @@ command /home [<text>]:
                     send "{@prefix} &cNon hai nessuna casa. Creane una con <suggest command:/sethome >&6&n/sethome<reset> &6<&ecasa&6>&c."
                     stop
             else:
-                if arg-1 is not "bed":
+                if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} contains arg-1:
                         teleport player to {et.homes_loc::%player%::%arg-1%}
                         if {settings.%player%.user.genre} is "%{server.genre.male}%":
@@ -174,11 +174,11 @@ command /movehome [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di una casa!"
                 stop
             else:
-                if arg-1 is not "bed":
+                if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} contains arg-1:
                         if player's location is {et.homes_loc::%player%::%arg-1%}:
                             send "{@prefix} &cLa tua posizione coincide con quella della casa che stai cercando di spostare!"
@@ -204,13 +204,13 @@ command /setmainhome [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di una casa!"
                 stop
             else:
-                if arg-1 is not "bed":
+                if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} contains arg-1:
-                        if arg-1 is not {et.homes_main_name.%player%}:
+                        if arg-1 isn't {et.homes_main_name.%player%}:
                             set {et.homes_main_name.%player%} to arg-1
                             set {et.homes_main_loc.%player%} to {et.homes_loc::%player%::%arg-1%}
                             send "{@prefix} &6Hai impostato come principale la casa &c%arg-1%&6."
@@ -236,7 +236,7 @@ command /homes [<offline player>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 if {et.homes::%player%} = 0:
                     send "{@prefix} &cNon hai nessuna casa. Creane una con <suggest command:/sethome >&6&n/sethome<reset>&6 <&ecasa&6>&c."
                     stop
@@ -272,7 +272,7 @@ command /homes [<offline player>]:
                         send "{@prefix} &e%{et.homes::%player%}% &6case totali: &f%{et.homes_name::%player%::*}%"
                         stop
         else:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di un giocatore!"
                 stop
             else:
@@ -298,11 +298,11 @@ command /homeinfo [<text>]:
     executable by: player, console
     trigger:
         if sender is player:
-            if arg-1 is not set:
+            if arg-1 isn't set:
                 send "{@prefix} &cSpecifica il nome di una casa!"
                 stop
             else:
-                if arg-1 is not "bed":
+                if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} contains arg-1:
                         send "&6----------- &c&lINFO CASA &6-----------"
                         send " &fNome: &c%arg-1%"
@@ -323,7 +323,7 @@ command /homeinfo [<text>]:
                         send " &fNome: &c%arg-1% (&7AUTOMATICA&c)"
                         send " &fPosizione: &e%player's bed location%"
                         send " &fData creazione: &3%{et.homes_whenset::%player%::bed}%"
-                        if {et.homes_main_name.%player%} is not set:
+                        if {et.homes_main_name.%player%} isn't set:
                             send " &fPrincipale: &aSì"
                         else:
                             send " &fPrincipale: &cNo"
@@ -375,7 +375,7 @@ command /resetallhomes [<offline player>]:
     permission: debug.commands
     permission message: %{server.prefix.main}% &cComando sconosciuto.
     trigger:
-        if arg-1 is not set:
+        if arg-1 isn't set:
             delete {et.homes_loc::%player%::*}
             delete {et.homes_name::%player%::*}
             delete {et.homes_whenset::%player%::*}

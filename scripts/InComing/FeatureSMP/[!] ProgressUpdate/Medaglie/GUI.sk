@@ -251,7 +251,7 @@ function openMedalsGui(p: player):
 on inventory click:
     if name of event-inventory is "Medaglie [BETA]":
         if type of event-inventory is chest inventory:
-            if index of event-slot is not 39 or 40:
+            if index of event-slot isn't 39 or 40:
                 cancel event
             else if index of event-slot is 39:
                 if click type is left mouse button:

@@ -13,9 +13,11 @@ options:
     no_available: &cQuesta funzionalità non è ancora disponibile.
     requires_progress_update: &6Disponibile con il &eProgress Update&6.
 
+    data: "data-%player's uuid%"
     gui_background: yaml value "personalization.gui_background.enabled" in "settings-%{_p}'s uuid%"
     genre: yaml value "genre" in "settings-%{_p}'s uuid%"
     status: yaml value "player_info.player.status.new" in "data-%{_p}'s uuid%"
+    last_gui: yaml value "player_gui.last_opened_1" in "data-%player's uuid%"
         
 command /profilo:
     aliases: /smp, /profile
@@ -31,78 +33,45 @@ command /profilo:
 
 function openProfileGui(p: player):
     set {_skills_power} to placeholder "auraskills_power" from {_p}
-    if {@gui_background} is true:
-        if {_p} has permission "admin.manage.server":
-            set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
-            set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
+    if {_p} has permission "admin.manage.server":
+        set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
+        if {@gui_background} is true:
+            set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
             set slot 10, 11, 12, 14, 15, 16, 19, 25, 28, 29, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
-            set slot 13 of {_gui} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "&f", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_luck" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Resistenza&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "&f" and "{@view}"
-            set slot 20 of {_gui} to writable book named "&fAbilità" with lore "&aPunteggio abilità&7: &e%{_skills_power}%", "&f", "&7Gioca, avanza di livello nelle", "&7varie abilità del server e sii", "&7il primo giocatore a scalare la", "&7classifica globale.", "&f", "&eAttualmente sei al &6%placeholder "auraskills_rank" from {_p}%° posto &enella", "&eclassifica globale delle abilità", "&edel server.", "&f", "&bClicca per avere un quadro più" and "&bcompleto sulle tue abilità."
-            set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
-            set slot 22 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%", " &2Esperienza per il livello %{level::%{_p}%} + 1%&7: &f%{level.max.%{_p}%}-{level.xp.%{_p}%}% PE", " %{level.progress_bar.%{_p}%}%", " &7%{level.xp.%{_p}%}%/%{level.max.%{_p}%}% PE", "&f" and "{@view}" 
-            set slot 23 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
-            set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@info_wiki}"
-            set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
-            set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che non ti" and "&7servono più."
-            if {enderchest.usable.%{_p}%} isn't true:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua enderchest." and " &cContinua a giocare per sbloccarla!"
-            else:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest" with lore "&7Apri la tua enderchest.", "&f" and " &eRighe accumulate: &a%{enderchest.guirows.%{_p}%}%/{@maxrowsenderchest}"
-            set slot 48 of {_gui} to comparator named "&2Gestione Server" with lore "&7Prendi in mano il controllo" and "&7dell'intero server."
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-            open {_gui} to {_p}
+        set slot 13 of {_gui} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "&f", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_luck" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Resistenza&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "&f" and "{@view}"
+        set slot 20 of {_gui} to writable book named "&fAbilità" with lore "&aPunteggio abilità&7: &e%{_skills_power}%", "&f", "&7Gioca, avanza di livello nelle", "&7varie abilità del server e sii", "&7il primo giocatore a scalare la", "&7classifica globale.", "&f", "&eAttualmente sei al &6%placeholder "auraskills_rank" from {_p}%° posto &enella", "&eclassifica globale delle abilità", "&edel server.", "&f", "&bClicca per avere un quadro più" and "&bcompleto sulle tue abilità."
+        set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
+        set slot 22 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%", " &2Esperienza per il livello %{level::%{_p}%} + 1%&7: &f%{level.max.%{_p}%}-{level.xp.%{_p}%}% PE", " %{level.progress_bar.%{_p}%}%", " &7%{level.xp.%{_p}%}%/%{level.max.%{_p}%}% PE", "&f" and "{@view}" 
+        set slot 23 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
+        set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@info_wiki}"
+        set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
+        set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che non ti" and "&7servono più."
+        if {enderchest.usable.%{_p}%} isn't true:
+            set slot 32 of {_gui} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua enderchest." and " &cContinua a giocare per sbloccarla!"
         else:
-            set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
-            set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
-            set slot 10, 11, 12, 14, 15, 16, 19, 25, 28, 29, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
-            set slot 13 of {_gui} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "&f", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_luck" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Resistenza&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "&f" and "{@view}"
-            set slot 20 of {_gui} to writable book named "&fAbilità" with lore "&aPunteggio abilità&7: &e%{_skills_power}%", "&f", "&7Gioca, avanza di livello nelle", "&7varie abilità del server e sii", "&7il primo giocatore a scalare la", "&7classifica globale.", "&f", "&eAttualmente sei al &6%placeholder "auraskills_rank" from {_p}%° posto &enella", "&eclassifica globale delle abilità", "&edel server.", "&f", "&bClicca per avere un quadro più" and "&bcompleto sulle tue abilità."
-            set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
-            set slot 22 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%", " &2Esperienza per il livello %{level::%{_p}%} + 1%&7: &f%{level.max.%{_p}%}-{level.xp.%{_p}%}% PE", " %{level.progress_bar.%{_p}%}%", " &7%{level.xp.%{_p}%}%/%{level.max.%{_p}%}% PE", "&f" and "{@view}" 
-            set slot 23 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
-            set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@info_wiki}"
-            set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
-            set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che non ti" and "&7servono più."
-            if {enderchest.usable.%{_p}%} isn't true:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua enderchest." and " &cContinua a giocare per sbloccarla!"
-            else:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest" with lore "&7Apri la tua enderchest.", "&f" and " &eRighe accumulate: &a%{enderchest.guirows.%{_p}%}%/{@maxrowsenderchest}"
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-            open {_gui} to {_p}
+            set slot 32 of {_gui} to ender chest named "&dEnderchest" with lore "&7Apri la tua enderchest.", "&f" and " &eRighe accumulate: &a%{enderchest.guirows.%{_p}%}%/{@maxrowsenderchest}"
+        set slot 48 of {_gui} to comparator named "&2Gestione Server" with lore "&7Prendi in mano il controllo" and "&7dell'intero server."
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
     else:
-        if {_p} has permission "admin.manage.server":
-            set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
-            set slot 13 of {_gui} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "&f", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_luck" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Resistenza&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "&f" and "{@view}"
-            set slot 20 of {_gui} to writable book named "&fAbilità" with lore "&aPunteggio abilità&7: &e%{_skills_power}%", "&f", "&7Gioca, avanza di livello nelle", "&7varie abilità del server e sii", "&7il primo giocatore a scalare la", "&7classifica globale.", "&f", "&eAttualmente sei al &6%placeholder "auraskills_rank" from {_p}%° posto &enella", "&eclassifica globale delle abilità", "&edel server.", "&f", "&bClicca per avere un quadro più" and "&bcompleto sulle tue abilità."
-            set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
-            set slot 22 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%", " &2Esperienza per il livello %{level::%{_p}%} + 1%&7: &f%{level.max.%{_p}%}-{level.xp.%{_p}%}% PE", " %{level.progress_bar.%{_p}%}%", " &7%{level.xp.%{_p}%}%/%{level.max.%{_p}%}% PE", "&f" and "{@view}" 
-            set slot 23 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
-            set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@info_wiki}"
-            set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
-            set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che non ti" and "&7servono più."
-            if {enderchest.usable.%{_p}%} isn't true:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua enderchest." and " &cContinua a giocare per sbloccarla!"
-            else:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest" with lore "&7Apri la tua enderchest.", "&f" and " &eRighe accumulate: &a%{enderchest.guirows.%{_p}%}%/{@maxrowsenderchest}"
-            set slot 48 of {_gui} to comparator named "&2Gestione Server" with lore "&7Prendi in mano il controllo" and "&7dell'intero server."
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-            open {_gui} to {_p}
+        set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
+        if {@gui_background} is true:
+            set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
+            set slot 10, 11, 12, 14, 15, 16, 19, 25, 28, 29, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
+        set slot 13 of {_gui} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "&f", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_luck" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Resistenza&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "&f" and "{@view}"
+        set slot 20 of {_gui} to writable book named "&fAbilità" with lore "&aPunteggio abilità&7: &e%{_skills_power}%", "&f", "&7Gioca, avanza di livello nelle", "&7varie abilità del server e sii", "&7il primo giocatore a scalare la", "&7classifica globale.", "&f", "&eAttualmente sei al &6%placeholder "auraskills_rank" from {_p}%° posto &enella", "&eclassifica globale delle abilità", "&edel server.", "&f", "&bClicca per avere un quadro più" and "&bcompleto sulle tue abilità."
+        set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
+        set slot 22 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%", " &2Esperienza per il livello %{level::%{_p}%} + 1%&7: &f%{level.max.%{_p}%}-{level.xp.%{_p}%}% PE", " %{level.progress_bar.%{_p}%}%", " &7%{level.xp.%{_p}%}%/%{level.max.%{_p}%}% PE", "&f" and "{@view}" 
+        set slot 23 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
+        set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@info_wiki}"
+        set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
+        set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che non ti" and "&7servono più."
+        if {enderchest.usable.%{_p}%} isn't true:
+            set slot 32 of {_gui} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua enderchest." and " &cContinua a giocare per sbloccarla!"
         else:
-            set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
-            set slot 13 of {_gui} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "&f", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_luck" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Resistenza&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &e🗡 Uccisioni&7: &f%{kills::%{_p}%}%", " &e☠ Morti&7: &f%{deaths::%{_p}%}%", " &d✦ Fama&7: &f%{fame::%{_p}%}%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "&f" and "{@view}"
-            set slot 20 of {_gui} to writable book named "&fAbilità" with lore "&aPunteggio abilità&7: &e%{_skills_power}%", "&f", "&7Gioca, avanza di livello nelle", "&7varie abilità del server e sii", "&7il primo giocatore a scalare la", "&7classifica globale.", "&f", "&eAttualmente sei al &6%placeholder "auraskills_rank" from {_p}%° posto &enella", "&eclassifica globale delle abilità", "&edel server.", "&f", "&bClicca per avere un quadro più" and "&bcompleto sulle tue abilità."
-            set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
-            set slot 22 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%", " &2Esperienza per il livello %{level::%{_p}%} + 1%&7: &f%{level.max.%{_p}%}-{level.xp.%{_p}%}% PE", " %{level.progress_bar.%{_p}%}%", " &7%{level.xp.%{_p}%}%/%{level.max.%{_p}%}% PE", "&f" and "{@view}" 
-            set slot 23 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
-            set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "&f" and "{@info_wiki}"
-            set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
-            set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che" and "&7non ti servono più."
-            if {enderchest.usable.%{_p}%} isn't true:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua enderchest." and " &cContinua a giocare per sbloccarla!"
-            else:
-                set slot 32 of {_gui} to ender chest named "&dEnderchest" with lore "&7Apri la tua enderchest.", "&f" and " &eRighe accumulate: &a%{enderchest.guirows.%{_p}%}%/{@maxrowsenderchest}"
-            set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-            open {_gui} to {_p}
+            set slot 32 of {_gui} to ender chest named "&dEnderchest" with lore "&7Apri la tua enderchest.", "&f" and " &eRighe accumulate: &a%{enderchest.guirows.%{_p}%}%/{@maxrowsenderchest}"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+        open {_gui} to {_p}
 
 function openPlayerProfileGUI(p: player):
     set {_player_hp} to placeholder "auraskills_hp" from {_p}
@@ -122,84 +91,46 @@ function openPlayerProfileGUI(p: player):
     set {_player_speed} to placeholder "auraskills_speed" from {_p}
     set {_genre} to {@genre}
     set {_status} to {@status}
+    set {_gui} to a new chest inventory with 6 rows named "Equipaggiamento e Statistiche"
     if {@gui_background} is true:
-        set {_gui} to a new chest inventory with 6 rows named "Equipaggiamento e Statistiche"
         set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
         set slot 10, 12, 13, 14, 16, 22, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
-        if {@genre} is "%{server.genre.male}%":
-            set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
-        else if {@genre} is "%{server.genre.female}%":
-            set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
-        if slot 39 of {_p}'s inventory is air:
-            set slot 11 of {_gui} to red stained glass pane named "&cSlot elmetto" with lore "&7Non stai indossando nessun elmetto." and "&7Indossane uno per visualizzarlo qui."
-        else:
-            set slot 11 of {_gui} to {_p}'s helmet
-        if slot 38 of {_p}'s inventory is air:
-            set slot 20 of {_gui} to red stained glass pane named "&cSlot corazza" with lore "&7Non stai indossando nessuna corazza." and "&7Indossane una per visualizzarla qui."
-        else:
-            set slot 20 of {_gui} to {_p}'s chestplate
-        if slot 37 of {_p}'s inventory is air:
-            set slot 29 of {_gui} to red stained glass pane named "&cSlot gambiere" with lore "&7Non stai indossando gambiere." and "&7Indossale per visualizzarle qui."
-        else:
-            set slot 29 of {_gui} to {_p}'s leggings
-        if slot 36 of {_p}'s inventory is air:
-            set slot 38 of {_gui} to red stained glass pane named "&cSlot stivali" with lore "&7Non stai indossando stivali." and "&7Indossali per visualizzarli qui."
-        else:
-            set slot 38 of {_gui} to {_p}'s boots
-        if slot 40 of {_p}'s inventory is air:
-            set slot 19 of {_gui} to magenta stained glass pane named "&dMano secondaria" with lore "&7Non hai oggetti nella seconda mano." and "&7Tieni qualcosa per visualizzarlo qui."
-        else:
-            set slot 19 of {_gui} to {_p}'s off hand item
-        if {_p}'s tool is air:
-            set slot 21 of {_gui} to lime stained glass pane named "&aMano principale" with lore "&7Non hai nulla in mano." and "&7Tieni qualcosa per visualizzarlo qui."
-        else:
-            set slot 21 of {_gui} to {_p}'s held item
-        set slot 15 of {_gui} to writable book named "&bLe tue informazioni" with lore " &9✎ Nome&7: &f%{_p}%", " &6✎ Soprannome&7: &f%{nick.%{_p}%}%", " &a✧ Sesso&7: &f%{_genre}%", " &e₪ Inventario&7: &f%{_player_inventory}%/35 slot liberi", " &b🌅 Bioma&7: &f%{_player_biome}%", " &3ℹ Ping&7: &f%{_p}'s ping% ms", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", " &c❣ &cIncremento salute&7: &f+%regex({_player_health})%", " &9✿ Saggezza&7: &f+%regex({_player_wisdom})%" and " &f➤ Velocità&7: &f+%regex({_player_speed})%"
-        set slot 23 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%  %{level.progress_bar.%{_p}%}%", "&f" and "{@view}"
-        set slot 24 of {_gui} to diamond sword with nbt from {@no_flags} named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &c🔥 Rapporto U/M&7: &f%regex({kills::%{_p}%}/{deaths::%{_p}%})%", " &6🗡 Danni inflitti&7: &f%regex({infldamage::%{_p}%})%", " &6☄ Danni subiti&7: &f%regex({suffdamage::%{_p}%})%", " &e&l⚡ &eSerie di uccisioni&7: &f%regex({killstreak::%{_p}%})%/%regex({killstreak_max.%{_p}%})%", " &4➽ Forza&7: &f+%regex({_player_strength})%", " &6❥ Rigenerazione&7: &f+%regex({_player_regeneration})%", " &5✦ Resistenza&7: &f+%regex({_player_toughness})%", " &a⌘ Probabilità Colpo Critico&7: &f+%regex({_player_crit_chance})%%%" and " &3★ Danno Colpo Critico&7: &f+%regex({_player_crit_damage})%%%"
-        set slot 25 of {_gui} to iron pickaxe with nbt from {@no_flags} named "&aStatistiche minerarie" with lore " &c⛏ Blocchi distrutti&7: &f%regex({broken_blocks::%{_p}%})%", " &b🔨 Blocchi piazzati&7: &f%regex({placed_blocks::%{_p}%})%" and " &2☘ Fortuna&7: &f+%regex({_player_luck})%"
-        set slot 33 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
-        set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-        open {_gui} to {_p}
+    if {@genre} is "%{server.genre.male}%":
+        set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
+    else if {@genre} is "%{server.genre.female}%":
+        set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
+    if slot 39 of {_p}'s inventory is air:
+        set slot 11 of {_gui} to red stained glass pane named "&cSlot elmetto" with lore "&7Non stai indossando nessun elmetto." and "&7Indossane uno per visualizzarlo qui."
     else:
-        set {_gui} to a new chest inventory with 6 rows named "Equipaggiamento e Statistiche"
-        if {@genre} is "%{server.genre.male}%":
-            set slot 4 of {_gui} to {_p}'s head named "&9%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
-        else if {@genre} is "%{server.genre.female}%":
-            set slot 4 of {_gui} to {_p}'s head named "&d%{_p}%" with lore "&7""%{_status}%&7""", "&f", " &e➹ Bug segnalati&7: &f%{reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{feedback_sent::%{_p}%}%", "&f", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "&f" and "&7Prima volta nel server: &f%{playtime.%{_p}%.first_login}%"
-        if slot 39 of {_p}'s inventory is air:
-            set slot 11 of {_gui} to red stained glass pane named "&cSlot elmetto" with lore "&7Non stai indossando nessun elmetto." and "&7Indossane uno per visualizzarlo qui."
-        else:
-            set slot 11 of {_gui} to {_p}'s helmet
-        if slot 38 of {_p}'s inventory is air:
-            set slot 20 of {_gui} to red stained glass pane named "&cSlot corazza" with lore "&7Non stai indossando nessuna corazza." and "&7Indossane una per visualizzarla qui."
-        else:
-            set slot 20 of {_gui} to {_p}'s chestplate
-        if slot 37 of {_p}'s inventory is air:
-            set slot 29 of {_gui} to red stained glass pane named "&cSlot gambiere" with lore "&7Non stai indossando gambiere." and "&7Indossale per visualizzarle qui."
-        else:
-            set slot 29 of {_gui} to {_p}'s leggings
-        if slot 36 of {_p}'s inventory is air:
-            set slot 38 of {_gui} to red stained glass pane named "&cSlot stivali" with lore "&7Non stai indossando stivali." and "&7Indossali per visualizzarli qui."
-        else:
-            set slot 38 of {_gui} to {_p}'s boots
-        if slot 40 of {_p}'s inventory is air:
-            set slot 19 of {_gui} to magenta stained glass pane named "&dMano secondaria" with lore "&7Non hai oggetti nella seconda mano." and "&7Tieni qualcosa per visualizzarlo qui."
-        else:
-            set slot 19 of {_gui} to {_p}'s off hand item
-        if {_p}'s tool is air:
-            set slot 21 of {_gui} to lime stained glass pane named "&aMano principale" with lore "&7Non hai nulla in mano." and "&7Tieni qualcosa per visualizzarlo qui."
-        else:
-            set slot 21 of {_gui} to {_p}'s held item
-        set slot 15 of {_gui} to writable book named "&bLe tue informazioni" with lore " &9✎ Nome&7: &f%{_p}%", " &6✎ Soprannome&7: &f%{nick.%{_p}%}%", " &a✧ Sesso&7: &f%{_genre}%", " &e₪ Inventario&7: &f%{_player_inventory}%/35 slot liberi", " &b🌅 Bioma&7: &f%{_player_biome}%", " &3ℹ Ping&7: &f%{_p}'s ping% ms", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", " &c❣ &cIncremento salute&7: &f+%regex({_player_health})%", " &9✿ Saggezza&7: &f+%regex({_player_wisdom})%" and " &f➤ Velocità&7: &f+%regex({_player_speed})%"
-        set slot 23 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%  %{level.progress_bar.%{_p}%}%", "&f" and "{@view}"
-        set slot 24 of {_gui} to diamond sword with nbt from {@no_flags} named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &c🔥 Rapporto U/M&7: &f%regex({kills::%{_p}%}/{deaths::%{_p}%})%", " &6🗡 Danni inflitti&7: &f%regex({infldamage::%{_p}%})%", " &6☄ Danni subiti&7: &f%regex({suffdamage::%{_p}%})%", " &e&l⚡ &eSerie di uccisioni&7: &f%regex({killstreak::%{_p}%})%/%regex({killstreak_max.%{_p}%})%", " &4➽ Forza&7: &f+%regex({_player_strength})%", " &6❥ Rigenerazione&7: &f+%regex({_player_regeneration})%", " &5✦ Resistenza&7: &f+%regex({_player_toughness})%", " &a⌘ Probabilità Colpo Critico&7: &f+%regex({_player_crit_chance})%%%" and " &3★ Danno Colpo Critico&7: &f+%regex({_player_crit_damage})%%%"
-        set slot 25 of {_gui} to iron pickaxe with nbt from {@no_flags} named "&aStatistiche minerarie" with lore " &c⛏ Blocchi distrutti&7: &f%regex({broken_blocks::%{_p}%})%", " &b🔨 Blocchi piazzati&7: &f%regex({placed_blocks::%{_p}%})%" and " &2☘ Fortuna&7: &f+%regex({_player_luck})%"
-        set slot 33 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
-        set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
-        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
-        open {_gui} to {_p}
+        set slot 11 of {_gui} to {_p}'s helmet
+    if slot 38 of {_p}'s inventory is air:
+        set slot 20 of {_gui} to red stained glass pane named "&cSlot corazza" with lore "&7Non stai indossando nessuna corazza." and "&7Indossane una per visualizzarla qui."
+    else:
+        set slot 20 of {_gui} to {_p}'s chestplate
+    if slot 37 of {_p}'s inventory is air:
+        set slot 29 of {_gui} to red stained glass pane named "&cSlot gambiere" with lore "&7Non stai indossando gambiere." and "&7Indossale per visualizzarle qui."
+    else:
+        set slot 29 of {_gui} to {_p}'s leggings
+    if slot 36 of {_p}'s inventory is air:
+        set slot 38 of {_gui} to red stained glass pane named "&cSlot stivali" with lore "&7Non stai indossando stivali." and "&7Indossali per visualizzarli qui."
+    else:
+        set slot 38 of {_gui} to {_p}'s boots
+    if slot 40 of {_p}'s inventory is air:
+        set slot 19 of {_gui} to magenta stained glass pane named "&dMano secondaria" with lore "&7Non hai oggetti nella seconda mano." and "&7Tieni qualcosa per visualizzarlo qui."
+    else:
+        set slot 19 of {_gui} to {_p}'s off hand item
+    if {_p}'s tool is air:
+        set slot 21 of {_gui} to lime stained glass pane named "&aMano principale" with lore "&7Non hai nulla in mano." and "&7Tieni qualcosa per visualizzarlo qui."
+    else:
+        set slot 21 of {_gui} to {_p}'s held item
+    set slot 15 of {_gui} to writable book named "&bLe tue informazioni" with lore " &9✎ Nome&7: &f%{_p}%", " &6✎ Soprannome&7: &f%{nick.%{_p}%}%", " &a✧ Sesso&7: &f%{_genre}%", " &e₪ Inventario&7: &f%{_player_inventory}%/35 slot liberi", " &b🌅 Bioma&7: &f%{_player_biome}%", " &3ℹ Ping&7: &f%{_p}'s ping% ms", " &d✦ Fama&7: &f%regex({fame::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", " &c❣ &cIncremento salute&7: &f+%regex({_player_health})%", " &9✿ Saggezza&7: &f+%regex({_player_wisdom})%" and " &f➤ Velocità&7: &f+%regex({_player_speed})%"
+    set slot 23 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "&f", "&aIl tuo livello&7: &f%{level::%{_p}%}%  %{level.progress_bar.%{_p}%}%", "&f" and "{@view}"
+    set slot 24 of {_gui} to diamond sword with nbt from {@no_flags} named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%regex({kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({deaths::%{_p}%})%", " &c🔥 Rapporto U/M&7: &f%regex({kills::%{_p}%}/{deaths::%{_p}%})%", " &6🗡 Danni inflitti&7: &f%regex({infldamage::%{_p}%})%", " &6☄ Danni subiti&7: &f%regex({suffdamage::%{_p}%})%", " &e&l⚡ &eSerie di uccisioni&7: &f%regex({killstreak::%{_p}%})%/%regex({killstreak_max.%{_p}%})%", " &4➽ Forza&7: &f+%regex({_player_strength})%", " &6❥ Rigenerazione&7: &f+%regex({_player_regeneration})%", " &5✦ Resistenza&7: &f+%regex({_player_toughness})%", " &a⌘ Probabilità Colpo Critico&7: &f+%regex({_player_crit_chance})%%%" and " &3★ Danno Colpo Critico&7: &f+%regex({_player_crit_damage})%%%"
+    set slot 25 of {_gui} to iron pickaxe with nbt from {@no_flags} named "&aStatistiche di raccolta" with lore " &c⛏ Blocchi distrutti&7: &f%regex({broken_blocks::%{_p}%})%", " &b🔨 Blocchi piazzati&7: &f%regex({placed_blocks::%{_p}%})%", " &9🪝 Loot pescati&7: &f%regex({fished_loot::%{_p}%})%" and " &2☘ Fortuna&7: &f+%regex({_player_luck})%"
+    set slot 33 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "&f", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "&f" and "{@requires_progress_update}"
+    set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{server.name}%"
+    open {_gui} to {_p}
 
 on inventory click:
     if name of event-inventory is "Abilità: &9Menu principale":
@@ -304,7 +235,8 @@ on inventory click:
                 if click type is left mouse button:
                     cancel event
                     set {gui.achievements.bypassprofile.%player%} to true
-                    set {gui.last_opened.%player%} to "Equipaggiamento e Statistiche"
+                    set {@last_gui} to "Equipaggiamento e Statistiche"
+                    save yaml {@data}
                     openMainAchievementsGui(player)
                 else:
                     cancel event

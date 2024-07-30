@@ -12,8 +12,8 @@ command /msg [<offline player>] [<text>]:
     executable by: player, console
     trigger:
         if sender is console:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "&cSpecifica il giocatore a cui vuoi mandare un messaggio!"
                     stop
                     
@@ -22,7 +22,7 @@ command /msg [<offline player>] [<text>]:
                 stop
                 
             else if arg-1 is set:
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "&cCosa vuoi dire a %arg-1%?"
                     stop
                 else:
@@ -32,8 +32,8 @@ command /msg [<offline player>] [<text>]:
                         play sound "entity.experience_orb.pickup" with volume 1 at arg-1 for arg-1
                         stop
         else:
-            if arg-1 is not set:
-                if arg-2 is not set:
+            if arg-1 isn't set:
+                if arg-2 isn't set:
                     send "&cSpecifica il giocatore a cui vuoi mandare un messaggio!"
                     stop
                     
@@ -50,7 +50,7 @@ command /msg [<offline player>] [<text>]:
                     stop
                 
             else if arg-1 is set:
-                if arg-2 is not set:
+                if arg-2 isn't set:
                     send "&cCosa vuoi dire a %arg-1%?"
                     stop
                 else:

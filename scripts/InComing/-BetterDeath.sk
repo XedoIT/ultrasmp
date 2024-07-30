@@ -15,7 +15,7 @@ on death of player:
                 if projectile is set:
                     set the death message to "&a%victim% &7was shoot by &c%attacker%&7! &8[&c%attacker's health%{@ASCII-Symbol-Heart}&8]"
             #Mob
-            if attacker is not a player:
+            if attacker isn't a player:
                 if attacker is set:
                     set the death message to "&a%victim% &7killed by &c%attacker%&7! &8[&c%attacker's health%{@ASCII-Symbol-Heart}&8]"               
             #Magic

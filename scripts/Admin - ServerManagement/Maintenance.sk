@@ -47,7 +47,7 @@ command /maintenance [<text>]:
                         send ""
                         stop
                         
-            else if arg-1 is not "status" or "info":
+            else if arg-1 isn't "status" or "info":
                 ToggleMaintenancePlayer(player,arg-1)
                 stop
         else:
@@ -76,7 +76,7 @@ command /maintenance [<text>]:
                         send ""
                         stop
 
-            else if arg-1 is not "status" or "info":
+            else if arg-1 isn't "status" or "info":
                 ToggleMaintenanceConsole(console,arg-1)
                 stop
 
