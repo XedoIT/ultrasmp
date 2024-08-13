@@ -17,6 +17,7 @@ options:
     god_ab: yaml value "actionbar.godmode.enabled" in "settings-%loop-player's uuid%"
 
 on join:
+    wait 1 tick
     CheckGodOnLogin(player)
             
 on food level change:

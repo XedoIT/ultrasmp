@@ -85,4 +85,5 @@ every 5 seconds:
             
 on quit:
     save yaml {@settings}
+    wait 5 ticks
     unload yaml {@settings}

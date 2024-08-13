@@ -18,6 +18,9 @@
 options:
     prefix: &4[&6&lH&e&lO&6&lM&e&lE&6&lS&4]
 
+  # YML
+    genre: yaml value "genre" in "settings-%player's uuid%"
+
 variables:
     {et.homes::%player%} = 0
     #{et.homes_limit::%player%} = 3
@@ -121,18 +124,18 @@ command /home [<text>]:
                     if {et.homes_loc::%player%::bed} is set:
                         if {et.homes_main_loc.%player%} isn't set:
                             teleport player to {et.homes_loc::%player%::bed}
-                            if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                            if {@genre} is "%{server.genre.male}%":
                                 send "{@prefix} &6Ti ho portato al tuo letto."
                                 stop
-                            else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                            else if {@genre} is "%{server.genre.female}%":
                                 send "{@prefix} &6Ti ho portata al tuo letto."
                                 stop
                         else:
                             teleport player to {et.homes_main_loc.%player%}
-                            if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                            if {@genre} is "%{server.genre.male}%":
                                 send "{@prefix} &6Ti ho portato alla tua casa principale &c%{et.homes_main_name.%player%}%&6."
                                 stop
-                            else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                            else if {@genre} is "%{server.genre.female}%":
                                 send "{@prefix} &6Ti ho portata alla tua casa principale &c%{et.homes_main_name.%player%}%&6."
                                 stop
                     else:
@@ -145,10 +148,10 @@ command /home [<text>]:
                 if arg-1 isn't "bed":
                     if {et.homes_name::%player%::*} contains arg-1:
                         teleport player to {et.homes_loc::%player%::%arg-1%}
-                        if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                        if {@genre} is "%{server.genre.male}%":
                             send "{@prefix} &6Ti ho portato alla casa &c%arg-1%&6."
                             stop
-                        else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                        else if {@genre} is "%{server.genre.female}%":
                             send "{@prefix} &6Ti ho portata alla casa &c%arg-1%&6."
                             stop
                     else:
@@ -156,10 +159,10 @@ command /home [<text>]:
                         stop
                 else:
                     teleport player to {et.homes_loc::%player%::bed}
-                    if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                    if {@genre} is "%{server.genre.male}%":
                         send "{@prefix} &6Ti ho portato al tuo letto."
                         stop
-                    else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                    else if {@genre} is "%{server.genre.female}%":
                         send "{@prefix} &6Ti ho portata al tuo letto."
                         stop
         else:

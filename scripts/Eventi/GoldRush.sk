@@ -23,6 +23,9 @@ options:
     subtitle_start: &aI mob danneggiati rilasceranno oro per
     subtitle_stop: &cEvento terminato.
 
+  # YML
+    genre: yaml value "genre" in "settings-%player's uuid%"
+
 command /goldrush:
     permission: event.goldrush
     permission message: %{server.prefix.main}% &cComando sconosciuto.
@@ -40,9 +43,9 @@ command /goldrush:
                 send "" to all players
                 send " &4&lIMPORTANTE! &cDurante l'evento, i mob uccisi non rilasceranno oggetti!" to all players
                 send "" to all players
-                if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                if {@genre} is "%{server.genre.male}%":
                     send " &eBuona fortuna, cercatore d'oro!"
-                else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                else if {@genre} is "%{server.genre.female}%":
                     send " &eBuona fortuna, cercatrice d'oro!"
                 send ""
                 send title "{@title}" with subtitle "{@subtitle_start} {@event_duration} minuti." to all players for 5 seconds

@@ -224,9 +224,6 @@ on player world change:
         set {whois.world.%player%} to "&dEnd"
         set {whois.world.marker.%player%} to end stone
 
-on join:
-    delete {whois.position.x.%player%}, {whois.position.y.%player%}, {whois.position.z.%player%}, {whois.position.biome.%player%}, {whois.offline.saturation.%player%}, {whois.offline.hp.%player%}, {whois.offline.max_hp.%player%}, {whois.offline.empty_slots.%player%}, {whois.offline.xp.%player%}, {whois.offline.xp_level.%player%}, {whois.offline.luck.%player%}, {whois.offline.health.%player%}, {whois.offline.wisdom.%player%}, {whois.offline.strength.%player%}, {whois.offline.regeneration.%player%}, {whois.offline.toughness.%player%}, {whois.offline.crit_chance.%player%}, {whois.offline.crit_damage.%player%} and {whois.offline.speed.%player%}
-
 on quit:
     set {whois.position.x.%player%} to placeholder "player_x" from player
     set {whois.position.y.%player%} to placeholder "player_y" from player

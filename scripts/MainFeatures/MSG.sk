@@ -1,3 +1,8 @@
+options:
+  # YML
+    genre: yaml value "genre" in "settings-%player's uuid%"
+    genre_lp: yaml value "genre" in "settings-%loop-player's uuid%"
+
 on command "/tell":
     cancel event
     send "%{server.prefix.main}% &cNon lo sai? Questo comando in questo server è disattivato!"
@@ -42,10 +47,10 @@ command /msg [<offline player>] [<text>]:
                 stop
                 
             else if arg-1 is player:
-                if {settings.%player%.user.genre} is "%{server.genre.male}%":
+                if {@genre} is "%{server.genre.male}%":
                     send "&cChe senso ha scrivere a te stesso?"
                     stop
-                else if {settings.%player%.user.genre} is "%{server.genre.female}%":
+                else if {@genre} is "%{server.genre.female}%":
                     send "&cChe senso ha scrivere a te stessa?"
                     stop
                 
@@ -113,8 +118,8 @@ command /msg [<offline player>] [<text>]:
 on chat:
     loop all players:
         if message contains "%loop-player%":
-            if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+            if {@genre_lp} is "%{server.genre.male}%":
                 replace "%loop-player%" in message with "&9%loop-player%&r"
-            else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+            else if {@genre_lp} is "%{server.genre.female}%":
                 replace "%loop-player%" in message with "&d%loop-player%&r"
             play sound "entity.experience_orb.pickup" with volume 1 at loop-player for loop-player

@@ -16,6 +16,7 @@ options:
     fly_ab: yaml value "actionbar.flymode.enabled" in "settings-%loop-player's uuid%"
 
 on join:
+    wait 1 tick
     CheckFlyOnLogin(player)
 
 on death of player:

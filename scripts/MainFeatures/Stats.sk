@@ -4,6 +4,9 @@ options:
 
     fight: &a● &a&lPvP abilitato &a●
 
+  # YML
+    genre: yaml value "genre" in "settings-%victim's uuid%"
+
 on join:
     if {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} isn't set:
         set {kills::%player%}, {deaths::%player%}, {killstreak::%player%}, {killstreak_max.%player%}, {infldamage::%player%} and {suffdamage::%player%} to 0
@@ -51,9 +54,9 @@ on death:
             if {killstreak::%victim%} != 0:
                 wait 2 ticks
                 send "" to victim
-                if {settings.%victim%.user.genre} is "%{server.genre.male}%":
+                if {@genre} is "%{server.genre.male}%":
                     send "&4&k00 &cSei morto con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
-                else if {settings.%victim%.user.genre} is "%{server.genre.female}%":
+                else if {@genre} is "%{server.genre.female}%":
                     send "&4&k00 &cSei morta con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
                 send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
                 send "" to victim
@@ -68,9 +71,9 @@ on death:
             if {killstreak::%victim%} != 0:
                 wait 2 ticks
                 send "" to victim
-                if {settings.%victim%.user.genre} is "%{server.genre.male}%":
+                if {@genre} is "%{server.genre.male}%":
                     send "&4&k00 &cSei morto con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
-                else if {settings.%victim%.user.genre} is "%{server.genre.female}%":
+                else if {@genre} is "%{server.genre.female}%":
                     send "&4&k00 &cSei morta con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
                 send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
                 send "" to victim
