@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a><img src="https://andrewontilt.github.io/ultrasmp/assets/icon.png" alt="UltraSMPico" width="100"></a>
+  <a><img src="https://andrewontilt.github.io/assets/ultrasmp/sprites/lp-icon.png" alt="UltraSMPico" width="100"></a>
   <br>
   Project: Ultra SMP
   <br>
