@@ -22,40 +22,44 @@ command /freeze [<offline player>]:
             send "%{server.prefix.main}% &cSpecifica il nome di un giocatore."
             stop
         else:
-            if arg-1 is online:
-                if {@freeze_arg} is true:
-                    if {@genre_arg} is "%{server.genre.male}%":
-                        send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzato."
-                        {@error_sound} at player for player
-                        stop
-                    else if {@genre_arg} is "%{server.genre.female}%":
-                        send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzata."
-                        {@error_sound} at player for player
+            if arg-1 is player:
+                send "%{server.prefix.main}% &cNon puoi immobilizzare te stesso."
+                stop
+            else: 
+                if arg-1 is online:
+                    if {@freeze_arg} is true:
+                        if {@genre_arg} is "%{server.genre.male}%":
+                            send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzato."
+                            {@error_sound} at player for player
+                            stop
+                        else if {@genre_arg} is "%{server.genre.female}%":
+                            send "%{server.prefix.main}% &6%arg-1% &cè già immobilizzata."
+                            {@error_sound} at player for player
+                            stop
+                    else:
+                        set {@freeze_arg} to true
+                        save yaml {@data}
+                        send "%{server.prefix.main}% &cHai immobilizzato &6%arg-1%&c."
+                        {@confirm_sound} at player for player
+                        {@freeze_sound} at arg-1 for arg-1
+                        if sender is player:
+                            if {@genre_arg} is "%{server.genre.male}%":
+                                send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzato!" to arg-1 for 5 seconds
+                                #send "%{server.prefix.main}% &6%player% &cti ha immobilizzato." to arg-1
+                            else if {@genre_arg} is "%{server.genre.female}%":
+                                send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzata!" to arg-1 for 5 seconds
+                                #send "%{server.prefix.main}% &6%player% &cti ha immobilizzata." to arg-1
+                        else:
+                            if {@genre_arg} is "%{server.genre.male}%":
+                                send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzato!" to arg-1 for 5 seconds
+                                #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzato." to arg-1
+                            else if {@genre_arg} is "%{server.genre.female}%":
+                                send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzata!" to arg-1 for 5 seconds
+                                #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzata." to arg-1
                         stop
                 else:
-                    set {@freeze_arg} to true
-                    save yaml {@data}
-                    send "%{server.prefix.main}% &cHai immobilizzato &6%arg-1%&c."
-                    {@confirm_sound} at player for player
-                    {@freeze_sound} at arg-1 for arg-1
-                    if sender is player:
-                        if {@genre_arg} is "%{server.genre.male}%":
-                            send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzato!" to arg-1 for 5 seconds
-                            #send "%{server.prefix.main}% &6%player% &cti ha immobilizzato." to arg-1
-                        else if {@genre_arg} is "%{server.genre.female}%":
-                            send title "&c&lSTOP!" with subtitle "&6%player% &cti ha immobilizzata!" to arg-1 for 5 seconds
-                            #send "%{server.prefix.main}% &6%player% &cti ha immobilizzata." to arg-1
-                    else:
-                        if {@genre_arg} is "%{server.genre.male}%":
-                            send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzato!" to arg-1 for 5 seconds
-                            #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzato." to arg-1
-                        else if {@genre_arg} is "%{server.genre.female}%":
-                            send title "&c&lSTOP!" with subtitle "&cLa &6console &cti ha immobilizzata!" to arg-1 for 5 seconds
-                            #send "%{server.prefix.main}% &cLa &6console &cti ha immobilizzata." to arg-1
+                    send "%{server.prefix.main}% &6%arg-1% &cè offline."
                     stop
-            else:
-                send "%{server.prefix.main}% &6%arg-1% &cè offline."
-                stop
                 
 command /unfreeze [<offline player>]:
     permission: freeze.use
@@ -122,6 +126,14 @@ on sneak toggle:
             send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
 
 on right click:
+    if {@freeze_p} is true:
+        cancel event
+        if {@genre_p} is "%{server.genre.male}%":
+            send action bar "&cSei stato immobilizzato! Non puoi muoverti." to player
+        if {@genre_p} is "%{server.genre.female}%":
+            send action bar "&cSei stata immobilizzata! Non puoi muoverti." to player
+
+on left click:
     if {@freeze_p} is true:
         cancel event
         if {@genre_p} is "%{server.genre.male}%":
