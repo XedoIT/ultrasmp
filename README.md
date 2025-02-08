@@ -3,6 +3,11 @@
   <br>
   Project: Ultra SMP
   <br>
+  
+  ![Static Badge](https://img.shields.io/badge/Skript-a?style=for-the-badge&label=%3C%2F%3E&color=%23ffd000) 
+  ![Static Badge](https://img.shields.io/badge/beta-a?style=for-the-badge&label=status&color=%23ff6600)
+  ![Static Badge](https://img.shields.io/badge/0.18-a?style=for-the-badge&label=Versione&color=%23#79d600)
+
 </h1>
 
 <h3 align="center">L'Ultra SMP è in BETA!</h4>
@@ -11,3 +16,5 @@ Verranno introdotti tutti gli Update col passare del tempo. Di seguito c'è la p
 
 <h3 align="center">Performance Update: 40%| Progress Update: 10% | Ultra SMP: 80% totale</h3>
 <h4 align="center">Per visualizzare tutti i changelog clicca <a href="https://wiki.ultrasmp.org/disagiosmp/aggiornamenti-e-novita/changelog">qui</a>.</h4>
+
+<br>
