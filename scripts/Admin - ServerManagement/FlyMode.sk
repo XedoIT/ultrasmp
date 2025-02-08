@@ -102,7 +102,7 @@ function CheckFlyOnDeath(p: player):
                 send "{@warn} &cSei morta con il volo abilitato! &cNon puoi più volare. {@warn}" to {_p}
                 send "" to {_p}
         else:
-            set {_p}'s flight mode to true
+            set {_p}'s flight mode to true # REMINDER: DA SPOSTARE IN "on respawn"
             send "" to {_p}
             send "{@prefix_enabled} &aPuoi volare anche dopo la morte, fantastico!" to {_p}
             send "" to {_p}

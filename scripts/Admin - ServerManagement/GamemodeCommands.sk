@@ -19,7 +19,8 @@ options:
 # AVVENTURA: empty map
 # SPETTATORE: ender eye
 
-command /gm [<text>] [<offline player>]:
+command /gamemode [<text>] [<offline player>]:
+    aliases: /gm
     permission: gm.use
     permission message: &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
     description: Modifica la modalità di gioco di un giocatore.
@@ -253,7 +254,7 @@ command /gm [<text>] [<offline player>]:
                 send "{@prefix} &cUtilizzo: &6/gm <&espectator&6> <&egiocatore&6>"
                 stop
 
-on tab complete of "/gm":
+on tab complete of "/gamemode" or "/gm":
     set tab completions for position 1 to "survival", "creative", "adventure" and "spectator"
     
 command /gms [<offline player>]:

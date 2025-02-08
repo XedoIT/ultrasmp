@@ -1,0 +1,21 @@
+command /renitem [<text>]:
+    permission: renitem.use
+    permission message: %{server.prefix.main}% &cComando sconosciuto.
+    executable by: player, console
+    trigger:
+        if sender is player:
+            if player's tool isn't air:
+                if arg-1 isn't set:
+                    send "%{server.prefix.main}% &cComando incompleto."
+                    send "%{server.prefix.main}% &cUtilizzo: &6/renitem <nome oggetto>"
+                    stop
+                else:
+                    set name of player's tool to uncolored arg-1
+                    send "%{server.prefix.main}% &aHai rinominato quest'oggetto &f%arg-1%&a."
+                    stop
+            else:
+                send "%{server.prefix.main}% &cPer rinominare un oggetto devi prima tenerlo in mano!"
+                stop
+        else:
+            send "%{server.prefix.main}% &cSolo i giocatori possono eseguire questo comando."
+            stop

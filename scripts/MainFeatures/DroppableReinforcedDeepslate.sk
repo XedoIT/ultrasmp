@@ -1,4 +1,17 @@
 on break of reinforced deepslate:
     if gamemode of player is survival or adventure:
-        if player's tool is a diamond pickaxe or a netherite pickaxe:
+        if player's tool is a netherite pickaxe:
             drop 1 reinforced deepslate at event-block
+        else:
+            send "%{server.prefix.main}% &cPuoi ottenere questo blocco soltanto se utilizzi un piccone di netherite!" to player
+
+every tick:
+    loop all players:
+        if loop-player's target block is reinforced deepslate:
+            if {lookatreinfdeepslate.%loop-player%} isn't set:
+                set {lookatreinfdeepslate.%loop-player%} to true
+                apply infinite potion of haste of tier 256 without particles whilst hiding potion icon to loop-player
+        else:
+            if {lookatreinfdeepslate.%loop-player%} is true:
+                delete {lookatreinfdeepslate.%loop-player%}
+                remove haste from loop-player

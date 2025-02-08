@@ -1,0 +1,43 @@
+# Configurazione del tempo AFK e della distanza minima in blocchi
+options:
+    afkTime: 5 # Tempo in minuti per considerare un giocatore AFK
+    afkDistance: 10 # Distanza minima in blocchi per considerare il giocatore non AFK
+
+# Quando un giocatore si muove, aggiorna la sua posizione e il tempo di movimento
+on player move:
+    set {afk.lastMove::%player%} to now
+    set {afk.lastPosition::%player%} to location of player
+
+# Controllo ogni 10 secondi se i giocatori sono AFK
+every 10 seconds:
+    loop all players:
+        if difference between {afk.lastMove::%loop-player%} and now > {@afkTime} seconds:
+            set {_lastLocation} to {afk.lastPosition::%loop-player%}
+            set {_currentLocation} to location of loop-player
+            if distance between {_lastLocation} and {_currentLocation} < {@afkDistance}:
+                if {afk.status::%loop-player%} is not set:
+                    set {afk.status::%loop-player%} to true
+                    wait 5 ticks
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
+                        kick loop-player due to "&c--- %{server.prefix.main}% &c---%nl%%nl%%nl%&6&lSei stato espulso per inattività!%nl%%nl%&7Durata ultima sessione: &c%{playtime.last_session.days.%loop-player%}% giorni&7, &c%{playtime.last_session.hours.%loop-player%}% ore&7, &c%{playtime.last_session.minutes.%loop-player%}% minuti &7e &c%{playtime.last_session.seconds.%loop-player%}% secondi&7"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
+                        kick loop-player due to "&c--- %{server.prefix.main}% &c---%nl%%nl%%nl%&6&lSei stata espulsa per inattività!%nl%%nl%&7Durata ultima sessione: &c%{playtime.last_session.days.%loop-player%}% giorni&7, &c%{playtime.last_session.hours.%loop-player%}% ore&7, &c%{playtime.last_session.minutes.%loop-player%}% minuti &7e &c%{playtime.last_session.seconds.%loop-player%}% secondi&7"
+            else:
+                delete {afk.status::%loop-player%}
+        else:
+            delete {afk.status::%loop-player%}
+
+# Quando un giocatore si unisce, imposta la sua posizione e il tempo di movimento iniziale
+on join:
+    set {afk.lastMove::%player%} to now
+    set {afk.lastPosition::%player%} to location of player
+
+# Quando un giocatore lascia, rimuovi il suo record AFK
+on quit:
+    delete {afk.lastMove::%player%}
+    delete {afk.lastPosition::%player%}
+    delete {afk.status::%player%}
+
+every second:
+    loop all players:
+        send action bar "AFK? %{afk.status::%loop-player%}%" to loop-player

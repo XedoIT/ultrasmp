@@ -1,7 +1,5 @@
 options:
     profile_item_name: &eProfilo &lSMP
-    profile_item_lore1: &7Apri il tuo profilo SMP e consulta
-    profile_item_lore2: &7diverse informazioni utili.
 
 on join:
     set slot 8 of player to nether star named "{@profile_item_name}"
@@ -13,22 +11,16 @@ on right click:
         openProfileGui(player)
         #play sound "ui.button.click" with volume 0.2 at player for player # SOSTITUIRE "ui.button.click" CON "%{settings.click_sound.profile.%player%}%"
 
-on click:
-    if click type is middle mouse:
-        if player is holding a nether star named "{@profile_item_name}":
-            if event-block is set:
-                cancel event
-
 on inventory click:
     if type of event-inventory is player inventory:
-        if index of event-slot isn't 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 or 40:
+        if index of event-slot is 8:
             cancel event
             #openProfileGui(player)
-        if index of event-slot is 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 or 40:
+        if index of event-slot isn't 8:
             if event-item is nether star named "{@profile_item_name}":
                 clear event-slot
     if click type is number key:
-        if event-slot isn't 8:
+        if event-slot is 8:
             if event-slot is air:
                 set {noswap.%player%} to air
             else:

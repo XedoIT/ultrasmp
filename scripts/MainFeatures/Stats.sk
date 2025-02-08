@@ -22,67 +22,75 @@ on damage:
             if {pvp} is "{@fight}":
                 if {god.%victim%} is "{@off}":
                     if {difficulty.info.hardcore_death::%victim%} and {difficulty.info.hardcore_death::%attacker%} isn't set:
-                        DamageInflicted(damage,attacker)
-                        DamageSuffered(damage,victim)
+                        if {arenacombat.status} isn't true:
+                            DamageInflicted(damage,attacker)
+                            DamageSuffered(damage,victim)
         else if victim isn't a player, a fireball, a boat, an armor stand or an item frame:
             if {difficulty.info.hardcore_death::%attacker%} isn't set:
-                DamageInflicted(damage,attacker)
+                if {arenacombat.status} isn't true:
+                    DamageInflicted(damage,attacker)
     else:
         if victim is a player:
             if {god.%victim%} is "{@off}":
                 if {difficulty.info.hardcore_death::%victim%} isn't set:
-                    DamageSuffered(damage,victim)
+                    if {arenacombat.status} isn't true:
+                        DamageSuffered(damage,victim)
 
 
 function DamageInflicted(i: number, p: player):
-    add {_i} to {infldamage::%{_p}%}
+    if {arenacombat.status} isn't true:
+        add {_i} to {infldamage::%{_p}%}
 
 function DamageSuffered(i: number, p: player):
-    add {_i} to {suffdamage::%{_p}%}
+    if {arenacombat.status} isn't true:
+        add {_i} to {suffdamage::%{_p}%}
 
 # UCCISIONI, MORTI E SERIE DI UCCISIONI
 on death:
     if victim isn't a player:
         if attacker is a player:
-            add 1 to {kills::%attacker%}
-            add 1 to {killstreak::%attacker%}
+            if {arenacombat.status} isn't true:
+                add 1 to {kills::%attacker%}
+                add 1 to {killstreak::%attacker%}
     else:
         if attacker is a player:
-            add 1 to {kills::%attacker%}
-            add 1 to {deaths::%victim%}
-            add 1 to {killstreak::%attacker%}
-            if {killstreak::%victim%} != 0:
-                wait 2 ticks
-                send "" to victim
-                if {@genre} is "%{server.genre.male}%":
-                    send "&4&k00 &cSei morto con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
-                else if {@genre} is "%{server.genre.female}%":
-                    send "&4&k00 &cSei morta con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
-                send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                send "" to victim
-                if {killstreak::%victim%} > {killstreak_max.%victim%}:
-                    set {killstreak_max_old.%victim%} to {killstreak_max.%victim%}
-                    set {killstreak_max.%victim%} to {killstreak::%victim%}
-                    send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%regex({killstreak_max_old.%victim%})%➜&b&l%regex({killstreak_max.%victim%})%&f) &e&k0&6&k0" to victim
-                delete {killstreak_max_old.%victim%}
-                set {killstreak::%victim%} to 0
+            if {arenacombat.status} isn't true:
+                add 1 to {kills::%attacker%}
+                add 1 to {deaths::%victim%}
+                add 1 to {killstreak::%attacker%}
+                if {killstreak::%victim%} != 0:
+                    wait 2 ticks
+                    send "" to victim
+                    if {@genre} is "%{server.genre.male}%":
+                        send "&4&k00 &cSei morto con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
+                    else if {@genre} is "%{server.genre.female}%":
+                        send "&4&k00 &cSei morta con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
+                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                    send "" to victim
+                    if {killstreak::%victim%} > {killstreak_max.%victim%}:
+                        set {killstreak_max_old.%victim%} to {killstreak_max.%victim%}
+                        set {killstreak_max.%victim%} to {killstreak::%victim%}
+                        send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%regex({killstreak_max_old.%victim%})%➜&b&l%regex({killstreak_max.%victim%})%&f) &e&k0&6&k0" to victim
+                    delete {killstreak_max_old.%victim%}
+                    set {killstreak::%victim%} to 0
         else:
-            add 1 to {deaths::%victim%}
-            if {killstreak::%victim%} != 0:
-                wait 2 ticks
-                send "" to victim
-                if {@genre} is "%{server.genre.male}%":
-                    send "&4&k00 &cSei morto con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
-                else if {@genre} is "%{server.genre.female}%":
-                    send "&4&k00 &cSei morta con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
-                send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
-                send "" to victim
-                if {killstreak::%victim%} > {killstreak_max.%victim%}:
-                    set {killstreak_max_old.%victim%} to {killstreak_max.%victim%}
-                    set {killstreak_max.%victim%} to {killstreak::%victim%}
-                    send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%regex({killstreak_max_old.%victim%})%➜&b&l%regex({killstreak_max.%victim%})%&f) &e&k0&6&k0" to victim
-                delete {killstreak_max_old.%victim%}
-                set {killstreak::%victim%} to 0
+            if {arenacombat.status} isn't true:
+                add 1 to {deaths::%victim%}
+                if {killstreak::%victim%} != 0:
+                    wait 2 ticks
+                    send "" to victim
+                    if {@genre} is "%{server.genre.male}%":
+                        send "&4&k00 &cSei morto con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
+                    else if {@genre} is "%{server.genre.female}%":
+                        send "&4&k00 &cSei morta con &e%regex({killstreak::%victim%})% uccisioni&c! &4&k00" to victim
+                    send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+                    send "" to victim
+                    if {killstreak::%victim%} > {killstreak_max.%victim%}:
+                        set {killstreak_max_old.%victim%} to {killstreak_max.%victim%}
+                        set {killstreak_max.%victim%} to {killstreak::%victim%}
+                        send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%regex({killstreak_max_old.%victim%})%➜&b&l%regex({killstreak_max.%victim%})%&f) &e&k0&6&k0" to victim
+                    delete {killstreak_max_old.%victim%}
+                    set {killstreak::%victim%} to 0
 
 # BLOCCHI DISTRUTTI E BLOCCHI PIAZZATI
 on place:

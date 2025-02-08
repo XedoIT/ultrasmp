@@ -155,6 +155,8 @@ on load:
 # VARIE (DECRAFTING)
   # SELLA
     register new shapeless recipe for 5 leather using 1 saddle with id "saddle_to_leather" in group "traveler"
+  # SECCHIO
+    register new shapeless recipe for 3 iron ingot using 1 bucket with id "bucket_to_iron" in group "utility"
 
 
 # CRAFTING PERSONALIZZATI
@@ -162,8 +164,9 @@ on load:
     register new shaped recipe for 1 enchanted golden apple using gold block, gold block, gold block, gold block, golden apple, gold block, gold block, gold block and gold block with id "enchanted_golden_apple" in group "miscellanous"
   # TOTEM DELL'IMMORTALITÀ
     register new shaped recipe for 1 totem of undying using emerald, air, emerald, enchanted golden apple, gold block, enchanted golden apple, air, enchanted golden apple and air with id "totem_of_undying" in group "miscellanous"
-  # SELLA
-    register new shapeless recipe for 1 saddle using air, air, air, leather, air, leather, leather, leather and leather with id "leather_to_saddle" in group "traveler"
-
-  # SECCHIO
-    register new shapeless recipe for 3 iron ingot using 1 bucket with id "bucket_to_iron" in group "utility"
+  # SPUGNA
+    register new shaped recipe for 4 sponge using 1 yellow wool, 1 yellow wool, 1 yellow wool, 1 yellow wool, splash potion of water, 1 yellow wool, 1 yellow wool, 1 yellow wool and 1 yellow wool with id "sponge" in group "miscellanous"
+  # FIORE SPORIFERO
+    register new shaped recipe for 2 spore blossom using 1 slime ball, 1 slime ball, 1 slime ball, 1 small dripleaf, 1 spore blossom, 1 small dripleaf, 1 bone meal, 1 bone meal and 1 bone meal with id "spore_blossom" in group "nature"
+  # AZALEA FIORITA
+    register new shaped recipe for 1 flowering azalea using 1 azalea and 1 flowering azalea leaves with id "flowering_azalea" in group "nature"

@@ -1,0 +1,34 @@
+#
+# DIPENDENZE:
+#
+# - SkRayFall
+# - skript-yaml
+#
+
+options:
+    genre: yaml value "genre" in "settings-%loop-player's uuid%"
+    nick_lp: yaml value "player_info.player.nickname" in "data-%loop-player's uuid%"
+
+every tick:
+    loop all players:
+        #set {_ping} to placeholder "player_ping" from loop-player
+        #set tab score of loop-player to {_ping} for loop-player
+        set {_nick} to {@nick_lp}
+        if {difficulty.info.hardcore_death::%loop-player%} isn't set:
+            set loop-player's tab name to formatted "%{rank.prefix.%loop-player%}% &f%{_nick}%"
+        else:
+            set loop-player's tab name to formatted "%{difficulty.info.hardcore_death.%loop-player%.marker}% &7&o%{_nick}%"
+        if {@genre} is "%{server.genre.male}%":
+            if world of loop-player is "%{server.world.overworld}%":
+                set tab header to "%{animation.UltraSMP}% &c&lDEV%nl%%nl%&b&l>> %{animation.Benvenuto}% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&b&k0 &a&lOverworld &b&k0%nl%%{animation.OverWorld}%" and footer to "%{animation.OverWorld}%%nl%%nl%&f&lFama:%nl%&b%regex({fame::%loop-player%})%%nl%%nl%&f&lReputazione:%nl%%{rank.%loop-player%}%%nl%%nl%%{pvp}%%nl%%nl%&3Difficoltà: %{difficulty.info}%%nl%%nl%&f&lCalendario reale:%nl%&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "tab_placeholder_time" from loop-player%" for loop-player
+            else if world of loop-player is "%{server.world.nether}%":
+                set tab header to "%{animation.UltraSMP}% &c&lDEV%nl%%nl%&b&l>> %{animation.Benvenuto}% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&4&k0 &c&lNether &4&k0%nl%%{animation.Nether}%" and footer to "%{animation.Nether}%%nl%%nl%&f&lFama:%nl%&b%regex({fame::%loop-player%})%%nl%%nl%&f&lReputazione:%nl%%{rank.%loop-player%}%%nl%%nl%%{pvp}%%nl%%nl%&3Difficoltà: %{difficulty.info}%%nl%%nl%&f&lCalendario reale:%nl%&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "tab_placeholder_time" from loop-player%" for loop-player
+            else if world of loop-player is "%{server.world.end}%":
+                set tab header to "%{animation.UltraSMP}% &c&lDEV%nl%%nl%&b&l>> %{animation.Benvenuto}% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&5&k0 &d&lEnd &5&k0%nl%%{animation.End}%" and footer to "%{animation.End}%%nl%%nl%&f&lFama:%nl%&b%regex({fame::%loop-player%})%%nl%%nl%&f&lReputazione:%nl%%{rank.%loop-player%}%%nl%%nl%%{pvp}%%nl%%nl%&3Difficoltà: %{difficulty.info}%%nl%%nl%&f&lCalendario reale:%nl%&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "tab_placeholder_time" from loop-player%" for loop-player
+        else if {@genre} is "%{server.genre.female}%":
+            if world of loop-player is "%{server.world.overworld}%":
+                set tab header to "%{animation.UltraSMP}% &c&lDEV%nl%%nl%&b&l>> %{animation.Benvenuta}% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&b&k0 &a&lOverworld &b&k0%nl%%{animation.OverWorld}%" and footer to "%{animation.OverWorld}%%nl%%nl%&f&lFama:%nl%&b%regex({fame::%loop-player%})%%nl%%nl%&f&lReputazione:%nl%%{rank.%loop-player%}%%nl%%nl%%{pvp}%%nl%%nl%&3Difficoltà: %{difficulty.info}%%nl%%nl%&f&lCalendario reale:%nl%&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "tab_placeholder_time" from loop-player%" for loop-player
+            else if world of loop-player is "%{server.world.nether}%":
+                set tab header to "%{animation.UltraSMP}% &c&lDEV%nl%%nl%&b&l>> %{animation.Benvenuta}% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&4&k0 &c&lNether &4&k0%nl%%{animation.Nether}%" and footer to "%{animation.Nether}%%nl%%nl%&f&lFama:%nl%&b%regex({fame::%loop-player%})%%nl%%nl%&f&lReputazione:%nl%%{rank.%loop-player%}%%nl%%nl%%{pvp}%%nl%%nl%&3Difficoltà: %{difficulty.info}%%nl%%nl%&f&lCalendario reale:%nl%&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "tab_placeholder_time" from loop-player%" for loop-player
+            else if world of loop-player is "%{server.world.end}%":
+                set tab header to "%{animation.UltraSMP}% &c&lDEV%nl%%nl%&b&l>> %{animation.Benvenuta}% &c&l%loop-player%&6&l! &b&l<<%nl%%nl%&5&k0 &d&lEnd &5&k0%nl%%{animation.End}%" and footer to "%{animation.End}%%nl%%nl%&f&lFama:%nl%&b%regex({fame::%loop-player%})%%nl%%nl%&f&lReputazione:%nl%%{rank.%loop-player%}%%nl%%nl%%{pvp}%%nl%%nl%&3Difficoltà: %{difficulty.info}%%nl%%nl%&f&lCalendario reale:%nl%&7%placeholder "localtime_time" from loop-player% &f- &b%placeholder "tab_placeholder_time" from loop-player%" for loop-player

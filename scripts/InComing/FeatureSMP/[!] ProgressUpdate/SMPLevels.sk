@@ -1,0 +1,55 @@
+options:
+    multiplier: 100
+    base: 100
+
+on join: # DEBUG/DEVELOPMENT
+    #if {level.xp.%player%} isn't set:
+    set {level.xp.%player%} to 0
+    #if {level::%player%} isn't set:
+    set {level::%player%} to 1
+    #if {level.max.%player%} isn't set:
+    set {level.max.%player%} to ({@multiplier} * ({level::%player%} - 2) ^ 2 + {@base})
+    #if {level.progress_bar.%player%} isn't set:
+    set {level.progress_bar.%player%} to "&7■■■■■■■■■■■■■■■■■■■■"
+
+command /levelxp:
+    trigger:
+        send "Livello SMP: %{level::%player%}%"
+        send "Esperienza totale: %{level.xp.%player%}%"
+        send "Esperienza massima per il livello %{level::%player%} + 1%: %{level.max.%player%}%"
+        send "Barra del progresso: %{level.progress_bar.%player%}%"
+        stop
+
+every tick:
+    loop all players:
+        if {level.xp.%loop-player%} >= {level.max.%loop-player%}:
+            add 1 to {level::%loop-player%}
+            send "&aCongratulazioni! Hai raggiunto il livello %{level::%loop-player%}%." to loop-player
+            add ({@multiplier} * ({level::%loop-player%} - 2) ^ 2 + {@base}) to {level.max.%loop-player%}
+            set {level.xp.%loop-player%} to 0
+
+        if {level.xp.%loop-player%} >= 10% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■&7■■■■■■■■■■■■■■■■■■"
+        else if {level.xp.%loop-player%} >= 20% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■&7■■■■■■■■■■■■■■■■"
+        else if {level.xp.%loop-player%} >= 30% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■&7■■■■■■■■■■■■■■"
+        else if {level.xp.%loop-player%} >= 40% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■&7■■■/■■■■■■■■"
+        else if {level.xp.%loop-player%} >= 50% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■■■&7■■■■■■■■■■"
+        else if {level.xp.%loop-player%} >= 60% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■■■■■&7■■■■■■■■"
+        else if {level.xp.%loop-player%} >= 70% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■■■■■■■&7■■■■■■"
+        else if {level.xp.%loop-player%} >= 80% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■■■■■■■■■&7■■■■"
+        else if {level.xp.%loop-player%} >= 90% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■■■■■■■■■■■&7■■"
+        else if {level.xp.%loop-player%} >= 100% of {level.max.%loop-player%}:
+            set {level.progress_bar.%loop-player%} to "&a■■■■■■■■■■■■■■■■■■■■"
+
+on break:
+    if event-block is grass block, dirt, sand, sandstone, stone or cobblestone:
+        add 124 to {level.xp.%player%}
+        send action bar "%{level.xp.%player%}%/%{level.max.%player%}%" to player

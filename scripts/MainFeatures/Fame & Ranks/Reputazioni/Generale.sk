@@ -23,6 +23,10 @@ options:
     levelup_sound: play sound "entity.player.levelup" with volume 1 and pitch 2
     what_sound: play sound "entity.villager.trader" with volume 1
 
+    glinted: "{enchantment_glint_override:true}"
+    glinted_no_flags: "{enchantment_glint_override:true,hide_additional_tooltip:{}}"
+    no_flags: "{hide_additional_tooltip:{}}"
+
     no_effect: &7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno.
     no_effect_self: &7Non hai nessun effetto perché sei neutrale&7. Cambia reputazione per ottenerne uno.
     no_effect_other: &c%arg-2% &7non ha nessun effetto perché è neutrale&7.
@@ -30,6 +34,9 @@ options:
   # ANNUNCI CAMBIO REPUTAZIONE
     new_rank: &c%loop-player% &fè diventato %{rank.%loop-player%}%&f!
     new_rank_female: &c%loop-player% &fè diventata %{rank.%loop-player%}%&f!
+
+  # INDICATORE REPUTAZIONE GUI
+    in_rank: &a&lLA TUA REPUTAZIONE ATTUALE
     
   # YML
     genre: yaml value "genre" in "settings-%player's uuid%"
@@ -76,7 +83,7 @@ options:
     tabpfx_rank_7: &3[&9&lM&3]&r
     tabpfx_rank_8: &3[&9&lS&3]&r
     tabpfx_rank_9: &9[&b&lS&9]&r
-    tabpfx_rank_10: &9[&b&lS&9]&r
+    tabpfx_rank_10: &9{&b&lS&9}&r
     tabpfx_rank_11: &4{&c[&6&n&lN&e&c]&4}&r
 
   # FAMA MASSIMA PER REPUTAZIONE
@@ -284,26 +291,7 @@ command /rank [<text>] [<offline player>] [<text>]:
                 if arg-2 isn't set:
                     if arg-3 isn't set:
                         if player has permission "ranks.list":
-                            send "&7&m---------&r {@prefix} &7&m---------"
-                            send "&fReputazioni disponibili:"
-                            send "1. %{rank.alignment.-5.%player%}% &f- <ttp:&4Da {@chat_max_rank_-5} in giù>&9[&3?&9]"
-                            send "2. %{rank.alignment.-4.%player%}% &f- <ttp:&cDa {@chat_min_rank_-4} a {@chat_max_rank_-4}>&9[&3?&9]"
-                            send "3. %{rank.alignment.-3.%player%}% &f- <ttp:&6Da {@chat_min_rank_-3} a {@chat_max_rank_-3}>&9[&3?&9]"
-                            send "4. %{rank.alignment.-2.%player%}% &f- <ttp:&eDa {@chat_min_rank_-2} a {@chat_max_rank_-2}>&9[&3?&9]"
-                            send "5. %{rank.alignment.-1.%player%}% &f- <ttp:&8Da {@chat_min_rank_-1} a {@chat_max_rank_-1}>&9[&3?&9]"
-                            send "6. %{rank.alignment.0.%player%}% &f- <ttp:&7Da {@chat_min_rank_0} a {@chat_max_rank_0}>&9[&3?&9]"
-                            send "7. %{rank.alignment.1.%player%}% &f- <ttp:&aDa {@chat_min_rank_1} a {@chat_max_rank_1}>&9[&3?&9]"
-                            send "8. %{rank.alignment.2.%player%}% &f- <ttp:&aDa {@chat_min_rank_2} a {@chat_max_rank_2}>&9[&3?&9]"
-                            send "9. %{rank.alignment.3.%player%}% &f- <ttp:&2Da {@chat_min_rank_3} a {@chat_max_rank_3}>&9[&3?&9]"
-                            send "10. %{rank.alignment.4.%player%}% &f- <ttp:&2Da {@chat_min_rank_4} a {@chat_max_rank_4}>&9[&3?&9]"
-                            send "11. %{rank.alignment.5.%player%}% &f- <ttp:&3Da {@chat_min_rank_5} a {@chat_max_rank_5}>&9[&3?&9]"
-                            send "12. %{rank.alignment.6.%player%}% &f- <ttp:&3Da {@chat_min_rank_6} a {@chat_max_rank_6}>&9[&3?&9]"
-                            send "13. %{rank.alignment.7.%player%}% &f- <ttp:&9Da {@chat_min_rank_7} a {@chat_max_rank_7}>&9[&3?&9]"
-                            send "14. %{rank.alignment.8.%player%}% &f- <ttp:&9Da {@chat_min_rank_8} a {@chat_max_rank_8}>&9[&3?&9]"
-                            send "15. %{rank.alignment.9.%player%}% &f- <ttp:&bDa {@chat_min_rank_9} a {@chat_max_rank_9} Fama>&9[&3?&9]"
-                            send "16. %{rank.alignment.10.%player%}% &f- <ttp:&bDa {@chat_min_rank_10} a {@chat_max_rank_10}>&9[&3?&9]"
-                            send "17. %{rank.alignment.11.%player%}% &f- <ttp:&6Da {@chat_min_rank_11} in su>&9[&3?&9]"
-                            send "&7&m-------------------------"
+                            openRanksGUI(player)
                             stop
                         else:
                             send "%{server.prefix.main}% &cComando sconosciuto."
@@ -841,10 +829,11 @@ every 3 ticks:
                 else if {fame::%loop-player%} > {@max_rank_10}:
                     set {rank.%loop-player%} to {rank.alignment.11.%loop-player%}
                     set {rank.prefix.%loop-player%} to "{@tabpfx_rank_11}"
-                    if {@genre_lp} is "%{server.genre.male}%":
+                    execute console command "/lp user %loop-player% permission set god.*"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
                         stop
-                    else if {@genre_lp} is "%{server.genre.female}%":
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
                         stop
 
@@ -852,9 +841,110 @@ every 3 ticks:
                 if {fame::%loop-player%} < {@min_rank_11}:
                     set {rank.%loop-player%} to {rank.alignment.10.%loop-player%}
                     set {rank.prefix.%loop-player%} to "{@tabpfx_rank_10}"
-                    if {@genre_lp} is "%{server.genre.male}%":
+                    execute console command "/lp user %loop-player% permission unset god.*"
+                    if {settings.%loop-player%.user.genre} is "%{server.genre.male}%":
                         broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
                         stop
-                    else if {@genre_lp} is "%{server.genre.female}%":
+                    else if {settings.%loop-player%.user.genre} is "%{server.genre.female}%":
                         broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
                         stop
+
+function openRanksGUI(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Reputazioni dell'%{server.name}%"
+    if {settings.%{_p}%.custom.glasspanes} is true:
+        set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&f"
+        set slot 10, 16, 19, 20, 21, 23, 24, 25, 37, 41 and 43 of {_gui} to gray stained glass pane named "&f"
+    set slot 4 of {_gui} to writable book named "&fReputazioni" with lore "&7In questa schermata potrai consultare la Fama", "&7necessaria ad ottenere le varie reputazioni.", "", "&7Ricorda di consultare la Wiki per maggiori dettagli!", "" and "&fAttualmente hai accumulato &a%regex({fame::%{_p}%})% Fama&f."
+    if {rank.%{_p}%} = {rank.alignment.-5.%{_p}%}:
+        set slot 11 of {_gui} to lava bucket with nbt from {@glinted} named "%{rank.alignment.-5.%{_p}%}% {@tabpfx_rank_-5}" with lore " &fFama richiesta:", "  &4Da {@chat_max_rank_-5} in giù", "", " &fEffetti ottenuti:", "  &c- &7Sfortuna", "  &c- &7Debolezza II", "  &c- &7Affaticamento II", "  &c- &7Lentezza II", "  &c- &7Cecità di 30s ogni 30m", "" and "{@in_rank}"
+    else:
+        set slot 11 of {_gui} to lava bucket named "%{rank.alignment.-5.%{_p}%}% {@tabpfx_rank_-5}" with lore " &fFama richiesta:", "  &4Da {@chat_max_rank_-5} in giù", "", " &fEffetti ottenuti:", "  &c- &7Sfortuna", "  &c- &7Debolezza II", "  &c- &7Affaticamento II", "  &c- &7Lentezza II", "  &c- &7Cecità di 30s ogni 30m"
+    if {rank.%{_p}%} = {rank.alignment.-4.%{_p}%}:
+        set slot 12 of {_gui} to tnt with nbt from {@glinted} named "%{rank.alignment.-4.%{_p}%}% {@tabpfx_rank_-4}" with lore " &fFama richiesta:", "  &cDa {@chat_min_rank_-4} a {@chat_max_rank_-4}", "", " &fEffetti ottenuti:", "  &c- &7Sfortuna", "  &c- &7Debolezza II", "  &c- &7Affaticamento" and "  &c- &7Lentezza", "" and "{@in_rank}"
+    else:
+        set slot 12 of {_gui} to tnt named "%{rank.alignment.-4.%{_p}%}% {@tabpfx_rank_-4}" with lore " &fFama richiesta:", "  &cDa {@chat_min_rank_-4} a {@chat_max_rank_-4}", "", " &fEffetti ottenuti:", "  &c- &7Sfortuna", "  &c- &7Debolezza II", "  &c- &7Affaticamento" and "  &c- &7Lentezza"
+    if {rank.%{_p}%} = {rank.alignment.-3.%{_p}%}:
+        set slot 13 of {_gui} to bone with nbt from {@glinted} named "%{rank.alignment.-3.%{_p}%}% {@tabpfx_rank_-3}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_-3} a {@chat_max_rank_-3}", "", " &fEffetti ottenuti:", "  &c- &7Sfortuna", "  &c- &7Debolezza" and "  &c- &7Affaticamento", "" and "{@in_rank}"
+    else:
+        set slot 13 of {_gui} to bone named "%{rank.alignment.-3.%{_p}%}% {@tabpfx_rank_-3}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_-3} a {@chat_max_rank_-3}", "", " &fEffetti ottenuti:", "  &c- &7Sfortuna", "  &c- &7Debolezza" and "  &c- &7Affaticamento"
+    if {rank.%{_p}%} = {rank.alignment.-2.%{_p}%}:
+        set slot 14 of {_gui} to fire charge with nbt from {@glinted} named "%{rank.alignment.-2.%{_p}%}% {@tabpfx_rank_-2}" with lore " &fFama richiesta:", "  &eDa {@chat_min_rank_-2} a {@chat_max_rank_-2}", "", " &fEffetti ottenuti:", "  &c- &7Forza II" and "  &c- &7Debolezza", "" and "{@in_rank}"
+    else:
+        set slot 14 of {_gui} to fire charge named "%{rank.alignment.-2.%{_p}%}% {@tabpfx_rank_-2}" with lore " &fFama richiesta:", "  &eDa {@chat_min_rank_-2} a {@chat_max_rank_-2}", "", " &fEffetti ottenuti:", "  &c- &7Forza II" and "  &c- &7Debolezza"
+    if {rank.%{_p}%} = {rank.alignment.-1.%{_p}%}:
+        set slot 15 of {_gui} to iron sword with nbt from {@glinted_no_flags} named "%{rank.alignment.-1.%{_p}%}% {@tabpfx_rank_-1}" with lore " &fFama richiesta:", "  &8Da {@chat_min_rank_-1} a {@chat_max_rank_-1}", "", " &fEffetti ottenuti:", "  &c- &7Forza II", "" and "{@in_rank}"
+    else:
+        set slot 15 of {_gui} to iron sword with nbt from {@no_flags} named "%{rank.alignment.-1.%{_p}%}% {@tabpfx_rank_-1}" with lore " &fFama richiesta:", "  &8Da {@chat_min_rank_-1} a {@chat_max_rank_-1}", "", " &fEffetti ottenuti:", "  &c- &7Forza II"
+    if {rank.%{_p}%} = {rank.alignment.0.%{_p}%}:
+        set slot 22 of {_gui} to feather with nbt from {@glinted} named "%{rank.alignment.0.%{_p}%}% {@tabpfx_rank_0}" with lore " &fFama richiesta:", "  &7Da {@chat_min_rank_0} a {@chat_max_rank_0}", "", " &fEffetti ottenuti:", "  &7Reputazione iniziale, nessun effetto.", "" and "{@in_rank}"
+    else:
+        set slot 22 of {_gui} to feather named "%{rank.alignment.0.%{_p}%}% {@tabpfx_rank_0}" with lore " &fFama richiesta:", "  &7Da {@chat_min_rank_0} a {@chat_max_rank_0}", "", " &fEffetti ottenuti:", "  &7Reputazione iniziale, nessun effetto."
+
+    if {rank.%{_p}%} = {rank.alignment.1.%{_p}%}:
+        set slot 28 of {_gui} to iron nugget with nbt from {@glinted} named "%{rank.alignment.1.%{_p}%}% {@tabpfx_rank_1}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_1} a {@chat_max_rank_1}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "" and "{@in_rank}"
+    else:
+        set slot 28 of {_gui} to iron nugget named "%{rank.alignment.1.%{_p}%}% {@tabpfx_rank_1}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_1} a {@chat_max_rank_1}", "", " &fEffetti ottenuti:" and "  &a- &7Fortuna"
+
+    if {rank.%{_p}%} = {rank.alignment.2.%{_p}%}:
+        set slot 29 of {_gui} to iron ingot with nbt from {@glinted} named "%{rank.alignment.2.%{_p}%}% {@tabpfx_rank_2}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_2} a {@chat_max_rank_2}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine", "" and "{@in_rank}"
+    else:
+        set slot 29 of {_gui} to iron ingot named "%{rank.alignment.2.%{_p}%}% {@tabpfx_rank_2}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_2} a {@chat_max_rank_2}", "", " &fEffetti ottenuti:" and "  &a- &7Fortuna" and "  &a- &7Sollecitudine"
+
+    if {rank.%{_p}%} = {rank.alignment.3.%{_p}%}:
+        set slot 30 of {_gui} to gold nugget with nbt from {@glinted} named "%{rank.alignment.3.%{_p}%}% {@tabpfx_rank_3}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_3} a {@chat_max_rank_3}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "" and "{@in_rank}"
+    else:
+        set slot 30 of {_gui} to gold nugget named "%{rank.alignment.3.%{_p}%}% {@tabpfx_rank_3}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_3} a {@chat_max_rank_3}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna" and "  &a- &7Sollecitudine II"
+
+    if {rank.%{_p}%} = {rank.alignment.4.%{_p}%}:
+        set slot 31 of {_gui} to gold ingot with nbt from {@glinted} named "%{rank.alignment.4.%{_p}%}% {@tabpfx_rank_4}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_4} a {@chat_max_rank_4}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza", "" and "{@in_rank}"
+    else:
+        set slot 31 of {_gui} to gold ingot named "%{rank.alignment.4.%{_p}%}% {@tabpfx_rank_4}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_4} a {@chat_max_rank_4}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II" and "  &a- &7Resistenza"
+
+    if {rank.%{_p}%} = {rank.alignment.5.%{_p}%}:
+        set slot 32 of {_gui} to emerald with nbt from {@glinted} named "%{rank.alignment.5.%{_p}%}% {@tabpfx_rank_5}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_5} a {@chat_max_rank_5}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "" and "{@in_rank}"
+    else:
+        set slot 32 of {_gui} to emerald named "%{rank.alignment.5.%{_p}%}% {@tabpfx_rank_5}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_5} a {@chat_max_rank_5}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II" and "  &a- &7Resistenza II"
+
+    if {rank.%{_p}%} = {rank.alignment.6.%{_p}%}:
+        set slot 33 of {_gui} to emerald block with nbt from {@glinted} named "%{rank.alignment.6.%{_p}%}% {@tabpfx_rank_6}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_6} a {@chat_max_rank_6}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione", "" and "{@in_rank}"
+    else:
+        set slot 33 of {_gui} to emerald block named "%{rank.alignment.6.%{_p}%}% {@tabpfx_rank_6}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_6} a {@chat_max_rank_6}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II" and "  &a- &7Rigenerazione"
+
+    if {rank.%{_p}%} = {rank.alignment.7.%{_p}%}:
+        set slot 34 of {_gui} to diamond with nbt from {@glinted} named "%{rank.alignment.7.%{_p}%}% {@tabpfx_rank_7}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_7} a {@chat_max_rank_7}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione II", "" and "{@in_rank}"
+    else:
+        set slot 34 of {_gui} to diamond named "%{rank.alignment.7.%{_p}%}% {@tabpfx_rank_7}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_7} a {@chat_max_rank_7}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II" and "  &a- &7Rigenerazione II"
+
+    if {rank.%{_p}%} = {rank.alignment.8.%{_p}%}:
+        set slot 38 of {_gui} to diamond block with nbt from {@glinted} named "%{rank.alignment.8.%{_p}%}% {@tabpfx_rank_8}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_8} a {@chat_max_rank_8}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione II", "  &a- &7Velocità", "" and "{@in_rank}"
+    else:
+        set slot 38 of {_gui} to diamond block named "%{rank.alignment.8.%{_p}%}% {@tabpfx_rank_8}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_8} a {@chat_max_rank_8}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione II" and "  &a- &7Velocità"
+
+    if {rank.%{_p}%} = {rank.alignment.9.%{_p}%}:
+        set slot 39 of {_gui} to netherite ingot with nbt from {@glinted} named "%{rank.alignment.9.%{_p}%}% {@tabpfx_rank_9}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_9} a {@chat_max_rank_9}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione II", "  &a- &7Velocità II", "" and "{@in_rank}"
+    else:
+        set slot 39 of {_gui} to netherite ingot named "%{rank.alignment.9.%{_p}%}% {@tabpfx_rank_9}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_9} a {@chat_max_rank_9}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione II" and "  &a- &7Velocità II"
+
+    if {rank.%{_p}%} = {rank.alignment.10.%{_p}%}:
+        set slot 40 of {_gui} to netherite block with nbt from {@glinted} named "%{rank.alignment.10.%{_p}%}% {@tabpfx_rank_10}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_10} a {@chat_max_rank_10}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione III", "  &a- &7Velocità II", "  &a- &7Eroe del villaggio di 15m ogni ora", "" and "{@in_rank}"
+    else:
+        set slot 40 of {_gui} to netherite block named "%{rank.alignment.10.%{_p}%}% {@tabpfx_rank_10}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_10} a {@chat_max_rank_10}", "", " &fEffetti ottenuti:", "  &a- &7Fortuna", "  &a- &7Sollecitudine II", "  &a- &7Resistenza II", "  &a- &7Rigenerazione III", "  &a- &7Velocità II" and "  &a- &7Eroe del villaggio di 15m ogni ora"
+
+    if {rank.%{_p}%} = {rank.alignment.11.%{_p}%}:
+        set slot 42 of {_gui} to bedrock with nbt from {@glinted} named "%{rank.alignment.11.%{_p}%}% {@tabpfx_rank_11}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_11} in su", "", " &fRicompense ottenute:", "  &a- &7/god", "" and "{@in_rank}"
+    else:
+        set slot 42 of {_gui} to bedrock named "%{rank.alignment.11.%{_p}%}% {@tabpfx_rank_11}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_11} in su", "", " &fRicompense ottenute:" and "  &a- &7/god"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna all'%{server.name}%"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Reputazioni dell'%{server.name}%":
+        if type of event-inventory is chest inventory:
+            if index of event-slot isn't 49:
+                cancel event
+            else:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
