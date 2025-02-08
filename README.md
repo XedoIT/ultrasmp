@@ -3,10 +3,11 @@
   <br>
   Project: Ultra SMP
   <br>
+  <br>
   
   ![Static Badge](https://img.shields.io/badge/Skript-a?style=for-the-badge&label=%3C%2F%3E&color=%23ffd000) 
   ![Static Badge](https://img.shields.io/badge/beta-a?style=for-the-badge&label=status&color=%23ff6600)
-  ![Static Badge](https://img.shields.io/badge/0.18-a?style=for-the-badge&label=Versione&color=%23#79d600)
+  ![Static Badge](https://img.shields.io/badge/0.18-a?style=for-the-badge&label=Versione&color=%2363ad02)
 
 </h1>
 
