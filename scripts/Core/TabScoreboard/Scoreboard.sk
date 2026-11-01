@@ -1,0 +1,228 @@
+#
+# DIPENDENZE:
+#
+# - SkBee
+#
+
+options:
+# NOMI STAGIONI
+    fall: &x&f&b&a&6&0&0A&x&e&c&9&7&0&0u&x&d&d&8&8&0&0t&x&c&e&7&a&0&0u&x&b&e&6&b&0&0n&x&a&f&5&c&0&0n&x&a&0&4&d&0&0o
+    winter: &x&0&0&b&0&f&bI&x&2&1&b&3&f&2n&x&4&1&b&6&e&8v&x&6&2&b&a&d&fe&x&8&2&b&d&d&6r&x&a&3&c&0&c&cn&x&c&3&c&3&c&3o
+    spring: &x&0&4&f&b&2&bP&x&0&4&f&2&4&6r&x&0&3&e&9&6&0i&x&0&3&e&0&7&bm&x&0&2&d&7&9&5a&x&0&2&c&e&b&0v&x&0&1&c&5&c&ae&x&0&1&b&c&e&5r&x&0&0&b&3&f&fa&a
+    summer: &x&f&b&e&2&0&0E&x&f&c&c&7&0&0s&x&f&d&a&c&0&0t&x&f&d&9&2&0&0a&x&f&e&7&7&0&0t&x&f&f&5&c&0&0e
+
+# SIMBOLI MARKER
+    no: &c✘
+    yes: &a✔
+
+# VARIABILI
+    scoreboard: {settings.personalization.scoreboard::%player%}
+    scoreboard_marker: {-settings.personalization.scoreboard_marker::%player%}
+
+    scoreboard_arg: {settings.personalization.scoreboard::%{_target}%}
+    scoreboard_arg_marker: {-settings.personalization.scoreboard_marker::%{_target}%}
+
+    scoreboard_lp: {settings.personalization.scoreboard::%loop-player%}
+    scoreboard_p: {settings.personalization.scoreboard::%{_p}%}
+    scoreboard_reminder: {settings.alerts.scoreboard_reminder::%{_p}%}
+
+every second:
+    loop all players:
+        if weather in "%{-server.world.overworld}%" is clear:
+            set {_weather} to placeholder "rs_season_%{-server.world.overworld}%" from loop-player
+            if time in "%{-server.world.overworld}%" is between 6:00 and 19:00:
+                if {_weather} is not "{@winter}" or "{@fall}":
+                    set {-rs_weather} to "&e☀"
+                else:
+                    set {-rs_weather} to "&7☁"
+            else:
+                set {-rs_weather} to "&9☽"
+        if weather in "%{-server.world.overworld}%" is rain:
+            set {-rs_weather} to "%{-rs_weather.rain}%"
+        if weather in "%{-server.world.overworld}%" is thunder:
+            set {-rs_weather} to "%{-rs_weather.thunder}%"
+
+# GESTIONE GIORNI SETTIMANA
+every second:
+    loop all players:
+        set {_weekday} to placeholder "rs_weekday_%{-server.world.overworld}%" from loop-player
+        if {_weekday} is "Lunedì":
+            set {-rs.week_day} to "Lun"
+        else if {_weekday} is "Martedì":
+            set {-rs.week_day} to "Mar"
+        else if {_weekday} is "Mercoledì":
+            set {-rs.week_day} to "Mer"
+        else if {_weekday} is "Giovedì":
+            set {-rs.week_day} to "Gio"
+        else if {_weekday} is "Venerdì":
+            set {-rs.week_day} to "Ven"
+        else if {_weekday} is "Sabato":
+            set {-rs.week_day} to "Sab"
+        else if {_weekday} is "Domenica":
+            set {-rs.week_day} to "Dom"
+
+# GESTIONE SIMBOLI METEO
+every 3 seconds:
+    set {_player} to first element of all players
+    if {_player} is set:
+        set {_weather_rain} to placeholder "rs_season_%{-server.world.overworld}%" from {_player}
+        if {_weather_rain} is not "{@winter}":
+            set {-rs_weather.rain} to "&b🌧"
+            wait 2 seconds
+            set {-rs_weather.rain} to "&3🌧"
+        else:
+            set {-rs_weather.rain} to "&b❄"
+            wait 2 seconds
+            set {-rs_weather.rain} to "&3❄"
+    set {-rs_weather.thunder} to "&7⛈"
+    wait 2 seconds
+    set {-rs_weather.thunder} to "&8⛈"
+
+
+# SCOREBOARD PRINCIPALE
+every tick:
+    loop all players:
+        if {@scoreboard_lp} is true:
+            set {_bioma} to placeholder "player_biome_capitalized" from loop-player
+            if {_bioma} contains ":":
+                set {_bioma} to last element of split {_bioma} at ":"
+                replace all "_" with " " in {_bioma}
+                set {_bioma} to "%first character of {_bioma} in upper case%%last (length of {_bioma} - 1) characters of {_bioma}%"
+            set title of loop-player's fastboard to "%{-animation.UltraSMP}% &c&lBETA"
+            set line 1 of loop-player's fastboard to "&7%{-rs.week_day}% %placeholder "rs_day_smp" from loop-player%/%placeholder "rs_month_smp" from loop-player%/%placeholder "rs_year_smp" from loop-player% &f- &b%placeholder "rs_time_smp" from loop-player%"
+            set line 2 of loop-player's fastboard to ""
+            set line 3 of loop-player's fastboard to "&fVita: &c%placeholder "auraskills_hp" from loop-player%/%placeholder "auraskills_hp_max" from loop-player% ❤"
+            set line 4 of loop-player's fastboard to ""
+            set line 5 of loop-player's fastboard to "&fInventario"
+            set line 6 of loop-player's fastboard to inventorySlots(loop-player)
+            set line 7 of loop-player's fastboard to ""
+            set line 8 of loop-player's fastboard to "&fCoordinate"
+            set line 10 of loop-player's fastboard to ""
+            set line 11 of loop-player's fastboard to "&fBioma"
+            set line 13 of loop-player's fastboard to ""
+            set line 14 of loop-player's fastboard to "&fStagione %{-rs_weather}%"
+            if world of loop-player is "%{-server.world.overworld}%":
+                set line 9 of loop-player's fastboard to "&a%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&b&l%placeholder "player_direction" from loop-player%&8]"
+                set line 12 of loop-player's fastboard to "&b%{_bioma}%"
+                set line 15 of loop-player's fastboard to "%placeholder "rs_season" from loop-player% [ %placeholder "rs_temperature" from loop-player% ]"
+            else if world of loop-player is "%{-server.world.nether}%":
+                set line 9 of loop-player's fastboard to "&6%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&c&l%placeholder "player_direction" from loop-player%&8]"
+                set line 12 of loop-player's fastboard to "&c%{_bioma}%"
+                set line 15 of loop-player's fastboard to placeholder "rs_season_%{-server.world.overworld}%" from loop-player
+            else if world of loop-player is "%{-server.world.end}%":
+                set line 9 of loop-player's fastboard to "&d%placeholder "player_x" from loop-player% %placeholder "player_y" from loop-player% %placeholder "player_z" from loop-player% &8[&5&l%placeholder "player_direction" from loop-player%&8]"
+                set line 12 of loop-player's fastboard to "&5%{_bioma}%"
+                set line 15 of loop-player's fastboard to placeholder "rs_season_%{-server.world.overworld}%" from loop-player
+        else:
+            clear fastboard of loop-player
+
+
+# CONTROLLO SLOT INVENTARIO GIOCATORE
+function inventorySlots(p: player) :: string:
+    set {_free} to 0
+    loop integers from 0 to 35:
+        if slot (loop-value) of {_p}'s inventory is air:
+            add 1 to {_free}
+    if {_free} is 0:
+        return "&c&k0 &4&lPIENO! &c&k0"
+    else if {_free} is 1:
+        return "&4&k0 &c1/35 &fslot libero &4&k0"
+    else if {_free} is between 2 and 3:
+        return "&4&k0 &c%{_free}%/35 &fslot liberi &4&k0"
+    else if {_free} is between 4 and 9:
+        return "&c%{_free}%/35 &fslot liberi"
+    else if {_free} is between 10 and 18:
+        return "&6%{_free}%/35 &fslot liberi"
+    else if {_free} is between 19 and 28:
+        return "&e%{_free}%/35 &fslot liberi"
+    else if {_free} is between 29 and 34:
+        return "&a%{_free}%/35 &fslot liberi"
+    else if {_free} is 35:
+        return "&2&lVUOTO!"
+    else:
+        return "&7[&c&l!&7] &4&lERRORE &7[&c&l!&7]"
+
+
+# AVVISO SCOREBOARD NASCOSTA
+every 1 minute:
+    loop players:
+        if {settings.personalization.scoreboard::%loop-player%} is not true:
+            if {-scoreboard_reminder.%loop-player%} is not set:
+                set {-scoreboard_reminder.%loop-player%} to now
+            else if difference between now and {-scoreboard_reminder.%loop-player%} is greater than or equal to 1 hour:
+                set {-scoreboard_reminder.%loop-player%} to now
+                ScoreboardReminder(loop-player)
+        else:
+            delete {-scoreboard_reminder.%loop-player%}
+
+on quit:
+    delete {-scoreboard_reminder.%player%}
+
+function ScoreboardReminder(p: player):
+    if {@scoreboard_reminder} is not true:
+        stop
+    send "" to {_p}
+    send "&4&lPROMEMORIA SCOREBOARD" to {_p}
+    send "" to {_p}
+    send " &cLa tua scoreboard è ancora nascosta." to {_p}
+    send formatted " &6Rendila visibile con <hover:show_text:'Clicca qui per rendere visibile la scoreboard'><click:run_command:/sbtoggle>&e&n/sbtoggle</click></hover><reset> &6per avere tutte le informazioni di cui hai bisogno a vista d'occhio." to {_p}
+    send "" to {_p}
+    send "" to {_p}
+    send formatted " &ePuoi disattivare questa notifica dalle <hover:show_text:'Clicca per aprire le impostazioni'><click:run_command:/impostazioni>&f&nImpostazioni</click></hover><reset>&e, nel tuo &7Profilo &7&lSMP&e." to {_p}
+    send "" to {_p}
+    play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+
+# COMANDO PRINCIPALE
+command /sbtoggle [<target: offline player>]:
+    executable by: player and console
+    suggestions:
+        if sender has permission "scoreboard.admin":
+            set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not player:
+                send "%{-server.prefix.main}% &cSolo i giocatori possono gestire la propria scoreboard!"
+            else:
+                if {@scoreboard} is not true:
+                    set {@scoreboard} to true
+                    set {@scoreboard_marker} to "{@yes}"
+                    play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                    send "%{-server.prefix.main}% &aHai mostrato la tua scoreboard."
+                else:
+                    delete {@scoreboard}
+                    set {@scoreboard_marker} to "{@no}"
+                    play sound "block.beacon.deactivate" with volume 1 at player for player
+                    send "%{-server.prefix.main}% &cHai nascosto la tua scoreboard."
+
+        else:
+            if {_target} is online:
+                if sender is player:
+                    if player has permission "scoreboard.admin":
+                        set {_da} to "da"
+                        set {_chi} to "%player%"
+                    else:
+                        send "%{-server.prefix.main}% &cQuesto comando non richiede parametri aggiuntivi."
+                else:
+                    set {_da} to "dalla"
+                    set {_chi} to "console"
+                if {_chi} is set:
+                    if {@scoreboard_arg} is not true:
+                        set {@scoreboard_arg} to true
+                        set {@scoreboard_arg_marker} to "{@yes}"
+                        send "%{-server.prefix.main}% &aLa tua scoreboard è stata attivata %{_da}% &e%{_chi}%&a." to {_target}
+                        send "%{-server.prefix.main}% &aScoreboard attivata per &e%{_target}%&a." to sender
+                        play sound "entity.player.levelup" with volume 1 and pitch 2 at {_target} for {_target}
+                    else:
+                        delete {@scoreboard_arg}
+                        set {@scoreboard_arg_marker} to "{@no}"
+                        send "%{-server.prefix.main}% &cLa tua scoreboard è stata disattivata %{_da}% &6%{_chi}%&c." to {_target}
+                        send "%{-server.prefix.main}% &cScoreboard disattivata per &6%{_target}%&c." to sender
+                        play sound "block.beacon.deactivate" with volume 1 at {_target} for {_target}
+            else:
+                if sender is player:
+                    if player has permission "scoreboard.admin":
+                        send "%{-server.prefix.main}% &c%{_target}% &6è offline."
+                    else:
+                        send "%{-server.prefix.main}% &cQuesto comando non richiede parametri aggiuntivi."
+                else:
+                    send "%{-server.prefix.main}% &c%{_target}% &6è offline."

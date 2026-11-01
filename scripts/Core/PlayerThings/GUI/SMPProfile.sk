@@ -1,0 +1,443 @@
+options:
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    
+    view: &eClicca per visualizzare altro.
+
+    glinted: "{enchantment_glint_override:true}"
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+
+    info_wiki: &eClicca per aprire la GUI della Wiki.
+    no_available: &cQuesta funzionalità non è ancora disponibile.
+    requires_progress_update: &6Disponibile con il &eProgress Update&6.
+    no_enderchest: &cLa tua Enderchest è ancora bloccata. Ottienine una per sbloccarla.
+
+    more_info: &eClicca per esplorare.
+    wiki_link: &eClicca per visitare la Wiki dell'SMP.
+    gui_config: &cLa GUI è in fase di creazione.
+
+    genre: {genre.%{_p}%}
+    gui_background: {settings.personalization.gui_background::%{_p}%}
+
+
+# COMANDO PRINCIPALE
+command /profilo:
+    description: Apri e gestisci il tuo profilo SMP.
+    executable by: player
+    trigger:
+        openProfileGui(player)
+
+# CESTINO
+command /cestino:
+    description: "Utile per la spazzatura nel tuo inventario."
+    executable by: player
+    trigger:
+        openTrashGui(player)
+
+# WIKI
+command /wiki:
+    executable by: player and console
+    trigger:
+        if sender is player:
+            send ""
+            send "&a&lWIKI DELL'SMP"
+            send "&fClicca sull'argomento che ti interessa per aprire la relativa pagina."
+            send ""
+            send " &9&l● Server"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp>&b&nIntroduzione"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp/il-server/profilo-smp>&b&nProfilo SMP"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp/il-server/fama-e-reputazioni>&b&nFama e Reputazioni"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp/il-server/abilita>&b&nAbilità"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp/il-server/medaglie>&b&nMedaglie"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp/il-server/impostazioni>&b&nImpostazioni"
+            send ""
+            send " &9&l● Aggiornamenti e Novità"
+            send "  &b● <link:https://wiki.ultrasmp.org/disagiosmp/aggiornamenti-e-novita/changelog>&b&nChangelog"
+            send ""
+        else:
+            send ""
+            send "&a&lWIKI DELL'SMP"
+            send "&fClicca sull'argomento che ti interessa per aprire la relativa pagina."
+            send ""
+            send " &9&l● Server"
+            send "  &b● &b&nIntroduzione&f: https://wiki.ultrasmp.org/disagiosmp"
+            send "  &b● &b&nProfilo SMP&f: https://wiki.ultrasmp.org/disagiosmp/il-server/profilo-smp"
+            send "  &b● &b&nFama e Reputazioni&f: https://wiki.ultrasmp.org/disagiosmp/il-server/fama-e-reputazioni"
+            send "  &b● &b&nAbilità&f: https://wiki.ultrasmp.org/disagiosmp/il-server/abilita"
+            send "  &b● &b&nMedaglie&f: https://wiki.ultrasmp.org/disagiosmp/il-server/medaglie"
+            send "  &b● &b&nImpostazioni&f: https://wiki.ultrasmp.org/disagiosmp/il-server/impostazioni"
+            send ""
+            send " &9&l● Aggiornamenti e Novità"
+            send "  &b● &b&nChangelog&f: https://wiki.ultrasmp.org/disagiosmp/aggiornamenti-e-novita/changelog"
+            send ""
+
+
+# GUI PRINCIPALE
+function openProfileGui(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Profilo &lSMP"
+    set metadata tag "SMPProfileGUI" of {_p} to {_gui}
+    if {@gui_background} is true:
+        set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 11, 12, 14, 15, 16, 19, 22, 25, 28, 29, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
+    updateProfileGuiSlots({_p})
+    set slot 21 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "" and "{@requires_progress_update}"
+    set slot 23 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{-server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "" and "{@requires_progress_update}"
+    set slot 24 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "" and "{@info_wiki}"
+    set slot 30 of {_gui} to crafting table named "&aBanco da lavoro" with lore "&7Utile per dei crafting ""al volo""."
+    set slot 31 of {_gui} to bucket named "&3Cestino" with lore "&7Butta qui le cose che non ti" and "&7servono più."
+    if {_p} has permission "admin.manage.server":
+        set slot 48 of {_gui} to chest named "&3Utilità Server" with lore "&7Gestisci difficoltà, ora di gioco e" and "&7modalità di gioco dei giocatori."
+    set slot 50 of {_gui} to redstone torch named "&fImpostazioni" with lore "&7Modifica le impostazioni dell'SMP" and "&7in base alle tue esigenze."
+
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+    open {_gui} to {_p}
+
+# AGGIORNAMENTO DINAMICO - PROFILO SMP
+function updateProfileGuiSlots(p: player):
+    set {_gui} to metadata tag "SMPProfileGUI" of {_p}
+    set {_position} to placeholder "auraskills_rank" from {_p}
+    set {_item} to skull of {_p} named "&aIl tuo profilo" with lore "&7Visualizza le tue informazioni,", "&7il tuo equipaggiamento e le", "&7tue statistiche dell'SMP.", "", " &c❤ Vita&7: &f%placeholder "auraskills_hp" from {_p}%/%placeholder "auraskills_hp_max" from {_p}%", " &2☘ Fortuna&7: &f+%placeholder "auraskills_luck" from {_p}%", " &c❣ &cIncremento salute&7: &f+%placeholder "auraskills_health" from {_p}%", " &9✿ Saggezza&7: &f+%placeholder "auraskills_wisdom" from {_p}%", " &4➽ Forza&7: &f+%placeholder "auraskills_strength" from {_p}%", " &6❥ Rigenerazione&7: &f+%placeholder "auraskills_regeneration" from {_p}%", " &5✦ Tenacia&7: &f+%placeholder "auraskills_toughness" from {_p}%", " &c🗡 Uccisioni&7: &f%regex({stats.kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({stats.deaths::%{_p}%})%", " &d✦ Fama&7: &f%regex({fama::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", "" and "{@view}"
+    setGuiSlot({_gui}, 13, {_item})
+    set {_item} to writable book named "&fAbilità" with lore "&7Gioca e affina le tue capacità", "&7di sopravvivenza conquistando", "&7e dominando la classifica", "&7generale della Ultra SMP.", "", "&eAl momento sei al &6%{_position}%° posto&e.", "", "&bClicca per avere un quadro" and "&bpiù completo sulle tue abilità."
+    setGuiSlot({_gui}, 20, {_item})
+    if {playerinfo.enderchest_unlocked::%{_p}%} is true:
+        set {_ec} to true
+    else if {_p} has permission "enderchest.bypass":
+        set {_ec} to true
+    if {_ec} is true:
+        set {_item} to ender chest named "&dEnderchest" with lore "&7Apri la tua Enderchest."
+    else:
+        set {_item} to ender chest named "&dEnderchest &c[BLOCCATO]" with lore "&7&mApri la tua Enderchest.", "", " &cDevi raccoglierne almeno" and " &cuna per aprirla da qui."
+    setGuiSlot({_gui}, 32, {_item})
+        
+# EQUIPAGGIAMENTO E STATISTICHE
+function openPlayerProfileGUI(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Equipaggiamento e Statistiche"
+    set metadata tag "SMPEquipmentGUI" of {_p} to {_gui}
+    if {@gui_background} is true:
+        set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 12, 13, 14, 16, 22, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
+    updateEquipmentGuiSlots({_p})
+    updateStatsGuiSlots({_p})
+    set slot 23 of {_gui} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{-server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "" and "{@requires_progress_update}"
+    set slot 33 of {_gui} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "" and "{@requires_progress_update}"
+    set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+    open {_gui} to {_p}
+
+# AGGIORNAMENTO DINAMICO - EQUIPAGGIAMENTO
+function updateEquipmentGuiSlots(p: player):
+    set {_gui} to metadata tag "SMPEquipmentGUI" of {_p}
+    if slot 39 of {_p}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot elmetto" with lore "&7Non stai indossando alcun elmetto." and "&7Indossane uno per visualizzarlo qui."
+    else:
+        set {_item} to {_p}'s helmet
+    setGuiSlot({_gui}, 11, {_item})
+    if slot 38 of {_p}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot corazza" with lore "&7Non stai indossando alcuna corazza." and "&7Indossane una per visualizzarla qui."
+    else:
+        set {_item} to {_p}'s chestplate
+    setGuiSlot({_gui}, 20, {_item})
+    if slot 37 of {_p}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot gambiere" with lore "&7Non stai indossando gambiere." and "&7Indossale per visualizzarle qui."
+    else:
+        set {_item} to {_p}'s leggings
+    setGuiSlot({_gui}, 29, {_item})
+    if slot 36 of {_p}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot stivali" with lore "&7Non stai indossando stivali." and "&7Indossali per visualizzarli qui."
+    else:
+        set {_item} to {_p}'s boots
+    setGuiSlot({_gui}, 38, {_item})
+    if slot 40 of {_p}'s inventory is air:
+        set {_item} to magenta stained glass pane named "&dMano secondaria" with lore "&7Non hai oggetti nella seconda mano." and "&7Tieni qualcosa per visualizzarlo qui."
+    else:
+        set {_item} to {_p}'s off hand item
+    setGuiSlot({_gui}, 19, {_item})
+    if {_p}'s tool is air:
+        set {_item} to lime stained glass pane named "&aMano principale" with lore "&7Non hai nulla in mano." and "&7Tieni qualcosa per visualizzarlo qui."
+    else:
+        set {_item} to {_p}'s held item
+    setGuiSlot({_gui}, 21, {_item})
+
+# AGGIORNAMENTO DINAMICO - STATISTICHE
+function updateStatsGuiSlots(p: player):
+    set {_gui} to metadata tag "SMPEquipmentGUI" of {_p}
+    set {_player_xp} to placeholder "player_current_exp" from {_p}
+    set {_player_xp_level} to placeholder "player_level" from {_p}
+    set {_player_inventory} to 0
+    loop integers from 0 to 35:
+        if loop-integer is not 8:
+            if slot loop-integer of {_p}'s inventory is air:
+                add 1 to {_player_inventory}
+    set {_player_biome} to placeholder "player_biome_capitalized" from {_p}
+    if {_player_biome} contains ":":
+        set {_player_biome} to last element of split {_player_biome} at ":"
+        replace all "_" with " " in {_player_biome}
+        set {_player_biome} to "%first character of {_player_biome} in upper case%%last (length of {_player_biome} - 1) characters of {_player_biome}%"
+    set {_player_luck} to placeholder "auraskills_luck" from {_p}
+    set {_player_health} to placeholder "auraskills_health" from {_p}
+    set {_player_wisdom} to placeholder "auraskills_wisdom" from {_p}
+    set {_player_strength} to placeholder "auraskills_strength" from {_p}
+    set {_player_regeneration} to placeholder "auraskills_regeneration" from {_p}
+    set {_player_toughness} to placeholder "auraskills_toughness" from {_p}
+    set {_player_crit_chance} to placeholder "auraskills_crit_chance" from {_p}
+    set {_player_crit_damage} to placeholder "auraskills_crit_damage" from {_p}
+    set {_player_speed} to placeholder "auraskills_speed" from {_p}
+    set {_genre} to {@genre}
+    if {_genre} is "%{-server.genre.male}%":
+        set {_c} to "&9"
+    else:
+        set {_c} to "&d"
+    set {_item} to {_p}'s skull named "%{_c}%%{_p}%" with lore " &e➹ Bug segnalati&7: &f%{stats.reported_bugs::%{_p}%}%", " &6★ Feedback inviati&7: &f%{stats.feedback_sent::%{_p}%}%", "", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2)", "" and " &7⌚ Prima volta nel server:" and "     &f%{playtime.first_login.%{_p}%}%"
+    setGuiSlot({_gui}, 4, {_item})
+    set {_item} to writable book named "&bLe tue informazioni" with lore " &9✎ Nome&7: &f%{_p}%", " &a✧ Sesso&7: &f%{_genre}%", " &e₪ Inventario&7: &f%{_player_inventory}%/35 slot liberi", " &b🌅 Bioma&7: &f%{_player_biome}%", " &3ℹ Ping&7: &f%{_p}'s ping% ms", " &d✦ Fama&7: &f%regex({fama::%{_p}%})%", " &a✪ Reputazione&7: &f%{rank.%{_p}%}%", " &c❣ &cIncremento salute&7: &f+%regex({_player_health})%", " &9✿ Saggezza&7: &f+%regex({_player_wisdom})%" and " &f➤ Velocità&7: &f+%regex({_player_speed})%"
+    setGuiSlot({_gui}, 15, {_item})
+    if {stats.deaths::%{_p}%} != 0:
+        set {_kd} to regex({stats.kills::%{_p}%}/{stats.deaths::%{_p}%})
+    else:
+        set {_kd} to "0"
+    set {_item} to diamond sword with nbt from {@no_flags} named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%regex({stats.kills::%{_p}%})%", " &c☠ Morti&7: &f%regex({stats.deaths::%{_p}%})%", " &c🔥 Rapporto U/M&7: &f%{_kd}%", " &6🗡 Danni inflitti&7: &f%regex({stats.infldamage::%{_p}%})%", " &6☄ Danni subiti&7: &f%regex({stats.suffdamage::%{_p}%})%", " &e&l⚡ &eSerie di uccisioni&7: &f%regex({stats.killstreak::%{_p}%})%/%regex({stats.killstreak_max.%{_p}%})%", " &4➽ Forza&7: &f+%regex({_player_strength})%", " &6❥ Rigenerazione&7: &f+%regex({_player_regeneration})%", " &5✦ Tenacia&7: &f+%regex({_player_toughness})%", " &a⌘ Probab. critico&7: &f+%regex({_player_crit_chance})%%%" and " &3&l💧 &3Danni da critico&7: &f+%regex({_player_crit_damage})%%%"
+    setGuiSlot({_gui}, 24, {_item})
+    set {_item} to iron pickaxe with nbt from {@no_flags} named "&aStatistiche di raccolta" with lore " &c⛏ Blocchi distrutti&7: &f%regex({stats.broken_blocks::%{_p}%})%", " &b🧱 Blocchi piazzati&7: &f%regex({stats.placed_blocks::%{_p}%})%", " &9🎣 Loot pescati&7: &f%regex({stats.fished_loot::%{_p}%})%" and " &2☘ Fortuna&7: &f+%regex({_player_luck})%"
+    setGuiSlot({_gui}, 25, {_item})
+
+# CESTINO
+function openTrashGui(p: player):
+    play sound "block.iron_door.open" with volume 1 and pitch 2 at {_p} for {_p}
+    set {_gui} to a new chest inventory with 6 row with name "Cestino"
+    set slot 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 and 44 of {_gui} to air
+    set slot 46, 47, 48, 49 and 50 of {_gui} to gray stained glass pane named ""
+    set slot 51 of {_gui} to hopper named "&eDall'inventario" with lore "&7Sposta tutti gli oggetti del tuo", "&7inventario dentro il cestino.", "", "&6&lNOTA", " &7Gli slot rapidi sono esclusi.", " &7Se equipaggiate, armatura e", " &7mano secondaria non vengono" and " &7spostate."
+    set slot 52 of {_gui} to bundle named "&aDal cestino" with lore "&7Sposta tutti gli oggetti del", "&7cestino nuovamente nel tuo", "&7inventario.", "", "&b&lNOTA", " &7Se l'inventario è pieno, gli" and " &7oggetti restano nel cestino." with item flag hide additional tooltip
+    set slot 53 of {_gui} to lava bucket named "&cSvuota" with lore "&7Distruggi definitivamente", "&7tutti gli oggetti.", "", "&4&lNOTA", " &7Una volta svuotato, tutti", " &7gli oggetti andranno" and " &7persi per sempre."
+    set slot 45 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    open {_gui} to {_p}
+
+# WIKI
+function openMainWikiGUI(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Wiki dell'SMP &4[BETA]"
+    if {@gui_background} is true:
+        set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named ""
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named ""
+    if {@genre} is "%{-server.genre.male}%":
+        set slot 4 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "" and "{@gui_config}"#with lore "&7Clicca sulle seguenti categorie", "&7per scoprire i vari argomenti", "&7ed essere reindirizzato nella" and "&7loro rispettiva pagina."
+        set slot 22 of {_gui} to paper named "&cWiki in creazione!" with lore "&7Questa GUI è in fase di creazione,", "&7pertanto dovrai aspettare prima", "&7di poterla utilizzare.", "" and "{@wiki_link}"
+        set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+        open {_gui} to {_p}
+    else:
+        set slot 4 of {_gui} to book named "&eWiki dell'SMP &c[BETA]" with lore "&7Vuoi saperne di più su una o più", "&7funzionalità presenti nel server?", "&7Questa guida ti saprà aiutare per", "&7qualsiasi cosa... basta cercare!", "" and "{@gui_config}"#with lore "&7Clicca sulle seguenti categorie", "&7per scoprire i vari argomenti", "&7ed essere reindirizzata nella" and "&7loro rispettiva pagina."
+        set slot 22 of {_gui} to paper named "&cWiki in creazione!" with lore "&7Questa GUI è in fase di creazione,", "&7pertanto dovrai aspettare prima", "&7di poterla utilizzare.", "" and "{@wiki_link}"
+        set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+        set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+        open {_gui} to {_p}
+
+
+# AGGIORNA LO SLOT SOLO SE L'OGGETTO È CAMBIATO
+function setGuiSlot(gui: inventory, s: integer, i: itemtype):
+    set {_old} to slot {_s} of {_gui}
+    if {_old} is {_i}:
+        if item amount of {_old} is item amount of {_i}:
+            stop
+    set slot {_s} of {_gui} to {_i}
+
+
+# GUI DINAMICHE
+every 2 ticks:
+    loop all players:
+        set {_gui} to metadata tag "SMPEquipmentGUI" of loop-player
+        if {_gui} is set:
+            if loop-player's current inventory is {_gui}:
+                updateEquipmentGuiSlots(loop-player)
+
+every 10 ticks:
+    loop all players:
+        set {_gui} to metadata tag "SMPEquipmentGUI" of loop-player
+        if {_gui} is set:
+            if loop-player's current inventory is {_gui}:
+                updateStatsGuiSlots(loop-player)
+        set {_gui} to metadata tag "SMPProfileGUI" of loop-player
+        if {_gui} is set:
+            if loop-player's current inventory is {_gui}:
+                updateProfileGuiSlots(loop-player)
+
+# CONTROLLO BLOCCO ENDERCHEST
+every 10 ticks:
+    loop all players:
+        if {playerinfo.enderchest_unlocked::%loop-player%} is not true:
+            if loop-player's inventory contains ender chest:
+                if loop-player's gamemode is not creative or spectator:
+                    set {playerinfo.enderchest_unlocked::%loop-player%} to true
+
+
+on inventory click:
+    if name of event-inventory contains "Abilità":
+        if index of event-slot is 48:
+            wait 1 tick
+            openProfileGui(player)
+
+    else if name of event-inventory is "Profilo &lSMP":
+        if type of event-inventory is chest inventory:
+            cancel event
+            if click type is left mouse button:
+                if index of event-slot is 13:
+                    openPlayerProfileGUI(player)
+                else if index of event-slot is 20:
+                    execute player command "/skills"
+                else if index of event-slot is 21 or 23:
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    send "%{-server.prefix.main}% {@no_available}"
+                else if index of event-slot is 24:
+                    openMainWikiGUI(player)
+                else if index of event-slot is 30:
+                    open crafting table for player
+                else if index of event-slot is 31:
+                    openTrashGui(player)
+                else if index of event-slot is 32:
+                    if {playerinfo.enderchest_unlocked::%player%} is true:
+                        set {_ec} to true
+                    else if player has permission "enderchest.bypass":
+                        set {_ec} to true
+                    if {_ec} is true:
+                        open ender chest of player to player
+                        play sound "block.ender_chest.open" with volume 1 and pitch 0.7 at player for player
+                    else:
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        send "%{-server.prefix.main}% {@no_enderchest}"
+                else if index of event-slot is 48:
+                    if player has permission "admin.manage.server":
+                        openServerUtility(player)
+                else if index of event-slot is 49:
+                    close player's inventory
+                else if index of event-slot is 50:
+                    openQuickSettingsGui(player)
+
+    else if name of event-inventory is "Equipaggiamento e Statistiche":
+        if type of event-inventory is chest inventory:
+            cancel event
+            if click type is left mouse button:
+                if index of event-slot is 23 or 33:
+                    play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                    send "%{-server.prefix.main}% {@no_available}"
+                else if index of event-slot is 48:
+                    openProfileGui(player)
+                else if index of event-slot is 49:
+                    close player's inventory
+
+    else if name of event-inventory is "Cestino":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is 45:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 46, 47, 48, 49 or 50:
+                cancel event
+            else if index of event-slot is 51:
+                cancel event
+                if click type is left mouse button:
+                    set {_gui} to event-inventory
+                    loop integers from 9 to 35:
+                        set {_i} to loop-value-1
+                        set {_item} to slot {_i} of player's inventory
+                        if {_item} is not air:
+                            loop integers from 0 to 44:
+                                set {_t} to loop-value-2
+                                if slot {_t} of {_gui} is air:
+                                    set slot {_t} of {_gui} to {_item}
+                                    set slot {_i} of player's inventory to air
+                                    exit 1 loop
+                    #play sound "entity.item.pickup" with volume 1 and pitch 1 at player for player
+            else if index of event-slot is 52:
+                cancel event
+                if click type is left mouse button:
+                    set {_gui} to event-inventory
+                    loop integers from 0 to 44:
+                        set {_t} to loop-value-1
+                        set {_item} to slot {_t} of {_gui}
+                        if {_item} is not air:
+                            loop integers from 9 to 35:
+                                set {_i} to loop-value-2
+                                if slot {_i} of player's inventory is air:
+                                    set slot {_i} of player's inventory to {_item}
+                                    set slot {_t} of {_gui} to air
+                                    exit 1 loop
+                    #play sound "entity.item.pickup" with volume 1 and pitch 1 at player for player
+            else if index of event-slot is 53:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+    
+    else if name of event-inventory is "Wiki dell'SMP &4[BETA]":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 22, 48 or 49:
+                cancel event
+            else if index of event-slot is 22:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                    send formatted "%{-server.prefix.main}% &aMentre aspetti la GUI puoi consultare la Wiki dell'SMP <link:https://wiki.ultrasmp.org>&b&nqui&a."
+                    play sound "{@confirm_sound}" with volume 1 and pitch 2 at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 48:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+
+on inventory close:
+    if name of event-inventory is "Ender Chest":
+        play sound "block.ender_chest.close" with volume 1 and pitch 0.7 at player for player
+    
+    else if name of event-inventory is "Cestino":
+        play sound "block.iron_door.close" with volume 1 and pitch 0 at player for player
+        set {_count} to 0
+        loop integers from 0 to 44:
+            if slot loop-integer of event-inventory is not air:
+                add item amount of slot loop-integer of event-inventory to {_count}
+        if {_count} = 1:
+            send action bar "&4&k0 &cCestino svuotato! &4&k0" to player # con %{_count}% oggetto buttato &4&k0" to player
+        if {_count} > 1:
+            send action bar "&4&k0 &cCestino svuotato! &4&k0" to player # con %{_count}% oggetti buttati &4&k0" to player
+
+    else if event-inventory is (metadata tag "SMPProfileGUI" of player):
+        delete metadata tag "SMPProfileGUI" of player
+    else if event-inventory is (metadata tag "SMPEquipmentGUI" of player):
+        delete metadata tag "SMPEquipmentGUI" of player
+
+# ZONA DEBUG
+command /resetenderchest [<target: offline player>]:
+    permission: debug.commands
+    executable by: player and console
+    suggestions: 
+        set suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not set:
+            if sender is player:
+                if {playerinfo.enderchest_unlocked::%player%} is not true:
+                    send "%{-server.prefix.main}% &cLa tua Enderchest è già bloccata."
+                    stop
+                else:
+                    delete {playerinfo.enderchest_unlocked::%player%}
+                    send "%{-server.prefix.main}% &aLa tua Enderchest è di nuovo bloccata."
+                    stop
+            else:
+                send "%{-server.prefix.main}% &cDevi specificare un giocatore."
+                stop
+        else:
+            if {playerinfo.enderchest_unlocked::%{_target}%} is not true:
+                send "%{-server.prefix.main}% &cL'enderchest di %{_target}% è già bloccata."
+            else:
+                delete {playerinfo.enderchest_unlocked::%{_target}%}
+                send "%{-server.prefix.main}% &aL'enderchest di &f%{_target}% &aè di nuovo bloccata."

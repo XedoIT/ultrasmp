@@ -1,0 +1,64 @@
+options:
+    inventory_full: {settings.alerts.inventory_full::%{_p}%}
+
+every 30 seconds:
+    loop players:
+        if gamemode of loop-player is survival or adventure:
+            if loop-player's inventory has not enough space for 1 saddle:
+                inventoryFullAlert(loop-player)
+
+on quit:
+    delete {-inventory_full.%player%}
+
+function inventoryFullAlert(p: player):
+    if {@inventory_full} is not true:
+        stop
+    if {-inventory_full.%{_p}%} is set:
+        if difference between now and {-inventory_full.%{_p}%} is less than 1 minute:
+            stop
+    set {-inventory_full.%{_p}%} to now
+    if {@inventory_full} is not true:
+        stop
+    send title "" with subtitle "&cInventario pieno!" to {_p} for 5 seconds
+    send "" to {_p}
+    send "&4&lINVENTARIO PIENO" to {_p}
+    send "" to {_p}
+    send " &cNon puoi portare più oggetti con te!" to {_p}
+    send formatted " &6Alleggerisci il tuo inventario con <hover:show_text:'Clicca per aprire il cestino'><click:run_command:/cestino>&e&n/cestino</click></hover><reset> &6e continua la tua avventura." to {_p}
+    send "" to {_p}
+    send "" to {_p}
+    send formatted " &ePuoi disattivare questa notifica dalle <hover:show_text:'Clicca per aprire le impostazioni'><click:run_command:/impostazioni>&f&nImpostazioni</click></hover><reset>&e, nel tuo &7Profilo &7&lSMP&e." to {_p}
+    send "" to {_p}
+    play sound "block.chest.open" with volume 1 and pitch 2 at {_p} for {_p}
+
+
+on join:
+    wait 5 seconds
+    if gamemode of player is survival or adventure:
+        if player's inventory has not enough space for 1 saddle:
+            inventoryFullAlert(player)
+
+on break:
+    chance of 1%:
+        if gamemode of player is survival or adventure:
+            if player's inventory has not enough space for 1 of event-block:
+                inventoryFullAlert(player)
+
+on inventory close:
+    chance of 1%:
+        if gamemode of player is survival or adventure:
+            if player's inventory has not enough space for 1 saddle:
+                inventoryFullAlert(player)
+
+on pickup:
+    chance of 1%:
+        if gamemode of player is survival or adventure:
+            if player's inventory has not enough space for 1 saddle:
+                inventoryFullAlert(player)
+
+# ZONA DEBUG
+command /inventoryfull:
+    permission: debug.command
+    trigger:
+        delete {-inventory_full.%player%}
+        inventoryFullAlert(player)

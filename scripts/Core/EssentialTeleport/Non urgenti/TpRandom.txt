@@ -1,0 +1,82 @@
+options:
+# RANDOMTP
+    minimumx: -10000
+    maximumx: 10000
+    minimumz: -10000
+    maximumz: 10000
+
+    maxheight: 300
+
+    blockblacklist: air, lava, water, stationary water, stationary lava, cactus, bamboo or vine
+    biomeblacklist: deep cold ocean, deep frozen ocean, deep lukewarm ocean, deep ocean, frozen ocean, frozen river, ocean, river, lukewarm ocean or warm ocean
+
+    waits: 20
+    delay: 5
+
+    cooldown: 60
+
+command /tprandom:
+    permission: et.member.tpr
+    aliases: /tpr, /rtp, /randomtp
+    usage: {@prefix} &cComando o parametro sconosciuto. Utilizza &6/tpr&c.
+    description: Teletrasportati in un punto a caso nel mondo in cui ti trovi.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            #send "{@prefix} &cQuesta funzionalità è stata disabilitata e sarà presto rimossa per evitare problemi prestazionali nel server."
+            #send "{@prefix} &cGrazie per averla utilizzata e perdonami per il disagio."
+            #play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            #stop
+            if {et.tpr_cooldown.%player%} is set:
+                if player does not have permission "et.admin.tprandom.bypass.cooldown":
+                    if {et.tpr_cooldown.%player%} > 1:
+                        send "{@prefix} &cDevi aspettare ancora &6%{et.tpr_cooldown.%player%}% secondi &cprima di poter utilizzare questo comando!" to player
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+                    else:
+                        send "{@prefix} &cDevi aspettare ancora &6%{et.tpr_cooldown.%player%}% secondo &cprima di poter utilizzare questo comando!" to player
+                        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                        stop
+            if player's world is "%{-server.world.overworld}%":
+                send "{@prefix} &6Ti sto portando via di qui..."
+                send ""
+                send " &4&lAVVISO!"
+                send "  &7- &cIl TPRandom sarà presto rimosso per evitare problemi prestazionali nel server."
+                send "  &7- &cLa rimozione è prevista con l'introduzione del &eProgress Update&c."
+                send "  &7- &cPrima di allora, continuerà ad essere attivo e funzionante, pertanto puoi utilizzarlo."
+                send "  &7- &cGrazie di utilizzarlo e perdonami per il disagio."
+                send ""
+                play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                loop {@waits} times:
+                    wait {@delay} ticks
+                    set {_x} to random integer between {@minimumx} to {@maximumx}
+                    set {_y} to 55
+                    set {_z} to random integer between {@minimumz} to {@maximumz}
+                    set {_location} to location at ({_x}, {_y}, {_z}) in world "%{-server.world.overworld}%"
+                    set {_block} to block at {_location}
+                    set {_biome} to biome at {_location}
+                    if {_biome} is not {@biomeblacklist}:
+                        if block under {_block} is not {@blockblacklist}:
+                            set {loc_before_tpr.%player%} to player's location
+                            teleport player at {_location}
+                            set {_loc} to location at player
+                            set y-coord of {_loc} to {@maxheight}
+                            loop {@maxheight} times:
+                                if block at {_loc} is solid:
+                                    teleport player to block above {_loc}
+                                    set {et.last_loc.%player%} to {loc_before_tpr.%player%}
+                                else:
+                                    remove 1 from y-coord of {_loc}
+                                set {et.last_loc.%player%} to {loc_before_tpr.%player%}
+                            delete {loc_before_tpr.%player%}
+                            if player does not have permission "et.admin.tprandom.bypass.cooldown":
+                                set {et.tpr_cooldown.%player%} to {@cooldown}
+                                send "{@prefix} &aTeletrasporto completato! &6Potrai riutilizzare &e/tpr &6tra &c%{et.tpr_cooldown.%player%}% secondi&6."
+                                play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                            stop
+            else:
+                send "{@prefix} &cQuesto comando può essere utilizzato soltanto nell'Overworld!"
+                stop
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop

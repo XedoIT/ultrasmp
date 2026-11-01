@@ -1,0 +1,379 @@
+﻿# Script per il sistema delle reputazioni ed effetti dati dalle reputazioni #
+# File di gestione del comando principale e dell'assegnazione della Reputazione in base alla Fama #
+#
+# PERMESSI
+#
+# REPUTAZIONI
+# - ranks.admin.help
+#
+
+options:
+    prefix: &8[&b&lRANK&8]
+    error: &8[&4&lRANK&8]
+
+    glinted: "{enchantment_glint_override:true}"
+    glinted_no_flags: "{enchantment_glint_override:true,tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+
+    gui_background: {settings.personalization.gui_background::%{_p}%}
+    genre_lp: {genre.%loop-player%}
+
+    no_effect: &7Non hai nessun effetto perché sei neutrale&7.%nl%&7Cambia reputazione per ottenerne uno.
+    no_effect_other: &c%{_target}% &7non ha nessun effetto perché è neutrale&7.
+
+  # ANNUNCI CAMBIO REPUTAZIONE
+    new_rank: &c%loop-player% &fè diventato %{rank.%loop-player%}%&f!
+    new_rank_female: &c%loop-player% &fè diventata %{rank.%loop-player%}%&f!
+
+  # INDICATORE REPUTAZIONE GUI
+    in_rank: &a&lLA TUA REPUTAZIONE ATTUALE
+
+  # LISTA REPUTAZIONI (NOME INTERO)
+    rank_-5: &4&lPerfido&r
+    rank_-5_female: &4&lPerfida&r
+    rank_-4: &c&lMalvagio&r
+    rank_-4_female: &c&lMalvagia&r
+    rank_-3: &6&lVile&r
+    rank_-2: &e&lSpregevole&r
+    rank_-1: &8&lAggressivo&r
+    rank_-1_female: &8&lAggressiva&r
+    rank_0: &7&lNeutrale&r
+    rank_1: &a&lPerbene&r
+    rank_2: &a&lGentile&r
+    rank_3: &2&lAffidabile&r
+    rank_4: &2&lAltruista&r
+    rank_5: &3&lAffabile&r
+    rank_6: &3&lPuro&r
+    rank_6_female: &3&lPura&r
+    rank_7: &9&lMigliore&r
+    rank_8: &9&lSpeciale&r
+    rank_9: &b&lStrepitoso&r
+    rank_9_female: &b&lStrepitosa&r
+    rank_10: &b&lStupendo&r
+    rank_10_female: &b&lStupenda&r
+    rank_11: &6&n&lNerd&r
+
+  # LISTA REPUTAZIONI (PREFISSO RANK)
+    tabpfx_rank_-5: &c[&4&lP&c]&r
+    tabpfx_rank_-4: &4[&c&lM&4]&r
+    tabpfx_rank_-3: &e[&6&lV&e]&r
+    tabpfx_rank_-2: &6[&e&lS&6]&r
+    tabpfx_rank_-1: &7[&8&lA&7]&r
+    tabpfx_rank_0: &8[&7&lN&8]&r
+    tabpfx_rank_1: &2[&a&lP&2]&r
+    tabpfx_rank_2: &2[&a&lG&2]&r
+    tabpfx_rank_3: &a[&2&lA&a]&r
+    tabpfx_rank_4: &a[&2&lA&a]&r
+    tabpfx_rank_5: &b[&3&lA&b]&r
+    tabpfx_rank_6: &b[&3&lP&b]&r
+    tabpfx_rank_7: &3[&9&lM&3]&r
+    tabpfx_rank_8: &3[&9&lS&3]&r
+    tabpfx_rank_9: &9[&b&lS&9]&r
+    tabpfx_rank_10: &9{&b&lS&9}&r
+    tabpfx_rank_11: &4{&c[&6&n&lN&e&c]&4}&r
+
+  # FAMA MASSIMA PER REPUTAZIONE
+    max_rank_-5: -1000
+    chat_max_rank_-5: -1.000 Fama
+    max_rank_-4: -750
+    chat_max_rank_-4: -750 Fama
+    max_rank_-3: -500
+    chat_max_rank_-3: -500 Fama
+    max_rank_-2: -250
+    chat_max_rank_-2: -250 Fama
+    max_rank_-1: -100
+    chat_max_rank_-1: -100 Fama
+    max_rank_0: 9999.99
+    chat_max_rank_0: 9.999,99 Fama
+    max_rank_1: 19999.99
+    chat_max_rank_1: 19.999,99 Fama
+    max_rank_2: 84999.99
+    chat_max_rank_2: 84.999,99 Fama
+    max_rank_3: 149999.99
+    chat_max_rank_3: 149.999,99 Fama
+    max_rank_4: 249999.99
+    chat_max_rank_4: 249.999,99 Fama
+    max_rank_5: 399999.99
+    chat_max_rank_5: 399.999,99 Fama
+    max_rank_6: 549999.99
+    chat_max_rank_6: 549.999,99 Fama
+    max_rank_7: 749999.99
+    chat_max_rank_7: 749.999,99 Fama
+    max_rank_8: 899999.99
+    chat_max_rank_8: 899.999,99 Fama
+    max_rank_9: 1999999.99
+    chat_max_rank_9: 1.999.999,99 Fama
+    max_rank_10: 14999999.99
+    chat_max_rank_10: 14.999.999,99 Fama
+
+  # FAMA MINIMA PER REPUTAZIONE
+    min_rank_-4: -999.99
+    chat_min_rank_-4: -999,99 Fama
+    min_rank_-3: -749.99
+    chat_min_rank_-3: -749,99 Fama
+    min_rank_-2: -499.99
+    chat_min_rank_-2: -499,99 Fama
+    min_rank_-1: -249.99
+    chat_min_rank_-1: -249,99 Fama
+    min_rank_0: -99.99
+    chat_min_rank_0: -99,99 Fama
+    min_rank_1: 10000
+    chat_min_rank_1: 10.000 Fama
+    min_rank_2: 20000
+    chat_min_rank_2: 20.000 Fama
+    min_rank_3: 85000
+    chat_min_rank_3: 85.000 Fama
+    min_rank_4: 150000
+    chat_min_rank_4: 150.000 Fama
+    min_rank_5: 250000
+    chat_min_rank_5: 250.000 Fama
+    min_rank_6: 400000
+    chat_min_rank_6: 400.000 Fama
+    min_rank_7: 550000
+    chat_min_rank_7: 550.000 Fama
+    min_rank_8: 750000
+    chat_min_rank_8: 750.000 Fama
+    min_rank_9: 900000
+    chat_min_rank_9: 900.000 Fama
+    min_rank_10: 2000000
+    chat_min_rank_10: 2.000.000 Fama
+    min_rank_11: 15000000
+    chat_min_rank_11: 15.000.000 Fama
+
+every second:
+    loop all players:
+        set {_u} to loop-player
+        if {-rank.alignment.-5.%{_u}%}, {-rank.alignment.-4.%{_u}%}, {-rank.alignment.-3.%{_u}%}, {-rank.alignment.-2.%{_u}%}, {-rank.alignment.-1.%{_u}%}, {-rank.alignment.0.%{_u}%}, {-rank.alignment.1.%{_u}%}, {-rank.alignment.2.%{_u}%}, {-rank.alignment.3.%{_u}%}, {-rank.alignment.4.%{_u}%}, {-rank.alignment.5.%{_u}%}, {-rank.alignment.6.%{_u}%}, {-rank.alignment.7.%{_u}%}, {-rank.alignment.8.%{_u}%}, {-rank.alignment.9.%{_u}%}, {-rank.alignment.10.%{_u}%} or {-rank.alignment.11.%{_u}%} is not set:
+            if {@genre_lp} is "%{-server.genre.female}%":
+                set {_n::*} to "{@rank_-5_female}", "{@rank_-4_female}", "{@rank_-3}", "{@rank_-2}", "{@rank_-1_female}", "{@rank_0}", "{@rank_1}", "{@rank_2}", "{@rank_3}", "{@rank_4}", "{@rank_5}", "{@rank_6_female}", "{@rank_7}", "{@rank_8}", "{@rank_9_female}", "{@rank_10_female}" and "{@rank_11}"
+            else:
+                set {_n::*} to "{@rank_-5}", "{@rank_-4}", "{@rank_-3}", "{@rank_-2}", "{@rank_-1}", "{@rank_0}", "{@rank_1}", "{@rank_2}", "{@rank_3}", "{@rank_4}", "{@rank_5}", "{@rank_6}", "{@rank_7}", "{@rank_8}", "{@rank_9}", "{@rank_10}" and "{@rank_11}"
+                if {@genre_lp} is not "%{-server.genre.male}%":
+                    delete {_n::1}, {_n::2}, {_n::5}, {_n::12}, {_n::15} and {_n::16}
+            loop integers from -5 to 11:
+                if {_n::%loop-number + 6%} is set:
+                    set {-rank.alignment.%loop-number%.%{_u}%} to {_n::%loop-number + 6%}
+
+on join:
+    wait 5 ticks
+    if {rank.%player%} is not set:
+        set {rank.%player%} to "{@rank_0}"
+    if {rank.prefix.%player%} is not set:
+        set {rank.prefix.%player%} to "{@tabpfx_rank_0}"
+
+command /rank:
+    aliases: /reputazione
+    description: Gestisci la reputazione di un giocatore.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            send "{@prefix} &fAl momento sei %{rank.%player%}%&f." and "{@prefix} &bOttieni Fama per cambiare la tua reputazione."
+        else:
+            send "{@error} &cSolo i giocatori possono eseguire questo comando."
+
+    subcommand check <target: offline player>:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/rank check <&egiocatore&6>
+        permission: rank.check
+        suggestions:
+            set the suggestions for the offline player argument to {players::*}
+        trigger:
+            if {rank.%{_target}%} is set:
+                send "{@prefix} &c%{_target}% &fal momento è %{rank.%{_target}%}%"
+            else if sender is player:
+                send "{@error} &6%{_target}% &cnon ha ancora un ruolo!"
+            else:
+                send "{@error} &6%{_target}% &cnon possiede ancora nessun ruolo!"
+
+    subcommand effect [<target: offline player>]:
+        usage: {@prefix} &cParametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/rank effect [<&egiocatore&6>]
+        suggestions:
+            set the suggestions for the offline player argument to {players::*}
+        trigger:
+            if {_target} is not set:
+                if sender is not player:
+                    send "{@prefix} &cComando incompleto." and "{@prefix} &cUtilizzo: &6/rank effect <&egiocatore&6>"
+                else if {rank.effect.%player%} != "{@no_effect}":
+                    send "&7&m---------&r {@prefix} &7&m---------", "&fI tuoi effetti attivi:", "%{rank.effect.%player%}%" and "&7&m-------------------------"
+                else:
+                    send "&7&m---------------&r {@prefix} &7&m---------------", "%{rank.effect.%player%}%" and "&7&m-------------------------------------"
+                stop
+            if sender is player:
+                if player doesn't have permission "rank.effect.other":
+                    send "{@prefix} &cParametro sconosciuto." and "{@prefix} &cUtilizzo: &6/rank effect [<&egiocatore&6>]"
+                    stop
+            if {_target} has not played before:
+                send "{@prefix} &6%{_target}% &cnon ha ancora giocato in questo server!"
+                stop
+            if {rank.effect.%{_target}%} != "{@no_effect}":
+                send "&7&m-------------&r {@prefix} &7&m-------------"
+                if sender is player:
+                    send "&fEffetti attivi di &c%{_target}% &f(%{rank.%{_target}%}%&f)&f:"
+                else:
+                    send "&fGli effetti attivi di &c%{_target}% &f(%{rank.%{_target}%}%&f)&f:"
+                send "%{rank.effect.%{_target}%}%" and "&7&m---------------------------------"
+            else:
+                send "&7&m------------&r {@prefix} &7&m------------", "{@no_effect_other}" and "&7&m------------------------------"
+
+    subcommand list:
+        trigger:
+            if sender is player:
+                openRanksGUI(player)
+            else:
+                send "&7&m------------------&r {@prefix} &7&m------------------", "&fReputazioni disponibili:", "1. {@rank_-5} &r- &7&o(Da {@chat_max_rank_-5} in giù)", "2. {@rank_-4} &r- &7&o(Da {@chat_min_rank_-4} a {@chat_max_rank_-4})", "3. {@rank_-3} &r- &7&o(Da {@chat_min_rank_-3} a {@chat_max_rank_-3})", "4. {@rank_-2} &r- &7&o(Da {@chat_min_rank_-2} a {@chat_max_rank_-2})", "5. {@rank_-1} &r- &7&o(Da {@chat_min_rank_-1} a {@chat_max_rank_-1})", "6. {@rank_0} &r- &7&o(Da {@chat_min_rank_0} a {@chat_max_rank_0})", "7. {@rank_1} &r- &7&o(Da {@chat_min_rank_1} a {@chat_max_rank_1})", "8. {@rank_2} &r- &7&o(Da {@chat_min_rank_2} a {@chat_max_rank_2})", "9. {@rank_3} &r- &7&o(Da {@chat_min_rank_3} a {@chat_max_rank_3})", "10. {@rank_4} &r- &7&o(Da {@chat_min_rank_4} a {@chat_max_rank_4})", "11. {@rank_5} &r- &7&o(Da {@chat_min_rank_5} a {@chat_max_rank_5})", "12. {@rank_6} &r- &7&o(Da {@chat_min_rank_6} a {@chat_max_rank_6})", "13. {@rank_7} &r- &7&o(Da {@chat_min_rank_7} a {@chat_max_rank_7})", "14. {@rank_8} &r- &7&o(Da {@chat_min_rank_8} a {@chat_max_rank_8})", "15. {@rank_9} &r- &7&o(Da {@chat_min_rank_9} a {@chat_max_rank_9})", "16. {@rank_10} &r- &7&o(Da {@chat_min_rank_10} a {@chat_max_rank_10})", "17. {@rank_11} &r- &7&o(Da {@chat_min_rank_11} in su)" and "&7&m-------------------------------------------"
+
+    subcommand help:
+        trigger:
+            send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<", "" and "&7Comandi che puoi eseguire:"
+            if sender is player:
+                send "&c- &a/rank&7&o: Visualizza la tua attuale reputazione."
+                if player has permission "rank.admin.help":
+                    send "&c- &7/rank &acheck <giocatore>&7&o: Controlla la reputazione di un giocatore." and "&c- &7/rank &aeffect [giocatore]&7&o: Controlla i tuoi effetti attivi o quelli di un altro giocatore."
+                else:
+                    send "&c- &7/rank &aeffect&7&o: Visualizza i tuoi effetti attivi."
+            else:
+                send "&c- &7/rank &acheck <giocatore>&7&o: Controlla la reputazione di un giocatore." and "&c- &7/rank &aeffect <giocatore>&7&o: Controlla gli effetti attivi di un giocatore."
+            send "&c- &7/rank &alist&7&o: Mostra l'elenco di tutte le reputazioni disponibili.", "&c- &7/rank &ahelp&7&o: Mostra questa lista.", "" and "&e> &7&m--------------------------------&r &e<"
+
+    subcommand <unknown: text>:
+        trigger:
+            send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<", "", " &cComando sconosciuto!" and ""
+            if sender is player:
+                send " &cUtilizza &6/rank"
+                if player has permission "rank.admin.help":
+                    send " &cUtilizza &6/rank &eeffect [giocatore]" and " &cUtilizza &6/rank &echeck <giocatore>"
+                else:
+                    send " &cUtilizza &6/rank &eeffect"
+            else:
+                send " &cUtilizza &6/rank &eeffect <giocatore>" and " &cUtilizza &6/rank &echeck <giocatore>"
+            send " &cUtilizza &6/rank &elist", " &cUtilizza &6/rank &ehelp", "" and "&e> &7&m--------------------------------&r &e<"
+
+every 3 ticks:
+    set {_up::*} to {@max_rank_-5}, {@min_rank_-3}, {@min_rank_-2}, {@min_rank_-1}, {@max_rank_-1}, {@max_rank_0}, {@max_rank_1}, {@max_rank_2}, {@max_rank_3}, {@max_rank_4}, {@max_rank_5}, {@max_rank_6}, {@max_rank_7}, {@max_rank_8}, {@max_rank_9} and {@max_rank_10}
+    set {_down::*} to {@min_rank_-4}, {@min_rank_-3}, {@min_rank_-2}, {@min_rank_-1}, {@min_rank_0}, {@min_rank_1}, {@min_rank_2}, {@min_rank_3}, {@min_rank_4}, {@min_rank_5}, {@min_rank_6}, {@min_rank_7}, {@min_rank_8}, {@min_rank_9}, {@min_rank_10} and {@min_rank_11}
+    set {_pfx::*} to "{@tabpfx_rank_-5}", "{@tabpfx_rank_-4}", "{@tabpfx_rank_-3}", "{@tabpfx_rank_-2}", "{@tabpfx_rank_-1}", "{@tabpfx_rank_0}", "{@tabpfx_rank_1}", "{@tabpfx_rank_2}", "{@tabpfx_rank_3}", "{@tabpfx_rank_4}", "{@tabpfx_rank_5}", "{@tabpfx_rank_6}", "{@tabpfx_rank_7}", "{@tabpfx_rank_8}", "{@tabpfx_rank_9}", "{@tabpfx_rank_10}" and "{@tabpfx_rank_11}"
+    loop all players:
+        set {_u} to loop-player
+        if {rank.%{_u}%} is set:
+            loop integers from -5 to 11:
+                if {rank.%{_u}%} is {-rank.alignment.%loop-number%.%{_u}%}:
+                    if {fama::%{_u}%} < {_down::%loop-number + 5%}:
+                        set {_n} to loop-number - 1
+                    else if {fama::%{_u}%} > {_up::%loop-number + 6%}:
+                        set {_n} to loop-number + 1
+                    else:
+                        stop loop
+                    set {rank.%{_u}%} to {-rank.alignment.%{_n}%.%{_u}%}
+                    set {rank.prefix.%{_u}%} to {_pfx::%{_n} + 6%}
+                    if {_n} is 11:
+                        execute console command "/lp user %loop-player% permission set admin.god.toggle"
+                        execute console command "/lp user %loop-player% permission set admin.fly.toggle"
+                        execute console command "/lp user %loop-player% permission set admin.god.keep"
+                        execute console command "/lp user %loop-player% permission set admin.fly.keep"
+                    else if loop-number is 11:
+                        execute console command "/lp user %loop-player% permission unset admin.god.toggle"
+                        execute console command "/lp user %loop-player% permission unset admin.fly.toggle"
+                        execute console command "/lp user %loop-player% permission unset admin.god.keep"
+                        execute console command "/lp user %loop-player% permission unset admin.fly.keep"
+                    if {@genre_lp} is "%{-server.genre.male}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank}"
+                        stop
+                    else if {@genre_lp} is "%{-server.genre.female}%":
+                        broadcast "&3&lREPUTAZIONE &f&l> {@new_rank_female}"
+                        stop
+                    stop loop
+
+function openRanksGUI(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Reputazioni della %{-server.name}%"
+    if {@gui_background} is true:
+        set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named ""
+        set slot 10, 16, 19, 20, 21, 23, 24, 25, 37, 41 and 43 of {_gui} to gray stained glass pane named ""
+    set slot 4 of {_gui} to writable book named "&fReputazioni" with lore "&7Accumula &aFama &7per ottenere", "&7una &bReputazione &7e sbloccare", "&7effetti permanenti che ti", "&7aiuteranno (od ostacoleranno)", "&7nella tua avventura nell'SMP.", "", "&7Passa col cursore su un'icona", "&7per scoprirne i dettagli.", "", "&eLe tue statistiche:", " &aFama&f: %regex({fama::%{_p}%})%" and " &bReputazione&f: %{rank.%{_p}%}%"
+    if {rank.%{_p}%} = {-rank.alignment.-5.%{_p}%}:
+        set slot 11 of {_gui} to lava bucket with nbt from {@glinted} named "%{-rank.alignment.-5.%{_p}%}% {@tabpfx_rank_-5}" with lore " &fFama richiesta:", "  &4Da {@chat_max_rank_-5} in giù", "", " &fEffetti ottenuti:", "  &c↓ &7Sfortuna", "  &c↓ &7Debolezza II", "  &c↓ &7Affaticamento II", "  &c↓ &7Lentezza II", "", "  &fOgni ora per 30 secondi:", "   &c↓ &7Cecità", "" and "{@in_rank}"
+    else:
+        set slot 11 of {_gui} to lava bucket named "%{-rank.alignment.-5.%{_p}%}% {@tabpfx_rank_-5}" with lore " &fFama richiesta:", "  &4Da {@chat_max_rank_-5} in giù", "", " &fEffetti ottenuti:", "  &c↓ &7Sfortuna", "  &c↓ &7Debolezza II", "  &c↓ &7Affaticamento II", "  &c↓ &7Lentezza II", "", "  &fOgni ora per 30 secondi:", "   &c↓ &7Cecità"
+    if {rank.%{_p}%} = {-rank.alignment.-4.%{_p}%}:
+        set slot 12 of {_gui} to tnt with nbt from {@glinted} named "%{-rank.alignment.-4.%{_p}%}% {@tabpfx_rank_-4}" with lore " &fFama richiesta:", "  &cDa {@chat_min_rank_-4} a {@chat_max_rank_-4}", "", " &fEffetti ottenuti:", "  &c↓ &7Sfortuna", "  &c↓ &7Debolezza II", "  &c↓ &7Affaticamento" and "  &c↓ &7Lentezza", "" and "{@in_rank}"
+    else:
+        set slot 12 of {_gui} to tnt named "%{-rank.alignment.-4.%{_p}%}% {@tabpfx_rank_-4}" with lore " &fFama richiesta:", "  &cDa {@chat_min_rank_-4} a {@chat_max_rank_-4}", "", " &fEffetti ottenuti:", "  &c↓ &7Sfortuna", "  &c↓ &7Debolezza II", "  &c↓ &7Affaticamento" and "  &c↓ &7Lentezza"
+    if {rank.%{_p}%} = {-rank.alignment.-3.%{_p}%}:
+        set slot 13 of {_gui} to bone with nbt from {@glinted} named "%{-rank.alignment.-3.%{_p}%}% {@tabpfx_rank_-3}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_-3} a {@chat_max_rank_-3}", "", " &fEffetti ottenuti:", "  &c↓ &7Sfortuna", "  &c↓ &7Debolezza" and "  &c↓ &7Affaticamento", "" and "{@in_rank}"
+    else:
+        set slot 13 of {_gui} to bone named "%{-rank.alignment.-3.%{_p}%}% {@tabpfx_rank_-3}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_-3} a {@chat_max_rank_-3}", "", " &fEffetti ottenuti:", "  &c↓ &7Sfortuna", "  &c↓ &7Debolezza" and "  &c↓ &7Affaticamento"
+    if {rank.%{_p}%} = {-rank.alignment.-2.%{_p}%}:
+        set slot 14 of {_gui} to dead bush with nbt from {@glinted} named "%{-rank.alignment.-2.%{_p}%}% {@tabpfx_rank_-2}" with lore " &fFama richiesta:", "  &eDa {@chat_min_rank_-2} a {@chat_max_rank_-2}", "", " &fEffetti ottenuti:", "  &c↓ &7Forza II" and "  &c↓ &7Debolezza", "" and "{@in_rank}"
+    else:
+        set slot 14 of {_gui} to dead bush named "%{-rank.alignment.-2.%{_p}%}% {@tabpfx_rank_-2}" with lore " &fFama richiesta:", "  &eDa {@chat_min_rank_-2} a {@chat_max_rank_-2}", "", " &fEffetti ottenuti:", "  &c↓ &7Forza II" and "  &c↓ &7Debolezza"
+    if {rank.%{_p}%} = {-rank.alignment.-1.%{_p}%}:
+        set slot 15 of {_gui} to iron sword with nbt from {@glinted_no_flags} named "%{-rank.alignment.-1.%{_p}%}% {@tabpfx_rank_-1}" with lore " &fFama richiesta:", "  &8Da {@chat_min_rank_-1} a {@chat_max_rank_-1}", "", " &fEffetti ottenuti:", "  &c↓ &7Forza II", "" and "{@in_rank}"
+    else:
+        set slot 15 of {_gui} to iron sword with nbt from {@no_flags} named "%{-rank.alignment.-1.%{_p}%}% {@tabpfx_rank_-1}" with lore " &fFama richiesta:", "  &8Da {@chat_min_rank_-1} a {@chat_max_rank_-1}", "", " &fEffetti ottenuti:", "  &c↓ &7Forza II"
+    if {rank.%{_p}%} = {-rank.alignment.0.%{_p}%}:
+        set slot 22 of {_gui} to feather with nbt from {@glinted} named "%{-rank.alignment.0.%{_p}%}% {@tabpfx_rank_0}" with lore " &fFama richiesta:", "  &7Da {@chat_min_rank_0} a {@chat_max_rank_0}", "", " &fEffetti ottenuti:", "  &7Reputazione iniziale, nessun effetto.", "" and "{@in_rank}"
+    else:
+        set slot 22 of {_gui} to feather named "%{-rank.alignment.0.%{_p}%}% {@tabpfx_rank_0}" with lore " &fFama richiesta:", "  &7Da {@chat_min_rank_0} a {@chat_max_rank_0}", "", " &fEffetti ottenuti:", "  &7Reputazione iniziale, nessun effetto."
+
+    if {rank.%{_p}%} = {-rank.alignment.1.%{_p}%}:
+        set slot 28 of {_gui} to iron nugget with nbt from {@glinted} named "%{-rank.alignment.1.%{_p}%}% {@tabpfx_rank_1}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_1} a {@chat_max_rank_1}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "" and "{@in_rank}"
+    else:
+        set slot 28 of {_gui} to iron nugget named "%{-rank.alignment.1.%{_p}%}% {@tabpfx_rank_1}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_1} a {@chat_max_rank_1}", "", " &fEffetti ottenuti:" and "  &a↑ &7Fortuna"
+
+    if {rank.%{_p}%} = {-rank.alignment.2.%{_p}%}:
+        set slot 29 of {_gui} to iron ingot with nbt from {@glinted} named "%{-rank.alignment.2.%{_p}%}% {@tabpfx_rank_2}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_2} a {@chat_max_rank_2}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine", "" and "{@in_rank}"
+    else:
+        set slot 29 of {_gui} to iron ingot named "%{-rank.alignment.2.%{_p}%}% {@tabpfx_rank_2}" with lore " &fFama richiesta:", "  &aDa {@chat_min_rank_2} a {@chat_max_rank_2}", "", " &fEffetti ottenuti:" and "  &a↑ &7Fortuna" and "  &a↑ &7Sollecitudine"
+
+    if {rank.%{_p}%} = {-rank.alignment.3.%{_p}%}:
+        set slot 30 of {_gui} to gold nugget with nbt from {@glinted} named "%{-rank.alignment.3.%{_p}%}% {@tabpfx_rank_3}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_3} a {@chat_max_rank_3}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "" and "{@in_rank}"
+    else:
+        set slot 30 of {_gui} to gold nugget named "%{-rank.alignment.3.%{_p}%}% {@tabpfx_rank_3}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_3} a {@chat_max_rank_3}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna" and "  &a↑ &7Sollecitudine II"
+
+    if {rank.%{_p}%} = {-rank.alignment.4.%{_p}%}:
+        set slot 31 of {_gui} to gold ingot with nbt from {@glinted} named "%{-rank.alignment.4.%{_p}%}% {@tabpfx_rank_4}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_4} a {@chat_max_rank_4}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza", "" and "{@in_rank}"
+    else:
+        set slot 31 of {_gui} to gold ingot named "%{-rank.alignment.4.%{_p}%}% {@tabpfx_rank_4}" with lore " &fFama richiesta:", "  &2Da {@chat_min_rank_4} a {@chat_max_rank_4}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II" and "  &a↑ &7Resistenza"
+
+    if {rank.%{_p}%} = {-rank.alignment.5.%{_p}%}:
+        set slot 32 of {_gui} to emerald with nbt from {@glinted} named "%{-rank.alignment.5.%{_p}%}% {@tabpfx_rank_5}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_5} a {@chat_max_rank_5}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "" and "{@in_rank}"
+    else:
+        set slot 32 of {_gui} to emerald named "%{-rank.alignment.5.%{_p}%}% {@tabpfx_rank_5}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_5} a {@chat_max_rank_5}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II" and "  &a↑ &7Resistenza II"
+
+    if {rank.%{_p}%} = {-rank.alignment.6.%{_p}%}:
+        set slot 33 of {_gui} to emerald block with nbt from {@glinted} named "%{-rank.alignment.6.%{_p}%}% {@tabpfx_rank_6}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_6} a {@chat_max_rank_6}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione", "" and "{@in_rank}"
+    else:
+        set slot 33 of {_gui} to emerald block named "%{-rank.alignment.6.%{_p}%}% {@tabpfx_rank_6}" with lore " &fFama richiesta:", "  &3Da {@chat_min_rank_6} a {@chat_max_rank_6}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II" and "  &a↑ &7Rigenerazione"
+
+    if {rank.%{_p}%} = {-rank.alignment.7.%{_p}%}:
+        set slot 34 of {_gui} to diamond with nbt from {@glinted} named "%{-rank.alignment.7.%{_p}%}% {@tabpfx_rank_7}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_7} a {@chat_max_rank_7}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione II", "" and "{@in_rank}"
+    else:
+        set slot 34 of {_gui} to diamond named "%{-rank.alignment.7.%{_p}%}% {@tabpfx_rank_7}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_7} a {@chat_max_rank_7}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II" and "  &a↑ &7Rigenerazione II"
+
+    if {rank.%{_p}%} = {-rank.alignment.8.%{_p}%}:
+        set slot 38 of {_gui} to diamond block with nbt from {@glinted} named "%{-rank.alignment.8.%{_p}%}% {@tabpfx_rank_8}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_8} a {@chat_max_rank_8}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione II", "  &a↑ &7Velocità", "" and "{@in_rank}"
+    else:
+        set slot 38 of {_gui} to diamond block named "%{-rank.alignment.8.%{_p}%}% {@tabpfx_rank_8}" with lore " &fFama richiesta:", "  &9Da {@chat_min_rank_8} a {@chat_max_rank_8}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione II" and "  &a↑ &7Velocità"
+
+    if {rank.%{_p}%} = {-rank.alignment.9.%{_p}%}:
+        set slot 39 of {_gui} to netherite ingot with nbt from {@glinted} named "%{-rank.alignment.9.%{_p}%}% {@tabpfx_rank_9}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_9} a {@chat_max_rank_9}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione II", "  &a↑ &7Velocità II", "" and "{@in_rank}"
+    else:
+        set slot 39 of {_gui} to netherite ingot named "%{-rank.alignment.9.%{_p}%}% {@tabpfx_rank_9}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_9} a {@chat_max_rank_9}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione II" and "  &a↑ &7Velocità II"
+
+    if {rank.%{_p}%} = {-rank.alignment.10.%{_p}%}:
+        set slot 40 of {_gui} to netherite block with nbt from {@glinted} named "%{-rank.alignment.10.%{_p}%}% {@tabpfx_rank_10}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_10} a {@chat_max_rank_10}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione III", "  &a↑ &7Velocità II", "", "  &fOgni ora per 15 minuti:", "   &a↑ &7Eroicità" and "{@in_rank}"
+    else:
+        set slot 40 of {_gui} to netherite block named "%{-rank.alignment.10.%{_p}%}% {@tabpfx_rank_10}" with lore " &fFama richiesta:", "  &bDa {@chat_min_rank_10} a {@chat_max_rank_10}", "", " &fEffetti ottenuti:", "  &a↑ &7Fortuna", "  &a↑ &7Sollecitudine II", "  &a↑ &7Resistenza II", "  &a↑ &7Rigenerazione III", "  &a↑ &7Velocità II", "", "  &fOgni ora per 15 minuti:" and "   &a↑ &7Eroicità"
+
+    if {rank.%{_p}%} = {-rank.alignment.11.%{_p}%}:
+        set slot 42 of {_gui} to bedrock with nbt from {@glinted} named "%{-rank.alignment.11.%{_p}%}% {@tabpfx_rank_11}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_11} in su", "", " &fRicompense ottenute:", "  &a↑ &7/god", "" and "{@in_rank}"
+    else:
+        set slot 42 of {_gui} to bedrock named "%{-rank.alignment.11.%{_p}%}% {@tabpfx_rank_11}" with lore " &fFama richiesta:", "  &6Da {@chat_min_rank_11} in su", "", " &fRicompense ottenute:" and "  &a↑ &7/god"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna all'%{-server.name}%"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Reputazioni della %{-server.name}%":
+        if type of event-inventory is chest inventory:
+            cancel event
+            if index of event-slot is 49:
+                if click type is left mouse button:
+                    close player's inventory

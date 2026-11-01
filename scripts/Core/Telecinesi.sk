@@ -1,0 +1,77 @@
+options:
+    toggle_sound: play sound "block.block_note.pling" with volume 1 and pitch 2
+
+command /telecinesi [<target: offline player>]:
+    permission: telekinesis.use
+    executable by: player and console
+    trigger:
+        if {_target} is not set:
+            if sender is not player:
+                send "%{-server.prefix.main}% &cSolo i giocatori possono eseguire questo comando."
+                stop
+            else:
+                if {telekinesis.%player%} is not set:
+                    set {telekinesis.%player%} to true
+                    send "%{-server.prefix.main}% &aDa adesso, i loot che otterrai finiranno nel tuo inventario."
+                else:
+                    delete {telekinesis.%player%}
+                    send "%{-server.prefix.main}% &cDa adesso, i loot che otterrai saranno droppati a terra."
+                {@toggle_sound} at player for player
+                stop
+        else:
+            if {_target} is not online:
+                send "%{-server.prefix.main}% &6%{_target}% &cè offline."
+                stop
+            else:
+                if {telekinesis.%{_target}%} is not set:
+                    set {telekinesis.%{_target}%} to true
+                    send "%{-server.prefix.main}% &aDa adesso, i loot che otterrai finiranno nel tuo inventario." to {_target}
+                    send "%{-server.prefix.main}% &aTelecinesi abilitata per &b%{_target}%&a." to sender
+                else:
+                    delete {telekinesis.%{_target}%}
+                    send "%{-server.prefix.main}% &cDa adesso, i loot che otterrai saranno droppati a terra." to {_target}
+                    send "%{-server.prefix.main}% &cTelecinesi disabilitata per &6%{_target}%&c." to sender
+                {@toggle_sound} at {_target} for {_target}
+
+on break:
+    if {telekinesis.%player%} is true:
+        if player's gamemode is not creative:
+            if player's inventory has enough space for 1 of event-block:
+                cancel drops
+                if "%type of event-block%" does not contain "shulker box":
+                    if "%block data of event-block%" contains "type=right" or "type=left":
+                        if "%block data of event-block%" contains "type=right":
+                            set {_s} to 0
+                        else:
+                            set {_s} to 27
+                        loop integers from {_s} to ({_s} + 26):
+                            set {_i} to slot loop-integer of inventory of event-block
+                            if {_i} is not air:
+                                drop {_i} at location of event-block
+                                set slot loop-integer of inventory of event-block to air
+                    else:
+                        loop items in inventory of event-block:
+                            drop loop-item at location of event-block
+                        clear inventory of event-block
+                give drops of event-block using player's tool to player
+
+on death of living entity:
+    if victim is not a player:
+        if attacker is a player:
+            if {telekinesis.%attacker%} is true:
+                loop drops:
+                    if attacker's inventory has enough space for loop-item:
+                        give loop-item to attacker
+                    else:
+                        drop loop-item at location of victim
+                    remove loop-item from drops
+
+on join:
+    wait 1 tick
+    if {telekinesis.%player%} is true:
+        if player does not have permission "telekinesis.keep":
+            delete {telekinesis.%player%}
+            send "%{-server.prefix.main}%&cTelecinesi disattivata." and "%{-server.prefix.main}% &cI loot che otterrai saranno droppati a terra."
+        else:
+            send "%{-server.prefix.main}% &aTelecinesi attiva." and "%{-server.prefix.main}% &aI loot che otterrai continueranno a finire nel tuo inventario."
+        {@toggle_sound} at player for player

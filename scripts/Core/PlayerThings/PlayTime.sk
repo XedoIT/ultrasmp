@@ -1,0 +1,129 @@
+options:
+    prefix: &6[&cPlayTime&6]
+
+function PlaytimeText(kind: text, who: offlineplayer) :: text:
+    set {_d} to {playtime.%{_kind}%.days.%{_who}%}
+    set {_h} to {playtime.%{_kind}%.hours.%{_who}%}
+    set {_m} to {playtime.%{_kind}%.minutes.%{_who}%}
+    set {_s} to {playtime.%{_kind}%.seconds.%{_who}%}
+    set {_dl} to "giorno" if {_d} is 1 else "giorni"
+    set {_hl} to "ora" if {_h} is 1 else "ore"
+    set {_ml} to "minuto" if {_m} is 1 else "minuti"
+    set {_sl} to "secondo" if {_s} is 1 else "secondi"
+    return "&c%{_d}% %{_dl}%&7, &c%{_h}% %{_hl}%&7, &c%{_m}% %{_ml}% &7e &c%{_s}% %{_sl}%&7"
+
+function PlaytimeClock(kind: text, who: offlineplayer) :: text:
+    return "%{playtime.%{_kind}%.days.%{_who}%}%:%{playtime.%{_kind}%.hours.%{_who}%}%:%{playtime.%{_kind}%.minutes.%{_who}%}%:%{playtime.%{_kind}%.seconds.%{_who}%}%"
+
+function PlaytimeTick(p: player, kind: text):
+    add 1 to {playtime.%{_kind}%.seconds.%{_p}%}
+    if {playtime.%{_kind}%.seconds.%{_p}%} >= 60:
+        set {playtime.%{_kind}%.seconds.%{_p}%} to 0
+        add 1 to {playtime.%{_kind}%.minutes.%{_p}%}
+        if {playtime.%{_kind}%.minutes.%{_p}%} >= 60:
+            set {playtime.%{_kind}%.minutes.%{_p}%} to 0
+            add 1 to {playtime.%{_kind}%.hours.%{_p}%}
+            if {playtime.%{_kind}%.hours.%{_p}%} >= 24:
+                set {playtime.%{_kind}%.hours.%{_p}%} to 0
+                add 1 to {playtime.%{_kind}%.days.%{_p}%}
+
+on first join:
+    if {playtime.first_login.%player%} is not set:
+        set {playtime.first_login.%player%} to now
+
+on join:
+    loop "days", "hours", "minutes" and "seconds":
+        set {playtime.actual_session.%loop-value%.%player%} to 0
+        delete {playtime.last_session.%loop-value%.%player%}
+        if {playtime.total.%loop-value%.%player%} is not set:
+            set {playtime.total.%loop-value%.%player%} to 0
+    if {playtime.sessions.%player%} is not set:
+        set {playtime.sessions.%player%} to 0
+
+on quit:
+    log "[PLAYTIME] Nella sua ultima sessione di gioco, %player% ha giocato per %{playtime.actual_session.seconds.%player%}% secondi, %{playtime.actual_session.minutes.%player%}% minuti, %{playtime.actual_session.hours.%player%}% ore e %{playtime.actual_session.days.%player%}% giorni." to "Sessioni di gioco.log"
+    loop "days", "hours", "minutes" and "seconds":
+        set {playtime.last_session.%loop-value%.%player%} to {playtime.actual_session.%loop-value%.%player%}
+        delete {playtime.actual_session.%loop-value%.%player%}
+    add 1 to {playtime.sessions.%player%}
+    set {playtime.last_seen.%player%} to now
+
+command /playtime:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/playtime <&esession&6> o /playtime <&etotal&6>.
+    description: "Tieni d'occhio il tuo tempo di gioco."
+    aliases: /pt
+    trigger:
+        if sender is not player:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+            stop
+        set {_session} to PlaytimeText("actual_session", player)
+        set {_total} to PlaytimeText("total", player)
+        send ""
+        send "&e&lIL TUO TEMPO DI GIOCO"
+        send " &7In questa sessione hai giocato per %{_session}%."
+        send " &7In totale hai giocato per %{_total}%."
+        send ""
+
+    subcommand session [<target: offline player>]:
+        suggestions:
+            if sender has permission "playtime.check.others":
+                set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is not player:
+                    send "{@prefix} &cSpecifica il nome di un giocatore!"
+                    stop
+                set {_text} to PlaytimeText("actual_session", player)
+                send "{@prefix} &7In questa sessione hai giocato per %{_text}%."
+                stop
+            if sender has permission "playtime.check.others":
+                if {_target} is online:
+                    set {_text} to PlaytimeText("actual_session", {_target})
+                    send "{@prefix} &7In questa sessione, &6%{_target}% &7ha giocato per %{_text}%."
+                else if {_target} has played before:
+                    set {_text} to PlaytimeText("last_session", {_target})
+                    send "{@prefix} &7Nella sua ultima sessione, &6%{_target}% &7ha giocato per %{_text}%."
+                else:
+                    send "{@prefix} &cNon ho trovato dati per &6%{_target}%&c."
+            else:
+                send "{@prefix} &cNon hai il permesso di vedere il tempo di gioco degli altri giocatori."
+
+    subcommand total [<target: offline player>]:
+        suggestions:
+            if sender has permission "playtime.check.others":
+                set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is not player:
+                    send "{@prefix} &cSpecifica il nome di un giocatore!"
+                    stop
+                set {_text} to PlaytimeText("total", player)
+                send "{@prefix} &7In totale hai giocato per %{_text}%."
+                stop
+            if sender has permission "playtime.check.others":
+                if {_target} has played before:
+                    set {_text} to PlaytimeText("total", {_target})
+                    send "{@prefix} &7In totale, &6%{_target}% &7ha giocato per %{_text}%."
+                else:
+                    send "{@prefix} &cNon ho trovato dati per &6%{_target}%&c."
+            else:
+                send "{@prefix} &cNon hai il permesso di vedere il tempo di gioco degli altri giocatori."
+
+every second:
+    {maintenance} is not set
+    loop all players:
+        PlaytimeTick(loop-player, "actual_session")
+        PlaytimeTick(loop-player, "total")
+
+every second:
+    loop all players:
+        if {actionbar.playtime.session.%loop-player%} is true:
+            set {_s} to PlaytimeClock("actual_session", loop-player)
+            send action bar "&aTempo della sessione: &f%{_s}%" to loop-player
+        else if {actionbar.playtime.total.%loop-player%} is true:
+            set {_t} to PlaytimeClock("total", loop-player)
+            send action bar "&bTempo totale: &f%{_t}%" to loop-player
+        else if {actionbar.playtime.both.%loop-player%} is true:
+            set {_s} to PlaytimeClock("actual_session", loop-player)
+            set {_t} to PlaytimeClock("total", loop-player)
+            send action bar "&aSessione: &f%{_s}%  &7|  &bTotale: &f%{_t}%" to loop-player

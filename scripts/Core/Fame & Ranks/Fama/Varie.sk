@@ -1,0 +1,40 @@
+options:
+  # INCURSIONE
+    # fama base di una vittoria (poi moltiplicata per la difficoltà)
+    fama_min: 10
+    fama_max: 30
+    # moltiplicatori per difficoltà (da impostare)
+    mult_easy: 1
+    mult_normal: 2
+    mult_hard: 4
+
+# PESCA (da aggiungere la rarità del loot e il relativo moltiplicatore)
+on fish catch:
+    if fishing state is caught fish:
+        if gamemode of player is creative or spectator:
+            stop
+        set {_fame} to random number between 0.25 and 1
+        add {_fame} to {fama::%player%}
+        send action bar "&2&lPESCA &a+%regex({_fame})% Fama &6(%regex({fama::%player%})% totale)" to player
+
+# INCURSIONE (fama a tutti i giocatori che hanno contribuito alla vittoria, in base alla difficoltà)
+import:
+    org.bukkit.event.raid.RaidFinishEvent
+
+on RaidFinishEvent:
+    set {_diff} to difficulty of event.getWorld()
+    if {_diff} is easy:
+        set {_mult} to {@mult_easy}
+    else if {_diff} is normal (difficulty):
+        set {_mult} to {@mult_normal}
+    else if {_diff} is hard:
+        set {_mult} to {@mult_hard}
+    set {_n} to event.getWinners().size()
+    loop {_n} times:
+        set {_i} to loop-number - 1
+        set {_p} to event.getWinners().get({_i})
+        if gamemode of {_p} is creative or spectator:
+            continue
+        set {_fame} to (random number between {@fama_min} and {@fama_max}) * {_mult}
+        add {_fame} to {fama::%{_p}%}
+        send action bar "&d&l🔔 &2&lINCURSIONE &a+%regex({_fame})% Fama &6(%regex({fama::%{_p}%})% totale)" to {_p}

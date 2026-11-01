@@ -1,0 +1,86 @@
+options:
+    prefix: &6[&a&lMSG&6]
+
+  # MESSAGGI PRIVATI
+    msg_cooldown: 3 minutes
+
+    genre: {genre.%player%}
+
+# MESSAGGI PRIVATI (/msg)
+command /msg <target: offline player> <message: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/msg <&egiocatore&6> <&emessaggio&6>&c.
+    description: "Ti piacciono i messaggi privati?"
+    aliases: /tell
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not online:
+            send "&6%{_target}% &cè offline."
+            stop
+        if sender is a player:
+            if {_target} is player:
+                if {@genre} is "%{-server.genre.male}%":
+                    set {_who} to "stesso"
+                else:
+                    set {_who} to "stessa"
+                send "{@prefix} &cVuoi davvero scrivere a te %{_who}%?"
+                stop
+        if {_message} is not set:
+            send "{@prefix} &cCosa vuoi dire a %{_target}%?"
+            stop
+        if sender is a player:
+            set {_cd} to {@msg_cooldown} # da sostituire con il valore del tempo personalizzato dal giocatore
+            set {_exp} to now + {_cd}
+            set {-msg.reply::%{_target}%::%player%} to player's name
+            set {-msg.expire::%{_target}%::%player%} to {_exp}
+            delete {-msg.reply::%player%::%{_target}%}
+            delete {-msg.expire::%player%::%{_target}%}
+            send "&6[&bTu &7a &f%{_target}%&6] &7» &f%{_message}%"
+            send formatted "<hover:show_text:'Clicca per rispondere rapidamente a %player%'><click:suggest_command:/r %player% >&6[&b%player% &7a &aTe&6]</click></hover><reset> &7» &f%{_message}%" to {_target}
+            send "&6[&f%player% a %{_target}%&6] &f» &7%{_message}%" to console
+        else:
+            send "&6[&eTu &7a &e%{_target}%&6] &c» &f%{_message}%"
+            send "&6[&eConsole &7a &eTe&6] &c» &f%{_message}%" to {_target}
+        play sound "entity.experience_orb.pickup" with volume 1 at {_target} for {_target}
+        if sender is a player:
+            set {_name} to player's name
+            wait {_cd}
+            if {-msg.expire::%{_target}%::%player%} is {_exp}:
+                delete {-msg.reply::%{_target}%::%player%}
+                delete {-msg.expire::%{_target}%::%player%}
+                send "{@prefix} &cIl tempo per rispondere a &6%{_name}% &cè scaduto." to {_target}
+                send formatted "{@prefix} &cClicca <click:suggest_command:/msg %{_name}% >&6&nqui</click><reset> &cper riaprire la conversazione." to {_target}
+
+# RISPOSTA RAPIDA (/r): suggerisce i giocatori che ti hanno scritto e aspettano una risposta
+command /r <target: offline player> <message: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/r <&egiocatore&6>&c.
+    description: "Rispondi a un messaggio privato."
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {-msg.reply::%player%::*}
+    trigger:
+        set {_c} to "msg"
+        if {_target} is not player:
+            if {-msg.reply::%player%::%{_target}%} is not set:
+                send "{@prefix} &cNon hai ricevuto messaggi da &6%{_target}% &cdi recente."
+                send formatted "{@prefix} &cClicca <click:suggest_command:/msg %{_target}% >&6&nqui</click><reset> &cper aprire una conversazione."
+                stop
+        else:
+            if {@genre} is "%{-server.genre.male}%":
+                set {_s} to "o"
+            else:
+                set {_s} to "a"
+            send "{@prefix} &cChe senso ha scrivere a te stess%{_s}%?"
+            stop
+        set {_c} to "msg %{_target}%"
+        if {_message} is set:
+            set {_c} to "msg %{_target}% %{_message}%"
+        make sender execute command {_c}
+
+on quit:
+    delete {-msg.reply::%player%::*}
+    delete {-msg.expire::%player%::*}
+    loop all players:
+        delete {-msg.reply::%loop-player%::%player%}
+        delete {-msg.expire::%loop-player%::%player%}

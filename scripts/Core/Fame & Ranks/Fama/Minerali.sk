@@ -1,0 +1,160 @@
+options:
+    coal_message: &8⛏ &8&lCARBONE &7+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    iron_message: &f⛏ &f&lFERRO &7+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    copper_message: &5⛏ &5&lRAME &d+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    gold_message: &e⛏ &e&lORO &6+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    redstone_message: &4⛏ &4&lREDSTONE &c+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    lapis_message: &1⛏ &9&lLAPIS &9+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    emerald_message: &2⛏ &2&lSMERALDO &a+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    diamond_message: &b⛏ &b&lDIAMANTE &9+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    amethyst_message: "<##9966cc>⛏ <##9966cc>&lAMETISTA &5+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)"
+    quartz_message: &f⛏ &f&lQUARZO &7+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)
+    debris_message: "<##964b00>⛏ <##964b00>&lNETHERITE &7+%regex({_fame})% Fama &3(%regex({fama::%player%})% totale)"
+
+# FUNZIONI PER IL CONTROLLO DEI MINERALI PIAZZATI
+function famaChiave(b: block) :: text:
+    return "%world of {_b}%_%x-coordinate of {_b}%_%y-coordinate of {_b}%_%z-coordinate of {_b}%"
+
+function famaPiazzato(b: block) :: boolean:
+    set {_k} to famaChiave({_b})
+    if {fama.piazzati::%{_k}%} is set:
+        delete {fama.piazzati::%{_k}%}
+        return true
+    return false
+
+on place of coal ore, deepslate coal ore, iron ore, deepslate iron ore, copper ore, deepslate copper ore, gold ore, deepslate gold ore, nether gold ore, redstone ore, deepslate redstone ore, lapis ore, deepslate lapis ore, emerald ore, deepslate emerald ore, diamond ore, deepslate diamond ore, amethyst cluster, nether quartz ore or ancient debris:
+    set {fama.piazzati::%famaChiave(event-block)%} to true
+
+on mine of coal ore or deepslate coal ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 0.25 and 1
+            add {_fame} to {fama::%player%}
+            send action bar "{@coal_message}" to player
+on mine of iron ore or deepslate iron ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 1 and 2
+            add {_fame} to {fama::%player%}
+            send action bar "{@iron_message}" to player
+on mine of copper ore or deepslate copper ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 1.25 and 2
+            add {_fame} to {fama::%player%}
+            send action bar "{@copper_message}" to player
+on mine of gold ore, deepslate gold ore or nether gold ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 1.5 and 3
+            add {_fame} to {fama::%player%}
+            send action bar "{@gold_message}" to player
+on mine of redstone ore or deepslate redstone ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 1.75 and 3.25
+            add {_fame} to {fama::%player%}
+            send action bar "{@redstone_message}" to player
+on mine of lapis ore or deepslate lapis ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 1.5 and 3
+            add {_fame} to {fama::%player%}
+            send action bar "{@lapis_message}" to player
+on mine of emerald ore or deepslate emerald ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 10 and 20
+            add {_fame} to {fama::%player%}
+            send action bar "{@emerald_message}" to player
+on mine of diamond ore or deepslate diamond ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 8 and 16
+            add {_fame} to {fama::%player%}
+            send action bar "{@diamond_message}" to player
+on mine amethyst cluster:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 1 and 3
+            add {_fame} to {fama::%player%}
+            send action bar {@amethyst_message} to player
+on mine of nether quartz ore:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 2 and 3
+            add {_fame} to {fama::%player%}
+            send action bar "{@quartz_message}" to player
+on mine of ancient debris:
+    if gamemode of player is creative or spectator:
+        stop
+    if famaPiazzato(event-block) is true:
+        stop
+    if player's tool is tagged as item tag "pickaxes":
+        if player's tool is not enchanted with silk touch:
+            set {_fame} to random number between 40 and 80
+            add {_fame} to {fama::%player%}
+            send action bar {@debris_message} to player
+            #cancel drops
+            #drop 1 ancient debris named "Detriti antichi" at event-block's location
+
+# ZONA DEBUG
+command /debugpiazzati:
+    permission: debug.commands
+    trigger:
+        send "Minerali segnati: %size of {fama.piazzati::*}%" to sender
+        
+command /sendorecolors:
+    permission: debug.commands
+    trigger:
+        send "&8&lCARBONE &7+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&f&lFERRO &7+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&5&lRAME &d+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&e&lORO &6+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&4&lREDSTONE &c+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&1&lLAPIS &9+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&2&lSMERALDO &a+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&b&lDIAMANTE &9+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "<##9966cc>&lAMETISTA &5+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "&f&lQUARZO &7+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player
+        send "<##964b00>&lNETHERITE &7+{Fama} Fama &3(%regex({fama::%player%})% totale)" to player

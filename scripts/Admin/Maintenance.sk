@@ -1,0 +1,104 @@
+options:
+    debug_prefix: &8[&4&lDEBUG&8]
+
+    default_reason: &eCorrezione di bug.
+
+    kick_message: &c--- &8[&6&lS&e&lM&6&lP &f| &4&lMANUTENZIONE&8] &c---%nl%%nl%%nl%&a&lIl server sta subendo delle modifiche!%nl%%nl%&bPer saperne di più, scrivi nel canale ""&9smp&b"" su Discord.%nl%%nl%&cMotivo: &e%{maintenance.reason}%
+
+
+on join:
+    if {maintenance} is set:
+        if player has permission "maintenance.kick.bypass":
+            send "" to player
+            send "%{-server.prefix.main}% &6La manutenzione è ancora &aattivata&6." to player
+            send "%{-server.prefix.main}% &7Motivo: &e%{maintenance.reason}%" to player
+            send "" to player
+        else:
+            kick player due to "{@kick_message}"
+
+command /manutenzione:
+    description: Gestisce la manutenzione del server.
+    permission: maintenance.use
+    executable by: player and console
+
+    subcommand enable [<reason: text>]:
+        permission: maintenance.bypass
+        trigger:
+            if {maintenance} is set:
+                send ""
+                send "{@debug_prefix} &cLa manutenzione è già attiva."
+                send ""
+                stop
+            set {_r} to "{@default_reason}"
+            if {_reason} is set:
+                set {_r} to {_reason}
+            EnableMaintenance(sender, {_r})
+
+    subcommand disable:
+        permission: maintenance.bypass
+        trigger:
+            if {maintenance} is not set:
+                send ""
+                send "{@debug_prefix} &cLa manutenzione non è attiva."
+                send ""
+                stop
+            DisableMaintenance(sender)
+
+    subcommand info:
+        trigger:
+            send ""
+            if {maintenance} is set:
+                send "{@debug_prefix} &aLa manutenzione è attivata."
+                send "{@debug_prefix} &cMotivo: &e%{maintenance.reason}%"
+            else:
+                send "{@debug_prefix} &cLa manutenzione è disattivata."
+            send ""
+
+command /manutenzionekick [<offline player>]:
+    permission: maintenance.kick
+    executable by: player and console
+    trigger:
+        if {maintenance} is not set:
+            send "%{-server.prefix.main}% &cLa manutenzione non è attiva!"
+            stop
+        if arg-1 is not set:
+            send "%{-server.prefix.main}% &cSpecifica il nome di un giocatore!"
+            stop
+        if arg-1 is not online:
+            send "%{-server.prefix.main}% &6%arg-1% &cè offline."
+            stop
+        kick arg-1 due to "{@kick_message}"
+
+function EnableMaintenance(s: commandsender, r: text):
+    set {_who} to "dalla console"
+    if {_s} is a player:
+        set {_who} to "da &e%{_s}%&6"
+    set {maintenance} to true
+    set {maintenance.reason} to {_r}
+    loop all players:
+        if loop-player does not have permission "maintenance.kick.bypass":
+            kick loop-player due to "{@kick_message}"
+    broadcast ""
+    broadcast "{@debug_prefix} &6Manutenzione &aattivata &6%{_who}%."
+    broadcast "{@debug_prefix} &cMotivo: &e%{maintenance.reason}%"
+    broadcast ""
+    broadcast "&c&lTutti i giocatori sono stati espulsi dal server."
+    broadcast ""
+
+function DisableMaintenance(s: commandsender):
+    set {_who} to "dalla console"
+    if {_s} is a player:
+        set {_who} to "da &e%{_s}%&6"
+    delete {maintenance}
+    delete {maintenance.reason}
+    broadcast ""
+    broadcast "{@debug_prefix} &6Manutenzione &cdisattivata &6%{_who}%."
+    broadcast ""
+    broadcast "&a&lI giocatori possono rientrare nel server."
+    broadcast ""
+    
+every 10 ticks:
+    {maintenance} is set
+    loop all players:
+        if {actionbar.maintenance.%loop-player%} is true:
+            send action bar "&c&l---&7&l{ &6Manutenzione: &a&lATTIVATA &7&l}&c&l---" to loop-player

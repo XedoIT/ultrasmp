@@ -1,0 +1,87 @@
+options:
+    prefix: &4[&e&lSTATUS&4]
+    default_status: &cNessuno stato impostato.
+
+    data: "data-%player's uuid%"
+    status: yaml value "generali.player-info.common.status.new" in "data-%player's uuid%"
+    old_status: yaml value "generali.player-info.common.status.old" in "data-%player's uuid%"
+    genre: yaml value "generali.player-info.genre"
+    settings: "data-%player's uuid%"
+
+command /status:
+    permission: status.use
+    description: Imposta uno stato personale
+    executable by: player
+    trigger:
+        if {@status} is not "{@default_status}":
+            set {_status} to yaml value "generali.player-info.common.status.new" in "data-%player's uuid%"
+            send "{@prefix} &fIl tuo stato attuale: &7%{_status}%"
+            stop
+        else:
+            send "{@prefix} &cNon hai ancora uno stato."
+            send "{@prefix} &cImpostalo con &6/status set <stato>&c."
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+            stop
+
+    subcommand set [<text: text>]:
+        usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizzo: &6/status set <stato>
+        trigger:
+            if {@status} is not "{@default_status}":
+                #set {_old_status} to yaml value "generali.player-info.common.status.old" in "data-%player's uuid%"
+                set {@old_status} to {@status}
+                set {@status} to {_text}
+                set {_status} to yaml value "generali.player-info.common.status.new" in "data-%player's uuid%"
+                send "{@prefix} &aHai aggiornato il tuo stato."
+                send "{@prefix} &7%{_status}%"
+                play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                save yaml {@data}
+                stop
+            else:
+                set {@status} to {_text}
+                set {@old_status} to "{@default_status}"
+                send "{@prefix} &aHai impostato il tuo stato."
+                set {_status} to yaml value "generali.player-info.common.status.new" in "data-%player's uuid%"
+                send "{@prefix} &7%{_status}%"
+                play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+                save yaml {@data}
+                stop
+
+    subcommand delete [<status: text>]:
+        executable by: player
+        trigger:
+            if {@status} is not "{@default_status}":
+                if {@genre} in {@settings} is "%{-server.genre.male}%":
+                    send formatted "{@prefix} &cSei sicuro di voler eliminare il tuo stato? <click:suggest_command:sì>&2&l[SÌ]<reset></click> <click:suggest_command:no>&4&l[NO]<reset></click>"
+                else if {@genre} in {@settings} is "%{-server.genre.female}%":
+                    send formatted "{@prefix} &cSei sicura di voler eliminare il tuo stato? <click:suggest_command:sì>&2&l[SÌ]<reset></click> <click:suggest_command:no>&4&l[NO]<reset></click>"
+                play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                set {status.%player%.confirm} to true
+                stop
+            else:
+                send "{@prefix} &cNon puoi eliminare il tuo stato se prima non ne imposti uno!"
+                play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+                stop
+
+on chat:
+    if {status.%player%.confirm} is true:
+        cancel event
+        if message is "si", "sì", "yes", "s" or "y":
+            set {@old_status} to {@status}
+            set {@status} to "{@default_status}"
+            send "{@prefix} &aStato eliminato con successo." to player
+            play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+            delete {status.%player%.confirm}
+            save yaml {@data}
+        else if message is "no" or "n":
+            send "{@prefix} &aRicevuto." to player
+            play sound "block.note_block.pling" with volume 1 and pitch 2 at player for player
+            delete {status.%player%.confirm}
+        else:
+            send "{@prefix} &cNon capisco cosa intendi con &f%message%&c!"
+            if {@genre} in {@settings} is "%{-server.genre.male}%":
+                send ""
+                send formatted "{@prefix} &cSei sicuro di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
+            if {@genre} in {@settings} is "%{-server.genre.female}%":
+                send ""
+                send formatted "{@prefix} &cSei sicura di voler eliminare il tuo stato? <suggest command:sì>&2&l[SÌ]<reset> <suggest command:no>&4&l[NO]<reset>"
+            play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player

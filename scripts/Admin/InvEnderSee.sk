@@ -1,0 +1,468 @@
+# ==========================================================
+#  invsee.sk
+#  Inventario ed enderchest dei giocatori (online e offline)
+#  Richiede: skript-reflect
+#  Permesso: invsee.use
+# ==========================================================
+options:
+    prefix: &c[&e&lINV&d&lENDER&6&lSEE&c]
+    # --- Titoli GUI (%{_n}% = nome del giocatore osservato) ---
+    title_inv: Inventario di %{_n}%
+    title_ender: Enderchest di %{_n}%
+    offline_suffix: &c[OFFLINE]
+
+    # --- Pulsanti ---
+    btn_close_name: &cChiudi
+    btn_close_lore: &7Torna alla Ultra SMP
+    btn_to_ender: &dEnderchest di %{_n}%
+    btn_to_inv: &6Inventario di %{_n}%
+    #btn_lore: &7Clicca per aprire
+
+    # --- Messaggi ---
+    msg_self: &cNon puoi aprire il tuo inventario.
+    msg_never_played: &cQuesto giocatore non è mai entrato nel server.
+    msg_no_data: &cNon ho trovato dati per &6%{_t}%&c.
+    #msg_offline_edit: &eGiocatore offline, le modifiche verranno applicate al suo prossimo ingresso.
+    msg_drop_offline: &cNon puoi droppare oggetti di un giocatore offline.
+    msg_target_left_m: &cLa GUI di &6%player% &cè stata chiusa perché è uscito dal server.
+    msg_target_left_f: &cLa GUI di &6%player% &cè stata chiusa perché è uscita dal server.
+    msg_target_joined_m: &cLa GUI di &6%player% &cè stata chiusa perché è rientrato nel server. Aprila nuovamente per vederla live.
+    msg_target_joined_f: &cLa GUI di &6%player% &cè stata chiusa perché è rientrata nel server. Aprila nuovamente per vederla live.
+
+    # --- Pannelli di vetro ---
+    helmet_slot: &cSlot elmetto
+    chest_slot: &cSlot corazza
+    leggings_slot: &cSlot pantaloni
+    boots_slot: &cSlot stivali
+    main_hand: &aMano principale
+    offhand: &dMano secondaria
+
+    # --- Pulizia automatica copie offline ---
+    snap_days: 7
+    cleanup_interval: 1 hour
+    msg_cleanup: &7[InvSee] Pulizia automatica: %{_n}% copie eliminate (inattive da oltre {@snap_days} giorni).
+    
+command /invsee <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/invsee <&egiocatore&6>&c.
+    permission: invsee.use
+    aliases: /oi
+    suggestions:
+        set the suggestions for offline player argument to {players::*}
+    executable by: player
+    trigger:
+        oiOpen(player, {_target}, false)
+
+command /endersee <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/endersee <&egiocatore&6>&c.
+    permission: invsee.use
+    aliases: /oe
+    suggestions:
+        set the suggestions for offline player argument to {players::*}
+    executable by: player
+    trigger:
+        oiOpen(player, {_target}, true)
+
+# ---------- FUNZIONI ----------
+
+function oiCopy(i: itemtype) :: itemtype:
+    return {_i}
+
+# Salva una copia di inventario ed enderchest di un giocatore online (serve per vederlo da offline)
+function oiSnapshot(p: player):
+    delete {invsee::snap::%{_p}%::*}
+    set {_inv} to {_p}.getInventory()
+    set {_ec} to {_p}.getEnderChest()
+    loop integers from 0 to 40:
+        set {_i} to {_inv}.getItem(loop-value)
+        if {_i} is set:
+            set {invsee::snap::%{_p}%::inv::%loop-value%} to oiCopy({_i})
+        delete {_i}
+    loop integers from 0 to 26:
+        set {_i} to {_ec}.getItem(loop-value)
+        if {_i} is set:
+            set {invsee::snap::%{_p}%::ender::%loop-value%} to oiCopy({_i})
+        delete {_i}
+    set {invsee::snap::%{_p}%::held} to {_inv}.getHeldItemSlot()
+    set {invsee::snap::%{_p}%::time} to now
+
+# Sincronizza UNO slot tra GUI (g) e inventario reale/virtuale (m)
+function oiSyncSlot(v: player, g: inventory, m: inventory, gi: number, mi: number, k: text, off: boolean, t: offlineplayer):
+    set {_a} to {_g}.getItem({_gi})
+    set {_b} to {_m}.getItem({_mi})
+    set {_ph} to {-invsee::%{_v}%::ph::%{_gi}%}
+    # il vetro segnaposto conta come slot vuoto
+    if {_a} is set:
+        if {_ph} is set:
+            if {_a}.equals({_ph}) is true:
+                delete {_a}
+    set {_lg} to {-invsee::%{_v}%::lg::%{_gi}%}
+    set {_lm} to {-invsee::%{_v}%::lm::%{_gi}%}
+    # la GUI e' cambiata rispetto all'ultima sincronizzazione? (modifica dell'admin)
+    set {_gc} to false
+    if {_a} is set:
+        if {_lg} is set:
+            if {_a}.equals({_lg}) is false:
+                set {_gc} to true
+        else:
+            set {_gc} to true
+    else if {_lg} is set:
+        set {_gc} to true
+    # l'inventario del giocatore e' cambiato rispetto all'ultima sincronizzazione?
+    set {_mc} to false
+    if {_gc} is false:
+        if {_b} is set:
+            if {_lm} is set:
+                if {_b}.equals({_lm}) is false:
+                    set {_mc} to true
+            else:
+                set {_mc} to true
+        else if {_lm} is set:
+            set {_mc} to true
+    if {_gc} is true:
+        if {_a} is set:
+            {_m}.setItem({_mi}, {_a})
+        else:
+            set slot {_mi} of {_m} to air
+            if {_ph} is set:
+                {_g}.setItem({_gi}, {_ph})
+        if {_off} is true:
+            if {_a} is set:
+                set {invsee::snap::%{_t}%::%{_k}%::%{_mi}%} to oiCopy({_a})
+            else:
+                delete {invsee::snap::%{_t}%::%{_k}%::%{_mi}%}
+            set {invsee::pending::%{_t}%} to true
+    else if {_mc} is true:
+        if {_b} is set:
+            {_g}.setItem({_gi}, {_b})
+        else if {_ph} is set:
+            {_g}.setItem({_gi}, {_ph})
+        else:
+            set slot {_gi} of {_g} to air
+    else:
+        stop
+    # memorizza lo stato appena sincronizzato
+    set {_x} to {_g}.getItem({_gi})
+    if {_x} is set:
+        if {_ph} is set:
+            if {_x}.equals({_ph}) is true:
+                delete {_x}
+    set {_y} to {_m}.getItem({_mi})
+    if {_x} is set:
+        set {-invsee::%{_v}%::lg::%{_gi}%} to {_x}.clone()
+    else:
+        delete {-invsee::%{_v}%::lg::%{_gi}%}
+    if {_y} is set:
+        set {-invsee::%{_v}%::lm::%{_gi}%} to {_y}.clone()
+    else:
+        delete {-invsee::%{_v}%::lm::%{_gi}%}
+
+# Sincronizza tutta la GUI del visualizzatore
+function oiSync(v: player):
+    set {_g} to {-invsee::%{_v}%::gui}
+    if {_g} is not set:
+        stop
+    set {_t} to {-invsee::%{_v}%::target}
+    set {_off} to {-invsee::%{_v}%::off}
+    set {_e} to {-invsee::%{_v}%::ender}
+    set {_k} to "inv"
+    if {_e} is true:
+        set {_k} to "ender"
+    set {_h} to 0
+    if {_off} is true:
+        set {_m} to {-invsee::%{_v}%::model}
+        if {invsee::snap::%{_t}%::held} is set:
+            set {_h} to {invsee::snap::%{_t}%::held}
+    else:
+        set {_p} to {_t}.getPlayer()
+        if {_p} is not set:
+            stop
+        if {_e} is true:
+            set {_m} to {_p}.getEnderChest()
+        else:
+            set {_m} to {_p}.getInventory()
+            set {_h} to {_m}.getHeldItemSlot()
+    set {_gs::*} to {-invsee::%{_v}%::gs::*}
+    set {_ms::*} to {-invsee::%{_v}%::ms::*}
+    loop integers from 1 to size of {_gs::*}:
+        set {_mi} to {_ms::%loop-value%}
+        if {_gs::%loop-value%} is 42:
+            set {_mi} to {_h}
+        oiSyncSlot({_v}, {_g}, {_m}, {_gs::%loop-value%}, {_mi}, {_k}, {_off}, {_t})
+
+# Apre la GUI (e = false: inventario, e = true: enderchest)
+function oiOpen(v: player, t: offlineplayer, e: boolean):
+    if "%uuid of {_t}%" is "%uuid of {_v}%":
+        send "{@prefix} {@msg_self}" to {_v}
+        stop
+    set {_off} to false
+    if {_t} is not online:
+        if {_t}.hasPlayedBefore() is false:
+            send "{@prefix} {@msg_never_played}" to {_v}
+            stop
+        if {invsee::snap::%{_t}%::time} is not set:
+            send "{@prefix} {@msg_no_data}" to {_v}
+            stop
+        set {_off} to true
+    set {_n} to {_t}.getName()
+    if {_off} is true:
+        set {_n} to "%{_n}% {@offline_suffix}"
+    # oggetti fissi della GUI
+    set {_f} to black stained glass pane named ""
+    set {_close} to barrier named "{@btn_close_name}" with lore "{@btn_close_lore}"
+    if {_e} is true:
+        set {_g} to chest inventory with 4 rows named "{@title_ender}"
+        set {_btn} to chest named "{@btn_to_inv}" #with lore "{@btn_lore}"
+        loop integers from 27 to 35:
+            set slot loop-value of {_g} to {_f}
+        set slot 31 of {_g} to {_close}
+        set slot 32 of {_g} to {_btn}
+    else:
+        set {_g} to chest inventory with 6 rows named "{@title_inv}"
+        set {_btn} to ender chest named "{@btn_to_ender}" #with lore "{@btn_lore}"
+        set {_close} to barrier named "{@btn_close_name}" with lore "{@btn_close_lore}"
+        loop integers from 36 to 53:
+            if loop-value is not between 37 and 42:
+                set slot loop-value of {_g} to {_f}
+        set slot 37 of {_g} to red stained glass pane named "{@helmet_slot}"
+        set slot 38 of {_g} to red stained glass pane named "{@chest_slot}"
+        set slot 39 of {_g} to red stained glass pane named "{@leggings_slot}"
+        set slot 40 of {_g} to red stained glass pane named "{@boots_slot}"
+        set slot 41 of {_g} to magenta stained glass pane named "{@offhand}"
+        set slot 42 of {_g} to lime stained glass pane named "{@main_hand}"
+        set slot 43 of {_g} to {_btn}
+        set slot 49 of {_g} to {_close}
+    # giocatore offline: inventario virtuale costruito dall'ultima copia salvata
+    if {_off} is true:
+        if {_e} is true:
+            set {_m} to chest inventory with 3 rows
+            loop {invsee::snap::%{_t}%::ender::*}:
+                set slot (loop-index parsed as number) of {_m} to loop-value
+        else:
+            set {_m} to chest inventory with 6 rows
+            loop {invsee::snap::%{_t}%::inv::*}:
+                set slot (loop-index parsed as number) of {_m} to loop-value
+    open {_g} to {_v}
+    # sessione (dopo l'open, cosi' la chiusura della GUI precedente non la cancella)
+    delete {-invsee::%{_v}%::*}
+    set {-invsee::%{_v}%::gui} to {_g}
+    set {-invsee::%{_v}%::target} to {_t}
+    set {-invsee::%{_v}%::tu} to "%uuid of {_t}%"
+    set {-invsee::%{_v}%::ender} to {_e}
+    set {-invsee::%{_v}%::off} to {_off}
+    if {_off} is true:
+        set {-invsee::%{_v}%::model} to {_m}
+    if {_e} is false:
+        loop integers from 37 to 42:
+            set {-invsee::%{_v}%::ph::%loop-value%} to {_g}.getItem(loop-value).clone()
+    # corrispondenza slot GUI (gs) -> slot inventario reale (ms)
+    if {_e} is true:
+        loop integers from 0 to 26:
+            add loop-value to {-invsee::%{_v}%::gs::*}
+            add loop-value to {-invsee::%{_v}%::ms::*}
+    else:
+        loop integers from 0 to 26:
+            add loop-value to {-invsee::%{_v}%::gs::*}
+            add (loop-value + 9) to {-invsee::%{_v}%::ms::*}
+        loop integers from 27 to 35:
+            add loop-value to {-invsee::%{_v}%::gs::*}
+            add (loop-value - 27) to {-invsee::%{_v}%::ms::*}
+        add 37, 38, 39, 40, 41 and 42 to {-invsee::%{_v}%::gs::*}
+        add 39, 38, 37, 36, 40 and 0 to {-invsee::%{_v}%::ms::*}
+    if {_v} is not in {-invsee::viewers::*}:
+        add {_v} to {-invsee::viewers::*}
+    oiSync({_v})
+    #if {_off} is true:
+        #send "{@prefix} {@msg_offline_edit}" to {_v}
+
+# Elimina le copie dei giocatori offline più vecchie del limite impostato nelle options
+function oiCleanup():
+    set {_max} to {@snap_days} days
+    set {_n} to 0
+    loop {invsee::snap::*}:
+        if loop-index ends with "::time":
+            set {_u} to loop-index
+            replace "::time" in {_u} with ""
+            # salto chi ha modifiche in attesa di essere applicate
+            if {invsee::pending::%{_u}%} is not set:
+                if difference between loop-value and now is greater than {_max}:
+                    delete {invsee::snap::%{_u}%::*}
+                    add 1 to {_n}
+    if {_n} > 0:
+        send "{@prefix} {@msg_cleanup}" to console
+
+# ---------- EVENTI ----------
+
+on inventory click:
+    set {_v} to player
+    set {_g} to {-invsee::%{_v}%::gui}
+    if {_g} is not set:
+        stop
+    # click nel proprio inventario (parte bassa): lascio fare e risincronizzo
+    if event-inventory is not {_g}:
+        wait 1 tick
+        oiSync({_v})
+        stop
+    set {_s} to index of event-slot
+    set {_t} to {-invsee::%{_v}%::target}
+    if {-invsee::%{_v}%::ender} is true:
+        if {_s} is 31:
+            cancel event
+            close {_v}'s inventory
+            stop
+        if {_s} is 32:
+            cancel event
+            wait 1 tick
+            oiOpen({_v}, {_t}, false)
+            stop
+        if {_s} > 26:
+            cancel event
+            stop
+    else:
+        if {_s} is 49:
+            cancel event
+            close {_v}'s inventory
+            stop
+        if {_s} is 43:
+            cancel event
+            wait 1 tick
+            oiOpen({_v}, {_t}, true)
+            stop
+        if {_s} is 35 or 36:
+            cancel event
+            stop
+        if {_s} is 42:
+            set {_h} to 0
+            if {-invsee::%{_v}%::off} is true:
+                if {invsee::snap::%{_t}%::held} is set:
+                    set {_h} to {invsee::snap::%{_t}%::held}
+            else:
+                set {_h} to {_t}.getPlayer().getInventory().getHeldItemSlot()
+            if {_h} is 8:
+                cancel event
+                stop
+        if {_s} > 42:
+            cancel event
+            stop
+    # oggetto lasciato cadere con Q / CTRL+Q: cade ai piedi del giocatore osservato
+    set {_an} to event-inventoryaction.name()
+    if {_s} is between 37 and 42:
+        set {_ph} to {-invsee::%{_v}%::ph::%{_s}%}
+        set {_it} to {_g}.getItem({_s})
+        if {_ph} is set:
+            if {_it} is set:
+                if {_it}.equals({_ph}) is true:
+                    cancel event
+                    if "%{_an}%" is "SWAP_WITH_CURSOR":
+                        set {_cur} to {_v}.getItemOnCursor()
+                        {_g}.setItem({_s}, {_cur})
+                        set {_rest} to {_cur}.clone()
+                        {_rest}.setAmount(0)
+                        {_v}.setItemOnCursor({_rest})
+                        wait 1 tick
+                        oiSync({_v})
+                    stop
+    set {_isdrop} to false
+    if "%{_an}%" is "DROP_ONE_SLOT":
+        set {_isdrop} to true
+    if "%{_an}%" is "DROP_ALL_SLOT":
+        set {_isdrop} to true
+    if {_isdrop} is true:
+        cancel event
+        if {-invsee::%{_v}%::off} is true:
+            send "{@prefix} {@msg_drop_offline}" to {_v}
+            stop
+        set {_it} to {_g}.getItem({_s})
+        if {_it} is not set:
+            stop
+        set {_p} to {_t}.getPlayer()
+        if {_p} is not set:
+            stop
+        set {_c} to {_it}.clone()
+        set {_left} to 0
+        if "%{_an}%" is "DROP_ONE_SLOT":
+            {_c}.setAmount(1)
+            set {_left} to {_it}.getAmount() - 1
+        if {_left} > 0:
+            set {_r} to {_it}.clone()
+            {_r}.setAmount({_left})
+            {_g}.setItem({_s}, {_r})
+        else:
+            set slot {_s} of {_g} to air
+        set {_loc} to {_p}.getEyeLocation()
+        set {_d} to {_p}.getWorld().dropItem({_loc}, {_c})
+        {_d}.setPickupDelay(40)
+        {_d}.setVelocity({_loc}.getDirection().multiply(0.3))
+        wait 1 tick
+        oiSync({_v})
+        stop
+    # click normale su uno slot modificabile: applico la modifica al giocatore
+    wait 1 tick
+    oiSync({_v})
+
+on inventory close:
+    set {_v} to player
+    if {-invsee::%{_v}%::gui} is not set:
+        stop
+    oiSync({_v})
+    delete {-invsee::%{_v}%::*}
+    remove {_v} from {-invsee::viewers::*}
+
+# aggiornamento in tempo reale (ogni 2 tick = 0,1 secondi)
+every 2 ticks:
+    loop {-invsee::viewers::*}:
+        oiSync(loop-value)
+
+on quit:
+    set {_u} to "%uuid of player%"
+    oiSnapshot(player)
+    # chi stava guardando questo giocatore: chiudo la GUI
+    loop {-invsee::viewers::*}:
+        if {-invsee::%loop-value%::tu} is {_u}:
+            wait 1 tick
+            if {genre.%player%} is "%{-server.genre.male}%":
+                send "{@prefix} {@msg_target_left_m}" to loop-value
+            else:
+                send "{@prefix} {@msg_target_left_f}" to loop-value
+            close loop-value's inventory
+    # se era lui a guardare un inventario
+    if {-invsee::%player%::gui} is set:
+        oiSync(player)
+        delete {-invsee::%player%::*}
+        remove player from {-invsee::viewers::*}
+
+on join:
+    set {_u} to "%uuid of player%"
+    # chi stava guardando questo giocatore da offline: chiudo la GUI
+    loop {-invsee::viewers::*}:
+        if {-invsee::%loop-value%::tu} is {_u}:
+            wait 1 tick
+            if {genre.%player%} is "%{-server.genre.male}%":
+                send "{@prefix} {@msg_target_joined_m}" to loop-value
+            else:
+                send "{@prefix} {@msg_target_joined_f}" to loop-value
+            close loop-value's inventory
+    # applico le modifiche fatte mentre era offline
+    if {invsee::pending::%player%} is set:
+        set {_p} to player
+        set {_inv} to {_p}.getInventory()
+        set {_ec} to {_p}.getEnderChest()
+        {_inv}.clear()
+        {_ec}.clear()
+        loop {invsee::snap::%{_p}%::inv::*}:
+            set slot (loop-index parsed as number) of {_inv} to loop-value
+        loop {invsee::snap::%{_p}%::ender::*}:
+            set slot (loop-index parsed as number) of {_ec} to loop-value
+        delete {invsee::pending::%{_p}%}
+
+# copia di sicurezza periodica (utile se il server va in crash)
+every 10 minutes:
+    loop all players:
+        oiSnapshot(loop-player)
+
+on load:
+    loop all players:
+        oiSnapshot(loop-player)
+    oiCleanup()
+
+every {@cleanup_interval}:
+    oiCleanup()

@@ -1,0 +1,232 @@
+options:
+  # GENERALE
+    prefix_enabled: &a[&2&lFly&a]
+    prefix_disabled: &6[&c&lFly&6]
+    prefix_error: &7[&c&lFly&7]
+    warn: &6[&c&l!&6]
+
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+    genre: {genre.%{_p}%}
+    fly_p: {playerinfo.fly::%{_p}%}
+    fly_ab: {settings.actionbar.fly.%loop-player%}
+
+  # EVENTO FLY
+    start_sound: play sound "entity.player.levelup" with volume 1 and pitch 0
+    stop_sound: play sound "entity.ender_dragon.shoot" with volume 1 and pitch 0
+
+    event_on: "&b>> &aL'evento ""&eVolo Libero&a"" è iniziato! &b<<"
+    event_off: "&6>> &cL'evento ""&7Volo Libero&c"" è terminato! &6<<"
+    event_in_progress: "&b>> &aL'evento ""&eVolo Libero&a"" è ancora attivo! &b<<"
+
+    title: "&e&lVolo Libero"
+    subtitle_start: "&aVola con &b/fly &aper i prossimi giorni."
+    subtitle_end: "&cEvento terminato."
+
+    bossbar_title: "&b>> &aEvento ""&e&lVolo Libero&a"" in corso! (&e/fly&a) &b<<"
+
+    event_days: 21
+
+on join:
+    wait 5 ticks
+    CheckFlyOnLogin(player)
+
+on respawn:
+    wait 1 tick
+    CheckFlyOnDeath(player)
+
+on player world change:
+    CheckFlyOnWorldChange(player)
+
+on quit:
+    if bossbar with id "event.fly.bossbar.%player's uuid%" is set:
+        remove bossbar "event.fly.bossbar.%player's uuid%"
+
+# BLOCCO: COMANDO PRINCIPALE (/fly) E FUNZIONI
+command /fly [<target: offline player>]:
+    description: "Perché camminare quando puoi volare?"
+    permission: admin.fly.toggle
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "{@prefix_error} &cSolo i giocatori possono volare."
+                stop
+            ToggleFlySelf(player)
+            stop
+        if {_target} is not online:
+            send "{@prefix_error} &6%{_target}% &cè offline."
+            if sender is a player:
+                {@error_sound} at player for player
+            stop
+        ToggleFlyOthers(sender, {_target})
+
+function CheckFlyOnLogin(p: player):
+    if {difficulty.info.hardcore_death::%{_p}%} is not true:
+        if {_p}'s gamemode is survival or adventure:
+            if {@fly_p} is true:
+                if {_p} does not have permission "admin.fly.keep" or "admin.fly.*":
+                    set {_p}'s flight mode to false
+                    delete {@fly_p}
+                    set {_m} to "{@warn} &7Prima di uscire dal server potevi volare. Adesso non puoi più. {@warn}"
+                else:
+                    set {_p}'s flight mode to true
+                    set {_m} to "{@prefix_enabled} &aPuoi ancora volare!"
+                wait 30 ticks
+                send "" and {_m} and "" to {_p}
+
+function CheckFlyOnDeath(p: player):
+    if {difficulty.info.hardcore_death::%{_p}%} is not true:
+        if {@fly_p} is true:
+            if {_p}'s gamemode is not creative or spectator:
+                if {_p} does not have permission "admin.fly.keep" or "admin.fly.*":
+                    set {_p}'s flight mode to false
+                    delete {@fly_p}
+                    #if {@genre} is "%{-server.genre.male}%":
+                        #set {_s} to "morto"
+                    #else if {@genre} is "%{-server.genre.female}%":
+                        #set {_s} to "morta"
+                    #if {_s} is set:
+                    send "" and "{@warn} &cNon puoi più volare. {@warn}" and "" to {_p}
+                else:
+                    set {_p}'s flight mode to true
+                    send "" and "{@prefix_enabled} &aPuoi ancora volare!" and "" to {_p}
+
+function CheckFlyOnWorldChange(p: player):
+    if {difficulty.info.hardcore_death::%{_p}%} is not true:
+        if {@fly_p} is true:
+            if {_p}'s gamemode is survival or adventure:
+                if {_p} does not have permission "admin.fly.keep" or "admin.fly.*":
+                    set {_p}'s flight mode to false
+                    delete {@fly_p}
+                    wait 1 second
+                    send "" and "{@warn} &cHai cambiato dimensione con il volo abilitato! Non puoi più volare. {@warn}" and "" to {_p}
+
+function ToggleFlySelf(p: player):
+    if {@fly_p} is true:
+        set {_p}'s flight mode to false
+        delete {@fly_p}
+        send "{@prefix_disabled} &cVolo disabilitato." to {_p}
+    else:
+        set {_p}'s flight mode to true
+        set {@fly_p} to true
+        send "{@prefix_enabled} &aVolo abilitato." to {_p}
+
+function ToggleFlyOthers(s: commandsender, p: player):
+    if {_s} is {_p}:
+        ToggleFlySelf({_p})
+        stop
+    set {_whoOff} to "&cLa &6console"
+    set {_whoOn} to "&aLa &econsole"
+    if {_s} is a player:
+        if {_s} has permission "admin.fly.toggle.other":
+            set {_whoOff} to "&6%{_s}%"
+            set {_whoOn} to "&e%{_s}%"
+        else:
+            send "{@prefix_error} &cQuesto comando non richiede parametri aggiuntivi." to {_s}
+            stop
+    if {@fly_p} is true:
+        set {_p}'s flight mode to false
+        delete {@fly_p}
+        send "{@prefix_disabled} &cHai tolto le ali a &6%{_p}%&c." to {_s}
+        send "{@prefix_disabled} %{_whoOff}% &cti ha tolto le ali. Da adesso non potrai più volare!" to {_p}
+    else:
+        set {_p}'s flight mode to true
+        set {@fly_p} to true
+        send "{@prefix_enabled} &aHai donato un paio d'ali a &e%{_p}%&a." to {_s}
+        send "{@prefix_enabled} %{_whoOn}% &ati ha donato un paio di ali. Adesso puoi volare!" to {_p}
+
+function ToggleNoFlyGM(p: player):
+    set {_p}'s flight mode to false
+    delete {@fly_p}
+
+function ToggleFlyGM(p: player):
+    set {_p}'s flight mode to true
+    set {@fly_p} to true
+
+every 10 ticks:
+    loop all players:
+        if gamemode of loop-player is not creative or spectator:
+            if {@fly_ab} is true:
+                if loop-player is flying:
+                    send action bar "&c&lIN VOLO &7| &aVelocità di volo: &6%flyspeed of loop-player%" to loop-player
+                else if loop-player has permission "admin.fly.toggle":
+                    send action bar "&a&lA TERRA &7| &bVelocità del passo: &e%walkspeed of loop-player%" to loop-player
+
+#BLOCCO: COMANDI PER L'EVENTO "VOLO LIBERO" (/flyevent e /flytimer), FUNZIONE ED EVENTI
+command /flyevent:
+    permission: event.fly
+    executable by: player and console
+    trigger:
+        if {event.fly} is set:
+            EndFlyEvent(true)
+            {@stop_sound} at player for player
+            stop
+        set {event.fly} to true
+        set {event.fly.end} to (unix timestamp of now) + ({@event_days} * 86400)
+        execute console command "lp group default permission set admin.fly.toggle true"
+        execute console command "lp group default permission set admin.fly.keep true"
+        broadcast {@event_on}
+        broadcast ""
+        broadcast "&a&lVOLO LIBERO &f- &6&lISTRUZIONI"
+        broadcast " &ePer i prossimi giorni potrai utilizzare la fly."
+        broadcast " &ePuoi volare eseguendo &b/fly &eo cliccando <cmd:/fly>&a&nqui&e."
+        broadcast ""
+        broadcast " &ePuoi, inoltre, controllare se l'evento è attivo dalla bossbar in alto."
+        broadcast ""
+        broadcast " &eBuon volo!"
+        broadcast ""
+        send title {@title} with subtitle {@subtitle_start} to all players for 5 seconds
+        loop all players:
+            create bossbar titled colored {@bossbar_title} and id "event.fly.bossbar.%loop-player's uuid%" for loop-player with progress 100 with colors white
+        {@start_sound} at player for player
+
+function EndFlyEvent(manual: boolean):
+    delete {event.fly}
+    delete {event.fly.end}
+    execute console command "lp group default permission unset admin.fly.toggle"
+    execute console command "lp group default permission unset admin.fly.keep"
+    if {_manual} is true:
+        send title {@title} with subtitle {@subtitle_end} to all players for 5 seconds
+        broadcast ""
+        broadcast {@event_off}
+        broadcast ""
+        set {_m} to "{@prefix_error} &cEvento interrotto! Da adesso non potrai più eseguire il comando &6/fly&c."
+    else:
+        send "" to console
+        send {@event_off} to console
+        send "" to console
+        set {_m} to "{@prefix_error} &cTempo per il volo scaduto! Da adesso non potrai più eseguire il comando &6/fly&c."
+    loop all players:
+        remove bossbar "event.fly.bossbar.%loop-player's uuid%"
+        remove bossbar "event.fly.%loop-player's uuid%"
+        send {_m} and "" and "%{-server.prefix.main}% &aSpero che questo evento ti sia piaciuto e che te lo sia goduto." and "%{-server.prefix.main}% &bBuona continuazione nell'&e%{-server.name}%&b!" to loop-player
+        play sound "block.note_block.pling" with volume 1 and pitch 2 at loop-player for loop-player
+
+every second:
+    {event.fly.end} is set
+    {event.fly.end} < (unix timestamp of now)
+    EndFlyEvent(false)
+
+command /flytimer:
+    executable by: player and console
+    trigger:
+        if {event.fly.end} is not set:
+            send "{@prefix_error} &cL'evento ""&6Volo Libero&c"" non è attivo! Riprova più tardi."
+            {@error_sound} at player for player
+            stop
+        set {_days} to ceil(({event.fly.end} - (unix timestamp of now)) / 86400)
+        if {_days} > 1:
+            send "{@warn} &aIl volo è abilitato per altri &e%{_days}% giorni&a."
+        else:
+            send "{@warn} &aIl volo è abilitato per &eun altro giorno&a."
+
+# EVENTI PER L'EVENTO "VOLO LIBERO"
+on join:
+    wait 2 seconds
+    if {event.fly} is true:
+        send {@event_in_progress} to player
+        if bossbar with id "event.fly.bossbar.%player's uuid%" is not set:
+            create bossbar titled colored {@bossbar_title} and id "event.fly.bossbar.%player's uuid%" for player with progress 100 with colors white

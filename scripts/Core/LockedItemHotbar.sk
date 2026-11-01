@@ -1,0 +1,67 @@
+import:
+    io.papermc.paper.event.player.PlayerPickItemEvent
+
+options:
+    profile_item_name: &eProfilo &lSMP
+
+on join:
+    set slot 8 of player to nether star named "{@profile_item_name}"
+
+on right click:
+    if player is holding a nether star named "{@profile_item_name}":
+        if player's offhand is not air:
+            cancel event
+        set {_b} to "%type of event-block%"
+        # --- BLOCCHI INTERAGIBILI (la GUI non si apre) ---
+        if {_b} contains "door" or "gate" or "button" or "lever" or "repeater" or "comparator" or "daylight detector":
+            stop
+        if {_b} contains "crafting table" or "anvil" or "enchanting table" or "grindstone" or "loom" or "cartography table" or "smithing table" or "stonecutter" or "beacon" or "lectern":
+            stop
+        if {_b} contains " bed" or "bell" or "note block" or "jukebox" or "respawn anchor" or "cauldron" or "composter" or "cake" or "sign" or "command block":
+            stop
+        # --- CONTENITORI (decommenta le 2 righe qui sotto per bloccare la GUI anche su questi) ---
+        # if {_b} contains "chest" or "barrel" or "shulker" or "hopper" or "dropper" or "dispenser" or "furnace" or "smoker" or "brewing stand" or "crafter" or "chiseled bookshelf" or "decorated pot":
+        #     stop
+        openProfileGui(player)
+        #play sound "ui.button.click" with volume 0.2 at player for player # SOSTITUIRE "ui.button.click" CON "%{settings.click_sound.profile.%player%}%"
+
+on inventory click:
+    if type of event-inventory is player inventory:
+        if index of event-slot is 8:
+            cancel event
+            openProfileGui(player) # disattivare se richiesto dai giocatori
+        else if event-item is nether star named "{@profile_item_name}":
+            clear event-slot
+    if click type is number key:
+        if event-slot is 8:
+            if event-slot is air:
+                set {-noswap.%player%} to air
+            else:
+                set {-noswap.%player%} to event-item
+            wait 1 tick
+            if event-item is nether star named "{@profile_item_name}":
+                set event-slot to {-noswap.%player%}
+                set slot 8 of player's inventory to nether star named "{@profile_item_name}"
+        if event-slot is 8:
+            cancel event
+        if cursor slot of player is nether star named "{@profile_item_name}":
+            set cursor slot of player to {-noswap.%player%}
+            set slot 8 of player's inventory to nether star named "{@profile_item_name}"
+
+on drop:
+    if event-item is nether star named "{@profile_item_name}":
+        cancel event
+
+on swap hand items:
+    if event-player's tool is nether star named "{@profile_item_name}":
+        cancel event
+
+# Con la stella in mano, la rotella (pick block) mette l'oggetto nello slot 7
+on PlayerPickItemEvent:
+    if event.getTargetSlot() is 8:
+        event.setTargetSlot(7)
+
+every tick:
+    loop all players:
+        if slot 8 of loop-player is not nether star named "{@profile_item_name}":
+            set slot 8 of loop-player to nether star named "{@profile_item_name}"

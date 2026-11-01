@@ -1,0 +1,121 @@
+options:
+    prefix: &8[&a&lC&b&lU&a&lR&b&lE&8]
+    error_prefix: &8[&c&lC&6&lU&c&lR&6&lE&8]
+
+    confirm_sound: entity.player.levelup
+    error_sound: entity.enderman.teleport
+
+  # YML
+    genre: {genre.%{_p}%}
+
+# BLOCCO: COMANDO PRINCIPALE (/heal) E FUNZIONI PER LA CURA
+command /heal [<target: offline player>]:
+    description: Cura i giocatori.
+    permission: command.healer
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is set:
+            if {_target} is online:
+                HealOthers(sender, {_target})
+            else:
+                send "{@prefix} &6%{_target}% &cè offline."
+        else if sender is a player:
+            HealSelf(player)
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+
+function HealSelf(p: player):
+    set {_player_hp} to placeholder "auraskills_hp" from {_p}
+    set {_player_hp_max} to placeholder "auraskills_hp_max" from {_p}
+    if {_player_hp} = {_player_hp_max}:
+        send "{@error_prefix} &cSei già in salute!" to {_p}
+        play sound "{@error_sound}" with volume 1 and pitch 0 for {_p}
+        stop
+    heal {_p}
+    if {@genre} is "%{-server.genre.male}%":
+        send "{@prefix} &aTi sei curato." to {_p}
+    else:
+        send "{@prefix} &aTi sei curata." to {_p}
+    play sound "{@confirm_sound}" with volume 1 and pitch 1 for {_p}
+
+function HealOthers(s: commandsender, p: player):
+    if {_s} is {_p}:
+        execute {_p} command "/heal"
+        stop
+    set {_player_hp} to placeholder "auraskills_hp" from {_p}
+    set {_player_hp_max} to placeholder "auraskills_hp_max" from {_p}
+    if {_player_hp} = {_player_hp_max}:
+        send "{@error_prefix} &6%{_p}% &cè già in salute!" to {_s}
+        if {_s} is a player:
+            play sound "{@error_sound}" with volume 1 and pitch 0 for {_s}
+        stop
+    heal {_p}
+    send "{@prefix} &aHai curato &b%{_p}%&a." to {_s}
+    if {_s} is a player:
+        set {_n} to "&b%{_s}%"
+    else:
+        set {_n} to "&aLa &bconsole"
+    if {@genre} is "%{-server.genre.male}%":
+        send "{@prefix} %{_n}% &ati ha curato." to {_p}
+    else:
+        send "{@prefix} %{_n}% &ati ha curata." to {_p}
+    play sound "{@confirm_sound}" with volume 1 and pitch 1 for {_p}
+
+# BLOCCO: COMANDO PRINCIPALE (/feed) E FUNZIONI PER LA SAZIETÀ
+command /feed [<target: offline player>]:
+    description: Sazia i giocatori.
+    permission: command.feed
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is set:
+            if {_target} is online:
+                FeedOthers(sender, {_target})
+            else:
+                send "{@prefix} &6%{_target}% &cè offline."
+        else if sender is a player:
+            FeedSelf(player)
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+
+function FeedSelf(p: player):
+    if {_p}'s food level >= 10:
+        if {@genre} is "%{-server.genre.male}%":
+            send "{@error_prefix} &cSei già sazio!" to {_p}
+        else:
+            send "{@error_prefix} &cSei già sazia!" to {_p}
+        play sound "{@error_sound}" with volume 1 and pitch 0 for {_p}
+        stop
+    set {_p}'s food level to 10
+    if {@genre} is "%{-server.genre.male}%":
+        send "{@prefix} &aTi sei saziato." to {_p}
+    else:
+        send "{@prefix} &aTi sei saziata." to {_p}
+    play sound "{@confirm_sound}" with volume 1 and pitch 1 for {_p}
+
+function FeedOthers(s: commandsender, p: player):
+    if {_s} is {_p}:
+        execute {_p} command "/feed"
+        stop
+    if {_p}'s food level >= 10:
+        if {@genre} is "%{-server.genre.male}%":
+            send "{@error_prefix} &6%{_p}% &cè già sazio!" to {_s}
+        else:
+            send "{@error_prefix} &6%{_p}% &cè già sazia!" to {_s}
+        if {_s} is a player:
+            play sound "{@error_sound}" with volume 1 and pitch 0 for {_s}
+        stop
+    set {_p}'s food level to 10
+    send "{@prefix} &aHai saziato &b%{_p}%&a." to {_s}
+    if {_s} is a player:
+        set {_n} to "&b%{_s}%"
+    else:
+        set {_n} to "&aLa &bconsole"
+    if {@genre} is "%{-server.genre.male}%":
+        send "{@prefix} %{_n}% &ati ha saziato." to {_p}
+    else:
+        send "{@prefix} %{_n}% &ati ha saziata." to {_p}
+    play sound "{@confirm_sound}" with volume 1 and pitch 1 for {_p}

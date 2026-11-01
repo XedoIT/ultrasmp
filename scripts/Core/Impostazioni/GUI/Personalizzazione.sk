@@ -1,0 +1,351 @@
+options:
+# GENERALI
+  # SUONI
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+    scoreboard_on: play sound "entity.player.levelup" with volume 1 and pitch 2
+    scoreboard_off: play sound "block.beacon.deactivate" with volume 1
+
+  # GLINT
+    glinted: "{enchantment_glint_override:true}"
+    glinted_off: "{enchantment_glint_override:false}"
+
+  # MARKER
+    no: &c✘
+    yes: &a✔
+
+# MESSAGGI FUNZIONALITÀ PERSONALIZZABILI
+  # SFONDO GUI
+    gui_fill: &7Sfondo GUI &aattivato&7.
+    gui_empty: &7Sfondo GUI &cdisattivato&7.
+
+  # MESSAGGIO DI BENTORNATO
+    msg_on: &7Messaggio di bentornato &aattivato&7.
+    msg_off: &7Messaggio di bentornato &cdisattivato&7.
+
+  # SCOREBOARD
+    sb_on: &7Scoreboard &aattivata&7.
+    sb_off: &7Scoreboard &cdisattivata&7.
+
+  # INFORMAZIONI GIOCATORI
+    playersinfo_on: &7Sguardo al profilo altrui &aattivato&7.
+    playersinfo_off: &7Sguardo al profilo altrui &cdisattivato&7.
+
+  # INDICATORE DANNI GIOCATORI
+    pdi_on: &7Indicatore danni giocatori &aattivato&7.
+    pdi_off: &7Indicatore danni giocatori &cdisattivato&7.
+
+  # INDICATORE DANNI MOB
+    mdi_on: &7Indicatore danni mob &aattivato&7.
+    mdi_off: &7Indicatore danni mob &cdisattivato&7.
+
+  # ATTIVA/DISATTIVA
+    turn_on: &eClicca per attivare.
+    turn_off: &eClicca per disattivare.
+
+# VARIABILI
+  # INIZIALIZZAZIONE:
+    initialized: {settings.personalization.initialized::%player%}
+
+  # PRINCIPALI
+    gui_background: {settings.personalization.gui_background::%player%}
+    wb_message: {settings.personalization.wb_message::%player%}
+    scoreboard: {settings.personalization.scoreboard::%player%}
+    can_view_other_profiles: {settings.personalization.view_other_profiles::%player%}
+    damage_indicator_players: {settings.personalization.damage_indicator_players::%player%}
+    damage_indicator_mobs: {settings.personalization.damage_indicator_mobs::%player%}
+
+    gui_background_p: {settings.personalization.gui_background::%{_p}%}
+    wb_message_p: {settings.personalization.wb_message::%{_p}%}
+    scoreboard_p: {settings.personalization.scoreboard::%{_p}%}
+    can_view_other_profiles_p: {settings.personalization.view_other_profiles::%{_p}%}
+    damage_indicator_players_p: {settings.personalization.damage_indicator_players::%{_p}%}
+    damage_indicator_mobs_p: {settings.personalization.damage_indicator_mobs::%{_p}%}
+
+  # MARKER PRINCIPALI
+    gui_background_marker: {-settings.personalization.gui_background_marker::%player%}
+    wb_message_marker: {-settings.personalization.wb_message_marker::%player%}
+    scoreboard_marker: {-settings.personalization.scoreboard_marker::%player%}
+    can_view_other_profiles_marker: {-settings.personalization.view_other_profiles_marker::%player%}
+    damage_indicator_players_marker: {-settings.personalization.damage_indicator_players_marker::%player%}
+    damage_indicator_mobs_marker: {-settings.personalization.damage_indicator_mobs_marker::%player%}
+
+    gui_background_p_marker: {-settings.personalization.gui_background_marker::%{_p}%}
+    wb_message_p_marker: {-settings.personalization.wb_message_marker::%{_p}%}
+    scoreboard_p_marker: {-settings.personalization.scoreboard_marker::%{_p}%}
+    can_view_other_profiles_p_marker: {-settings.personalization.view_other_profiles_marker::%{_p}%}
+    damage_indicator_players_p_marker: {-settings.personalization.damage_indicator_players_marker::%{_p}%}
+    damage_indicator_mobs_p_marker: {-settings.personalization.damage_indicator_mobs_marker::%{_p}%}
+
+  # MARKER (GUI: NOTIFICHE)
+    inventory_full_marker: {-settings.alerts.inventory_full_marker::%{_p}%}
+    scoreboard_reminder_marker: {-settings.alerts.scoreboard_reminder_marker::%{_p}%}
+
+  # MARKER (GUI: PRIVACY)
+    can_others_view_self_profile: {-settings.privacy.can_others_view_self_profile_marker::%{_p}%}
+    can_receive_others_tp_requests: {-settings.privacy.can_receive_others_tp_requests_marker::%{_p}%}
+
+# CONFIGURAZIONE VARIABILI
+on join:
+    # Default solo per i giocatori nuovi
+    if {@initialized} is not set:
+        set {@initialized} to true
+        set {@gui_background} to true
+        set {@wb_message} to true
+        set {@scoreboard} to true
+        set {@can_view_other_profiles} to true
+        set {@damage_indicator_mobs} to true
+        # indicatore danni giocatori: resta non impostato (disattivo)
+
+    # Marker in base allo stato reale di ogni opzione
+    set {@gui_background_marker} to "{@no}"
+    if {@gui_background} is true:
+        set {@gui_background_marker} to "{@yes}"
+
+    set {@wb_message_marker} to "{@no}"
+    if {@wb_message} is true:
+        set {@wb_message_marker} to "{@yes}"
+
+    set {@scoreboard_marker} to "{@no}"
+    if {@scoreboard} is true:
+        set {@scoreboard_marker} to "{@yes}"
+
+    set {@can_view_other_profiles_marker} to "{@no}"
+    if {@can_view_other_profiles} is true:
+        set {@can_view_other_profiles_marker} to "{@yes}"
+
+    set {@damage_indicator_players_marker} to "{@no}"
+    if {@damage_indicator_players} is true:
+        set {@damage_indicator_players_marker} to "{@yes}"
+
+    set {@damage_indicator_mobs_marker} to "{@no}"
+    if {@damage_indicator_mobs} is true:
+        set {@damage_indicator_mobs_marker} to "{@yes}"
+
+# ELIMINAZIONE MARKER
+on quit:
+    delete {@gui_background_marker}, {@wb_message_marker}, {@scoreboard_marker}, {@can_view_other_profiles_marker}, {@damage_indicator_players_marker} and {@damage_indicator_mobs_marker}
+
+# SFONDO GUI
+function ToggleGuiFiller(p: player):
+    if {@gui_background_p} is not true:
+        set {@gui_background_p} to true
+        set {@gui_background_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@gui_fill}" to {_p}
+    else:
+        delete {@gui_background_p}
+        set {@gui_background_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@gui_empty}" to {_p}
+
+# MESSAGGIO DI BENTORNATO
+function ToggleWelcomeMessage(p: player):
+    if {@wb_message_p} is not true:
+        set {@wb_message_p} to true
+        set {@wb_message_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@msg_on}" to {_p}
+    else:
+        delete {@wb_message_p}
+        set {@wb_message_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@msg_off}" to {_p}
+
+# GESTIONE SCOREBOARD
+function ScoreboardManagement(p: player):
+    if {@scoreboard_p} is not true:
+        set {@scoreboard_p} to true
+        set {@scoreboard_p_marker} to "{@yes}"
+        {@scoreboard_on} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@sb_on}" to {_p}
+    else:
+        delete {@scoreboard_p}
+        set {@scoreboard_p_marker} to "{@no}"
+        {@scoreboard_off} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@sb_off}" to {_p}
+
+# INFORMAZIONI GIOCATORI
+function TogglePlayersInformationToOthers(p: player):
+    if {@can_view_other_profiles_p} is not true:
+        set {@can_view_other_profiles_p} to true
+        set {@can_view_other_profiles_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@playersinfo_on}" to {_p}
+    else:
+        delete {@can_view_other_profiles_p}
+        set {@can_view_other_profiles_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@playersinfo_off}" to {_p}
+
+# INDICATORE DANNI GIOCATORI
+function TogglePlayersDamageIndicator(p: player):
+    if {@damage_indicator_players_p} is not true:
+        set {@damage_indicator_players_p} to true
+        set {@damage_indicator_players_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@pdi_on}" to {_p}
+    else:
+        delete {@damage_indicator_players_p}
+        set {@damage_indicator_players_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@pdi_off}" to {_p}
+
+# INDICATORE DANNI MOB
+function ToggleMobsDamageIndicator(p: player):
+    if {@damage_indicator_mobs_p} is not true:
+        set {@damage_indicator_mobs_p} to true
+        set {@damage_indicator_mobs_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@mdi_on}" to {_p}
+    else:
+        delete {@damage_indicator_mobs_p}
+        set {@damage_indicator_mobs_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@mdi_off}" to {_p}
+
+# GUI PRINCIPALE
+function openCustomPlayerSettingsGUI(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Impostazioni: &9Personalizzazione"
+    if {@gui_background_p} is true:
+        set slot 0, 1, 3, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named ""
+        set slot 10, 11, 12, 13, 14, 15, 16, 23, 32, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named ""
+    set slot 2 of {_gui} to nether star with nbt from {@glinted_off} named "&bRapide" with lore "&7Gestisci da qui le impostazioni", "&7più comuni per evitare perdite" and "&7di tempo."
+    set slot 4 of {_gui} to comparator with nbt from {@glinted} named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "", "&7Include:", "%{@gui_background_p_marker}% &7Sfondo GUI", "%{@wb_message_p_marker}% &7Messaggio di bentornato", "%{@scoreboard_p_marker}% &7Scoreboard", "%{@can_view_other_profiles_p_marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{@damage_indicator_players_p_marker}% &7Indicatore danni giocatori" and "%{@damage_indicator_mobs_p_marker}% &7Indicatore danni mob"
+    set slot 5 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche che riceverai", "&7durante la tua avventura all'interno", "&7della %{-server.name}%.", "", "&7Include:", "%{@inventory_full_marker}% &7Inventario pieno" and "%{@scoreboard_reminder_marker}% &7Promemoria scoreboard"
+    set slot 6 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "", "&7Include:", "%{@can_others_view_self_profile}% &7Profilo giocatori &e[&7Tu &6&l←&e]" and "%{@can_receive_others_tp_requests}% &7Richieste teletrasporto"
+    set slot 19 of {_gui} to glass pane named "&aSfondo GUI" with lore "&7Gli slot vuoti di alcuni menu", "&7saranno riempiti da pannelli", "&7di vetro scuri.", "", "&4&lATTENZIONE!", " &cGli oggetti inseriti dal proprio", " &cinventario andranno persi se" and " &c""&aSfondo GUI&c"" non è attiva."
+    set slot 20 of {_gui} to oak door named "&aMessaggio di bentornato" with lore "&7Al tuo rientro, in chat, ti verranno", "&7inviate delle informazioni utili sui", "&7giocatori e sul mondo di gioco.", "", "&e&lNOTA", " &7Se hai nascosto la scoreboard, il", " &7messaggio includerà anche le sue", " &7informazioni, insieme alla possibilità" and " &7di riattivarla con un click."
+    set slot 21 of {_gui} to writable book named "&aScoreboard" with lore "&7Mostra o nascondi la scoreboard.", "", "&6&lNOTA", " &7Se la scoreboard è nascosta e hai", " &7attivato ""&aMessaggio di bentornato&7"",", " &7leggerai le sue informazioni in chat," and " &7ogni volta che rientrerai nel server."
+    set slot 22 of {_gui} to {_p}'s skull named "&aProfilo giocatori" with lore "&7Consulta il profilo degli altri", "&7giocatori e fai competere le", "&7tue statistiche con le loro.", "", "&4&lNOTA", " &cAlcuni giocatori potrebbero", " &cimpedirti di consultare il", " &cloro profilo a causa di", " &cun'impostazione sulla privacy.", "", " &ePer saperne di più, consulta", " &e""&fProfilo giocatori&e"" cliccando", and " &e""&6Privacy&e"", nella barra in alto."
+    set slot 24 of {_gui} to player head named "&aIndicatore danni giocatori" with lore "&7Verrà mostrata la quantità di", "&7danni inflitti a un giocatore", "&7per colpo andato a segno.", "", "&4&lNOTA", " &cAttivando questa opzione,", " &cverrà mostrata la quantità", " &cdi danni inflitti da &ntutti i" and " &c&ngiocatori&c."
+    set slot 25 of {_gui} to zombie head named "&aIndicatore danni mob" with lore "&7Verrà mostrata la quantità", "&7di danni inflitti a un mob per", "&7colpo andato a segno.", "", "&4&lNOTA", " &cAttivando questa opzione,", " &cverrà mostrata la quantità", " &cdi danni inflitti da &ntutti i" and " &c&ngiocatori&c."
+    if {@gui_background_p} is true:
+        set slot 28 of {_gui} to lime dye named "&aSfondo GUI" with lore "{@turn_off}"
+    else:
+        set slot 28 of {_gui} to gray dye named "&cSfondo GUI" with lore "{@turn_on}"
+    if {@wb_message_p} is true:
+        set slot 29 of {_gui} to lime dye named "&aMessaggio di bentornato" with lore "{@turn_off}"
+    else:
+        set slot 29 of {_gui} to gray dye named "&cMessaggio di bentornato" with lore "{@turn_on}"
+    if {@scoreboard_p} is true:
+        set slot 30 of {_gui} to lime dye named "&aScoreboard" with lore "{@turn_off}"
+    else:
+        set slot 30 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
+    if {@can_view_other_profiles_p} is true:
+        set slot 31 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+    else:
+        set slot 31 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+    if {@damage_indicator_players_p} is true:
+        set slot 33 of {_gui} to lime dye named "&aIndicatore danni giocatori" with lore "{@turn_off}"
+    else:
+        set slot 33 of {_gui} to gray dye named "&cIndicatore danni giocatori" with lore "{@turn_on}"
+    if {@damage_indicator_mobs_p} is true:
+        set slot 34 of {_gui} to lime dye named "&aIndicatore danni mob" with lore "{@turn_off}"
+    else:
+        set slot 34 of {_gui} to gray dye named "&cIndicatore danni mob" with lore "{@turn_on}"
+    set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Personalizzazione":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 2, 4, 5, 6, 28, 29, 30, 31, 33, 34, 48 or 49:
+                cancel event
+            else if index of event-slot is 2:
+                if click type is left mouse button:
+                    cancel event
+                    openQuickSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 4:
+                if click type is left mouse button:
+                    cancel event
+                    {@error_sound} at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 5:
+                if click type is left mouse button:
+                    cancel event
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 6:
+                if click type is left mouse button:
+                    cancel event
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 28:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleGuiFiller(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 29:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleWelcomeMessage(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 30:
+                if click type is left mouse button:
+                    cancel event
+                    ScoreboardManagement(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 31:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersInformationToOthers(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 33:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersDamageIndicator(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 34:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleMobsDamageIndicator(player)
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 48:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+
+
+# ZONA DEBUG
+command /resetpersonalizationsettings [<target: offline player>]:
+    permission: debug.commands
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not set:
+            if sender is not player:
+                send "&cSpecifica il nome di un giocatore."
+            else:
+                delete {settings.personalization.initialized.%player%}, {settings.personalization.gui_background::%player%}, {settings.personalization.wb_message::%player%}, {settings.personalization.scoreboard::%player%}, {settings.personalization.view_other_profiles::%player%}, {settings.personalization.damage_indicator_players::%player%}, {settings.personalization.damage_indicator_mobs::%player%}, {-settings.personalization.gui_background_marker::%player%}, {-settings.personalization.wb_message_marker::%player%}, {-settings.personalization.scoreboard_marker::%player%}, {-settings.personalization.view_other_profiles_marker::%player%}, {-settings.personalization.damage_indicator_players_marker::%player%} and {-settings.personalization.damage_indicator_mobs_marker::%player%}
+                send "&cImpostazioni di personalizzazione di %player% eliminate."
+        else:
+            delete {settings.personalization.initialized.%{_target}%}, {settings.personalization.gui_background::%{_target}%}, {settings.personalization.wb_message::%{_target}%}, {settings.personalization.scoreboard::%{_target}%}, {settings.personalization.view_other_profiles::%{_target}%}, {settings.personalization.damage_indicator_players::%{_target}%}, {settings.personalization.damage_indicator_mobs::%{_target}%}, {-settings.personalization.gui_background_marker::%{_target}%}, {-settings.personalization.wb_message_marker::%{_target}%}, {-settings.personalization.scoreboard_marker::%{_target}%}, {-settings.personalization.view_other_profiles_marker::%{_target}%}, {-settings.personalization.damage_indicator_players_marker::%{_target}%} and {-settings.personalization.damage_indicator_mobs_marker::%{_target}%}
+            send "&cImpostazioni di personalizzazione di %{_target}% eliminate."

@@ -1,0 +1,130 @@
+options:
+    select: &eClicca per selezionare!
+    selected: &aSELEZIONATO!
+    
+    glinted: "{enchantment_glint_override:true}"
+
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+    genre_gui: Seleziona il tuo sesso
+    genre_confirm: Confermi?
+
+    genre: {genre.%player%}
+    genre_p: {genre.%{_p}%}
+
+on join:
+    wait 1 tick
+    if  {@genre} is not set:
+        GenrePrompt(player)
+        wait 5 ticks
+        make player invulnerable
+
+function GenrePrompt(p: player):
+    set {_g} to  {@genre_p}
+    if {_g} is not set:
+        set {_gui} to a new chest inventory with 6 rows named "{@genre_gui}"
+    else:
+        set {_gui} to a new chest inventory with 6 rows named "{@genre_confirm}"
+    set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 13, 17, 18, 22, 26, 27, 31, 35, 36, 40, 44, 45, 46, 47, 48, 50, 51, 52 and 53 of {_gui} to black stained glass pane named ""
+    if {_g} is not set:
+        set slot 49 of {_gui} to bedrock named "&cGioca!" with lore "&7Non puoi chiudere questa GUI se" and "&7prima non scegli il tuo sesso."
+    else:
+        set slot 49 of {_gui} to grass block named "&aGioca!" with lore "&7Inizia la tua avventura nell'SMP."
+    set slot 4 of {_gui} to skull of {_p} named "&eIl tuo sesso" with lore "&7Clicca su uno dei pannelli per", "&7selezionare il tuo sesso,", "&7quindi clicca su ""&aGioca!&7"" &7per", "&7iniziare a giocare.", "", "&4&lATTENZIONE!", " &cUna volta confermato il sesso" and " &cnon potrai più cambiarlo."
+    set slot 10, 11, 12, 19, 20, 21, 28, 29, 30, 37, 38 and 39 of {_gui} to blue stained glass pane named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "" and "{@select}"
+    set slot 14, 15, 16, 23, 24, 25, 32, 33, 34, 41, 42 and 43 of {_gui} to pink stained glass pane named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "" and "{@select}"
+    if {_g} is "%{-server.genre.male}%":
+        set slot 10, 11, 12, 19, 20, 21, 28, 29, 30, 37, 38 and 39 of {_gui} to blue stained glass pane with nbt from {@glinted} named "&9♂ Maschio" with lore "&bIl server si rivolgerà a te", "&balla forma maschile.", "" and "{@selected}"
+    else if {_g} is "%{-server.genre.female}%":
+        set slot 14, 15, 16, 23, 24, 25, 32, 33, 34, 41, 42 and 43 of {_gui} to pink stained glass pane with nbt from {@glinted} named "&5♀ Femmina" with lore "&dIl server si rivolgerà a te", "&dalla forma femminile.", "" and "{@selected}"
+    open {_gui} to {_p}
+    
+    
+function GenreSelect(p: player, male: boolean):
+    if {_male} is true:
+        set {_g} to {-server.genre.male}
+        set {_m} to "{@selected}"
+        set {_f} to "{@select}"
+        set {_msg} to "&9Da adesso mi rivolgerò a te con la forma al maschile."
+    else:
+        set {_g} to {-server.genre.female}
+        set {_m} to "{@select}"
+        set {_f} to "{@selected}"
+        set {_msg} to "&dDa adesso mi rivolgerò a te con la forma al femminile."
+    if  {@genre_p} is not "%{_g}%":
+        set {-settings.%{_p}%.genre.male} to {_m}
+        set {-settings.%{_p}%.genre.female} to {_f}
+        set  {@genre_p} to {_g}
+        send "%{-server.prefix.main}% %{_msg}%" to {_p}
+        {@confirm_sound} at {_p} for {_p}
+    else:
+        send "%{-server.prefix.main}% &cHai già scelto quel sesso!" to {_p}
+        {@error_sound} at {_p} for {_p}
+
+on inventory click:
+    if name of player's current inventory is "{@genre_gui}" or "{@genre_confirm}":
+        if type of player's current inventory is chest inventory:
+            if player is invulnerable:
+                cancel event
+                if event-inventory is player's current inventory:
+                    if click type is left mouse button:
+                        if index of event-slot is 10, 11, 12, 19, 20, 21, 28, 29, 30, 37, 38 or 39:
+                            GenreSelect(player, true)
+                            GenrePrompt(player)
+                        else if index of event-slot is 14, 15, 16, 23, 24, 25, 32, 33, 34, 41, 42 or 43:
+                            GenreSelect(player, false)
+                            GenrePrompt(player)
+                        else if index of event-slot is 49:
+                            if name of event-inventory is "{@genre_gui}":
+                                if  {@genre} is not set:
+                                    send "%{-server.prefix.main}% &cDevi prima selezionare il tuo sesso!"
+                                    {@error_sound} at player for player
+                            else:
+                                close player's inventory
+                                send ""
+                                send "%{-server.prefix.main}% &aEcco fatto. L'avventura ti aspetta!"
+                                send "%{-server.prefix.main}% &aBuon divertimento nell'SMP, &b%player%&a!"
+                                send ""
+                                delete {-settings.%player%.genre.male}
+                                delete {-settings.%player%.genre.female}
+                                make player vulnerable
+                                wait 5 ticks
+                                send title "&aEccoti &b%player%!" with subtitle "&6Da adesso potrai subire danni." to player for 5 seconds
+                                play sound "entity.player.levelup" with volume 1 and pitch 2 at player for player
+                                wait 3 seconds
+                                send "----------------------------"
+                                send ""
+                                send "&6&k0 &e&lAVVISO %{-server.name_CAPS}% &6&k0"
+                                send ""
+                                send " &6● &rIl server è ancora in &c&lBETA&r e potresti riscontrare &cbug &re &cproblemi di instabilità&r."
+                                send " &6● &rLe funzionalità potrebbero &asubire modifiche&r o &cessere rimosse&r durante lo sviluppo."
+                                send " &6● &rPuoi controllare la &btabella dei progressi &rcliccando <link:https://github.com/users/XedoIT/projects/1/views/1>&b&nqui&r."
+                                send ""
+                                send "----------------------------"
+                
+on inventory close:
+    if name of event-inventory is "{@genre_gui}":
+        if  {@genre} is not set:
+            wait 1 tick
+            GenrePrompt(player)
+            send "%{-server.prefix.main}% &cDevi prima selezionare il tuo sesso!"
+            {@error_sound} at player for player
+
+
+# ZONA DEBUG
+command /resetgenre [<target: offline player>]:
+    permission: debug.commands
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not set:
+            if sender is not player:
+                send "&cSpecifica il nome di un giocatore."
+            else:
+                delete {genre.%player%}
+                send "&cSesso di %player% eliminato."
+        else:
+            delete {genre.%{_target}%}
+            send "&cSesso di %{_target}% eliminato."

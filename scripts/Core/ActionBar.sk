@@ -1,0 +1,84 @@
+options:
+    prefix: &e[&9&lActionBar&e]
+    
+command /actionbar:
+    description: Attiva o disattiva la visualizzazione di una determinata action bar.
+    aliases: /ab
+
+    subcommand maintenance:
+        permission: ab.maintenance
+        trigger:
+            if {actionbar.maintenance.%player%} is true:
+                delete {actionbar.maintenance.%player%}
+                send "{@prefix} &cInfo della manutenzione sull'action bar disattivata."
+                stop
+            else:
+                set {actionbar.maintenance.%player%} to true
+                send "{@prefix} &aInfo della manutenzione sull'action bar attivata."
+                stop
+
+    subcommand uptime:
+        permission: ab.uptime
+        trigger:
+            if {actionbar.uptime.%player%} is true:
+                delete {actionbar.uptime.%player%}
+                send "{@prefix} &cTempo di attività in tempo reale disattivato."
+                stop
+            else:
+                set {actionbar.uptime.%player%} to true
+                send "{@prefix} &aTempo di attività in tempo reale attivato."
+                stop
+
+    subcommand playtime:
+        trigger:
+            if {actionbar.playtime.session.%player%}, {actionbar.playtime.total.%player%} or {actionbar.playtime.both.%player%} is set:
+                delete {actionbar.playtime.session.%player%}
+                delete {actionbar.playtime.total.%player%}
+                delete {actionbar.playtime.both.%player%}
+                send "{@prefix} &cTempo di gioco in tempo reale disattivato."
+                stop
+            else:
+                send "{@prefix} &cSpecifica il tipo di action bar che vuoi visualizzare!"
+                stop
+
+        subcommand session:
+            trigger:
+                if {actionbar.playtime.session.%player%} is not set:
+                    set {actionbar.playtime.session.%player%} to true
+                    delete {actionbar.playtime.total.%player%}
+                    delete {actionbar.playtime.both.%player%}
+                    send "{@prefix} &aTempo di gioco della sessione in tempo reale attivato."
+                    stop
+                else:
+                    delete {actionbar.playtime.session.%player%}
+                    send "{@prefix} &cTempo di gioco della sessione in tempo reale disattivato."
+                    send "{@prefix} &6Utilizza &e/playtime session &6per consultarlo singolarmente."
+                    stop
+
+        subcommand total:
+            trigger:
+                if {actionbar.playtime.total.%player%} is not set:
+                    set {actionbar.playtime.total.%player%} to true
+                    delete {actionbar.playtime.session.%player%}
+                    delete {actionbar.playtime.both.%player%}
+                    send "{@prefix} &aTempo di gioco totale in tempo reale attivato."
+                    stop
+                else:
+                    delete {actionbar.playtime.total.%player%}
+                    send "{@prefix} &cTempo di gioco totale in tempo reale disattivato."
+                    send "{@prefix} &6Utilizza &e/playtime total &6per consultarlo singolarmente."
+                    stop
+
+        subcommand both:
+            trigger:
+                if {actionbar.playtime.both.%player%} is not set:
+                    set {actionbar.playtime.both.%player%} to true
+                    delete {actionbar.playtime.total.%player%}
+                    delete {actionbar.playtime.session.%player%}
+                    send "{@prefix} &aDa adesso vedrai entrambi i tuoi tempi di gioco in tempo reale."
+                    stop
+                else:
+                    delete {actionbar.playtime.both.%player%}
+                    send "{@prefix} &cTempi di gioco in tempo reale disattivati."
+                    send "{@prefix} &6Utilizza &e/playtime session &6o &e/playtime total &6per consultarli singolarmente."
+                    stop

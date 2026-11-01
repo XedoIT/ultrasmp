@@ -1,0 +1,469 @@
+# Script per il sistema della Fama #
+#
+# PlaceHolder per la FAMA: %skript_fame::{player}%
+#
+# PERMESSI
+#
+# FAMA
+# - fama.admin.check
+# - fama.admin.reset
+# - fama.admin.set
+# - fama.admin.add
+# - fama.admin.remove
+# - fama.idle.toggle
+# - fama.help.admin
+# - fama.idle.notify
+# - fama.admin.commands
+#
+# PARAMETRI LIBERI PER TUTTI (non richiedono permesso): /fama, top, pay, info, help
+# Tutti gli altri parametri richiedono il rispettivo permesso.
+#
+#
+# SUONI
+#
+# - play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_target} for {_target}
+# - play sound "{@error_sound}" with volume 1 and pitch 0 at {_target} for {_target}
+# - play sound "{@what_sound}" with volume 1 at player for player
+#
+
+options:
+    prefix: &8[&b&lFAMA&8]
+    error: &8[&4&lFAMA&8]
+
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    #check_sound: entity.player.levelup
+    #what_sound: entity.villager.trade
+
+    genre: {genre.%player%}
+
+on load:
+    if {fama.idle} is not set:
+        set {fama.idle} to true
+    
+on join:
+    if {fama::%player%} is not set:
+        set {fama::%player%} to 0
+
+every 5 hours:
+    loop all players:
+        set {_fame-5} to a random integer between 300 and 400
+        set {_fame-4} to a random integer between 250 and 300
+        set {_fame-3} to a random integer between 200 and 250
+        set {_fame-2} to a random integer between 100 and 200
+        set {_fame-1} to a random integer between 50 and 100
+        set {_fame0} to a random integer between 10 and 50
+        set {_fame1_1} to a random integer between 50 and 75
+        set {_fame1_2} to a random integer between 50 and 125
+        set {_fame2_1} to a random integer between 125 and 175
+        set {_fame2_2} to a random integer between 125 and 200
+        set {_fame3_1} to a random integer between 225 and 250
+        set {_fame3_2} to a random integer between 225 and 275
+        set {_fame4_1} to a random integer between 250 and 325
+        set {_fame4_2} to a random integer between 250 and 350
+        set {_fame5_1} to a random integer between 350 and 450
+        set {_fame5_2} to a random integer between 450 and 500
+        if {fama::%loop-player%} < 1000000:
+            if {fama.idle} is true:
+                if {rank.%loop-player%} is {-rank.alignment.-5.%loop-player%}:
+                    add {_fame-5} to {fama::%loop-player%}
+                    send "&6+%{_fame-5}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.-5.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame-5}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.-4.%loop-player%}:
+                    add {_fame-4} to {fama::%loop-player%}
+                    send "&6+%{_fame-4}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.-4.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame-4}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.-3.%loop-player%}:
+                    add {_fame-3} to {fama::%loop-player%}
+                    send "&6+%{_fame-3}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.-3.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame-3}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.-2.%loop-player%}:
+                    add {_fame-2} to {fama::%loop-player%}
+                    send "&6+%{_fame-2}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.-2.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame-2}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.-1.%loop-player%}:
+                    add {_fame-1} to {fama::%loop-player%}
+                    send "&6+%{_fame-1}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.-1.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame-1}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.0.%loop-player%}:
+                    add {_fame0} to {fama::%loop-player%}
+                    send "&6+%{_fame0}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.0.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame0}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.1.%loop-player%}:
+                    add {_fame1_1} to {fama::%loop-player%}
+                    send "&6+%{_fame1_1}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.1.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame1_1}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.2.%loop-player%}:
+                    add {_fame1_2} to {fama::%loop-player%}
+                    send "&6+%{_fame1_2}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.2.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame1_2}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.3.%loop-player%}:
+                    add {_fame2_1} to {fama::%loop-player%}
+                    send "&6+%{_fame2_1}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.3.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame2_1}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.4.%loop-player%}:
+                    add {_fame2_2} to {fama::%loop-player%}
+                    send "&6+%{_fame2_2}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.4.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame2_2}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.5.%loop-player%}:
+                    add {_fame3_1} to {fama::%loop-player%}
+                    send "&6+%{_fame3_1}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.5.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame3_1}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.6.%loop-player%}:
+                    add {_fame3_2} to {fama::%loop-player%}
+                    send "&6+%{_fame3_2}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.6.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame3_2}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.7.%loop-player%}:
+                    add {_fame4_1} to {fama::%loop-player%}
+                    send "&6+%{_fame4_1}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.7.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame4_1}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.8.%loop-player%}:
+                    add {_fame4_2} to {fama::%loop-player%}
+                    send "&6+%{_fame4_2}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.8.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame4_2}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.9.%loop-player%}:
+                    add {_fame5_1} to {fama::%loop-player%}
+                    send "&6+%{_fame5_1}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.9.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame5_1}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+                else if {rank.%loop-player%} is {-rank.alignment.10.%loop-player%}:
+                    add {_fame5_2} to {fama::%loop-player%}
+                    send "&6+%{_fame5_2}% Fama! (Tempo di gioco) &b&l>> &6(%{-rank.alignment.10.%loop-player%}%&6)" to loop-player
+                    send action bar "&2&l⌚ TEMPO DI GIOCO &a+%{_fame5_2}% Fama &6(%regex({fama::%loop-player%})% totale)" to loop-player
+                    continue
+            else:
+                if loop-player has permission "fama.idle.notify":
+                    send "{@error} &cNon posso assegnare la Fama ai giocatori perché l'assegnazione automatica è disattivata!" to loop-player
+                    send "{@error} &cPer attivarla, clicca <cmd:/fama idle>&6qui&c." to loop-player
+                    continue
+        #else:
+            #send "{@prefix} &6Hai raggiunto la reputazione più alta del server, pertanto non riceverai più Fama in modo automatico." to loop-player
+            #send "{@prefix} &bPuoi comunque guadagnarla giocando normalmente nel server!" to loop-player
+            #continue
+        
+command /fama:
+    description: Visualizza quanta Fama possiedi.
+    aliases: /f
+    executable by: players and console
+    trigger:
+        if sender is player:
+            send "{@prefix} &6Hai accumulato &c%regex({fama::%player%})% Fama&6."
+        else:
+            send "{@prefix} &cSolo i giocatori possono eseguire questo comando."
+
+    subcommand check <target: offline player>:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/fama check <&egiocatore&6>
+        permission: fama.admin.check
+        executable by: player and console
+        suggestions:
+            set the suggestions for the offline player argument to {players::*}
+        trigger:
+            if {fama::%{_target}%} is set:
+                send "{@prefix} &c%{_target}% &6ha accumulato &e%regex({fama::%{_target}%})% Fama&6."
+            else:
+                send "{@error} &6%{_target}% &cnon ha ancora giocato in questo server!"
+
+    subcommand top:
+        usage: {@prefix} &cQuesto comando non richiede parametri aggiuntivi.%nl%{@prefix} &cUtilizzo: &6/fama top
+        executable by: player and console
+        trigger:
+            set {_pos} to 0
+            send "&7&m----------------------------------------------"
+            send "                  &e&lTOP 5 FAMA"
+            send " "
+            while {_pos} < 5:
+                delete {_max}
+                delete {_index}
+                loop {fama::*}:
+                    if {_used::%loop-index%} is set:
+                        continue
+                    if {_max} is not set:
+                        set {_max} to loop-value
+                        set {_index} to loop-index
+                    else if loop-value > {_max}:
+                        set {_max} to loop-value
+                        set {_index} to loop-index
+                if {_index} is not set:
+                    stop loop
+                add 1 to {_pos}
+                set {_used::%{_index}%} to true
+                set {_player} to {_index} parsed as offline player
+                if {_player} is not online:
+                    if {_pos} = 1:
+                        send " &e&l%{_pos}%. &c%{_player}% &e&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                    else if {_pos} = 2:
+                        send " &7&l%{_pos}%. &c%{_player}% &7&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                    else if {_pos} = 3:
+                        send " <##cd7f32>&l%{_pos}%. &c%{_player}% <##cd7f32>&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                    else:
+                        send " &f%{_pos}%. &c%{_player}% &8&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                else:
+                    if {_pos} = 1:
+                        send " &e&l%{_pos}%. &a%{_player}% &e&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                    else if {_pos} = 2:
+                        send " &7&l%{_pos}%. &a%{_player}% &7&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                    else if {_pos} = 3:
+                        send " <##cd7f32>&l%{_pos}%. &a%{_player}% <##cd7f32>&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+                    else:
+                        send " &f%{_pos}%. &a%{_player}% &8&l» &f%regex({fama::%{_player}%})% Fama &f(%{rank.%{_player}%}%&f)" to sender
+            send "&7&m----------------------------------------------"
+
+    subcommand reset [<target: offline player>]:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/fama reset [<&egiocatore&6>]
+        permission: fama.admin.reset
+        executable by: player and console
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is player:
+                    if {fama::%player%} is not 0:
+                        set {fama::%player%} to 0 
+                        send "{@prefix} &6Hai azzerato la tua Fama."
+                        stop
+                    else:
+                        send "{@error} &cNon possiedi Fama!"
+                        stop 
+                else:
+                    send "{@error} &cSolo i giocatori possono azzerare la propria Fama."
+                    stop
+            else:
+                if {_target} is not online:
+                    send "{@error} &6%{_target}% &cè offline."
+                    stop
+                else:
+                    if {fama::%{_target}%} is not 0:
+                        set {fama::%{_target}%} to 0
+                        send "{@prefix} &6Hai azzerato la Fama di &c%{_target}%&6." to sender
+                        if {_target} is online:
+                            if sender is player:
+                                send "{@prefix} &c%player% &6ha azzerato la tua Fama." to {_target}
+                            else:
+                                send "{@prefix} &6La &cconsole &6ha azzerato la tua Fama." to {_target}
+                        stop
+                    else:
+                        send "{@error} &6%{_target}% &cnon possiede Fama!"
+                        stop                
+
+    subcommand set <target: offline player> <fama: number>:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/fama set <&egiocatore&6> <&eFama&6>
+        permission: fama.admin.set
+        executable by: player and console
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is online:
+                if {_fama} > 0:
+                    set {fama::%{_target}%} to {_fama}
+                    send "{@prefix} &6Hai impostato la Fama di &c%{_target}% &6a &e%{_fama}%&6." to sender
+                    if sender is player:
+                        send "{@prefix} &c%player% &6ha impostato la tua Fama a &e%regex({_fama})%&6. Adesso hai &a%regex({fama::%{_target}%})% &6Fama." to {_target}
+                    else:
+                        send "{@prefix} &6La &cconsole &6ha impostato la tua Fama a &e%regex({_fama})%&6. Adesso hai &a%regex({fama::%{_target}%})% &6Fama." to {_target}
+                    stop
+                if {_fama} = 0:
+                    send "{@error} &cIl numero deve essere maggiore di 0!"
+                    stop
+                if {_fama} < 0:
+                    send "{@error} &cIl numero deve essere positivo!"
+                    stop
+            else:
+                send "{@error} &6%{_target}% &cè offline."
+                stop
+
+    subcommand add <target: offline player> <fama: number>:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/fama add <&egiocatore&6> <&eFama&6>
+        permission: fama.admin.add
+        executable by: player and console
+        suggestions:
+            set the suggestions for the offline player argument to {players::*}
+        trigger:
+            if {_fama} > 0:
+                add {_fama} to {fama::%{_target}%}
+                send "{@prefix} &6Hai aggiunto &e%regex({_fama})% Fama &6alla Fama totale di &c%{_target}%&6." to sender
+                if sender is player:
+                    send "{@prefix} &c%player% &6ha aggiunto &e%regex({_fama})% Fama &6alla tua Fama totale. Adesso hai &a%regex({fama::%{_target}%})% &6Fama." to {_target}
+                else:
+                    send "{@prefix} &6La &cconsole &6ha aggiunto &e%regex({_fama})% Fama &6alla tua Fama totale. Adesso hai &a%regex({fama::%{_target}%})% &6Fama." to {_target}
+                stop
+            if {_fama} = 0:
+                send "{@error} &cChe senso ha aggiungere 0 Fama?"
+                stop
+            if {_fama} < 0:
+                send "{@error} &cIl numero deve essere positivo!"
+                stop
+
+    subcommand remove <target: offline player> <fama: number>:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/fama remove <&egiocatore&6> <&eFama&6>
+        permission: fama.admin.remove
+        executable by: player and console
+        suggestions:
+            set the suggestions for the offline player argument to {players::*}
+        trigger:
+            if {_fama} > 0:
+                subtract {_fama} from {fama::%{_target}%}
+                send "{@prefix} &6Hai rimosso &e%regex({_fama})% Fama &6dalla Fama totale di &c%{_target}%&6." to sender
+                if sender is player:
+                    send "{@prefix} &c%player% &6ha rimosso &e%regex({_fama})% Fama &6dalla tua Fama totale. Adesso hai &a%regex({fama::%{_target}%})% &6Fama." to {_target}
+                else:
+                    send "{@prefix} &6La &cconsole &6ha rimosso &e%regex({_fama})% Fama &6dalla tua Fama totale. Adesso hai &a%regex({fama::%{_target}%})% &6Fama." to {_target}
+                stop
+            if {_fama} = 0:
+                send "{@error} &cChe senso ha togliere 0 Fama?"
+                stop
+            if {_fama} < 0:
+                send "{@error} &cIl numero deve essere positivo!"
+                stop
+
+    subcommand pay <target: offline player> <fama: number>:
+        usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizzo: &6/fama pay <&egiocatore&6> <&eFama&6>
+        executable by: player
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is sender:
+                if {@genre} is "%{-server.genre.male}%":
+                    send "{@error} &cNon puoi eseguire questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@error} &cNon puoi eseguire questo comando su te stessa!"
+                    stop
+            if {_target} is not online:
+                send "{@error} &6%{_target}% &cè offline."
+                stop
+            else:
+                if {_fama} > 0:
+                    if {fama::%player%} >= {_fama}:
+                        add {_fama} to {fama::%{_target}%}
+                        send "{@prefix} &aHai ricevuto &b%regex({_fama})% Fama &ada &e%player%&a." to {_target}
+                        send action bar "&2&lVENDITA &a+%regex({_fama})% Fama &6(%regex({fama::%{_target}%})% totale)" to {_target}
+                        subtract {_fama} from {fama::%player%}
+                        send action bar "&4&lACQUISTO &c-%regex({_fama})% Fama &6(%regex({fama::%player%})% totale)" to player
+                        send "{@prefix} &aHai pagato &b%regex({_fama})% Fama &aa &e%{_target}%&a." to player
+                        log "[TRANSAZIONE FAMA] %player% ha pagato %regex({_fama})% Fama a %{_target}%." to "lista transazioni.log"
+                        stop
+                    else:
+                        send "{@error} &cNon hai abbastanza Fama per effettuare questo pagamento!"
+                        stop
+                if {_fama} = 0:
+                    send "{@error} &cChe senso ha pagare 0 Fama?"
+                    stop
+                if {_fama} < 0:
+                    send "{@error} &cIl numero deve essere positivo!"
+                    stop
+
+    subcommand idle:
+        usage: {@prefix} &cQuesto comando non richiede parametri aggiuntivi.%nl%{@prefix} &cUtilizzo: &6/fama idle
+        permission: fama.admin.idle.toggle
+        executable by: player and console
+        trigger:
+            if {fama.idle} is not true:
+                set {fama.idle} to true
+                send "{@prefix} &7Assegnazione automatica della Fama &aattivata&7."
+            else:
+                delete {fama.idle}
+                send "{@prefix} &7Assegnazione automatica della Fama &cdisattivata&7."
+
+    subcommand help:
+        usage: {@prefix} &cQuesto comando non richiede parametri aggiuntivi.%nl%{@prefix} &cUtilizzo: &6/fama help
+        executable by: player and console
+        trigger:
+            if sender is player:
+                send ""
+                send "&7Comandi che puoi eseguire:"
+                send "&c- &a/fama&7: &oVisualizza quanta Fama possiedi."
+                send "&c- &7/fama &atop&7: &oConsulta la top 5 dei giocatori con più Fama."
+                send "&c- &7/fama &apay <giocatore> <Fama>&7: &oPaga un giocatore utilizzando la tua Fama."
+                send "&c- &7/fama &ahelp&7: &oMostra questa lista comandi."
+                if player has permission "fama.admin.help":
+                    send "&c- &7/fama &acheck <giocatore>&7: &oControlla quanta Fama ha un giocatore."
+                    send "&c- &7/fama &areset <giocatore>&7: &oAzzera la tua Fama o quella di un giocatore."
+                    send "&c- &7/fama &aset <giocatore> <Fama>&7: &oImposta il valore della Fama di un giocatore."
+                    send "&c- &7/fama &aadd <giocatore> <Fama>&7: &oAggiungi Fama a un giocatore."
+                    send "&c- &7/fama &aremove <giocatore> <Fama>&7: &oRimuovi Fama da un giocatore."
+                    send "&c- &7/fama &aidle&7: &oAttiva o disattiva l'assegnazione automatica della Fama ai giocatori."
+                send ""
+            else:
+                send ""
+                send "&7Comandi che puoi eseguire:"
+                send "&c- &7/fama &acheck <giocatore>&7: &oControlla quanta Fama ha un giocatore."
+                send "&c- &7/fama &atop&7: &oConsulta la top 5 dei giocatori con più Fama."
+                send "&c- &7/fama &areset <giocatore>&7: &oAzzera la Fama di un giocatore."
+                send "&c- &7/fama &aset <giocatore> <Fama>&7: &oImposta il valore della Fama di un giocatore."
+                send "&c- &7/fama &aadd <giocatore> <Fama>&7: &oAggiungi Fama a un giocatore."
+                send "&c- &7/fama &aremove <giocatore> <Fama>&7: &oRimuovi Fama da un giocatore."
+                send "&c- &7/fama &apay <giocatore> <Fama>&7: &oPaga un giocatore utilizzando la tua Fama"
+                send "&c- &7/fama &aidle&7: &oAttiva o disattiva l'assegnazione automatica della Fama ai giocatori."
+                send "&c- &7/fama &ahelp&7: &oMostra questa lista comandi"
+                send ""
+
+    subcommand <unknown: text>:
+        executable by: player and console
+        trigger:
+            if sender is player:
+                send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                send ""
+                send " &cComando sconosciuto!"
+                send ""
+                send " &cUtilizza &6/fama"
+                send " &cUtilizza &6/fama &etop"
+                send " &cUtilizza &6/fama &epay <giocatore> <Fama>"
+                send " &cUtilizza &6/fama &ehelp"
+                if player has permission "fama.admin.help":
+                    send " &cUtilizza &6/fama &echeck <giocatore>"
+                    send " &cUtilizza &6/fama &ereset <giocatore>"
+                    send " &cUtilizza &6/fama &eset <giocatore> <Fama>"
+                    send " &cUtilizza &6/fama &eadd <giocatore> <Fama>"
+                    send " &cUtilizza &6/fama &eremove <giocatore> <Fama>"
+                    send " &cUtilizza &6/fama &eidle"
+                send ""
+                send "&e> &7&m--------------------------------&r &e<"
+            else:
+                send "&e> &7&m------------&r {@prefix} &7&m------------&r &e<"
+                send ""
+                send " &cComando sconosciuto!"
+                send ""
+                send " &cUtilizza &6/fama &echeck <giocatore>"
+                send " &cUtilizza &6/fama &etop"
+                send " &cUtilizza &6/fama &ereset <giocatore>"
+                send " &cUtilizza &6/fama &eset <giocatore> <Fama>"
+                send " &cUtilizza &6/fama &eadd <giocatore> <Fama>"
+                send " &cUtilizza &6/fama &eremove <giocatore> <Fama>"
+                send " &cUtilizza &6/fama &epay <giocatore> <Fama>"
+                send " &cUtilizza &6/fama &eidle"
+                send " &cUtilizza &6/fama &ehelp"
+                send ""
+                send "&e> &7&m--------------------------------&r &e<"
+
+# FUNZIONE PER DIVIDERE I NUMERI GROSSI IN MIGLIAIA CON UN PUNTO E CON UNA VIRGOLA PER I DECIMALI
+function regex(n: object) :: text:
+    if {_n} is not set:
+        return "0"
+    set {_t} to "%{_n}%"
+    set {_sign} to ""
+    if {_t} starts with "-":
+        set {_sign} to "-"
+        replace all "-" with "" in {_t}
+    if {_t} contains ".":
+        set {_s::*} to split {_t} at "."
+        return "%{_sign}%%a({_s::1})%,%last 2 characters of {_s::2}%"
+    return "%{_sign}%%a({_t})%"
+
+function a(b: text) :: text:
+    if length of {_b} > 3:
+        return "%a(first length of {_b} - 3 characters of {_b})%.%last 3 characters of {_b}%"
+    return {_b}

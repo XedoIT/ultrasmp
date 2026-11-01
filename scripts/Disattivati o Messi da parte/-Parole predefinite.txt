@@ -1,0 +1,42 @@
+# Questo file non è uno script, ma semplicemente una guida sulle parole predefinite quando vengono utilizzare negli script che le richiedono.
+
+# ATTENZIONE!! 
+# Non abilitare questo script!
+
+options:
+# I PRINCIPALI SUONI
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+
+# COMANDO SCONOSCIUTO DELL'SMP
+    'unknown_command' o 'permission_message': &4[&6&lS&e&lM&6&lP&4] &cComando sconosciuto.
+
+# PERMESSO DI DEBUG
+    permission: debug.commands
+
+# ERRORE UTILIZZO CONSOLE PREDEFINITO (da ignorare se in uno script è richiesta una funzionalità particolare, i.e. GamemodeCommands.sk)
+    send "%{-server.prefix.main}% &cSolo i giocatori possono eseguire questo comando."
+
+# GIOCATORE OFFLINE
+    send "%{-server.prefix.main}% &6%player% &cè offline."
+
+# NESSUN PARAMETRO AGGIUNTIVO
+    send "%{-server.prefix.main}% &cQuesto comando non richiede parametri aggiuntivi."
+
+# SEPARATORI CATEGORIE/SEZIONE
+    # [nome categoria/sezione]
+
+# CONDIZIONE SFONDO GUI (if {@gui_background} is [...]:)
+    gui_background: yaml value "impostazioni.personalization.gui_background.enabled" in "data-%{_p}'s uuid%"
+
+# CONDIZIONE SESSO GIOCATORE (if {@genre} is [...]:)
+    genre: {genre.%player%}
+
+
+
+# SISTEMA IMPEDIMENTO AVVIO SCRIPT
+on load:
+    send "%{-server.prefix.main}% &c&lÈ stato rilevato che lo script &6%script% &c&lè stato abilitato."
+    send "%{-server.prefix.main}% &cDisattivazione in corso..."
+    execute console command "/skript disable %script%"

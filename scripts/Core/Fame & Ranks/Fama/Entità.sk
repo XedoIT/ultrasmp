@@ -1,0 +1,196 @@
+#---------- FAMA: TABELLA DATI (caricata all'avvio dello script) ----------#
+on load:
+    delete {-fama.prof::*}
+    delete {-fama.mob::*}
+
+    # PROFILI: segno (1 = guadagna Fama, -1 = perde Fama) + 9 moltiplicatori
+    # Ordine moltiplicatori: Overworld (easy, normal, hard) | Nether (easy, normal, hard) | End (easy, normal, hard)
+    set {-fama.prof::ostile::*} to 1, 1, 2, 4, 1, 2, 4, 1, 2, 4
+    set {-fama.prof::zombi::*} to 1, 1, 2, 4, 1.5, 3, 4.5, 1, 2, 4
+    set {-fama.prof::zoglin::*} to 1, 1.5, 2.5, 4.5, 2, 3, 5, 1, 2, 4
+    set {-fama.prof::scheletro::*} to 1, 1, 2.5, 4, 1.5, 2.5, 4.5, 1, 2, 4
+    set {-fama.prof::scheletrowither::*} to 1, 1, 2, 4, 2, 3.5, 5, 1, 2, 4
+    set {-fama.prof::insetto::*} to 1, 1, 2, 4, 1, 2, 4, 1.5, 2.5, 4
+    set {-fama.prof::fuoco::*} to 1, 1, 2, 4, 1.5, 2.5, 5, 1, 2, 4
+    set {-fama.prof::ghast::*} to 1, 3, 4, 7, 1.5, 2, 3.5, 1, 2, 4
+    set {-fama.prof::piglin::*} to 1, 1, 2, 4, 1.5, 3, 5, 1, 2, 4
+    set {-fama.prof::end::*} to 1, 1.5, 2, 3.5, 2, 3, 3.5, 2, 2.5, 4.5
+    set {-fama.prof::warden::*} to 1, 1.5, 2.5, 4, 2, 3.5, 7, 3, 5, 10
+    set {-fama.prof::wither::*} to 1, 1.5, 3, 7, 3, 5, 8, 3, 4.5, 5.5
+    set {-fama.prof::drago::*} to 1, 1, 1.5, 2, 1, 1.5, 2, 2, 4, 8
+    set {-fama.prof::nullo::*} to 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    set {-fama.prof::passivo::*} to -1, 1, 1.5, 2, 1, 1.5, 2, 1, 1.5, 2
+    set {-fama.prof::neutrale::*} to -1, 1.5, 2, 3, 2, 2.5, 3, 1, 2, 3
+    set {-fama.prof::acquatico::*} to -1, 1, 1.5, 2, 1, 1.5, 2, 1, 1.5, 2
+    set {-fama.prof::pipistrello::*} to -1, 1, 1.25, 1.5, 1, 1.25, 1.5, 1, 1.25, 1.5
+    set {-fama.prof::strider::*} to -1, 1, 1.5, 2, 2, 2.5, 3, 1, 1.5, 2
+    set {-fama.prof::giocatore::*} to -1, 2, 3, 5, 2, 3, 5, 2, 3, 5
+    set {-fama.prof::morte::*} to -1, 1, 2, 3, 2, 3, 4, 2, 4, 5
+    set {-fama.prof::sniffer::*} to -1, 2, 3, 4, 1, 2, 3, 1, 2, 3
+    set {-fama.prof::golem::*} to -1, 3, 4, 5, 2, 3, 4, 2, 3, 4
+
+    # MOB: set {-fama.mob::<nome entità in Skript>::*} to "NOME MOSTRATO", "profilo", fama minima, fama massima
+    # --- Passivi e neutrali --- In ordine di rilascio (dal meno recente al più recente)
+    set {-fama.mob::pig::*} to "MAIALE", "passivo", 0.1, 0.5
+    set {-fama.mob::sheep::*} to "PECORA", "passivo", 0.1, 0.5
+    set {-fama.mob::cow::*} to "MUCCA", "passivo", 0.1, 0.5
+    set {-fama.mob::chicken::*} to "GALLINA", "passivo", 0.1, 0.5
+    set {-fama.mob::squid::*} to "CALAMARO", "acquatico", 0.5, 2
+    set {-fama.mob::wolf::*} to "LUPO", "neutrale", 0.5, 3
+    set {-fama.mob::mooshroom::*} to "MOOSHROOM", "passivo", 0.1, 0.5
+    set {-fama.mob::snow golem::*} to "GOLEM DI NEVE", "golem", 0.5, 1.5
+    set {-fama.mob::villager::*} to "VILLICO", "passivo", 0.5, 4
+    set {-fama.mob::ocelot::*} to "OCELOTTO", "passivo", 0.5, 3
+    set {-fama.mob::iron golem::*} to "GOLEM DI FERRO", "golem", 0.5, 3
+    set {-fama.mob::bat::*} to "PIPISTRELLO", "pipistrello", 0.1, 0.2
+    set {-fama.mob::horse::*} to "CAVALLO", "passivo", 0.5, 2.5
+    set {-fama.mob::donkey::*} to "ASINO", "passivo", 0.5, 2.5
+    set {-fama.mob::mule::*} to "MULO", "passivo", 0.5, 2.5
+    set {-fama.mob::skeleton horse::*} to "CAVALLO SCHELETRO", "passivo", 0.5, 2.5
+    set {-fama.mob::undead horse::*} to "CAVALLO ZOMBI", "passivo", 0.5, 2.5
+    set {-fama.mob::rabbit::*} to "CONIGLIO", "passivo", 0.1, 0.5
+    set {-fama.mob::polar bear::*} to "ORSO POLARE", "neutrale", 0.5, 2.5
+    set {-fama.mob::llama::*} to "LAMA", "neutrale", 0.5, 2.5
+    set {-fama.mob::parrot::*} to "PAPPAGALLO", "passivo", 0.5, 3
+    set {-fama.mob::turtle::*} to "TARTARUGA", "acquatico", 0.5, 2
+    set {-fama.mob::cod::*} to "MERLUZZO", "acquatico", 0.5, 2
+    set {-fama.mob::salmon::*} to "SALMONE", "acquatico", 0.5, 2
+    set {-fama.mob::puffer fish::*} to "PESCE PALLA", "acquatico", 0.5, 2
+    set {-fama.mob::tropical fish::*} to "PESCE TROPICALE", "acquatico", 0.5, 2
+    set {-fama.mob::dolphin::*} to "DELFINO", "acquatico", 0.5, 2
+    set {-fama.mob::panda::*} to "PANDA", "neutrale", 0.5, 2.5
+    set {-fama.mob::cat::*} to "GATTO", "passivo", 0.5, 3
+    set {-fama.mob::trader llama::*} to "LAMA DEL MERCANTE", "neutrale", 0.5, 2.5
+    set {-fama.mob::wandering trader::*} to "MERCANTE AMBULANTE", "passivo", 0.5, 4
+    set {-fama.mob::fox::*} to "VOLPE", "passivo", 0.5, 3
+    set {-fama.mob::bee::*} to "APE", "neutrale", 0.5, 3
+    set {-fama.mob::strider::*} to "STRIDER", "strider", 0.5, 1
+    set {-fama.mob::axolotl::*} to "ASSOLOTTO", "passivo", 0.5, 2
+    set {-fama.mob::glow squid::*} to "CALAMARO LUMINESCENTE", "acquatico", 0.5, 2
+    set {-fama.mob::goat::*} to "CAPRA", "neutrale", 0.5, 2.5
+    set {-fama.mob::frog::*} to "RANA", "acquatico", 0.5, 1.5
+    set {-fama.mob::tadpole::*} to "GIRINO", "acquatico", 0.5, 1.5
+    set {-fama.mob::allay::*} to "ALLEVIANTE", "passivo", 0.5, 4
+    set {-fama.mob::camel::*} to "DROMEDARIO", "passivo", 0.5, 2.5
+    set {-fama.mob::sniffer::*} to "FIUTATORE", "sniffer", 2, 6
+    set {-fama.mob::armadillo::*} to "ARMADILLO", "passivo", 0.1, 0.5
+    set {-fama.mob::happy ghast::*} to "GHAST ALLEGRO", "passivo", 5, 10
+    set {-fama.mob::copper golem::*} to "GOLEM DI RAME", "golem", 1.5, 3
+    set {-fama.mob::nautilus::*} to "NAUTILO", "acquatico", 1, 3
+    set {-fama.mob::zombie nautilus::*} to "NAUTILO ZOMBI", "acquatico", 1, 1.25
+    set {-fama.mob::camel husk::*} to "MUMMIFARIO", "passivo", 0.5, 2.5
+    set {-fama.mob::sulfur cube::*} to "CUBO DI ZOLFO", "passivo", 0.5, 1
+    # --- Ostili --- In ordine di rilascio (dal meno recente al più recente)
+    set {-fama.mob::creeper::*} to "CREEPER", "ostile", 1.5, 4.5
+    set {-fama.mob::skeleton::*} to "SCHELETRO", "scheletro", 1.5, 2.5
+    set {-fama.mob::zombie::*} to "ZOMBI", "zombi", 0.5, 3
+    set {-fama.mob::spider::*} to "RAGNO", "ostile", 1.5, 3.5
+    set {-fama.mob::slime::*} to "GELATINA", "ostile", 0.5, 3
+    set {-fama.mob::ghast::*} to "GHAST", "ghast", 1.5, 3
+    set {-fama.mob::zombie pigmans::*} to "PIGLIN ZOMBIFICATO", "zombi", 0.5, 3
+    set {-fama.mob::cave spider::*} to "RAGNO DELLE CAVERNE", "ostile", 1.5, 3.5
+    set {-fama.mob::enderman::*} to "ENDERMAN", "ostile", 1.5, 2.5
+    set {-fama.mob::silverfish::*} to "PESCIOLINO D'ARGENTO", "insetto", 1, 2.5
+    set {-fama.mob::blaze::*} to "BLAZE", "fuoco", 1.5, 3.5
+    set {-fama.mob::magma cube::*} to "CUBO DI MAGMA", "fuoco", 1.5, 3.5
+    set {-fama.mob::ender dragon::*} to "DRAGO DELL'END", "drago", 40, 80
+    set {-fama.mob::zombie villager::*} to "VILLICO ZOMBI", "zombi", 0.5, 2.5
+    set {-fama.mob::wither::*} to "WITHER", "wither", 35, 45
+    set {-fama.mob::wither skeleton::*} to "SCHELETRO WITHER", "scheletrowither", 2, 4
+    set {-fama.mob::witch::*} to "STREGA", "ostile", 2.5, 5.5
+    set {-fama.mob::endermite::*} to "ENDERMITE", "insetto", 1, 2.5
+    set {-fama.mob::guardian::*} to "GUARDIANO", "ostile", 3, 7
+    set {-fama.mob::elder guardian::*} to "GUARDIANO ANTICO", "ostile", 3, 7
+    set {-fama.mob::shulker::*} to "SHULKER", "end", 1.5, 3
+    set {-fama.mob::husk::*} to "MUMMIFICATO", "zombi", 0.5, 3
+    set {-fama.mob::stray::*} to "ERRANTE", "scheletro", 1.5, 2.5
+    set {-fama.mob::vindicator::*} to "VENDICATORE", "ostile", 2.5, 5.5
+    set {-fama.mob::evoker::*} to "EVOCATORE", "ostile", 3, 6
+    set {-fama.mob::vex::*} to "VESSANTE", "ostile", 2, 5
+    set {-fama.mob::phantom::*} to "FANTASMA", "ostile", 1, 2.5
+    set {-fama.mob::drowned::*} to "ANNEGATO", "zombi", 0.5, 3
+    set {-fama.mob::pillager::*} to "PREDONE", "ostile", 2.5, 5.5
+    set {-fama.mob::ravager::*} to "DEVASTATORE", "ostile", 10, 25
+    set {-fama.mob::hoglin::*} to "HOGLIN", "piglin", 0.5, 2
+    set {-fama.mob::piglin::*} to "PIGLIN", "piglin", 0.5, 2
+    set {-fama.mob::zoglin::*} to "ZOGLIN", "zoglin", 1, 4
+    set {-fama.mob::piglin brute::*} to "PIGLIN BRUTO", "piglin", 0.5, 2
+    set {-fama.mob::warden::*} to "SORVEGLIANTE", "warden", 50, 80
+    set {-fama.mob::breeze::*} to "BREZZA", "ostile", 2.5, 4
+    set {-fama.mob::bogged::*} to "PALUDOSO", "scheletro", 1.5, 2.5
+    set {-fama.mob::creaking::*} to "SCRICCHIO", "ostile", 3, 5
+    set {-fama.mob::parched::*} to "OSSECCO", "scheletro", 1.5, 2.5
+    # --- Speciali ---
+    set {-fama.mob::illusioner::*} to "ILLUSORE", "nullo", 2, 5
+
+#---------- FAMA: FUNZIONI ----------#
+# Restituisce 1-9 (mondo + difficoltà del giocatore) oppure 0 se il mondo/difficoltà non è previsto
+function famaIndice(p: player) :: number:
+    if world of {_p} is "%{-server.world.overworld}%":
+        set {_w} to 0
+    else if world of {_p} is "%{-server.world.nether}%":
+        set {_w} to 3
+    else if world of {_p} is "%{-server.world.end}%":
+        set {_w} to 6
+    else:
+        return 0
+    if difficulty of {_p}'s world is easy:
+        return {_w} + 1
+    else if difficulty of {_p}'s world is normal (difficulty):
+        return {_w} + 2
+    else if difficulty of {_p}'s world is hard:
+        return {_w} + 3
+    return 0
+
+# Applica la Fama al giocatore (guadagno o perdita in base al profilo) e manda l'action bar
+function famaApplica(p: player, nome: text, fame: number, profilo: text):
+    if gamemode of {_p} is creative or spectator:
+        stop
+    set {_i} to famaIndice({_p})
+    if {_i} is 0:
+        stop
+    set {_prof::*} to {-fama.prof::%{_profilo}%::*}
+    set {_m} to {_prof::%{_i} + 1%}
+    set {_tot} to {_fame} * {_m}
+    add ({_tot} * {_prof::1}) to {fama::%{_p}%}
+    if {_prof::1} is 1:
+        send action bar "&2☠ &2&l%{_nome}% &a+%regex({_tot})% Fama &6(%regex({fama::%{_p}%})% totale)" to {_p}
+    else:
+        send action bar "&4☠ &4&l%{_nome}% &c-%regex({_tot})% Fama &6(%regex({fama::%{_p}%})% totale)" to {_p}
+
+#---------- FAMA: EVENTO UNICO ----------#
+on death:
+    if victim is a player:
+        if {arenacombat} is true:
+            stop
+        if attacker is a player:
+            famaApplica(attacker, "GIOCATORE", random number between 20 and 40, "giocatore")
+            stop
+        if gamemode of victim is creative or spectator:
+            stop
+        set {_i} to famaIndice(victim)
+        if {_i} is 0:
+            stop
+        set {_prof::*} to {-fama.prof::morte::*}
+        set {_fame} to random number between 15 and 20
+        set {_tot} to {_fame} * {_prof::%{_i} + 1%}
+        remove {_tot} from {fama::%victim%}
+        send action bar "&4☠ &4&lMORTE &c-%regex({_tot})% Fama &6(%regex({fama::%victim%})% totale)" to victim
+        stop
+    if attacker is not a player:
+        stop
+    set {_k} to "%type of victim%"
+    #send "&e&l[DEBUG] &fMob ucciso: %{_k}%" to attacker
+    #send "&e&l[DEBUG] &fMob ucciso: %{_k}%" to console
+    set {_d::*} to {-fama.mob::%{_k}%::*}
+    if {_d::*} is not set:
+        stop
+    famaApplica(attacker, {_d::1}, random number between {_d::3} and {_d::4}, {_d::2})
+
+on break of creaking heart:
+    if "%block data of event-block%" does not contain "creaking_heart_state=awake":
+        stop
+    if "%block data of event-block%" does not contain "natural=true":
+        stop
+    set {_d::*} to {-fama.mob::creaking::*}
+    famaApplica(player, {_d::1}, random number between {_d::3} and {_d::4}, {_d::2})

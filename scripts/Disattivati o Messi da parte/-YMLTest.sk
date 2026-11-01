@@ -1,0 +1,533 @@
+# ============================================================
+# YMLTest.sk - script di prova per skript-yaml
+# Serve a capire se il problema di salvataggio dipende dal plugin
+# (non dai tuoi script). Usa una cartella separata, quindi non
+# tocca i file di "plugins/YML Data".
+# ============================================================
+
+options:
+    dir: plugins/YML Test
+
+# ------------------------------------------------------------
+# JOIN: carica (o crea) il file del giocatore e salva
+# ------------------------------------------------------------
+on join:
+    set {_u} to "%player's uuid%"
+    set {_id} to "test-%{_u}%"
+    load yaml "{@dir}/%{_u}%.yml" as {_id}
+
+    set {_n} to yaml value "test.joins" from {_id}
+    if {_n} is not set:
+        set {_n} to 0
+    add 1 to {_n}
+
+    set yaml value "test.joins" in {_id} to {_n}
+    set yaml value "test.nome" in {_id} to "%player's name%"
+    set yaml value "test.ultimo-join" in {_id} to "join alle %now%"
+    set yaml value "test.attivo" in {_id} to true
+
+    save yaml {_id}
+    # se il save lancia l'eccezione, la riga qui sotto NON viene eseguita
+    log "[YMLTest] JOIN: save ok per %player% (joins: %{_n}%)"
+
+# ------------------------------------------------------------
+# QUIT: aggiorna, salva e scarica lo yaml
+# ------------------------------------------------------------
+on quit:
+    set {_u} to "%player's uuid%"
+    set {_id} to "test-%{_u}%"
+
+    set yaml value "test.ultimo-quit" in {_id} to "quit alle %now%"
+    set yaml value "test.attivo" in {_id} to false
+
+    save yaml {_id}
+    log "[YMLTest] QUIT: save ok per %player%"
+    unload yaml {_id}
+
+# ------------------------------------------------------------
+# SAVE periodico: ogni minuto salva solo gli yaml di questo test
+# (in Skript non esiste un evento "save", quindi uso un timer)
+# ------------------------------------------------------------
+every 1 minute:
+    loop all loaded yaml:
+        if loop-value starts with "test-":
+            save yaml loop-value
+            log "[YMLTest] SAVE periodico ok: %loop-value%"
+            wait 2 ticks
+
+# ------------------------------------------------------------
+# COMANDO DI DIAGNOSI
+#   /yamltest numeri    -> salva solo numeri e booleani
+#   /yamltest stringhe  -> salva solo stringhe
+#   /yamltest save      -> salva subito lo yaml del giocatore
+#   /yamltest mostra    -> mostra i valori attualmente in memoria
+# ------------------------------------------------------------
+command /yamltest:
+    usage: /yamltest <numeri|stringhe|save|mostra>
+    executable by: players
+    trigger:
+        send "&cUso: /yamltest <numeri|stringhe|save|mostra>"
+
+    subcommand numeri:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-numeri-%{_u}%"
+            load yaml "{@dir}/numeri-%{_u}%.yml" as {_id}
+            set yaml value "prova.contatore" in {_id} to 42
+            set yaml value "prova.attivo" in {_id} to true
+            send "&e[Test numeri] salvataggio in corso..."
+            save yaml {_id}
+            send "&a[Test numeri] save eseguito SENZA eccezioni."
+            # verifica reale: scarico, ricarico da disco e rileggo
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/numeri-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.contatore" from {_id}
+            if {_v} is set:
+                send "&a[Test numeri] RILETTO DA DISCO: %{_v}% -> il file viene scritto."
+            else:
+                send "&c[Test numeri] valore NON presente su disco -> il file non e' stato scritto."
+
+    subcommand stringhe:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-stringhe-%{_u}%"
+            load yaml "{@dir}/stringhe-%{_u}%.yml" as {_id}
+            set yaml value "prova.testo" in {_id} to "ciao mondo"
+            send "&e[Test stringhe] salvataggio in corso..."
+            save yaml {_id}
+            send "&a[Test stringhe] save eseguito SENZA eccezioni."
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/stringhe-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.testo" from {_id}
+            if {_v} is set:
+                send "&a[Test stringhe] RILETTO DA DISCO: %{_v}% -> il file viene scritto."
+            else:
+                send "&c[Test stringhe] valore NON presente su disco -> il file non e' stato scritto."
+
+    subcommand save:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-%{_u}%"
+            send "&e[Test save] salvataggio in corso..."
+            save yaml {_id}
+            send "&a[Test save] save eseguito SENZA eccezioni."
+
+    subcommand mostra:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-%{_u}%"
+            set {_joins} to yaml value "test.joins" from {_id}
+            set {_nome} to yaml value "test.nome" from {_id}
+            set {_ultimo} to yaml value "test.ultimo-join" from {_id}
+            set {_attivo} to yaml value "test.attivo" from {_id}
+            send "&7joins: &f%{_joins}%"
+            send "&7nome: &f%{_nome}%"
+            send "&7ultimo-join: &f%{_ultimo}%"
+            send "&7attivo: &f%{_attivo}%"
+
+# ------------------------------------------------------------
+# /yamlstr <valore>
+# Salva UNA sola stringa e la rilegge da disco.
+# Serve a trovare quali valori fanno scattare l'errore.
+# Provali uno alla volta (un'eccezione interrompe il comando):
+#   /yamlstr ciao   /yamlstr No   /yamlstr 0   /yamlstr 5   /yamlstr -
+#   /yamlstr true   /yamlstr ✔    /yamlstr 20/20
+# ------------------------------------------------------------
+command /yamlstr <text>:
+    usage: /yamlstr <valore>
+    executable by: players
+    trigger:
+        set {_u} to "%player's uuid%"
+        set {_id} to "test-str-%{_u}%"
+        load yaml "{@dir}/str-%{_u}%.yml" as {_id}
+        set yaml value "prova.valore" in {_id} to arg-1
+        send "&e[yamlstr] provo a salvare la stringa: &f%arg-1%"
+        save yaml {_id}
+        send "&a[yamlstr] save SENZA eccezioni per: &f%arg-1%"
+        unload yaml {_id}
+        wait 1 second
+        load yaml "{@dir}/str-%{_u}%.yml" as {_id}
+        wait 1 second
+        set {_v} to yaml value "prova.valore" from {_id}
+        send "&a[yamlstr] riletto da disco: &f%{_v}%"
+        unload yaml {_id}
+
+# ------------------------------------------------------------
+# /yamltipo <testo|nome|numero|booleano|data|uuid|giocatore>
+# Salva UN solo tipo di valore e lo rilegge da disco.
+# NB: il messaggio "save ok" non e' affidabile (skript-yaml cattura
+# l'eccezione e il codice prosegue). Fidati solo del WARN in console
+# e della RILETTURA DA DISCO qui sotto.
+# ------------------------------------------------------------
+command /yamltipo:
+    usage: /yamltipo <testo|nome|numero|booleano|data|uuid|giocatore>
+    executable by: players
+    trigger:
+        send "&cUso: /yamltipo <testo|nome|numero|booleano|data|uuid|giocatore>"
+
+    subcommand testo:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to "ciao"
+            send "&e[yamltipo] provo a salvare il tipo: &ftesto"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] testo: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] testo: NON scritto su disco"
+            unload yaml {_id}
+
+    subcommand nome:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to player's name
+            send "&e[yamltipo] provo a salvare il tipo: &fnome"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] nome: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] nome: NON scritto su disco"
+            unload yaml {_id}
+
+    subcommand numero:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to 42
+            send "&e[yamltipo] provo a salvare il tipo: &fnumero"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] numero: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] numero: NON scritto su disco"
+            unload yaml {_id}
+
+    subcommand booleano:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to true
+            send "&e[yamltipo] provo a salvare il tipo: &fbooleano"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] booleano: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] booleano: NON scritto su disco"
+            unload yaml {_id}
+
+    subcommand data:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to now
+            send "&e[yamltipo] provo a salvare il tipo: &fdata"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] data: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] data: NON scritto su disco"
+            unload yaml {_id}
+
+    subcommand uuid:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to player's uuid
+            send "&e[yamltipo] provo a salvare il tipo: &fuuid"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] uuid: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] uuid: NON scritto su disco"
+            unload yaml {_id}
+
+    subcommand giocatore:
+        trigger:
+            set {_u} to "%player's uuid%"
+            set {_id} to "test-tipo-%{_u}%"
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            set yaml value "prova.valore" in {_id} to player
+            send "&e[yamltipo] provo a salvare il tipo: &fgiocatore"
+            save yaml {_id}
+            unload yaml {_id}
+            wait 1 second
+            load yaml "{@dir}/tipo-%{_u}%.yml" as {_id}
+            wait 1 second
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[yamltipo] giocatore: riletto da disco -> &f%{_v}%"
+            else:
+                send "&c[yamltipo] giocatore: NON scritto su disco"
+            unload yaml {_id}
+
+# ------------------------------------------------------------
+# /yamlbatch
+# Prova in un colpo solo tante stringhe "sospette".
+# Ogni stringa viene salvata in un file separato, poi il file viene
+# ricaricato da disco: se il valore e' tornato, [OK], altrimenti [FALLITO].
+# (Per ogni FALLITO vedrai anche uno stack trace in console: e' normale.)
+# ------------------------------------------------------------
+command /yamlbatch:
+    executable by: players
+    trigger:
+        set {_u} to "%player's uuid%"
+        set {_cases::*} to "ciao", "&cciao", "&a✔", "✔", "No", "Sì", "0", "5", "-", "true", "20/20", "+5", "+5%%", "1.5", "2026-10-07", "ciao: mondo", "# test"
+        set {_i} to 0
+        send "&e[yamlbatch] test in corso su %size of {_cases::*}% stringhe..."
+        loop {_cases::*}:
+            add 1 to {_i}
+            set {_id} to "test-batch-%{_i}%-%{_u}%"
+            set {_file} to "{@dir}/batch-%{_i}%-%{_u}%.yml"
+            load yaml {_file} as {_id}
+            set yaml value "prova.valore" in {_id} to loop-value
+            save yaml {_id}
+            unload yaml {_id}
+            wait 2 ticks
+            load yaml {_file} as {_id}
+            wait 2 ticks
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[OK] &f%loop-value%"
+            else:
+                send "&c[FALLITO] &f%loop-value%"
+            unload yaml {_id}
+        send "&e[yamlbatch] finito."
+
+# ------------------------------------------------------------
+# /yamlcolori
+# Capisce COSA, nelle stringhe con colori, fa fallire il salvataggio:
+# il carattere "&", il carattere "§" (in cui Skript converte "&" quando
+# legge lo script) oppure la posizione (inizio / meta' stringa).
+# ------------------------------------------------------------
+command /yamlcolori:
+    executable by: players
+    trigger:
+        set {_u} to "%player's uuid%"
+        set {_amp} to "&"
+        set {_sec} to "§"
+        set {_cases::*} to "&cciao", "x&cciao", "%{_amp}%cciao", "§cciao", (uncolored "&cciao"), " &cciao"
+        set {_i} to 0
+        send "&e[yamlcolori] test in corso su %size of {_cases::*}% stringhe..."
+        loop {_cases::*}:
+            add 1 to {_i}
+            if loop-value contains {_sec}:
+                set {_tipo} to "contiene §"
+            else if loop-value contains {_amp}:
+                set {_tipo} to "contiene &"
+            else:
+                set {_tipo} to "nessun codice colore"
+            set {_id} to "test-col-%{_i}%-%{_u}%"
+            set {_file} to "{@dir}/col-%{_i}%-%{_u}%.yml"
+            load yaml {_file} as {_id}
+            set yaml value "prova.valore" in {_id} to loop-value
+            save yaml {_id}
+            unload yaml {_id}
+            wait 2 ticks
+            load yaml {_file} as {_id}
+            wait 2 ticks
+            set {_v} to yaml value "prova.valore" from {_id}
+            if {_v} is set:
+                send "&a[OK] &f#%{_i}% (%{_tipo}%) %uncolored loop-value%"
+            else:
+                send "&c[FALLITO] &f#%{_i}% (%{_tipo}%) %uncolored loop-value%"
+            unload yaml {_id}
+        send "&e[yamlcolori] finito."
+
+# ------------------------------------------------------------
+# /yamlnocheck
+# skript-yaml filtra i codici colore di default (changelog v1.2.2):
+# l'opzione "without string checks" disattiva quel filtro.
+# Qui vediamo se, con l'opzione, le stringhe con & si salvano.
+# ------------------------------------------------------------
+command /yamlnocheck:
+    executable by: players
+    trigger:
+        set {_u} to "%player's uuid%"
+        set {_cases::*} to "ciao", "&cciao", "&a✔"
+        set {_i} to 0
+        send "&e[yamlnocheck] test in corso (without string checks)..."
+        loop {_cases::*}:
+            add 1 to {_i}
+            set {_id} to "test-nochk-%{_i}%-%{_u}%"
+            set {_file} to "{@dir}/nochk-%{_i}%-%{_u}%.yml"
+            load yaml {_file} as {_id}
+            set yaml value "prova.valore" in {_id} without string checks to loop-value
+            save yaml {_id}
+            unload yaml {_id}
+            wait 2 ticks
+            load yaml {_file} as {_id}
+            wait 2 ticks
+            set {_v} to yaml value "prova.valore" from {_id} without string checks
+            if {_v} is set:
+                send "&a[OK] &f%{_v}%"
+            else:
+                send "&c[FALLITO] &f%uncolored loop-value%"
+            unload yaml {_id}
+        send "&e[yamlnocheck] finito."
+
+# ------------------------------------------------------------
+# /yamlscan
+# Fotografa lo yaml del giocatore IN MEMORIA, adesso:
+#  - quante chiavi "generali" sono presenti
+#  - quali valori contengono & o § (quelli che rompono il save)
+#  - il marker di "Sfondo GUI", scritto in chiaro
+# Eseguilo (1) appena entri, (2) dopo il salvataggio che da' errore.
+# ------------------------------------------------------------
+command /yamlscan:
+    executable by: players
+    trigger:
+        set {_id} to "data-%player's uuid%"
+        set {_a} to "&"
+        set {_s} to "§"
+        add "generali.player-info.common.uuid" to {_paths::*}
+        add "generali.player-info.common.name" to {_paths::*}
+        add "generali.player-info.genre" to {_paths::*}
+        add "generali.player-info.common.gamemode" to {_paths::*}
+        add "generali.player-info.common.status.new" to {_paths::*}
+        add "generali.player-info.common.status.old" to {_paths::*}
+        add "generali.player-info.position.dimension" to {_paths::*}
+        add "impostazioni.personalization.gui-background.enabled" to {_paths::*}
+        add "impostazioni.personalization.gui-background.marker" to {_paths::*}
+        add "impostazioni.personalization.join-message.enabled" to {_paths::*}
+        add "impostazioni.personalization.join-message.marker" to {_paths::*}
+        add "impostazioni.personalization.fastboard.enabled" to {_paths::*}
+        add "impostazioni.personalization.fastboard.marker" to {_paths::*}
+        add "impostazioni.personalization.can-view-other-profiles.enabled" to {_paths::*}
+        add "impostazioni.personalization.can-view-other-profiles.marker" to {_paths::*}
+        add "impostazioni.personalization.damage-indicator.players.enabled" to {_paths::*}
+        add "impostazioni.personalization.damage-indicator.players.marker" to {_paths::*}
+        add "impostazioni.personalization.damage-indicator.mobs.enabled" to {_paths::*}
+        add "impostazioni.personalization.damage-indicator.mobs.marker" to {_paths::*}
+        add "impostazioni.notify.generic.full-inventory.enabled" to {_paths::*}
+        add "impostazioni.notify.generic.full-inventory.marker" to {_paths::*}
+        add "impostazioni.notify.generic.no-fastboard.enabled" to {_paths::*}
+        add "impostazioni.notify.generic.no-fastboard.marker" to {_paths::*}
+        add "impostazioni.notify.service.scheduled-restarts.enabled" to {_paths::*}
+        add "impostazioni.notify.service.scheduled-restarts.marker" to {_paths::*}
+        add "impostazioni.notify.service.lag-issues.enabled" to {_paths::*}
+        add "impostazioni.notify.service.lag-issues.marker" to {_paths::*}
+        add "impostazioni.notify.service.scheduled-stops.enabled" to {_paths::*}
+        add "impostazioni.notify.service.scheduled-stops.marker" to {_paths::*}
+        add "impostazioni.privacy.can-others-view-self-profile.enabled" to {_paths::*}
+        add "impostazioni.privacy.can-others-view-self-profile.marker" to {_paths::*}
+        add "impostazioni.privacy.can-receive-others-tp-requests.enabled" to {_paths::*}
+        add "impostazioni.privacy.can-receive-others-tp-requests.marker" to {_paths::*}
+        add "impostazioni.actionbar.flymode.enabled" to {_paths::*}
+        add "impostazioni.actionbar.flymode.marker" to {_paths::*}
+        add "impostazioni.actionbar.godmode.enabled" to {_paths::*}
+        add "impostazioni.actionbar.godmode.marker" to {_paths::*}
+        add "impostazioni.actionbar.maintenance.enabled" to {_paths::*}
+        add "impostazioni.actionbar.maintenance.marker" to {_paths::*}
+        add "impostazioni.actionbar.playtime.session.enabled" to {_paths::*}
+        add "impostazioni.actionbar.playtime.session.marker" to {_paths::*}
+        add "impostazioni.actionbar.playtime.total.enabled" to {_paths::*}
+        add "impostazioni.actionbar.playtime.total.marker" to {_paths::*}
+        add "impostazioni.actionbar.playtime.both.enabled" to {_paths::*}
+        add "impostazioni.actionbar.playtime.both.marker" to {_paths::*}
+        add "impostazioni.settings-alert-update" to {_paths::*}
+        add "generali.player-info.common.xp" to {_paths::*}
+        add "generali.player-info.common.health" to {_paths::*}
+        add "generali.player-info.common.food" to {_paths::*}
+        add "generali.player-info.common.op" to {_paths::*}
+        add "generali.player-info.common.fly" to {_paths::*}
+        add "generali.player-info.common.god" to {_paths::*}
+        add "generali.player-info.common.frozen" to {_paths::*}
+        add "generali.player-info.common.afk" to {_paths::*}
+        add "generali.player-info.common.fly-speed" to {_paths::*}
+        add "generali.player-info.common.walk-speed" to {_paths::*}
+        add "generali.player-info.position.coordinates" to {_paths::*}
+        add "generali.player-info.position.biome" to {_paths::*}
+        add "generali.player-playtime.session" to {_paths::*}
+        add "generali.player-playtime.total" to {_paths::*}
+        add "generali.player-playtime.sessions" to {_paths::*}
+        add "generali.player-playtime.first-join" to {_paths::*}
+        add "generali.player-connection.ip-address" to {_paths::*}
+        add "generali.player-connection.ping" to {_paths::*}
+        add "generali.player-skills.strength" to {_paths::*}
+        add "generali.player-skills.health" to {_paths::*}
+        add "generali.player-skills.regeneration" to {_paths::*}
+        add "generali.player-skills.luck" to {_paths::*}
+        add "generali.player-skills.wisdom" to {_paths::*}
+        add "generali.player-skills.toughness" to {_paths::*}
+        add "generali.player-skills.crit-chance" to {_paths::*}
+        add "generali.player-skills.crit-damage" to {_paths::*}
+        add "generali.player-skills.speed" to {_paths::*}
+        add "generali.player-support.reported-bugs" to {_paths::*}
+        add "generali.player-support.feedback-sent" to {_paths::*}
+        add "generali.player-progress.level.xp-until-next-level" to {_paths::*}
+        add "generali.player-progress.fama" to {_paths::*}
+        add "generali.player-progress.rank" to {_paths::*}
+        add "generali.player-progress.bloody-stats.kills" to {_paths::*}
+        add "generali.player-progress.bloody-stats.deaths" to {_paths::*}
+        add "generali.player-progress.bloody-stats.kd-ratio" to {_paths::*}
+        add "generali.player-progress.bloody-stats.damage.inflicted" to {_paths::*}
+        add "generali.player-progress.bloody-stats.damage.suffered" to {_paths::*}
+        add "generali.player-progress.bloody-stats.killstreak" to {_paths::*}
+        add "generali.player-progress.collection-stats.broken-blocks" to {_paths::*}
+        add "generali.player-progress.collection-stats.placed-blocks" to {_paths::*}
+        add "generali.player-progress.collection-stats.fished-loots" to {_paths::*}
+        set {_gen_tot} to 0
+        set {_gen_set} to 0
+        set {_bad} to 0
+        loop {_paths::*}:
+            set {_v} to yaml value loop-value from {_id}
+            if loop-value starts with "generali":
+                add 1 to {_gen_tot}
+                if {_v} is set:
+                    add 1 to {_gen_set}
+            if {_v} is set:
+                set {_t} to "%{_v}%"
+                if {_t} contains {_a} or {_s}:
+                    add 1 to {_bad}
+                    replace all {_a} with "[AMP]" in {_t}
+                    replace all {_s} with "[SEZ]" in {_t}
+                    send "&c[COLORE] &f%loop-value% = %{_t}%"
+        set {_m} to yaml value "impostazioni.personalization.gui-background.marker" from {_id}
+        set {_t} to "%{_m}%"
+        replace all {_a} with "[AMP]" in {_t}
+        replace all {_s} with "[SEZ]" in {_t}
+        send "&e[yamlscan] marker sfondo GUI = &f%{_t}%"
+        send "&e[yamlscan] chiavi generali presenti: &f%{_gen_set}%/%{_gen_tot}%"
+        send "&e[yamlscan] valori con colori: &f%{_bad}%"

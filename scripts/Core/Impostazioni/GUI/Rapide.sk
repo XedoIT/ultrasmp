@@ -1,0 +1,136 @@
+options:
+    #interactable: &e≡
+    #manage: &eClicca per gestirle.
+
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+    turn_on: &eClicca per attivare.
+    turn_off: &eClicca per disattivare.
+
+    gui_background: {settings.personalization.gui_background::%{_p}%}
+    scoreboard: {settings.personalization.scoreboard::%{_p}%}
+    inventory_full: {settings.alerts.inventory_full::%{_p}%}
+    can_receive_others_tp_requests: {settings.privacy.can_receive_others_tp_requests::%{_p}%}
+
+    gui_background_marker: {-settings.personalization.gui_background_marker::%{_p}%}
+    wb_message_marker: {-settings.personalization.wb_message_marker::%{_p}%}
+    scoreboard_marker: {-settings.personalization.scoreboard_marker::%{_p}%}
+    can_view_other_profiles_marker: {-settings.personalization.view_other_profiles_marker::%{_p}%}
+    damage_indicator_players_marker: {-settings.personalization.damage_indicator_players_marker::%{_p}%}
+    damage_indicator_mobs_marker: {-settings.personalization.damage_indicator_mobs_marker::%{_p}%}
+
+    inventory_full_marker: {-settings.alerts.inventory_full_marker::%{_p}%}
+    scoreboard_reminder_marker: {-settings.alerts.scoreboard_reminder_marker::%{_p}%}
+
+    can_others_view_self_profile: {-settings.privacy.can_others_view_self_profile_marker::%{_p}%}
+    can_receive_others_tp_requests_marker: {-settings.privacy.can_receive_others_tp_requests_marker::%{_p}%}
+
+command /impostazioni:
+    description: Gestisci le tue impostazioni all'interno dell'SMP.
+    executable by: player
+    trigger:
+        openQuickSettingsGui(player)
+
+function openQuickSettingsGui(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Impostazioni: &9Rapide"
+    if {@gui_background} is true:
+        set slot 0, 1, 3, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named "&r"
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 21, 22, 23, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named "&r"
+    set slot 2 of {_gui} to nether star named "&bRapide" with lore "&7Gestisci da qui le impostazioni", "&7più comuni per evitare perdite" and "&7di tempo."
+    set slot 4 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "", "&7Include:", "%{@gui_background_marker}% &7Sfondo GUI", "%{@wb_message_marker}% &7Messaggio di bentornato", "%{@scoreboard_marker}% &7Scoreboard", "%{@can_view_other_profiles_marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{@damage_indicator_players_marker}% &7Indicatore danni giocatori" and "%{@damage_indicator_mobs_marker}% &7Indicatore danni mob"
+    set slot 5 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche che riceverai", "&7durante la tua avventura all'interno", "&7della %{-server.name}%.", "", "&7Include:", "%{@inventory_full_marker}% &7Inventario pieno" and "%{@scoreboard_reminder_marker}% &7Promemoria scoreboard"
+    set slot 6 of {_gui} to iron bars named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "", "&7Include:", "%{@can_others_view_self_profile}% &7Profilo giocatori &e[&7Tu &6&l←&e]" and "%{@can_receive_others_tp_requests_marker}% &7Richieste teletrasporto"
+    set slot 20 of {_gui} to glass pane named "&aSfondo GUI" with lore "&7Gli slot vuoti di alcuni menu", "&7saranno riempiti da pannelli", "&7di vetro scuri.", "", "&4&lATTENZIONE!", " &cGli oggetti inseriti dal proprio", " &cinventario andranno persi se" and " &c""&aSfondo GUI&c"" non è attiva."
+    set slot 21 of {_gui} to writable book named "&aScoreboard" with lore "&7Mostra o nascondi la scoreboard.", "", "&6&lNOTA", " &7Se la scoreboard è nascosta e hai", " &7attivato ""&aMessaggio di bentornato&7"",", " &7leggerai le sue informazioni in chat,", " &7ogni volta che rientrerai nel server.", "", " &eClicca su ""&aPersonalizzazione&e"" nella" and " &ebarra in alto per saperne di più."
+    set slot 23 of {_gui} to chest named "&eInventario pieno" with lore "&7Ti verrà inviato un messaggio", "&7in chat e uno a schermo quando", "&7il tuo inventario non può più", "&7contenere altri oggetti.", "", "&4&lRICORDA!", " &cGli avvisi saranno inviati ogni", " &cminuto se il tuo inventario" and "&c sarà ancora pieno."
+    set slot 24 of {_gui} to compass named "&6Richieste di teletrasporto" with lore "&7Consenti agli altri giocatori", "&7di inviarti richieste" and "&7di teletrasporto."
+    if {@gui_background} is true:
+        set slot 29 of {_gui} to lime dye named "&aSfondo GUI" with lore "{@turn_off}"
+    else:
+        set slot 29 of {_gui} to gray dye named "&cSfondo GUI" with lore "{@turn_on}"
+    if {@scoreboard} is true:
+        set slot 30 of {_gui} to lime dye named "&aScoreboard" with lore "{@turn_off}"
+    else:
+        set slot 30 of {_gui} to gray dye named "&cScoreboard" with lore "{@turn_on}"
+    if {@inventory_full} is true:
+        set slot 32 of {_gui} to lime dye named "&aInventario pieno" with lore "{@turn_off}"
+    else:
+        set slot 32 of {_gui} to gray dye named "&cInventario pieno" with lore "{@turn_on}"
+    if {@can_receive_others_tp_requests} is true:
+        set slot 33 of {_gui} to lime dye named "&aRichieste di teletrasporto" with lore "{@turn_off}"
+    else:
+        set slot 33 of {_gui} to gray dye named "&cRichieste di teletrasporto" with lore "{@turn_on}"
+    set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Rapide":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 2, 4, 5, 6, 29, 30, 32, 33, 48 or 49:
+                cancel event
+            else if index of event-slot is 2:
+                if click type is left mouse button:
+                    cancel event
+                    {@error_sound} at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 4:
+                if click type is left mouse button:
+                    cancel event
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 5:
+                if click type is left mouse button:
+                    cancel event
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 6:
+                if click type is left mouse button:
+                    cancel event
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 29:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleGuiFiller(player)
+                    openQuickSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 30:
+                if click type is left mouse button:
+                    cancel event
+                    ScoreboardManagement(player)
+                    openQuickSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 32:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleInventoryAlerts(player)
+                    openQuickSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 33:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleTPRequestsToSelf(player)
+                    openQuickSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 48:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event

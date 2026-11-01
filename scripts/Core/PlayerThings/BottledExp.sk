@@ -1,0 +1,144 @@
+options:
+    prefix: &8[&2&lXP&8]
+
+    bottle_name: &6|   Esperienza in Bottiglia   |
+    bottle_lore: &eRaccolta: &6
+
+    giving_exp: entity.player.levelup
+    filling_bottle: item.bottle.fill_dragonbreath
+
+command /bottle:
+    subcommand [help]:
+        trigger:
+            bottleHelp(player)
+
+    subcommand until <level: text>:
+        usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/bottle until &6<&elivello&6>
+        suggestions:
+            set {_next} to player's level + 1
+            set the suggestions for the text argument to "%{_next}%"
+        trigger:
+            bottleUntil(player, {_level})
+
+    subcommand store <amount: text>:
+        usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/bottle store &6<&exp&6/&elivelli&6/&emax&6>
+        suggestions:
+            set the suggestions for the text argument to "100", "3L" and "max"
+        trigger:
+            bottleStore(player, {_amount})
+
+# Tasto destro su una bottiglia salvata: riscatta l'EXP invece di lanciarla
+on right click with experience bottle:
+    if player's tool is not event-item:
+        stop
+    set {_s} to storedXp(event-item)
+    if {_s} <= 0:
+        stop
+    cancel event
+    set {_have} to item amount of player's tool
+    if {_have} <= 1:
+        set player's tool to air
+    else:
+        set item amount of player's tool to ({_have} - 1)
+    set player's total experience to (player's total experience + {_s})
+    send "{@prefix} &aHai ottenuto &e%{_s}% EXP &ada un'ampolla d'esperienza."
+    play sound "{@giving_exp}" with volume 1 at player for player
+
+
+# EXP totale necessaria per raggiungere un certo livello (formula vanilla)
+function xpForLevel(l: number) :: number:
+    if {_l} <= 0:
+        return 0
+    if {_l} <= 16:
+        return round(({_l} ^ 2) + (6 * {_l}))
+    if {_l} <= 31:
+        return round((2.5 * ({_l} ^ 2)) - (40.5 * {_l}) + 360)
+    return round((4.5 * ({_l} ^ 2)) - (162.5 * {_l}) + 2220)
+
+# Legge l'EXP salvata in una bottiglia creata con /bottle store (0 se è una bottiglia normale)
+function storedXp(i: item) :: number:
+    set {_l::*} to lore of {_i}
+    if {_l::1} is not set:
+        return 0
+    set {_t} to uncolored {_l::1}
+    if {_t} does not contain "Raccolta: ":
+        return 0
+    replace all "Raccolta: " with "" in {_t}
+    set {_v} to {_t} parsed as integer
+    if {_v} is not set:
+        return 0
+    return {_v}
+
+function bottleStore(p: player, a: text = ""):
+    if {_p}'s tool is not glass bottle:
+        send "{@prefix} &cDevi tenere in mano un'ampolla di vetro vuota." to {_p}
+        stop
+    set {_total} to {_p}'s total experience
+    set {_arg} to lowercase {_a}
+    if {_arg} is "max":
+        set {_cost} to {_total}
+    else if {_arg} ends with "l" or "L":
+        replace all "l" with "" in {_arg}
+        set {_lv} to {_arg} parsed as integer
+        if {_lv} is not set:
+            send "{@prefix} &cIl valore deve essere un numero." to {_p}
+            stop
+        if {_lv} <= 0:
+            send "{@prefix} &cNon puoi conservare 0 livelli EXP." to {_p}
+            stop
+        set {_cur} to {_p}'s level
+        if {_lv} > {_cur}:
+            send "{@prefix} &cNon hai abbastanza livelli per farlo." to {_p}
+            stop
+        set {_cost} to xpForLevel({_cur}) - xpForLevel({_cur} - {_lv})
+    else:
+        set {_cost} to {_arg} parsed as integer
+        if {_cost} is not set:
+            send "{@prefix} &cIl valore deve essere un numero." to {_p}
+            stop
+        if {_cost} <= 0:
+            send "{@prefix} &cNon puoi conservare 0 EXP." to {_p}
+            stop
+    if {_cost} <= 0:
+        send "{@prefix} &cNon hai abbastanza EXP." to {_p}
+        stop
+    if {_cost} > {_total}:
+        send "{@prefix} &cNon hai abbastanza EXP." to {_p}
+        stop
+    set {_bottle} to experience bottle named "{@bottle_name}" with lore "{@bottle_lore}%{_cost}%"
+    set {_have} to item amount of {_p}'s tool
+    if {_have} > 1:
+        if {_p} can't hold {_bottle}:
+            send "{@prefix} &cNon hai abbastanza spazio nell'inventario." to {_p}
+            stop
+    if {_have} <= 1:
+        set {_p}'s tool to air
+    else:
+        set item amount of {_p}'s tool to ({_have} - 1)
+    set {_p}'s total experience to ({_total} - {_cost})
+    give {_bottle} to {_p}
+    send "{@prefix} &aHai conservato &e%{_cost}% EXP &ain un'ampolla d'esperienza." to {_p}
+    play sound "{@filling_bottle}" with volume 1 at {_p} for {_p}
+
+function bottleUntil(p: player, a: text = ""):
+    set {_lv} to {_a} parsed as integer
+    if {_lv} is not set:
+        send "{@prefix} &cParametro non valido." to {_p}
+        send "{@prefix} &cUtilizza &6/bottle until &6<&elivello&6>" to {_p}
+        stop
+    set {_need} to xpForLevel({_lv}) - {_p}'s total experience
+    if {_need} <= 0:
+        send "{@prefix} &cHai già raggiunto il &6livello %{_lv}%&c." to {_p}
+        stop
+    if {_need} > 1:
+        send "{@prefix} &eHai bisogno di altri &a%{_need}% EXP &eper arrivare al &alivello %{_lv}%&e." to {_p}
+    else:
+        send "{@prefix} &eHai bisogno di &a%{_need}% EXP &eper arrivare al &alivello %{_lv}%&e." to {_p}
+
+function bottleHelp(p: player):
+    send "" to {_p}
+    send "&cComando incompleto." to {_p}
+    send "" to {_p}
+    send " &cUtilizza &6/bottle &euntil <livello>&7: &oCalcola l'esperienza da accumulare per avanzare di livello." to {_p}
+    send " &cUtilizza &6/bottle &estore <xp&6/&elivelli&6/&emax>&7: &oConserva la tua esperienza in ampolle d'esperienza. Utile per metterla da parte o per scambiarla con qualcuno." to {_p}
+    send "" to {_p}

@@ -1,0 +1,67 @@
+#
+# TESTI ANIMATI PER TAB E SCOREBOARD
+#
+
+function barraAnimata(pos: number, evidenza: text, base: text) :: text:
+    set {_testo} to ""
+    if {_pos} > 1:
+        set {_testo} to "%{_base}%"
+        loop ({_pos} - 1) times:
+            set {_testo} to "%{_testo}%-"
+    set {_testo} to "%{_testo}%%{_evidenza}%-"
+    if {_pos} < 15:
+        set {_testo} to "%{_testo}%%{_base}%"
+        loop (15 - {_pos}) times:
+            set {_testo} to "%{_testo}%-"
+    return {_testo}
+
+on load:
+    set {-animation.UltraSMP} to "&e&lULTRA SMP"
+    set {-animation.Benvenuto} to "&6&lB_"
+    set {-animation.Benvenuta} to "&6&lB_"
+    set {-animation.OverWorld} to barraAnimata(1, "&b", "&a")
+    set {-animation.Nether} to barraAnimata(1, "&c", "&5")
+    set {-animation.End} to barraAnimata(1, "&5", "&d")
+
+every 14 seconds: # UltraSMP
+    set {_intro::*} to "&e&lULTRA SMP", "&6&lU&e&lLTRA SMP", "&f&lU&6&lL&e&lTRA SMP", "&f&lUL&6&lT&e&lRA SMP", "&f&lULT&6&lR&e&lA SMP", "&f&lULTR&6&lA &e&lSMP", "&f&lULTRA&6&l S&e&lMP", "&f&lULTRA S&6&lM&e&lP", "&f&lULTRA SM&6&lP"
+    loop {_intro::*}:
+        set {-animation.UltraSMP} to loop-value
+        wait 10 ticks
+    set {_colori::*} to "&f", "", "&f", "", "&e", "&e", "&e", "", "&f", "", "&e", "&e", "&e", "", "&f", "", "&e", "&e"
+    loop {_colori::*}:
+        set {-animation.UltraSMP} to "%loop-value%&lULTRA SMP"
+        wait 10 ticks
+
+every 198 ticks: # Benvenuto/Benvenuta
+    set {_m} to "Benvenuto"
+    set {_f} to "Benvenuta"
+    set {_lettere::*} to 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1
+    loop {_lettere::*}:
+        set {-animation.Benvenuto} to "&6&l%first loop-value characters of {_m}%_"
+        set {-animation.Benvenuta} to "&6&l%first loop-value characters of {_f}%_"
+        wait 9 ticks
+
+every 145 ticks: # OverWorld
+    loop 29 times:
+        set {_pos} to loop-number
+        if {_pos} > 15:
+            set {_pos} to 30 - {_pos}
+        set {-animation.OverWorld} to barraAnimata({_pos}, "&b", "&a")
+        wait 5 ticks
+
+every 145 ticks: # Nether
+    loop 29 times:
+        set {_pos} to loop-number
+        if {_pos} > 15:
+            set {_pos} to 30 - {_pos}
+        set {-animation.Nether} to barraAnimata({_pos}, "&c", "&5")
+        wait 5 ticks
+
+every 145 ticks: # End
+    loop 29 times:
+        set {_pos} to loop-number
+        if {_pos} > 15:
+            set {_pos} to 30 - {_pos}
+        set {-animation.End} to barraAnimata({_pos}, "&5", "&d")
+        wait 5 ticks

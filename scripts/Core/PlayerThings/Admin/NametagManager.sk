@@ -1,0 +1,243 @@
+import:
+    org.bukkit.Bukkit
+    org.bukkit.entity.Interaction
+    org.bukkit.scoreboard.Team$Option as TeamOption
+    org.bukkit.scoreboard.Team$OptionStatus as TeamStatus
+
+options:
+    #height: 0.26               # altezza della riga più bassa (vita) sopra la testa (con 3 righe)
+    height: 0                   # altezza della riga più bassa (vita) sopra la testa (con 2 righe)
+    line_gap: 0.26              # distanza verticale (nel mondo) tra una riga e l'altra
+    billboard: center           # ogni riga ruota verso la camera attorno al proprio centro
+    carrier: true               # true = ogni riga ha la sua altezza nel mondo; false = vecchio sistema (altezza nella traslazione)
+    sneak_opacity: 32           # opacità del testo da accovacciato (0-255, 32 = valore vanilla)
+    view_distance: 64           # distanza massima (in blocchi) a cui si vedono le righe (lato client)
+    max_distance: 64            # oltre questa distanza 3D il nametag viene nascosto
+    sneak_distance: 32          # come max_distance, ma quando il proprietario è accovacciato (vanilla = 32; metti 64 per disattivare)
+    max_below: 64               # se lo spettatore è almeno questi blocchi più in basso del proprietario, il nametag sparisce
+    see_through: true           # true = visibili attraverso i blocchi quando non accovacciato
+    text_color: &x&D&9&D&8&D&F  # colore del testo di nome e vita (E6E6E6 = grigio chiarissimo; più basso = più scuro, FFFFFF = bianco puro)
+    team: nt_hide               # team (solo interno) usato per nascondere il nome vanilla
+
+on load:
+    # pulisce eventuali display rimasti da un riavvio/crash o dalle versioni precedenti
+    loop all entities:
+        if scoreboard tags of loop-entity contains "nametag":
+            set {_e} to loop-entity
+            {_e}.remove()
+    delete {-nametag::*}
+    delete {-nametag.carrier::*}
+    delete {-nametag.text::*}
+    delete {-nametag.opacity::*}
+    loop all players:
+        NametagHide(loop-player)
+        NametagUpdate(loop-player)
+
+on unload:
+    loop all players:
+        NametagRemove(loop-player)
+    # ridà ai giocatori il nome vanilla quando lo script viene scaricato
+    set {_team} to NametagTeam()
+    {_team}.unregister()
+
+# Ottiene (o crea) il team che nasconde il nome vanilla, senza usare comandi
+function NametagTeam() :: object:
+    set {_sb} to Bukkit.getScoreboardManager().getMainScoreboard()
+    set {_team} to {_sb}.getTeam("{@team}")
+    if {_team} is not set:
+        set {_team} to {_sb}.registerNewTeam("{@team}")
+    {_team}.setOption(TeamOption.NAME_TAG_VISIBILITY, TeamStatus.NEVER)
+    return {_team}
+
+# Mette il giocatore nel team: il suo nome vanilla non viene più mostrato
+function NametagHide(p: player):
+    set {_team} to NametagTeam()
+    {_team}.addEntry({_p}.getName())
+
+# Righe mostrate: 1 = reputazione, 2 = nome, 3 = vita
+function NametagLines(p: player) :: strings:
+    set {_health} to placeholder "auraskills_hp" from {_p}
+    #set {_align} to {rank.%{_p}%}
+    #if {_align} is not set:
+        #set {_align} to ""
+    #return "%{_align}%", "{@text_color}%{_p}%", "{@text_color}%{_health}% &c❤"
+    return "{@text_color}%{_p}%", "{@text_color}%{_health}% &c❤"
+
+# Rimuove davvero trasportatori e display del giocatore dal mondo e cancella i valori salvati
+function NametagRemove(p: player):
+    loop 3 times:
+        set {_d} to {-nametag::%{_p}%::%loop-value%}
+        if {_d} is set:
+            {_d}.remove()
+        set {_c} to {-nametag.carrier::%{_p}%::%loop-value%}
+        if {_c} is set:
+            if {_c} is not {_p}:
+                {_c}.remove()
+    delete {-nametag.vis::%{_p}%::*}
+    delete {-nametag::%{_p}%::*}
+    delete {-nametag.carrier::%{_p}%::*}
+    delete {-nametag.text::%{_p}%::*}
+    delete {-nametag.opacity::%{_p}%::*}
+
+# Crea trasportatori e display se mancano (o se sono stati staccati) e aggiorna testi, opacità e visibilità
+function NametagUpdate(p: player):
+    if {_p} is offline:
+        stop
+    if {_p} is dead:
+        stop
+    set {_new} to false
+    loop 3 times:
+        set {_c} to {-nametag.carrier::%{_p}%::%loop-value%}
+        set {_d} to {-nametag::%{_p}%::%loop-value%}
+        if {_c} is not set:
+            set {_new} to true
+        else if {_d} is not set:
+            set {_new} to true
+        else if vehicle of {_d} is not {_c}:
+            set {_new} to true
+        else if {_c} is not {_p}:
+            if vehicle of {_c} is not {_p}:
+                set {_new} to true
+    if {_new} is true:
+        NametagRemove({_p})
+        set {_loc} to {_p}'s location
+        set pitch of {_loc} to 0
+        set yaw of {_loc} to 0
+        set {_use} to {@carrier}
+        loop 3 times:
+            set {_h} to {@height} + ((3 - loop-value) * {@line_gap})
+            set {_c} to {_p}
+            set {_y} to {_h}
+            if {_use} is true:
+                # entità invisibile e strettissima alta quanto l'altezza di questa riga: il display si monta sopra di lei
+                set {_c} to {_loc}.getWorld().spawn({_loc}, Interaction)
+                {_c}.setInteractionWidth(0.01)
+                {_c}.setInteractionHeight({_h})
+                add "nametag" to scoreboard tags of {_c}
+                add {_c} to passengers of {_p}
+                hide {_c} from {_p}
+                set {_y} to 0
+            set {-nametag.carrier::%{_p}%::%loop-value%} to {_c}
+            spawn 1 text display at {_loc}
+            set {_d} to last spawned entity
+            set billboard of {_d} to {@billboard}
+            set display translation of {_d} to vector(0, {_y}, 0)
+            set view range of {_d} to ({@view_distance} / 64)
+            add "nametag" to scoreboard tags of {_d}
+            add {_d} to passengers of {_c}
+            hide {_d} from {_p}
+            set {-nametag::%{_p}%::%loop-value%} to {_d}
+    # se il giocatore ha sopra di sé un'altra entità (mob o giocatore montato) le righe vengono nascoste
+    set {_other} to false
+    loop passengers of {_p}:
+        set {_mine} to false
+        if scoreboard tags of loop-entity contains "nametag":
+            set {_mine} to true
+        if {_mine} is false:
+            set {_other} to true
+    # spettatore, invisibile (pozione) o con un'altra entità sopra: righe nascoste
+    if gamemode of {_p} is spectator:
+        set {_t::*} to "", "", ""
+    else if {_p} has a potion effect of invisibility:
+        set {_t::*} to "", "", ""
+    else if {_other} is true:
+        set {_t::*} to "", "", ""
+    else:
+        set {_t::*} to NametagLines({_p})
+    # accovacciato: testo sbiadito e non visibile attraverso i blocchi (come in vanilla)
+    if {_p} is sneaking:
+        set {_o} to {@sneak_opacity}
+        set {_see} to false
+    else:
+        set {_o} to 255
+        set {_see} to {@see_through}
+    loop 3 times:
+        set {_d} to {-nametag::%{_p}%::%loop-value%}
+        if {-nametag.text::%{_p}%::%loop-value%} is not {_t::%loop-value%}:
+            set {-nametag.text::%{_p}%::%loop-value%} to {_t::%loop-value%}
+            set text of {_d} to {_t::%loop-value%}
+        if {-nametag.opacity::%{_p}%::%loop-value%} is not {_o}:
+            set {-nametag.opacity::%{_p}%::%loop-value%} to {_o}
+            set text opacity of {_d} to {_o}
+            if {_see} is true:
+                force {_d} to be visible through walls
+            else:
+                prevent {_d} from being visible through walls
+    NametagHideSelf({_p})
+    NametagVisibility({_p})
+
+# Nasconde (di nuovo) trasportatori e display al loro proprietario
+function NametagHideSelf(p: player):
+    loop 3 times:
+        set {_d} to {-nametag::%{_p}%::%loop-value%}
+        if {_d} is set:
+            hide {_d} from {_p}
+        set {_c} to {-nametag.carrier::%{_p}%::%loop-value%}
+        if {_c} is set:
+            if {_c} is not {_p}:
+                hide {_c} from {_p}
+
+# Nasconde o mostra le righe del giocatore agli altri giocatori in base a distanza e dislivello (regole vanilla)
+function NametagVisibility(p: player):
+    loop all players:
+        if loop-player is not {_p}:
+            set {_v} to loop-player
+            set {_hide} to false
+            if world of {_v} is not world of {_p}:
+                set {_hide} to true
+            else:
+                set {_max} to {@max_distance}
+                if {_p} is sneaking:
+                    set {_max} to {@sneak_distance}
+                if distance between {_v} and {_p} >= {_max}:
+                    set {_hide} to true
+                else if ((y-coordinate of {_p}) - (y-coordinate of {_v})) >= {@max_below}:
+                    set {_hide} to true
+            if {-nametag.vis::%{_p}%::%{_v}%} is not {_hide}:
+                set {-nametag.vis::%{_p}%::%{_v}%} to {_hide}
+                loop 3 times:
+                    set {_d} to {-nametag::%{_p}%::%loop-value-2%}
+                    if {_d} is set:
+                        if {_hide} is true:
+                            hide {_d} from {_v}
+                        else:
+                            reveal {_d} from {_v}
+
+on join:
+    wait 1 tick
+    NametagHide(player)
+    NametagUpdate(player)
+
+on quit:
+    NametagRemove(player)
+    loop all players:
+        delete {-nametag.vis::%loop-player%::%player%}
+
+on death of player:
+    NametagRemove(victim)
+
+on respawn:
+    wait 2 ticks
+    NametagHide(player)
+    NametagUpdate(player)
+
+on world change:
+    wait 2 ticks
+    NametagUpdate(player)
+    wait 10 ticks
+    NametagUpdate(player)
+
+on teleport:
+    wait 2 ticks
+    NametagUpdate(player)
+    wait 10 ticks
+    NametagUpdate(player)
+
+on sneak toggle:
+    wait 1 tick
+    NametagUpdate(player)
+
+# aggiorna vita/testi e ricrea le entità se sono state staccate (teletrasporti, dimensioni)
+every 10 ticks:
+    loop all players:
+        NametagUpdate(loop-player)

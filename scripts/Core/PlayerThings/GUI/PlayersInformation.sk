@@ -1,0 +1,165 @@
+options:
+    glinted: "{enchantment_glint_override:true}"
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+
+    no_available: &cQuesta funzionalità non è ancora disponibile.
+    requires_progress_update: &6Disponibile con il &eProgress Update&6.
+
+    gui_background: {settings.personalization.gui_background::%{_p}%}
+
+    genre: {genre.%{_e}%}
+
+    can_view_other_profiles: {settings.personalization.view_other_profiles::%player%}
+    can_others_view_self_profile: {settings.privacy.can_others_view_self_profile::%event-entity%}
+
+on right click on player:
+    player's tool is air
+    if player's offhand is shield:
+        cancel event
+    if {@can_view_other_profiles} is not true:
+        set {_reason} to "Hai disattivato ""&fProfilo giocatori&c"" dalle tue Impostazioni di Personalizzazione."
+    else if {@can_others_view_self_profile} is not true:
+        set {_reason} to "Ha disattivato la possibilità di farlo per chiunque."
+    if {_reason} is set:
+        send "%{-server.prefix.main}% &cNon puoi consultare il profilo di &6%event-entity%&c!" and "%{-server.prefix.main}% &c%{_reason}%" to player
+        play sound "entity.enderman.teleport" with volume 1 and pitch 0 at player for player
+        stop
+    PlayersInformation(player, event-entity)
+            
+function PlayersInformation(p: player, e: entity):
+    set metadata tag "PlayersInformationGUI" of {_p} to a new chest inventory with 6 rows named "&rProfilo di %{_e}%"
+    if {@gui_background} is true:
+        set slot 0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of metadata tag "PlayersInformationGUI" of {_p} to black stained glass pane named "&r"
+        set slot 10, 12, 13, 14, 16, 22, 27, 28, 30, 31, 32, 34, 37, 39, 40, 41, 42 and 43 of metadata tag "PlayersInformationGUI" of {_p} to gray stained glass pane named "&r"
+    set slot 23 of metadata tag "PlayersInformationGUI" of {_p} to brewing stand named "&fLivelli SMP" with lore "&7Sali di livello giocando all'interno", "&7dell'%{-server.name}%, sbloccando nuovi", "&7cosmetici, vantaggi e funzionalità", "&7che amplieranno la tua esperienza", "&7di gioco.", "", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "" and "{@requires_progress_update}"
+    set slot 33 of metadata tag "PlayersInformationGUI" of {_p} to diamond with nbt from {@glinted} named "&aObiettivi SMP" with lore "&7Visualizza gli obiettivi", "&7ottenibili dell'SMP.", "", "&c&oFunzionalità non disponibile.", "&c&oRiprova più tardi.", "" and "{@requires_progress_update}"
+    set slot 48 of metadata tag "PlayersInformationGUI" of {_p} to paper named "&bInfo" with lore "&7I valori tra parentesi sono quelli" and "&7delle tue statistiche."
+    set slot 49 of metadata tag "PlayersInformationGUI" of {_p} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+    UpdateProfileEquipment({_p}, {_e})
+    UpdateProfileStats({_p}, {_e})
+    set metadata tag "PlayersInformationTarget" of {_p} to {_e}
+    open metadata tag "PlayersInformationGUI" of {_p} to {_p}
+
+function UpdateProfileEquipment(p: player, e: entity):
+    set {_gui} to metadata tag "PlayersInformationGUI" of {_p}
+    if slot 39 of {_e}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot elmetto" with lore "&6%{_e}% &7non sta" and "&7indossando nessun elmetto."
+    else:
+        set {_item} to {_e}'s helmet
+    setGuiSlot({_gui}, 11, {_item})
+    if slot 38 of {_e}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot corazza" with lore "&6%{_e}% &7non sta" and "&7indossando nessuna corazza."
+    else:
+        set {_item} to {_e}'s chestplate
+    setGuiSlot({_gui}, 20, {_item})
+    if slot 37 of {_e}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot gambiere" with lore "&6%{_e}% &7non sta" and "&7indossando gambiere."
+    else:
+        set {_item} to {_e}'s leggings
+    setGuiSlot({_gui}, 29, {_item})
+    if slot 36 of {_e}'s inventory is air:
+        set {_item} to red stained glass pane named "&cSlot stivali" with lore "&6%{_e}% &7non sta" and "&7indossando stivali."
+    else:
+        set {_item} to {_e}'s boots
+    setGuiSlot({_gui}, 38, {_item})
+    if slot 40 of {_e}'s inventory is air:
+        set {_item} to magenta stained glass pane named "&dMano secondaria" with lore "&6%{_e}% &7non ha" and "&7oggetti nella seconda mano."
+    else:
+        set {_item} to {_e}'s off hand item
+    setGuiSlot({_gui}, 19, {_item})
+    if {_e}'s tool is air:
+        set {_item} to lime stained glass pane named "&aMano principale" with lore "&6%{_e}% &7non ha" and "&7nulla in mano."
+    else:
+        set {_item} to {_e}'s held item
+    setGuiSlot({_gui}, 21, {_item})
+
+function UpdateProfileStats(p: player, e: entity):
+    set {_gui} to metadata tag "PlayersInformationGUI" of {_p}
+    set {_player_xp} to placeholder "player_current_exp" from {_e}
+    set {_player_xp_level} to placeholder "player_level" from {_e}
+    set {_player_inventory} to 0
+    loop integers from 0 to 35:
+        if loop-integer is not 8:
+            if slot loop-integer of {_e}'s inventory is air:
+                add 1 to {_player_inventory}
+    set {_player_biome} to placeholder "player_biome_capitalized" from {_e}
+    if {_player_biome} contains ":":
+        set {_player_biome} to last element of split {_player_biome} at ":"
+        replace all "_" with " " in {_player_biome}
+        set {_player_biome} to "%first character of {_player_biome} in upper case%%last (length of {_player_biome} - 1) characters of {_player_biome}%"
+    set {_player_luck} to placeholder "auraskills_luck" from {_e}
+    set {_player_health} to placeholder "auraskills_health" from {_e}
+    set {_player_wisdom} to placeholder "auraskills_wisdom" from {_e}
+    set {_player_strength} to placeholder "auraskills_strength" from {_e}
+    set {_player_regeneration} to placeholder "auraskills_regeneration" from {_e}
+    set {_player_toughness} to placeholder "auraskills_toughness" from {_e}
+    set {_player_crit_chance} to placeholder "auraskills_crit_chance" from {_e}
+    set {_player_crit_damage} to placeholder "auraskills_crit_damage" from {_e}
+    set {_player_speed} to placeholder "auraskills_speed" from {_e}
+    set {_player_xp_self} to placeholder "player_current_exp" from {_p}
+    set {_player_xp_level_self} to placeholder "player_level" from {_p}
+    set {_player_luck_self} to placeholder "auraskills_luck" from {_p}
+    set {_player_health_self} to placeholder "auraskills_health" from {_p}
+    set {_player_wisdom_self} to placeholder "auraskills_wisdom" from {_p}
+    set {_player_strength_self} to placeholder "auraskills_strength" from {_p}
+    set {_player_regeneration_self} to placeholder "auraskills_regeneration" from {_p}
+    set {_player_toughness_self} to placeholder "auraskills_toughness" from {_p}
+    set {_player_crit_chance_self} to placeholder "auraskills_crit_chance" from {_p}
+    set {_player_crit_damage_self} to placeholder "auraskills_crit_damage" from {_p}
+    set {_player_speed_self} to placeholder "auraskills_speed" from {_p}
+    set {_genre} to {@genre}
+    if {_genre} is "%{-server.genre.male}%":
+        set {_color} to "&9"
+    else:
+        set {_color} to "&d"
+    set {_ratio_e} to "0"
+    set {_ratio_p} to "0"
+    if {stats.deaths::%{_e}%} != 0:
+        set {_ratio_e} to regex({stats.kills::%{_e}%}/{stats.deaths::%{_e}%})
+    if {stats.deaths::%{_p}%} != 0:
+        set {_ratio_p} to regex({stats.kills::%{_p}%}/{stats.deaths::%{_p}%})
+    set {_item} to {_e}'s skull named "%{_color}%%{_e}%" with lore " &e➹ Bug segnalati&7: &f%{stats.reported_bugs::%{_e}%}% &8(%{stats.reported_bugs::%{_p}%}%)", " &6★ Feedback inviati&7: &f%{stats.feedback_sent::%{_e}%}% &8(%{stats.feedback_sent::%{_p}%}%)", "", " &a❉ EXP&7: &2%{_player_xp_level}% livelli (&a%regex({_player_xp})% punti&2) &8(%{_player_xp_level_self}% (%regex({_player_xp_self})%))", "" and " &7⌚ Prima volta nel server:" and "     &f%{playtime.first_login.%{_e}%}%"
+    setGuiSlot({_gui}, 4, {_item})
+    set {_item} to writable book named "&bInformazioni" with lore " &9✎ Nome&7: &f%{_e}%", " &a✧ Sesso&7: &f%{_genre}%", " &e₪ Inventario&7: &f%{_player_inventory}%/35 slot liberi", " &b🌅 Bioma&7: &f%{_player_biome}%", " &3ℹ Ping&7: &f%{_e}'s ping% ms &8(%{_p}'s ping% ms)", " &d✦ Fama&7: &f%regex({fama::%{_e}%})% &8(%regex({fama::%{_p}%})%)", " &a✪ Reputazione&7: &f%{rank.%{_e}%}% &8(%{rank.%{_p}%}%&8)", " &2☘ Fortuna&7: &f+%{_player_luck}% &8(+%{_player_luck_self}%)", " &c❣ &cIncremento salute&7: &f+%regex({_player_health})% &8(+%regex({_player_health_self})%)", " &9✿ Saggezza&7: &f+%regex({_player_wisdom})% &8(+%regex({_player_wisdom_self})%)" and " &f➤ Velocità&7: &f+%regex({_player_speed})% &8(+%regex({_player_speed_self})%)"
+    setGuiSlot({_gui}, 15, {_item})
+    set {_item} to diamond sword with nbt from {@no_flags} named "&aStatistiche sanguinarie" with lore " &c🗡 Uccisioni&7: &f%regex({stats.kills::%{_e}%})% &8(%regex({stats.kills::%{_p}%})%)", " &c☠ Morti&7: &f%regex({stats.deaths::%{_e}%})% &8(%regex({stats.deaths::%{_p}%})%)", " &c🔥 Rapporto U/M&7: &f%{_ratio_e}% &8(%{_ratio_p}%)", " &6🗡 Danni inflitti&7: &f%regex({stats.infldamage::%{_e}%})% &8(%regex({stats.infldamage::%{_p}%})%)", " &6☄ Danni subiti&7: &f%regex({stats.suffdamage::%{_e}%})% &8(%regex({stats.suffdamage::%{_p}%})%)", " &e&l⚡ &eSerie di uccisioni&7: &f%regex({stats.killstreak::%{_e}%})%/%regex({stats.killstreak_max.%{_e}%})% &8(%regex({stats.killstreak::%{_p}%})%/%regex({stats.killstreak_max.%{_p}%})%)", " &4➽ Forza&7: &f+%regex({_player_strength})% &8(+%regex({_player_strength_self})%)", " &6❥ Rigenerazione&7: &f+%regex({_player_regeneration})% &8(+%regex({_player_regeneration_self})%)", " &5✦ Tenacia&7: &f+%regex({_player_toughness})% &8(+%regex({_player_toughness_self})%)", " &a⌘ Probab. critico&7: &f+%regex({_player_crit_chance})%%% &8(+%regex({_player_crit_chance_self})%%%)" and " &3&l💧 &3Danni da critico&7: &f+%regex({_player_crit_damage})%%% &8(+%regex({_player_crit_damage_self})%%%)"
+    setGuiSlot({_gui}, 24, {_item})
+    set {_item} to iron pickaxe with nbt from {@no_flags} named "&aStatistiche di raccolta" with lore " &c⛏ Blocchi distrutti&7: &f%regex({stats.broken_blocks::%{_e}%})% &8(%regex({stats.broken_blocks::%{_p}%})%)", " &b🧱 Blocchi piazzati&7: &f%regex({stats.placed_blocks::%{_e}%})% &8(%regex({stats.placed_blocks::%{_p}%})%)", " &9🪝 Loot pescati&7: &f%regex({stats.fished_loot::%{_e}%})% &8(%regex({stats.fished_loot::%{_p}%})%)" and " &2☘ Fortuna&7: &f+%{_player_luck}% &8(+%{_player_luck_self}%)"
+    setGuiSlot({_gui}, 25, {_item})
+
+every 2 ticks:
+    loop all players:
+        set {_gui} to metadata tag "PlayersInformationGUI" of loop-player
+        if {_gui} is set:
+            if loop-player's current inventory is {_gui}:
+                set {_t} to metadata tag "PlayersInformationTarget" of loop-player
+                if {_t} is online:
+                    UpdateProfileEquipment(loop-player, {_t})
+                else:
+                    close loop-player's inventory
+
+every 10 ticks:
+    loop all players:
+        set {_gui} to metadata tag "PlayersInformationGUI" of loop-player
+        if {_gui} is set:
+            if loop-player's current inventory is {_gui}:
+                set {_t} to metadata tag "PlayersInformationTarget" of loop-player
+                if {_t} is online:
+                    UpdateProfileStats(loop-player, {_t})
+
+on inventory click:
+    if event-inventory is (metadata tag "PlayersInformationGUI" of player):
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 49:
+                cancel event
+            else:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+
+on inventory close:
+    if event-inventory is (metadata tag "PlayersInformationGUI" of player):
+        delete metadata tag "PlayersInformationGUI" of player
+        delete metadata tag "PlayersInformationTarget" of player

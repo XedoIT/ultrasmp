@@ -1,0 +1,896 @@
+# VERSIONE 1.1.1
+# NOVITÀ v1.1.1: MODIFICA NOME DEL SISTEMA E DELLE VARIABILI
+#
+# PERMESSI
+#
+# et.admin.tptoggle
+# et.admin.tpinfo
+# et.admin.tphere
+# et.admin.top
+# et.admin.tpoffline
+# et.admin.tpofflinehere
+# et.admin.tphelp
+# et.admin.tprandom.bypass.cooldown
+# debug.commands
+#
+options:
+# GENERALI
+    prefix: &4[&6&lT&e&lP&4]
+    
+    time: 30
+    time_unit: seconds
+    time_unit_ita: secondi
+
+    no: &c✘
+    yes: &a✔
+
+# TPR (teletrasporto casuale)
+    tpr_world: smp
+    tpr_world_nether: smp_nether
+    #tpr_world_end: smp_the_end
+    tpr_radius: 5000
+    tpr_radius_nether: 1500
+    #tpr_radius_end: 750
+    tpr_attempts: 15
+    tpr_cooldown: 300
+    tpr_nether_min: 33
+    tpr_nether_max: 120
+    tpr_ground: grass block or dirt or coarse dirt or podzol or mycelium or rooted dirt or mud or sand or red sand or gravel or sandstone or red sandstone or stone or snow block or terracotta
+    tpr_ground_nether: netherrack #or soul soil or crimson nylium or warped nylium
+    #tpr_ground_end: end stone
+
+# VARIABILI
+    genre_p: {genre.%player%}
+    genre_arg: {genre.%{_target}%}
+
+    can_receive_others_tp_requests: {settings.privacy.can_receive_others_tp_requests::%player%}
+    can_receive_others_tp_requests_arg: {settings.privacy.can_receive_others_tp_requests::%{_target}%}
+    can_receive_others_tp_requests_marker: {-settings.privacy.can_receive_others_tp_requests_marker::%player%}
+    can_receive_others_tp_requests_marker_arg: {-settings.privacy.can_receive_others_tp_requests_marker::%{_target}%}
+
+on join:
+    if {-et.tp_requests_totalcount::%player%} is not set:
+        set {-et.tp_requests_totalcount::%player%} to 0
+    if {-et.tp_requests_count::%player%} is not set:
+        set {-et.tp_requests_count::%player%} to 0
+    if {-et.tphere_requests_count::%player%} is not set:
+        set {-et.tphere_requests_count::%player%} to 0
+    if {et.last_online_loc.%player%} is set:
+        teleport player to {et.last_online_loc.%player%}
+        delete {et.last_online_loc.%player%}
+        delete {et.last_loc.%player%} # Commentare se si rivuole il /back con l'ultima posizione prima di uscire al rientro
+
+on quit:
+    set {et.last_online_loc.%player%} to player's location
+
+on teleport:
+    if teleport cause is command or plugin:
+        set {et.last_loc.%player%} to player's location
+
+on death of player:
+    set {et.last_loc.%victim%} to victim's location
+
+command /back:
+    description: Torna alla tua ultima posizione.
+    executable by: player
+    trigger:
+        if {et.last_loc.%player%} is not set:
+            send "{@prefix} &cNon ho trovato una posizione in cui teletrasportarti!"
+            stop
+        else:
+            etTeleport(player, {et.last_loc.%player%})
+            if {@genre_p} is "%{-server.genre.female}%":
+                send "{@prefix} &7Ti ho portata alla tua ultima posizione."
+                stop
+            else:
+                send "{@prefix} &7Ti ho portato alla tua ultima posizione."
+                stop
+
+command /tpa <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpa <&egiocatore&6>&c.
+    description: Invia una richiesta di teletrasporto a un giocatore.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                if {-et.tp_requests_list::%{_target}%::*} does not contain player:
+                    if {-et.tphere_requests_list::%{_target}%::*} does not contain player:
+                        if {@can_receive_others_tp_requests_arg} is true:
+                            if {et.tp_requests_blacklist::%{_target}%::*} does not contain player:
+                                add player to {-et.tp_requests_list::%{_target}%::*}
+                                add 1 to {-et.tp_requests_totalcount::%{_target}%}
+                                add 1 to {-et.tp_requests_count::%{_target}%}
+                                set {_id} to now
+                                set {-et.tp_requests_id::%{_target}%::%player%} to {_id}
+                                send "{@prefix} &6Hai inviato una richiesta di teletrasporto a &c%{_target}%&6." to player
+                                send "{@prefix} &6Ha &c{@time} {@time_unit_ita} &6per accettare." to player
+                                send ""
+                                send formatted "{@prefix} &6Per annullare questa richiesta: <click:run_command:/tpcancel %{_target}%>&c&l[ANNULLA]</click>" to player
+                                send "{@prefix} &c%player% &6vorrebbe venire da te. &6Hai &c{@time} {@time_unit_ita} &6per accettare." to {_target}
+                                send "" to {_target}
+                                send formatted "{@prefix} <hover:show_text:'&2Clicca qui per accettare la richiesta di &a%player%&2'><click:run_command:/tpaccept %player%>&a&l[ACCETTA&a]</click></hover><reset> <hover:show_text:'&4Clicca qui per rifiutare la richiesta di &c%player%&4'><click:run_command:/tpdeny %player%>&c&l[RIFIUTA&c&l]</click></hover><reset> &f| <hover:show_text:'&cClicca qui per bloccare &6%player%&c'><click:run_command:/tpblock %player%>&4&l[BLOCCA&4&l]</click></hover><reset> <hover:show_text:'&fClicca qui per ignorare questa richiesta'><click:run_command:/tpignore %player%>&7&l[IGNORA&7&l]</click></hover><reset> <hover:show_text:'&9Manda un messaggio privato a &b%player%&9'><click:suggest_command:/msg %player% >&b&l[MESSAGGIO&b&l]</click></hover><reset>" to {_target}
+                                wait {@time} {@time_unit}
+                                if {-et.tp_requests_id::%{_target}%::%player%} is {_id}:
+                                    if {-et.tp_requests_list::%{_target}%::*} contains player:
+                                        remove player from {-et.tp_requests_list::%{_target}%::*}
+                                        subtract 1 from {-et.tp_requests_totalcount::%{_target}%}
+                                        subtract 1 from {-et.tp_requests_count::%{_target}%}
+                                        delete {-et.tp_requests_id::%{_target}%::%player%}
+                                        send "{@prefix} &6%{_target}% &cnon ha accettato la tua richiesta di teletrasporto entro il tempo limite." to player
+                                        send "{@prefix} &cLa tua richiesta di teletrasporto da parte di &6%player% &cè scaduta." to {_target}
+                                        stop
+                            else:
+                                send "{@prefix} &6%{_target}% &cha bloccato le tue richieste di teletrasporto."
+                                stop
+                        else:
+                            send "{@prefix} &6%{_target}% &cnon può ricevere richieste di teletrasporto."
+                            stop
+                    else:
+                        send "{@prefix} &cDi recente hai chiesto a &6%{_target}% &cdi venire da te."
+                        send "{@prefix} &cAttendi prima di inviare un'altra richiesta di teletrasporto!"
+                        stop
+                else:
+                    send "{@prefix} &cHai già inviato una richiesta di teletrasporto a &6%{_target}%&c!"
+                    stop
+            else:
+                if {@genre_p} is "%{-server.genre.female}%":
+                    send "{@prefix} &cNon puoi usare questo comando su stessa!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su stesso!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tpahere <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpahere <&egiocatore&6>&c.
+    description: Invia una richiesta di teletrasporto alla tua posizione a un giocatore.
+    executable by: player
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                if {-et.tphere_requests_list::%{_target}%::*} does not contain player:
+                    if {-et.tp_requests_list::%{_target}%::*} does not contain player:
+                        if {@can_receive_others_tp_requests_arg} is true:
+                            if {et.tp_requests_blacklist::%{_target}%::*} does not contain player:
+                                add player to {-et.tphere_requests_list::%{_target}%::*}
+                                add 1 to {-et.tp_requests_totalcount::%{_target}%}
+                                add 1 to {-et.tphere_requests_count::%{_target}%}
+                                set {_id} to now
+                                set {-et.tp_requests_id::%{_target}%::%player%} to {_id}
+                                send "{@prefix} &6Hai chiesto a &c%{_target}% &6di venire da te." to player
+                                send "{@prefix} &6Ha &c{@time} {@time_unit_ita} &6per accettare." to player
+                                send ""
+                                send formatted "{@prefix} &6Per annullare questa richiesta: <click:run_command:/tpcancel %{_target}%>&c&l[ANNULLA]</click>" to player
+                                if {@genre_p} is "%{-server.genre.female}%":
+                                    send "{@prefix} &c%player% &6vorrebbe che tu andassi da lei. &6Hai &c{@time} {@time_unit_ita} &6per accettare." to {_target}
+                                else:
+                                    send "{@prefix} &c%player% &6vorrebbe che tu andassi da lui. &6Hai &c{@time} {@time_unit_ita} &6per accettare." to {_target}
+                                send "" to {_target}
+                                send formatted "{@prefix} <hover:show_text:'&2Clicca qui per accettare la richiesta di &a%player%&2'><click:run_command:/tpaccept %player%>&a&l[ACCETTA&a]</click></hover><reset> <hover:show_text:'&4Clicca qui per rifiutare la richiesta di &c%player%&4'><click:run_command:/tpdeny %player%>&c&l[RIFIUTA&c&l]</click></hover><reset> &f| <hover:show_text:'&cClicca qui per bloccare &6%player%&c'><click:run_command:/tpblock %player%>&4&l[BLOCCA&4&l]</click></hover><reset> <hover:show_text:'&fClicca qui per ignorare questa richiesta'><click:run_command:/tpignore %player%>&7&l[IGNORA&7&l]</click></hover><reset> <hover:show_text:'&9Manda un messaggio privato a &b%player%&9'><click:suggest_command:/msg %player% >&b&l[MESSAGGIO&b&l]</click></hover><reset>" to {_target}
+                                wait {@time} {@time_unit}
+                                if {-et.tp_requests_id::%{_target}%::%player%} is {_id}:
+                                    if {-et.tphere_requests_list::%{_target}%::*} contains player:
+                                        remove player from {-et.tphere_requests_list::%{_target}%::*}
+                                        subtract 1 from {-et.tp_requests_totalcount::%{_target}%}
+                                        subtract 1 from {-et.tphere_requests_count::%{_target}%}
+                                        delete {-et.tp_requests_id::%{_target}%::%player%}
+                                        send "{@prefix} &6%{_target}% &cnon ha accettato la tua richiesta di teletrasporto entro il tempo limite." to player
+                                        send "{@prefix} &cLa tua richiesta di teletrasporto da parte di &6%player% &cè scaduta." to {_target}
+                                        stop
+                            else:
+                                send "{@prefix} &6%{_target}% &cha bloccato le tue richieste di teletrasporto."
+                                stop
+                        else:
+                            send "{@prefix} &6%{_target}% &cnon può ricevere richieste di teletrasporto."
+                            stop
+                    else:
+                        if {@genre_arg} is "%{-server.genre.male}%":
+                            send "{@prefix} &cDi recente hai chiesto a &6%{_target}% &cdi andare da lui."
+                            send "{@prefix} &cAttendi prima di inviare un'altra richiesta di teletrasporto!"
+                            stop
+                        else:
+                            send "{@prefix} &cDi recente hai chiesto a &6%{_target}% &cdi andare da lei."
+                            send "{@prefix} &cAttendi prima di inviare un'altra richiesta di teletrasporto!"
+                            stop
+                else:
+                    send "{@prefix} &cHai già inviato una richiesta di teletrasporto a &6%{_target}%&c!"
+                    stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tpaccept <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpaccept <&egiocatore&6>&c.
+    description: Accetta la richiesta di teletrasporto da parte di un giocatore.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {-et.tp_requests_list::%player%::*} and {-et.tphere_requests_list::%player%::*}
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                if {-et.tp_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tp_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tp_requests_count::%player%}
+                    etTeleport({_target}, player's location)
+                else if {-et.tphere_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tphere_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tphere_requests_count::%player%}
+                    etTeleport(player, {_target}'s location)
+                else:
+                    send "{@prefix} &6%{_target}% &cnon ti ha inviato richieste di teletrasporto di recente."
+                    stop
+                send "{@prefix} &6Hai accettato la richiesta di &c%{_target}%&6." to player
+                send "{@prefix} &c%player% &6ha accettato la tua richiesta di teletrasporto." to {_target}
+                stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tpdeny <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpdeny <&egiocatore&6>&c.
+    description: Rifiuta la richiesta di teletrasporto da parte di un giocatore.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {-et.tp_requests_list::%player%::*} and {-et.tphere_requests_list::%player%::*}
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                if {-et.tp_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tp_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tp_requests_count::%player%}
+                else if {-et.tphere_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tphere_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tphere_requests_count::%player%}
+                else:
+                    send "{@prefix} &6%{_target}% &cnon ti ha inviato richieste di teletrasporto di recente."
+                    stop
+                send "{@prefix} &6Hai rifiutato la richiesta di &c%{_target}%&6." to player
+                send "{@prefix} &c%player% &6ha rifiutato la tua richiesta di teletrasporto." to {_target}
+                stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tpcancel <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpcancel <&egiocatore&6>&c.
+    description: Annulla la richiesta di teletrasporto che hai inviato a un giocatore.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                if {-et.tp_requests_list::%{_target}%::*} contains player:
+                    remove player from {-et.tp_requests_list::%{_target}%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%{_target}%}
+                    subtract 1 from {-et.tp_requests_count::%{_target}%}
+                else if {-et.tphere_requests_list::%{_target}%::*} contains player:
+                    remove player from {-et.tphere_requests_list::%{_target}%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%{_target}%}
+                    subtract 1 from {-et.tphere_requests_count::%{_target}%}
+                else:
+                    send "{@prefix} &cNon hai inviato richieste di teletrasporto a &6%{_target}% &cdi recente."
+                    stop
+                send "{@prefix} &cHai annullato la richiesta di teletrasporto per &6%{_target}%&c." to player
+                send "{@prefix} &6%player% &cha annullato la richiesta di teletrasporto che ti aveva inviato." to {_target}
+                stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tpignore <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpignore <&egiocatore&6>&c.
+    description: Ignora la richiesta di teletrasporto di un giocatore.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {-et.tp_requests_list::%player%::*} and {-et.tphere_requests_list::%player%::*}
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                if {-et.tp_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tp_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tp_requests_count::%player%}
+                else if {-et.tphere_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tphere_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tphere_requests_count::%player%}
+                else:
+                    send "{@prefix} &6%{_target}% &cnon ti ha inviato richieste di teletrasporto di recente."
+                    stop
+                send "{@prefix} &cHai ignorato la richiesta di teletrasporto di &6%{_target}%&c."
+                #send "{@prefix} &6Non preoccuparti! Non informerò &c%{_target}% &6della tua scelta."
+                stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tpblock <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpblock <&egiocatore&6>&c.
+    description: Impedisci a un giocatore di inviarti richieste di teletrasporto.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not player:
+            if {et.tp_requests_blacklist::%player%::*} does not contain {_target}:
+                add {_target} to {et.tp_requests_blacklist::%player%::*}
+                if {-et.tp_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tp_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tp_requests_count::%player%}
+                else if {-et.tphere_requests_list::%player%::*} contains {_target}:
+                    remove {_target} from {-et.tphere_requests_list::%player%::*}
+                    subtract 1 from {-et.tp_requests_totalcount::%player%}
+                    subtract 1 from {-et.tphere_requests_count::%player%}
+                send "{@prefix} &cDa adesso &6%{_target}% &cnon potrà più inviarti richieste di teletrasporto."
+                stop
+            else:
+                send "{@prefix} &cHai già bloccato le richieste di teletrasporto di &6%{_target}%&c!"
+                stop
+        else:
+            if {@genre_p} is "%{-server.genre.male}%":
+                send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                stop
+            else:
+                send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                stop
+
+command /tpunblock <target: offline player>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/tpunblock <&egiocatore&6>&c.
+    description: Permetti nuovamente a un giocatore di inviarti richieste di teletrasporto.
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {et.tp_requests_blacklist::%player%::*}
+    trigger:
+        if sender is player:
+            if {_target} is not player:
+                if {et.tp_requests_blacklist::%player%::*} contains {_target}:
+                    remove {_target} from {et.tp_requests_blacklist::%player%::*}
+                    send "{@prefix} &6Da adesso &c%{_target}% &6potrà inviarti richieste di teletrasporto."
+                    stop
+                else:
+                    send "{@prefix} &cNon hai bloccato le richieste di teletrasporto di &6%{_target}%&c!"
+                    stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                    stop
+            
+command /tptoggle [<target: offline player>]:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/tptoggle&c.
+    description: Attiva o disattiva la ricezione di richieste di teletrasporto da parte dei giocatori.
+    executable by: player and console
+    suggestions:
+        if sender has permission "et.admin.tptoggle":
+            set the suggestions for the offline player argument to all players
+    trigger:
+        if sender is player:
+            if {_target} is not set:
+                if {@can_receive_others_tp_requests} is not true:
+                    set {@can_receive_others_tp_requests} to true
+                    set {@can_receive_others_tp_requests_marker} to "{@yes}"
+                    send "{@prefix} &6Da adesso gli altri giocatori potranno inviarti richieste di teletrasporto."
+                    stop
+                else:
+                    delete {@can_receive_others_tp_requests}
+                    set {@can_receive_others_tp_requests_marker} to "{@no}"
+                    send "{@prefix} &cDa adesso gli altri giocatori non potranno più inviarti richieste di teletrasporto."
+                    stop
+            else:
+                if player has permission "et.admin.tptoggle":
+                    if {@can_receive_others_tp_requests_arg} is not true:
+                        set {@can_receive_others_tp_requests_arg} to true
+                        set {@can_receive_others_tp_requests_marker_arg} to "{@yes}"
+                        send "{@prefix} &6Hai attivato la ricezione di richieste di teletrasporto per &c%{_target}%&6." to player
+                        send "{@prefix} &6Da adesso gli altri giocatori potranno inviarti richieste di teletrasporto." to {_target}
+                        stop
+                    else:
+                        delete {@can_receive_others_tp_requests_arg}
+                        set {@can_receive_others_tp_requests_marker_arg} to "{@no}"
+                        send "{@prefix} &cHai disattivato la ricezione di richieste di teletrasporto per &6%{_target}%&c." to player
+                        send "{@prefix} &cDa adesso gli altri giocatori non potranno più inviarti richieste di teletrasporto." to {_target}
+                        stop
+                else:
+                    execute player command "/tptoggle"
+                    stop
+        else:
+            if {_target} is not set:
+                send "{@prefix} &cSpecifica il nome di un giocatore!"
+                stop
+            else:
+                if {@can_receive_others_tp_requests_arg} is not true:
+                    set {@can_receive_others_tp_requests_arg} to true
+                    set {@can_receive_others_tp_requests_marker_arg} to "{@yes}"
+                    send "{@prefix} &6Hai attivato la ricezione di richieste di teletrasporto per &c%{_target}%&6." to console
+                    send "{@prefix} &6Da adesso gli altri giocatori potranno inviarti richieste di teletrasporto." to {_target}
+                    stop
+                else:
+                    delete {@can_receive_others_tp_requests_arg}
+                    set {@can_receive_others_tp_requests_marker_arg} to "{@no}"
+                    send "{@prefix} &cHai disattivato la ricezione di richieste di teletrasporto per &6%{_target}%&c." to console
+                    send "{@prefix} &cDa adesso gli altri giocatori non potranno più inviarti richieste di teletrasporto." to {_target}
+                    stop
+
+command /tpinfo [<target: offline player>]:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/tpinfo&c.
+    description: Visualizza le tue informazioni di teletrasporto.
+    executable by: player and console
+    suggestions:
+        if sender has permission "et.admin.tpinfo":
+            set the suggestions for the offline player argument to {players::*}
+        else:
+            set the suggestions for the offline player argument to ""
+    trigger: 
+        if sender is player:
+            if {_target} is not set:
+                send "&6----------- &c&lINFO TP &6-----------"
+                send " &fGiocatore: &b%player%"
+                send " &fRichieste di teletrasporto: &e%{-et.tp_requests_totalcount::%player%}%"
+                send ""
+                if {-et.tp_requests_count::%player%} != 0:
+                    send " &fRichieste attive (&c/tpa&f): &a%{-et.tp_requests_count::%player%}% &f- &3%{-et.tp_requests_list::%player%::*}%"
+                else:
+                    send " &fRichieste attive (&c/tpa&f): &a-"
+                if {-et.tphere_requests_count::%player%} != 0:
+                    send " &fRichieste attive (&c/tpahere&f): &a%{-et.tphere_requests_count::%player%}% &f- &3%{-et.tphere_requests_list::%player%::*}%"
+                else:
+                    send " &fRichieste attive (&c/tpahere&f): &a-"
+                if {et.last_loc.%player%} is set:
+                    send " &fUltima posizione: &b%{et.last_loc.%player%}%"
+                send "&6-------------------------------"
+                stop
+            else:
+                if player has permission "et.admin.tpinfo":
+                    send "&6----------- &c&lINFO TP &6-----------"
+                    send " &fGiocatore: &b%{_target}%"
+                    send " &fRichieste di teletrasporto: &e%{-et.tp_requests_totalcount::%{_target}%}%"
+                    send ""
+                    if {-et.tp_requests_count::%{_target}%} != 0:
+                        send " &fRichieste attive (&c/tpa&f): &a%{-et.tp_requests_count::%{_target}%}% &f- &3%{-et.tp_requests_list::%{_target}%::*}%"
+                    else:
+                        send " &fRichieste attive (&c/tpa&f): &a-"
+                    if {-et.tphere_requests_count::%{_target}%} != 0:
+                        send " &fRichieste attive (&c/tpahere&f): &a%{-et.tphere_requests_count::%{_target}%}% &f- &3%{-et.tphere_requests_list::%{_target}%::*}%"
+                    else:
+                        send " &fRichieste attive (&c/tpahere&f): &a-"
+                    if {et.last_loc.%{_target}%} is set:
+                        send formatted " &fUltima posizione: <hover:show_text:'Clicca qui per teletrasportarti'><click:run_command:'/tpinfotp %{_target}%'>&b%{et.last_loc.%{_target}%}%</click></hover><reset>"
+                    send "&6-------------------------------"
+                    stop
+                else:
+                    execute player command "/tpinfo"
+                    stop
+        else:
+            if {_target} is not set:
+                send "{@prefix} &cSpecifica il nome di un giocatore!"
+                stop
+            else:
+                send "&6----------- &c&lINFO TP &6-----------"
+                send " &fGiocatore: &b%{_target}%"
+                send " &fRichieste di teletrasporto: &e%{-et.tp_requests_totalcount::%{_target}%}%"
+                send ""
+                if {-et.tp_requests_count::%{_target}%} != 0:
+                    send " &fRichieste attive (&c/tpa&f): &a%{-et.tp_requests_count::%{_target}%}% &f- &3%{-et.tp_requests_list::%{_target}%::*}%"
+                else:
+                    send " &fRichieste attive (&c/tpa&f): &a-"
+                if {-et.tphere_requests_count::%{_target}%} != 0:
+                    send " &fRichieste attive (&c/tpahere&f): &a%{-et.tphere_requests_count::%{_target}%}% &f- &3%{-et.tphere_requests_list::%{_target}%::*}%"
+                else:
+                    send " &fRichieste attive (&c/tpahere&f): &a-"
+                if {et.last_loc.%{_target}%} is set:
+                    send " &fUltima posizione: &b%{et.last_loc.%{_target}%}%"
+                send "&6-------------------------------"
+                stop
+
+command /tpinfotp <target: offline player>:
+    description: Teletrasportati all'ultima posizione di un giocatore (usato dal click in /tpinfo).
+    permission: et.admin.tpinfo
+    executable by: player
+    trigger:
+        if {et.last_loc.%{_target}%} is not set:
+            send "{@prefix} &cNon ho trovato l'ultima posizione di &6%{_target}%&c!"
+            stop
+        etTeleport(player, {et.last_loc.%{_target}%})
+        if {@genre_p} is "%{-server.genre.male}%":
+            send "{@prefix} &6Ti ho portato all'ultima posizione di &c%{_target}%&6."
+            stop
+        else:
+            send "{@prefix} &6Ti ho portata all'ultima posizione di &c%{_target}%&6."
+            stop
+
+command /tphere <target: offline player>:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/tphere <&egiocatore&6>&c.
+    description: Teletrasporta un giocatore presso la tua posizione.
+    permission: et.admin.tphere
+    executable by: player
+    suggestions:
+        set the suggestions for offline player argument to all players
+    trigger:
+        if {_target} is online:
+            if {_target} is not player:
+                etTeleport({_target}, player's location)
+                send "{@prefix} &6Hai portato &c%{_target}% &6da te." to player
+                if {@genre_arg} is "%{-server.genre.male}%":
+                    if {@genre_p} is "%{-server.genre.male}%":
+                        send "{@prefix} &c%player% &6ti ha portato da lui." to {_target}
+                        stop
+                    else:
+                        send "{@prefix} &c%player% &6ti ha portato da lei." to {_target}
+                        stop
+                else:
+                    if {@genre_p} is "%{-server.genre.male}%":
+                        send "{@prefix} &c%player% &6ti ha portata da lui." to {_target}
+                        stop
+                    else:
+                        send "{@prefix} &c%player% &6ti ha portata da lei." to {_target}
+                        stop
+            else:
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &cNon puoi teletrasportarti da te stesso!"
+                    stop
+                else:
+                    send "{@prefix} &cNon puoi teletrasportarti da te stessa!"
+                    stop
+        else:
+            send "{@prefix} &6%{_target}% &cè offline."
+            stop
+
+command /tprandom:
+    description: Teletrasportati in un punto casuale in superficie.
+    aliases: /tpr
+    executable by: player
+    trigger:
+        if {-et.tpr_searching::%player%} is set:
+            send "{@prefix} &cSto già cercando un posto per te, attendi un attimo!"
+            stop
+        set {_w} to player's world
+        if {_w} is world "{@tpr_world}":
+            set {_dim} to "overworld"
+            set {_radius} to {@tpr_radius}
+        else if {_w} is world "{@tpr_world_nether}":
+            set {_dim} to "nether"
+            set {_radius} to {@tpr_radius_nether}
+#        else if {_w} is world "{@tpr_world_end}":
+#            set {_dim} to "end"
+#            set {_radius} to {@tpr_radius_end}
+        else:
+            send "{@prefix} &cNon puoi usare questo comando in questo mondo!"
+            stop
+        if player does not have permission "et.admin.tprandom.bypass.cooldown":
+            if {-et.tpr_cooldown::%player%} is set:
+                set {_left} to ceil({@tpr_cooldown} - (difference between {-et.tpr_cooldown::%player%} and now) / 1 second)
+                if {_left} > 0:
+                    set {_min} to floor({_left} / 60)
+                    set {_sec} to {_left} - ({_min} * 60)
+                    if {_min} is 1:
+                        set {_txt_min} to "1 minuto"
+                    else:
+                        set {_txt_min} to "%{_min}% minuti"
+                    if {_sec} is 1:
+                        set {_txt_sec} to "1 secondo"
+                    else:
+                        set {_txt_sec} to "%{_sec}% secondi"
+                    if {_min} is 0:
+                        set {_time} to {_txt_sec}
+                    else if {_sec} is 0:
+                        set {_time} to {_txt_min}
+                    else:
+                        set {_time} to "%{_txt_min}% e %{_txt_sec}%"
+                    send "{@prefix} &cDevi attendere ancora &6%{_time}% &cprima di usare di nuovo &6/tpr&c."
+                    stop
+        set {-et.tpr_searching::%player%} to true
+        send "{@prefix} &7Sto cercando un posto sicuro..."
+        loop {@tpr_attempts} times:
+            if player is not online:
+                delete {-et.tpr_searching::%player%}
+                stop
+            set {_x} to floor((random number between 0 and 1) * (2 * {_radius} + 1)) - {_radius}
+            set {_z} to floor((random number between 0 and 1) * (2 * {_radius} + 1)) - {_radius}
+            set {_ok} to false
+            if {_dim} is "overworld":
+                set {_ground} to highest solid block at location({_x}, 100, {_z}, {_w})
+                set {_up1} to block above {_ground}
+                set {_up2} to block above {_up1}
+                if {_ground} is {@tpr_ground}:
+                    if {_up1} is air:
+                        if {_up2} is air:
+                            if sky light level of {_up1} is 15:
+                                set {_ok} to true
+#            else if {_dim} is "end":
+#                set {_ground} to highest solid block at location({_x}, 100, {_z}, {_w})
+#                set {_up1} to block above {_ground}
+#                set {_up2} to block above {_up1}
+#                if {_ground} is {@tpr_ground_end}:
+#                    if {_up1} is air:
+#                        if {_up2} is air:
+#                            set {_ok} to true
+            else if {_dim} is "nether":
+                set {_y} to random integer between {@tpr_nether_min} and {@tpr_nether_max}
+                while {_y} >= {@tpr_nether_min}:
+                    set {_ground} to block at location({_x}, {_y}, {_z}, {_w})
+                    if {_ground} is {@tpr_ground_nether}:
+                        set {_up1} to block above {_ground}
+                        set {_up2} to block above {_up1}
+                        if {_up1} is air:
+                            if {_up2} is air:
+                                set {_lava} to false
+                                loop blocks within location({_x} - 1, {_y}, {_z} - 1, {_w}) and location({_x} + 1, {_y} + 2, {_z} + 1, {_w}):
+                                    if loop-block is lava:
+                                        set {_lava} to true
+                                if {_lava} is false:
+                                    set {_ok} to true
+                                    set {_y} to 0
+                    subtract 1 from {_y}
+            if {_ok} is true:
+                set {_dest} to location({_x} + 0.5, (y-coord of {_ground}) + 1, {_z} + 0.5, {_w})
+                etTeleport(player, {_dest})
+                set {-et.tpr_cooldown::%player%} to now
+                delete {-et.tpr_searching::%player%}
+                if {_w} is world "{@tpr_world}":
+                    if {@genre_p} is "%{-server.genre.male}%":
+                        send "{@prefix} &7Ti ho portato in un posto casuale &8(&a%{_x}%&8, &a%{_z}%&8)&7."
+                    else:
+                        send "{@prefix} &7Ti ho portata in un posto casuale &8(&a%{_x}%&8, &a%{_z}%&8)&7."
+                else if {_w} is world "{@tpr_world_nether}":
+                    if {@genre_p} is "%{-server.genre.male}%":
+                        send "{@prefix} &7Ti ho portato in un posto casuale &8(&6%{_x}%&8, &6%{_z}%&8)&7."
+                    else:
+                        send "{@prefix} &7Ti ho portata in un posto casuale &8(&6%{_x}%&8, &6%{_z}%&8)&7."
+                stop
+            wait 1 tick
+        delete {-et.tpr_searching::%player%}
+        send "{@prefix} &cNon ho trovato un posto sicuro, riprova!"
+        stop
+
+command /top [<target: offline player>]:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/top [<&egiocatore&6>]&c.
+    description: Torna in superficie.
+    permission: et.admin.top
+    executable by: player and console
+    suggestions:
+        if sender has permission "et.admin.top":
+            set the suggestions for the offline player argument to all players
+        else:
+            set the suggestions for the offline player argument to ""
+    trigger:
+        if sender is player:
+            if {_target} is not set:
+                if player is not flying:
+                    set {_loc} to location at player
+                    set y-coord of {_loc} to 320
+                    loop 320 times:
+                        if y-coord of {_loc} is y-coord of location at player:
+                            send "{@prefix} &cSei già in cima!"
+                            stop
+                        if block at {_loc} is solid:
+                            teleport player to block above {_loc}
+                            if {@genre_p} is "%{-server.genre.male}%":
+                                send "{@prefix} &aTi ho portato in cima."
+                                stop
+                            else:
+                                send "{@prefix} &aTi ho portata in cima."
+                                stop
+                        else:
+                            remove 1 from y-coord of {_loc}
+                else:
+                    send "{@prefix} &cQuesta funzione è disabilitata se sei in volo."
+                    stop
+            else:
+                if {_target} is online:
+                    if {_target} is not player:
+                        if {_target} is not flying:
+                            set {_loc} to location at {_target}
+                            set y-coord of {_loc} to 320
+                            loop 320 times:
+                                if y-coord of {_loc} is y-coord of location at {_target}:
+                                    send "{@prefix} &c%{_target}% è già in cima!"
+                                    stop
+                                if block at {_loc} is solid:
+                                    teleport {_target} to block above {_loc}
+                                    send "{@prefix} &aHo portato &e%{_target}% &ain cima."
+                                    if {@genre_arg} is "%{-server.genre.male}%":
+                                        send "{@prefix} &e%player% &ati ha portato in cima." to {_target}
+                                        stop
+                                    else:
+                                        send "{@prefix} &e%player% &ati ha portata in cima." to {_target}
+                                        stop
+                                else:
+                                    remove 1 from y-coord of {_loc}
+                        else:
+                            send "{@prefix} &cQuesta funzione è disabilitata se %{_target}% è in volo."
+                            stop
+                    else:
+                        if {@genre_p} is "%{-server.genre.male}%":
+                            send "{@prefix} &cNon puoi utilizzare questo comando su te stesso!"
+                            stop
+                        else:
+                            send "{@prefix} &cNon puoi utilizzare questo comando su te stessa!"
+                            stop
+                else:
+                    send "{@prefix} &6%{_target}% &cè offline."
+                    stop
+        else:
+            if {_target} is online:
+                if {_target} is not flying:
+                    set {_loc} to location at {_target}
+                    set y-coord of {_loc} to 320
+                    loop 320 times:
+                        if y-coord of {_loc} is y-coord of location at {_target}:
+                            send "{@prefix} &6%{_target}% &cè già in cima!"
+                            stop
+                        if block at {_loc} is solid:
+                            teleport {_target} to block above {_loc}
+                            if {@genre_arg} is "%{-server.genre.male}%":
+                                send "{@prefix} &aLa &econsole &ati ha portato in cima." to {_target}
+                                stop
+                            else:
+                                send "{@prefix} &aLa &econsole &ati ha portata in cima." to {_target}
+                                stop
+                        else:
+                            remove 1 from y-coord of {_loc}
+                else:
+                    send "{@prefix} &cQuesta funzione è disabilitata se &6%{_target}% &cè in volo."
+                    stop
+            else:
+                send "{@prefix} &6%{_target}% &cè offline."
+                stop
+
+command /tpoffline <target: offline player>:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/tpoffline <&egiocatore&6>&c.
+    description: Teletrasportati all'ultima posizione conosciuta di un giocatore.
+    permission: et.admin.tpoffline
+    aliases: /tpoffl
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not player:
+            if {et.last_online_loc.%{_target}%} is set:
+                etTeleport(player, {et.last_online_loc.%{_target}%})
+                if {@genre_p} is "%{-server.genre.male}%":
+                    send "{@prefix} &6Ti ho portato all'ultima posizione conosciuta di &c%{_target}%&6."
+                    stop
+                else:
+                    send "{@prefix} &6Ti ho portata all'ultima posizione conosciuta di &c%{_target}%&6."
+                    stop
+            else:
+                send "{@prefix} &cNon ho trovato l'ultima posizione conosciuta di &6%{_target}%&c!"
+                send "{@prefix} &cProbabilmente non esiste ancora o è online?"
+                stop
+        else:
+            if {@genre_p} is "%{-server.genre.male}%":
+                send "{@prefix} &cNon puoi usare questo comando su te stesso!"
+                stop
+            else:
+                send "{@prefix} &cNon puoi usare questo comando su te stessa!"
+                stop
+
+command /tpofflinehere <target: offline player>:
+    usage: {@prefix} &cComando incompleto o parametro sconosciuto.%nl%{@prefix} &cUtilizza &6/tpofflinehere <&egiocatore&6>&c.
+    description: Sposta l'ultima posizione conosciuta di un giocatore alla tua posizione.
+    permission: et.admin.tpofflinehere
+    aliases: /tpofflhere
+    executable by: player
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not online:
+            set {et.last_online_loc.%{_target}%} to player's location
+            send "{@prefix} &6Hai spostato l'ultima posizione conosciuta di &c%{_target}% &6alla tua posizione."
+            stop
+        else:
+            send "{@prefix} &cNon puoi eseguire questo comando se &6%{_target}% &cè online!"
+            stop
+
+command /tphelp:
+    description: Mostra la lista di tutti i comandi disponibili per il teletrasporto.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            send ""
+            send "&cLISTA COMANDI PER IL TELETRASPORTO"
+            send "&f- &6/back &f- &7Torna alla tua posizione precedente, se ne hai una."
+            send "&f- &6/tpa <&egiocatore&6>&7: &oChiedi a un giocatore di andare alla sua posizione."
+            send "&f- &6/tpahere <&egiocatore&6>&7: &oChiedi a un giocatore di venire alla tua posizione."
+            send "&f- &6/tpaccept <&egiocatore&6>&7: &oAccetta una richiesta di teletrasporto di un giocatore."
+            send "&f- &6/tpdeny <&egiocatore&6>&7: &oRifiuta una richiesta di teletrasporto di un giocatore."
+            send "&f- &6/tpcancel <&egiocatore&6>&7: &oAnnulla una tua richiesta di teletrasporto."
+            send "&f- &6/tpignore <&egiocatore&6>&7: &oIgnora una richiesta di teletrasporto di un giocatore."
+            send "&f- &6/tpblock <&egiocatore&6>&7: &oImpedisci a un giocatore di inviarti richieste di teletrasporto."
+            send "&f- &6/tpunblock <&egiocatore&6>&7: &oPermetti a un giocatore precedentemente bloccato di inviarti richieste di teletrasporto."
+            send "&f- &6/tprandom &7(&6/tpr&7): &oTeletrasportati in una posizione casuale nel mondo."
+            if player has permission "et.admin.tphelp":
+                send "&f- &6/tptoggle [&egiocatore&6]&7: &oAttiva o disattiva la ricezione di richieste di teletrasporto (tue o di un giocatore)."
+                send "&f- &6/tpinfo [&egiocatore&6]&7: &oVisualizza le informazioni di teletrasporto (tue o di un giocatore)."
+                send "&f- &6/tphere <&egiocatore&6>&7: &oTeletrasporta istantaneamente un giocatore alla tua posizione."
+                send "&f- &6/top [&egiocatore&6]&7: &oTeletrasporta te o un giocatore al blocco in cima alla sua posizione."
+                send "&f- &6/tpoffline <&egiocatore&6>&7: &oTeletrasportati all'ultima posizione conosciuta di un giocatore (solo offline)."
+                send "&f- &6/tpofflinehere <&egiocatore&6>&7: &oSposta l'ultima posizione conosciuta di un giocatore alla tua posizione."
+            else:
+                send "&f- &6/tptoggle&7: &oAttiva o disattiva la ricezione di richieste di teletrasporto."
+                send "&f- &6/tpinfo&7: &oVisualizza le tue informazioni di teletrasporto."
+            send "&f- &6/tphelp&7: &oMostra questa lista."
+            send ""
+            stop
+        else:
+            send ""
+            send "&cLISTA COMANDI PER IL TELETRASPORTO"
+            send "&f- &6/top <&egiocatore&6>&7: &oTeletrasporta un giocatore al blocco in cima alla sua posizione."
+            send "&f- &6/tpinfo <&egiocatore&6>&7: &oVisualizza le informazioni di teletrasporto di un giocatore."
+            send "&f- &6/tphelp&7: &oMostra questa lista."
+            send ""
+            stop
+
+# ZONA DEBUG
+command /resetalltpsettings [<target: offline player>]:
+    permission: debug.commands
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not set:
+            delete {-et.tp_requests_list::%player%::*}
+            delete {-et.tphere_requests_list::%player%::*}
+            set {@can_receive_others_tp_requests} to true
+            set {@can_receive_others_tp_requests_marker} to "{@yes}"
+            set {-et.tp_requests_totalcount::%player%} to 0
+            set {-et.tp_requests_count::%player%} to 0
+            set {-et.tphere_requests_count::%player%} to 0
+            send "&e&l[Debug] &fTutti i tuoi dati di teletrasporto sono stati eliminati."
+            stop
+        else:
+            delete {-et.tp_requests_list::%{_target}%::*}
+            delete {-et.tphere_requests_list::%{_target}%::*}
+            set {@can_receive_others_tp_requests_arg} to true
+            set {@can_receive_others_tp_requests_marker_arg} to "{@yes}"
+            set {-et.tp_requests_totalcount::%{_target}%} to 0
+            set {-et.tp_requests_count::%{_target}%} to 0
+            set {-et.tphere_requests_count::%{_target}%} to 0
+            send "&e&l[Debug] &fTutti i dati di teletrasporto di %{_target}% sono stati eliminati."
+            stop

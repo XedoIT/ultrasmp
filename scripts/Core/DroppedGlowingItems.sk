@@ -1,0 +1,78 @@
+import:
+    org.bukkit.Bukkit
+    net.kyori.adventure.text.format.NamedTextColor
+    org.bukkit.event.entity.EntityRemoveEvent
+
+# Restituisce il team glow_<colore> di una scoreboard, creandolo e colorandolo se serve
+function glowTeam(sb: object, key: text) :: object:
+    set {_t} to {_sb}.getTeam("glow_%{_key}%")
+    if {_t} is not set:
+        set {_t} to {_sb}.registerNewTeam("glow_%{_key}%")
+    if {_key} is "white":
+        {_t}.color(NamedTextColor.WHITE)
+    else if {_key} is "yellow":
+        {_t}.color(NamedTextColor.YELLOW)
+    else if {_key} is "aqua":
+        {_t}.color(NamedTextColor.AQUA)
+    else if {_key} is "purple":
+        {_t}.color(NamedTextColor.DARK_PURPLE)
+    else:
+        {_t}.color(NamedTextColor.GOLD)
+    return {_t}
+
+# Scoreboard principale + quella di ogni giocatore online
+function glowBoards() :: objects:
+    set {_boards::*} to Bukkit.getScoreboardManager().getMainScoreboard()
+    loop all players:
+        add loop-player.getScoreboard() to {_boards::*}
+    return {_boards::*}
+
+# Un giocatore che entra riceve nella sua scoreboard gli oggetti già a terra
+every 10 ticks:
+    set {_main} to Bukkit.getScoreboardManager().getMainScoreboard()
+    loop all players:
+        set {_board} to loop-player.getScoreboard()
+        if {_board} is not {_main}:
+            loop "white", "yellow", "aqua", "purple" and "gold":
+                set {_key} to loop-value-2
+                set {_src} to {_main}.getTeam("glow_%{_key}%")
+                if {_src} is set:
+                    set {_dst} to {_board}.getTeam("glow_%{_key}%")
+                    if {_dst} is not set:
+                        set {_dst} to glowTeam({_board}, {_key})
+                    if {_dst}.getSize() is not {_src}.getSize():
+                        {_dst}.addEntries({_src}.getEntries())
+
+on item spawn:
+    set {_item} to event-entity
+    wait 1 tick
+    if {_item} is valid:
+        if {_item}.getThrower() is set:
+            set {_stack} to {_item}.getItemStack()
+            set {_name} to {_stack}.getType().name()
+            set {_key} to "white"
+            if {_name} matches "(ENCHANTED_GOLDEN_APPLE|NETHER_STAR|HEAVY_CORE|DRAGON_EGG|MACE|ELYTRA|HEART_OF_THE_SEA|EXPERIENCE_BOTTLE|PLAYER_HEAD|CONDUIT|TOTEM_OF_UNDYING)":
+                set {_key} to "gold"
+            else if {_name} matches "(NETHERITE_(SWORD|AXE|SPEAR|PICKAXE|SHOVEL|HOE|HELMET|CHESTPLATE|LEGGINGS|BOOTS)|NETHERITE_UPGRADE_SMITHING_TEMPLATE|ENCHANTED_BOOK|BEACON|END_CRYSTAL|DRAGON_BREATH|DRAGON_HEAD|WITHER_SKELETON_SKULL|TRIDENT)":
+                set {_key} to "purple"
+            else if {_name} matches "(DIAMOND_(SWORD|AXE|SPEAR|PICKAXE|SHOVEL|HOE|HELMET|CHESTPLATE|LEGGINGS|BOOTS)|OMINOUS_TRIAL_KEY)":
+                set {_key} to "aqua"
+            else if {_name} matches "(GOLDEN_APPLE|MUSIC_DISC_.*|ZOMBIE_HEAD|CREEPER_HEAD|PIGLIN_HEAD|SKELETON_SKULL|TRIAL_KEY)":
+                set {_key} to "yellow"
+            {_item}.setGlowing(true)
+            set {_id} to {_item}.getUniqueId().toString()
+            loop glowBoards():
+                set {_team} to glowTeam(loop-value, {_key})
+                {_team}.addEntry({_id})
+            #broadcast "&e&l[DEBUG] &7%{_name}% -> %{_key}%"
+
+# Pulizia: toglie l'oggetto dai team quando sparisce (raccolto, despawn, unito, distrutto)
+on EntityRemoveEvent:
+    set {_e} to event.getEntity()
+    if {_e} is a dropped item:
+        if event.getCause().name() is not "UNLOAD":
+            set {_id} to {_e}.getUniqueId().toString()
+            loop glowBoards():
+                set {_t} to loop-value.getEntryTeam({_id})
+                if {_t} is set:
+                    {_t}.removeEntry({_id})

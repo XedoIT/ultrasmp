@@ -1,4 +1,0 @@
-command /achievements:
-    aliases: /obiettivi
-    trigger:
-        openMainAchievementsGui(player)

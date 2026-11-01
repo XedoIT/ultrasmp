@@ -1,0 +1,92 @@
+options:
+    animation_speed: 0.001
+
+    wait: 20
+
+    marker_y_offset: 1.975
+
+    random_x_mob: -0.7 and 0.9
+    random_y_mob: -0.7 and -0.8
+    random_z_mob: -0.7 and 0.3
+    random_x_player: -0.7 and 0.9
+    random_y_player: -0.3 and -0.9
+    random_z_player: -0.7 and 0.3
+
+    lowest_damage: 1.99
+    lowest_damage_color: &7
+    low_damage: 2 and 4.99
+    low_damage_color: &a
+    medium_damage: 5 and 6.99
+    medium_damage_color: &e
+    high_damage: 7 and 9.99
+    high_damage_color: &c
+    critical_damage: 10
+    critical_damage_color: &4
+
+    fight: &a● &a&lPvP abilitato &a●
+
+    god: {playerinfo.god.%victim%}
+
+function DamageIndicatorColor(i: number) :: text:
+    if {_i} <= {@lowest_damage}:
+        return "{@lowest_damage_color}"
+    else if {_i} is between {@low_damage}:
+        return "{@low_damage_color}"
+    else if {_i} is between {@medium_damage}:
+        return "{@medium_damage_color}"
+    else if {_i} is between {@high_damage}:
+        return "{@high_damage_color}"
+    else if {_i} >= {@critical_damage}:
+        return "{@critical_damage_color}"
+
+function DamageIndicatorAnimate(l: location, name: text, t: text):
+    spawn (armor stand) at {_l} ~ vector(0,{@marker_y_offset},0):
+        set int tag "Invisible" of nbt of entity to 100
+        set int tag "NoGravity" of nbt of entity to 100
+        set byte tag "Marker" of nbt of entity to 1
+    set {_a} to (last spawned armor stand)
+    set (display name of {_a}) to {_name}
+    loop all players:
+        if {settings.personalization.damage_indicator_%{_t}%::%loop-player%} is not true:
+            hide {_a} from loop-player
+    wait 1 tick
+    loop {@wait} times:
+        teleport {_a} to (location of {_a} ~ vector(0,{@animation_speed},0))
+        wait 1 tick
+    delete ({_a}'s uuid parsed as entity)
+
+function DamageIndicatorPlayers(e: location, i: number, p: player):
+    set {_c} to DamageIndicatorColor({_i})
+    if {_c} is set:
+        set {_x} to (random number between {@random_x_player})
+        set {_y} to (random number between {@random_y_player})
+        set {_z} to (random number between {@random_z_player})
+        DamageIndicatorAnimate({_e} ~ vector({_x},{_y},{_z}), "%{_c}%%regex({_i})%", "players")
+
+function DamageIndicatorMobs(e: location, i: number, p: player):
+    set {_c} to DamageIndicatorColor({_i})
+    if {_c} is set:
+        set {_x} to (random number between {@random_x_mob})
+        set {_y} to (random number between {@random_y_mob})
+        set {_z} to (random number between {@random_z_mob})
+        DamageIndicatorAnimate({_e} ~ vector({_x},{_y},{_z}), "%{_c}%🗡 +%regex({_i})%", "mobs")
+
+on damage:
+    if victim is not a player, a fireball, a boat, an armor stand or an item frame:
+        if attacker is a player:
+            if {difficulty.info.hardcore_death::%attacker%} is not true:
+                DamageIndicatorMobs((location of victim),damage,attacker)
+    else if victim is a player:
+        if {pvp} is "{@fight}":
+            if {@god} is not true:
+                if {difficulty.info.hardcore_death::%attacker%} is not true:
+                    DamageIndicatorPlayers((location of victim),damage,attacker)
+                    if damage cause is projectile:
+                        if gamemode of victim is survival or adventure:
+                            if victim is not attacker:
+                                if attacker's tool is a bow or a crossbow:
+                                    wait 1 tick
+                                    send "&8[&6🏹&8] &c%victim% &aha &c%placeholder "auraskills_hp" from victim% ❤" to attacker
+                                else if attacker's tool is trident:
+                                    wait 1 tick
+                                    send "&8[&b🔱&8] &c%victim% &aha &c%placeholder "auraskills_hp" from victim% ❤" to attacker

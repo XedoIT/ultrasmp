@@ -1,0 +1,105 @@
+options:
+    prefix_enabled: &a[&2&lGod&a]
+    prefix_disabled: &6[&c&lGod&6]
+    prefix_error: &7[&c&lGod&7]
+    warn: &6[&c&l!&6]
+
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+    god: {playerinfo.god::%player%}
+    god_lp: {playerinfo.god::%loop-player%}
+    god_p: {playerinfo.god::%{_p}%}
+    god_v: {playerinfo.god::%victim%}
+    god_ab: {settings.actionbar.godmode.%loop-player%}
+
+on join:
+    wait 5 ticks
+    CheckGodOnLogin(player)
+
+on respawn:
+    wait 1 tick
+    if {@god} is true:
+        make player invulnerable
+
+on food level change:
+    if {@god} is true:
+        cancel event
+
+on damage:
+    if victim is a player:
+        if {@god_v} is true:
+            cancel event
+
+command /god [<target: offline player>]:
+    description: "I pericoli per te non sono più un problema!"
+    permission: admin.god.toggle
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "{@prefix_error} &cSolo i giocatori possono diventare immortali."
+                stop
+            ToggleGodSelf(player)
+            stop
+        if {_target} is not online:
+            send "{@prefix_error} &6%{_target}% &cè offline."
+            if sender is a player:
+                {@error_sound} at player for player
+            stop
+        ToggleGodOthers(sender, {_target})
+
+function CheckGodOnLogin(p: player):
+    if {@god_p} is true:
+        if {_p}'s gamemode is survival or adventure:
+            if {_p} does not have permission "admin.god.keep" or "admin.god.*":
+                make {_p} vulnerable
+                delete {@god_p}
+                set {_m} to "{@warn} &7Prima di uscire dal server eri immortale. Adesso non lo sei più. {@warn}"
+            else:
+                make {_p} invulnerable
+                set {_m} to "{@prefix_enabled} &aSei ancora immortale!"
+            wait 2 seconds
+            send "" and {_m} and "" to {_p}
+
+function ToggleGodSelf(p: player):
+    if {@god_p} is true:
+        make {_p} vulnerable
+        delete {@god_p}
+        send "{@prefix_disabled} &cModalità Dio disattivata! &6I mob potranno ferirti." to {_p}
+    else:
+        make {_p} invulnerable
+        set {@god_p} to true
+        heal {_p}
+        feed {_p}
+        send "{@prefix_enabled} &aModalità Dio attivata! &bI mob ti ignoreranno." to {_p}
+
+function ToggleGodOthers(s: commandsender, p: player):
+    if {_s} doesn't have permission "admin.god.toggle.other" or "admin.god.*":
+        send "{@prefix_error} &cNon hai il permesso per farlo!" to {_s}
+        stop
+    set {_who_off} to "&cLa &6console"
+    set {_who_on} to "&aLa &econsole"
+    if {_s} is a player:
+        set {_who_off} to "&6%{_s}%"
+        set {_who_on} to "&e%{_s}%"
+    if {@god_p} is true:
+        make {_p} vulnerable
+        delete {@god_p}
+        send "{@prefix_disabled} &cHai tolto l'immortalità a &6%{_p}%&c." to {_s}
+        send "{@prefix_disabled} %{_who_off}% &cti ha tolto l'immortalità! &6I mob potranno ferirti." to {_p}
+    else:
+        make {_p} invulnerable
+        set {@god_p} to true
+        heal {_p}
+        feed {_p}
+        send "{@prefix_enabled} &aHai reso &e%{_p}% &aimmortale." to {_s}
+        send "{@prefix_enabled} %{_who_on}% &ati ha reso immortale! &bI mob ti ignoreranno." to {_p}
+
+every second:
+    loop all players:
+        if {@god_ab} is true:
+            if {@god_lp} is true:
+                if gamemode of loop-player is not creative or spectator:
+                    send action bar "&aFormidabile! &bNon subirai più danni!" to loop-player

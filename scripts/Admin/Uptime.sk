@@ -1,0 +1,48 @@
+function uptimeUnit(n: number, singular: text, plural: text) :: text:
+    if {_n} = 1:
+        return {_singular}
+    return {_plural}
+
+on skript load:
+    if {-uptime.time} is not set:
+        set {-uptime.days}, {-uptime.hours}, {-uptime.minutes} and {-uptime.seconds} to 0
+        set {-uptime.time} to now formatted as "dd/MM/yyyy, HH:mm:ss"
+        send "&9Il server è online: tempo di attività avviato." to console
+
+on skript stop:
+    set {_giorni} to uptimeUnit({-uptime.days}, "giorno", "giorni")
+    set {_ore} to uptimeUnit({-uptime.hours}, "ora", "ore")
+    set {_minuti} to uptimeUnit({-uptime.minutes}, "minuto", "minuti")
+    set {_secondi} to uptimeUnit({-uptime.seconds}, "secondo", "secondi")
+    log "[UPTIME] Il server è stato chiuso dopo %{-uptime.days}% %{_giorni}%, %{-uptime.hours}% %{_ore}%, %{-uptime.minutes}% %{_minuti}% e %{-uptime.seconds}% %{_secondi}% di attività." to "uptime.log"
+    send "&cÈ stato salvato un "".log"" con il tempo di attività del server per questa sessione." to console
+    send "&6Per consultarlo, vai a ""/plugins/Skript/logs/uptime.log""." to console
+
+command /uptime:
+    trigger:
+        set {_giorni} to uptimeUnit({-uptime.days}, "giorno", "giorni")
+        set {_ore} to uptimeUnit({-uptime.hours}, "ora", "ore")
+        set {_minuti} to uptimeUnit({-uptime.minutes}, "minuto", "minuti")
+        set {_secondi} to uptimeUnit({-uptime.seconds}, "secondo", "secondi")
+        send "&aIl server è online da &b%{-uptime.days}% %{_giorni}%&a, &b%{-uptime.hours}% %{_ore}%&a, &b%{-uptime.minutes}% %{_minuti}% &ae &b%{-uptime.seconds}% %{_secondi}% &a(&b%{-uptime.time}%&a)."
+
+every second:
+    add 1 to {-uptime.seconds}
+    if {-uptime.seconds} = 60:
+        # Incremento minuti
+        set {-uptime.seconds} to 0
+        add 1 to {-uptime.minutes}
+        if {-uptime.minutes} = 60:
+            # Incremento ore
+            set {-uptime.minutes} to 0
+            add 1 to {-uptime.hours}
+            if {-uptime.hours} = 24:
+                # Incremento giorni
+                set {-uptime.hours} to 0
+                add 1 to {-uptime.days}
+
+every 10 ticks:
+    set {_actionbar} to "&aTempo di attività server: &f%{-uptime.days}%:%{-uptime.hours}%:%{-uptime.minutes}%:%{-uptime.seconds}%"
+    loop all players:
+        if {actionbar.uptime.%loop-player%} is true:
+            send action bar {_actionbar} to loop-player

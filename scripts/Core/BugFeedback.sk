@@ -1,0 +1,174 @@
+options:
+    bug_prefix: &c[&6&lBUG&c]
+    feedback_prefix: &b[&a&lFEEDBACK&b]
+    
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+# BLOCCO: BUG - COMANDO PRINCIPALE, EVENTO E FUNZIONE
+command /bug <bug: text>:
+    usage: {@bug_prefix} &cComando incompleto.%nl%{@bug_prefix} &eQuale bug vuoi segnalare?
+    description: Segnala un bug.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            if {bug_cooldown.%player%} is not set:
+                log "[BUG] %player% ha segnalato un bug: ""%{_bug}%""" to "bug.log"
+                send ""
+                send "%{-server.prefix.main}% &a&lBug segnalato. &aSarà revisionato al più presto."
+                send "%{-server.prefix.main}% &bLe tue segnalazioni sono importanti per il server. Continua così!"
+                send ""
+                {@confirm_sound} at player for player
+                add 1 to {reported_bugs::%player%}
+                add 15 to {fama::%player%}
+                send "&6+15 Fama! (Bug segnalato)"
+                bugSent(player, {_bug})
+                set {bug_cooldown.%player%} to 30
+                stop
+            if {bug_cooldown.%player%} != 1:
+                send "%{-server.prefix.main}% &cHai segnalato un bug di recente! Puoi segnalarne un altro tra &6%{bug_cooldown.%player%}% secondi&c!"
+                {@error_sound} at player for player
+                stop
+            else:
+                send "%{-server.prefix.main}% &cHai segnalato un bug di recente! Puoi segnalarne un altro tra &6un secondo&c!"
+                {@error_sound} at player for player
+                stop
+        else:
+            log "[BUG] La console ha segnalato un bug: ""%{_bug}%""" to "bug.log"
+            send ""
+            send "%{-server.prefix.main}% &a&lBug segnalato correttamente!"
+            send ""
+            send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log"
+            stop
+
+every second:
+    loop all players:
+        if {bug_cooldown.%loop-player%} is set:
+            if {bug_cooldown.%loop-player%} <= 1:
+                delete {bug_cooldown.%loop-player%}
+            else:
+                subtract 1 from {bug_cooldown.%loop-player%}
+
+function bugSent(p: player, bug: text):
+    send "" to console
+    send "&7&m-------------------------&r {@bug_prefix} &7&m-------------------------" to console
+    send "&b&l|&c&l Nuova segnalazione:" to console
+    send "" to console
+    send "&b&l|&9&l >> &7Inviata da: &e%{_p}%" to console
+    send "&b&l|&9&l >> &7Segnalazione: &6%{_bug}%" to console
+    send "&7&m---------------------------------------------------------" to console
+    send "" to console
+    send "&ePuoi trovare i bug segnalati su &6/plugins/Skript/logs/bug.log" to console
+    send "" to console
+
+# BLOCCO: FEEDBACK - COMANDO PRINCIPALE, EVENTO E FUNZIONE
+command /feedback <feedback: text>:
+    usage: {@feedback_prefix} &cComando incompleto.%nl%{@feedback_prefix} &eDì la tua sul server.
+    description: Dai il contributo e fai sapere quanto tieni a questo server.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            if {feedback_cooldown.%player%} is not set:
+                log "[FEEDBACK] %player% ha scritto: ""%{_feedback}%""" to "feedback.log"
+                send ""
+                send "%{-server.prefix.main}% &a&lFeedback inviato. Grazie mille per il supporto!"
+                send "%{-server.prefix.main}% &bLa tua opinione e il tuo supporto sono importanti per il server. Continua così!"
+                send ""
+                {@confirm_sound} at player for player
+                add 1 to {feedback_sent::%player%}
+                add 25 to {fama::%player%}
+                send "&6+25 Fama! (Feedback inviato)"
+                feedbackSent(player, {_feedback})
+                set {feedback_cooldown.%player%} to 120
+                stop
+            if {feedback_cooldown.%player%} != 1:
+                send "%{-server.prefix.main}% &cHai inviato un feedback di recente! Puoi inviarne un altro tra &6%{feedback_cooldown.%player%}% secondi&c!"
+                {@error_sound} at player for player
+                stop
+            else:
+                send "%{-server.prefix.main}% &cHai inviato un feedback di recente! Puoi inviarne un altro tra &6un secondo&c!"
+                {@error_sound} at player for player
+                stop
+                
+        else:
+            log "[FEEDBACK] La console ha scritto: ""%{_feedback}%""" to "feedback.log"
+            send ""
+            send "%{-server.prefix.main}% &a&lFeedback inviato correttamente!"
+            send ""
+            send "&ePuoi trovare i le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
+            stop
+
+every second:
+    loop all players:
+        if {feedback_cooldown.%loop-player%} is set:
+            if {feedback_cooldown.%loop-player%} <= 1:
+                delete {feedback_cooldown.%loop-player%}
+            else:
+                subtract 1 from {feedback_cooldown.%loop-player%}
+
+function feedbackSent(p: player, feedback: text):
+    send "" to console
+    send "&7&m----------------------&r {@feedback_prefix} &7&m----------------------" to console
+    send "&b&l|&c&l Nuovo feedback:" to console
+    send "" to console
+    send "&b&l|&9&l >> &7Inviato da: &e%{_p}%" to console
+    send "&b&l|&9&l >> &7Feedback: &6%{_feedback}%" to console
+    send "&7&m--------------------------------------------------------" to console
+    send "" to console
+    send "&ePuoi trovare le opinioni dei giocatori su &6/plugins/Skript/logs/feedback.log" to console
+    send "" to console
+
+# PROMEMORIA DI INVIARE BUG E FEEDBACK
+on join:
+    set {-bugsfeedback_reminder.%player%} to now
+
+every 1 minute:
+    loop players:
+        if {-bugsfeedback_reminder.%loop-player%} is not set:
+            set {-bugsfeedback_reminder.%loop-player%} to now
+        else if difference between now and {-bugsfeedback_reminder.%loop-player%} is greater than or equal to 2 hours:
+            set {-bugsfeedback_reminder.%loop-player%} to now
+            BugFeedbackReminder(loop-player)
+
+on quit:
+    delete {-bugsfeedback_reminder.%player%}
+
+function BugFeedbackReminder(p: player):
+    send "" to {_p}
+    send "&4&lPROMEMORIA SMP" to {_p}
+    send " &aSapevi che puoi aiutare a gestire l'esperienza di gioco dell'%{-server.name}%?" to {_p}
+    send "" to {_p}
+    send " &fUtilizza <hover:show_text:'Trascrivilo in chat'><click:suggest_command:/bug >&c&n/bug</click></hover><reset> per segnalare un problema o <hover:show_text:'Trascrivilo in chat'><click:suggest_command:/feedback >&e&n/feedback</click></hover><reset> per consigliare una o più funzionalità, oppure esprimendo la tua opinione sul server." to {_p}
+    send "" to {_p}
+    send " &bGrazie di giocare nell'%{-server.name}%, il tuo feedback è importante!" to {_p}
+    send "" to {_p}
+    play sound "block.note_block.pling" with volume 1 and pitch 2 at {_p} for {_p}
+
+
+# DEBUG
+command /resetbug [<player: offline player>]:
+    permission: debug.commands
+    executable by: player and console
+    trigger:
+        if {_player} is not set:
+            set {reported_bugs::%player%} to 0
+            send "%{-server.prefix.main}% &aHai azzerato il tuo contatore dei bug segnalati."
+        else:
+            set {reported_bugs::%{_player}%} to 0
+            send "%{-server.prefix.main}% &aHai azzerato il contatore dei bug segnalati di &b%{_player}%&a."
+
+command /resetfeedback [<player: offline player>]:
+    permission: debug.commands
+    executable by: player and console
+    trigger:
+        if {_player} is not set:
+            set {feedback_sent::%player%} to 0
+            send "%{-server.prefix.main}% &aHai azzerato il tuo contatore dei feedback inviati."
+        else:
+            set {feedback_sent::%{_player}%} to 0
+            send "%{-server.prefix.main}% &aHai azzerato il contatore dei feedback inviati di &b%{_player}%&a."
+
+command /bugfeedbackreminder:
+    permission: debug.commands
+    trigger:
+        BugFeedbackReminder(player)

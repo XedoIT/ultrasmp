@@ -1,0 +1,173 @@
+options:
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+
+    selected: &aSELEZIONATO!
+    not_selected: &eClicca per selezionare.
+
+    0: &fPacifica
+    1: &aFacile
+    2: &eNormale
+    3: &6&lDifficile
+    4: &4&lHardcore
+
+    0_hint: &fGoditi la tranquillità e gioca senza pensieri (e pericoli).
+    1_hint: &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!
+    2_hint: &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!
+    3_hint: &6Qui le cose si fanno più interessanti! Tieni gli occhi aperti sui pericoli (e sulla tua Vita!)
+    4_hint_1: &cL'%{-server.name}% è stata impostata su %{-difficulty.info}%&c!
+    4_hint_2: &cCiò significa che non puoi permetterti di morire, altrimenti...
+
+    difficulty_changed: &7La difficoltà dell'SMP è stata impostata su %{-difficulty.info}%&7
+    already_set: %{-server.prefix.main}% &cLa difficoltà del server è già impostata su %{-difficulty.info}%&c!
+
+on load:
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    if {difficulty.hardcore_mode} is set:
+        set {-difficulty.info} to "{@4}"
+        set {-difficulty.hardcore} to "{@selected}"
+    else if difficulty of all worlds is peaceful:
+        set {-difficulty.info} to "{@0}"
+        set {-difficulty.peaceful} to "{@selected}"
+    else if difficulty of all worlds is easy:
+        set {-difficulty.info} to "{@1}"
+        set {-difficulty.easy} to "{@selected}"
+    else if difficulty of all worlds is hard:
+        set {-difficulty.info} to "{@3}"
+        set {-difficulty.hard} to "{@selected}"
+    else:
+        set {-difficulty.info} to "{@2}"
+        set {-difficulty.normal} to "{@selected}"
+
+on join:
+    if {difficulty.hardcore_mode} is true:
+        wait 1 second
+        send ""
+        send "&c&k&l0 &cL'%{-server.name}% è stata impostata su &4&lHardcore&c! &c&k&l0" to player
+        send "&c&k&l0 &cOgni tua mossa sbagliata sarà fatale. &c&k&l0" to player
+        send ""
+        play sound "entity.wither.spawn" with volume 1 and pitch 0 at player for player
+
+command /difficulty:
+    description: Modifica la difficoltà del server.
+    permission: minecraft.command.difficulty
+    executable by: player and console
+    trigger:
+        DifficultyHelpList(sender)
+
+    subcommand peaceful:
+        trigger:
+            SetPeacefulDifficulty(sender)
+
+    subcommand easy:
+        trigger:
+            SetEasyDifficulty(sender)
+
+    subcommand normal:
+        trigger:
+            SetNormalDifficulty(sender)
+
+    subcommand hard:
+        trigger:
+            SetHardDifficulty(sender)
+
+    subcommand hardcore:
+        trigger:
+            SetHardcoreDifficulty(sender)
+
+# FUNZIONI DIFFICOLTÀ
+function DifficultyHelpList(s: commandsender):
+    send "" to {_s}
+    send "%{-server.prefix.main}% &fAttualmente il server è in %{-difficulty.info}%&f." to {_s}
+    send "" to {_s}
+    send "%{-server.prefix.main}% &6Comandi per cambiare difficoltà:" to {_s}
+    send "%{-server.prefix.main}% &7/difficulty &fpeaceful" to {_s}
+    send "%{-server.prefix.main}% &7/difficulty &aeasy" to {_s}
+    send "%{-server.prefix.main}% &7/difficulty &enormal" to {_s}
+    send "%{-server.prefix.main}% &7/difficulty &6&lhard" to {_s}
+    send "%{-server.prefix.main}% &7/difficulty &4&lhardcore" to {_s}
+    send "" to {_s}
+
+function SetPeacefulDifficulty(s: commandsender):
+    if difficulty of all worlds is peaceful:
+        send "{@already_set}" to {_s}
+        if {_s} is a player:
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_s} for {_s}
+        stop
+    set difficulty of all worlds to peaceful
+    set {-difficulty.info} to "{@0}"
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    set {-difficulty.peaceful} to "{@selected}"
+    delete {difficulty.hardcore_mode}
+    if {_s} is a player:
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_s} for {_s}
+    broadcast "%{-server.prefix.main}% {@difficulty_changed}."
+    send "%{-server.prefix.main}% {@0_hint}" to all players
+
+function SetEasyDifficulty(s: commandsender):
+    if difficulty of all worlds is easy:
+        send "{@already_set}" to {_s}
+        if {_s} is a player:
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_s} for {_s}
+        stop
+    set difficulty of all worlds to easy
+    set {-difficulty.info} to "{@1}"
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    set {-difficulty.easy} to "{@selected}"
+    delete {difficulty.hardcore_mode}
+    if {_s} is a player:
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_s} for {_s}
+    broadcast "%{-server.prefix.main}% {@difficulty_changed}."
+    send "%{-server.prefix.main}% {@1_hint}" to all players
+
+function SetNormalDifficulty(s: commandsender):
+    if difficulty of all worlds is normal:
+        send "{@already_set}" to {_s}
+        if {_s} is a player:
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_s} for {_s}
+        stop
+    set difficulty of all worlds to normal
+    set {-difficulty.info} to "{@2}"
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    set {-difficulty.normal} to "{@selected}"
+    delete {difficulty.hardcore_mode}
+    if {_s} is a player:
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_s} for {_s}
+    broadcast "%{-server.prefix.main}% {@difficulty_changed}."
+    send "%{-server.prefix.main}% {@2_hint}" to all players
+
+function SetHardDifficulty(s: commandsender):
+    if {difficulty.hardcore_mode} is not set:
+        if difficulty of all worlds is hard:
+            send "{@already_set}" to {_s}
+            if {_s} is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at {_s} for {_s}
+            stop
+    set difficulty of all worlds to hard
+    set {-difficulty.info} to "{@3}"
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    set {-difficulty.hard} to "{@selected}"
+    delete {difficulty.hardcore_mode}
+    if {_s} is a player:
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_s} for {_s}
+    broadcast "%{-server.prefix.main}% {@difficulty_changed}."
+    send "%{-server.prefix.main}% {@3_hint}" to all players
+
+function SetHardcoreDifficulty(s: commandsender):
+    if {difficulty.hardcore_mode} is set:
+        send "{@already_set}" to {_s}
+        if {_s} is a player:
+            play sound "{@error_sound}" with volume 1 and pitch 0 at {_s} for {_s}
+        stop
+    set difficulty of all worlds to hard
+    set {-difficulty.info} to "{@4}"
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    set {-difficulty.hardcore} to "{@selected}"
+    set {difficulty.hardcore_mode} to true
+    if {_s} is a player:
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_s} for {_s}
+    broadcast "%{-server.prefix.main}% {@difficulty_changed}."
+    send "%{-server.prefix.main}% {@4_hint_1}" to all players
+    send "%{-server.prefix.main}% {@4_hint_2}" to all players
+    send all players title "&c&k☠ &4&lHARDCORE MODE &c&k☠" with subtitle "&cOgni tua mossa sbagliata sarà fatale!" for 8 seconds with 0.5 seconds fade in and 1 seconds fade out
+    play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players

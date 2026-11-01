@@ -1,0 +1,539 @@
+# QUI SI TROVANO TUTTI I COMANDI (LA CUI CREAZIONE DI UNO SCRIPT DEDICATO RISULTEREBBE INUTILE), VARIABILI E FUNZIONI ATTIVE GLOBALI DEL SERVER.
+import:
+    org.bukkit.event.player.PlayerCommandSendEvent
+    net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket
+    net.minecraft.network.protocol.common.custom.BrandPayload
+
+options:
+    genre: {genre.%player%}
+    genre_arg: {genre.%{_target}%}
+    server_version: "&4&lBETA &7v0.3"
+    noperm_message: %{-server.prefix.main}% &cComando sconosciuto.
+    
+    server_ip: "mc.ultrasmp.org"
+    server_port: "14091"
+
+
+# CARICAMENTO VERSIONE
+on load:
+    set {-server.version} to {@server_version}
+
+
+# NOME MODIFICATO BRAND SERVER
+options:
+    server_brand: Ultra SMP#-> vanilla
+
+on join:
+    #wait 2 ticks
+    set {_testo} to "{@server_brand}&r"
+    replace all "&" with "§" in {_testo}
+    set {_payload} to new BrandPayload({_testo})
+    set {_packet} to new ClientboundCustomPayloadPacket({_payload})
+    set {_handle} to player.getHandle()
+    {_handle}.connection.send({_packet})
+
+
+# NASCONDI COMANDI E MESSAGGIO MANCANZA DI PERMESSO
+options:
+    hidecmd_prefix: &e[&c&lHIDECMD&e]
+
+on unknown command execution:
+    set the unknown command message to "{@noperm_message}"
+
+on load:
+    delete {-hiddencommands::*}
+    add "?", "about", "abtoggle" to {-hiddencommands::*}
+    add "currentbiome", "co" to {-hiddencommands::*}
+    add "gbellyflop", "gcrawl", "glay", "glayback", "glegsup", "gsit", "gspin" to {-hiddencommands::*}
+    add "help" to {-hiddencommands::*}
+    add "icanhasbukkit" to {-hiddencommands::*}
+    add "lp", "luckperms" to {-hiddencommands::*}
+    add "mana", "me" to {-hiddencommands::*}
+    add "papi", "perm", "permission", "permissions", "perms", "placeholderapi" to {-hiddencommands::*}
+    add "rayfall", "realisticseasons", "rs" to {-hiddencommands::*}
+    add "season", "seasondump", "sk", "skill", "skillrank", "skilltop", "skrayfall", "skrf", "stats" to {-hiddencommands::*}
+    add "teammsg", "tm", "togglefahrenheit", "toggleseasoncolors", "toggleseasonparticles", "toggletemperature", "tps", "trigger" to {-hiddencommands::*}
+    add "uptime" to {-hiddencommands::*}
+    add "ver", "version" to {-hiddencommands::*}
+    wait 2 seconds
+    loop all players:
+        loop-player.updateCommands()
+        
+# Toglie i comandi nascosti dalla lista dei suggerimenti
+on PlayerCommandSendEvent:
+    if event.getPlayer() has permission "usmp.commands.bypass":
+        stop
+    loop {-hiddencommands::*}:
+        event.getCommands().remove(loop-value)
+        event.getCommands().remove("bukkit:%loop-value%")
+        event.getCommands().remove("minecraft:%loop-value%")
+        event.getCommands().remove("luckperms:%loop-value%")
+        event.getCommands().remove("placeholderapi:%loop-value%")
+        event.getCommands().remove("realisticseasons:%loop-value%")
+        event.getCommands().remove("skript:%loop-value%")
+
+# Gestione della lista (solo staff)
+command /hidecmd:
+    permission: usmp.admin
+    subcommand add <command: text>:
+        usage: {@hidecmd_prefix} &cComando incompleto.%nl%{@hidecmd_prefix} &cUtilizza &6/hidecmd <&eadd&6> <&ecomando&6>&c.
+        trigger:
+            set {_c} to {_command} in lower case
+            #replace all "/" in {_c} with ""
+            if {-hiddencommands::*} contains {_c}:
+                send "{@hidecmd_prefix} &cIl comando &e/%{_c}% &cè già nascosto."
+                stop
+            add {_c} to {-hiddencommands::*}
+            send "{@hidecmd_prefix} &aOra il comando &e/%{_c}% &aè nascosto."
+            # Aggiorna subito i suggerimenti a tutti
+            loop all players:
+                loop-player.updateCommands()
+
+    subcommand remove <command: text>:
+        usage: {@hidecmd_prefix} &cComando incompleto.%nl%{@hidecmd_prefix} &cUtilizza &6/hidecmd <&eremove&6> <&ecomando&6>&c.
+        trigger:
+            set {_c} to {_command} in lower case
+            #replace all "/" in {_c} with ""
+            if {-hiddencommands::*} does not contain {_c}:
+                send "{@hidecmd_prefix} &cIl comando &e/%{_c}% &cnon è nella lista."
+                stop
+            remove {_c} from {-hiddencommands::*}
+            send "{@hidecmd_prefix} &aOra il comando &e/%{_c}% &aè di nuovo visibile."
+            # Aggiorna subito i suggerimenti a tutti
+            loop all players:
+                loop-player.updateCommands()
+            
+    subcommand list:
+        usage: {@hidecmd_prefix} &cQuesto comando non richiede parametri aggiuntivi.%nl%{@hidecmd_prefix} &cUtilizza &6/hidecmd <&elist&6>&c.
+        trigger:
+            if {-hiddencommands::*} is not set:
+                send "{@hidecmd_prefix} &cNon ci sono comandi nascosti."
+                stop
+            set {_lista} to join {-hiddencommands::*} with "&7, &e"
+            send "{@hidecmd_prefix} &6Comandi nascosti: &e%{_lista}%"
+
+    subcommand <unknown: text>:
+        trigger:
+            send "{@hidecmd_prefix} &cComando incompleto o parametro sconosciuto."
+            send "{@hidecmd_prefix} &cUtilizza &6/hidecmd <&eadd&6> <&ecomando&6>&c."
+            send "{@hidecmd_prefix} &cUtilizza &6/hidecmd <&eremove&6> <&ecomando&6>&c."
+            send "{@hidecmd_prefix} &cUtilizza &6/hidecmd <&elist&6>&c."
+            stop
+
+# Blocca anche l'esecuzione dei comandi nascosti
+on command:
+    if command sender is not a player:
+        stop
+    if player has permission "usmp.commands.bypass":
+        stop
+    set {_base} to last element of (command split at ":")
+    set {_base} to {_base} in lower case
+    if {-hiddencommands::*} contains {_base}:
+        cancel event
+        send "{@noperm_message}" to player
+        stop
+    if command is "plugins", "pl", "bukkit:plugins" or "bukkit:pl":
+        cancel event
+        chance of 10%:
+            send "" to player
+            send "&4&lINFORMAZIONI" to player
+            send "" to player
+            send formatted " &eVista la quantità di funzionalità presenti nella %{-server.name}%, è stata creata, per comodità, una lista di tutti i plugin e script sviluppati e impiegati. Clicca <link:https://www.youtube.com/watch?v=dQw4w9WgXcQ>&6&nqui<reset> &eper consultarla." to player
+            send "" to player
+            send " &aBuon divertimento nella %{-server.name}%!" to player
+            send "" to player
+            stop
+        send "" to player
+        send "&4&lINFORMAZIONI" to player
+        send "" to player
+        send " &cMolte delle funzionalità di questo server sono state ideate e sviluppate da Xedo, quindi non ci sono plugin da mostrare." to player
+        send "" to player
+        send " &aBuon divertimento nella %{-server.name}%!" to player
+        send "" to player
+
+
+# MOTD
+on server list ping:
+    if {maintenance} is set:
+        set motd to "       &e&l%{-server.name_CAPS}% &c[%minecraft version%] &7- &6[%{-server.version}%&6]%newline%          &4&k0 &6&lMANUTENZIONE IN CORSO! &4&k0"
+        set fake max players count to 1
+        hide all players from the server list
+        #cancel event
+    else:
+        set motd to "         &e&l%{-server.name_CAPS}% &c[%minecraft version%] &7- &6[%{-server.version}%&6]%newline%    &b&lPERFORMANCE UPDATE 2.0 &fe &a&lQoL UPDATE"
+        #set the fake max players count to (number of all players + 1)
+
+
+# MESSAGGIO DI AVVISO BETA
+on join:
+    if {@genre} is set:
+        wait 3 seconds
+        send "----------------------------" to player
+        send "" to player
+        send "&6&k0 &e&lAVVISO %{-server.name_CAPS}% &6&k0" to player
+        send ""
+        send " &6● &rIl server è ancora in &c&lBETA&r e potresti riscontrare &cbug &re &cproblemi di instabilità&r." to player
+        #send "" to player
+        send " &6● &rLe funzionalità potrebbero &asubire modifiche&r o &cessere rimosse&r durante lo sviluppo." to player
+        #send "" to player
+        send " &6● &rPuoi controllare la &btabella dei progressi &rcliccando <link:https://github.com/users/XedoIT/projects/1/views/1>&b&nqui&r." to player
+        send "" to player
+        send "----------------------------" to player
+
+
+# DEEPSLATE RINFORZATA OTTENIBILE
+on break of reinforced deepslate:
+    if gamemode of player is survival or adventure:
+        if player's tool is a netherite pickaxe:
+            chance of 25%:
+                drop 1 reinforced deepslate at event-block
+every tick:
+    loop all players:
+        if loop-player's target block is reinforced deepslate:
+            if loop-player's gamemode is survival:
+                if "%type of loop-player's tool%" contains "pickaxe":
+                    apply infinite haste 256 to loop-player:
+                        hide the particles
+                        hide the icon
+        else:
+            remove haste from loop-player
+
+
+# RISOLUZIONE DIMENSIONE GIOCATORE E AGGIORNAMENTO CAMBIO DI DIMENSIONE
+options:
+    dimension: {playerinfo.dimension.%player%}
+
+on join:
+    if world of player is "smp":
+        set {@dimension} to "&aOverworld"
+        #set {world.marker.%player%} to grass block
+    else if world of player is "smp_nether":
+        set {@dimension} to "&cNether"
+        #set {world.marker.%player%} to netherrack
+    else if world of player is "smp_the_end":
+        set {@dimension} to "&dEnd"
+        #set {world.marker.%player%} to end stone
+
+on player world change:
+    if world of player is "smp":
+        set {@dimension} to "&aOverworld"
+        #set {world.marker.%player%} to grass block
+    else if world of player is "smp_nether":
+        set {@dimension} to "&cNether"
+        #set {world.marker.%player%} to netherrack
+    else if world of player is "smp_the_end":
+        set {@dimension} to "&dEnd"
+        #set {world.marker.%player%} to end stone
+
+
+# MESSAGGI PREDEFINITI DI INGRESSO E USCITA DAL SERVER (PRIMA DEL PERSONALIZATION UPDATE)
+on join:
+    if {@genre} is not set:
+        set join message to "&c&k00 &eL'%{-server.name}% ti dà il benvenuto, &6%player%&e! &c&k00"
+        launch ball large coloured red, purple and white fading to light green and black at player's location with duration 3
+    else:
+        if {@genre} is {-server.genre.male}:
+            set {_g} to "unito"
+        if {@genre} is {-server.genre.female}:
+            set {_g} to "unita"
+        set join message to "&6%player% &esi è %{_g}% alla %{-server.name}%!"
+
+on quit:
+    set quit message to "&6%player% &eha lasciato la %{-server.name}%!"
+
+
+# ANTI-GRIEFING ENDERMAN
+on enderman pickup:
+    cancel event
+
+on enderman place:
+    cancel event
+
+
+variables:
+ # NESSUN PERMESSO
+    {-noperm_message} = "%{-server.prefix.main}% &cComando sconosciuto."
+
+ # NOME SERVER
+    {-server.name} = "Ultra SMP"
+    {-server.name_CAPS} = "ULTRA SMP"
+
+ # PREFISSI
+    {-server.prefix.main} = "&4[&6&lS&e&lM&6&lP&4]"
+    #{-server.prefix.map} = "&a[&b&lMAPPA&a]"
+
+ # SESSO GIOCATORI
+    {-server.genre.male} = "&9Maschio"
+    {-server.genre.female} = "&dFemmina"
+
+ # MONDI
+    {-server.world.overworld} = "smp"
+    {-server.world.nether} = "smp_nether"
+    {-server.world.end} = "smp_the_end"
+
+
+# COMANDI (CON FUNZIONI, EVENTI, OPZIONI ANNESSI)
+
+# BROADCAST
+command /broadcast <text:text>:
+    aliases: /annuncio
+    usage: &e[&6BROADCAST&e] &cCosa vuoi annunciare?
+    description: Annuncia qualcosa nel server.
+    permission: broadcast.use
+    trigger:
+        broadcast "&c[&aAnnuncio&c]&r %{_text}%"
+        play sound "entity.experience_orb.pickup" with volume 1 and pitch 0 at all players
+
+# LINK TEXTURE ULTRA SMP
+command /texture:
+    permission: command.texture
+    trigger:
+        send formatted "%{-server.prefix.main}% &ePuoi scaricare l'ultima versione dell'%{-server.name}% Pack <link:https://pack.ultrasmp.org/download/packsmp>&b&nqui<reset>&e."
+
+# LINK MAPPA
+command /mappa:
+    permission: command.mappa
+    trigger:
+        send formatted "%{-server.prefix.map}% &aPuoi visualizzare la mappa dell'%{-server.name}% cliccando <link:http://map.ultrasmp.org:1401>&b&nqui&a."
+
+# MOTD PERSONALIZZABILE IN-GAME
+#command /motd [<integer>] [<text>]: # COMANDO CHE PERMETTE LA CREAZIONE E IL SALVATAGGIO DI RIGHE PER IL MOTD MOSTRATO NELLA LISTA DEI SERVER
+
+# PING
+options:
+    prefix_ping: &8[&2&lPING&8]
+
+command /ping <target: offline player>:
+    usage: {@prefix_ping} &cUtilizzo: &6/ping <&egiocatore&6>
+    description: Visualizza il ping dei giocatori.
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    executable by: console
+    trigger:
+        if {_target} is not online:
+            send "{@prefix_ping} &c%{_target}% &6è offline."
+            stop
+        else:
+            send "{@prefix_ping} &fIl ping di &c%{_target}% &fè &a%{_target}'s ping% ms&f."
+            stop
+
+# IP
+options:
+    ip_prefix: &b[&6&lIP&b]
+
+command /ip:
+    description: Visualizza l'IP del server.
+    executable by: player
+    trigger:
+        send "{@ip_prefix} &eL'IP del server è &a%{@server_ip}%&e."
+
+command /checkip <target: offline player>:
+    usage: {@ip_prefix} &cUtilizzo: &6/checkip <giocatore>
+    description: Visualizza l'IP di un giocatore.
+    permission: admin.checkip
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not online:
+            send "{@ip_prefix} &6%{_target}% &cè offline."
+        else if {_target} is player:
+            execute player command "/myip"
+        else:
+            send "{@ip_prefix} &eL'IP di &b%{_target}% &eè &a%{_target}'s ip%&e."
+
+command /myip:
+    description: Visualizza l'IP del giocatore che esegue il comando.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            send "{@ip_prefix} &eIl tuo IP è &a%player's ip%&e." to player
+        else:
+            send "{@ip_prefix} &eL'IP del server è &a%{@server_ip}%" to console
+
+# KILL
+command /kill [<target: offline player>]:
+    description: "Uccide un giocatore."
+    permission: command.kill
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "%{-server.prefix.main}% &cSpecifica il nome di un giocatore!"
+                stop
+            set {_target} to player
+        if {_target} is not online:
+            send "%{-server.prefix.main}% &6%{_target}% &cè offline."
+            stop
+        if {_target} is player:
+            set {_who} to "ucciso da solo"
+            if {@genre_arg} is {-server.genre.female}:
+                set {_who} to "uccisa da sola"
+            broadcast "%{_target}% si è %{_who}%"
+        else:
+            set {_who} to "stato ucciso"
+            if {@genre_arg} is {-server.genre.female}:
+                set {_who} to "stata uccisa"
+            set {_by} to "dalla console"
+            if sender is a player:
+                set {_by} to "da %player%"
+            broadcast "%{_target}% è %{_who}% %{_by}%"
+        set {kill.silent.%{_target}%} to true
+        set health of {_target} to 0
+        delete {kill.silent.%{_target}%}
+        stop
+
+on death of player:
+    if {kill.silent.%victim%} is set:
+        set the death message to ""
+
+# ARENACOMBAT
+command /arenacombat:
+    permission: arenacombat.toggle
+    executable by: player and console
+    trigger:
+        if {arenacombat} is not set:
+            set {arenacombat} to true
+            broadcast "%{-server.prefix.main}% &aModalità combattimento Arena attivata!"
+            send "%{-server.prefix.main}% &bGli esiti dei tuoi combattimenti &6&nnon influiranno&b sulle tue &estatistiche sanguinarie &be sulla tua &eFama&b." to all players
+            stop
+        else:
+            delete {arenacombat}
+            broadcast "%{-server.prefix.main}% &cModalità combattimento Arena disattivata!"
+            send "%{-server.prefix.main}% &6Gli esiti dei tuoi combattimenti &c&ninfluiranno&6 sulle tue &estatistiche sanguinarie &6e sulla tua &eFama&6." to all players
+            stop
+
+every tick:
+    loop all players:
+        if {arenacombat} is true:
+            send action bar "&a&lMODALITÀ ARENA ATTIVA" to loop-player
+
+# RINOMINA OGGETTO IN MANO
+options:
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+command /renitem [<name: text>]:
+    #usage: %{-server.prefix.main}% &cComando incompleto.%nl%%{-server.prefix.main}% &cUtilizzo: &6/renitem <nome>
+    permission: renitem.use
+    executable by: player
+    trigger:
+        if player's tool is not air:
+            if {_name} is set:
+                if {_name} is not the name of player's tool:
+                    set name of player's tool to uncolored {_name}
+                    send "%{-server.prefix.main}% &aOggetto rinominato in &f%{_name}%&a."
+                    {@confirm_sound} at player for player
+                else:
+                    send "%{-server.prefix.main}% &cQuest'oggetto ha già quel nome!"
+                    {@error_sound} at player for player
+            else:
+                if the name of player's tool is set:
+                    reset name of player's tool
+                    send "%{-server.prefix.main}% &aHai tolto il nome da quest'oggetto."
+                    {@confirm_sound} at player for player
+                else:
+                    send "%{-server.prefix.main}% &cQuest'oggetto non ha un nome personalizzato."
+                    {@error_sound} at player for player
+            stop
+        else:
+            send "%{-server.prefix.main}% &cPer modificare il nome di un oggetto devi prima tenerlo in mano!"
+            {@error_sound} at player for player
+        stop
+
+# SKULLS
+command /skull [<target: offline player>]:
+    usage: %{-server.prefix.main}% &cUtilizzo: &6/skull <giocatore>!
+    description: Ottieni in modo facile la testa di qualsiasi giocatore che ha acquistato Minecraft.
+    permission: skull.use
+    executable by: player
+    trigger:
+        if player has enough space for 1 player head:
+            give {_target}'s skull to player
+            send "%{-server.prefix.main}% &aHai ottenuto la testa di &b%{_target}%&a."
+            log "[SKULL] %player% ha richiesto la testa di ""%{_target}%"" (UUID: %{_target}'s uuid%)" to "Skull.log"
+            stop
+        else:
+            send "%{-server.prefix.main}% &cÈ necessario almeno uno slot di spazio libero nel tuo inventario per richiedere una testa!"
+            stop
+
+# (/stop) E SISTEMA DI STOP/RIPRESA TEMPO DI GIOCO IN BASE AI GIOCATORI ONLINE
+command /stop:
+    permission: minecraft.command.stop
+    executable by: player and console
+    trigger:
+        kick all players due to "&c--- %{-server.prefix.main}% &c---%nl%%nl%%nl%&6&lLa &e&l%{-server.name}% &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l."
+        wait 3 seconds
+        stop server
+on join:
+    if size of all players = 1:
+        wait 5 ticks
+        execute console command "/rs pausetime smp"
+        send "&aAlmeno un giocatore online: il tempo sta andando avanti." to console
+on quit:
+    if size of all players = 1:
+        wait 5 ticks
+        execute console command "/rs pausetime smp"
+        send "&cNon ci sono giocatori online: il tempo è ora bloccato." to console
+
+# GIOCATORI ONLINE
+command /list:
+    executable by: player and console
+    trigger:
+        set {_online} to size of all players
+        set {_max} to max player count
+        set {_names} to join names of all players with ", "
+        if {_online} > 1:
+            send "", "%{-server.prefix.main}% &7Ci sono &c%{_online}% giocatori &7su &c%{_max}% &7online.", " &6Giocatori: &f%{_names}%" and ""
+        else if {_online} is 1:
+            send "", "%{-server.prefix.main}% &7Al momento c'è &c1 giocatore &7su &c%{_max}% &7all'interno del server.", " &6Giocatore: &f%{_names}%" and ""
+        else:
+            send "%{-server.prefix.main}% &7Al momento non ci sono giocatori online."
+
+on join:
+    set {_uuid} to "%uuid of player%"
+    set {players::%{_uuid}%} to player's name
+
+function nomeDaUUID(u: text) :: text:
+    if {players::%{_u}%} is set:
+        return {players::%{_u}%}
+    return "Sconosciuto"
+    
+# VELOCITÀ GIOCATORE (fly e walk)
+options:
+    flyspeed_prefix: &a[&2&lFS&a]
+    flyspeed_prefix_error: &6[&c&lFS&6]
+    walkspeed_prefix: &a[&2&lWS&a]
+    walkspeed_prefix_error: &6[&c&lWS&6]
+
+command /flyspeed <target: offline player> <speed: integer>:
+    usage: {@flyspeed_prefix_error}&cUtilizzo: &e/flyspeed <giocatore> <numero>
+    permission: flyspeed.set
+    description: Cambia la velocità di volo di un giocatore.
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not online:
+            send "{@flyspeed_prefix_error} &c%{_target}% è offline."
+            stop
+        set flyspeed of {_target} to max(-10, min(10, {_speed})) / 10
+        send "{@flyspeed_prefix} Velocità di volo impostata su &6%{_speed}% &aper &e%{_target}%&a."
+
+command /walkspeed <target: offline player> <speed: integer>:
+    usage: {@walkspeed_prefix_error}&cUtilizzo: &e/walkspeed <giocatore> <numero>
+    permission: walkspeed.set
+    description: Cambia la velocità del passo di un giocatore.
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not online:
+            send "{@walkspeed_prefix_error} &c%{_target}% è offline."
+            stop
+        if {_speed} < 0:
+            send "{@walkspeed_prefix} &cLa velocità del passo deve essere superiore a 0."
+            stop
+        set walkspeed of {_target} to min(10, {_speed}) / 10
+        if {_speed} > 10:
+            set {_speed} to 11
+        send "{@walkspeed_prefix} Velocità del passo impostata su &6%{_speed}% &aper &e%{_target}%&a."

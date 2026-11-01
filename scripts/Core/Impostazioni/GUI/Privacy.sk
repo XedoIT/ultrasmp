@@ -1,0 +1,199 @@
+options:
+# GENERALI
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+  # GLINT
+    glinted: "{enchantment_glint_override:true}"
+    glinted_off: "{enchantment_glint_override:false}"
+    
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+
+    no: &c✘
+    yes: &a✔
+
+# MESSAGGI IMPOSTAZIONI DI PRIVACY
+  # ATTIVA/DISATTIVA
+    turn_on: &eClicca per attivare.
+    turn_off: &eClicca per disattivare.
+
+  # PROFILO GIOCATORE
+    playersinfo_on: &7Informazioni profilo &aconsentite&7.
+    playersinfo_off: &7Informazioni profilo &cbloccate&7.
+
+  # RICHIESTE DI TELETRASPORTO
+    tp_requests_on: &7Ricezione richieste di teletrasporto &aattivata&7.
+    tp_requests_off: &7Ricezione richieste di teletrasporto &cdisattivata&7.
+
+# VARIABILI
+    gui_background: {settings.personalization.gui_background::%{_p}%}
+
+  # INIZIALIZZAZIONE
+    initialized: {settings.privacy.initialized::%player%}
+  
+  # PRINCIPALI
+    can_others_view_self_profile: {settings.privacy.can_others_view_self_profile::%player%}
+    can_receive_others_tp_requests: {settings.privacy.can_receive_others_tp_requests::%player%}
+    can_others_view_self_profile_p: {settings.privacy.can_others_view_self_profile::%{_p}%}
+    can_receive_others_tp_requests_p: {settings.privacy.can_receive_others_tp_requests::%{_p}%}
+
+  # MARKER PRINCIPALI
+    can_others_view_self_profile_marker: {-settings.privacy.can_others_view_self_profile_marker::%player%}
+    can_receive_others_tp_requests_marker: {-settings.privacy.can_receive_others_tp_requests_marker::%player%}
+    can_others_view_self_profile_p_marker: {-settings.privacy.can_others_view_self_profile_marker::%{_p}%}
+    can_receive_others_tp_requests_p_marker: {-settings.privacy.can_receive_others_tp_requests_marker::%{_p}%}
+
+  # MARKER (GUI: PERSONALIZZAZIONE)
+    gui_background_marker: {-settings.personalization.gui_background_marker::%{_p}%}
+    wb_message_marker: {-settings.personalization.wb_message_marker::%{_p}%}
+    scoreboard_marker: {-settings.personalization.scoreboard_marker::%{_p}%}
+    can_view_other_profiles_marker: {-settings.personalization.view_other_profiles_marker::%{_p}%}
+    damage_indicator_players_marker: {-settings.personalization.damage_indicator_players_marker::%{_p}%}
+    damage_indicator_mobs_marker: {-settings.personalization.damage_indicator_mobs_marker::%{_p}%}
+
+  # MARKER (GUI: NOTIFICHE)
+    inventory_full_marker: {-settings.alerts.inventory_full_marker::%{_p}%}
+    scoreboard_reminder_marker: {-settings.alerts.scoreboard_reminder_marker::%{_p}%}
+
+# CONFIGURAZIONE VARIABILI
+on join:
+    # Default solo per i giocatori nuovi
+    if {@initialized} is not set:
+        set {@initialized} to true
+        set {@can_others_view_self_profile} to true
+        set {@can_receive_others_tp_requests} to true
+
+    # Marker in base allo stato reale di ogni opzione
+    set {@can_others_view_self_profile_marker} to "{@no}"
+    if {@can_others_view_self_profile} is true:
+        set {@can_others_view_self_profile_marker} to "{@yes}"
+
+    set {@can_receive_others_tp_requests_marker} to "{@no}"
+    if {@can_receive_others_tp_requests} is true:
+        set {@can_receive_others_tp_requests_marker} to "{@yes}"
+
+# ELIMINAZIONE MARKER
+on quit:
+    delete {@can_others_view_self_profile_marker} and {@can_receive_others_tp_requests_marker}
+
+# PROFILO GIOCATORI    
+function TogglePlayersInformationToSelf(p: player):
+    if {@can_others_view_self_profile_p} is not true:
+        set {@can_others_view_self_profile_p} to true
+        set {@can_others_view_self_profile_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@playersinfo_on}" to {_p}
+    else:
+        delete {@can_others_view_self_profile_p}
+        set {@can_others_view_self_profile_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@playersinfo_off}" to {_p}
+
+function ToggleTPRequestsToSelf(p: player):
+    if {@can_receive_others_tp_requests_p} is not true:
+        set {@can_receive_others_tp_requests_p} to true
+        set {@can_receive_others_tp_requests_p_marker} to "{@yes}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@tp_requests_on}" to {_p}
+    else:
+        delete {@can_receive_others_tp_requests_p}
+        set {@can_receive_others_tp_requests_p_marker} to "{@no}"
+        {@confirm_sound} at {_p} for {_p}
+        send "%{-server.prefix.main}% {@tp_requests_off}" to {_p}
+
+function openPrivacyPlayerSettingsGUI(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Impostazioni: &9Privacy"
+    if {@gui_background} is true:
+        set slot 0, 1, 3, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 50, 51, 52 and 53 of {_gui} to black stained glass pane named ""
+        set slot 10, 11, 12, 13, 14, 15, 16, 19, 20, 22, 24, 25, 28, 29, 31, 33, 34, 37, 38, 39, 40, 41, 42 and 43 of {_gui} to gray stained glass pane named ""
+    set slot 2 of {_gui} to nether star with nbt from {@glinted_off} named "&bRapide" with lore "&7Gestisci da qui le impostazioni", "&7più comuni per evitare perdite" and "&7di tempo."
+    set slot 4 of {_gui} to comparator named "&aPersonalizzazione" with lore "&7Impostale a tuo piacimento!", "", "&7Include:", "%{@gui_background_marker}% &7Sfondo GUI", "%{@wb_message_marker}% &7Messaggio di bentornato", "%{@scoreboard_marker}% &7Scoreboard", "%{@can_view_other_profiles_marker}% &7Profilo giocatori &e[&7Tu &6&l→&e]", "%{@damage_indicator_players_marker}% &7Indicatore danni giocatori" and "%{@damage_indicator_mobs_marker}% &7Indicatore danni mob"
+    set slot 5 of {_gui} to bell named "&eNotifiche" with lore "&7Gestisci le notifiche che riceverai", "&7durante la tua avventura all'interno", "&7della %{-server.name}%.", "", "&7Include:", "%{@inventory_full_marker}% &7Inventario pieno" and "%{@scoreboard_reminder_marker}% &7Promemoria scoreboard"
+    set slot 6 of {_gui} to iron bars with nbt from {@glinted} named "&6Privacy" with lore "&7La sicurezza prima di tutto!", "", "&7Include:", "%{@can_others_view_self_profile_p_marker}% &7Profilo giocatori &e[&7Tu &6&l←&e]" and "%{@can_receive_others_tp_requests_p_marker}% &7Richieste teletrasporto"
+    set slot 21 of {_gui} to {_p}'s skull named "&6Profilo giocatori" with lore "&7Consenti agli altri giocatori di", "&7consultare il tuo profilo.", "", "&4&lNOTA", " &cQuesta modifica non chiuderà il", " &ctuo profilo ai giocatori che lo", " &cstanno attualmente consultando."
+    set slot 23 of {_gui} to compass named "&6Richieste di teletrasporto" with lore "&7Consenti agli altri giocatori", "&7di inviarti richieste" and "&7di teletrasporto."
+    if {@can_others_view_self_profile_p} is true:
+        set slot 30 of {_gui} to lime dye named "&aProfilo giocatori" with lore "{@turn_off}"
+    else:
+        set slot 30 of {_gui} to gray dye named "&cProfilo giocatori" with lore "{@turn_on}"
+    if {@can_receive_others_tp_requests_p} is true:
+        set slot 32 of {_gui} to lime dye named "&aRichieste di teletrasporto" with lore "{@turn_off}"
+    else:
+        set slot 32 of {_gui} to gray dye named "&cRichieste di teletrasporto" with lore "{@turn_on}"
+    set slot 48 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    set slot 49 of {_gui} to barrier named "&cChiudi" with lore "&7Torna alla %{-server.name}%"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Impostazioni: &9Privacy":
+        if type of event-inventory is chest inventory:
+            if index of event-slot is not 2, 4, 5, 6, 30, 32, 48 or 49:
+                cancel event
+            else if index of event-slot is 2:
+                if click type is left mouse button:
+                    cancel event
+                    openQuickSettingsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 4:
+                if click type is left mouse button:
+                    cancel event
+                    openCustomPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 5:
+                if click type is left mouse button:
+                    cancel event
+                    openAlertsGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 6:
+                if click type is left mouse button:
+                    cancel event
+                    {@error_sound} at player for player
+                else:
+                    cancel event
+            else if index of event-slot is 30:
+                if click type is left mouse button:
+                    cancel event
+                    TogglePlayersInformationToSelf(player)
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 32:
+                if click type is left mouse button:
+                    cancel event
+                    ToggleTPRequestsToSelf(player)
+                    openPrivacyPlayerSettingsGUI(player)
+                else:
+                    cancel event
+            else if index of event-slot is 48:
+                if click type is left mouse button:
+                    cancel event
+                    openProfileGui(player)
+                else:
+                    cancel event
+            else if index of event-slot is 49:
+                if click type is left mouse button:
+                    cancel event
+                    close player's inventory
+                else:
+                    cancel event
+
+
+# ZONA DEBUG
+command /resetprivacyssettings [<target: offline player>]:
+    permission: debug.commands
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not set:
+            if sender is not player:
+                send "&cSpecifica il nome di un giocatore."
+            else:
+                delete {settings.privacy.initialized.%player%}, {settings.privacy.can_others_view_self_profile::%player%} and {settings.privacy.can_receive_others_tp_requests::%player%}
+                send "&cImpostazioni di privacy di %player% eliminate."
+        else:
+            delete {settings.privacy.initialized.%{_target}%}, {settings.privacy.can_others_view_self_profile::%{_target}%} and {settings.privacy.can_receive_others_tp_requests::%{_target}%}
+            send "&cImpostazioni di privacy di %{_target}% eliminate."

@@ -1,0 +1,94 @@
+options:
+    freeze_sound: play sound "entity.player.hurt_freeze" with volume 1 and pitch 0
+    unfreeze_sound: play sound "entity.ghast.shoot" with volume 1 and pitch 0
+
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+    error_sound: play sound "entity.enderman.teleport" with volume 1 and pitch 0
+
+    genre: {genre.%player%}
+    genre_arg: {genre.%{_target}%}
+    genre_p: {genre.%{_p}%}
+    freeze: {playerinfo.freeze::%player%}
+    freeze_arg: {playerinfo.freeze::%{_target}%}
+    freeze_a: {playerinfo.freeze::%attacker%}
+
+command /freeze <target: offline player>:
+    permission: command.freeze
+    suggestions: 
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is player:
+            set {_a} to "o" if {@genre} is "%{-server.genre.male}%" else "a"
+            send "%{-server.prefix.main}% &cNon puoi immobilizzare te stess%{_a}%."
+            {@error_sound} at player for player
+            stop
+        if {_target} is not online:
+            send "%{-server.prefix.main}% &6%{_target}% &cè offline."
+            stop
+        set {_a} to "o" if {@genre_arg} is "%{-server.genre.male}%" else "a"
+        if {@freeze_arg} is true:
+            send "%{-server.prefix.main}% &6%{_target}% &cè già immobilizzat%{_a}%."
+            {@error_sound} at player for player
+            stop
+        set {@freeze_arg} to true
+        send "%{-server.prefix.main}% &cHai immobilizzato &6%{_target}%&c."
+        {@confirm_sound} at player for player
+        {@freeze_sound} at {_target} for {_target}
+        set {_who} to "&6%sender%" if sender is a player else "&cLa &6console"
+        send title "&c&lSTOP!" with subtitle "%{_who}% &cti ha immobilizzat%{_a}%!" to {_target} for 5 seconds
+
+command /unfreeze <target: offline player>:
+    permission: command.unfreeze
+    suggestions: 
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not online:
+            send "%{-server.prefix.main}% &6%{_target}% &cè offline."
+            stop
+        set {_a} to "o" if {@genre_arg} is "%{-server.genre.male}%" else "a"
+        if {@freeze_arg} is not true:
+            send "%{-server.prefix.main}% &b%{_target}% &anon è immobilizzat%{_a}%."
+            {@error_sound} at player for player
+            stop
+        delete {@freeze_arg}
+        send "%{-server.prefix.main}% &aHai liberato &b%{_target}%&a."
+        {@confirm_sound} at player for player
+        {@unfreeze_sound} at {_target} for {_target}
+        set {_who} to "&b%sender%" if sender is a player else "&aLa &bconsole"
+        send title "&a&lVIA LIBERA!" with subtitle "%{_who}% &ati ha liberat%{_a}%!" to {_target} for 5 seconds
+
+function FreezedActionBar(p: player):
+    set {_a} to "o" if {@genre_p} is "%{-server.genre.male}%" else "a"
+    send action bar "&c&lSei stat%{_a}% immobilizzat%{_a}%! Non puoi farlo." to {_p}
+    
+on join:
+    wait 30 ticks
+    if {@freeze} is true:
+        set {_a} to "o" if {@genre_p} is "%{-server.genre.male}%" else "a"
+        send "", " &cSei ancora immobilizzat%{_a}%!" and ""
+
+on player move:
+    if {@freeze} is true:
+        cancel event
+        FreezedActionBar(player)
+
+on click:
+    if {@freeze} is true:
+        cancel event
+        FreezedActionBar(player)
+
+on break:
+    if {@freeze} is true:
+        cancel event
+        FreezedActionBar(player)
+
+on place:
+    if {@freeze} is true:
+        cancel event
+        FreezedActionBar(player)
+
+on damage:
+    if {@freeze_a} is true:
+        if attacker is player:
+            cancel event
+            FreezedActionBar(attacker)

@@ -1,0 +1,118 @@
+options:
+    fight: &a● &a&lPvP abilitato &a●
+
+    genre: {genre.%victim%}
+    god: {playerinfo.god.%victim%}
+
+on join:
+    if {stats.kills::%player%}, {stats.deaths::%player%}, {stats.killstreak::%player%}, {stats.killstreak_max.%player%}, {stats.infldamage::%player%} and {stats.suffdamage::%player%} is not set:
+        set {stats.kills::%player%}, {stats.deaths::%player%}, {stats.killstreak::%player%}, {stats.killstreak_max.%player%}, {stats.infldamage::%player%} and {stats.suffdamage::%player%} to 0
+    if {stats.broken_blocks::%player%}, {stats.placed_blocks::%player%} and {stats.fished_loot::%player%} is not set:
+        set {stats.broken_blocks::%player%}, {stats.placed_blocks::%player%} and {stats.fished_loot::%player%} to 0
+    if {stats.reported_bugs::%player%} and {stats.feedback_sent::%player%} is not set:
+        set {stats.reported_bugs::%player%} and {stats.feedback_sent::%player%} to 0
+
+# DANNI INFLITTI E DANNI SUBITI
+on damage:
+    if {arenacombat} is true:
+        stop
+    if attacker is a player:
+        if victim is a player:
+            if {pvp} is "{@fight}":
+                if {@god} is not true:
+                    if {difficulty.info.hardcore_death::%victim%} is not true:
+                        if {difficulty.info.hardcore_death::%attacker%} is not true:
+                            DamageInflicted(damage,attacker)
+                            DamageSuffered(damage,victim)
+        else if victim is not a player, a fireball, a boat, an armor stand or an item frame:
+            if victim is a creaking:
+                if victim.getHome() is set:
+                    stop
+            if {difficulty.info.hardcore_death::%attacker%} is not true:
+                DamageInflicted(damage,attacker)
+    else:
+        if victim is a player:
+            if {@god} is not true:
+                if {difficulty.info.hardcore_death::%victim%} is not true:
+                    DamageSuffered(damage,victim)
+
+function DamageInflicted(i: number, p: player):
+    if {arenacombat} is not true:
+        if {difficulty.info.hardcore_death::%{_p}%} is not true:
+            if gamemode of {_p} is not creative or spectator:
+                add {_i} to {stats.infldamage::%{_p}%}
+
+function DamageSuffered(i: number, p: player):
+    if {arenacombat} is not true:
+        if {difficulty.info.hardcore_death::%{_p}%} is not true:
+            if gamemode of {_p} is not creative or spectator:
+                add {_i} to {stats.suffdamage::%{_p}%}
+
+# UCCISIONI, MORTI E SERIE DI UCCISIONI
+on death:
+    if {arenacombat} is true:
+        stop
+    if attacker is a player:
+        add 1 to {stats.kills::%attacker%}
+        add 1 to {stats.killstreak::%attacker%}
+    if victim is a player:
+        add 1 to {stats.deaths::%victim%}
+        if {stats.killstreak::%victim%} != 0:
+            wait 2 ticks
+            send "" to victim
+            if {@genre} is "%{-server.genre.male}%":
+                send "&4&k00 &cSei morto con &e%regex({stats.killstreak::%victim%})% uccisioni&c! &4&k00" to victim
+            else:
+                send "&4&k00 &cSei morta con &e%regex({stats.killstreak::%victim%})% uccisioni&c! &4&k00" to victim
+            send "&e&k00 &6La tua serie di uccisioni è stata azzerata! &e&k00" to victim
+            send "" to victim
+            if {stats.killstreak::%victim%} > {stats.killstreak_max.%victim%}:
+                set {stats.killstreak_max_old.%victim%} to {stats.killstreak_max.%victim%}
+                set {stats.killstreak_max.%victim%} to {stats.killstreak::%victim%}
+                send "&e&k0&6&k0 &aHai stabilito un nuovo record di serie di uccisioni! &f(&3%regex({stats.killstreak_max_old.%victim%})%➜&b&l%regex({stats.killstreak_max.%victim%})%&f) &e&k0&6&k0" to victim
+            send "" to victim
+            delete {stats.killstreak_max_old.%victim%}
+            set {stats.killstreak::%victim%} to 0
+
+# BLOCCHI DISTRUTTI, BLOCCHI PIAZZATI E LOOT PESCATI
+on place:
+    if player's gamemode is survival or adventure:
+        if {difficulty.info.hardcore_death::%player%} is not true:
+            add 1 to {stats.placed_blocks::%player%}
+
+on break:
+    if player's gamemode is survival or adventure:
+        if {difficulty.info.hardcore_death::%player%} is not true:
+            add 1 to {stats.broken_blocks::%player%}
+
+on fish catch:
+    if fishing state is caught fish:
+        if player's gamemode is survival or adventure:
+            if {difficulty.info.hardcore_death::%player%} is not true:
+                add 1 to {stats.fished_loot::%player%}
+
+# ZONA DEBUG
+command /resetminingstats:
+    permission: debug.commands
+    trigger:
+        set {stats.placed_blocks::%player%} to 0
+        set {stats.broken_blocks::%player%} to 0
+        set {stats.fished_loot::%player%} to 0
+
+command /resetinfdamage:
+    permission: debug.commands
+    trigger:
+        set {stats.infldamage::%player%} to 0
+
+command /resetsufdamage:
+    permission: debug.commands
+    trigger:
+        set {stats.suffdamage::%player%} to 0
+
+command /resetbloodstats:
+    permission: debug.commands
+    trigger:
+        set {stats.kills::%player%} to 0
+        set {stats.killstreak::%player%} to 0
+        set {stats.killstreak_max.%player%} to 0
+        set {stats.deaths::%player%} to 0

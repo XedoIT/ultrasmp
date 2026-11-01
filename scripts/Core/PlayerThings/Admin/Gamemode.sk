@@ -1,0 +1,315 @@
+﻿options:
+    prefix: &6[&a&lGM&6]
+
+    gm0: &fSopravvivenza
+    gm1: &fCreativa
+    gm2: &fAvventura
+    gm3: &fSpettatore
+
+    error_sound: entity.enderman.teleport
+
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+
+command /gamemode:
+    aliases: /gm
+    permission: minecraft.command.gamemode
+    description: Modifica la modalità di gioco di un giocatore.
+    executable by: player and console
+    trigger:
+        send "{@prefix} &cComando incompleto."
+        send "{@prefix} &cUtilizzo: &6/gamemode <&esurvival&6> [<&egiocatore&6>]"
+        send "{@prefix} &cUtilizzo: &6/gamemode <&ecreative&6> [<&egiocatore&6>]"
+        send "{@prefix} &cUtilizzo: &6/gamemode <&eadventure&6> [<&egiocatore&6>]"
+        send "{@prefix} &cUtilizzo: &6/gamemode <&espectator&6> [<&egiocatore&6>]"
+        stop
+
+    subcommand survival [<target: offline player>]:
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is not a player:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                    send "{@prefix} &cSpecifica il nome di un giocatore!" to sender
+                    stop
+                set {_target} to sender
+
+            if {_target} is not online:
+                send "{@prefix} &6%{_target}% &cè offline." to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            if gamemode of {_target} is survival:
+                if {_target} is sender:
+                    send "{@prefix} &cSei già in modalità &asopravvivenza&c!" to sender
+                else:
+                    send "{@prefix} &6%{_target}% &cè già in modalità &asopravvivenza&c!" to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            SetSurvivalGamemode({_target})
+            ToggleNoFlyGM({_target})
+            send "{@prefix} &aSei in modalità &csopravvivenza&a." to {_target}
+            if {_target} is not sender:
+                send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%{_target}%&a." to sender
+
+    subcommand creative [<target: offline player>]:
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is not a player:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                    send "{@prefix} &cSpecifica il nome di un giocatore!" to sender
+                    stop
+                set {_target} to sender
+
+            if {_target} is not online:
+                send "{@prefix} &6%{_target}% &cè offline." to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            if gamemode of {_target} is creative:
+                if {_target} is sender:
+                    send "{@prefix} &cSei già in modalità &acreativa&c!" to sender
+                else:
+                    send "{@prefix} &6%{_target}% &cè già in modalità &acreativa&c!" to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            SetCreativeGamemode({_target})
+            ToggleFlyGM({_target})
+            send "{@prefix} &aSei in modalità &ccreativa&a." to {_target}
+            if {_target} is not sender:
+                send "{@prefix} &aModalità &ccreativa &aimpostata per &e%{_target}%&a." to sender
+
+    subcommand adventure [<target: offline player>]:
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is not a player:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                    send "{@prefix} &cSpecifica il nome di un giocatore!" to sender
+                    stop
+                set {_target} to sender
+
+            if {_target} is not online:
+                send "{@prefix} &6%{_target}% &cè offline." to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            if gamemode of {_target} is adventure:
+                if {_target} is sender:
+                    send "{@prefix} &cSei già in modalità &aavventura&c!" to sender
+                else:
+                    send "{@prefix} &6%{_target}% &cè già in modalità &aavventura&c!" to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            SetAdventureGamemode({_target})
+            ToggleNoFlyGM({_target})
+            send "{@prefix} &aSei in modalità &cavventura&a." to {_target}
+            if {_target} is not sender:
+                send "{@prefix} &aModalità &cavventura &aimpostata per &e%{_target}%&a." to sender
+
+    subcommand spectator [<target: offline player>]:
+        suggestions:
+            set the suggestions for the offline player argument to all players
+        trigger:
+            if {_target} is not set:
+                if sender is not a player:
+                    send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                    send "{@prefix} &cSpecifica il nome di un giocatore!" to sender
+                    stop
+                set {_target} to sender
+
+            if {_target} is not online:
+                send "{@prefix} &6%{_target}% &cè offline." to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            if gamemode of {_target} is spectator:
+                if {_target} is sender:
+                    send "{@prefix} &cSei già in modalità &aspettatore&c!" to sender
+                else:
+                    send "{@prefix} &6%{_target}% &cè già in modalità &aspettatore&c!" to sender
+                if sender is a player:
+                    play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+                stop
+
+            SetSpectatorGamemode({_target})
+            ToggleFlyGM({_target})
+            send "{@prefix} &aSei in modalità &cspettatore&a." to {_target}
+            if {_target} is not sender:
+                send "{@prefix} &aModalità &cspettatore &aimpostata per &e%{_target}%&a." to sender
+
+    subcommand <text>:
+        trigger:
+            send "{@prefix} &cComando sconosciuto."
+            send "{@prefix} &cUtilizzo: &6/gamemode <survival|creative|adventure|spectator> [giocatore]"
+            send "{@prefix} &cUtilizzo: &6/gm <survival|creative|adventure|spectator> [giocatore]"
+            send "{@prefix} &cUtilizzo: &6/gms [giocatore]"
+            send "{@prefix} &cUtilizzo: &6/gmc [giocatore]"
+            send "{@prefix} &cUtilizzo: &6/gma [giocatore]"
+            send "{@prefix} &cUtilizzo: &6/gmsp [giocatore]"
+            stop
+
+command /gms [<target: offline player>]:
+    permission: minecraft.command.gamemode
+    description: Imposta la modalità di gioco di un giocatore in sopravvivenza.
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                stop
+            set {_target} to sender
+
+        if {_target} is not online:
+            send "{@prefix} &6%{_target}% &cè offline." to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        if gamemode of {_target} is survival:
+            if {_target} is sender:
+                send "{@prefix} &cSei già in modalità &asopravvivenza&c!" to sender
+            else:
+                send "{@prefix} &6%{_target}% &cè già in modalità &asopravvivenza&c!" to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        SetSurvivalGamemode({_target})
+        ToggleNoFlyGM({_target})
+        send "{@prefix} &aSei in modalità &csopravvivenza&a." to {_target}
+        if {_target} is not sender:
+            send "{@prefix} &aModalità &csopravvivenza &aimpostata per &e%{_target}%&a." to sender
+
+command /gmc [<target: offline player>]:
+    permission: minecraft.command.gamemode
+    description: Imposta la modalità di gioco di un giocatore in creativa.
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                stop
+            set {_target} to sender
+
+        if {_target} is not online:
+            send "{@prefix} &6%{_target}% &cè offline." to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        if gamemode of {_target} is creative:
+            if {_target} is sender:
+                send "{@prefix} &cSei già in modalità &acreativa&c!" to sender
+            else:
+                send "{@prefix} &6%{_target}% &cè già in modalità &acreativa&c!" to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        SetCreativeGamemode({_target})
+        ToggleFlyGM({_target})
+        send "{@prefix} &aSei in modalità &ccreativa&a." to {_target}
+        if {_target} is not sender:
+            send "{@prefix} &aModalità &ccreativa &aimpostata per &e%{_target}%&a." to sender
+
+command /gma [<target: offline player>]:
+    permission: minecraft.command.gamemode
+    description: Imposta la modalità di gioco di un giocatore in avventura.
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                stop
+            set {_target} to sender
+
+        if {_target} is not online:
+            send "{@prefix} &6%{_target}% &cè offline." to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        if gamemode of {_target} is adventure:
+            if {_target} is sender:
+                send "{@prefix} &cSei già in modalità &aavventura&c!" to sender
+            else:
+                send "{@prefix} &6%{_target}% &cè già in modalità &aavventura&c!" to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        SetAdventureGamemode({_target})
+        ToggleNoFlyGM({_target})
+        send "{@prefix} &aSei in modalità &cavventura&a." to {_target}
+        if {_target} is not sender:
+            send "{@prefix} &aModalità &cavventura &aimpostata per &e%{_target}%&a." to sender
+
+command /gmsp [<target: offline player>]:
+    permission: minecraft.command.gamemode
+    description: Imposta la modalità di gioco di un giocatore in spettatore.
+    executable by: player and console
+    suggestions:
+        set the suggestions for the offline player argument to all players
+    trigger:
+        if {_target} is not set:
+            if sender is not a player:
+                send "{@prefix} &cSolo i giocatori possono cambiare la propria modalità di gioco." to sender
+                stop
+            set {_target} to sender
+
+        if {_target} is not online:
+            send "{@prefix} &6%{_target}% &cè offline." to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        if gamemode of {_target} is spectator:
+            if {_target} is sender:
+                send "{@prefix} &cSei già in modalità &aspettatore&c!" to sender
+            else:
+                send "{@prefix} &6%{_target}% &cè già in modalità &aspettatore&c!" to sender
+            if sender is a player:
+                play sound "{@error_sound}" with volume 1 and pitch 0 at player for player
+            stop
+
+        SetSpectatorGamemode({_target})
+        ToggleFlyGM({_target})
+        send "{@prefix} &aSei in modalità &cspettatore&a." to {_target}
+        if {_target} is not sender:
+            send "{@prefix} &aModalità &cspettatore &aimpostata per &e%{_target}%&a." to sender
+
+function SetSurvivalGamemode(p: player):
+    set {_p}'s gamemode to survival
+    set {playerinfo.gamemode.%{_p}%} to "{@gm0}"
+
+function SetCreativeGamemode(p: player):
+    set {_p}'s gamemode to creative
+    set {playerinfo.gamemode.%{_p}%} to "{@gm1}"
+
+function SetAdventureGamemode(p: player):
+    set {_p}'s gamemode to adventure
+    set {playerinfo.gamemode.%{_p}%} to "{@gm2}"
+
+function SetSpectatorGamemode(p: player):
+    set {_p}'s gamemode to spectator
+    set {playerinfo.gamemode.%{_p}%} to "{@gm3}"

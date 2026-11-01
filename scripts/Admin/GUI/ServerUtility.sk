@@ -1,0 +1,316 @@
+options:
+    confirm_sound: block.note_block.pling
+    error_sound: entity.enderman.teleport
+    check_sound: entity.player.levelup
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+
+    gui_background: {settings.personalization.gui_background::%{_p}%}
+
+    selected: &aSELEZIONATO!
+    not_selected: &eClicca per selezionare.
+
+    0: &fPacifica
+    1: &aFacile
+    2: &eNormale
+    3: &6&lDifficile
+    4: &4&lHardcore
+
+    0_hint: &fGoditi la tranquillità e gioca senza pensieri (e pericoli).
+    1_hint: &aI mostri saranno deboli, ma non sottovalutarli: sapranno comunque come ferirti!
+    2_hint: &eLa difficoltà predefinita di Minecraft, ma non dell'SMP. Fai attenzione ai pericoli!
+    3_hint: &6Qui le cose si fanno più interessanti! Tieni gli occhi aperti sui pericoli (e sulla tua Vita!)
+    4_hint_1: &cL'%{-server.name}% è stata impostata su &4&lHardcore&c!
+    4_hint_2: &cCiò significa che non puoi permetterti di morire, altrimenti...
+
+    difficulty_changed: &7La difficoltà dell'SMP è stata impostata su %{-difficulty.info}%&7
+    already_set: %{-server.prefix.main}% &cLa difficoltà del server è già impostata su %{-difficulty.info}%&c!
+
+    genre_v: {genre.%victim%}
+    genre_lp: {genre.%loop-player%}
+    fly: {playerinfo.fly.%loop-player%}
+    god: {playerinfo.god.%loop-player%}
+
+
+# ============================================================
+#  EVENTI
+# ============================================================
+
+on chat with priority lowest:
+    if {-sm.%player%.gms} is true:
+        cancel event
+        delete {-sm.%player%.gms}
+        set {_name} to uncolored message
+        wait 1 tick
+        applyGamemode(player, {_name}, survival, "sopravvivenza")
+    else if {-sm.%player%.gmc} is true:
+        cancel event
+        delete {-sm.%player%.gmc}
+        set {_name} to uncolored message
+        wait 1 tick
+        applyGamemode(player, {_name}, creative, "creativa")
+    else if {-sm.%player%.gma} is true:
+        cancel event
+        delete {-sm.%player%.gma}
+        set {_name} to uncolored message
+        wait 1 tick
+        applyGamemode(player, {_name}, adventure, "avventura")
+    else if {-sm.%player%.gmsp} is true:
+        cancel event
+        delete {-sm.%player%.gmsp}
+        set {_name} to uncolored message
+        wait 1 tick
+        applyGamemode(player, {_name}, spectator (gamemode), "spettatore")
+
+on death of player:
+    if {difficulty.hardcore_mode} is true:
+        set {difficulty.info.hardcore_death::%victim%} to true
+        set {difficulty.info.hardcore_death.%victim%.marker} to "&4☠"
+        execute console command "/lp user %victim% parent set death"
+        if {@genre_v} is "%{-server.genre.female}%":
+            set death message to "&c%victim% è diventata un fantasma!"
+            #send "%{server.prefix.main}% &4&lSei morto! &cTornerai in vita quando la modalità Hardcore sarà disattivata." to victim
+        else:
+            set death message to "&c%victim% è diventato un fantasma!"
+            #send "%{server.prefix.main}% &4&lSei morta! &cTornerai in vita quando la modalità Hardcore sarà disattivata." to victim
+
+every second:
+    loop all players:
+        if {difficulty.hardcore_mode} is true:
+            if {difficulty.info.hardcore_death::%loop-player%} is true:
+                apply infinite glowing 1 to loop-player:
+                    hide the particles
+                    hide the icon
+                apply infinite night vision 1 to loop-player:
+                    hide the particles
+                    hide the icon
+                make loop-player invulnerable
+                set loop-player's flight mode to true
+                send action bar "&cSei un fantasma! &6La tua esperienza di gioco non è più la stessa." to loop-player
+
+on break:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+        send "%{-server.prefix.main}% &cNon puoi distruggere blocchi finché sei un fantasma." to player
+on place:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+        send "%{-server.prefix.main}% &cNon puoi piazzare blocchi finché sei un fantasma." to player
+on command:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        if command isn't "home", "back", "msg" or "r":
+            cancel event
+            send "%{-server.prefix.main}% &cNon puoi eseguire questo comando finché sei un fantasma."
+            send "%{-server.prefix.main}% &6%player% &cha provato ad eseguire il comando &e/%command% &cda fantasma." to console
+on damage:
+    if attacker is a player:
+        if {difficulty.info.hardcore_death::%attacker%} is true:
+            cancel event
+            send "%{-server.prefix.main}% &cNon puoi ferire nessuno finché sei un fantasma." to attacker
+on food level change:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+on drop:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+        send "%{-server.prefix.main}% &cNon puoi buttare oggetti per terra finché sei un fantasma." to player
+on pickup:
+    if {difficulty.info.hardcore_death::%player%} is true:
+        cancel event
+
+every second:
+    loop all players:
+        if {difficulty.hardcore_mode} is not true:
+            if {difficulty.info.hardcore_death::%loop-player%} is true:
+                delete {difficulty.info.hardcore_death::%loop-player%}
+                delete {difficulty.info.hardcore_death.%loop-player%.marker}
+                remove glowing from loop-player
+                remove night vision from loop-player
+                make loop-player vulnerable
+                set loop-player's flight mode to false
+                execute console command "/lp user %loop-player% parent set default"
+                if {@genre_lp} is "%{-server.genre.female}%":
+                    send "%{-server.prefix.main}% &dSei tornata in vita! Puoi riprendere la tua avventura normalmente." to loop-player
+                else:
+                    send "%{-server.prefix.main}% &bSei tornato in vita! Puoi riprendere la tua avventura normalmente." to loop-player
+
+
+# ============================================================
+#  FUNZIONI: GAMEMODE
+# ============================================================
+
+# Chiede in chat il nome del giocatore (poi gestito da "on chat")
+function askGamemodeTarget(p: player, name: text):
+    close {_p}'s inventory
+    send "%{-server.prefix.main}% &7Chi vuoi mettere in &f%{_name}%&7?" to {_p}
+    play sound "{@check_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+
+# Applica la gamemode al giocatore scritto in chat
+function applyGamemode(sender: player, name: text, gm: gamemode, label: text):
+    set {_target} to player({_name})
+    if {_target} is not set:
+        send "%{-server.prefix.main}% &6%{_name}% &cè offline." to {_sender}
+        play sound "{@error_sound}" with volume 1 and pitch 0 at {_sender} for {_sender}
+        openServerUtility({_sender})
+        stop
+    if gamemode of {_target} isn't {_gm}:
+        if {_gm} is survival:
+            SetSurvivalGamemode({_target})
+            ToggleNoFlyGM({_target})
+        else if {_gm} is creative:
+            SetCreativeGamemode({_target})
+            ToggleFlyGM({_target})
+        else if {_gm} is adventure:
+            SetAdventureGamemode({_target})
+            ToggleNoFlyGM({_target})
+        else:
+            SetSpectatorGamemode({_target})
+            ToggleFlyGM({_target})
+        send "%{-server.prefix.main}% &aModalità &c%{_label}% &aimpostata per &e%{_target}%&a." to {_sender}
+        send "%{-server.prefix.main}% &aSei in modalità &c%{_label}%&a." to {_target}
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_sender} for {_sender}
+        play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_target} for {_target}
+    else:
+        send "%{-server.prefix.main}% &6%{_target}% &cè già in modalità &a%{_label}%&c!" to {_sender}
+        play sound "{@error_sound}" with volume 1 and pitch 0 at {_sender} for {_sender}
+    openServerUtility({_sender})
+
+
+# ============================================================
+#  FUNZIONI: DIFFICOLTÀ
+# ============================================================
+
+function smpDifficultyAlready(p: player):
+    send "%{-server.prefix.main}% {@already_set}" to {_p}
+    play sound "{@error_sound}" with volume 1 and pitch 0 at {_p} for {_p}
+
+# id = nome della variabile {difficulty.<id>} del pulsante, label = testo di {-difficulty.info}
+function setSMPDifficulty(p: player, d: difficulty, id: text, label: text, msg: text):
+    set difficulty of all worlds to {_d}
+    set {-difficulty.info} to {_label}
+    set {-difficulty.peaceful}, {-difficulty.easy}, {-difficulty.normal}, {-difficulty.hard} and {-difficulty.hardcore} to "{@not_selected}"
+    set {-difficulty.%{_id}%} to "{@selected}"
+    if {_id} is "hardcore":
+        set {difficulty.hardcore_mode} to true
+    else:
+        delete {difficulty.hardcore_mode}
+    play sound "{@confirm_sound}" with volume 1 and pitch 2 at {_p} for {_p}
+    broadcast "%{-server.prefix.main}% {@difficulty_changed}"
+    send "%{-server.prefix.main}% %{_msg}%" to all players
+    if {_id} is "hardcore":
+        send "%{-server.prefix.main}% {@4_hint_2}" to all players
+        send all players title "&c&k&l0 &4&lHARDCORE MODE &c&k&l0" with subtitle "&cOgni tua mossa sbagliata sarà fatale!" for 5 seconds with 0.5 seconds fade in and 0.5 seconds fade out
+        play sound "entity.wither.spawn" with volume 1 and pitch 0 at all players
+    openServerUtility({_p})
+
+
+# ============================================================
+#  FUNZIONI: ORA DI GIOCO
+# ============================================================
+
+function setSMPTime(p: player, t: time, label: text):
+    set time of the world "smp" to {_t}
+    send "%{-server.prefix.main}% &7Ora di gioco impostata alle %{_label}%&7." to {_p}
+
+
+# ============================================================
+#  GUI
+# ============================================================
+
+function guiDifficulty(gui: inventory):
+    set slot 10 and 16 of {_gui} to compass named "&2Difficoltà" with lore "&7Gestisci la difficoltà dell'SMP."
+    set slot 11 of {_gui} to white concrete named "{@0}" with lore "&7Imposta la difficoltà del server", "&7su &f&lPacifica&7.", "", "&3Attualmente l'SMP è in %{-difficulty.info}%", "" and "%{-difficulty.peaceful}%"
+    set slot 12 of {_gui} to lime concrete named "{@1}" with lore "&7Imposta la difficoltà del server", "&7su &a&lFacile&7.", "", "&3Attualmente l'SMP è in %{-difficulty.info}%", "" and "%{-difficulty.easy}%"
+    set slot 13 of {_gui} to yellow concrete named "{@2}" with lore "&7Imposta la difficoltà del server", "&7su &e&lNormale&7.", "", "&3Attualmente l'SMP è in %{-difficulty.info}%", "" and "%{-difficulty.normal}%"
+    set slot 14 of {_gui} to orange concrete named "{@3}" with lore "&7Imposta la difficoltà del server", "&7su &6&lDifficile&7.", "", "&3Attualmente l'SMP è in %{-difficulty.info}%", "" and "%{-difficulty.hard}%"
+    set slot 15 of {_gui} to red concrete named "{@4}" with lore "&7Imposta la difficoltà del server", "&7su &c&lHardcore&7.", "", "&4&lATTENZIONE!", "&cQuesta difficoltà non permette di", "&crinascere alla morte!", "&4&lSelezionala a tuo rischio!", "", "&3Attualmente l'SMP è in %{-difficulty.info}%", "" and "%{-difficulty.hardcore}%"
+
+function guiTime(gui: inventory):
+    set slot 19 and 25 of {_gui} to clock named "&bOra di gioco" with lore "&7Modifica l'ora di gioco dell'SMP."
+    set slot 20 of {_gui} to yellow stained glass pane named "&eAlba" with lore "&7Imposta l'ora di gioco alle &c06:00"
+    set slot 21 of {_gui} to orange stained glass pane named "&6Prima mattinata" with lore "&7Imposta l'ora di gioco alle &c09:00"
+    set slot 22 of {_gui} to red stained glass pane named "&cMezzogiorno" with lore "&7Imposta l'ora di gioco alle &c12:00"
+    set slot 23 of {_gui} to orange stained glass pane named "&6Tramonto" with lore "&7Imposta l'ora di gioco alle &c18:30"
+    set slot 24 of {_gui} to blue stained glass pane named "&9Mezzanotte" with lore "&7Imposta l'ora di gioco alle &c00:00"
+
+function guiGamemode(gui: inventory, p: player):
+    set slot 37 and 43 of {_gui} to skull of {_p} named "&eModalità di gioco" with lore "&7Modifica la modalità di gioco" and "&7di un giocatore."
+    set slot 38 of {_gui} to iron sword with nbt from {@no_flags} named "&9Sopravvivenza" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eSopravvivenza&7."
+    set slot 39 of {_gui} to grass block named "&aCreativa" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eCreativa&7."
+    set slot 41 of {_gui} to map named "&2Avventura" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eAvventura&7."
+    set slot 42 of {_gui} to ender eye named "&bSpettatore" with lore "&7Imposta la modalità di gioco di un" and "&7giocatore su &eSpettatore&7."
+
+function openServerUtility(p: player):
+    set {_gui} to a new chest inventory with 6 rows named "Utilità Server"
+    if {@gui_background} is true:
+        loop integers from 0 to 53:
+            set slot loop-value of {_gui} to black stained glass pane named "&r"
+        set slot 40 of {_gui} to gray stained glass pane named "&r"
+    guiDifficulty({_gui})
+    guiTime({_gui})
+    guiGamemode({_gui}, {_p})
+    set slot 49 of {_gui} to arrow named "&aIndietro" with lore "&7Torna a Profilo &7&lSMP"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "Utilità Server":
+        if type of event-inventory is chest inventory:
+            cancel event
+            if click type is left mouse button:
+                # Difficoltà
+                if index of event-slot is 11:
+                    if difficulty of all worlds isn't peaceful:
+                        setSMPDifficulty(player, peaceful, "peaceful", "{@0}", "{@0_hint}")
+                    else:
+                        smpDifficultyAlready(player)
+                else if index of event-slot is 12:
+                    if difficulty of all worlds isn't easy:
+                        setSMPDifficulty(player, easy, "easy", "{@1}", "{@1_hint}")
+                    else:
+                        smpDifficultyAlready(player)
+                else if index of event-slot is 13:
+                    if difficulty of all worlds isn't normal:
+                        setSMPDifficulty(player, normal, "normal", "{@2}", "{@2_hint}")
+                    else:
+                        smpDifficultyAlready(player)
+                else if index of event-slot is 14:
+                    if difficulty of all worlds isn't hard:
+                        setSMPDifficulty(player, hard, "hard", "{@3}", "{@3_hint}")
+                    else if {difficulty.hardcore_mode} is true:
+                        setSMPDifficulty(player, hard, "hard", "{@3}", "{@3_hint}")
+                    else:
+                        smpDifficultyAlready(player)
+                else if index of event-slot is 15:
+                    if {difficulty.hardcore_mode} is true:
+                        smpDifficultyAlready(player)
+                    else:
+                        setSMPDifficulty(player, hard, "hardcore", "{@4}", "{@4_hint_1}")
+
+                # Ora di gioco
+                else if index of event-slot is 20:
+                    setSMPTime(player, 06:00, "&e06:00")
+                else if index of event-slot is 21:
+                    setSMPTime(player, 09:00, "&609:00")
+                else if index of event-slot is 22:
+                    setSMPTime(player, 12:00, "&c12:00")
+                else if index of event-slot is 23:
+                    setSMPTime(player, 18:30, "&618:30")
+                else if index of event-slot is 24:
+                    setSMPTime(player, 00:00, "&900:00")
+
+                # Gamemode
+                else if index of event-slot is 38:
+                    askGamemodeTarget(player, "sopravvivenza")
+                    set {-sm.%player%.gms} to true
+                else if index of event-slot is 39:
+                    askGamemodeTarget(player, "creativa")
+                    set {-sm.%player%.gmc} to true
+                else if index of event-slot is 41:
+                    askGamemodeTarget(player, "avventura")
+                    set {-sm.%player%.gma} to true
+                else if index of event-slot is 42:
+                    askGamemodeTarget(player, "spettatore")
+                    set {-sm.%player%.gmsp} to true
+
+                # Indietro
+                else if index of event-slot is 49:
+                    openProfileGui(player)

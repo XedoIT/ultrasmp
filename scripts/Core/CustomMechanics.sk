@@ -1,0 +1,110 @@
+on right click:
+# BLOCCHI DI PIETRISCO MUSCHIOSO IN PIETRISCO NORMALE
+    if player's tool is shears:
+        event-block is mossy cobblestone
+        if player's offhand is not air:
+            cancel event
+        set event-block to cobblestone
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy cobblestone stairs
+        if player's offhand is not air:
+            cancel event
+        set event-block to cobblestone stairs
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy cobblestone slab
+        if player's offhand is not air:
+            cancel event
+        set event-block to cobblestone slab
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy cobblestone wall
+        if player's offhand is not air:
+            cancel event
+        set event-block to cobblestone wall
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy stone bricks
+        if player's offhand is not air:
+            cancel event
+        set event-block to stone bricks
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy stone brick stairs
+        if player's offhand is not air:
+            cancel event
+        set event-block to stone brick stairs
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy stone brick slab
+        if player's offhand is not air:
+            cancel event
+        set event-block to stone brick slab
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is mossy stone brick wall
+        if player's offhand is not air:
+            cancel event
+        set event-block to stone brick wall
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+        event-block is infested mossy stone bricks
+        if player's offhand is not air:
+            cancel event
+        set event-block to infested stone bricks
+        drop vine at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+
+# OSSIDIANA IN OSSIDIANA PIANGENTE
+    # CONVERSIONE IN OSSIDIANA PIANGENTE
+    if player's tool is lapis lazuli:
+        event-block is obsidian
+        if player's offhand is not air:
+            cancel event
+        set event-block to crying obsidian
+        play sound "item.glow_ink_sac.use" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 of player's tool from player's inventory
+    # CONVERSIONE IN OSSIDIANA
+    if player's tool is shears:
+        event-block is crying obsidian
+        if player's offhand is not air:
+            cancel event
+        set event-block to obsidian
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 1 from held item's durability
+
+# SCHEGGE DI RISONANZA DAL BLOCCO DI SCULK
+    if player's tool is shears:
+        event-block is sculk
+        if player's offhand is not air:
+            cancel event
+            stop
+        set {_shards} to a random integer between 1 and 3
+        drop {_shards} of echo shard at event-block's position
+        play sound "entity.sheep.shear" with volume 1 to player
+        if player's gamemode is not creative:
+            remove 60 from held item's durability
+            if durability of player's tool <= 0:
+                set player's tool to air
+                play sound "entity.item.break" with volume 1 to player

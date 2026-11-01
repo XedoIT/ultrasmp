@@ -1,0 +1,377 @@
+# VERSIONE 1.0.2 
+# NOVITÀ v1.0.2: MODIFICA NOME DEL SISTEMA E DELLE VARIABILI
+#
+# PERMESSI
+#
+# et.admin.homes
+# et.admin.homeinfo # NON ANCORA USATO
+# debug.commands
+#
+options:
+    prefix: &4[&6&lH&e&lO&6&lM&e&lE&6&lS&4]
+    
+    genre: {genre.%player%}
+
+every 5 seconds:
+    loop all players:
+        if loop-player's bed exists:
+            if {et.homes_name::%loop-player%::*} does not contain "letto":
+                set {et.homes_loc::%loop-player%::bed} to loop-player's bed location
+                add "letto" to {et.homes_name::%loop-player%::*}
+                add 1 to {et.homes::%loop-player%}
+                set {et.homes_whenset::%loop-player%::bed} to now
+        else:
+            if {et.homes_name::%loop-player%::*} contains "letto":
+                delete {et.homes_loc::%loop-player%::bed}
+                remove "letto" from {et.homes_name::%loop-player%::*}
+                subtract 1 from {et.homes::%loop-player%}
+                delete {et.homes_whenset::%loop-player%::bed}
+
+on bed leave:
+    if player's bed location is not {et.homes_loc::%player%::bed}:
+        set {et.homes_loc::%player%::bed} to player's bed location
+
+command /sethome <home: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/sethome <&ecasa&6>&c.
+    description: Crea una casa alla tua posizione.
+    executable by: player
+    trigger:
+        if {_home} is not "letto":
+            if {et.homes_name::%player%::*} does not contain {_home}:
+                set {et.homes_loc::%player%::%{_home}%} to player's location
+                add {_home} to {et.homes_name::%player%::*}
+                add 1 to {et.homes::%player%}
+                set {et.homes_whenset::%player%::%{_home}%} to now
+                send "{@prefix} &cHai creato la casa &6%{_home}%&c!"
+                stop
+            else:
+                send "{@prefix} &cHai già una casa con quel nome!"
+                stop
+        else:
+            if {et.homes_name::%player%::*} does not contain {_home}:
+                send "{@prefix} &cNon puoi usare il nome ""&6bed&c"" dato che verrà utilizzato non appena imposterai il tuo spawn su un letto!"
+                stop
+            else:
+                send "{@prefix} &cHai già una casa con quel nome!"
+                stop
+
+command /delhome <home: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/delhome <&ecasa&6>&c.
+    description: Elimina una delle tue case.
+    executable by: player
+    suggestions:
+        set the suggestions for the text argument to {et.homes_name::%player%::*}
+    trigger:
+        if {_home} is not "letto":
+            if {et.homes_name::%player%::*} contains {_home}:
+                delete {et.homes_loc::%player%::%{_home}%}
+                remove {_home} from {et.homes_name::%player%::*}
+                subtract 1 from {et.homes::%player%}
+                delete {et.homes_whenset::%player%::%{_home}%}
+                if {_home} is {et.homes_main_name.%player%}:
+                    delete {et.homes_main_name.%player%}
+                    delete {et.homes_main_loc.%player%}
+                send "{@prefix} &cHai eliminato la casa &6%{_home}%&c."
+                stop
+            else:
+                send "{@prefix} &cNon possiedi una casa con quel nome!"
+                stop
+        else:
+            send "{@prefix} &cNon puoi eliminare la posizione del tuo letto!"
+            stop
+
+command /home [<home: text>]:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/home [&ecasa&6]&c.
+    description: Vai in una delle tue case.
+    executable by: player
+    suggestions:
+        set the suggestions for the text argument to {et.homes_name::%player%::*}
+    trigger:
+        if {_home} is not set:
+            if {et.homes::%player%} > 0:
+                if {et.homes_main_loc.%player%} is set:
+                    etTeleport(player, {et.homes_main_loc.%player%})
+                    set {_genre} to {@genre}
+                    if {_genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &6Ti ho portata alla tua casa principale &c%{et.homes_main_name.%player%}%&6."
+                        stop
+                    else:
+                        send "{@prefix} &6Ti ho portato alla tua casa principale &c%{et.homes_main_name.%player%}%&6."
+                        stop
+                else if {et.homes_loc::%player%::bed} is set:
+                    etTeleport(player, {et.homes_loc::%player%::bed})
+                    set {_genre} to {@genre}
+                    if {_genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &6Ti ho portata al tuo letto."
+                        stop
+                    else:
+                        send "{@prefix} &6Ti ho portato al tuo letto."
+                        stop
+                else:
+                    send "{@prefix} &cSpecifica il nome di una casa!"
+                    stop
+            else:
+                send formatted "{@prefix} &cNon possiedi case. Creane una con <click:suggest_command:/sethome >&6&n/sethome</click><reset> &6<&ecasa&6>&c."
+                stop
+        else:
+            if {_home} is not "letto":
+                if {et.homes_name::%player%::*} contains {_home}:
+                    etTeleport(player, {et.homes_loc::%player%::%{_home}%})
+                    set {_genre} to {@genre}
+                    if {_genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &6Ti ho portata alla casa &c%{_home}%&6."
+                        stop
+                    else:
+                        send "{@prefix} &6Ti ho portato alla casa &c%{_home}%&6."
+                        stop
+                else:
+                    send "{@prefix} &cNon possiedi una casa con quel nome!"
+                    stop
+            else:
+                if {et.homes_loc::%player%::bed} is set:
+                    etTeleport(player, {et.homes_loc::%player%::bed})
+                    set {_genre} to {@genre}
+                    if {_genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &6Ti ho portata al tuo letto."
+                        stop
+                    else:
+                        send "{@prefix} &6Ti ho portato al tuo letto."
+                        stop
+                else:
+                    send "{@prefix} &cNon hai ancora un letto!"
+                    stop
+
+command /movehome <home: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/movehome <&ecasa&6>&c.
+    description: Sposta una delle tue case alla tua posizione.
+    executable by: player
+    suggestions:
+        set the suggestions for the text argument to {et.homes_name::%player%::*}
+    trigger:
+        if {_home} is not "letto":
+            if {et.homes_name::%player%::*} contains {_home}:
+                if player's location is {et.homes_loc::%player%::%{_home}%}:
+                    send "{@prefix} &cLa tua posizione coincide con quella della casa che stai cercando di spostare!"
+                else:
+                    set {et.homes_loc::%player%::%{_home}%} to player's location
+                    if {_home} is {et.homes_main_name.%player%}:
+                        set {et.homes_main_loc.%player%} to player's location
+                    send "{@prefix} &cLa casa &6%{_home}% &cè stata spostata alla tua posizione."
+                    stop
+            else:
+                send "{@prefix} &cNon possiedi una casa con quel nome!"
+                stop
+        else:
+            send "{@prefix} &cNon puoi spostare la posizione del tuo letto!"
+            stop
+
+command /setmainhome <home: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/setmainhome <&ecasa&6>&c.
+    description: Imposta come principale una delle tue case.
+    executable by: player
+    suggestions:
+        set the suggestions for the text argument to {et.homes_name::%player%::*}
+    trigger:
+        if {_home} is not "letto":
+            if {et.homes_name::%player%::*} contains {_home}:
+                if {_home} is not {et.homes_main_name.%player%}:
+                    set {et.homes_main_name.%player%} to {_home}
+                    set {et.homes_main_loc.%player%} to {et.homes_loc::%player%::%{_home}%}
+                    send "{@prefix} &6Hai impostato come principale la casa &c%{_home}%&6."
+                    stop
+                else:
+                    send "{@prefix} &cLa casa &6%{_home}% &cè già la tua casa principale!"
+                    stop
+            else:
+                send "{@prefix} &cNon possiedi una casa con quel nome!"
+                stop
+        else:
+            send "{@prefix} &cNon puoi impostare il tuo letto come casa principale!"
+            stop
+
+command /homes [<target: offline player>]:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/homes&c.
+    description: Mostra tutte le tue case.
+    executable by: player and console
+    suggestions:
+        if sender has permission "et.admin.homes":
+            set the suggestions for the offline player argument to {players::*}
+        else:
+            set the suggestions for the offline player argument to ""
+    trigger:
+        if sender is player:
+            if {et.homes::%player%} is not set:
+                set {et.homes::%player%} to 0
+            if {_target} is not set:
+                if {et.homes::%player%} = 0:
+                    send formatted "{@prefix} &cNon possiedi case. Creane una con <click:suggest_command:/sethome >&6&n/sethome</click><reset> &6<&ecasa&6>&c."
+                    stop
+                set {_names} to join {et.homes_name::%player%::*} with ", "
+                if {et.homes::%player%} = 1:
+                    send "{@prefix} &6Possiedi &e%{et.homes::%player%}% &6casa: &f%{_names}%"
+                    stop
+                if {et.homes::%player%} > 1:
+                    send "{@prefix} &6Possiedi &e%{et.homes::%player%}% &6case: &f%{_names}%"
+                    stop
+            else:
+                if player has permission "et.admin.homes":
+                    if {et.homes::%{_target}%} is set:
+                        if {_target} is not player:
+                            if {et.homes::%{_target}%} = 0:
+                                send "{@prefix} &6%{_target}% &cnon possiede case."
+                                stop
+                            set {_names} to join {et.homes_name::%{_target}%::*} with ", "
+                            if {et.homes::%{_target}%} = 1:
+                                send "{@prefix} &c%{_target}% &6possiede &e%{et.homes::%{_target}%}% &6casa: &f%{_names}%"
+                                stop
+                            if {et.homes::%{_target}%} > 1:
+                                send "{@prefix} &c%{_target}% &6possiede &e%{et.homes::%{_target}%}% &6case: &f%{_names}%"
+                                stop
+                        else:
+                            execute player command "/homes"
+                            stop
+                    else:
+                        send "{@prefix} &6%{_target}% &cnon possiede case."
+                        stop
+                else:
+                    if {et.homes::%player%} = 0:
+                        send "{@prefix} &cNon possiedi case. Creane una con &6/sethome <&ecasa&6>&c."
+                        stop
+                    set {_names} to join {et.homes_name::%player%::*} with ", "
+                    if {et.homes::%player%} = 1:
+                        send "{@prefix} &6Possiedi &e%{et.homes::%player%}% &6casa: &f%{_names}%"
+                        stop
+                    if {et.homes::%player%} > 1:
+                        send "{@prefix} &6Possiedi &e%{et.homes::%player%}% &6case: &f%{_names}%"
+                        stop
+        else:
+            if {_target} is not set:
+                send "{@prefix} &cSpecifica il nome di un giocatore!"
+                stop
+            else:
+                if {et.homes::%{_target}%} is set:
+                    if {et.homes::%{_target}%} = 0:
+                        send "{@prefix} &6%{_target}% &cnon possiede case."
+                        stop
+                    set {_names} to join {et.homes_name::%{_target}%::*} with ", "
+                    if {et.homes::%{_target}%} = 1:
+                        send "{@prefix} &c%{_target}% &6possiede &e%{et.homes::%{_target}%}% &6casa: &f%{_names}%"
+                        stop
+                    if {et.homes::%{_target}%} > 1:
+                        send "{@prefix} &c%{_target}% &6possiede &e%{et.homes::%{_target}%}% &6case: &f%{_names}%"
+                        stop
+                else:
+                    send "{@prefix} &6%{_target}% &cnon possiede case."
+                    stop
+
+command /homeinfo <home: text>:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/homeinfo <&ecasa&6>&c.
+    description: Mostra le informazioni di una o più case.
+    executable by: player
+    suggestions:
+        set the suggestions for the text argument to {et.homes_name::%player%::*}
+    trigger:
+        if {_home} is not "letto":
+            if {et.homes_name::%player%::*} contains {_home}:
+                set {_loc} to {et.homes_loc::%player%::%{_home}%}
+                send "&6----------- &c&lINFO CASA &6-----------"
+                send " &fNome: &c%{_home}%"
+                send " &fPosizione: &eXYZ: %floor(x-coordinate of {_loc})% / %floor(y-coordinate of {_loc})% / %floor(z-coordinate of {_loc})% (&7%world of {_loc}%&e)"
+                send " &fData creazione: &3%{et.homes_whenset::%player%::%{_home}%}%"
+                if {_home} is {et.homes_main_name.%player%}:
+                    send " &fPrincipale: &aSì"
+                else:
+                    send " &fPrincipale: &cNo"
+                send "&6---------------------------------"
+                stop
+            else:
+                send "{@prefix} &cNon possiedi una casa con quel nome!"
+                stop
+        else:
+            if player's bed exists:
+                set {_loc} to player's bed location
+                send "&6----------- &c&lINFO CASA &6-----------"
+                send " &fNome: &c%{_home}% (&7AUTOMATICA&c)"
+                send " &fPosizione: &eXYZ: %floor(x-coordinate of {_loc})% / %floor(y-coordinate of {_loc})% / %floor(z-coordinate of {_loc})% (&7%world of {_loc}%&e)"
+                send " &fData creazione: &3%{et.homes_whenset::%player%::bed}%"
+                if {et.homes_main_name.%player%} is not set:
+                    send " &fPrincipale: &aSì"
+                else:
+                    send " &fPrincipale: &cNo"
+                send "&6---------------------------------"
+                stop
+            else:
+                send "{@prefix} &cNon hai ancora un letto!"
+                stop
+
+command /homehelp:
+    usage: {@prefix} &cComando incompleto.%nl%{@prefix} &cUtilizza &6/homehelp&c.
+    description: Mostra la lista dei comandi per le case.
+    executable by: player and console
+    trigger:
+        if sender is player:
+            send ""
+            send "&cLISTA COMANDI PER LE CASE"
+            send " &f- &6/sethome <&ecasa&6> &f- &7Crea una casa."
+            send " &f- &6/delhome <&ecasa&6> &f- &7Elimina una casa."
+            send " &f- &6/movehome <&ecasa&6> &f- &7Sposta una casa alla tua posizione."
+            send " &f- &6/setmainhome <&ecasa&6> &f- &7Imposta come principale una delle tue case."
+            send " &f- &6/home <&ecasa&6> &f- &7Vai in una delle tue case."
+            send " &f- &6/homes &f- &7Mostra tutte le tue case."
+            send " &f- &6/homeinfo <&ecasa&6> &f- &7Mostra le informazioni di una casa."
+            send " &f- &6/homehelp &f- &7Mostra questa lista."
+            send ""
+            stop
+        else:
+            send ""
+            send "&cLISTA COMANDI PER LE CASE"
+            send " &f- &6/homes <&egiocatore&6> &f- &7Mostra tutte le case di un giocatore."
+            #send " &f- &6/homeinfo <&ecasa&6> &f- &7Mostra le informazioni di una casa."
+            send " &f- &6/homehelp &f- &7Mostra questa lista."
+            send ""
+            stop
+
+
+# FUNZIONE PER TELETRASPORTARE GIOCATORE E IL SUO NAMETAG TRA LE DIMENSIONI (vale anche per gli script Warps.sk e TPA.sk)
+function etTeleport(p: player, l: location):
+    set {_pass::*} to passengers of {_p}
+    if {_pass::*} is set:
+        eject passengers of {_p}
+    teleport {_p} to {_l}
+    if world of {_p} is not world of {_l}:
+        wait 1 tick
+        eject passengers of {_p}
+        teleport {_p} to {_l}
+    if {_pass::*} is set:
+        wait 2 ticks
+        loop {_pass::*}:
+            teleport loop-value to {_p}'s location
+        wait 1 tick
+        loop {_pass::*}:
+            add loop-value to passengers of {_p}
+
+
+# ZONA DEBUG
+command /resetallhomes [<target: offline player>]:
+    permission: debug.commands
+    suggestions:
+        set the suggestions for the offline player argument to {players::*}
+    trigger:
+        if {_target} is not set:
+            delete {et.homes_loc::%player%::*}
+            delete {et.homes_name::%player%::*}
+            delete {et.homes_whenset::%player%::*}
+            delete {et.homes_main_loc.%player%}
+            delete {et.homes_main_name.%player%}
+            set {et.homes::%player%} to 0
+            send "&e&l[Debug] &fTutte le tue case e i relativi dati sono stati eliminati."
+            stop
+        else:
+            delete {et.homes_loc::%{_target}%::*}
+            delete {et.homes_name::%{_target}%::*}
+            delete {et.homes_whenset::%{_target}%::*}
+            delete {et.homes_main_loc.%{_target}%}
+            delete {et.homes_main_name.%{_target}%}
+            set {et.homes::%{_target}%} to 0
+            send "&e&l[Debug] &fTutte le case e i relativi dati di %{_target}% sono stati eliminati."
+            stop

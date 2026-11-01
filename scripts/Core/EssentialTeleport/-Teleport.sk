@@ -1,0 +1,62 @@
+options:
+    prefix: &8[&4&lTP&8]
+
+    genre: {genre.%player%}
+
+command /teleport <traveler:offline player> [<target:offline player>]:
+    usage: {@prefix} &cUtilizzo: &6/teleport <giocatore1> <giocatore2>
+    permission: minecraft.command.teleport
+    description: "TELETRASPORTO!"
+    executable by: player and console
+    suggestions:
+        set arg-1's suggestions to all players
+        set arg-2's suggestions to all players
+    trigger:
+        if sender is player:
+            if {_traveler} is player:
+                if {_target} is not set:
+                    if {@genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &cNon puoi teletrasportarti da te stessa!"
+                    else:
+                        send "{@prefix} &cNon puoi teletrasportarti da te stesso!"
+                else if {_target} is player:
+                    if {@genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &cNon puoi teletrasportare te stessa da te stessa!"
+                    else:
+                        send "{@prefix} &cNon puoi teletrasportare te stesso da te stessa!"
+                else if {_target} is not online:
+                    send "{@prefix} &c%{_target}% &6è offline."
+                else:
+                    teleport player at {_target}'s location
+                    if {@genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &7Ti ho portata da &c%{_target}%&7."
+                    else:
+                        send "{@prefix} &7Ti ho portato da &c%{_target}%&7."
+            else if {_traveler} is not online:
+                send "{@prefix} &c%{_traveler}% &6è offline."
+            else:
+                if {_target} is not set:
+                    teleport player at {_traveler}'s location
+                    if {@genre} is "%{-server.genre.female}%":
+                        send "{@prefix} &7Ti ho portata da &c%{_traveler}%&7."
+                    else:
+                        send "{@prefix} &7Ti ho portato da &c%{_traveler}%&7."
+                else if {_target} is not online:
+                    send "{@prefix} &c%{_target}% &6è offline."
+                else:
+                    teleport {_traveler} at {_target}'s location
+                    if {_target}'s uuid is not player's uuid:
+                        send "{@prefix} &7Hai portato &c%{_traveler}% &7da &c%{_target}%&7."
+                    else:
+                        send "{@prefix} &7Hai portato &c%{_traveler}% &7da &cte&7."
+        else:
+            if {_traveler} is not online:
+                send "{@prefix} &c%{_traveler}% &6è offline."
+            else:
+                if {_target} = {_traveler}:
+                    send "{@prefix} &cNon puoi teletrasportare %{_traveler}% da %{_target}%!"
+                else if {_target} is not online:
+                    send "{@prefix} &c%{_target}% &6è offline."
+                else:
+                    teleport {_traveler} at {_target}'s location
+                    send "{@prefix} &7Hai portato &c%{_traveler}% &7da &c%{_target}%&7."

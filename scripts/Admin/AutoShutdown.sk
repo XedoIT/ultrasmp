@@ -1,0 +1,217 @@
+options:
+    prefix: &4[&6AUTOSHUTDOWN&4]
+
+    default_time: 30 # TEMPO PREDEFINITO UTILIZZATO DAL COMANDO SENZA PARAMETRO
+    time_unit: minutes # UNITÀ DI MISURA PREDEFINITA DAL COMANDO CON E SENZA PARAMETRO
+    on_time_event: minute # VALORE PER L'EVENTO "every ..."
+
+on join:
+    if {autoshutdown.cooldown} is set:
+        wait 2 seconds
+        send ""
+        send "{@prefix} &aC'è una chiusura programmata del server attiva:"
+        send "{@prefix} &6Rimangono &c%{autoshutdown.cooldown}% minuti &6alla chiusura del server."
+        send ""
+
+command /autoshutdown:
+    executable by: player and console
+    trigger:
+        if sender has permission "maintenance.*":
+            send "{@prefix} &cComando incompleto."
+            send "{@prefix} &cUtilizzo: &6/autoshutdown set <&enumero intero&6>"
+            send "{@prefix} &cUtilizzo: &6/autoshutdown cancel"
+            send "{@prefix} &cUtilizzo: &6/autoshutdown add <&enumero intero&6>"
+            send "{@prefix} &cUtilizzo: &6/autoshutdown remove <&enumero intero&6>"
+            send "{@prefix} &cUtilizzo: &6/autoshutdown info"
+        else:
+            if {autoshutdown.cooldown} is not set:
+                send ""
+                send "{@prefix} &cAl momento non c'è nessuna chiusura programmata del server."
+                send ""
+            else:
+                send ""
+                send "{@prefix} &aC'è una chiusura programmata del server attiva:"
+                send "{@prefix} &6Rimangono &c%{autoshutdown.cooldown}% minuti &6alla chiusura del server."
+                send ""
+
+    subcommand set [<time: integer>]:
+        permission: autoshutdown.set
+        trigger:
+            if {_time} < 1:
+                send ""
+                send "{@prefix} &cInserisci un numero intero maggiore di 0."
+                send ""
+                stop
+            if {_time} is not set:
+                if {autoshutdown.cooldown} is not set:
+                    set {autoshutdown.cooldown} to {@default_time}
+                    broadcast ""
+                    broadcast "{@prefix} &cIl server verrà chiuso tra &6%{autoshutdown.cooldown}% minuti&c!"
+                    broadcast ""
+                else:
+                    send ""
+                    send "{@prefix} &cÈ già presente una chiusura programmata del server!"
+                    send "{@prefix} &6Esegui &e/autoshutdown add &6o &e/autoshutdown remove &6per gestire il tempo della chiusura programmata."
+                    send ""
+            else:
+                if {autoshutdown.cooldown} is not set:
+                    set {autoshutdown.cooldown} to {_time}
+                    broadcast ""
+                    broadcast "{@prefix} &cIl server verrà chiuso tra &6%{_time}% minuti&c!"
+                    broadcast ""
+                else:
+                    send ""
+                    send "{@prefix} &cÈ già presente una chiusura programmata del server!"
+                    send "{@prefix} &6Esegui &e/autoshutdown add &6o &e/autoshutdown remove &6per gestire il tempo della chiusura programmata."
+                    send ""
+
+    subcommand cancel:
+        permission: autoshutdown.cancel
+        trigger:
+            if {autoshutdown.cooldown} is not set:
+                send ""
+                send "{@prefix} &cNon c'è nessuna chiusura programmata!"
+                send ""
+            else:
+                delete {autoshutdown.cooldown}
+                broadcast ""
+                broadcast "{@prefix} &aChiusura programmata del server annullata."
+                broadcast ""
+
+    subcommand add [<time: integer>]:
+        permission: autoshutdown.add
+        trigger:
+            if {_time} < 1:
+                send ""
+                send "{@prefix} &cInserisci un numero intero maggiore di 0."
+                send ""
+                stop
+            if {_time} is not set:
+                if {autoshutdown.cooldown} is not set:
+                    send ""
+                    send "{@prefix} &cNon c'è nessuna chiusura programmata del server!"
+                    send "{@prefix} &6Esegui &e/autoshutdown set [<minuti>] &6per programmare la chiusura del server."
+                    send ""
+                else:
+                    add {@default_time} to {autoshutdown.cooldown}
+                    send ""
+                    broadcast "{@prefix} &aSono stati aggiunti &e{@default_time} minuti &aal timer per la chiusura programmata del server."
+                    send ""
+                    broadcast ""
+                    broadcast "{@prefix} &cIl server verrà chiuso tra &6%{autoshutdown.cooldown}% minuti&c!"
+                    broadcast ""
+            else:
+                if {autoshutdown.cooldown} is not set:
+                    send ""
+                    send "{@prefix} &cNon c'è nessuna chiusura programmata del server!"
+                    send "{@prefix} &6Esegui &e/autoshutdown set [<minuti>] &6per programmare la chiusura del server."
+                    send ""
+                else:
+                    add {_time} to {autoshutdown.cooldown}
+                    if {_time} = 1:
+                        send ""
+                        send "{@prefix} &aHai aggiunto &e1 minuto &aal timer per la chiusura programmata del server."
+                        send ""
+                    else if {_time} >= 1:
+                        send ""
+                        send "{@prefix} &aHai aggiunto &e%{_time}% minuti &aal timer per la chiusura programmata del server."
+                        send ""
+                    broadcast ""
+                    broadcast "{@prefix} &cIl server verrà chiuso tra &6%{autoshutdown.cooldown}% minuti&c!"
+                    broadcast ""
+
+    subcommand remove [<time: integer>]:
+        permission: autoshutdown.remove
+        trigger:
+            if {_time} < 1:
+                send ""
+                send "{@prefix} &cInserisci un numero intero maggiore di 0."
+                send ""
+                stop
+            if {_time} is not set:
+                if {autoshutdown.cooldown} is not set:
+                    send ""
+                    send "{@prefix} &cNon c'è nessuna chiusura programmata del server!"
+                    send "{@prefix} &6Esegui &e/autoshutdown set [<minuti>] &6per programmare la chiusura del server."
+                    send ""
+                else:
+                    if {autoshutdown.cooldown} > {@default_time}:
+                        subtract {@default_time} from {autoshutdown.cooldown}
+                        send ""
+                        send "{@prefix} &aSono stati tolti &e{@default_time} minuti &aal timer per la chiusura programmata del server."
+                        send ""
+                        broadcast ""
+                        broadcast "{@prefix} &cIl server verrà chiuso tra &6%{autoshutdown.cooldown}% minuti&c!"
+                        broadcast ""
+                    else:
+                        send ""
+                        send "{@prefix} &cIl tempo rimanente è minore di &6{@default_time} minuti&c. Inserisci un valore inferiore a &e%{autoshutdown.cooldown}%&c."
+                        send ""
+            else:
+                if {autoshutdown.cooldown} is not set:
+                    send ""
+                    send "{@prefix} &cNon c'è nessuna chiusura programmata del server!"
+                    send "{@prefix} &6Esegui &e/autoshutdown set [<minuti>] &6per programmare la chiusura del server."
+                    send ""
+                else:
+                    if {_time} >= {autoshutdown.cooldown}:
+                        send ""
+                        send "{@prefix} &cIl tempo rimanente è &6%{autoshutdown.cooldown}% minuti&c. Inserisci un valore inferiore a &e%{autoshutdown.cooldown}%&c."
+                        send ""
+                    else:
+                        subtract {_time} from {autoshutdown.cooldown}
+                        if {_time} = 1:
+                            send ""
+                            send "{@prefix} &aHai tolto &e1 minuto &aal timer per la chiusura programmata del server."
+                            send ""
+                        else if {_time} >= 1:
+                            send ""
+                            send "{@prefix} &aHai tolto &e%{_time}% minuti &aal timer per la chiusura programmata del server."
+                            send ""
+                        broadcast ""
+                        broadcast "{@prefix} &cIl server verrà chiuso tra &6%{autoshutdown.cooldown}% minuti&c!"
+                        broadcast ""
+
+    subcommand info:
+        permission: autoshutdown.info
+        trigger:
+            if {autoshutdown.cooldown} is not set:
+                send ""
+                send "{@prefix} &cAl momento non c'è nessuna chiusura programmata del server."
+                send ""
+            else:
+                send ""
+                send "{@prefix} &aC'è una chiusura programmata del server attiva:"
+                send "{@prefix} &6Rimangono &c%{autoshutdown.cooldown}% minuti &6alla chiusura del server."
+                send ""
+
+every {@on_time_event}:
+    if {autoshutdown.cooldown} is set:
+        if {-autoshutdown.closing} is not set:
+            subtract 1 from {autoshutdown.cooldown}
+            if {autoshutdown.cooldown} <= 5:
+                if {autoshutdown.cooldown} > 1:
+                    broadcast ""
+                    broadcast "{@prefix} &cIl server verrà chiuso tra &6%{autoshutdown.cooldown}% minuti&c!"
+                    broadcast ""
+                else:
+                    set {-autoshutdown.closing} to true
+                    broadcast ""
+                    broadcast "{@prefix} &cIl server verrà chiuso tra &61 minuto&c!"
+                    broadcast ""
+                    wait 55 seconds
+                    if {autoshutdown.cooldown} is not set:
+                        delete {-autoshutdown.closing}
+                        stop
+                    if {autoshutdown.cooldown} > 1:
+                        delete {-autoshutdown.closing}
+                        stop
+                    kick all players due to "&c--- {@prefix} &c---%nl%%nl%%nl%&6&lLa &e&l%{-server.name}% &6&lverrà chiusa a momenti,%nl%&6&lpertanto, &c&lho anticipato la tua uscita&6&l."
+                    wait 5 seconds
+                    delete {autoshutdown.cooldown}
+                    delete {-autoshutdown.closing}
+                    stop server
+
+on unload:
+    delete {autoshutdown.cooldown}
+    delete {-autoshutdown.closing}

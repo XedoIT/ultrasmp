@@ -1,0 +1,29 @@
+# »
+# «
+options:
+    genre: {genre.%loop-player%}
+
+# COLORE STANDARD PRIMA DEL PERSONALIZATION UPDATE
+on chat:
+    # Colore a cui tornare dopo il nome (rosso per i fantasmi, come nel loro formato)
+    if {difficulty.info.hardcore_death::%player%} is not true:
+        set {_r} to "&r"
+    else:
+        set {_r} to "&c"
+
+    # Nomi dei giocatori citati: colore in base al genere
+    loop all players:
+        if message contains "%loop-player%":
+            if {@genre} is "%{-server.genre.male}%":
+                set {_c} to "&9"
+            else:
+                set {_c} to "&d"
+            replace all "%loop-player%" in message with "%{_c}%%loop-player%%{_r}%"
+            if loop-player is not player:
+                play sound "entity.experience_orb.pickup" with volume 1 at loop-player for loop-player
+
+    # Formato della chat (dopo, così contiene il messaggio già colorato)
+    if {difficulty.info.hardcore_death::%player%} is not true:
+        set chat format to "%{rank.prefix.%player%}% &f%player% &7»&r %message%"
+    else:
+        set chat format to "%{rank.prefix.%player%}% %{difficulty.info.hardcore_death.%player%.marker}% &7&o%player% &f»&c %message%"

@@ -1,0 +1,132 @@
+options:
+    dir: plugins/YML Data
+    data: "data-%player's uuid%"
+    data_lp: "data-%loop-player's uuid%"
+
+    status: Nessuno stato impostato.
+    no_flags: "{tooltip_display:{hidden_components:[""attribute_modifiers""]}}"
+    genre: yaml value "generali.player-info.genre" in "data-%loop-player's uuid%"
+
+    confirm_sound: play sound "block.note_block.pling" with volume 1 and pitch 2
+
+    no: ✘
+    yes: ✔
+    on: Sì
+    off: No
+    dimension: Overworld
+
+on join:
+    load yaml "{@dir}/%player's uuid%.yml" as {@data}
+
+    if yaml {@data} is empty:
+        set {_player_hp} to placeholder "auraskills_hp" from player
+        set {_player_hp_max} to placeholder "auraskills_hp_max" from player
+        set {_player_xp} to placeholder "player_current_exp" from player
+        set {_player_xp_level} to placeholder "player_level" from player
+        set {_player_x} to placeholder "player_x" from player
+        set {_player_y} to placeholder "player_y" from player
+        set {_player_z} to placeholder "player_z" from player
+        set {_player_biome} to placeholder "player_biome_capitalized" from player
+        set {_player_ip} to placeholder "player_ip" from player
+        set {_player_op} to placeholder "player_is_op" from player
+        set {_player_strength} to placeholder "auraskills_strength" from player
+        set {_player_health} to placeholder "auraskills_health" from player
+        set {_player_regeneration} to placeholder "auraskills_regeneration" from player
+        set {_player_luck} to placeholder "auraskills_luck" from player
+        set {_player_wisdom} to placeholder "auraskills_wisdom" from player
+        set {_player_toughness} to placeholder "auraskills_toughness" from player
+        set {_player_crit_chance} to placeholder "auraskills_crit_chance" from player
+        set {_player_crit_damage} to placeholder "auraskills_crit_damage" from player
+        set {_player_speed} to placeholder "auraskills_speed" from player
+
+        set yaml value "generali.player-info.common.uuid" in {@data} to "%player's uuid%"
+        set yaml value "generali.player-info.common.name" in {@data} to "%player's name%"
+        set yaml value "generali.player-info.genre" in {@data} to "-"
+        set yaml value "generali.player-info.common.gamemode" in {@data} to "%player's gamemode%"
+        set yaml value "generali.player-info.position.dimension" in {@data} to "{@dimension}"
+
+# [ YML ] IMPOSTAZIONI
+
+        set yaml value "impostazioni.personalization.gui-background.enabled" in {@data} to true
+        set yaml value "impostazioni.personalization.gui-background.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.personalization.join-message.enabled" in {@data} to true
+        set yaml value "impostazioni.personalization.join-message.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.personalization.fastboard.enabled" in {@data} to true
+        set yaml value "impostazioni.personalization.fastboard.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.personalization.can-view-other-profiles.enabled" in {@data} to true
+        set yaml value "impostazioni.personalization.can-view-other-profiles.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.personalization.damage-indicator.players.enabled" in {@data} to false
+        set yaml value "impostazioni.personalization.damage-indicator.players.marker" in {@data} to "{@no}"
+        set yaml value "impostazioni.personalization.damage-indicator.mobs.enabled" in {@data} to true
+        set yaml value "impostazioni.personalization.damage-indicator.mobs.marker" in {@data} to "{@yes}"
+
+        set yaml value "impostazioni.notify.generic.full-inventory.enabled" in {@data} to true
+        set yaml value "impostazioni.notify.generic.full-inventory.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.notify.generic.no-fastboard.enabled" in {@data} to true
+        set yaml value "impostazioni.notify.generic.no-fastboard.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.notify.service.scheduled-restarts.enabled" in {@data} to true
+        set yaml value "impostazioni.notify.service.scheduled-restarts.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.notify.service.lag-issues.enabled" in {@data} to true
+        set yaml value "impostazioni.notify.service.lag-issues.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.notify.service.scheduled-stops.enabled" in {@data} to true
+        set yaml value "impostazioni.notify.service.scheduled-stops.marker" in {@data} to "{@yes}"
+
+        set yaml value "impostazioni.privacy.can-others-view-self-profile.enabled" in {@data} to true
+        set yaml value "impostazioni.privacy.can-others-view-self-profile.marker" in {@data} to "{@yes}"
+        set yaml value "impostazioni.privacy.can-receive-others-tp-requests.enabled" in {@data} to true
+        set yaml value "impostazioni.privacy.can-receive-others-tp-requests.marker" in {@data} to "{@yes}"
+
+        set yaml value "impostazioni.actionbar.flymode.enabled" in {@data} to false
+        set yaml value "impostazioni.actionbar.flymode.marker" in {@data} to "{@no}"
+        set yaml value "impostazioni.actionbar.godmode.enabled" in {@data} to false
+        set yaml value "impostazioni.actionbar.godmode.marker" in {@data} to "{@no}"
+        set yaml value "impostazioni.actionbar.maintenance.enabled" in {@data} to false
+        set yaml value "impostazioni.actionbar.maintenance.marker" in {@data} to "{@no}"
+        set yaml value "impostazioni.actionbar.playtime.session.enabled" in {@data} to false
+        set yaml value "impostazioni.actionbar.playtime.session.marker" in {@data} to "{@no}"
+        set yaml value "impostazioni.actionbar.playtime.total.enabled" in {@data} to false
+        set yaml value "impostazioni.actionbar.playtime.total.marker" in {@data} to "{@no}"
+        set yaml value "impostazioni.actionbar.playtime.both.enabled" in {@data} to false
+        set yaml value "impostazioni.actionbar.playtime.both.marker" in {@data} to "{@no}"
+
+        set yaml value "impostazioni.settings-alert-update" in {@data} to "{@no}"
+
+# [ YML ] GENERALI
+
+        save yaml {@data}
+
+on quit:
+    save yaml {@data}
+
+every 3 minutes:
+    loop all loaded yaml:
+        save loop-value
+        wait 2 ticks
+
+# ============================================================
+# Colora i marker letti dallo yaml (nel file restano senza colori)
+# Uso: ymlColor(yaml value "percorso.marker" from "data-%player's uuid%")
+# ============================================================
+function ymlColor(s: object) :: text:
+    set {_t} to "%{_s}%"
+    if {_t} contains "✔":
+        return "&a%{_t}%"
+    else if {_t} contains "✘":
+        return "&c%{_t}%"
+    return {_t}
+
+# ============================================================
+# Restituisce il sesso COLORATO partendo da quello salvato nello yaml (senza colori)
+# Uso: ymlGenre(yaml value "generali.player-info.genre" from "data-%player's uuid%")
+# ============================================================
+function ymlGenre(s: object) :: text:
+    set {_t} to "%{_s}%"
+    set {_m} to "%{-server.genre.male}%"
+    set {_f} to "%{-server.genre.female}%"
+    set {_um} to uncolored {_m}
+    set {_uf} to uncolored {_f}
+    if {_t} is {_um}:
+        return {_m}
+    else if {_t} is {_uf}:
+        return {_f}
+    return {_t}
